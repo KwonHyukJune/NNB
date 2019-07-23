@@ -47,8 +47,7 @@
 	</mvc:annotation-driven>
 
 
-
-	<!-- @RequestMapping 어노테이션을 활용하여 컨트롤러를 사용하기 위해 빈 추 -->
+	<!-- @RequestMapping 어노테이션을 활용하여 컨트롤러를 사용하기 위해 빈 추가 -->
 	<bean
 		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
 
