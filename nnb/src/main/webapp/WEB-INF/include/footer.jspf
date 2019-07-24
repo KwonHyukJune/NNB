@@ -2,7 +2,22 @@
 
 <footer>
     <div>
-    </div>
+    <a href="<c:url='/admin/member/amdinMemberList'/>">이용약관</a> |
+	<a href="<c:url='/admin/help/amdinQNAList'/>">개인정보처리방침</a> |
+	<a href="<c:url='/admin/notice/amdinNoticeList'/>"">매물관리규정</a> |
+	<a href="<c:url='/admin/bank/bankList'/>">자동저장서비스</a>	
+	
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<input type="text" id="search" onkeypress="if( event.keyCode == 13 ){searchData();}" />
+ 
+	
+	
+
+  	</div>	
+  
+  
+	<br/>	
+    <br/>
     <div class="">
         <span>EZEN Coperation</span><br/>
         <span><strong>대표 :</strong> 최사랑  <strong>주소 :</strong> 서울시 강남구 서초대로빌딩 10층 (주)EZEN Coperation</span><br/>
