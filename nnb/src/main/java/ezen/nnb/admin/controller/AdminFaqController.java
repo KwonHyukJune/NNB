@@ -25,10 +25,5 @@ public class AdminFaqController {
 		mv.addObject("list", list);
 		return mv;
 	}
-	
-	@RequestMapping(value = "/admin/faq/detail")
-	public ModelAndView adminFaqDetail(Map<String, Object> commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("/admin/faq/detail");
-		List<>
-	}
 }
+
