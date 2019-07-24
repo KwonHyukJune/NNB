@@ -5,6 +5,6 @@ import java.util.Map;
 
 public interface AdminFaqService {
 
-	List<Map<String, Object>> selectFaqList(Map<String, Object> commandMap) throws Exception;
+	List<Map<String, Object>> selectFaqList(Map<String, Object> map) throws Exception;
 
 }

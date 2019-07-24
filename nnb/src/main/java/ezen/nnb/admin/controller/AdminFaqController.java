@@ -25,4 +25,6 @@ public class AdminFaqController {
 		mv.addObject("list", list);
 		return mv;
 	}
+	
+	@RequestMapping(value = "/admin/faq/detail")
 }
