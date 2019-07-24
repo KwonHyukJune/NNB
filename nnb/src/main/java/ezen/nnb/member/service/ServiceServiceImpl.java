@@ -22,7 +22,6 @@ public class ServiceServiceImpl implements ServiceService {
 		// TODO Auto-generated method stub
 		return serviceDAO.openFAQList(map);
 		
-		안녕하세요
 	}
 
 }
