@@ -19,7 +19,7 @@ public class AdminFaqController {
 	private AdminFaqService adminFaqService;
 
 	@RequestMapping(value = "/admin/faq/list")
-	public ModelAndView openSampleBoardList(Map<String, Object> commandMap) throws Exception {
+	public ModelAndView adminFaqList(Map<String, Object> commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("/admin/faq/list");
 		List<Map<String, Object>> list = adminFaqService.selectFaqList(commandMap);
 		mv.addObject("list", list);
@@ -27,4 +27,8 @@ public class AdminFaqController {
 	}
 	
 	@RequestMapping(value = "/admin/faq/detail")
+	public ModelAndView adminFaqDetail(Map<String, Object> commandMap) throws Exception {
+		ModelAndView mv = new ModelAndView("/admin/faq/detail");
+		List<>
+	}
 }
