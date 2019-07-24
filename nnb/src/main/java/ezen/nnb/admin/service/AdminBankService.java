@@ -5,6 +5,6 @@ import java.util.Map;
 
 public interface AdminBankService {
 
-	List<Map<String, Object>> selectBankList(Map<String, Object> commandMap);
+	List<Map<String, Object>> selectBankList(Map<String, Object> map) throws Exception;
 
 }
