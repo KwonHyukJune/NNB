@@ -1,0 +1,14 @@
+<%@ page pageEncoding="UTF-8"%>
+
+<footer>
+    <div>
+    </div>
+    <div class="">
+        <span>EZEN Coperation</span><br/>
+        <span><strong>대표 :</strong> 최사랑  <strong>주소 :</strong> 서울시 강남구 서초대로빌딩 10층 (주)EZEN Coperation</span><br/>
+        <span><strong>고객센터 :</strong> 99-9999-9999  <strong>팩스 :</strong> 02-999-9999</span><br/>
+        <span><strong>사업자 번호 :</strong> 000-00-00000 <strong>프로모션 / 사업 제휴문의 :</strong> ezen@naver.com</span>
+        <span><strong> 통신판매업 신고번호 :</strong> 제9999-서울 강남-99999호</span>
+        <p>EZEN Coperation., Inc.All right reserved.</p>
+    </div>
+</footer>
