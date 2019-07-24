@@ -1,5 +1,22 @@
 package ezen.nnb.admin.dao;
 
-public class AdminLoginDAO {
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.stereotype.Repository;
+import ezen.nnb.common.AbstractDAO;
+
+@Repository("AdminLoginDAO")
+public class AdminLoginDAO extends AbstractDAO{
+	/*
+	 * @SuppressWarnings("unchecked") public Map<String,
+	 * Object>LoginStatus(Map<String, Object> map) throws Exception{ return
+	 * (Map<String, Object>)selectOne("adminlogin.adminlogin", map); }
+	 */
+
+	@SuppressWarnings("unchecked")
+	public Map<String, Object> AdminLogin(Map<String, Object> map) throws Exception{
+	    return (Map<String, Object>)selectOne("adminLogin.selectAdminLogin", map);
+	}
 
 }

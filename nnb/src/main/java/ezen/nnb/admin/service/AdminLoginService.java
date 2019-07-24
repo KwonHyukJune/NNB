@@ -1,5 +1,9 @@
 package ezen.nnb.admin.service;
 
-public class AdminLoginService {
+import java.util.Map;
+
+public interface AdminLoginService {
+	Map<String, Object> AdminLogin(Map<String,Object>map )throws Exception;
+	
 
 }
