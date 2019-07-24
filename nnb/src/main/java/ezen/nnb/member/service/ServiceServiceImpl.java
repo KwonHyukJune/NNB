@@ -21,6 +21,8 @@ public class ServiceServiceImpl implements ServiceService {
 	public List<Map<String, Object>> openFAQList(Map<String, Object> commandMap) throws Exception {
 		// TODO Auto-generated method stub
 		return serviceDAO.openFAQList(map);
+		
+		안녕하세요
 	}
 
 }
