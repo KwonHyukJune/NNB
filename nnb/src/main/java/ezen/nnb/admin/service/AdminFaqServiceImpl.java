@@ -22,4 +22,29 @@ public class AdminFaqServiceImpl implements AdminFaqService{
 		return adminFaqDAO.selectFaqList(map);
 	}
 
+	@Override
+	public void writeFaq(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		adminFaqDAO.writeFaq(map);
+	}
+
+	@Override
+	public Map<String, Object> selectFaqDetail(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return adminFaqDAO.selectFaqDetail(map);
+	}
+
+	@Override
+	public void updateFaq(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		adminFaqDAO.updateFaq(map);
+		
+	}
+
+	@Override
+	public void deleteFaq(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		adminFaqDAO.deleteFaq(map);
+	}
+
 }
