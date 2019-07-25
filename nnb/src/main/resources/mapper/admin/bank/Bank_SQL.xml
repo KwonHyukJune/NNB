@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="bank">
+
 <!-- 게시판(관리자, 회원) -->
 <select id="selectBankList" parameterType="hashMap" resultType="hashMap">
 <![CDATA[
        select * from bank where bank_num=#{bank_num}
 ]]>
 </select>
+
 <!-- 글쓰기(관리자) -->
 <insert id="insertBankWrite" parameterType="hashMap">
 <![CDATA[
@@ -49,6 +51,7 @@ insert into bank(
         bank_num=#{bank_num}
 ]]>
 </update>
+
 <!-- 글 수정(관리자) -->
 <update id="updateBankModify" parameterType="hashMap">
 <![CDATA[
@@ -64,6 +67,7 @@ insert into bank(
         bank_num=#{bank_num}                        
 ]]> 
 </update>     
+
 <!-- 글 삭제(관리자) -->
 <delete id="deleteBank" parameterType="hashmap">
 <![CDATA[
