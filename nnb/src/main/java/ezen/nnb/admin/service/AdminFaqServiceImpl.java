@@ -13,7 +13,7 @@ import ezen.nnb.admin.dao.AdminFaqDAO;
 public class AdminFaqServiceImpl implements AdminFaqService{
 	Logger log = Logger.getLogger(this.getClass());
 	
-	@Resource(name="AdminFaqDAO")
+	@Resource(name="adminFaqDAO")
 	private AdminFaqDAO adminFaqDAO;
 	
 	@Override
