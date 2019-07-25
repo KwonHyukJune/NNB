@@ -1,5 +1,10 @@
 package ezen.nnb.admin.service;
 
-public class AdminReportService {
+import java.util.List;
+import java.util.Map;
 
+public interface AdminReportService {
+	List<Map<String, Object>> selectReportList(Map<String, Object> map) throws Exception;
+	
+	Map<String, Object> selectReportDetail(Map<String, Object> map) throws Exception;
 }
