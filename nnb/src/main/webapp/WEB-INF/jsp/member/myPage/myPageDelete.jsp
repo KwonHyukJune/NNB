@@ -1,0 +1,1 @@
+myPageDelete.jsp
