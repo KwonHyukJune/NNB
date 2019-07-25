@@ -32,5 +32,51 @@ public class AdminBankController {
 		
 		return mv;
 	}
+	@RequestMapping(value="/admin/bankWriteForm")
+	public ModelAndView adminBankWriteForm(CommandMap commandMap) throws Exception{
+		ModelAndView mv = new ModelAndView("/admin/bank/writeForm");
+		return mv;
+	}
+	@RequestMapping(value="/admin/bankWrite")
+	public ModelAndView adminBankWrite(CommandMap commandMap) throws Exception{
+		ModelAndView mv = new ModelAndView("redirect:/admin/bankList");
+		adminBankService.insertBankWrite(commandMap.getMap());
+		
+		return mv;
+	}
+	@RequestMapping(value="/admin/bankDetail")
+	public ModelAndView adminBankDetail(CommandMap commandMap) throws Exception{
+		ModelAndView mv = new ModelAndView("/admin/bank/detail");
+		Map<String,Object> map = adminBankService.selectBankDetail(commandMap.getMap());
+		mv.addObject("map", map);
+		
+		return mv;
+	}
+	@RequestMapping(value="/admin/bankModifyForm")
+	public ModelAndView adminBankModifyForm(CommandMap commandMap) throws Exception{
+		ModelAndView mv = new ModelAndView("/admin/bank/modifyForm");
+		Map<String,Object> map = adminBankService.selectBankDetail(commandMap.getMap());
+		mv.addObject("map", map);
+		
+		return mv;
+	}
+	@RequestMapping(value="/admin/bankModify")
+	public ModelAndView adminBankModify(CommandMap commandMap) throws Exception{
+		ModelAndView mv = new ModelAndView("redirect:/admin/bankDetail");
+		adminBankService.updateBankModify(commandMap.getMap());
+		
+		mv.addObject("IDX", commandMap.get("IDX"));
+		return mv;
+	}
 	
+	@RequestMapping(value="/admin/bankDelete")
+	public ModelAndView adminBankDelete(CommandMap commandMap) throws Exception{
+		ModelAndView mv = new ModelAndView("redirect:/admin/bankList");
+		
+		adminBankService.deleteBank(commandMap.getMap());
+		
+		return mv;
+	}
 }
+
+	
