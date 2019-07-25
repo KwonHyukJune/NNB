@@ -62,7 +62,7 @@ public class AdminFaqController {
 		return mv;
 	}
 	
-	@RequestMapping(value="/sample/updateBoard.do")
+	@RequestMapping(value="/admin/faq/modify")
 	public ModelAndView adminFaqModify(CommandMap commandMap) throws Exception{
 		ModelAndView mv = new ModelAndView("redirect:/admin/faq/Detail");
 		
@@ -72,7 +72,7 @@ public class AdminFaqController {
 		return mv;
 	}
 	
-	@RequestMapping(value="/sample/deleteBoard.do")
+	@RequestMapping(value="/admin/faq/delete")
 	public ModelAndView adminFaqDelete(CommandMap commandMap) throws Exception{
 		ModelAndView mv = new ModelAndView("redirect:/admin/faq/list");
 		
