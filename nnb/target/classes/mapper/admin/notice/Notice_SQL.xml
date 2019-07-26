@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="notice">
+<select id="selectNoticeList" parameterType="hashmap" resultType="hashmap">
+
+	<![CDATA[
+SELECT
+                NT_NUM,
+                NT_TYPE,
+                NT_TITLE,
+                NT_DATE
+
+FROM
+                NOTICE 
+WHERE 
+                NT_TYPE='공지유형'
+	]]>
+	</select>
+</mapper>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="service">
+
+
+<!-- #####게시판(관리자, 회원) -->
+<select id="selectNoticeList" parameterType="hashMap" resultType="hashMap">
+<![CDATA[
+SELECT
+                NT_NUM,
+                NT_TYPE,
+                NT_TITLE,
+                NT_DATE
+
+FROM
+                NOTICE 
+WHERE 
+                NT_TYPE='공지유형'
+]]>
+</select>
+
+<!-- #####글쓰기(관리자) -->
+<insert id="insertNoticeWrite" parameterType="hashMap">
+<![CDATA[
+INSERT INTO NOTICE (
+            NT_NUM, 
+            NT_TYPE,
+            NT_TITLE, 
+            NT_CONTENT,
+            NT_DATE
+) VALUES
+            (NT_NUM_SEQ.NEXTVAL,           
+             #{NT_TYPE},
+             #{NT_TITLE},
+             #{NT_CONTENT},
+             SYSDATE
+)
+]]>
+</insert>
+
+<select id="selectNoticeDetail" parameterType="hashMap" resultType="hashMap">
+<![CDATA[
+SELECT NT_NUM,
+       NT_TYPE,
+       NT_DATE,
+       NT_TITLE,
+       NT_CONTENT
+FROM
+      NOTICE
+WHERE
+      NT_NUM = #{NT_NUM}
+]]>
+</select>
+
+<!-- #####글 수정(관리자) -->
+<update id="updateNoticeModify" parameterType="hashMap">
+<![CDATA[
+UPDATE NOTICE
+SET
+               NOTICE_TITLE = #{NOTICE_TITLE},
+               NOTICE_CATEGORY = #{NOTICE_CATEGORY},
+               NOTICE_CONTENT = #{NOTICE_CONTENT}
+WHERE  NOTICE_NUM = #{NOTICE_NUM}
+]]>
+</update>     
+
+<!-- #####글 삭제(관리자) -->
+<delete id="deleteNotice" parameterType="hashmap">
+<![CDATA[
+DELETE
+	NOTICE
+WHERE 
+	NT_NUM = #{NT_NUM}
+]]>
+</delete>
+
+
+</mapper>
