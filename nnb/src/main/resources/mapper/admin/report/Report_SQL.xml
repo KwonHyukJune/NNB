@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="report">
+
+<select id="selectReportRoomList" parameterType="hashmap" resultType="hashmap"> 
+	<![CDATA[
+	SELECT
+		ROW_NUMBER() OVER (ORDER BY FAQ_NUM DESC) RNUM,
+		REPORT_ID,
+		REPORT_D_ID,
+		REPORT_POST_NUM,
+		REPORT_DATE,
+		REPORT_REASON,
+		REPORT_TYPE
+	FROM
+		report
+	<choose>
+	<when test="ReportType==1">
+	Where 
+		report_type = '욕설 및 혐오발언' and report_post_num is not null;
+	</when>
+	<when test="ReportType==2">
+	Where 
+		report_type = '허위정보 기재' and report_post_num is not null;
+	</when>
+	<when test="ReportType==3">
+	Where 
+		report_type = '음란성 게시글' and report_post_num is not null;
+	</when>
+	<when test="ReportType==4">
+	Where 
+		report_type = '도배/광고' and report_post_num is not null;
+	</when>
+	<otherwise>
+	Where 
+		report_post_num is not null;
+	</otherwise>
+	</choose>
+	]]>
+	
+</select>
+
+<select id="selectReportMemberList" parameterType="hashmap" resultType="hashmap"> 
+	<![CDATA[
+	SELECT
+		ROW_NUMBER() OVER (ORDER BY FAQ_NUM DESC) RNUM,
+		REPORT_ID,
+		REPORT_D_ID,
+		REPORT_DATE,
+		REPORT_REASON,
+		REPORT_TYPE
+	FROM
+		report
+	where
+		report_post_num is null; 
+	]]>
+</select>
+<select id="selectFaqDetail" parameterType="hashmap" resultType="hashmap"> 
+	<![CDATA[
+	SELECT
+		FAQ_CONTENT,
+		FAQ_TITLE,
+		FAQ_CATEGORY
+	FROM
+		FAQ
+	WHERE
+		FAQ_NUM = #{FAQ_NUM}
+	]]>
+</select>
+
+<select id="insertFaq" parameterType="hashmap"> 
+	<![CDATA[
+	INSERT INTO FAQ (
+		FAQ_NUM,
+		FAQ_TITLE,
+		FAQ_CATEGORY,
+		FAQ_CONTENT
+		) 
+	VALUES(
+		FAQ_NUM_SEQ.NEXTVAL,
+		#{FAQ_TITLE},
+		#{FAQ_CATEGORY},
+		#{FAQ_CONTENT}
+	)
+	]]>
+</select>
+
+<select id="updateFaq" parameterType="hashmap"> 
+	<![CDATA[
+	UPDATE FAQ
+	SET
+		FAQ_TITLE = #{FAQ_TITLE},
+		FAQ_CATEGORY = #{FAQ_CATEGORY},
+		FAQ_CONTENT = #{FAQ_CONTENT}
+	WHERE FAQ_NUM = #{FAQ_NUM}
+	]]>
+</select>	
+
+<select id="deleteFaq" parameterType="hashmap"> 
+	<![CDATA[
+	DELETE FAQ
+	WHERE FAQ_NUM = #{FAQ_NUM}
+	]]>
+</select>
+</mapper>

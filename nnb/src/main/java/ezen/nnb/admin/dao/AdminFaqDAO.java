@@ -14,7 +14,6 @@ public class AdminFaqDAO extends AbstractDAO{
 	public List<Map<String, Object>> selectFaqList(Map<String, Object> map) {
 		// TODO Auto-generated method stub
 		return (List<Map<String, Object>>) selectList("faq.selectFaqList", map);
-
 	}
 
 	public void writeFaq(Map<String, Object> map) {
