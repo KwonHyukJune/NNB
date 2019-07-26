@@ -20,20 +20,22 @@ public class AdminReportController {
 	@Resource(name = "adminReportService")
 	private AdminReportService adminReportService;
 
-	@RequestMapping(value = "/admin/reportList")
-	public ModelAndView adminReportList(CommandMap commandMap) throws Exception {
+	@RequestMapping(value = "/admin/report/roomList")
+	public ModelAndView adminReportRoomList(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("/admin/report/list");
 
-		List<Map<String, Object>> list = adminReportService.selectReportList(commandMap.getMap());
+		List<Map<String, Object>> list = adminReportService.selectReportRoomList(commandMap.getMap());
 		mv.addObject("list", list);
 
 		return mv;
 	}
-	@RequestMapping(value = "/admin/reportDetail")
-	public ModelAndView adminReportDetail(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("/admin/report/detail");
-		Map<String, Object> map = adminReportService.selectReportDetail(commandMap.getMap());
-		mv.addObject("map", map);
+	
+	@RequestMapping(value = "/admin/report/memberList")
+	public ModelAndView adminReportmemberList(CommandMap commandMap) throws Exception {
+		ModelAndView mv = new ModelAndView("/admin/report/list");
+
+		List<Map<String, Object>> list = adminReportService.selectReportMemberList(commandMap.getMap());
+		mv.addObject("list", list);
 
 		return mv;
 	}
