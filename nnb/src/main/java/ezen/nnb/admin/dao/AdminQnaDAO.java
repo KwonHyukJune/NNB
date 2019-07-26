@@ -22,5 +22,17 @@ public class AdminQnaDAO extends AbstractDAO{
 		return (Map<String, Object>) selectOne("qna.selectQnaDetail", map);
 	}
 
+	public void updateQna(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		update("qna.updateQna", map);
+	}
+
+	public void deleteQna(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		delete("qna.deleteQna", map);
+	}
+	
+	
+
 }
 

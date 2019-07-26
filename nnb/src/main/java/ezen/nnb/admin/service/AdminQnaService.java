@@ -9,4 +9,8 @@ public interface AdminQnaService {
 
 	Map<String, Object> selectQnaDetail(Map<String, Object> map) throws Exception;
 
+	void updateQna(Map<String, Object> map) throws Exception;
+
+	void deleteQna(Map<String, Object> map) throws Exception;
+
 }

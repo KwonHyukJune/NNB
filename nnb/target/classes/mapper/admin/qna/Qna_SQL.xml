@@ -6,11 +6,12 @@
 <select id="selectQnaList" parameterType="hashmap" resultType="hashmap"> 
 	<![CDATA[
 	SELECT
-		ROW_NUMBER() OVER (ORDER BY FAQ_NUM DESC) RNUM,
+		ROW_NUMBER() OVER (ORDER BY QNA_NUM DESC) RNUM,
 		QNA_NUM,
 		QNA_TITLE,
 		QNA_CONTENT,
-		QNA_DATE
+		QNA_DATE,
+		RES_STATE
 	FROM
 		QNA 
 	]]>
@@ -19,14 +20,35 @@
 <select id="selectQnaDetail" parameterType="hashmap" resultType="hashmap"> 
 	<![CDATA[
 	SELECT
+		MEM_ID,
 		QNA_TITLE,
 		QNA_CONTENT,
-		QNA_DATE
+		QNA_DATE,
+		RES_TITLE,
+		RES_CONTENT
 	FROM
-		FAQ
+		QNA
 	WHERE
-		QNA_NUM = #{QNA_NUM}"
+		QNA_NUM = #{QNA_NUM}
 	]]>
 </select>
 
+<select id="updateQna" parameterType="hashmap"> 
+	<![CDATA[
+	UPDATE QNA
+	SET
+		RES_TITLE = #{RES_TITLE},
+		RES_CONTENT = #{RES_CONTENT},
+		RES_DATE = sysdate,
+		RES_STATE ='y'
+	WHERE QNA_NUM = #{QNA_NUM}
+	]]>
+</select>	
+
+<select id="deleteQna" parameterType="hashmap"> 
+	<![CDATA[
+	DELETE QNA
+	WHERE QNA_NUM = #{QNA_NUM}
+	]]>
+</select>
 </mapper>
