@@ -10,7 +10,7 @@ import ezen.nnb.admin.service.AdminNoticeService;
 
 import ezen.nnb.common.CommandMap;
 
-@Controller
+@Controller 
 public class /*컨트롤러*/AdminNoticeController {
 	Logger log=Logger.getLogger(this.getClass());
 	@Resource(name="adminNoticeService") 

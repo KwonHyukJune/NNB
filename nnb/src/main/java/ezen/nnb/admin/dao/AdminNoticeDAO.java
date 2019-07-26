@@ -1,10 +1,9 @@
-
 package ezen.nnb.Notice.dao;
 import java.util.List;
 import java.util.Map;
 import org.springframework.stereotype.Repository;
 import ezen.nnb.common.AbstractDAO;
-@Repository("NoticeNoticeDAO")
+@Repository("NoticeNoticeDAO") 
 public class AdminNoticeDAO extends AbstractDAO{
 	@SuppressWarnings("unchecked")
 	public List<Map<String, Object>> selectNoticeList(Map<String, Object> map)throws Exception{

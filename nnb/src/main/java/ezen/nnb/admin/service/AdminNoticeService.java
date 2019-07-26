@@ -1,6 +1,3 @@
-
-AdminNoticeService.java
-
 package ezen.nnb.admin.service;
 
 import java.util.List;
@@ -14,7 +11,7 @@ public interface AdminNoticeService {
 	void updateNoticeModify(Map<String, Object> map) throws Exception;
 	void deleteNotice(Map<String, Object> map) throws Exception;
 }
-
+ 
 }
 
 
