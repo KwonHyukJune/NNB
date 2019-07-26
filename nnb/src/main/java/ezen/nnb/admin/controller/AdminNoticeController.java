@@ -23,7 +23,7 @@ public class /*컨트롤러*/AdminNoticeController {
 		List<Map<String,Object>> list=adminNoticeService.selectNoticeList(commandMap.getMap());
 		mv.addObject("list",list);	
 		return mv;
-	}  
+	}   
 
 	//상세
 	@RequestMapping(value=/*MapperURL*/"/admin/noticeDetail")
@@ -66,4 +66,4 @@ public class /*컨트롤러*/AdminNoticeController {
 		return mv;
 	}
 }
-
+ 
