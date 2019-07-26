@@ -36,6 +36,36 @@ public class AdminQnaController {
 		
 		return mv;
 	}
+	/*
+	 * @RequestMapping(value="/admin/qna/replyForm") public ModelAndView
+	 * adminFaqModifyForm(CommandMap commandMap) throws Exception{ ModelAndView mv =
+	 * new ModelAndView("/admin/faq/detail");
+	 * 
+	 * Map<String,Object> map =
+	 * adminQnaService.selectQnaDetail(commandMap.getMap()); mv.addObject("map",
+	 * map);
+	 * 
+	 * return mv; }
+	 */
+	
+	@RequestMapping(value="/admin/qna/reply")
+	public ModelAndView adminFaqModify(CommandMap commandMap) throws Exception{
+		ModelAndView mv = new ModelAndView("redirect:/admin/qna/detail");
+		
+		adminQnaService.updateQna(commandMap.getMap());
+		
+		mv.addObject("FAQ_NUM", commandMap.get("FAQ_NUM"));
+		return mv;
+	}
+	
+	@RequestMapping(value="/admin/qna/delete")
+	public ModelAndView adminFaqDelete(CommandMap commandMap) throws Exception{
+		ModelAndView mv = new ModelAndView("redirect:/admin/qna/list");
+		
+		adminQnaService.deleteQna(commandMap.getMap());
+		
+		return mv;
+	}
 }
 
 

@@ -29,4 +29,15 @@ public class AdminQnaServiceImpl implements AdminQnaService{
 		return adminQnaDAO.selectQnaDetail(map);
 	}
 
+	@Override
+	public void updateQna(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		adminQnaDAO.updateQna(map);
+	}
+
+	@Override
+	public void deleteQna(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		adminQnaDAO.deleteQna(map);
+	}
 }
