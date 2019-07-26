@@ -24,4 +24,4 @@ public class AdminNoticeDAO extends AbstractDAO{
 	}
 }
 
-   
+    

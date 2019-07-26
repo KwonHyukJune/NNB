@@ -19,4 +19,4 @@
 <delete parameterType="hashmap" id="deleteNotice">
 <![CDATA[ DELETE NOTICE WHERE NT_NUM = #{NT_NUM} ]]>
 </delete>
-</mapper> 
+</mapper>  
