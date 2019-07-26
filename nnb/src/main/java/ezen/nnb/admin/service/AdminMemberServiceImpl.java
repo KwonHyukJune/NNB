@@ -27,8 +27,17 @@ public class AdminMemberServiceImpl implements AdminMemberService{
 		
 	}
 	@Override
-	public List<Map<String, Object>> adminMemberSearch(Map<String, Object> map) throws Exception {
-		return AdminMemberDAO.adminMemberSearch(map);
+	public List<Map<String, Object>> adminMemberSearchID(Map<String, Object> map) throws Exception {
+		return AdminMemberDAO.adminMemberSearchID(map);
 	}
-	
+
+	@Override
+	public List<Map<String, Object>> adminMemberSearchName(Map<String, Object> map) throws Exception {
+		return AdminMemberDAO.adminMemberSearchName(map);
+	}
+	@Override
+	public List<Map<String, Object>> adminMemberSearchNICK(Map<String, Object> map) throws Exception {
+		return AdminMemberDAO.adminMemberSearchNICK(map);
+	}
+
 }

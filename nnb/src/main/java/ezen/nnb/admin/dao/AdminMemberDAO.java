@@ -1,7 +1,7 @@
 package ezen.nnb.admin.dao;
 
 import java.util.List;
-import java.util.Map;
+import java.util.Map; 
 
 import org.springframework.stereotype.Repository;
 
@@ -25,10 +25,18 @@ public class AdminMemberDAO extends AbstractDAO{
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Map<String, Object>> adminMemberSearch(Map<String, Object> map) throws Exception {
-		return (List<Map<String, Object>>) selectList("adminMember.adminMemberSearch", map);
+	public List<Map<String, Object>> adminMemberSearchID(Map<String, Object> map) throws Exception {
+		return (List<Map<String, Object>>) selectList("adminMember.adminMemberSearchID", map);
+	}
+	@SuppressWarnings("unchecked")
+	public List<Map<String,Object>>adminMemberSearchName(Map<String,Object>map)throws Exception{
+		return(List<Map<String, Object>>)selectList("adminMember.adminMemberSearchName",map);
+	} 
+	@SuppressWarnings("unchecked")
+	public List<Map<String,Object>>adminMemberSearchNICK(Map<String,Object>map)throws Exception{
+		return(List<Map<String,Object>>)selectList("adminMember.adminMemberSearchNICK",map);
 	}
 	
-
+	
 
 }

@@ -24,11 +24,12 @@ public class AdminLoginController {
     public ModelAndView adminloginform(CommandMap commandMap,HttpServletRequest request) throws Exception{
 		
 		ModelAndView mv = new ModelAndView();		
-		mv.setViewName("/admin/login");
+		mv.setViewName("/admin/login/adminLogin");
 
 		return mv;
 		
 	}
+	@RequestMapping(value="/admin/main")
 	public ModelAndView AdminLogin(CommandMap commandMap, HttpServletRequest request,HttpServletResponse response) throws Exception {
 		ModelAndView mv=new ModelAndView();
 		HttpSession session=request.getSession();
@@ -36,9 +37,9 @@ public class AdminLoginController {
 		if(map!=null) {
 			session.setAttribute("adminId","y");//?
 			mv.addObject("adminJoin",map);
-			mv.setViewName("/admin/main");
+			mv.setViewName("/admin/main/adminMain");
 			}else {
-				mv.setViewName("/admin/login");
+				mv.setViewName("/admin/login/adminLogin");
 				mv.addObject("message","해당아이디가 존재하지 않습니다");
 			}
 		return mv;

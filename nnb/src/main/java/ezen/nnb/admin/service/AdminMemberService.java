@@ -10,7 +10,11 @@ public interface AdminMemberService {
 	
 	public void adminMemberBan(Map<String,Object>map)throws Exception;
 	
-	public List<Map<String,Object>>adminMemberSearch(Map<String, Object>map)throws Exception;
+	public List<Map<String, Object>> adminMemberSearchID(Map<String, Object> map) throws Exception;
+
+	public List<Map<String, Object>> adminMemberSearchName(Map<String, Object> map) throws Exception;
+
+	public List<Map<String, Object>> adminMemberSearchNICK(Map<String, Object> map) throws Exception;
 	
 
 }
