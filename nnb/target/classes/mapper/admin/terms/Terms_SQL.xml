@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="terms">
+<!-- 약관 목록 -->
+<select id="selectTermsList" parameterType="hashMap" resultType="hashMap">
+<![CDATA[
+	select
+    		ROW_NUMBER() OVER (ORDER BY TERMS_NUM DESC) RNUM,
+            TERMS_NUM,
+            TERMS_REGDATE,
+            TERMS_TITLE
+	from	
+            TERMS
+	]]>
+</select>
+
+<!-- 약관 상세보기 -->
+<select id="selectTermsDetail" parameterType="hashMap" resultType="hashMap">
+<![CDATA[
+	select
+            TERMS_NUM,
+            TERMS_REGDATE,
+            TERMS_TITLE,
+            TERMS_CONTENT
+	FROM
+            TERMS
+	WHERE
+    	    TERMS_NUM = #{TERMS_NUM}
+]]>
+</select>
+
+<!-- 약관 등록 -->
+<insert id="insertTerms" parameterType="hashMap">
+<![CDATA[
+	INSERT 
+	INTO TERMS (
+            TERMS_NUM, 
+            TERMS_TITLE,
+            TERMS_CONTENT, 
+            TERMS_REGDATE
+	) VALUES   (
+			TERMS_NUM_SEQ.NEXTVAL,           
+            #{TERMS_TITLE},                
+            #{TERMS_CONTENT},
+            SYSDATE
+	)
+]]>
+</insert>
+
+<update id="updateTermsModify" parameterType="hashMap">
+<![CDATA[
+	UPDATE TERMS
+	SET
+			TERMS_TITLE = #{TERMS_TITLE},
+	       	TERMS_CONTENT = #{TERMS_CONTENT}
+        	TERMS_REGDATE = SYSDATE
+	WHERE
+			TERMS_NUM = #{TERMS_NUM}
+
+]]>
+</update>
+
+<delete id="deleteTerms" parameterType="hashMap">
+<![CDATA[
+	DELETE FROM TERMS WHERE TERMS=#{TERMS_NUM}
+]]>
+</delete>
+
+</mapper>
