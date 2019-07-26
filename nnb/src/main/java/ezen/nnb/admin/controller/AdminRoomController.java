@@ -20,7 +20,7 @@ public class /*컨트롤러*/AdminRoomController {
 	Logger log=Logger.getLogger(this.getClass());
 	@Resource(name="adminRoomService") 
 	private AdminRoomService adminRoomService;
-	
+	 
 	//목록
 	@RequestMapping(value=/*MapperURL*/"/admin/roomList")
 	public ModelAndView adminRoomList(CommandMap commandMap) throws Exception{
