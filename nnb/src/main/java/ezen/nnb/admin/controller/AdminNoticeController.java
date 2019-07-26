@@ -23,7 +23,7 @@ public class /*컨트롤러*/AdminNoticeController {
 		List<Map<String,Object>> list=adminNoticeService.selectNoticeList(commandMap.getMap());
 		mv.addObject("list",list);	
 		return mv;
-	}
+	}  
 
 	//상세
 	@RequestMapping(value=/*MapperURL*/"/admin/noticeDetail")
@@ -33,7 +33,7 @@ public class /*컨트롤러*/AdminNoticeController {
 		mv.addObject("map", map);
 		return mv;
 	}//등록폼	
-	@RequestMapping(value=/*MapperURL*/"/admin/noticeWriteForm")
+	@RequestMapping(value=/*MapperURL*/"/admin/noticeWriteForm")  
 	public ModelAndView /*메소드*/adminNoticeWriteForm(CommandMap commandMap) throws Exception{
 		ModelAndView mv = new ModelAndView(/*jsp*/"/admin/notice/writeForm");
 		return mv;

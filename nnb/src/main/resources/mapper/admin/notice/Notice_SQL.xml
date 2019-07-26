@@ -63,7 +63,7 @@ SET
 WHERE  NOTICE_NUM = #{NOTICE_NUM}
 ]]>
 </update>     
-
+  
 <!-- #####글 삭제(관리자) -->
 <delete id="deleteNotice" parameterType="hashmap">
 <![CDATA[
