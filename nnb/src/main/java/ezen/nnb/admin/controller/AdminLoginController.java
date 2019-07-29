@@ -1,4 +1,4 @@
-package ezen.nnb.admin.controller;
+﻿package ezen.nnb.admin.controller;
 
 import java.util.Map;
 
@@ -35,9 +35,9 @@ public class AdminLoginController {
 		HttpSession session=request.getSession();
 		Map<String,Object>map=AdminLoginService.AdminLogin(commandMap.getMap());
 		if(map!=null) {
-			session.setAttribute("adminId","y");//?
+			session.setAttribute("ADMIN_ID","Y");//?
 			mv.addObject("adminJoin",map);
-			mv.setViewName("/admin/main/adminMain");
+			mv.setViewName("redirect:/admin/main/adminMain");
 			}else {
 				mv.setViewName("/admin/login/adminLogin");
 				mv.addObject("message","해당아이디가 존재하지 않습니다");
@@ -45,7 +45,12 @@ public class AdminLoginController {
 		return mv;
 		}
 	
-	
+	@RequestMapping(value="/admin/logout")
+	public ModelAndView logout(HttpServletRequest request,CommandMap commandMap) {
+		HttpSession session=request.getSession(false);
+		session.invalidate();
+		ModelAndView mv=new ModelAndView("redirect:/main");
+		return mv;
 	}
-
+}
 

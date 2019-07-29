@@ -6,13 +6,20 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import ezen.nnb.admin.paging.Paging;
+import ezen.nnb.admin.service.AdminLoginService;
 import ezen.nnb.admin.service.AdminMessageService;
 import ezen.nnb.common.CommandMap;
 
+@Controller
 public class AdminMessageController {
 	
 	int currentPage = 0;
@@ -23,10 +30,12 @@ public class AdminMessageController {
 	private Paging page;
 	private int searchNum;
 	private String isSearch;
-	
-@Resource(name="AdminMessageService")
-private AdminMessageService AdminMessageService;
-	
+@Resource(name="adminMessageService")
+private AdminMessageService adminMessageService;
+
+@Resource(name="adminLoginService")
+private AdminLoginService adminLoginService;	
+
 public ModelAndView adMessageList(CommandMap commandMap,HttpServletRequest request)throws Exception {
 		
 if(request.getParameter("currentPage")==null || request.getParameter("currentPage").trim().isEmpty()
@@ -37,7 +46,7 @@ if(request.getParameter("currentPage")==null || request.getParameter("currentPag
 			  
 		  }
 		ModelAndView mv=new ModelAndView();
-		List<Map<String,Object>>adminMessageList=AdminMessageService.adminMessageList(commandMap.getMap());
+		List<Map<String,Object>>adminMessageList=adminMessageService.adminMessageList(commandMap.getMap());
 		
 		Map<String,Object>isSearchMap=new HashMap<String,Object>();
 		
@@ -48,9 +57,9 @@ if(request.getParameter("currentPage")==null || request.getParameter("currentPag
 		  isSearchMap.put("isSearch", isSearch);
 			  
 		  if(searchNum==1) {
-			  adminMessageList=AdminMessageService.adminMessageSearchContent(isSearchMap);
+			  adminMessageList=adminMessageService.adminMessageSearchContent(isSearchMap);
 			  }if(searchNum==2) {
-				  adminMessageList=AdminMessageService.adminMessageSearchTitle(isSearchMap);
+				  adminMessageList=adminMessageService.adminMessageSearchTitle(isSearchMap);
 			  }  totalCount=adminMessageList.size();
 			  page=new Paging(currentPage,totalCount,blockCount,blockPage,"adminMessageList");
 			  pagingHtml=page.getPagingHtml().toString();
@@ -87,11 +96,44 @@ if(request.getParameter("currentPage")==null || request.getParameter("currentPag
 			  mv.addObject("pagingHtml",pagingHtml);
 			  mv.addObject("currentPage",currentPage);
 			  mv.addObject("adminMessageList",adminMessageList);
-			  mv.setViewName("/admin/message/messageList");
+			  mv.setViewName("admin/message/messageList");
 				  
 			 return mv;
 		  }
 	}
-
+	@RequestMapping(value="/admin/messageWriteForm")
+	public ModelAndView adWriteForm()throws Exception{
+		ModelAndView mv=new ModelAndView();
+		mv.setViewName("admin/message/messageWriteForm");
+		return mv;
+	}
+	@RequestMapping(value="/admin/messageWrite",method=RequestMethod.POST)
+	public ModelAndView adWrite(CommandMap commandMap,HttpServletRequest request,HttpServletResponse response)throws Exception{
+		ModelAndView mv=new ModelAndView();
+		HttpSession session=request.getSession();
+		Map<String,Object>map=adminLoginService.AdminLogin(commandMap.getMap());		
+		if(map!=null) {
+			session.setAttribute("ADMIN_ID", "Y"); //?
+			if(!(commandMap.getMap().get("MEM_ID").equals(""))) {
+		if (commandMap.getMap().get("MESSAGE_NUM")!=null){
+			mv.addObject("message","메세지가 성공적으로 전송되었습니다");
+			mv.setViewName("redirect:admin/message/messageList?MESSAGE_NUM="+commandMap.get("MESSAGE_NUM"));
+		}else {
+			mv.addObject("message", "메세지 전송에 실패했습니다");
+			mv.setViewName("admin/message/messageWriteForm");
+			}
+		}
+	}		
+		return mv;
+		
+	}
+	@RequestMapping(value="/admin/messageDelete")
+	public ModelAndView adMessageDelete(CommandMap commandMap)throws Exception{
+		ModelAndView mv = new ModelAndView();
+		adminMessageService.adminMessageDelete(commandMap.getMap());
+		mv.setViewName("redirect:admin/message/messageList");
+		return mv;
+		
+	}
 
 	}

@@ -26,7 +26,7 @@ public class AdminMessageServiceImpl implements AdminMessageService{
 		
 		return AdminMessageDAO.adminMessageDetail(map);
 	}
-
+ 
 	@Override
 	public void adminMessageWrite(Map<String, Object> map) throws Exception {
 		AdminMessageDAO.adminMessageWrite(map);

@@ -1,10 +1,14 @@
 package ezen.nnb.admin.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -99,18 +103,30 @@ public class AdminMemberController{
 			@RequestMapping(value="/admin/memberDetail")
 		    public ModelAndView adMemberDetail(CommandMap commandMap) throws Exception{
 				ModelAndView mv = new ModelAndView();
-				Map<String,Object>memberDetailm = AdminMemberService.adminMemberDetail(commandMap.getMap());
-				mv.addObject("memberDetailm",memberDetailm);
+				Map<String,Object>map = AdminMemberService.adminMemberDetail(commandMap.getMap());
+				mv.addObject("memberDetail",map);
 				mv.setViewName("admin/member/memberDetail");			
 				return mv;		 
 	}
-			@RequestMapping(value="/admin/memberDetail")
+			@RequestMapping(value="admin/memberDelete")
 			public ModelAndView adMemberBan(CommandMap commandMap)throws Exception{
-				ModelAndView mv = new ModelAndView();
+				ModelAndView mv=new ModelAndView();
 				AdminMemberService.adminMemberBan(commandMap.getMap());
-				mv.setViewName("admin/member/memberDetail");
+				SimpleDateFormat s=new SimpleDateFormat("yyyy/MM/dd");
+				Calendar cal=Calendar.getInstance();
+				s.format(cal.getTime());
+				if(!(commandMap.getMap().get("MEM_ID").equals(""))) {
+					String id=(String)commandMap.getMap().get("MEM_ID");
+					if(id.equals("Y")) {
+						Calendar banDate=(Calendar) commandMap.getMap().get("BAN_REMOVAL_DATE");
+						int result=cal.compareTo(banDate);
+						if(result>0) {
+							mv.setViewName("redirect:/member/main/loginForm");
+						}
+					}
+				}
+				mv.setViewName("redirect:/member/main/main");
 				return mv;
-				
 			}
 		}
 				

@@ -22,7 +22,7 @@ public class AdminMessageDAO extends AbstractDAO{
 	}
 	public void adminMessageDelete(Map<String,Object>map)throws Exception{
 		delete("adminMessage.adminMessageDelete",map);
-	}
+	} 
 	
 	@SuppressWarnings("unchecked")
 	public List<Map<String,Object>>adminMessageSearchContent(Map<String,Object>map)throws Exception{

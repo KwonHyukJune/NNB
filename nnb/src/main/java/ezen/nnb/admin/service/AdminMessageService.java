@@ -16,3 +16,4 @@ public interface AdminMessageService {
 	
 	public List<Map<String,Object>> adminMessageSearchTitle(Map<String,Object>map)throws Exception;
 }
+ 
