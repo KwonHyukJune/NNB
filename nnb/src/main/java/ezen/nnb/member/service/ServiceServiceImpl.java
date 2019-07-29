@@ -8,7 +8,7 @@ import javax.annotation.Resource;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
-@Service("ServiceService")
+@Service("serviceService")
 public class ServiceServiceImpl implements ServiceService {
 
 	@Override

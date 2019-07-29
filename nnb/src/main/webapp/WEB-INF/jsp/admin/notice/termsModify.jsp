@@ -4,7 +4,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>공지사항 수정</title>
 <head>
-<%@include file = "/include/adminHeader.jspf" %>
+<%@ include file="/WEB-INF/include/include-header.jspf" %>
+<%@include file = "/WEB-INF/include/adminHeader.jspf" %>
 
 <script type="text/javascript">
 
@@ -72,7 +73,7 @@
 <br/><br/><br/><br/><br/><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;
 <div>
-<%@include file = "/include/footer.jspf" %>
+<%@include file = "/WEB-INF/include/footer.jspf" %>
 </div>
 </body>
 </html>

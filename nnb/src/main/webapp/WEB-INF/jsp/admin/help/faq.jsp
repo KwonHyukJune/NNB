@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<%@ include file="/WEB-INF/include/include-header.jspf" %>
 <title>Q&A 관리</title>
 </head>
 <body>

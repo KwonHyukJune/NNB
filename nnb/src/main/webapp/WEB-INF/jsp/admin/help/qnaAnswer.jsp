@@ -4,7 +4,7 @@
 <html>
 <title>1:1 문의 답변</title>
 <head>
-<%@ include file="/include/include-header.jspf" %>
+<%@ include file="/WEB-INF/include/include-header.jspf" %>
 
 <script type="text/javascript">
 

@@ -5,7 +5,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>공지게시판 새글 등록</title>
 <head>
-<%@include file = "/include/adminHeader.jspf" %>
+<%@ include file="/WEB-INF/include/include-header.jspf" %>
+<%@include file = "/WEB-INF/include/adminHeader.jspf" %>
 
 <script type="text/javascript">
 	function frameclose() { 
@@ -51,7 +52,7 @@
 <br/><br/><br/><br/><br/><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;
 <div>
-<%@include file = "/include/footer.jspf" %>
+<%@include file = "/WEB-INF/include/footer.jspf" %>
 </div>
 </body>
 </html>

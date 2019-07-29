@@ -99,17 +99,10 @@ package ezen.nnb.admin.controller;
 					ModelAndView mv = new ModelAndView();
 					Map<String,Object>memberDetailm = AdminMemberService.adminMemberDetail(commandMap.getMap());
 					mv.addObject("memberDetailm",memberDetailm);
-					mv.setViewName("memberDetail");			
+					mv.setViewName("/memberDetail");			
 					return mv;		 
 		}
-				@RequestMapping(value="/admin/memberDetail")
-				public ModelAndView memberBan(CommandMap commandMap)throws Exception{
-					ModelAndView mv = new ModelAndView();
-					AdminMemberService.adminMemberBan(commandMap.getMap());
-					mv.setViewName("memberDetail");
-					return mv;
-					
-				}
-			}
+
+}
 				
 

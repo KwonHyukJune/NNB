@@ -6,10 +6,12 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Service;
 
 import ezen.nnb.admin.dao.AdminFaqDAO;
 import ezen.nnb.admin.dao.AdminReportDAO;
 
+@Service("adminReportService")
 public class AdminReportServiceImpl implements AdminReportService{
 	
 	Logger log = Logger.getLogger(this.getClass());

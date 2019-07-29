@@ -4,7 +4,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>제휴 은행 등록 폼</title>
 <head>
-<%@include file = "/include/adminHeader.jspf" %>
+<%@ include file="/WEB-INF/include/include-header.jspf" %>
+<%@include file = "/WEB-INF/include/adminHeader.jspf" %>
 
 <script type="text/javascript">
 
@@ -125,7 +126,7 @@ function fn_downloadFile(obj){ var idx = obj.parent().find("#IDX").val();
 <br/><br/><br/><br/><br/><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;
 <div>
-<%@include file = "/include/footer.jspf" %>
+<%@include file = "/WEB-INF/include/footer.jspf" %>
 </div>
 </body>
 </html>

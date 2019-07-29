@@ -4,8 +4,8 @@
 <title>공지 게시판</title>
 <html>
 <head>
-<%@ include file="/include/include-header.jspf" %>
-<%@ include file="/include/adminHeader.jspf" %>
+<%@ include file="/WEB-INF/include/include-header.jspf" %>
+<%@include file = "/WEB-INF/include/adminHeader.jspf" %>
 
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/myInterest.css'/>"/>
 
@@ -97,7 +97,7 @@ function showPopup() {
 </div>
 <br>
 <div>
-<%@ include file="/include/footer.jspf" %>
+<%@include file = "/WEB-INF/include/footer.jspf" %>
 </div>
 </body>
 </html>
