@@ -1,0 +1,68 @@
+@charset "EUC-KR";
+.title{
+	width:80%;
+	margin:0 auto;
+	text-align: center;
+	font-size: 20pt;
+}
+.list{
+	width:80%;
+	margin:0 auto;
+}
+.list ul{
+	border:0px;
+	padding: 0px;
+}
+.list li{
+	list-style:none;
+	float:left;
+}
+.list li.p1{
+	width:10%;
+}
+.list li.p2{
+	width:10%;
+}
+.list li.p3{
+	width:50%;
+}
+.list li.p4{
+	width:10%;
+}
+.list li.p5{
+	width:20%;
+}
+.detail{
+	width:80%;
+	margin:0 auto;
+}
+.detail ul{
+	border:0px;
+	padding: 0px;
+}
+.detail li{
+	list-style:none;
+	float:left;
+}
+.detail li.p1{
+	width:10%;
+}
+.detail li.p2{
+	width:60%;
+}
+.detail li.p3{
+	width:10%;
+}
+.detail li.p4{
+	width:20%;
+}
+.detail div.content{
+	
+}
+.detail div.image{
+	 width:60%;
+	 border:0;
+	 text-align: center;
+	 margin:0 auto;
+	 
+}

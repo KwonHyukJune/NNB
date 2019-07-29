@@ -1,0 +1,27 @@
+@charset "EUC-KR";
+a.tabmenu{
+	width:25%;
+}
+.messageWriteForm li{
+	list-style: none;
+}
+.left{
+	width:20%;
+	float: left;
+}
+.right{
+	width:80%;
+	float: left;
+}
+.h{
+	width:20%;
+	float:left;
+}
+.b{
+	width:80%;
+	float:left;
+}
+.tab div{
+	width:33%;
+	float:left;
+}

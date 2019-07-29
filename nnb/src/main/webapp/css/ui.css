@@ -1,1 +1,27 @@
-@charset "EUC-KR" ;
+@charset "EUC-KR";
+.footer{
+	position:absolute;
+	bottom:0px;
+}
+.fav{
+    width: 36px;
+    position: absolute;
+    top: 3px;
+    right: 7px;
+    z-index: 1;
+    cursor: pointer;
+}
+.deleteFav{
+    width: 32px;
+    height: 30px;
+    margin: 0px auto;
+    background: url(/nnb/media/like.svg) center center / cover;
+    cursor: pointer;
+}
+.insertFav{
+    width: 32px;
+    height: 30px;
+    margin: 0px auto;
+    background: url(/nnb/media/unlike.svg) center center / cover;
+    cursor: pointer;
+}

@@ -40,7 +40,7 @@ function ComSubmit(opt_formId){
 	};
 }
 
-/* ajax   */
+/* ajax */
 var gfv_ajaxCallback = "";
 function ComAjax(opt_formId){
 	this.url = "";
@@ -159,4 +159,12 @@ function _movePage(value){
 	else{
 		eval(gfv_eventName+"(value);");
 	}
+}
+
+function close(){
+	window.close();
+}
+
+function back(){
+	history.go(-1);
 }

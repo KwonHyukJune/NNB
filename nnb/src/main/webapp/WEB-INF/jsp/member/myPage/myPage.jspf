@@ -1,0 +1,13 @@
+<%@ page pageEncoding="utf-8"%>
+	<div class="title">마이페이지</div>
+	<div class="tab">
+		<div>
+		<a class="tabmenu" href="<c:url value='/myPage/myPageInfo'/>">내정보</a>
+		</div>
+		<div>
+		<a class="tabmenu" href="<c:url value='/myPage/messageList'/>">메시지함</a>
+		</div>
+		<div>
+		<a class="tabmenu" href="<c:url value='/myPage/myProfile'/>">내 룸메이트 정보</a>
+		</div>
+	</div>
