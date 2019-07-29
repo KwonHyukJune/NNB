@@ -114,11 +114,10 @@
  
  </script>
 
-
-
-
-
-
+&nbsp;&nbsp;&nbsp;&nbsp;
+<div>
+<%@include file = "/WEB-INF/include/footer.jspf" %>
+</div>
 
 </body>
 </html>

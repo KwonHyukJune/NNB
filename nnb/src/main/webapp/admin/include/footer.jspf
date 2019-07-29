@@ -1,21 +1,17 @@
-<%@ page pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 
 <footer>
     <div>
-    <a href="<c:url='/admin/member/amdinMemberList'/>">이용약관</a> |
-	<a href="<c:url='/admin/help/amdinQNAList'/>">개인정보처리방침</a> |
-	<a href="<c:url='/admin/notice/amdinNoticeList'/>"">매물관리규정</a> |
-	<a href="<c:url='/admin/bank/bankList'/>">자동저장서비스</a>	
-	
-	&nbsp;&nbsp;&nbsp;&nbsp;
-	<input type="text" id="search" onkeypress="if( event.keyCode == 13 ){searchData();}" />
- 
-	
-	
-
+    	<a href="<c:url value='/admin/member/amdinMemberList'/>">이용약관</a> |
+		<a href="<c:url value='/admin/help/amdinQNAList'/>">개인정보처리방침</a> |
+		<a href="<c:url value='/admin/notice/amdinNoticeList'/>"">매물관리규정</a> |
+		<a href="<c:url value='/admin/bank/bankList'/>">자동저장서비스</a>		
+		&nbsp;&nbsp;&nbsp;&nbsp;
+		<input type="text" id="search" onkeypress="if( event.keyCode == 13 ){searchData();}" />
   	</div>	
-  
-  
+  	
 	<br/>	
     <br/>
     <div class="">
