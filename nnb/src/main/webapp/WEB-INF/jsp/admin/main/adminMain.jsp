@@ -1,25 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
 <!DOCTYPE html>
 <html>
-<title>관리자 메인 페이지</title>
-
-
-
 <head>
-<%@include file = "/WEB-INF/include/adminHeader.jspf" %>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
 </head>
-<br/>
-
 <body>
-
-
-<br/><br/><br/><br/><br/><br/>
-
-&nbsp;&nbsp;&nbsp;&nbsp;
-<div>
-<%@include file = "/WEB-INF/include/footer.jspf" %>
-</div>
 
 </body>
 </html>
