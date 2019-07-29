@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import ezen.nnb.admin.service.AdminReportService;
+import ezen.nnb.admin.service.AdminRoomService;
 import ezen.nnb.common.CommandMap;
 
 @Controller
@@ -19,6 +20,9 @@ public class AdminReportController {
 	
 	@Resource(name = "adminReportService")
 	private AdminReportService adminReportService;
+	
+	@Resource(name="adminRoomService") 
+	private AdminRoomService adminRoomService;
 
 	@RequestMapping(value = "/admin/report/roomList")
 	public ModelAndView adminReportRoomList(CommandMap commandMap) throws Exception {
@@ -39,4 +43,26 @@ public class AdminReportController {
 
 		return mv;
 	}
+	
+	@RequestMapping(value="/admin/report/detail")
+	public ModelAndView adminFaqDetail(CommandMap commandMap) throws Exception{
+		ModelAndView mv = new ModelAndView("/admin/faq/detail");
+		
+		Map<String,Object> map = adminReportService.selectReportDetail(commandMap.getMap());
+		mv.addObject("map", map);
+		
+		return mv;
+	}
+//	
+//	
+//	@RequestMapping(value="/admin/Report/roomDelete")
+//	public ModelAndView adminReportDelete(CommandMap commandMap) throws Exception{
+//		ModelAndView mv = new ModelAndView("redirect:/admin/report/list");
+//		
+//		adminMessageService.adminMessageWrite(commandMap.getMap());
+//		adminRoomService.deleteRoom(commandMap.getMap());
+//		
+//		return mv;
+//	}
+//	
 }

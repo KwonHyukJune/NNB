@@ -5,10 +5,14 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.apache.log4j.Logger;
+
 import ezen.nnb.admin.dao.AdminFaqDAO;
 import ezen.nnb.admin.dao.AdminReportDAO;
 
 public class AdminReportServiceImpl implements AdminReportService{
+	
+	Logger log = Logger.getLogger(this.getClass());
 	
 	@Resource(name="adminReportDAO")
 	private AdminReportDAO adminReportDAO;
@@ -23,5 +27,11 @@ public class AdminReportServiceImpl implements AdminReportService{
 	public List<Map<String, Object>> selectReportMemberList(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub
 		return adminReportDAO.selectReportMemberList(map);
+	}
+
+	@Override
+	public Map<String, Object> selectReportDetail(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return adminReportDAO.selectReportDetail(map);
 	}
 }

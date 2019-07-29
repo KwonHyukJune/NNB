@@ -11,7 +11,6 @@
 		REPORT_D_ID,
 		REPORT_POST_NUM,
 		REPORT_DATE,
-		REPORT_REASON,
 		REPORT_TYPE
 	FROM
 		report
@@ -48,7 +47,6 @@
 		REPORT_ID,
 		REPORT_D_ID,
 		REPORT_DATE,
-		REPORT_REASON,
 		REPORT_TYPE
 	FROM
 		report
@@ -59,17 +57,20 @@
 <select id="selectFaqDetail" parameterType="hashmap" resultType="hashmap"> 
 	<![CDATA[
 	SELECT
-		FAQ_CONTENT,
-		FAQ_TITLE,
-		FAQ_CATEGORY
+		REPORT_ID,
+		REPORT_D_ID,
+		REPORT_POST_NUM,
+		REPORT_DATE,
+		REPORT_REASON,
+		REPORT_TYPE
 	FROM
-		FAQ
+		REPORT
 	WHERE
-		FAQ_NUM = #{FAQ_NUM}
+		REPORT_NUM = #{REPORT_NUM}
 	]]>
 </select>
 
-<select id="insertFaq" parameterType="hashmap"> 
+<!-- <select id="insertFaq" parameterType="hashmap"> 
 	<![CDATA[
 	INSERT INTO FAQ (
 		FAQ_NUM,
@@ -102,5 +103,5 @@
 	DELETE FAQ
 	WHERE FAQ_NUM = #{FAQ_NUM}
 	]]>
-</select>
+</select> -->
 </mapper>

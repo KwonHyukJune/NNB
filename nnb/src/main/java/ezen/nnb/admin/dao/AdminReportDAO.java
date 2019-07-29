@@ -22,4 +22,10 @@ public class AdminReportDAO extends AbstractDAO{
 		return (List<Map<String, Object>>) selectList("report.selectReportMemberList", map);
 	}
 
+	@SuppressWarnings("unchecked")
+	public Map<String, Object> selectReportDetail(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return (Map<String, Object>) selectOne("report.selectReportDetail", map);
+	}
+
 }
