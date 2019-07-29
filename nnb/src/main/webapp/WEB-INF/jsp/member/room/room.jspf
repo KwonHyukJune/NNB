@@ -1,0 +1,6 @@
+<%@ page pageEncoding="utf-8"%>
+	<div class="title">방 내놓기</div>
+	<div class="tab">
+	<a class="tabmenu" href="<c:url value='/room/write'/>">방 내놓기</a>
+	<a class="tabmenu" href="<c:url value='/room/adminRoom'/>">내 방 관리</a>
+	</div>

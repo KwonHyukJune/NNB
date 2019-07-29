@@ -1,0 +1,14 @@
+@charset "EUC-KR";
+input[type="range"]{
+	width:100px;
+	margin:0;
+	border:0;
+}
+.h{
+	width:20%;
+	float: left;
+}
+.b{
+	width:80%;
+	float: left;
+}

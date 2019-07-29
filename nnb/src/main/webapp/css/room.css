@@ -1,0 +1,15 @@
+@charset "EUC-KR";
+.h{
+	width:20%;
+	float:left;
+}
+.b{
+	width:80%;
+	float:left;
+}
+.button{
+	float:left;
+}
+.c_button{
+	float:left;
+}

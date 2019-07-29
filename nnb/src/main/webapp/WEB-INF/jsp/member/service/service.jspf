@@ -1,0 +1,7 @@
+<%@ page pageEncoding="utf-8"%>
+	<div class="title">문의하기</div>
+	<div class="tab">
+	<a class="tabmenu" href="<c:url value='/service/faq'/>">자주 묻는 질문</a>
+	<a class="tabmenu" href="<c:url value='/service/qna'/>">1:1질문</a>
+	<a class="tabmenu" href="<c:url value='/service/notice'/>">공지사항</a>
+	</div>

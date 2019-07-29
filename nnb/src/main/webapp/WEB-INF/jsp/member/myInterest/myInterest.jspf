@@ -1,0 +1,7 @@
+<%@ page pageEncoding="utf-8"%>
+	<div class="title">관심목록</div>
+	<div class="tab">
+	<a class="tabmenu" href="<c:url value='/myInterest/recentRoom'/>">최근 본 방</a>
+	<a class="tabmenu" href="<c:url value='/myInterest/favRoomList'/>">찜한 방</a>
+	<a class="tabmenu" href="<c:url value='/myInterest/favRoommateList'/>">찜한 룸메이트 정보</a>
+	</div>

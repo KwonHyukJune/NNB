@@ -1,0 +1,18 @@
+@charset "EUC-KR";
+.tab div{
+	width:33%;
+	float:left;
+}
+.room{
+	width:200px;
+	float:left;
+	margin:5px;
+	position: relative;
+}
+.img img{
+	width:100%;
+}
+.p6{
+    z-index: 1;
+    cursor: pointer;
+}
