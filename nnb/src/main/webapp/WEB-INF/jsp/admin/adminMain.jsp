@@ -7,7 +7,8 @@
 
 
 <head>
-<%@include file = "/include/adminHeader.jspf" %>
+<%@ include file="/WEB-INF/include/include-header.jspf" %>
+<%@include file = "/WEB-INF/include/adminHeader.jspf" %>
 </head>
 <br/>
 
@@ -18,7 +19,7 @@
 
 &nbsp;&nbsp;&nbsp;&nbsp;
 <div>
-<%@include file = "/projectTest/admin/include/footer.jspf" %>
+<%@include file = "/WEB-INF/include/footer.jspf" %>
 </div>
 
 </body>

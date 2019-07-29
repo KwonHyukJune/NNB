@@ -24,7 +24,7 @@ public class AdminLoginController {
     public ModelAndView adminloginform(CommandMap commandMap,HttpServletRequest request) throws Exception{
 		
 		ModelAndView mv = new ModelAndView();		
-		mv.setViewName("/admin/login");
+		mv.setViewName("/admin/login/adminLogin");
 
 		return mv;
 		

@@ -4,7 +4,7 @@
 <html>
 <title>FAQ 상세보기</title>
 <head>
-<%@ include file="/include/include-header.jspf" %>
+<%@ include file="/WEB-INF/include/include-header.jspf" %>
 
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/myInterest.css'/>"/>
 

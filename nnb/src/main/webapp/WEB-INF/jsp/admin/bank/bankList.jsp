@@ -4,8 +4,8 @@
 <html>
 <title>제휴 은행 리스트</title>
 <head>
-<%@ include file="/include/include-header.jspf" %>
-<%@ include file="/include/adminHeader.jspf" %>
+<%@ include file="/WEB-INF/include/include-header.jspf" %>
+<%@include file = "/WEB-INF/include/adminHeader.jspf" %>
 
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/myInterest.css'/>"/>
 
@@ -102,7 +102,7 @@ function goPage3() {   // 수정
 </div>
 <br>
 <div>
-<%@ include file="/include/footer.jspf" %>
+<%@include file = "/WEB-INF/include/footer.jspf" %>
 </div>
 </body>
 </html>

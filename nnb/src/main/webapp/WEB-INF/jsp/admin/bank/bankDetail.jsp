@@ -4,7 +4,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>제휴 은행 상세보기</title>
 <head>
-<%@include file = "/include/adminHeader.jspf" %>
+<%@ include file="/WEB-INF/include/include-header.jspf" %>
+<%@include file = "/WEB-INF/include/adminHeader.jspf" %>
 
 <script type="text/javascript">
 
@@ -83,7 +84,7 @@ function goPage2() {
 </form> 
 <br/><br/><br/><br/>
 <div>
-<%@include file = "/include/footer.jspf" %>
+<%@include file = "/WEB-INF/include/footer.jspf" %>
 </div>
 </body>
 </html>
