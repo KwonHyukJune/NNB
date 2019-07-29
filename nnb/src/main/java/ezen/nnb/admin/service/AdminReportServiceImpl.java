@@ -18,7 +18,7 @@ public class AdminReportServiceImpl implements AdminReportService{
 	private AdminReportDAO adminReportDAO;
 	
 	@Override
-	public List<Map<String, Object>> selectReportRoomList(Map<String, Object> map) {
+	public List<Map<String, Object>> selectReportRoomList(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub
 		return adminReportDAO.selectReportRoomList(map);
 	}

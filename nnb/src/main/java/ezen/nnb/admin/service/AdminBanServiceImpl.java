@@ -23,4 +23,10 @@ public class AdminBanServiceImpl implements AdminBanService{
 		adminBanDAO.insertBan(map);
 	}
 
+	@Override
+	public Map<String, Object> banDateCheck(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return adminBanDAO.banDateCheck(map);
+	}
+
 }

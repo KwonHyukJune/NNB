@@ -26,7 +26,7 @@ public class AdminReportController {
 
 	@RequestMapping(value = "/admin/report/roomList")
 	public ModelAndView adminReportRoomList(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("/admin/report/list");
+		ModelAndView mv = new ModelAndView("/admin/report/roomList");
 
 		List<Map<String, Object>> list = adminReportService.selectReportRoomList(commandMap.getMap());
 		mv.addObject("list", list);
@@ -35,8 +35,8 @@ public class AdminReportController {
 	}
 	
 	@RequestMapping(value = "/admin/report/memberList")
-	public ModelAndView adminReportmemberList(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("/admin/report/list");
+	public ModelAndView adminReportMemberList(CommandMap commandMap) throws Exception {
+		ModelAndView mv = new ModelAndView("/admin/report/memberList");
 
 		List<Map<String, Object>> list = adminReportService.selectReportMemberList(commandMap.getMap());
 		mv.addObject("list", list);
@@ -53,16 +53,14 @@ public class AdminReportController {
 		
 		return mv;
 	}
-//	
-//	
-//	@RequestMapping(value="/admin/Report/roomDelete")
-//	public ModelAndView adminReportDelete(CommandMap commandMap) throws Exception{
-//		ModelAndView mv = new ModelAndView("redirect:/admin/report/list");
-//		
-//		adminMessageService.adminMessageWrite(commandMap.getMap());
-//		adminRoomService.deleteRoom(commandMap.getMap());
-//		
-//		return mv;
-//	}
-//	
+	/*
+	 * @RequestMapping(value="/admin/Report/roomDelete") public ModelAndView
+	 * adminReportDelete(CommandMap commandMap) throws Exception{ ModelAndView mv =
+	 * new ModelAndView("redirect:/admin/report/roomList");
+	 * 
+	 * adminMessageService.adminMessageWrite(commandMap.getMap());
+	 * adminRoomService.deleteRoom(commandMap.getMap());
+	 * 
+	 * return mv; }
+	 */
 }
