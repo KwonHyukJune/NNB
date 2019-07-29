@@ -60,7 +60,7 @@ public class AdminReportController {
 	 * 
 	 * adminMessageService.adminMessageWrite(commandMap.getMap());
 	 * adminRoomService.deleteRoom(commandMap.getMap());
-	 * 
+	 * 12323543
 	 * return mv; }
 	 */
 }
