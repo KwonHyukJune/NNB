@@ -25,7 +25,7 @@ public class AdminBankController {
 	
 	@RequestMapping(value="/admin/bankList")
 	public ModelAndView adminBankList(CommandMap commandMap) throws Exception{
-		ModelAndView mv=new ModelAndView("/admin/bank/list");
+		ModelAndView mv=new ModelAndView("admin/bank/bankList");
 		
 		List<Map<String,Object>> list=adminBankService.selectBankList(commandMap.getMap());
 		mv.addObject("list",list);
@@ -34,7 +34,7 @@ public class AdminBankController {
 	}
 	@RequestMapping(value="/admin/bankWriteForm")
 	public ModelAndView adminBankWriteForm(CommandMap commandMap) throws Exception{
-		ModelAndView mv = new ModelAndView("/admin/bank/writeForm");
+		ModelAndView mv = new ModelAndView("admin/bank/bankWrite");
 		return mv;
 	}
 	@RequestMapping(value="/admin/bankWrite")
@@ -46,7 +46,7 @@ public class AdminBankController {
 	}
 	@RequestMapping(value="/admin/bankDetail")
 	public ModelAndView adminBankDetail(CommandMap commandMap) throws Exception{
-		ModelAndView mv = new ModelAndView("/admin/bank/detail");
+		ModelAndView mv = new ModelAndView("admin/bank/bankDetail");
 		Map<String,Object> map = adminBankService.selectBankDetail(commandMap.getMap());
 		mv.addObject("map", map);
 		
@@ -54,7 +54,7 @@ public class AdminBankController {
 	}
 	@RequestMapping(value="/admin/bankModifyForm")
 	public ModelAndView adminBankModifyForm(CommandMap commandMap) throws Exception{
-		ModelAndView mv = new ModelAndView("/admin/bank/modifyForm");
+		ModelAndView mv = new ModelAndView("admin/bank/modifyForm");
 		Map<String,Object> map = adminBankService.selectBankDetail(commandMap.getMap());
 		mv.addObject("map", map);
 		
@@ -65,7 +65,7 @@ public class AdminBankController {
 		ModelAndView mv = new ModelAndView("redirect:/admin/bankDetail");
 		adminBankService.updateBankModify(commandMap.getMap());
 		
-		mv.addObject("IDX", commandMap.get("IDX"));
+		mv.addObject("bank_num", commandMap.get("bank_num"));
 		return mv;
 	}
 	

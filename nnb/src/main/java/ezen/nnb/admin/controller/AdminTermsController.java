@@ -20,7 +20,7 @@ Logger log = Logger.getLogger(this.getClass());
 
 	@RequestMapping(value = "/admin/Terms/list")
 	public ModelAndView adminTermsList(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("/admin/Terms/list");
+		ModelAndView mv = new ModelAndView("admin/Terms/list");
 		List<Map<String, Object>> list = adminTermsService.selectTermsList(commandMap.getMap());
 		mv.addObject("list", list);
 		return mv;
@@ -28,7 +28,7 @@ Logger log = Logger.getLogger(this.getClass());
 
 	@RequestMapping(value="/admin/Terms/writeForm")
 	public ModelAndView adminTermsWriteForm(CommandMap commandMap) throws Exception{
-		ModelAndView mv = new ModelAndView("/admin/Terms/writeForm");
+		ModelAndView mv = new ModelAndView("admin/Terms/writeForm");
 		return mv;
 	}
 	
@@ -43,7 +43,7 @@ Logger log = Logger.getLogger(this.getClass());
 	
 	@RequestMapping(value="/admin/Terms/detail")
 	public ModelAndView adminTermsDetail(CommandMap commandMap) throws Exception{
-		ModelAndView mv = new ModelAndView("/admin/Terms/detail");
+		ModelAndView mv = new ModelAndView("admin/Terms/detail");
 		
 		Map<String,Object> map = adminTermsService.selectTermsDetail(commandMap.getMap());
 		mv.addObject("map", map);
@@ -53,7 +53,7 @@ Logger log = Logger.getLogger(this.getClass());
 	
 	@RequestMapping(value="/admin/Terms/modifyForm")
 	public ModelAndView adminTermsModifyForm(CommandMap commandMap) throws Exception{
-		ModelAndView mv = new ModelAndView("/admin/Terms/modifyForm");
+		ModelAndView mv = new ModelAndView("admin/Terms/modifyForm");
 		
 		Map<String,Object> map = adminTermsService.selectTermsDetail(commandMap.getMap());
 		mv.addObject("map", map);
