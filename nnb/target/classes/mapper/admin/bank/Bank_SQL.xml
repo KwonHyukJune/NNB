@@ -5,7 +5,16 @@
 <!-- 게시판(관리자, 회원) -->
 <select id="selectBankList" parameterType="hashMap" resultType="hashMap">
 <![CDATA[
-       select * from bank where bank_num=#{bank_num}
+	select
+		row_number() over (ORDER BY bank_num ASC) rnum,
+		BANK_NUM,
+		BANK_KIND,
+		BANK_TITLE,
+		BANK_CONTENT,
+		BANK_HITCOUNT,
+		BANK_REGDATE
+	from bank
+	order by rnum desc
 ]]>
 </select>
 
@@ -22,7 +31,7 @@ insert into bank(
         bank_original_file2,
         bank_stored_file2
 ) values (
-        #{bank_num},
+        bank_num_seq.nextval,
         #{bank_kind},
         #{bank_title},
         #{bank_content},
@@ -37,7 +46,7 @@ insert into bank(
 <!-- 상세보기(관리자, 회원) -->
 <select id="selectBankDetail" parameterType="hashMap" resultType="hashMap">
 <![CDATA[
-       select * from bank where bank_num=#{bank_num}
+       select * from bank where bank_num=#{num}
 ]]>
 </select>
 
@@ -71,7 +80,7 @@ insert into bank(
 <!-- 글 삭제(관리자) -->
 <delete id="deleteBank" parameterType="hashmap">
 <![CDATA[
-	delete from bank where bank_num=#{bank_num}
+	delete from bank where bank_num=#{num}
 ]]>
 </delete>                   
 
