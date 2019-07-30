@@ -8,19 +8,11 @@
 <%@include file = "/WEB-INF/include/adminHeader.jspf" %>
 
 <script type="text/javascript">
-
-	function frameclose() { 
-		parent.close() 
-		window.close() 
-		self.close() 
-		} 
-	
 	function submit(){
 	    var f=document.bankWriteForm;   //폼 name
+	    	f.action = "bankWrite";
 		    f.submit();	 
-			
 		}
-	
 </script>
 </head>
 <body>
@@ -37,10 +29,10 @@
  <form action="bankList.jsp" method="get" name="bankWriteForm">
 	<div>
 	은행종류
-		<select>
+		<select name="bank_kind">
 			<option>은행종류</option>
-			<option>국민 은행</option>
-			<option>신한 은행</option>
+			<option value="국민">국민 은행</option>
+			<option value="신한">신한 은행</option>
 		</select>
    </div>
    <br/>
@@ -48,35 +40,27 @@
   
 		<div>
        		 제목&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        	<input type="text" id="TITLE" name="TITLE"/>
+        	<input type="text" id="bank_title" name="bank_title"/>
   		</div>
   		<br/>
 		<div>    
 	       	 내용&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<textarea rows="20" cols="50" title="내용" id="CONTENTS" name="CONTENTS"></textarea>
+		<textarea rows="20" cols="50" title="내용" id="bank_content" name="bank_content"></textarea>
 	    </div>
 
     <div>
     	<br/><br/>
 <hr>	
-    	<input type="file" name="file">첨부파일	
-    		<c:forEach var="row" items="${list }"> 
-	    		<input type="hidden" id="IDX" value="${row.IDX }"> 
-	    			<a href="#this" name="file">${row.ORIGINAL_FILE_NAME }</a>
-	    			(${row.FILE_SIZE }kb) 	
-    			</c:forEach>
+    	<input type="file" name="bank_original_file1">첨부파일	1
+    	<input type="hidden" name="bank_stored_file1" value="dd1">
     			<br/><br/>
-    	<input type="file" name="file">첨부파일	
-    		<c:forEach var="row" items="${list }"> 
-	    		<input type="hidden" id="IDX" value="${row.IDX }"> 
-	    			<a href="#this" name="file">${row.ORIGINAL_FILE_NAME }</a>
-	    			(${row.FILE_SIZE }kb) 	
-    			</c:forEach>		
+    	<input type="file" name="bank_original_file2">첨부파일	2
+    	<input type="hidden" name="bank_stored_file2" value="dd2">
 <hr>	
 <br/><br/>
     	<a href="javascript:submit()">등록</a>
 
-    	<a href="javascript:frameclose()">닫기</a>
+    	<a href="javascript:back();">닫기</a>
     </div>
 </form> 
 

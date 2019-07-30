@@ -7,26 +7,30 @@
 <%@ include file="/WEB-INF/include/include-header.jspf" %>
 <%@include file = "/WEB-INF/include/adminHeader.jspf" %>
 
-<link rel="stylesheet" type="text/css" href="<c:url value='/css/myInterest.css'/>"/>
-
 <script type="text/javascript">
-	$("#delete").on("click", function(e){ //삭제하기 버튼 
-		e.preventDefault(); 
-		fn_deleteBoard(); 
-	}); 
 
-function goPage1() {    //리스트 누르면 상세보기
-	location.href="bankDetail.jsp"; 
+function goPage1(num) {    //리스트 누르면 상세보기
+	location.href="bankDetail?num="+num; 
 	}
 			  
 function goPage2() {    // 새글 작성
-	location.href="bankWrite.jsp"; 
+	location.href="bankWriteForm"; 
 	}
 
-function goPage3() {   // 수정
-	location.href="bankModify.jsp"; 
+function goPage3(num) {   // 수정
+	location.href="bankModify?num="+num; 
 	}
-
+function delet(num){
+	if(confirm('삭제하시겠습니까?')){
+		var x = $('a#'+num);
+		var str = "<form id='frm' method='post' action='bankDelete'>"
+				+ "<input type='hidden' name='num' value='"+num+"'>"
+				+ "</form>";
+		x.html(str);
+		console.log(str);
+		frm.submit();
+	}
+}
 
 </script>
 
@@ -45,7 +49,7 @@ function goPage3() {   // 수정
 
 
 <!-- 테스트용 세팅 -->
-<%@ page import="java.util.HashMap" %>
+<%-- <%@ page import="java.util.HashMap" %>
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
@@ -63,20 +67,19 @@ function goPage3() {   // 수정
   
  
    request.setAttribute("bankList",bankList);
-%>
+%> --%>
 <!-- 테스트용 세팅 끝 -->
 
 <div class="selectBankList">
 
 
 <div class="bankList">
-   
-<c:forEach var="bank" items="${bankList}">
+<c:forEach var="bank" items="${list}">
 	<div class="bank">
-	  <a href="#" onClick="javascript:goPage1()">
+	  <a href="#" onClick="javascript:goPage1(${bank.BANK_NUM})">
 	      
 	      <div>
-	         ${bank.BANK_NUM}&nbsp;	
+	         ${bank.RNUM}&nbsp;	
 	      	
 			 ${bank.BANK_KIND}&nbsp;      
 	      	
@@ -88,14 +91,14 @@ function goPage3() {   // 수정
 	          
 	      </div>
 	  </a>
-	      <a href="#" onClick="javascript:goPage3()">수정</a>
-	      <a href="#this" class="btn" id="delete">삭제</a>
+	      <a href="#" onClick="goPage3(${bank.BANK_NUM})">수정</a>
+	      <a href="#" class="btn" id="${bank.BANK_NUM}" onclick="delet(${bank.BANK_NUM})">삭제</a>
 	  
 		<div>
-			 <a href="#" onClick="javascript:goPage2()">새 글 등록</a>
 		</div>
    </div>	
 </c:forEach>
+			 <a href="#" onClick="javascript:goPage2()">새 글 등록</a>
  
 </div>
 
