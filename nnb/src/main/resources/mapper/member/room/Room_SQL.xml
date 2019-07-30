@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="room">
+
+	<insert id="insertRoomInfo1" parameterType="hashmap"> 
+	<![CDATA[
+	INSERT INTO ROOM_INFO1
+		(
+		ROOM_NUM, 
+		ROOM_TYPE, 
+		BUILDING_TYPE, 
+		MONTHLY_PAYMENT, 
+		MONTHLY_DEPOSIT, 
+		JEONSE, 
+		ADDRESS1, 
+		ADDRESS2, 
+		ZIPCODE, 
+		TRADE_TYPE, 
+		MEM_ID
+		)
+	VALUES (
+		ROOM_NUM_SEQ.NEXTVAL, 
+		#{ROOM_TYPE}, 
+		#{BUILDING_TYPE},
+		#{MONTHLY_PAYMENT},
+		#{MONTHLY_DEPOSIT},
+		#{JEONSE}, 
+		#{ADDRESS1}, 
+		#{ADDRESS2},
+		#{ZIPCODE},
+		#{TRADE_TYPE},
+		#{MEM_ID}
+		)
+	]]>
+	</insert>
+
+	<insert id="insertRoomInfo2" parameterType="hashmap"> 
+	<![CDATA[
+	INSERT INTO ROOM_INFO2
+		(
+		ROOM_NUM, 
+		SUPPLY_SIZE, 
+		REAL_SIZE, 
+		BUILDING_STORY, 
+		ROOM_FLOOR, 
+		HEATING_SYSTEM, 
+		MOVE_IN_DATE, 
+		UTILITY_CHECK, 
+		UTILITY_PRICE, 
+		UTILITY_TYPE, 
+		PARKING, 
+		PARKING_BILL, 
+		PET, 
+		ELEVATOR, 
+		BALCONY, 
+		BUILT_IN, 
+		STRUCTURES, 
+		OPTIONS, 
+		LOAN_ACCESS, 
+		DESC_TITLE, 
+		DESC_DETAIL, 
+		DESC_SECRET
+		) 
+	VALUES 
+		(
+		ROOM_NUM_SEQ.CURRVAL, 
+		#{SUPPLY_SIZE}, 
+		#{REAL_SIZE}, 
+		#{BUILDING_STORY}, 
+		#{ROOM_FLOOR}, 
+		#{HEATING_SYSTEM}, 
+		#{MOVE_IN_DATE}, 
+		#{UTILITY_CHECK},
+		#{UTILITY_PRICE}, 
+		#{UTILITY_TYPE}, 
+		#{PARKING}, 
+		#{PARKING_BILL}, 
+		#{PET}, 
+		#{ELEVATOR}, 
+		#{BALCONY}, 
+		#{BUILT_IN},
+		#{STRUCTERS}, 
+		#{OPTIONS}, 
+		#{LOAN_ACCESS}, 
+		#{DESC_TITLE}, 
+		#{DESC_DETAIL}, 
+		#{DESC_SECRET}
+		)
+	]]>
+	</insert>
+
+	<insert id="insertRoomBoard" parameterType="hashmap"> 
+	<![CDATA[
+	INSERT INTO ROOM_BOARD
+		(
+		ROOM_NUM,
+		BOARD_NUM,
+		TRADE_STATUS,
+		EXPIRATION_DATE,
+		HIT_COUNT,
+		FAV_COUNT,
+		DEL_GB,
+		UPLOAD_DATE
+		) 
+	VALUES
+		(
+		#{ROOM_NUM},
+		#{BOARD_NUM},
+		#{TRADE_STATUS}='광고중',
+		#{EXPIRATION_DATE},
+		0,
+		0,
+		'N',
+		SYSDATE
+		)
+	]]>
+	</insert>
+
+</mapper>

@@ -1,5 +1,10 @@
 package ezen.nnb.member.service;
 
-public class RoomService {
+import java.util.Map;
+
+public interface RoomService {
+
+	public void insertRoomInfo(Map<String, Object> map) throws Exception;
+		
 
 }
