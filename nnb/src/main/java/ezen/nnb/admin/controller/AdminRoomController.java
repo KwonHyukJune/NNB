@@ -123,4 +123,4 @@ public class AdminRoomController{
 				mv.setViewName/*##��*/("redirect:/admin/roomList");
 				return mv;
 			}
-		}  
+		}    ////
