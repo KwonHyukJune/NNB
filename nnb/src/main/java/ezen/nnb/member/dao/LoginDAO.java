@@ -15,5 +15,17 @@ public class LoginDAO extends AbstractDAO{
 		return (Map<String, Object>) selectOne("login.selectId", map);
 	}
 
+	@SuppressWarnings("unchecked")
+	public Map<String, Object> findIdWithPhone(Map<String, Object> map) throws Exception{
+		// TODO Auto-generated method stub
+		return (Map<String, Object>) selectOne("login.findIdWithPhone", map);
+	}
+
+	@SuppressWarnings("unchecked")
+	public Map<String, Object> findIdWithEmail(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return (Map<String, Object>) selectOne("login.findIdWithEmail", map);
+	}
+
 
 }

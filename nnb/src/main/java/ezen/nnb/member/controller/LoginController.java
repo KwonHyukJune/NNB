@@ -31,7 +31,7 @@ public class LoginController {
 
 	// Login Form
 	@RequestMapping(value = "/loginForm")
-	public ModelAndView loginForm() {
+	public ModelAndView loginForm() throws Exception {
 		ModelAndView mv = new ModelAndView("/member/main/loginForm");
 		return mv;
 	}
@@ -44,40 +44,39 @@ public class LoginController {
 
 		Map<String, Object> chk = loginService.loginCheck(commandMap.getMap());
 		Map<String, Object> banChk = adminBanService.banDateCheck(commandMap.getMap());
-		if (chk == null) { // ¾ÆÀÌµğ °ªÀÌ ¾øÀ¸¸é
+		if (chk == null) { // ì•„ì´ë””ê°€ ìˆëŠ”ì§€ ì—†ëŠ”ì§€ë¥¼ í™•ì¸
 			mv.setViewName("/member/main/loginForm");
-			mv.addObject("message", "ÇØ´ç ¾ÆÀÌµğ°¡ ¾ø½À´Ï´Ù.");
+			mv.addObject("message", "í•´ë‹¹ ì•„ì´ë””ê°€ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
 			return mv;
 
-		} else { // ¾ÆÀÌµğ °ªÀÌ ÀÖÀ¸¸é
-					// ¸â¹ö ºñ¹Ğ¹øÈ£°¡ ÀÔ·ÂÇÑ ºñ¹Ğ¹øÈ£ °ªÀÌ °°À¸¸é
+		} else { 
 			if (chk.get("MEM_PW").equals(commandMap.get("MEM_PW"))) {
-				if (chk.get("MEM_VERIFY").equals("Y")) {
-					if (banChk == null || (int) banChk.get("EXP_DATE") <= 0) {
-						session.setAttribute("MEM_ID", commandMap.get("MEM_ID")); // ¼¼¼Ç¿¡ ¾ÆÀÌµğ¸¦ ³Ö¾î¶ó
+				if (chk.get("MEM_VERIFY").equals("Y")) { //ì´ë©”ì¼ ì¸ì¦ì„ í–ˆì„ã„¸ ã…
+					if (banChk == null || (int) banChk.get("EXP_DATE") <= 0) {// ëª¨ë“  ì¡°ê±´ì„ ì¶©ì¡±ì‹œí‚¤ë©´ ë¡œê·¸ì¸!
+						session.setAttribute("MEM_ID", commandMap.get("MEM_ID")); // ï¿½ï¿½ï¿½Ç¿ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ ï¿½Ö¾ï¿½ï¿½
 						mv.addObject("MEMBER", chk); //
 						mv.setViewName("redirect:/main");
 						return mv;
-					} else {
+					} else { //ì œì¬ê¸°í•œì´ ì•„ì§ ë‚¨ì•˜ì„ ë•Œ
 						mv.setViewName("/main");
-						mv.addObject("message", "È¸¿ø´ÔÀº " + banChk.get("BAN_REMOVAL_DATE") + " ±îÁö  ÀÌ¿ëÀÌ Á¦ÇÑµÇ¾ú½À´Ï´Ù.");
+						mv.addObject("message", "íšŒì›ë‹˜ì€" + banChk.get("BAN_REMOVAL_DATE") + "ê¹Œì§€ ì´ìš©ì´ ì œì¬ë˜ì—ˆìŠµë‹ˆë‹¤.");
 						return mv;
 					}
-				} else {
+				} else { // ì´ë©”ì¼ ì¸ì¦ì„ ì™„ë£Œí•˜ì§€ ì•Šì•˜ì„ ë–„
 					mv.setViewName("/main");
-					mv.addObject("message", "ÀÌ¸ŞÀÏ ÀÎÁõÀ» ¿Ï·áÇØÁÖ¼¼¿ä.");
+					mv.addObject("message", "ì´ë©”ì¼ ì¸ì¦ì„ ì™„ë£Œí•´ì£¼ì„¸ìš”.");
 					return mv;
 				}
 
-			} else { // ºñ¹Ğ¹øÈ£ Æ²·ÈÀ»¶§
+			} else { //ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í•˜ì§€ ì•Šì„ ë•Œ
 				mv.setViewName("loginForm");
-				mv.addObject("message", "ºñ¹Ğ¹øÈ£¸¦ È®ÀÎÇØ ÁÖ¼¼¿ä.");
+				mv.addObject("message", "ë¹„ë°€ë²ˆí˜¸ê°€ ë§ì§€ ì•ŠìŠµë‹ˆë‹¤.");
 				return mv;
 			}
 		}
 	}
 
-	@RequestMapping(value = "/logout") // ·Î±×¾Æ¿ô
+	@RequestMapping(value = "/logout") // ï¿½Î±×¾Æ¿ï¿½
 	public ModelAndView logout(HttpServletRequest request, CommandMap commandMap) throws Exception {
 		HttpSession session = request.getSession(false);
 		if (session != null)
@@ -86,9 +85,32 @@ public class LoginController {
 		mv.setViewName("redirect:/main");
 		return mv;
 	}
-	/*
-	 * public ModelAndView findId(CommandMap commandMap) throws Exception {
-	 * ModelAndView mv = new ModelAndView(); }
-	 */
-
+	
+	@RequestMapping(value="/findId") //ì•„ì´ë”” ì°¾ê¸° í¼ì„ ë³´ì—¬ì£¼ëŠ” ë©”ì†Œë“œ
+	public ModelAndView findId(CommandMap commandMap) throws Exception {
+		ModelAndView mv = new ModelAndView("member/main/findId"); 
+		return mv;
+	}	
+	
+	@RequestMapping(value="/findIdResult", method=RequestMethod.POST) //ì…ë ¥í•œ ì •ë³´ì— ë§ì¶°ì„œ ì•„ì´ë””ë¥¼ ì°¾ì•„ì£¼ëŠ” ê±°
+	public ModelAndView findIdResult(CommandMap commandMap) throws Exception {
+		ModelAndView mv = new ModelAndView("member/main/findIdResult");
+		if(commandMap.get("type").equals("phone")) {
+			Map<String, Object> map = loginService.findIdWithPhone(commandMap.getMap());
+			mv.addObject("map", map);
+			return mv;
+		}else {
+			Map<String, Object> map = loginService.findIdWithEmail(commandMap.getMap());
+			mv.addObject("map", map);
+			return mv;
+		}
+	}
+	
+	@RequestMapping(value="/findPw") //ì•„ì´ë”” ì°¾ê¸° í¼ì„ ë³´ì—¬ì£¼ëŠ” ë©”ì†Œë“œ
+	public ModelAndView findPw(CommandMap commandMap) throws Exception {
+		ModelAndView mv = new ModelAndView("member/main/findPwConfirm"); 
+		return mv;
+	}	
+	
+	
 }

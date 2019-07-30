@@ -23,7 +23,7 @@ import ezen.nnb.member.service.JoinService;
 public class JoinController {
 	Logger log=Logger.getLogger(this.getClass());
 	
-	@Resource
+	@Resource(name="mailSender")
 	private JavaMailSender mailSender;	
 	
 	@Resource(name="joinService") //service 영역에 접근
@@ -62,7 +62,7 @@ public class JoinController {
 		sendMail.setText(new StringBuffer()
 				.append("<h1>메일인증<h1>")
 				.append("<a href='http://localhost:8080/nnb/memberVerify?mem_email"
-				+commandMap.getMap().get("mem_email"))
+						+ commandMap.getMap().get("mem_email")/* .toString() */)
 				.append("' target='_blenk'>이메일 인증 확인</a>").toString());
 		sendMail.setFrom("rrnjs1245@naver.com","테스트");
 		sendMail.setTo(commandMap.getMap().get("mem_email").toString());
@@ -70,7 +70,7 @@ public class JoinController {
 		
 		return mv;
 	}
-	@RequestMapping(value="/memberVerfiy", method=RequestMethod.GET)
+	@RequestMapping(value="/memberVerify", method=RequestMethod.GET)
 	//member table에 verfiy컬럼의 값을 바꿔준다.
 	public ModelAndView signSuccess(CommandMap commandMap) throws Exception{
 		//이메일 인증기능 처리
