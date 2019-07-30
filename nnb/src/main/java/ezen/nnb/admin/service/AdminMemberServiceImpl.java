@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import ezen.nnb.admin.dao.AdminMemberDAO;
 
-@Service("AdminMemberService")
+@Service("adminMemberService")
 public class AdminMemberServiceImpl implements AdminMemberService{
 	@Resource(name="AdminMemberDAO")
 	private AdminMemberDAO AdminMemberDAO;
