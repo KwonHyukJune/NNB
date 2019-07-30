@@ -64,23 +64,6 @@
     </div>
 </form> 
 
-<script>
-
-function fn_openBoardUpdate(){ var idx = "${map.IDX}";
-	var comSubmit = new ComSubmit(); 
-	comSubmit.setUrl("<c:url value='/sample/openBoardUpdate.do' />"); 
-	comSubmit.addParam("IDX", idx); comSubmit.submit(); 
-	} 
-	
-function fn_downloadFile(obj){ var idx = obj.parent().find("#IDX").val(); 
-	var comSubmit = new ComSubmit(); 
-	comSubmit.setUrl("<c:url value='/common/downloadFile.do' />"); 
-	comSubmit.addParam("IDX", idx); 
-	comSubmit.submit(); 
-	} 
-
-</script>
-
 <br/><br/><br/><br/><br/><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;
 <div>

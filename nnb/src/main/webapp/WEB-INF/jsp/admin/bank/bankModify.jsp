@@ -24,13 +24,24 @@
 	function fn_deleteFile(obj){ 
 		obj.parent().remove(); 
 		}
-
+	
+	$(document).ready(function(){
+		(function(){
+			var value = "${room.ROOM_TYPE}";
+			var key = $("input[name='ROOM_TYPE']");
+			for(var i=0;i<key.length;i++){
+				if(key[i].value==value){
+					key[i].checked = true;
+				};
+			};
+		})();
+	});
 
 </script>
 </head>
 <body>
 
-<!-- 테스트용 세팅 -->
+<%-- <!-- 테스트용 세팅 -->
 <%@ page import="java.util.HashMap" %>
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.List" %>
@@ -49,7 +60,7 @@
  
    request.setAttribute("bank",bank1);
 %>
-<!-- 테스트용 세팅 끝 -->
+<!-- 테스트용 세팅 끝 --> --%>
 
 <h1><div>제휴은행 등록</div></h1>
 
@@ -63,10 +74,10 @@
  <form action="bankList.jsp" method="get" name="bankWriteForm">
 	<div>
 	은행종류
-		<select>
+		<select name="bank_kind">
 			<option>은행종류</option>
-			<option>국민 은행</option>
-			<option>신한 은행</option>
+			<option value="국민">국민 은행</option>
+			<option value="신한">신한 은행</option>
 		</select>
    </div>
    <br/>
