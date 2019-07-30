@@ -25,5 +25,15 @@
 	]]>
 </select>
 
-
+<select id="selectBanDate" parameterType="hashmap" resultType="hashmap"> 
+	<![CDATA[
+	SELECT
+		BAN_REMOVAL_DATE,
+		BAN_ROMOVAL_DATE-sysdate EXP_DATE
+	FROM
+		BAN
+	WHERE
+		MEM_ID 
+	]]>
+</select>
 </mapper>

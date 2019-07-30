@@ -11,19 +11,19 @@ import ezen.nnb.common.AbstractDAO;
 public class AdminReportDAO extends AbstractDAO{
 
 	@SuppressWarnings("unchecked")
-	public List<Map<String, Object>> selectReportRoomList(Map<String, Object> map) {
+	public List<Map<String, Object>> selectReportRoomList(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub
 		return (List<Map<String, Object>>) selectList("report.selectReportRoomList", map);
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Map<String, Object>> selectReportMemberList(Map<String, Object> map) {
+	public List<Map<String, Object>> selectReportMemberList(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub
 		return (List<Map<String, Object>>) selectList("report.selectReportMemberList", map);
 	}
 
 	@SuppressWarnings("unchecked")
-	public Map<String, Object> selectReportDetail(Map<String, Object> map) {
+	public Map<String, Object> selectReportDetail(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub
 		return (Map<String, Object>) selectOne("report.selectReportDetail", map);
 	}

@@ -22,7 +22,7 @@ public class AdminRoomDAO extends AbstractDAO{
 	}
 	
 	public void deleteRoom(Map<String, Object> map) throws Exception {
-	delete("room.deleteRoom",map);
+	update("room.deleteRoom",map);
 	}
 } 
 
