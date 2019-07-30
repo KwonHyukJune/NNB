@@ -46,7 +46,7 @@
 등록한 매물은 30일 동안 어쩌구~
 </div>
 
-<form id="frm">
+<form id="frm" name="frm" enctype="multipart/form-data">
 <div class="table">
 	<div class="thead">매물 종류</div>
 	<div class="tbody">
