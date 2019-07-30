@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+<%@ page pageEncoding="UTF-8" %>
+=======
 <%@ page pageEncoding="UTF-8"%>
+>>>>>>> refs/remotes/origin/sub-master
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 
