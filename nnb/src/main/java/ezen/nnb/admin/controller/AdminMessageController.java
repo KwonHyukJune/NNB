@@ -30,6 +30,7 @@ public class AdminMessageController {
 	private Paging page;
 	private int searchNum;
 	private String isSearch;
+	
 @Resource(name="adminMessageService")
 private AdminMessageService adminMessageService;
 

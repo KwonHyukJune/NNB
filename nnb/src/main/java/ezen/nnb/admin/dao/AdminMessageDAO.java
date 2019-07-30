@@ -6,7 +6,7 @@ import java.util.Map;
 import org.springframework.stereotype.Repository;
 import ezen.nnb.common.AbstractDAO;
 
-@Repository("AdminMessageDAO")
+@Repository("adminMessageDAO")
 public class AdminMessageDAO extends AbstractDAO{
 	
 	@SuppressWarnings("unchecked")
