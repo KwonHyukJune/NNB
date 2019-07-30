@@ -42,13 +42,13 @@ public class JoinController {
 		ModelAndView mv=new ModelAndView("member/main/joinForm");
 		return mv;
 	}
-	@RequestMapping(value="/join/idCheck")
+	@RequestMapping(value="/join/idCheck") /////////////////////////////////////////////////수정이 요구됨
 	public ModelAndView idCheck(CommandMap commandMap) throws Exception{
 		ModelAndView mv=new ModelAndView();
-		Map<String,Object> map = joinService.selectIdCheck(commandMap.getMap());
+		int idCheck = joinService.selectIdCheck(commandMap.getMap());
 		
 		return mv;
-	}
+	}/////////////////////////////////////////////////////////////////////////
 	@RequestMapping(value="/join/emailAuth")
 	//회원가입 할 경우 해당 이메일 인증을 요구하는 링크를 첨부한 이메일을 발송
 	public ModelAndView emailAuth(CommandMap commandMap) throws Exception{

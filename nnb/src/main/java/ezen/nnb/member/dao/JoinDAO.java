@@ -11,9 +11,9 @@ import ezen.nnb.common.AbstractDAO;
 public class JoinDAO extends AbstractDAO{
 	
 	@SuppressWarnings("unchecked")
-	public Map<String, Object> selectIdCheck(Map<String, Object> map) throws Exception{
+	public int selectIdCheck(Map<String, Object> map) throws Exception{
 		// TODO Auto-generated method stub
-		return (Map<String,Object>)selectOne("join.selectIdCheck",map);
+		return (int)selectOne("join.selectIdCheck",map);
 	}
 	public void insertMember(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub
