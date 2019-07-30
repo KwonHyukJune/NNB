@@ -6,7 +6,7 @@ import java.util.Map;
 import org.springframework.stereotype.Repository;
 import ezen.nnb.common.AbstractDAO;
 
-@Repository("AdminLoginDAO")
+@Repository("adminLoginDAO")
 public class AdminLoginDAO extends AbstractDAO{
 	/*
 	 * @SuppressWarnings("unchecked") public Map<String,

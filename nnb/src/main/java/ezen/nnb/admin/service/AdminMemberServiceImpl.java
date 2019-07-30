@@ -9,9 +9,9 @@ import org.springframework.stereotype.Service;
 
 import ezen.nnb.admin.dao.AdminMemberDAO;
 
-@Service("AdminMemberService")
+@Service("adminMemberService")
 public class AdminMemberServiceImpl implements AdminMemberService{
-	@Resource(name="AdminMemberDAO")
+	@Resource(name="adminMemberDAO")
 	private AdminMemberDAO AdminMemberDAO;
 	@Override
 	public List<Map<String,Object>>adminMemberList(Map<String,Object>map)throws Exception{

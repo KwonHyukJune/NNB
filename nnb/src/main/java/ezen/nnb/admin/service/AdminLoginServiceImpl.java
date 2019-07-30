@@ -8,10 +8,10 @@ import org.springframework.stereotype.Service;
 
 import ezen.nnb.admin.dao.AdminLoginDAO;
 
-@Service("AdminLoginService")
+@Service("adminLoginService")
 public class AdminLoginServiceImpl implements AdminLoginService{
 
-	@Resource(name="AdminLoginDAO")
+	@Resource(name="adminLoginDAO")
 	private AdminLoginDAO AdminLoginDao;
 	
 	@Override

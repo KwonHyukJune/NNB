@@ -11,7 +11,7 @@
 </script>
 </head>
 <body>
-
+${eCheck }
 <div class="result" style="display: none">
 임시 비밀번호가 입력하신 이메일로 전송되었습니다.<br>
 <a href="#" class="btn" onclick="close();">닫기</a>

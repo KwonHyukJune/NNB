@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import ezen.nnb.common.AbstractDAO;
 
-@Repository("AdminMemberDAO")
+@Repository("adminMemberDAO")
 public class AdminMemberDAO extends AbstractDAO{
 
 	@SuppressWarnings("unchecked")
