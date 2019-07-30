@@ -64,15 +64,15 @@ function goPage2() {
 	  
 	<hr><br/>
 	<div>
-		<img width="500" height="300" src="../img/google.png"/> 
+		<img width="500" height="300" src="<c:url value='/images/${bank.BANK_STORED_FILE1}'/>"/> 
 	</div>
 	<div>
-		<img width="500" height="300" src="${bank.BANK_BANK_STORED_FILE2}"> 
+		<img width="500" height="300" src="<c:url value='/images/${bank.BANK_STORED_FILE2}'/>"/> 
 	</div>
 	<div>    
 		내용<br/>
-		<textarea rows="20" cols="50" title="내용" id="CONTENTS" name="CONTENTS">${bank.BANK_CONTENT}
-		</textarea>	
+		<div>${bank.BANK_CONTENT}
+		</div>	
     </div>
 
     <div>

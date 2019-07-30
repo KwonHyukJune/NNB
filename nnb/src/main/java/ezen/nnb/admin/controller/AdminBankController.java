@@ -1,7 +1,9 @@
 package ezen.nnb.admin.controller;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.annotation.Resource;
 
@@ -25,7 +27,7 @@ public class AdminBankController {
 	
 	@RequestMapping(value="/admin/bankList")
 	public ModelAndView adminBankList(CommandMap commandMap) throws Exception{
-		ModelAndView mv=new ModelAndView("/admin/bank/list");
+		ModelAndView mv=new ModelAndView("admin/bank/bankList");
 		
 		List<Map<String,Object>> list=adminBankService.selectBankList(commandMap.getMap());
 		mv.addObject("list",list);
@@ -34,7 +36,7 @@ public class AdminBankController {
 	}
 	@RequestMapping(value="/admin/bankWriteForm")
 	public ModelAndView adminBankWriteForm(CommandMap commandMap) throws Exception{
-		ModelAndView mv = new ModelAndView("/admin/bank/writeForm");
+		ModelAndView mv = new ModelAndView("admin/bank/bankWrite");
 		return mv;
 	}
 	@RequestMapping(value="/admin/bankWrite")
@@ -46,7 +48,7 @@ public class AdminBankController {
 	}
 	@RequestMapping(value="/admin/bankDetail")
 	public ModelAndView adminBankDetail(CommandMap commandMap) throws Exception{
-		ModelAndView mv = new ModelAndView("/admin/bank/detail");
+		ModelAndView mv = new ModelAndView("admin/bank/bankDetail");
 		Map<String,Object> map = adminBankService.selectBankDetail(commandMap.getMap());
 		mv.addObject("map", map);
 		
@@ -72,11 +74,12 @@ public class AdminBankController {
 	@RequestMapping(value="/admin/bankDelete")
 	public ModelAndView adminBankDelete(CommandMap commandMap) throws Exception{
 		ModelAndView mv = new ModelAndView("redirect:/admin/bankList");
-		
+
 		adminBankService.deleteBank(commandMap.getMap());
 		
 		return mv;
 	}
+
 }
 
 	
