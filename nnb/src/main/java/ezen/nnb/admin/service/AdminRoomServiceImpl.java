@@ -39,4 +39,4 @@ public class AdminRoomServiceImpl implements AdminRoomService{
 		return AdminRoomDAO.selectAdminRoomWriter(map);
 	}
 	
-}
+} 
