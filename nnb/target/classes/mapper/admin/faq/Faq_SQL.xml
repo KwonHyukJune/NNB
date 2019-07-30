@@ -28,7 +28,7 @@
 	]]>
 </select>
 
-<select id="insertFaq" parameterType="hashmap"> 
+<insert id="insertFaq" parameterType="hashmap"> 
 	<![CDATA[
 	INSERT INTO FAQ (
 		FAQ_NUM,
@@ -43,9 +43,9 @@
 		#{FAQ_CONTENT}
 	)
 	]]>
-</select>
+</insert>
 
-<select id="updateFaq" parameterType="hashmap"> 
+<update id="updateFaq" parameterType="hashmap"> 
 	<![CDATA[
 	UPDATE FAQ
 	SET
@@ -54,12 +54,12 @@
 		FAQ_CONTENT = #{FAQ_CONTENT}
 	WHERE FAQ_NUM = #{FAQ_NUM}
 	]]>
-</select>	
+</update>	
 
-<select id="deleteFaq" parameterType="hashmap"> 
+<delete id="deleteFaq" parameterType="hashmap"> 
 	<![CDATA[
 	DELETE FAQ
 	WHERE FAQ_NUM = #{FAQ_NUM}
 	]]>
-</select>
+</delete>
 </mapper>

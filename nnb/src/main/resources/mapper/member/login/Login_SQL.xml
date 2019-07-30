@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="ban">
+<mapper namespace="login">
 
 	<!-- 로그인, 회원정보수정 -->
 	<select id="selectId" parameterType="hashmap" resultType="hashmap">
@@ -13,10 +13,30 @@
 		FROM
 			MEMBER 
 		WHERE 
-			MEM_ID = #{MEM_ID} and DEL_GB ='N' and MEM_VERIFY = 'Y'
+			MEM_ID = #{MEM_ID} and DEL_GB ='N'
 	]]>
 	</select>
 	
-
-
+	<select id="findIdWithPhone" parameterType="hashmap" resultType="hashmap">
+	<![CDATA[
+		SELECT 
+			MEM_ID,
+		FROM
+			MEMBER 
+		WHERE 
+			MEM_NAME = #{MEM_NAME} and MEM_PHONE = #{MEM_PHONE} and DEL_GB ='N' 
+	]]>
+	</select>
+	
+	<select id="findIdWithEmail" parameterType="hashmap" resultType="hashmap">
+	
+	<![CDATA[
+		SELECT 
+			MEM_ID,
+		FROM
+			MEMBER 
+		WHERE 
+			MEM_NAME = #{MEM_NAME} and MEM_EMAIL = #{MEM_EMAIL} and DEL_GB ='N' 
+	]]>
+	</select>
 </mapper>
