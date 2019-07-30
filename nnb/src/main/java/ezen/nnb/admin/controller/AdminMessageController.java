@@ -30,13 +30,13 @@ public class AdminMessageController {
 	private Paging page;
 	private int searchNum;
 	private String isSearch;
-@Resource(name="adminMessageService")
+@Resource(name="adminMessageService")  
 private AdminMessageService adminMessageService;
 
 @Resource(name="adminLoginService")
 private AdminLoginService adminLoginService;	
 
-public ModelAndView adMessageList(CommandMap commandMap,HttpServletRequest request)throws Exception {
+public ModelAndView adminMessageList(CommandMap commandMap,HttpServletRequest request)throws Exception {
 		
 if(request.getParameter("currentPage")==null || request.getParameter("currentPage").trim().isEmpty()
 				  || request.getParameter("currentPage").equals("0")) {
@@ -102,13 +102,13 @@ if(request.getParameter("currentPage")==null || request.getParameter("currentPag
 		  }
 	}
 	@RequestMapping(value="/admin/messageWriteForm")
-	public ModelAndView adWriteForm()throws Exception{
+	public ModelAndView adminWriteForm()throws Exception{
 		ModelAndView mv=new ModelAndView();
 		mv.setViewName("admin/message/messageWriteForm");
 		return mv;
 	}
 	@RequestMapping(value="/admin/messageWrite",method=RequestMethod.POST)
-	public ModelAndView adWrite(CommandMap commandMap,HttpServletRequest request,HttpServletResponse response)throws Exception{
+	public ModelAndView adminWrite(CommandMap commandMap,HttpServletRequest request,HttpServletResponse response)throws Exception{
 		ModelAndView mv=new ModelAndView();
 		HttpSession session=request.getSession();
 		Map<String,Object>map=adminLoginService.AdminLogin(commandMap.getMap());		
@@ -128,7 +128,7 @@ if(request.getParameter("currentPage")==null || request.getParameter("currentPag
 		
 	}
 	@RequestMapping(value="/admin/messageDelete")
-	public ModelAndView adMessageDelete(CommandMap commandMap)throws Exception{
+	public ModelAndView adminMessageDelete(CommandMap commandMap)throws Exception{
 		ModelAndView mv = new ModelAndView();
 		adminMessageService.adminMessageDelete(commandMap.getMap());
 		mv.setViewName("redirect:admin/message/messageList");
