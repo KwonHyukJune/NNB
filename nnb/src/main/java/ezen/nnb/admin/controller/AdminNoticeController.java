@@ -19,7 +19,7 @@ public class /*컨트롤러*/AdminNoticeController {
 	//목록
 	@RequestMapping(value=/*MapperURL*/"/admin/noticeList")
 	public ModelAndView adminNoticeList(CommandMap commandMap) throws Exception{
-		ModelAndView mv=new ModelAndView(/*jsp*/"/admin/notice/list");
+		ModelAndView mv=new ModelAndView(/*jsp*/"/admin/notice/noticeList");
 		List<Map<String,Object>> list=adminNoticeService.selectNoticeList(commandMap.getMap());
 		mv.addObject("list",list);	
 		return mv;
@@ -28,14 +28,14 @@ public class /*컨트롤러*/AdminNoticeController {
 	//상세
 	@RequestMapping(value=/*MapperURL*/"/admin/noticeDetail")
 	public ModelAndView /*메소드*/adminNoticeDetail(CommandMap commandMap) throws Exception{
-		ModelAndView mv = new ModelAndView(/*jsp*/"/admin/notice/detail");
+		ModelAndView mv = new ModelAndView(/*jsp*/"/admin/notice/noticeDetail");
 		Map<String,Object> map = adminNoticeService./*Mybatis ID*/selectNoticeDetail(commandMap.getMap());
 		mv.addObject("map", map);
 		return mv;
 	}//등록폼	
 	@RequestMapping(value=/*MapperURL*/"/admin/noticeWriteForm")  
 	public ModelAndView /*메소드*/adminNoticeWriteForm(CommandMap commandMap) throws Exception{
-		ModelAndView mv = new ModelAndView(/*jsp*/"/admin/notice/writeForm");
+		ModelAndView mv = new ModelAndView(/*jsp*/"/admin/notice/noticeWrite");
 		return mv;
 	}//등록
 	@RequestMapping(value=/*MapperURL*/"/admin/noticeWrite")
@@ -46,7 +46,7 @@ public class /*컨트롤러*/AdminNoticeController {
 	}//수정폼
 	@RequestMapping(value=/*MapperURL*/"/admin/noticeModifyForm")
 	public ModelAndView /*메소드*/adminNoticeModifyForm(CommandMap commandMap) throws Exception{
-		ModelAndView mv = new ModelAndView(/*jsp*/"/admin/notice/modifyForm");
+		ModelAndView mv = new ModelAndView(/*jsp*/"/admin/notice/noticeModify");
 		Map<String,Object> map = adminNoticeService./*Mybatis ID*/selectNoticeDetail(commandMap.getMap());
 		mv.addObject("map", map);
 		return mv;

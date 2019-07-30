@@ -6,54 +6,55 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import ezen.nnb.admin.service.AdminTermsService;
 import ezen.nnb.common.CommandMap;
-
+@Controller
 public class AdminTermsController {
 Logger log = Logger.getLogger(this.getClass());
 	
 	@Resource(name = "adminTermsService")
 	private AdminTermsService adminTermsService;
 
-	@RequestMapping(value = "/admin/Terms/list")
+	@RequestMapping(value = "/admin/terms/list")
 	public ModelAndView adminTermsList(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("/admin/Terms/list");
+		ModelAndView mv = new ModelAndView("admin/terms/termsList");
 		List<Map<String, Object>> list = adminTermsService.selectTermsList(commandMap.getMap());
 		mv.addObject("list", list);
 		return mv;
 	}
 
-	@RequestMapping(value="/admin/Terms/writeForm")
+	@RequestMapping(value="/admin/terms/termsWrite")
 	public ModelAndView adminTermsWriteForm(CommandMap commandMap) throws Exception{
-		ModelAndView mv = new ModelAndView("/admin/Terms/writeForm");
+		ModelAndView mv = new ModelAndView("/admin/terms/termsWrite");
 		return mv;
 	}
 	
-	@RequestMapping(value="/admin/Terms/write")
+	@RequestMapping(value="/admin/terms/write")
 	public ModelAndView adminTermsWrite(CommandMap commandMap) throws Exception{
-		ModelAndView mv = new ModelAndView("redirect:/admin/Terms/writeForm");
+		ModelAndView mv = new ModelAndView("redirect:/admin/terms/termsWrite");
 		
 		adminTermsService.writeTerms(commandMap.getMap());
 		
 		return mv;
 	}
 	
-	@RequestMapping(value="/admin/Terms/detail")
+	@RequestMapping(value="/admin/terms/detail")
 	public ModelAndView adminTermsDetail(CommandMap commandMap) throws Exception{
-		ModelAndView mv = new ModelAndView("/admin/Terms/detail");
+		ModelAndView mv = new ModelAndView("/admin/terms/termsDetail");
 		
 		Map<String,Object> map = adminTermsService.selectTermsDetail(commandMap.getMap());
-		mv.addObject("map", map);
+		mv.addObject("terms", map);
 		
 		return mv;
 	}
 	
-	@RequestMapping(value="/admin/Terms/modifyForm")
+	@RequestMapping(value="/admin/terms/termsModify")
 	public ModelAndView adminTermsModifyForm(CommandMap commandMap) throws Exception{
-		ModelAndView mv = new ModelAndView("/admin/Terms/modifyForm");
+		ModelAndView mv = new ModelAndView("/admin/terms/termsModify");
 		
 		Map<String,Object> map = adminTermsService.selectTermsDetail(commandMap.getMap());
 		mv.addObject("map", map);
@@ -61,9 +62,9 @@ Logger log = Logger.getLogger(this.getClass());
 		return mv;
 	}
 	
-	@RequestMapping(value="/admin/Terms/modify")
+	@RequestMapping(value="/admin/terms/modify")
 	public ModelAndView adminTermsModify(CommandMap commandMap) throws Exception{
-		ModelAndView mv = new ModelAndView("redirect:/admin/Terms/Detail");
+		ModelAndView mv = new ModelAndView("redirect:/admin/terms/Detail");
 		
 		adminTermsService.updateTermsModify(commandMap.getMap());
 		
@@ -71,9 +72,9 @@ Logger log = Logger.getLogger(this.getClass());
 		return mv;
 	}
 	
-	@RequestMapping(value="/admin/Terms/delete")
+	@RequestMapping(value="/admin/terms/delete")
 	public ModelAndView adminTermsDelete(CommandMap commandMap) throws Exception{
-		ModelAndView mv = new ModelAndView("redirect:/admin/Terms/list");
+		ModelAndView mv = new ModelAndView("redirect:/admin/terms/termsList");
 		
 		adminTermsService.deleteTerms(commandMap.getMap());
 		

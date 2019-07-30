@@ -16,7 +16,7 @@
 	}); 
 
 function showPopup() { 
-	  window.open("noticeDetail.jsp", "회원상세보기", 
+	  window.open("noticeDetail", "회원상세보기", 
 			  "width=700, height=700, scrollbars=1, left=100, top=50"); }
 </script>
 
@@ -32,9 +32,9 @@ function showPopup() {
 	
 <div>
 <!-- 링크에 URL 제대로 바꿔줘야 됩니다. 지금은 테스트용 jsp 링크입니다. -->
-<a href=# onclick="location.href='noticeList.jsp'">공지 게시판</a>&nbsp;&nbsp;&nbsp;&nbsp;
+<a href=# onclick="location.href='noticeList'">공지 게시판</a>&nbsp;&nbsp;&nbsp;&nbsp;
 <a href=# onclick="location.href='roomList.jsp'">방 게시판</a>&nbsp;&nbsp;&nbsp;&nbsp;
-<a href=# onclick="location.href='termsList.jsp'">약관 관리</a>
+<a href=# onclick="location.href='termsList'">약관 관리</a>
 </div>
 
 <br/><br/><br/>

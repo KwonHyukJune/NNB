@@ -25,7 +25,7 @@ public class AdminBankController {
 	
 	@RequestMapping(value="/admin/bankList")
 	public ModelAndView adminBankList(CommandMap commandMap) throws Exception{
-		ModelAndView mv=new ModelAndView("/admin/bank/list");
+		ModelAndView mv=new ModelAndView("/admin/bank/bankList");
 		
 		List<Map<String,Object>> list=adminBankService.selectBankList(commandMap.getMap());
 		mv.addObject("list",list);

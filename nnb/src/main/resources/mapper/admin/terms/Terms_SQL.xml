@@ -6,12 +6,13 @@
 <select id="selectTermsList" parameterType="hashMap" resultType="hashMap">
 <![CDATA[
 	select
-    		ROW_NUMBER() OVER (ORDER BY TERMS_NUM DESC) RNUM,
+    		ROW_NUMBER() OVER (ORDER BY TERMS_NUM ASC) RNUM,
             TERMS_NUM,
             TERMS_REGDATE,
             TERMS_TITLE
 	from	
             TERMS
+            ORDER BY RNUM DESC
 	]]>
 </select>
 
@@ -26,7 +27,7 @@
 	FROM
             TERMS
 	WHERE
-    	    TERMS_NUM = #{TERMS_NUM}
+    	    TERMS_NUM = #{NUM}
 ]]>
 </select>
 
@@ -56,7 +57,7 @@
 	       	TERMS_CONTENT = #{TERMS_CONTENT}
         	TERMS_REGDATE = SYSDATE
 	WHERE
-			TERMS_NUM = #{TERMS_NUM}
+			TERMS_NUM = #{NUM}
 
 ]]>
 </update>
