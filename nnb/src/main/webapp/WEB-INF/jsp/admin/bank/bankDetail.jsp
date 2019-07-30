@@ -10,11 +10,11 @@
 <script type="text/javascript">
 
 function goPage1() { 
-	location.href="bankList.jsp"; 
+	location.href="bankList"; 
 	}
 	
 function goPage2() { 
-	location.href="bankModify.jsp"; 
+	location.href="bankModifyForm?num="+${bank.BANK_NUM}; 
 	}
 
 
@@ -22,7 +22,7 @@ function goPage2() {
 </head>
 <body>
 
-<!-- 테스트용 세팅 -->
+<%-- <!-- 테스트용 세팅 -->
 <%@ page import="java.util.HashMap" %>
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.List" %>
@@ -43,7 +43,7 @@ function goPage2() {
  
    request.setAttribute("bank",bank1);
 %>
-<!-- 테스트용 세팅 끝 -->
+<!-- 테스트용 세팅 끝 --> --%>
 
 <h1><div>제휴은행 관리</div></h1>
 

@@ -73,7 +73,7 @@ insert into bank(
         bank_original_file2=#{bank_original_file2},                        
         bank_stored_file2=#{bank_stored_file2}                        
 	where                                
-        bank_num=#{bank_num}                        
+        bank_num=#{num}                        
 ]]> 
 </update>     
 

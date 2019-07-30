@@ -50,15 +50,15 @@ public class AdminBankController {
 	public ModelAndView adminBankDetail(CommandMap commandMap) throws Exception{
 		ModelAndView mv = new ModelAndView("admin/bank/bankDetail");
 		Map<String,Object> map = adminBankService.selectBankDetail(commandMap.getMap());
-		mv.addObject("map", map);
+		mv.addObject("bank", map);
 		
 		return mv;
 	}
 	@RequestMapping(value="/admin/bankModifyForm")
 	public ModelAndView adminBankModifyForm(CommandMap commandMap) throws Exception{
-		ModelAndView mv = new ModelAndView("admin/bank/modifyForm");
+		ModelAndView mv = new ModelAndView("admin/bank/bankModify");
 		Map<String,Object> map = adminBankService.selectBankDetail(commandMap.getMap());
-		mv.addObject("map", map);
+		mv.addObject("bank", map);
 		
 		return mv;
 	}
