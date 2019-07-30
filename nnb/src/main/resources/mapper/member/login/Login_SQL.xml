@@ -20,7 +20,7 @@
 	<select id="findIdWithPhone" parameterType="hashmap" resultType="hashmap">
 	<![CDATA[
 		SELECT 
-			MEM_ID,
+			MEM_ID
 		FROM
 			MEMBER 
 		WHERE 
@@ -32,11 +32,33 @@
 	
 	<![CDATA[
 		SELECT 
-			MEM_ID,
+			MEM_ID
 		FROM
 			MEMBER 
 		WHERE 
 			MEM_NAME = #{MEM_NAME} and MEM_EMAIL = #{MEM_EMAIL} and DEL_GB ='N' 
 	]]>
 	</select>
+	
+	<select id="selectEmailCheck" parameterType="hashMap" resultType="Integer">
+	<![CDATA[
+    SELECT 
+    	count(*) 
+    FROM 
+    	member 
+    WHERE 
+    	mem_id=#{mem_id} and mem_email=${mem_email} and DEL_GB = 'N'
+	]]>
+	</select>
+	
+	<update id="updateTempPw" parameterType="String">
+	<![CDATA[
+    update 
+    	member 
+    set 
+    	mem_pw=#{tempPw} 
+    where 
+    	mem_id=#{mem_id} and mem_email=${mem_email} and DEL_GB = 'N'
+	]]>
+	</update>
 </mapper>

@@ -3,6 +3,7 @@ package ezen.nnb.member.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ezen.nnb.admin.service.AdminBanService;
 import ezen.nnb.common.CommandMap;
+import ezen.nnb.common.MailHandler;
 import ezen.nnb.member.service.LoginService;
 
 @Controller
@@ -28,6 +31,9 @@ public class LoginController {
 
 	@Resource(name = "adminBanService")
 	private AdminBanService adminBanService;
+
+	@Resource(name = "mailSender")
+	private JavaMailSender mailSender;
 
 	// Login Form
 	@RequestMapping(value = "/loginForm")
@@ -49,15 +55,15 @@ public class LoginController {
 			mv.addObject("message", "해당 아이디가 존재하지 않습니다.");
 			return mv;
 
-		} else { 
+		} else {
 			if (chk.get("MEM_PW").equals(commandMap.get("MEM_PW"))) {
-				if (chk.get("MEM_VERIFY").equals("Y")) { //이메일 인증을 했을ㄸ ㅐ
+				if (chk.get("MEM_VERIFY").equals("Y")) { // 이메일 인증을 했을ㄸ ㅐ
 					if (banChk == null || (int) banChk.get("EXP_DATE") <= 0) {// 모든 조건을 충족시키면 로그인!
 						session.setAttribute("MEM_ID", commandMap.get("MEM_ID")); // ���ǿ� ���̵� �־��
 						mv.addObject("MEMBER", chk); //
 						mv.setViewName("redirect:/main");
 						return mv;
-					} else { //제재기한이 아직 남았을 때
+					} else { // 제재기한이 아직 남았을 때
 						mv.setViewName("/main");
 						mv.addObject("message", "회원님은" + banChk.get("BAN_REMOVAL_DATE") + "까지 이용이 제재되었습니다.");
 						return mv;
@@ -68,7 +74,7 @@ public class LoginController {
 					return mv;
 				}
 
-			} else { //비밀번호가 일치하지 않을 때
+			} else { // 비밀번호가 일치하지 않을 때
 				mv.setViewName("loginForm");
 				mv.addObject("message", "비밀번호가 맞지 않습니다.");
 				return mv;
@@ -85,32 +91,59 @@ public class LoginController {
 		mv.setViewName("redirect:/main");
 		return mv;
 	}
-	
-	@RequestMapping(value="/findId") //아이디 찾기 폼을 보여주는 메소드
+
+	@RequestMapping(value = "/findId") // 아이디 찾기 폼을 보여주는 메소드
 	public ModelAndView findId(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("member/main/findId"); 
+		ModelAndView mv = new ModelAndView("member/main/findId");
 		return mv;
-	}	
-	
-	@RequestMapping(value="/findIdResult", method=RequestMethod.POST) //입력한 정보에 맞춰서 아이디를 찾아주는 거
+	}
+
+	@RequestMapping(value = "/findIdResult", method = RequestMethod.POST) // 입력한 정보에 맞춰서 아이디를 찾아주는 거
 	public ModelAndView findIdResult(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("member/main/findIdResult");
-		if(commandMap.get("type").equals("phone")) {
+		if (commandMap.get("type").equals("phone")) {
 			Map<String, Object> map = loginService.findIdWithPhone(commandMap.getMap());
 			mv.addObject("map", map);
 			return mv;
-		}else {
+		} else {
 			Map<String, Object> map = loginService.findIdWithEmail(commandMap.getMap());
 			mv.addObject("map", map);
 			return mv;
 		}
 	}
-	
-	@RequestMapping(value="/findPw") //아이디 찾기 폼을 보여주는 메소드
+
+	@RequestMapping(value = "/findPw") // 비밀번호 찾기 폼을 보여주는 메소드
 	public ModelAndView findPw(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("member/main/findPwConfirm"); 
+		ModelAndView mv = new ModelAndView("member/main/findPw");
 		return mv;
-	}	
-	
-	
+	}
+
+	@RequestMapping(value = "/join/findPwConfirm")
+	// 회원가입 할 경우 해당 이메일 인증을 요구하는 링크를 첨부한 이메일을 발송
+	public ModelAndView sendNewPw(CommandMap commandMap) throws Exception {
+		ModelAndView mv = new ModelAndView("member/main/findPwConfirm");
+		// mybatis로 inserMeber() 기능 처리 및 해당 이메일로 이메일 발송
+		int eCheck = loginService.selectEmailCheck(commandMap.getMap());
+
+		String tempPw = UUID.randomUUID().toString().replaceAll("-", ""); 
+		tempPw = tempPw.substring(0, 10);
+
+		if (eCheck > 0) {
+			MailHandler sendMail = new MailHandler(mailSender);
+
+			sendMail.setSubject("니내방 임시비밀번호입니다.");
+			sendMail.setText(new StringBuffer().append("<h1>임시비밀번호<h1>")
+					.append("회원님의 임시비밀번호는 {"
+							+ tempPw/* .toString() */)
+					.append("} 입니다. 로그인 후 새로운 비밀번호를 저장해주세요.").toString());
+			sendMail.setFrom("ezenyoon@gmail.com", "니내방");
+			sendMail.setTo(commandMap.getMap().get("mem_email").toString());
+			sendMail.send();
+		
+			loginService.updateTempPw(tempPw);
+		}
+
+		mv.addObject("eCheck", eCheck);
+		return mv;
+	}
 }

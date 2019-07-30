@@ -35,4 +35,16 @@ public class LoginServiceImpl implements LoginService{
 		return loginDAO.findIdWithEmail(map);
 	}
 
+	@Override
+	public int selectEmailCheck(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return loginDAO.selectEmailCheck(map);
+	}
+
+	@Override
+	public void updateTempPw(String tempPw) throws Exception {
+		// TODO Auto-generated method stub
+		loginDAO.updateTempPw(tempPw);
+	}
+
 }

@@ -18,7 +18,7 @@ public class JoinServiceImpl implements JoinService{
 	private JoinDAO joinDAO;
 	
 	@Override
-	public Map<String, Object> selectIdCheck(Map<String, Object> map) throws Exception {
+	public int selectIdCheck(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub
 		return joinDAO.selectIdCheck(map);
 	}

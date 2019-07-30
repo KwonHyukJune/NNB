@@ -4,7 +4,7 @@ import java.util.Map;
 
 public interface JoinService {
 
-	Map<String, Object> selectIdCheck(Map<String, Object> map) throws Exception;
+	int selectIdCheck(Map<String, Object> map) throws Exception;
 
 	void insertMember(Map<String, Object> map) throws Exception;
 
