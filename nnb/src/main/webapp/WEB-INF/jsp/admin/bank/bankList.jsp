@@ -14,9 +14,32 @@ function goPage1(num) {    //리스트 누르면 상세보기
 	location.href="bankDetail?num="+num; 
 	}
 			  
+<<<<<<< Upstream, based on origin/sub-master
 function goPage3(num) {   // 수정
 	location.href="bankModifyForm?num="+num; 
+=======
+function goPage2() {    // 새글 작성
+	location.href="bankWriteForm"; 
+>>>>>>> 891bd1f 2019-07-30 16:48 김지우
 	}
+<<<<<<< Upstream, based on origin/sub-master
+function delet(num){
+	if(confirm('삭제하시겠습니까?')){
+		var x = $('a#'+num);
+		var str = "<form id='frm' method='post' action='bankDelete'>"
+				+ "<input type='hidden' name='num' value='"+num+"'>"
+				+ "</form>";
+		x.html(str);
+		console.log(str);
+		frm.submit();
+=======
+
+function goPage3(num) {   // 수정
+	location.href="bankModify?num="+num; 
+>>>>>>> 891bd1f 2019-07-30 16:48 김지우
+	}
+<<<<<<< Upstream, based on origin/sub-master
+=======
 function delet(num){
 	if(confirm('삭제하시겠습니까?')){
 		var x = $('a#'+num);
@@ -27,6 +50,7 @@ function delet(num){
 		console.log(str);
 		frm.submit();
 	}
+>>>>>>> 891bd1f 2019-07-30 16:48 김지우
 }
 
 </script>
@@ -95,10 +119,14 @@ function delet(num){
 		</div>
    </div>	
 </c:forEach>
+<<<<<<< Upstream, based on origin/sub-master
 <c:if test="${list.size()==0}">
 등록된 글이 없습니다.
 </c:if>
 			 <a href="bankWriteForm">새 글 등록</a>
+=======
+			 <a href="#" onClick="javascript:goPage2()">새 글 등록</a>
+>>>>>>> 891bd1f 2019-07-30 16:48 김지우
  
 </div>
 

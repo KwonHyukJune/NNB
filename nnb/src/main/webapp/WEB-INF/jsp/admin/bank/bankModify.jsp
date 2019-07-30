@@ -27,6 +27,7 @@
 	
 	$(document).ready(function(){
 		(function(){
+<<<<<<< Upstream, based on origin/sub-master
 			var value = "${bank.BANK_KIND}";
 			var key = $("select[name='bank_kind']>option");
 			for(var i=0;i<key.length;i++){
@@ -47,6 +48,14 @@
 			var key = $("textarea[name='bank_content']");
 			for(var i=0;i<key.length;i++){
 				key[i].value = value;
+=======
+			var value = "${room.ROOM_TYPE}";
+			var key = $("input[name='ROOM_TYPE']");
+			for(var i=0;i<key.length;i++){
+				if(key[i].value==value){
+					key[i].checked = true;
+				};
+>>>>>>> 891bd1f 2019-07-30 16:48 김지우
 			};
 		})();
 	});
@@ -55,7 +64,11 @@
 </head>
 <body>
 
+<<<<<<< Upstream, based on origin/sub-master
 	<%-- <!-- 테스트용 세팅 -->
+=======
+<%-- <!-- 테스트용 세팅 -->
+>>>>>>> 891bd1f 2019-07-30 16:48 김지우
 <%@ page import="java.util.HashMap" %>
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.List" %>
@@ -83,12 +96,25 @@
 
 
 	<div>
+<<<<<<< Upstream, based on origin/sub-master
 		<h2>새 질문 등록</h2>
 		<hr>
 		<br />
 	</div>
 	<form action="bankModify" method="post" name="bankWriteForm">
 		<input type="hidden" name="num" value="${bank.BANK_NUM}">
+=======
+	은행종류
+		<select name="bank_kind">
+			<option>은행종류</option>
+			<option value="국민">국민 은행</option>
+			<option value="신한">신한 은행</option>
+		</select>
+   </div>
+   <br/>
+   
+  
+>>>>>>> 891bd1f 2019-07-30 16:48 김지우
 		<div>
 			은행종류 <select name="bank_kind">
 				<option>은행종류</option>

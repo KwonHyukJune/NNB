@@ -7,6 +7,18 @@
 <%@ include file="/WEB-INF/include/include-header.jspf" %>
 <%@include file = "/WEB-INF/include/adminHeader.jspf" %>
 
+<script type="text/javascript">
+
+function goPage1() { 
+	location.href="bankList"; 
+	}
+	
+function goPage2() { 
+	location.href="bankModifyForm?num="+${bank.BANK_NUM}; 
+	}
+
+
+</script>
 </head>
 <body>
 
