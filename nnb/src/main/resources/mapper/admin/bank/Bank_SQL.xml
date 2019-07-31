@@ -62,7 +62,7 @@ insert into bank(
 </update>
 
 <!-- 글 수정(관리자) -->
-<update id="updateBankModify" parameterType="hashMap">
+<update id="updateBank" parameterType="hashMap">
 <![CDATA[
 	update bank set                                
         bank_kind=#{bank_kind},                        
