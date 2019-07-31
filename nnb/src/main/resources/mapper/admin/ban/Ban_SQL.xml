@@ -29,11 +29,11 @@
 	<![CDATA[
 	SELECT
 		BAN_REMOVAL_DATE,
-		BAN_ROMOVAL_DATE-sysdate EXP_DATE
+		BAN_REMOVAL_DATE-sysdate EXP_DATE
 	FROM
 		BAN
 	WHERE
-		MEM_ID 
+		MEM_ID = #{MEM_ID}
 	]]>
 </select>
 </mapper>

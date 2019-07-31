@@ -9,11 +9,12 @@
 			MEM_NUM,
 			MEM_ID,
 			MEM_PW,
-			MEM_NAME
+			MEM_NAME,
+			MEM_VERIFY
 		FROM
 			MEMBER 
 		WHERE 
-			MEM_ID = #{MEM_ID} and DEL_GB ='N'
+			MEM_ID = #{MEM_ID} and MEM_DEL_GB ='N'
 	]]>
 	</select>
 	

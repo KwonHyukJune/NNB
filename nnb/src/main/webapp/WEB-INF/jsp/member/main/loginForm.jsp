@@ -1,29 +1,33 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <%@ include file="/WEB-INF/include/include-header.jspf" %>
 <%@ include file="/WEB-INF/include/header.jspf" %>
 <script type="text/javascript">
-/* 
-·Î±×ÀÎ
-Ãë¼Ò
- */
+function submit(){
+	loginForm.submit();
+}
+$(document).ready(function(){
+	if("${MEM_ID}"!=null && "${MEM_ID}"!=''){
+		$("#MEM_ID")[0].value = "${MEM_ID}";
+	}
+});
 </script>
 </head>
 <body>
 
-<div class="login">
+<div class="loginForm">
 LOGIN
-<form id="loginForm">
-<input type="text" id="id" name="id" placeholder="¾ÆÀÌµğ ÀÔ·Â"><br>
-<input type="password" id="password" name="password" placeholder="ºñ¹Ğ¹øÈ£ ÀÔ·Â">
+<form id="loginForm" action="login" method="POST">
+<input type="text" id="MEM_ID" name="MEM_ID" placeholder="ì•„ì´ë”” ì…ë ¥"><br>
+<input type="password" id="MEM_PW" name="MEM_PW" placeholder="ë¹„ë°€ë²ˆí˜¸ ì…ë ¥">
 </form>
-	<a href="#" class="btn" onclick="">·Î±×ÀÎ</a>
-	<a href="#" class="btn" onclick="back();">Ãë¼Ò</a><br>
-<a href="<c:url value='/findId'/>">¾ÆÀÌµğ Ã£±â</a>
-<a href="<c:url value='/findpw'/>">ºñ¹Ğ¹øÈ£ Ã£±â</a>
+	<a href="#" class="btn" onclick="submit();">ë¡œê·¸ì¸</a>
+	<a href="#" class="btn" onclick="back();">ì·¨ì†Œ</a><br>
+<a href="<c:url value='/findId'/>">ì•„ì´ë”” ì°¾ê¸°</a>
+<a href="<c:url value='/findpw'/>">ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸°</a>
 </div>
 
 <%@ include file="/WEB-INF/include/footer.jspf" %>
