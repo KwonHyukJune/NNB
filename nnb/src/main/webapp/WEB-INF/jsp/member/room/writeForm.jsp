@@ -30,7 +30,7 @@
 	};
 	function submit(){
 		var comSubmit = new ComSubmit(frm);
-		comSubmit.setUrl("<c:url value='/room/regist'/>");
+		comSubmit.setUrl("<c:url value='/room/write'/>");
 		/* EXPIRATION_DATE는 자바에서 오늘날짜+30일로 */
 		comSubmit.addParam("MEM_ID",mem);
 		comSubmit.submit(frm);

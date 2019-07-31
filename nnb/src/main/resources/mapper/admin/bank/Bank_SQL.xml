@@ -26,22 +26,39 @@ insert into bank(
         bank_kind, 
         bank_title, 
         bank_content, 
-        bank_original_file1,
-        bank_stored_file1,
-        bank_original_file2,
-        bank_stored_file2
 ) values (
         bank_num_seq.nextval,
         #{bank_kind},
         #{bank_title},
         #{bank_content},
-        #{bank_original_file1},
-        #{bank_stored_file1},
-        #{bank_original_file2},
-        #{bank_stored_file2}
 )
 ]]>
 </insert>
+<!-- 이거는 고민을 좀 해봐야겠다 -->
+<!-- <insert id="insertRoomFile" parameterType="hashmap"> 
+<![CDATA[ 
+INSERT INTO TB_FILE 
+	( 
+	FILE_NUM, 
+	ROOM_NUM, 
+	ORG_NAME, 
+	STD_NAME, 
+	FILE_SIZE,
+	CREA_ID
+	) 
+VALUES 
+	( 
+	FILE_NUM_SEQ, 
+	ROOM_NUM_SEQ.CURRVAL, 
+	#{ORG_NAME}, 
+	#{STD_NAME}, 
+	#{FILE_SIZE},
+	#{CREA_ID}
+	) 
+	]]> 
+	</insert> -->
+
+
 
 <!-- 상세보기(관리자, 회원) -->
 <select id="selectBankDetail" parameterType="hashMap" resultType="hashMap">

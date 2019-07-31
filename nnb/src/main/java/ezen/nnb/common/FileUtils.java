@@ -30,8 +30,6 @@ public class FileUtils {
     	List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
         Map<String, Object> listMap = null; 
         
-        String room_num = (String)map.get("ROOM_NUM");
-        
         File file = new File(filePath);
         if(file.exists() == false){
         	file.mkdirs();
@@ -48,7 +46,6 @@ public class FileUtils {
         		multipartFile.transferTo(file);
         		
         		listMap = new HashMap<String,Object>();
-        		listMap.put("ROOM_NUM", room_num);
         		listMap.put("ORIGINAL_FILE_NAME", originalFileName);
         		listMap.put("STORED_FILE_NAME", storedFileName);
         		listMap.put("FILE_SIZE", multipartFile.getSize());

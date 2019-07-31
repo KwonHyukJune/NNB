@@ -26,4 +26,9 @@ public class AdminBankDAO extends AbstractDAO{
 	public void deleteBank(Map<String, Object> map) throws Exception {
 		delete("bank.deleteBank",map);
 	}
+	
+	public void insertBankFile(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		insert("bank.insertBankFile", map);
+	}
 }
