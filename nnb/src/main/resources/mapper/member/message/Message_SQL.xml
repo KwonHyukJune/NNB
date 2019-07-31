@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="message">
+
+<select id="selectMessageList" parameterType="hashmap" resultType="hashmap">
+<![CDATA[
+  select
+     ROW_NUMBER() OVER (ORDER BY MESSAGE_NUM DESC) RNUM,
+     MESSAGE_NUM,
+     MESSAGE_CONTENT,
+     SENDER,
+     RECIEVER,
+     SEND_DATE
+  FROM
+     MESSAGE
+  <choose>
+  <when test="MESSAGE=='수신'">
+  WHERE 
+     RECIEVER=#{RECEIVER}
+  ORDER BY MESSAGE_NUM DESC
+  </when>
+
+  <when test="MESSAGE=='발신'">
+  WHERE 
+     SENDER=${SENDER}
+  ORDER BY MESSAGE_NUM DESC
+  </when>
+  <otherwise>
+  WHERE 
+     RECIEVER=#{RECEIVER} or SENDER=${SENDER}
+  ORDER BY MESSAGE_NUM DESC
+  </otherwise>
+  </choose>                        
+]]>
+</select>
+
+<insert id="insertMessage" parameterType="hashmap">
+<![CDATA[
+  insert into MESSAGE
+(
+  MESSAGE_NUM,
+  MESSAGE_TITLE,
+  MESSAGE_CONTENT,
+  SENDER,
+  RECEIVER
+)
+  values
+(
+  MESSAGE_NUM_SEQ.NEXTVAL,
+  #{MESSAGE_TITLE},
+  #{MESSAGE_CONTENT},
+  #{SENDER},
+  #{RECEIVER}
+)
+]]>
+</insert>
+</mapper>
