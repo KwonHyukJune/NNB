@@ -13,6 +13,15 @@
 	    	f.action = "bankWrite";
 		    f.submit();	 
 		}
+	$(document).ready(function(){
+		$("a[name='delete']").on("click",function(e){	//삭제 버튼
+			e.preventDefault();
+			fn_deleteFile($(this));
+		});
+	});
+	function fn_deleteFile(obj){
+		obj.prev().prev().val('');
+	}
 </script>
 </head>
 <body>
@@ -26,7 +35,7 @@
 <hr>
 <br/>
 </div>
- <form action="bankList.jsp" method="get" name="bankWriteForm">
+ <form method="get" name="bankWriteForm">
 	<div>
 	은행종류
 		<select name="bank_kind">
@@ -50,12 +59,16 @@
 
     <div>
     	<br/><br/>
-<hr>	
-    	<input type="file" name="bank_original_file1">첨부파일	1
-    	<input type="hidden" name="bank_stored_file1" value="dd1">
-    			<br/><br/>
-    	<input type="file" name="bank_original_file2">첨부파일	2
-    	<input type="hidden" name="bank_stored_file2" value="dd2">
+<hr>	<p>
+	    	<input type="file" name="bank_original_file1">첨부파일	1
+	    	<input type="hidden" name="bank_stored_file1" value="dd1">
+			<a href="#" class="btn" id="delete1" name="delete">삭제</a>
+		</p>
+    	<p>
+	    	<input type="file" name="bank_original_file2">첨부파일	2
+	    	<input type="hidden" name="bank_stored_file2" value="dd2">
+			<a href="#" class="btn" id="delete2" name="delete">삭제</a>
+		</p>
 <hr>	
 <br/><br/>
     	<a href="javascript:submit()">등록</a>

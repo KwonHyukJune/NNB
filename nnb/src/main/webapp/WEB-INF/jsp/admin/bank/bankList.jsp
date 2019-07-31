@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>제휴 은행 리스트</title>
 <head>
 <%@ include file="/WEB-INF/include/include-header.jspf" %>
@@ -13,12 +14,8 @@ function goPage1(num) {    //리스트 누르면 상세보기
 	location.href="bankDetail?num="+num; 
 	}
 			  
-function goPage2() {    // 새글 작성
-	location.href="bankWriteForm"; 
-	}
-
 function goPage3(num) {   // 수정
-	location.href="bankModify?num="+num; 
+	location.href="bankModifyForm?num="+num; 
 	}
 function delet(num){
 	if(confirm('삭제하시겠습니까?')){
@@ -98,9 +95,13 @@ function delet(num){
 		</div>
    </div>	
 </c:forEach>
-			 <a href="#" onClick="javascript:goPage2()">새 글 등록</a>
+<c:if test="${list.size()==0}">
+등록된 글이 없습니다.
+</c:if>
+			 <a href="bankWriteForm">새 글 등록</a>
  
 </div>
+
 
 </div>
 <br>

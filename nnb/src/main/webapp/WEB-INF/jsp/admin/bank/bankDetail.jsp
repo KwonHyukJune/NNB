@@ -7,18 +7,6 @@
 <%@ include file="/WEB-INF/include/include-header.jspf" %>
 <%@include file = "/WEB-INF/include/adminHeader.jspf" %>
 
-<script type="text/javascript">
-
-function goPage1() { 
-	location.href="bankList"; 
-	}
-	
-function goPage2() { 
-	location.href="bankModifyForm?num="+${bank.BANK_NUM}; 
-	}
-
-
-</script>
 </head>
 <body>
 
@@ -78,8 +66,8 @@ function goPage2() {
     <div>
   	<br/>
 	<hr>	
-	  <a href="#" onClick="javascript:goPage1()">목록으로</a>
-	  <a href="#" onClick="javascript:goPage2()">수정</a>
+	  <a href="bankList">목록으로</a>
+	  <a href="bankModifyForm?num=${bank.BANK_NUM}">수정</a>
     </div><hr>
 </form> 
 <br/><br/><br/><br/>

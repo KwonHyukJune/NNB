@@ -1,9 +1,7 @@
 package ezen.nnb.admin.controller;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import javax.annotation.Resource;
 
@@ -67,7 +65,7 @@ public class AdminBankController {
 		ModelAndView mv = new ModelAndView("redirect:/admin/bankDetail");
 		adminBankService.updateBankModify(commandMap.getMap());
 		
-		mv.addObject("bank_num", commandMap.get("bank_num"));
+		mv.addObject("num", commandMap.get("num"));
 		return mv;
 	}
 	
