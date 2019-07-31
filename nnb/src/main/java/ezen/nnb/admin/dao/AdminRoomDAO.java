@@ -37,6 +37,10 @@ public class AdminRoomDAO extends AbstractDAO{
 	public List<Map<String, Object>> selectAdminRoomWriter(Map<String, Object> map) throws Exception {
 		return (List<Map<String, Object>>) selectList("adminRoom.selectAdminRoomWriter", map);
 	}
+	@SuppressWarnings("unchecked")
+	public void deleteRoom(Map<String, Object> map) throws Exception {
+		delete("adminRoom.delectAdminRoom",map);
+	}
 	
 
 }

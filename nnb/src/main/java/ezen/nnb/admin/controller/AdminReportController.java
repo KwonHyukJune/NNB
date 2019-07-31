@@ -18,10 +18,10 @@ import ezen.nnb.common.CommandMap;
 public class AdminReportController {
 	Logger log = Logger.getLogger(this.getClass());
 	
-	@Resource(name = "adminReportService")
+	@Resource(name = "AdminReportService")
 	private AdminReportService adminReportService;
 	
-	@Resource(name="adminRoomService") 
+	@Resource(name="AdminRoomService") 
 	private AdminRoomService adminRoomService;
 
 	@RequestMapping(value = "/admin/report/roomList")
