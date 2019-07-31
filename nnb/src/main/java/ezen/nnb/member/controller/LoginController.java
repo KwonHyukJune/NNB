@@ -1,5 +1,6 @@
 package ezen.nnb.member.controller;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,42 +45,40 @@ public class LoginController {
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ModelAndView login(CommandMap commandMap, HttpServletRequest request) throws Exception {
-		ModelAndView mv = new ModelAndView();
+		ModelAndView mv = new ModelAndView("/member/main/login");
+		String message = "";
+		String url = "";
 
 		HttpSession session = request.getSession();
 
+		System.out.println("MEM_ID:"+commandMap.get("MEM_ID"));
 		Map<String, Object> chk = loginService.loginCheck(commandMap.getMap());
 		Map<String, Object> banChk = adminBanService.banDateCheck(commandMap.getMap());
-		if (chk == null) { // 아이디가 있는지 없는지를 확인
-			mv.setViewName("/member/main/loginForm");
-			mv.addObject("message", "해당 아이디가 존재하지 않습니다.");
-			return mv;
+		if (chk==null) { // 아이디가 있는지 없는지를 확인
+			message = "해당 아이디가 존재하지 않습니다.";
 
 		} else {
 			if (chk.get("MEM_PW").equals(commandMap.get("MEM_PW"))) {
 				if (chk.get("MEM_VERIFY").equals("Y")) { // 이메일 인증을 했을ㄸ ㅐ
-					if (banChk == null || (int) banChk.get("EXP_DATE") <= 0) {// 모든 조건을 충족시키면 로그인!
+					if (banChk==null || ((BigDecimal)banChk.get("EXP_DATE")).intValue() <= 0) {// 모든 조건을 충족시키면 로그인!
 						session.setAttribute("MEM_ID", commandMap.get("MEM_ID")); // ���ǿ� ���̵� �־��
-						mv.addObject("MEMBER", chk); //
-						mv.setViewName("redirect:/main");
-						return mv;
 					} else { // 제재기한이 아직 남았을 때
-						mv.setViewName("/main");
-						mv.addObject("message", "회원님은" + banChk.get("BAN_REMOVAL_DATE") + "까지 이용이 제재되었습니다.");
-						return mv;
+						java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
+						message = "회원님은 " + sdf.format(banChk.get("BAN_REMOVAL_DATE")) + "까지 이용이 제재되었습니다.";
+						url = "/main";
 					}
 				} else { // 이메일 인증을 완료하지 않았을 떄
-					mv.setViewName("/main");
-					mv.addObject("message", "이메일 인증을 완료해주세요.");
-					return mv;
+					message = "이메일 인증을 완료해주세요.";
+					url = "/main";
 				}
 
 			} else { // 비밀번호가 일치하지 않을 때
-				mv.setViewName("loginForm");
-				mv.addObject("message", "비밀번호가 맞지 않습니다.");
-				return mv;
+				message = "비밀번호가 맞지 않습니다.";
 			}
 		}
+		mv.addObject("message",message);
+		mv.addObject("url",url);
+		return mv;
 	}
 
 	@RequestMapping(value = "/logout") // �α׾ƿ�

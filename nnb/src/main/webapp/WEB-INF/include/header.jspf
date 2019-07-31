@@ -2,15 +2,18 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 <script type="text/javascript">
-var idChk = "<%=(String)session.getAttribute("userId")%>";
+var idChk = "<%=(String)session.getAttribute("MEM_ID")%>";
 sessionStorage.setItem("MEM_ID",idChk);
-if(idChk=="null"){
-	$(".login").hide();
-	$(".logout").show();
-}else{
-	$(".login").show();
-	$(".logout").hide();
-}
+console.log(idChk);
+$(document).ready(function(){
+	if(idChk=="null"){
+		$(".login").hide();
+		$(".logout").show();
+	}else{
+		$(".login").show();
+		$(".logout").hide();
+	}
+});
 function openMenu(){
 	var e = document.getElementById("mymenu");
 	if(e.style.display=='block')
@@ -35,7 +38,7 @@ function openMenu(){
 	<a href="<c:url value='/loginForm'/>">로그인</a>
 </div>
 <div class="login" onclick="openMenu()">
-	<img src="">${MEM_NICK}님
+	<img src="">${MEM_ID}님
 	<ul class="mymenu" id="mymenu">
 		<li><a href="<c:url value='/myPage/messageList'/>">마이페이지</a></li>
 		<li><a href="<c:url value='/logout'/>">로그아웃</a></li>
