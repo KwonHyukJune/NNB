@@ -2,6 +2,7 @@ package ezen.nnb.admin.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -108,26 +109,44 @@ public class AdminMemberController{
 				mv.setViewName("admin/member/memberDetail");			
 				return mv;		 
 	}
-			@RequestMapping(value="admin/memberDelete")
-			public ModelAndView adMemberBan(CommandMap commandMap)throws Exception{
-				ModelAndView mv=new ModelAndView();
-				adminMemberService.adminMemberBan(commandMap.getMap());
-				SimpleDateFormat s=new SimpleDateFormat("yyyy/MM/dd");
-				Calendar cal=Calendar.getInstance();
-				s.format(cal.getTime());
-				if(!(commandMap.getMap().get("MEM_ID").equals(""))) {
-					String id=(String)commandMap.getMap().get("MEM_ID");
-					if(id.equals("Y")) {
-						Calendar banDate=(Calendar) commandMap.getMap().get("BAN_REMOVAL_DATE");
-						int result=cal.compareTo(banDate);
-						if(result>0) {
-							mv.setViewName("redirect:/member/main/loginForm");
-						}
+			
+		@RequestMapping(value="admin/memberDelete")
+		public ModelAndView adMemberBan(CommandMap commandMap,HttpServletRequest request)throws Exception{
+			ModelAndView mv=new ModelAndView();
+			adminMemberService.adminMemberBan(commandMap.getMap());
+			SimpleDateFormat s=new SimpleDateFormat("yyyy/MM/dd");
+			Calendar cal=Calendar.getInstance();
+			s.format(cal.getTime());
+			if(!(commandMap.getMap().get("MEM_ID").equals(""))) {
+				String id=(String)commandMap.getMap().put("MEM_ID", (String) request.getSession().getAttribute("MEM_ID"));
+				if(id.equals("Y")) {
+					String ban="";//차단기간
+					//Date ban_date=(Date)commandMap.getMap().get("BAN_DATE");//제재시작
+					String totalBan="";
+					String period=(String)commandMap.getMap().get("period");
+					if(period=="1") {//=>jsp
+						ban="1";
+					}else if(period=="2") {
+						ban="3";
+					}else if(period=="3") {
+						ban="7";
+					}else if(period=="4") {
+						ban="30";
+					}
+					//totalBan=ban+ban_date;//차단해제날짜
+					totalBan=(String)commandMap.getMap().get("BAN_REMOVAL_DATE");//차단해체
+					Calendar banDate=(Calendar) commandMap.getMap().get(totalBan);
+					int result=cal.compareTo(banDate);//오늘날짜와 비교
+					if(result<0) {						
+						mv.addObject("MEM_ID",request.getParameter("MEM_ID"));
+						mv.setViewName("redirect:/member/main/loginForm");
 					}
 				}
-				mv.setViewName("redirect:/member/main/main");
-				return mv;
 			}
+			mv.addObject("MEM_ID",request.getParameter("MEM_ID"));
+			mv.setViewName("redirect:/member/main/main");
+			return mv;
 		}
+	}
 				
 
