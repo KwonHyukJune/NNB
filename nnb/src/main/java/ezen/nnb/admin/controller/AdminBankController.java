@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -38,9 +39,9 @@ public class AdminBankController {
 		return mv;
 	}
 	@RequestMapping(value="/admin/bankWrite")
-	public ModelAndView adminBankWrite(CommandMap commandMap) throws Exception{
+	public ModelAndView adminBankWrite(CommandMap commandMap, HttpServletRequest request) throws Exception{
 		ModelAndView mv = new ModelAndView("redirect:/admin/bankList");
-		adminBankService.insertBankWrite(commandMap.getMap());
+		adminBankService.insertBankWrite(commandMap.getMap(), request);
 		
 		return mv;
 	}

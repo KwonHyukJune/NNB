@@ -105,9 +105,9 @@
 		) 
 	VALUES
 		(
-		#{ROOM_NUM},
+		ROOM_NUM_SEQ.CURRVAL,
 		#{BOARD_NUM},
-		#{TRADE_STATUS}='광고중',
+		'광고중',
 		#{EXPIRATION_DATE},
 		0,
 		0,
@@ -116,5 +116,220 @@
 		)
 	]]>
 	</insert>
+	
+	<insert id="insertRoomFile" parameterType="hashmap"> 
+	<![CDATA[ 
+	INSERT INTO ROOM_FILES 
+		( 
+		FILE_NUM, 
+		ROOM_NUM, 
+		ORG_NAME, 
+		STD_NAME, 
+		FILE_SIZE,
+		CREA_ID
+		) 
+	VALUES 
+		( 
+		FILE_NUM_SEQ, 
+		ROOM_NUM_SEQ.CURRVAL, 
+		#{ORG_NAME}, 
+		#{STD_NAME}, 
+		#{FILE_SIZE},
+		#{CREA_ID}
+		) 
+	]]> 
+	</insert>
+	
+	<update id="updateThumbnail" parameterType="hashmap"> 
+	<![CDATA[ 
+	UPDATE ROOM_INFO1
+		SET THUMBNAIL = (
+	SELECT
+  		STD_NAME
+	FROM
+  		ROOM_FILES
+	WHERE
+  		FILE_NUM = 
+  		(
+    	SELECT 
+     		min(FILE_NUM)
+    	FROM
+      		ROOM_FILES
+    	WHERE
+      		ROOM_NUM = #{ROOM_NUM} AND FILE_DEL = 'N'
+      	)
+	)
+	WHERE ROOM_NUM = #{ROOM_NUM}
+	]]> 
+	</update>
+
+	<select id= "selectRoomList" parameterType="hashmap" resultType="hashmap">
+	<![CDATA[
+	select * 
+	from
+		(select a.* ,ROOM_NUM as rnum,
+  		count(*) over() as totalCount from(SELECT DISTINCT		
+		R1.MEM_ID, R1.ROOM_NUM,
+		R1.TRADE_TYPE,R1.BUILDING_TYPE,R1.ADDRESS1, 
+		R1.ADDRESS2, R1.ZIPCODE,
+		R1.MONTHLY_PAYMENT,
+		R1.MONTHLY_DEPOSIT,
+		R1.JEONSE,R1.MEM_ID,
+		R1.THUMBNAIL,
+		R2.UTILITY_CHECK, R2.UTILITY_PRICE,
+		R2.UTILITY_TYPE,R2.SUPPLY_SIZE, R2.REAL_SIZE,
+		R2.ROOM_FLOOR,R2.STRUCTURES R2.PARKING,R2.PET,		
+		R2.ELEVATOR,R2.BALCONY, R2.BUILT_IN, R2.OPTIONS,
+		R2.LOAN_ACCESS,RB.BOARD_NUM,
+		RB.EXPIRATION_DATE, RB.HIT_COUNT,
+		RB.FAV_COUNT, RB.TRADE_STATUS, RB.UPLOAD_DATE,
+		RB.DEL_GB			
+	FROM
+		ROOM_INFO1 R1,
+		ROOM_INFO2 R2, 
+		ROOM_BOARD RB
+	WHERE R1.ROOM_NUM = R2.ROOM_NUM
+		AND R1.ROOM_NUM = RB.ROOM_NUM
+		AND DEL_GB='N' 		
+
+<if test="address!=null and !address.equals('')">
+AND R1.ROOM_NUM IN(SELECT ROOM_NUM FROM ROOM_INFO1 R1
+	 WHERE ADDRESS1 LIKE '%'||#{address}||'%')
+<if test="room_type!=null and !room_type.equals('')">
+	AND R1.ROOM_TYPE=#{room_type}
+</if>
+<if test="monthly_payment!=null and!monthly_payment.equals('')">	
+	AND R1.MONTHLY_PAYMENT=#{monthly_payment}
+</if>
+<if test="monthly_deposit!=null and!monthly_deposit.equals('')">
+	AND R1.MONTHLY_DEPOSIT=#{monthly_deposit}
+<if test="jeonse!=null and !jeonse.equals('')">
+	AND R1.JEONSE=#{jeonse}
+</if>
+<if test=minMpayment!=null and !minMpayment.equals('')">
+	AND R1.MONTHLY_PAYMENT>#{minPayment}
+</if>
+<if test=maxMpayment!=null and !maxMpayment.equals('')">
+	AND R1.MONTHLY_PAYMENT<#{maxPayment}
+</if>
+<if test=minMdeposit!=null and !minMdeposit.equals('')">
+	AND R1.MONTHLY_DEPOSIT>#{minMdeposit}
+</if>
+<if test=maxMdeposit!=null and !maxMdeposit.equals('')">
+	AND R1.MONTHLY_DEPOSIT<#{maxMdeposit}
+</if>
+<if test=minJeonse!=null and !minJeonse.equals('')">
+	AND R1.JEONSE>#{minJeonse}
+</if>
+<if test=maxJeonse!=null and !maxJeonse.equals('')">
+	AND R1.JEONSE<#{maxJeonse}
+</if>	
+<if test="trade_type!=null and!trade_type.equals('')">
+	AND R1.TRADE_TYPE=#{trade_type}	
+</if>
+<if test="utility_check!=null and!utility_check.equals('')">
+	<if test="minUtility!=null and !minUtility.equals('')">
+		AND R2.UTILITY_PRICE>#{minUtility}
+	</if>
+	<if test="maxUtility!=null and !maxUtility.equals('')">
+		AND R2.UTILITY_PRICE>#{maxUtility}
+	</if>
+</if>
+<if test="real_size!=null and!trade_type.equals('')">
+	AND R2.REAL_SIZE=#{real_size}
+</if>
+<if test="room_floor!=null and!room_floor.equals('')">
+	AND R2.ROOM_FLOOR=#{room_floor}
+</if>
+<if test="structures!=null and!structures.equals('')">
+	AND R2.STRUCTURES=#{structures}
+</if>
+<if test="parking!=null and!parking.equals('')">
+	AND R2.PARKING=#{parking}
+</if>
+<if test="pet!=null and!pet.equals('')">
+	AND R2.PET=#{pet}
+</if>
+<if test="elevator!=null and!elevator.equals('')">
+	AND R2.ELEVATOR=#{elevator}
+</if>
+<if test="balcony!=null and!balcony.equals('')">
+	AND R2.BALCONY=#{balcony}
+</if>
+<if test="built_in!=null and!built_in.equals('')">
+	AND R2.BUILT_IN=#{built_in}
+</if>
+<if test="options!=null and!options.equals('')">
+	AND R2.OPTIONS=#{options}
+</if>
+<if test="loan_access!=null and!loan_access.equals('')">
+	AND R2.LOAN_ACCESS=#{loan_access}
+</if>
+
+</if>)  a)
+  where rnum >=#{startCount} and rnum <=#{endCount};
+]]>
+</select>
+
+<select id="selectRoomInfoDetail" parameterType="hashmap" resultType="hashmap">
+<![CDATA[
+		SELECT 
+			R1.MEM_ID, R1.ROOM_NUM,
+			R1.TRADE_TYPE,R1.BUILDING_TYPE,R1.ADDRESS1, 
+			R1.ADDRESS2, R1.ZIPCODE,
+			R1.MONTHLY_PAYMENT,
+			R1.MONTHLY_DEPOSIT,
+			R1.JEONSE,R1.MEM_ID,
+			R2.DESC_SECRET, R2.SUPPLY_SIZE, R2.REAL_SIZE,
+			R2.BUILDING_STORY, R2.ROOM_FLOOR, R2.HEATING_SYSTEM,
+			R2.MOVE_IN_DATE, R2.UTILITY_CHECK, R2.UTILITY_PRICE,
+			R2.UTILITY_TYPE, R2.PARKING, R2.PARKING_BILL,
+			R2.PET, R2.ELEVATOR, R2.BALCONY, R2.BUILT_IN,
+			R2.STRUCTURES, R2.OPTIONS, R2.LOAN_ACCESS,
+			R2.DESC_TITLE, R2.DESC_DETAIL, RB.BOARD_NUM,
+			RB.EXPIRATION_DATE, RB.HIT_COUNT,
+			RB.FAV_COUNT, RB.TRADE_STATUS, RB.UPLOAD_DATE,
+			RB.DEL_GB
+		FROM
+			ROOM_INFO1 R1, ROOM_INFO2 R2,
+			ROOM_BOARD RB
+    	WHERE R1.ROOM_NUM= R2.ROOM_NUM
+			AND R1.ROOM_NUM=RB.ROOM_NUM
+			AND DEL_GB='N' AND R1.ROOM_NUM=#{ROOM_NUM}
+	]]>
+</select>
+
+<select id="selectRoomFileList" parameterType="hashmap" resultType="hashmap"> 
+<![CDATA[ 
+	SELECT 
+		ROOM_NUM, 
+		ORG_NAME, 
+		ROUND(FILE_SIZE/1024,1) AS FILE_SIZE 
+	FROM 
+		TB_FILE 
+	WHERE 
+		ROOM_NUM = #{ROOM_NUM} AND DEL_GB = 'N' 
+]]> 
+</select>
+
+<update id="updateHitCount" parameterType="hashMap">
+<![CDATA[
+	update ROOM_BOARD 
+	set
+        hit_count=nvl(hit_count,0)+1
+	where
+        BOARD_NUM=#{BOARD_NUM}
+]]>
+</update>
+
+<update id="deleteRoom" parameterType="hashMap">
+<![CDATA[
+	update ROOM_BOARD 
+	set
+        DEL_GB='Y'
+	where
+        BOARD_NUM=#{BOARD_NUM}
+]]>
+</update>
 
 </mapper>
