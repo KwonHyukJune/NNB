@@ -3,7 +3,7 @@ http://localhost:8080/ninaebang/myPage/MyInfoDetail		내 정보 보기	/myInfo/M
 http://localhost:8080/ninaebang/myPage/MyInfoModifyForm	정보 수정 폼	/myInfo/MyInfoModifyForm	MyInfoModify()		selectInfoDetail	MyInfoModifyForm.jsp	
 http://localhost:8080/ninaebang/myPage/MyInfoModify		내 정보 수정	/myInfo/MyInfoModify		MyInfoModify()-post	updateInfoModify	MyInfoModify.jsp	
 http://localhost:8080/ninaebang/myPage/MyInfoDeleteComfirm회원탈퇴-비밀번호확인						MyInfoDelete.jsp	
-http://localhost:8080/ninaebang/myPage/MyInfoDelete		회원탈퇴	/myInfo/MyInfoDelete		MyInfoDelete()		deleteInfo			redirect: main			*/
+http://localhost:8080/ninaebang/myPage/MyInfoDelete		회원탈퇴	/myInfo/MyInfoDelete		MyInfoDelete()		deleteInfo			redirect: main	*/
 package ezen.nnb.member.controller;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -64,4 +64,4 @@ public ModelAndView MyInfoModify(CommandMap commandMap)throws Exception{
 
 
 }   
- 
+  

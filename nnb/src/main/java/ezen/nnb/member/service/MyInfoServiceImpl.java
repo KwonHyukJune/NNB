@@ -29,4 +29,4 @@ public class MyInfoServiceImpl implements MyInfoService{
 		myPageDAO.deleteMyInfo(map);
 	}
 		
-} 
+}  
