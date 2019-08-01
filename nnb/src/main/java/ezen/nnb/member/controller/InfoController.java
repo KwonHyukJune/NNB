@@ -1,5 +1,6 @@
 package ezen.nnb.member.controller;
 import java.text.SimpleDateFormat;
+
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -17,28 +18,28 @@ import ezen.nnb.common.CommandMap;
 import ezen.nnb.member.service.InfoService;
 @Controller
 public class InfoController {
-	@Resource(name="InfoService") 
-	private InfoService InfoService;
+	@Resource(name="infoService") 
+	private InfoService infoService;
 	
 ///InfoDetail
 @RequestMapping(value="/info/agree")
 public ModelAndView openAgree(CommandMap commandMap) throws Exception{
 	ModelAndView mv = new ModelAndView("mypage/info/agree");
-	List<Map<String, Object>> map = InfoService.selectAgree(commandMap.getMap());	
+	List<Map<String, Object>> map = infoService.selectAgree(commandMap.getMap());	
 	return mv;
 }
 
-@RequestMapping(value="/infoAgree")
+@RequestMapping(value="/info/PersonalData")
 public ModelAndView openPersnalData(CommandMap commandMap) throws Exception{
-	ModelAndView mv = new ModelAndView("mypage/info/agree");
-	List<Map<String, Object>> map = InfoService.selectPersonalData(commandMap.getMap());	
+	ModelAndView mv = new ModelAndView("mypage/info/PersonalData");
+	List<Map<String, Object>> map = infoService.selectPersonalData(commandMap.getMap());	
 	return mv;
 }
 
-@RequestMapping(value="/infoAgree")
+@RequestMapping(value="/info/ArticleRule")
 public ModelAndView openArticleRule(CommandMap commandMap) throws Exception{
-	ModelAndView mv = new ModelAndView("mypage/info/agree");
-	List<Map<String, Object>> map = InfoService.selectArticleRule(commandMap.getMap());	
+	ModelAndView mv = new ModelAndView("mypage/info/ArticleRule");
+	List<Map<String, Object>> map = infoService.selectArticleRule(commandMap.getMap());	
 	return mv;
 }
 
