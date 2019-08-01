@@ -14,4 +14,4 @@ public interface LoginService {
 
 	public void updateTempPw(Map<String,Object> map) throws Exception;
 
-}
+} 

@@ -27,6 +27,7 @@ import ezen.nnb.member.service.LoginService;
 public class LoginController {
 
 	Logger log = Logger.getLogger(this.getClass());
+	
 	@Resource(name = "loginService")
 	private LoginService loginService;
 
@@ -123,7 +124,7 @@ public class LoginController {
 		ModelAndView mv = new ModelAndView("member/main/findPwConfirm");
 		// mybatis로 inserMeber() 기능 처리 및 해당 이메일로 이메일 발송
 		int eCheck = loginService.selectEmailCheck(commandMap.getMap());
-
+		
 		String tempPw = UUID.randomUUID().toString().replaceAll("-", ""); 
 		tempPw = tempPw.substring(0, 10);
 

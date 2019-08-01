@@ -1,5 +1,6 @@
 package ezen.nnb.member.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -22,6 +23,14 @@ public class RoomController {
 	@Resource(name = "roomService")
 	private RoomService roomService;
 
+	@RequestMapping(value = "/room/adminRoom")
+	public ModelAndView adminRoomList(CommandMap commandMap) throws Exception {
+		ModelAndView mv = new ModelAndView("member/room/adminRoom");
+		List<Map<String, Object>> list = roomService.selectAdminRoomList(commandMap.getMap());
+		mv.addObject("list", list);
+		return mv;
+	}
+	
 	@RequestMapping(value = "/room/writeForm")
 	public ModelAndView writeFormRoom(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("/member/room/writeForm");
@@ -46,9 +55,9 @@ public class RoomController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "/room/write") //
+	@RequestMapping(value = "/room/delete") //
 	public ModelAndView deleteRoom(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("member/room/adminRoom");
+		ModelAndView mv = new ModelAndView("redirect: member/room/adminRoom");
 		roomService.deleteRoom(commandMap.getMap());
 		return mv;
 	}
