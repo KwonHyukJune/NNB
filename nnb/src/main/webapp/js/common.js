@@ -161,10 +161,6 @@ function _movePage(value){
 	}
 }
 
-function close(){
-	window.close();
-}
-
 function back(){
 	history.go(-1);
 }
