@@ -33,7 +33,7 @@ WHERE
 ]]>
 </delete>   
 
-<select id = "selectFavRoom" parameterType="hasmap" resultType="hashmap">
+<select id = "selectFavRoom" parameterType="hashmap" resultType="hashmap">
 <![CDATA[
 	select fav_room.room_num from fav_room where mem_id=#{MEM_ID}
 ]]>

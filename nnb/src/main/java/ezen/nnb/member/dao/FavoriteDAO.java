@@ -3,8 +3,11 @@ package ezen.nnb.member.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.stereotype.Repository;
+
 import ezen.nnb.common.AbstractDAO;
 
+@Repository("favoriteDAO")
 public class FavoriteDAO extends AbstractDAO {
 
 	public void deleteFavRoom(Map<String, Object> map) throws Exception{

@@ -7,9 +7,11 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Service;
 
 import ezen.nnb.member.dao.FavoriteDAO;
 
+@Service("favoriteService")
 public class FavoriteServiceImpl implements FavoriteService{
 
 	Logger log = Logger.getLogger(this.getClass());
