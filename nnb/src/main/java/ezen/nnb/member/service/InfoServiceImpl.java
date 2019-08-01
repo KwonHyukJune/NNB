@@ -16,7 +16,6 @@ import ezen.nnb.member.dao.JoinDAO;
 public class InfoServiceImpl implements InfoService{	
 	Logger log = Logger.getLogger(this.getClass());
 
-
 	@Resource(name="infoDAO")
 	private InfoDAO infoDAO;
 	

@@ -31,6 +31,7 @@ public class MyInfoController {
 public ModelAndView MyInfoDetail(CommandMap commandMap) throws Exception{
 	ModelAndView mv = new ModelAndView("mypage/MyInfo/detail");
 	Map<String,Object> map = myInfoService.selectMyInfoDetail(commandMap.getMap());	
+	mv.addObject("map",map);
 	return mv;
 }
 
@@ -39,6 +40,7 @@ public ModelAndView MyInfoDetail(CommandMap commandMap) throws Exception{
 public ModelAndView MyInfoModifyForm(CommandMap commandMap) throws Exception{
 	ModelAndView mv = new ModelAndView("mypage/MyInfo/modifyForm");
 	Map<String,Object> map = myInfoService.selectMyInfoDetail(commandMap.getMap());	
+	mv.addObject("map",map);
 	return mv;
 }
 ///MyInfoModify

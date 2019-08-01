@@ -28,7 +28,7 @@ public class AdminRoomController{
 	private int searchNum;
 	private String isSearch;
 
-	@Resource(name="AdminRoomService")
+	@Resource(name="adminRoomService")
 	private AdminRoomService adminRoomService;
 		
 			@RequestMapping(value/*##MU*/="admin/roomList")

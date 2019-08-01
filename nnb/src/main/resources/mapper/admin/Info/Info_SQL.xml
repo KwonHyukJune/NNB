@@ -15,35 +15,7 @@
 	FROM
             TERMS
 	WHERE
-    	    TERMS_NUM = #{이용약관}
-]]>
-</select>
-<!-- 약관 상세보기 -->
-<select id="selectTermsDetail" parameterType="hashMap" resultType="hashMap">
-<![CDATA[
-	select
-            TERMS_NUM,
-            TERMS_REGDATE,
-            TERMS_TITLE,
-            TERMS_CONTENT
-	FROM
-            TERMS
-	WHERE
-    	    TERMS_NUM = #{개인처이 정보방침}
-]]>
-</select>
-<!-- 약관 상세보기 -->
-<select id="selectTermsDetail" parameterType="hashMap" resultType="hashMap">
-<![CDATA[
-	select
-            TERMS_NUM,
-            TERMS_REGDATE,
-            TERMS_TITLE,
-            TERMS_CONTENT
-	FROM
-            TERMS
-	WHERE
-    	    TERMS_TITLE = #{매물관리규정}
+    	    TERMS_TITLE = #{terms}
 ]]>
 </select>
 
