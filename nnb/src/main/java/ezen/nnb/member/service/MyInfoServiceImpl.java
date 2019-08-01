@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import ezen.nnb.admin.dao.AdminTermsDAO;
 import ezen.nnb.member.dao.MyInfoDAO;
 
-@Service("MyInfoService")
+@Service("myInfoService")
 public class MyInfoServiceImpl implements MyInfoService{
 	Logger log = Logger.getLogger(this.getClass());
 

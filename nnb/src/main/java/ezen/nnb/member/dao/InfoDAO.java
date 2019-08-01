@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import ezen.nnb.common.AbstractDAO;
 
-	@Repository("InfoDAO")
+	@Repository("infoDAO")
 	public class InfoDAO extends AbstractDAO{
 
 

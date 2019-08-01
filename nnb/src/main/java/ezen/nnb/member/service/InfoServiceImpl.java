@@ -12,13 +12,11 @@ import ezen.nnb.member.dao.IgnoreDAO;
 import ezen.nnb.member.dao.InfoDAO;
 import ezen.nnb.member.dao.JoinDAO;
 
-@Service("InfoService")
+@Service("infoService")
 public class InfoServiceImpl implements InfoService{	
 	Logger log = Logger.getLogger(this.getClass());
 
 
-
-	
 	@Resource(name="infoDAO")
 	private InfoDAO infoDAO;
 	

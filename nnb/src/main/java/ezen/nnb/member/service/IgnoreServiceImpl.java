@@ -6,9 +6,11 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Service;
 
 import ezen.nnb.member.dao.IgnoreDAO;
 
+@Service("ignoreService")
 public class IgnoreServiceImpl implements IgnoreService{
 
 	Logger log = Logger.getLogger(this.getClass());
