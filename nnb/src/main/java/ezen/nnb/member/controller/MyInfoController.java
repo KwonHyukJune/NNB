@@ -23,7 +23,7 @@ import ezen.nnb.common.CommandMap;
 import ezen.nnb.member.service.MyInfoService;
 @Controller
 public class MyInfoController {
-	@Resource(name="adminBankService") 
+	@Resource(name="MyInfoService") 
 	private MyInfoService MyInfoService;
 	
 ///MyInfoDetail
