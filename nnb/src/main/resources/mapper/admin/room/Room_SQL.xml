@@ -1,34 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="room">
+<mapper namespace="adminRoom">
 
-<!-- #####게시판(관리자, 회원) -->
-<select id="selectRoomList" resultType="hashMap" parameterType="hashMap" >
+<select id="selectAdminRoomList" resultType="hashMap" parameterType="hashMap" >
 <![CDATA[
-SELECT BOARD_NUM, UPLOAD_DATE, MEM_ID, DESC_TITLE, HIT_COUNT FROM ROOM_BOARD B, ROOM_INFO1 I1, ROOM_INFO2 I2 WHERE B.ROOM_NUM = I2.ROOM_NUM AND B.ROOM_NUM = I1.ROOM_NUM ]]>
+SELECT BOARD_NUM,
+       UPLOAD_DATE,
+       MEM_ID,
+       DESC_TITLE,
+       HIT_COUNT
+FROM
+       ROOM_BOARD B, ROOM_INFO1 I1, ROOM_INFO2 I2
+WHERE  B.ROOM_NUM = I2.ROOM_NUM
+AND B.ROOM_NUM = I1.ROOM_NUM
+]]>
 </select>
 
-<!-- ##### 검색) -->
-<select id="searchRoom" resultType="hashmap" parameterType="hashmap" >
+<!-- 
+<mapper namespace="room">
+<select id="detailRoom" resultType="hashmap" parameterType="hashmap">
 <![CDATA[ 
-SELECT DISTINCT R1.MEM_ID, R1.ROOM_NUM, R1.TRADE_TYPE,R1.BUILDING_TYPE,R1.ADDRESS1, R1.ADDRESS2, R1.ZIPCODE, R1.MONTHLY_PAYMENT, R1.MONTHLY_DEPOSIT, R1.JEONSE,R1.MEM_ID , R2.UTILITY_CHECK, R2.UTILITY_PRICE, R2.UTILITY_TYPE,R2.SUPPLY_SIZE, R2.REAL_SIZE, R2.ROOM_FLOOR,R2.STRUCTURES, R2.PARKING,R2.PET, R2.ELEVATOR,R2.BALCONY, R2.BUILT_IN, R2.OPTIONS, R2.LOAN_ACCESS,RB.BOARD_NUM, RF.FILE_NUM, RB.EXPIRATION_DATE, RB.HIT_COUNT, RB.FAV_COUNT, RB.TRADE_STATUS, RB.UPLOAD_DATE, RB.DEL_GB FROM ROOM_INFO1 R1, ROOM_INFO2 R2, ROOM_BOARD RB, ROOM_FILES RF, WHERE R1.ROOM_NUM= R2.ROOM_NUM AND R1.ROOM_NUM=RB.ROOM_NUM AND R1.ROOM_NUM=RF.ROOM_NUM AND DEL_GB='N' <if test="address!=null and !address.equals('')"> AND R1.ROOM_NUM IN(SELECT ROOM_NUM FROM ROOM_INFO1 R1 WHERE ADDRESS1 LIKE '%'||#{address}||'%') <if test="room_type!=null and !room_type.equals('')"> AND R1.ROOM_TYPE=#{room_type} </if> <if test="monthly_payment!=null and!monthly_payment.equals('')"> AND R1.MONTHLY_PAYMENT=#{monthly_payment} </if> <if test="monthly_deposit!=null and!monthly_deposit.equals('')"> AND R1.MONTHLY_DEPOSIT=#{monthly_deposit} <if test="jeonse!=null and !jeonse.equals('')"> AND R1.JEONSE=#{jeonse} </if> <if test=minMpayment!=null and !minMpayment.equals('')"> AND R1.MONTHLY_PAYMENT>#{minPayment} </if> <if test=maxMpayment!=null and !maxMpayment.equals('')"> AND R1.MONTHLY_PAYMENT<#{maxPayment} </if> <if test=minMdeposit!=null and !minMdeposit.equals('')"> AND R1.MONTHLY_DEPOSIT>#{minMdeposit} </if> <if test=maxMdeposit!=null and !maxMdeposit.equals('')"> AND R1.MONTHLY_DEPOSIT<#{maxMdeposit} </if> <if test=minJeonse!=null and !minJeonse.equals('')"> AND R1.JEONSE>#{minJeonse} </if> <if test=maxJeonse!=null and !maxJeonse.equals('')"> AND R1.JEONSE<#{maxJeonse} </if> <if test="trade_type!=null and!trade_type.equals('')"> AND R1.TRADE_TYPE=#{trade_type} </if> <if test="utility_check!=null and!utility_check.equals('')"> <if test="minUtility!=null and !minUtility.equals('')"> AND R2.UTILITY_PRICE>#{minUtility}</if> <if test="maxUtility!=null and !maxUtility.equals('')"> AND R2.UTILITY_PRICE>#{maxUtility}</if> </if> <if test="real_size!=null and!trade_type.equals('')"> AND R2.REAL_SIZE=#{real_size} </if> <if test="room_floor!=null and!room_floor.equals('')"> AND R2.ROOM_FLOOR=#{room_floor} </if> <if test="structures!=null and!structures.equals('')"> AND R2.STRUCTURES=#{structures} </if> <if test="parking!=null and!parking.equals('')"> AND R2.PARKING=#{parking} </if> <if test="pet!=null and!pet.equals('')"> AND R2.PET=#{pet} </if> <if test="elevator!=null and!elevator.equals('')"> AND R2.ELEVATOR=#{elevator} </if> <if test="balcony!=null and!balcony.equals('')"> AND R2.BALCONY=#{balcony} </if> <if test="built_in!=null and!built_in.equals('')"> AND R2.BUILT_IN=#{built_in} </if> <if test="options!=null and!options.equals('')"> AND R2.OPTIONS=#{options} </if> <if test="loan_access!=null and!loan_access.equals('')"> AND R2.LOAN_ACCESS=#{loan_access} </if> </if> ]]>
+]]>
+</select>
+ -->
+ 
+<select id="updateAdminRoomStatus" resultType="hashMap" parameterType="hashMap" >
+<![CDATA[ 
+UPDATE ROOM_BOARD
+SET
+               TRADE_STATE = #{TRADE_STATE}
+WHERE  BOARD_NUM = #{BOARD_NUM}
+]]>
 </select>
 
-<!-- #####상세보기(관리자, 회원) -->
-<select id="selectRoomDetail" resultType="hashMap" parameterType="hashMap" >
+
+
+<select id="selectAdminRoomA" resultType="hashMap" parameterType="hashMap" >
 <![CDATA[ 
-select id="selectDetail" parameterType="hashmap" resultType="hashmap"> <![CDATA[ SELECT R1.MEM_ID, R1.ROOM_NUM, R1.TRADE_TYPE,R1.BUILDING_TYPE,R1.ADDRESS1, R1.ADDRESS2, R1.ZIPCODE, R1.MONTHLY_PAYMENT, R1.MONTHLY_DEPOSIT, R1.JEONSE,R1.MEM_ID, R2.DESC_SECRET, R2.SUPPLY_SIZE, R2.REAL_SIZE, R2.BUILDING_STORY, R2.ROOM_FLOOR, R2.HEATING_SYSTEM, R2.MOVE_IN_DATE, R2.UTILITY_CHECK, R2.UTILITY_PRICE, R2.UTILITY_TYPE, R2.PARKING, R2.PARKING_BILL, R2.PET, R2.ELEVATOR, R2.BALCONY, R2.BUILT_IN, R2.STRUCTURES, R2.OPTIONS, R2.LOAN_ACCESS, R2.DESC_TITLE, R2.DESC_DETAIL, RB.BOARD_NUM, RF.FILE_NUM, RB.EXPIRATION_DATE, RB.HIT_COUNT, RB.FAV_COUNT, RB.TRADE_STATUS, RB.UPLOAD_DATE, RB.DEL_GB FROM ROOM_INFO1 R1, ROOM_INFO2 R2, ROOM_BOARD RB, ROOM_FILES RF WHERE R1.ROOM_NUM= R2.ROOM_NUM AND R1.ROOM_NUM=RB.ROOM_NUM AND R1.ROOM_NUM=RF.ROOM_NUM AND DEL_GB='N' ]]>
+SELECT 
+        B.TRADE_STATUS,
+        I1.ROOM_NUM,
+        I1.MEM_ID,
+        B.UPLOAD_DATE,
+        I2.DESC_TITLE,
+                   I2.DESC_DETAIL,
+        M.MEM_ID
+FROM ROOM_BOARD B, MEMBER M, ROOM_INFO1 I1, ROOM_INFO2 I2
+WHERE I1.MEM_ID = M.MEM_ID        
+            AND B.ROOM_NUM = I2.ROOM_NUM
+            AND B.ROOM_NUM = I1.ROOM_NUM
+<choose>
+      <when test="I2.DESC_TITLE == 1">        
+            AND I2.DESC_TITLE like %#{DESC_TITLE}%
+      </when>
+      <when test="I2.DESC_TITLE == 2">
+        AND B.ROOM_NUM like %#{ROOM_NUM}%
+      </when>
+      <when test="I2.DESC_TITLE == 3">
+        AND I1.MEM_ID like %#{MEM_ID}%
+      </when>
+</choose>
+]]>
 </select>
+
 
 <!-- #####글 삭제(관리자) -->
-<update id="deleteRoom" parameterType="hashmap" >
+<update id="deleteAdminRoom" parameterType="hashmap" >
 <![CDATA[ 
-	UPDATE 
-		ROOM_BOARD 
-	SET
-		DEL_GB='y'
-	WHERE 
-		BOARD_NUM = #{BOARD_NUM} ]]>
+DELETE ROOM_BOARD
+WHERE BOARD_NUM = #{BOARD_NUM}]]>
 </update>
 
 </mapper>  

@@ -27,16 +27,9 @@ public class AdminRoomServiceImpl implements AdminRoomService{
 		
 	}
 	@Override
-	public List<Map<String, Object>> selectAdminRoomTitle(Map<String, Object> map) throws Exception {
-		return AdminRoomDAO.selectAdminRoomTitle(map);
+	public List<Map<String, Object>> selectAdminRoomA(Map<String, Object> map) throws Exception {
+		return AdminRoomDAO.selectAdminRoomA(map);
 	}
-	@Override
-	public List<Map<String, Object>> selectAdminRoomContent(Map<String, Object> map) throws Exception {
-		return AdminRoomDAO.selectAdminRoomContent(map);
-	}
-	@Override
-	public List<Map<String, Object>> selectAdminRoomWriter(Map<String, Object> map) throws Exception {
-		return AdminRoomDAO.selectAdminRoomWriter(map);
-	}
+
 	
 }   

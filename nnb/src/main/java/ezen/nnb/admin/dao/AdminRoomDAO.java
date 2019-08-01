@@ -25,18 +25,12 @@ public class AdminRoomDAO extends AbstractDAO{
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Map<String, Object>> selectAdminRoomTitle(Map<String, Object> map) throws Exception {
-		return (List<Map<String, Object>>) selectList("adminRoom.selectAdminRoomTitle", map);
+	public List<Map<String, Object>> selectAdminRoomA(Map<String, Object> map) throws Exception {
+		return (List<Map<String, Object>>) selectList("adminRoom.selectAdminRoomA", map);
 	}  
 	
-	@SuppressWarnings("unchecked")
-	public List<Map<String, Object>> selectAdminRoomContent(Map<String, Object> map) throws Exception {
-		return (List<Map<String, Object>>) selectList("adminRoom.selectAdminRoomContent", map);
-	}
-	@SuppressWarnings("unchecked")
-	public List<Map<String, Object>> selectAdminRoomWriter(Map<String, Object> map) throws Exception {
-		return (List<Map<String, Object>>) selectList("adminRoom.selectAdminRoomWriter", map);
-	}
+
+	
 	@SuppressWarnings("unchecked")
 	public void deleteRoom(Map<String, Object> map) throws Exception {
 		delete("adminRoom.delectAdminRoom",map);
