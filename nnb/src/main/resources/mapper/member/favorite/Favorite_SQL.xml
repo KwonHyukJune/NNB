@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="favorite">
+<select id="selectFavRoomList" parameterType="hashmap" resultType="hashmap">
+<![CDATA[
+SELECT
+	R1.ROOM_NUM,
+	R1.ROOM_TYPE,
+	R1.TRADE_TYPE,
+	R1.monthly_payment,
+	R1.monthly_DEPOSIT,
+	R1.jeonse,
+	R1.THUMBNAIL,
+	R2.DESC_TITLE,
+	RB.UPLOAD_DATE
+FROM
+	ROOM_INFO1 R1, 
+	ROOM_INFO2 R2, 
+	ROOM_BOARD RB
+WHERE
+	R1.ROOM_NUM=r2.room_num and
+	R1.ROOM_NUM=rb.room_num and
+	R1.ROOM_NUM=#{rn}
+]]>
+</select>
+
+<delete id="deleteMember" parameterType="hashmap">
+<![CDATA[
+   delete from
+      FAV_ROOM
+   where
+      MEM_ID=#{MEM_ID}
+]]>
+</delete>   
+
+<select id = "selectFavRoom" parameterType="hasmap" resultType="hashmap">
+<![CDATA[
+	select fav_room.room_num from fav_room where mem_id=#{MEM_ID}
+]]>
+
+</select>
+
+</mapper>
