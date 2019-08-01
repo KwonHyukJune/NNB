@@ -16,24 +16,13 @@ import ezen.nnb.member.dao.JoinDAO;
 public class InfoServiceImpl implements InfoService{	
 	Logger log = Logger.getLogger(this.getClass());
 
-
 	@Resource(name="infoDAO")
 	private InfoDAO infoDAO;
 	
 	@Override
-	public List<Map<String, Object>> selectAgree(Map<String, Object> map) {
-		return null;
+	public List<Map<String, Object>> selectTermsDetail(Map<String, Object> map) throws Exception{
+		return infoDAO.selectTermsDetail(map);
 	}
-	@Override
-	public List<Map<String, Object>> selectPersonalData (Map<String, Object> map) {
-		return null;
-	}
-	@Override
-	public List<Map<String, Object>> selectArticleRule (Map<String, Object> map) {
-		return null;
-	}
-	
-	
 
 	
 }
