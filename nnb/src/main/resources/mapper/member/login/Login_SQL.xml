@@ -25,7 +25,7 @@
 		FROM
 			MEMBER 
 		WHERE 
-			MEM_NAME = #{MEM_NAME} and MEM_PHONE = #{MEM_PHONE} and DEL_GB ='N' 
+			MEM_NAME = #{MEM_NAME} and MEM_PHONE = #{MEM_PHONE} and MEM_DEL_GB ='N' 
 	]]>
 	</select>
 	
@@ -37,7 +37,7 @@
 		FROM
 			MEMBER 
 		WHERE 
-			MEM_NAME = #{MEM_NAME} and MEM_EMAIL = #{MEM_EMAIL} and DEL_GB ='N' 
+			MEM_NAME = #{MEM_NAME} and MEM_EMAIL = #{MEM_EMAIL} and MEM_DEL_GB ='N' 
 	]]>
 	</select>
 	
@@ -48,7 +48,7 @@
     FROM 
     	member 
     WHERE 
-    	mem_id=#{mem_id} and mem_email=${mem_email} and DEL_GB = 'N'
+    	mem_id=#{MEM_ID} and mem_email=#{MEM_EMAIL} and MEM_DEL_GB = 'N'
 	]]>
 	</select>
 	
@@ -59,7 +59,7 @@
     set 
     	mem_pw=#{tempPw} 
     where 
-    	mem_id=#{mem_id} and mem_email=${mem_email} and DEL_GB = 'N'
+    	mem_id=#{MEM_ID} and mem_email=#{MEM_EMAIL} and MEM_DEL_GB = 'N'
 	]]>
 	</update>
 </mapper>

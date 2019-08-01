@@ -42,9 +42,9 @@ public class LoginServiceImpl implements LoginService{
 	}
 
 	@Override
-	public void updateTempPw(String tempPw) throws Exception {
+	public void updateTempPw(Map<String,Object> map) throws Exception {
 		// TODO Auto-generated method stub
-		loginDAO.updateTempPw(tempPw);
+		loginDAO.updateTempPw(map);
 	}
 
 }
