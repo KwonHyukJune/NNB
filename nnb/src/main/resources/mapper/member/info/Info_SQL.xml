@@ -29,7 +29,7 @@
 	FROM
             TERMS
 	WHERE
-    	    TERMS_NUM = #{개인처이 정보방침}
+    	    TERMS_NUM = #{개인정보 처리방침}
 ]]>
 </select>
 <!-- 약관 상세보기 -->
