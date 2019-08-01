@@ -12,6 +12,6 @@ public interface LoginService {
 
 	public int selectEmailCheck(Map<String, Object> map) throws Exception;
 
-	public void updateTempPw(String tempPw) throws Exception;
+	public void updateTempPw(Map<String,Object> map) throws Exception;
 
 }

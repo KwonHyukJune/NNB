@@ -100,13 +100,13 @@ public class LoginController {
 	@RequestMapping(value = "/findIdResult", method = RequestMethod.POST) // 입력한 정보에 맞춰서 아이디를 찾아주는 거
 	public ModelAndView findIdResult(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("member/main/findIdResult");
-		if (commandMap.get("type").equals("phone")) {
+		if (commandMap.get("findIdBy").equals("phone")) {
 			Map<String, Object> map = loginService.findIdWithPhone(commandMap.getMap());
-			mv.addObject("map", map);
+			mv.addObject("id", map);
 			return mv;
 		} else {
 			Map<String, Object> map = loginService.findIdWithEmail(commandMap.getMap());
-			mv.addObject("map", map);
+			mv.addObject("id", map);
 			return mv;
 		}
 	}
@@ -136,10 +136,12 @@ public class LoginController {
 							+ tempPw/* .toString() */)
 					.append("} 입니다. 로그인 후 새로운 비밀번호를 저장해주세요.").toString());
 			sendMail.setFrom("ezenyoon@gmail.com", "니내방");
-			sendMail.setTo(commandMap.getMap().get("mem_email").toString());
+			sendMail.setTo(commandMap.getMap().get("MEM_EMAIL").toString());
 			sendMail.send();
+			
+			commandMap.put("tempPw", tempPw);
 		
-			loginService.updateTempPw(tempPw);
+			loginService.updateTempPw(commandMap.getMap());
 		}
 
 		mv.addObject("eCheck", eCheck);

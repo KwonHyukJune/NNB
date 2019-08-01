@@ -32,9 +32,9 @@ public class LoginDAO extends AbstractDAO{
 		return (int)selectOne("login.selectEmailCheck",map);
 	}
 
-	public void updateTempPw(String tempPw) throws Exception {
+	public void updateTempPw(Map<String,Object> map) throws Exception {
 		// TODO Auto-generated method stub
-		update("login.updateTempPw", tempPw);
+		update("login.updateTempPw",map);
 	}
 
 
