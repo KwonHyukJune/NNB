@@ -58,4 +58,25 @@ public class RoomServiceImpl implements RoomService {
 		return roomDAO.selectAdminRoomList(map);
 	}
 
+	@Override
+	public Map<String, Object> selectAdminRoomCount(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return roomDAO.selectAdminRoomCount(map);
+	}
+
+	@Override
+	public void updateReAdRoom(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		roomDAO.updateReAdRoom(map);
+	}
+
+	@Override
+	public void updateSoldRoom(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		roomDAO.updateSoldRoom(map);
+	}
+
+	
+
+	
 }

@@ -3,11 +3,13 @@ package ezen.nnb.member.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.stereotype.Repository;
+
 import ezen.nnb.common.AbstractDAO;
 
+@Repository("roomDAO")
 public class RoomDAO extends AbstractDAO{
 
-	
 
 	@SuppressWarnings("unchecked") //내방 보기 리스트
 	public List<Map<String, Object>> selectAdminRoomList(Map<String, Object> map) {
@@ -45,14 +47,30 @@ public class RoomDAO extends AbstractDAO{
 	
 	//방 정보 불러오기
 	@SuppressWarnings("unchecked")
-	public Map<String, Object> selectRoomInfoDetail(Map<String, Object> map) {
+	public Map<String, Object> selectRoomInfoDetail(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub
 		return (Map<String, Object>)selectOne("room.selectRoomInfoDetail", map);
 	}
-	// 방지우기
+	// 방 DEL_GB 업데이트하기
 	public void deleteRoom(Map<String, Object> map) throws Exception{
 		// TODO Auto-generated method stub
-		delete("room.deleteRoom",map);
+		update("room.deleteRoom",map);
+	}
+
+	@SuppressWarnings("unchecked")
+	public Map<String, Object> selectAdminRoomCount(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return (Map<String, Object>) selectOne("room.selectAdminRoomCount");
+	}
+
+	public void updateReAdRoom(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		update("room.updateReAdRoom",map);
+	}
+
+	public void updateSoldRoom(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		update("room.updateSoldRoom",map);
 	}
 
 }
