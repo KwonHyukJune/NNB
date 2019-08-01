@@ -25,16 +25,13 @@ public class MyInterestController {
 	private FavoriteService favoriteService;
 	@Resource(name="roommateService")
 	private RoommateService roommateService;
-	/*
+	
 	 @RequestMapping("/myInterest/recentRoom") 
 	 public ModelAndView recentRoomList(CommandMap commandMap)throws Exception{ 
-	 * ModelAndView mv=new ModelAndView("member/myInterest/recentRoomList");
-	 * 
-	 * List<Map<String,Object>> list=searchRoomService.selectRoomList(commandMap.getMap());
-	 * mv.addObject("list", list);
-	 * 
-	 * return mv; }
-	 */
+	 ModelAndView mv=new ModelAndView("member/myInterest/recentRoomList");
+	
+	 return mv; 
+	}
 	@RequestMapping(value="/myInterest/favRoomList")
 	public ModelAndView favRoomList(CommandMap commandMap)throws Exception{
 		ModelAndView mv=new ModelAndView("member/myInterest/favRoomList");

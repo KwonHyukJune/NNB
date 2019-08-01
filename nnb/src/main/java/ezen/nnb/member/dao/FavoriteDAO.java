@@ -22,14 +22,19 @@ public class FavoriteDAO extends AbstractDAO {
 		return (List<Map<String,Object>>)selectList("favorite.selectRoommateList",map);
 	}
 	@SuppressWarnings("unchecked")
-	public List<Map<String, Object>> selectFavRoomList(Map<String, Object> map) throws Exception{
+	public List<Map<String, Object>> selectFavRoomList(Object object) throws Exception{
 		// TODO Auto-generated method stub
-		return (List<Map<String,Object>>)selectList("favorite.selectRoomList",map);
+		return (List<Map<String,Object>>)selectList("favorite.selectRoomList",object);
 	}
 
 	public void deleteFavRoommate(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub
 		delete("favorite.deleteFavRoommate",map);
+	}
+	@SuppressWarnings("unchecked")
+	public Map<String, Object> selectFavRoom(Map<String, Object> map) throws Exception{
+		// TODO Auto-generated method stub
+		return (Map<String,Object>)selectOne("favorite.selectFavRoom",map);
 	}
 
 
