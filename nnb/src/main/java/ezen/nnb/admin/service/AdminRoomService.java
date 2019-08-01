@@ -10,10 +10,7 @@ public interface AdminRoomService {
 	
 	public void updateAdminRoomStatus(Map<String,Object>map)throws Exception;
 	
-	public List<Map<String,Object>>selectAdminRoomTitle(Map<String, Object>map)throws Exception;
-	public List<Map<String,Object>>selectAdminRoomContent(Map<String, Object>map)throws Exception;
-	public List<Map<String,Object>>selectAdminRoomWriter(Map<String, Object>map)throws Exception;
-	
+	public List<Map<String,Object>>selectAdminRoomA(Map<String, Object>map)throws Exception;
 
 }
     

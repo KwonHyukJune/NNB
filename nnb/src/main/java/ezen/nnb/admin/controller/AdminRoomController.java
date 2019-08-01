@@ -52,11 +52,7 @@ public class AdminRoomController{
 			  isSearchMap.put("isSearch", isSearch);
 				  
 			  if(searchNum==1) {
-				  adminRoomList=adminRoomService.selectAdminRoomTitle(isSearchMap);
-			  }if(searchNum==2) {
-				  adminRoomList=adminRoomService.selectAdminRoomContent(isSearchMap);
-			  }if(searchNum==3) {
-				  adminRoomList=adminRoomService.selectAdminRoomWriter(isSearchMap);
+				  adminRoomList=adminRoomService.selectAdminRoomA(isSearchMap);
 			  }
 			  totalCount=adminRoomList.size();
 			  page=new Paging(currentPage,totalCount,blockCount,blockPage,"adminRoomList");
