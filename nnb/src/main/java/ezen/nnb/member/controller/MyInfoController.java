@@ -23,14 +23,14 @@ import ezen.nnb.common.CommandMap;
 import ezen.nnb.member.service.MyInfoService;
 @Controller
 public class MyInfoController {
-	@Resource(name="MyInfoService") 
-	private MyInfoService MyInfoService;
+	@Resource(name="myInfoService") 
+	private MyInfoService myInfoService;
 	
 ///MyInfoDetail
 @RequestMapping(value="/mypage/MyInfodetail")
 public ModelAndView MyInfoDetail(CommandMap commandMap) throws Exception{
 	ModelAndView mv = new ModelAndView("mypage/MyInfo/detail");
-	Map<String,Object> map = MyInfoService.selectMyInfoDetail(commandMap.getMap());	
+	Map<String,Object> map = myInfoService.selectMyInfoDetail(commandMap.getMap());	
 	return mv;
 }
 
@@ -38,14 +38,14 @@ public ModelAndView MyInfoDetail(CommandMap commandMap) throws Exception{
 @RequestMapping(value="/mypage/MyInfo/modifyForm")
 public ModelAndView MyInfoModifyForm(CommandMap commandMap) throws Exception{
 	ModelAndView mv = new ModelAndView("mypage/MyInfo/modifyForm");
-	Map<String,Object> map = MyInfoService.selectMyInfoDetail(commandMap.getMap());	
+	Map<String,Object> map = myInfoService.selectMyInfoDetail(commandMap.getMap());	
 	return mv;
 }
 ///MyInfoModify
 @RequestMapping(value="/mypage/MyInfo/modify")
 public ModelAndView MyInfoModify(CommandMap commandMap)throws Exception{
 	ModelAndView mv=new ModelAndView("redirect:/mypage/MyInfo/detail");	
-	MyInfoService.updateMyInfoModify(commandMap.getMap());	
+	myInfoService.updateMyInfoModify(commandMap.getMap());	
 	mv.addObject("MyInfo", commandMap.get("MyInfo"));
 	return mv;
 }
@@ -57,7 +57,7 @@ public ModelAndView MyInfoModify(CommandMap commandMap)throws Exception{
 	@RequestMapping(value="mypage/MyInfoDelete")
 	public ModelAndView MyInfoDelete(CommandMap commandMap)throws Exception{
 	ModelAndView mv=new ModelAndView("redirect: main");	
-	MyInfoService.deleteMyInfo(commandMap.getMap());
+	myInfoService.deleteMyInfo(commandMap.getMap());
 	
 	return mv;
 }
