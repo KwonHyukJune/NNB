@@ -5,7 +5,7 @@ import org.aspectj.org.eclipse.jdt.internal.codeassist.select.SelectionOnExplici
 import org.springframework.stereotype.Repository;
 import ezen.nnb.common.AbstractDAO;
 
-@Repository("MyInfoDAO")
+@Repository("myInfoDAO")
 public class MyInfoDAO extends AbstractDAO {
 
 	//보기

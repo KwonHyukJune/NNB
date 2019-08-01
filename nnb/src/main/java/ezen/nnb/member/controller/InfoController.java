@@ -17,7 +17,7 @@ import ezen.nnb.common.CommandMap;
 import ezen.nnb.member.service.InfoService;
 @Controller
 public class InfoController {
-	@Resource(name="InfoService") 
+	@Resource(name="infoService") 
 	private InfoService InfoService;
 	
 ///InfoDetail
@@ -28,14 +28,14 @@ public ModelAndView openAgree(CommandMap commandMap) throws Exception{
 	return mv;
 }
 
-@RequestMapping(value="/infoAgree")
+@RequestMapping(value="/info/personalData")
 public ModelAndView openPersnalData(CommandMap commandMap) throws Exception{
 	ModelAndView mv = new ModelAndView("mypage/info/agree");
 	List<Map<String, Object>> map = InfoService.selectPersonalData(commandMap.getMap());	
 	return mv;
 }
 
-@RequestMapping(value="/infoAgree")
+@RequestMapping(value="/info/articelRule")
 public ModelAndView openArticleRule(CommandMap commandMap) throws Exception{
 	ModelAndView mv = new ModelAndView("mypage/info/agree");
 	List<Map<String, Object>> map = InfoService.selectArticleRule(commandMap.getMap());	
