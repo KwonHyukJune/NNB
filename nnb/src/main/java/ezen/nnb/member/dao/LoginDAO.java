@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import ezen.nnb.common.AbstractDAO;
 
 @Repository("loginDAO")
-public class LoginDAO extends AbstractDAO{
+public class LoginDAO extends AbstractDAO{ 
 
 	@SuppressWarnings("unchecked")
 	public Map<String, Object> selectId(Map<String, Object> map) throws Exception {

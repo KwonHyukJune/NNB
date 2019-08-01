@@ -52,4 +52,10 @@ public class RoomServiceImpl implements RoomService {
 		roomDAO.deleteRoom(map);
 	}
 
+	@Override
+	public List<Map<String, Object>> selectAdminRoomList(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return roomDAO.selectAdminRoomList(map);
+	}
+
 }
