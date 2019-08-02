@@ -28,7 +28,7 @@ VALUES(
 	QNA_NUM_SEQ.NEXTVAL,
 	#{id},
 	#{title},
-	#{content}
+	#{content} 
 );
 ]]>
 </insert>
