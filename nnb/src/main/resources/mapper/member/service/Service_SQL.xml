@@ -2,4 +2,55 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
 <mapper namespace="service">
 
+
+	<select id="selectFAQList" parameterType="hashmap" resultType="hashmap">
+	<![CDATA[
+SELECT
+	row_number() over (ORDER BY FAQ_NUM DESC) rnum,
+	FAQ_NUM,
+	FAQ_TITLE,
+	FAQ_CATEGORY,
+	FAQ_CONTENT
+FROM
+	FAQ;
+    ]]>
+	</select>
+
+<insert id="insertQNA" parameterType="hashmap">
+<![CDATA[
+	INSERT INTO QNA(
+	QNA_NUM,
+	MEM_ID,
+	QNA_TITLE,
+	QNA_CONTENT
+)
+VALUES(
+	QNA_NUM_SEQ.NEXTVAL,
+	#{id},
+	#{title},
+	#{content}
+);
+]]>
+</insert>
+
+
+	<select id="selectFAQDetail" parameterType="hashmap" resultType="hashmap">
+	<![CDATA[
+SELECT
+	row_number() over (ORDER BY NT_NUM DESC) rnum,
+	NT_NUM,
+	NT_TITLE,
+	NT_CONTENT,
+	NT_DATE,
+	NT_TYPE
+FROM
+	NOTICE;
+    ]]>
+	</select>
+	
 </mapper>
+
+
+
+
+	
