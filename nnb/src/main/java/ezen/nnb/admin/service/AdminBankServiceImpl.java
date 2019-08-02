@@ -10,6 +10,7 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import ezen.nnb.admin.dao.AdminBankDAO;
+import ezen.nnb.common.BankFile;
 import ezen.nnb.common.FileUtils;
 
 @Service("adminBankService") // service 객체 임을 선언
@@ -21,8 +22,8 @@ public class AdminBankServiceImpl implements AdminBankService {
 	// 인터페이스를 구현하면 인터페이스에 정의된 메서드를 무조건 작성해야한다.
 	// interface에 정의된 메서드를 실제 구현할 수 있는 코드 작성
 	
-	@Resource(name = "fileUtils")
-	private FileUtils fileUtils;
+	@Resource(name = "bankFile")
+	private BankFile bankFile;
 	
 	@Override
 	public List<Map<String, Object>> selectBankList(Map<String, Object> map) throws Exception {
@@ -31,10 +32,8 @@ public class AdminBankServiceImpl implements AdminBankService {
 	@Override
 	public void insertBankWrite(Map<String, Object> map, HttpServletRequest request) throws Exception {
 		adminBankDAO.insertBankWrite(map);
-		List<Map<String,Object>> list = fileUtils.parseInsertFileInfo(map, request); 
-		for(int i=0, size=list.size(); i<size; i++){ 
-			adminBankDAO.insertBankFile(list.get(i)); 
-		}
+		Map<String,Object> map2 = bankFile.parseInsertFileInfo(map, request); 
+		adminBankDAO.insertBankFile(map2); 
 
 	}
 	@Override
