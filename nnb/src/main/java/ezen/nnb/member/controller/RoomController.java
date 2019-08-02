@@ -50,7 +50,7 @@ public class RoomController {
 
 	@RequestMapping(value = "/room/detail") // 방 상세 정보를 찾아서 리턴해준다. + 첨부파일
 	public ModelAndView detailRoom(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("search/detailRoom");
+		ModelAndView mv = new ModelAndView("member/search/detailRoom");
 		
 		Map<String,Object> map = roomService.selectRoomDetail(commandMap.getMap());
 		mv.addObject("map", map.get("map")); //게시글 상세정보.
@@ -96,7 +96,7 @@ public class RoomController {
 		return mv;
 	}
 	
-	@RequestMapping(value="/room/detail/landlordInfo")
+	@RequestMapping(value="/room/detail/lessorInfo")
 	public ModelAndView lessorInfo(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("search/lessor");
 		Map<String,Object> map = roomService.selectLessorInfo(commandMap.getMap());

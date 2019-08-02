@@ -254,9 +254,9 @@
 			ORG_NAME, 
 			ROUND(FILE_SIZE/1024,1) AS FILE_SIZE 
 		FROM 
-			TB_FILE 
+			ROOM_FILES 
 		WHERE 
-			ROOM_NUM = #{ROOM_NUM} AND DEL_GB = 'N' 
+			ROOM_NUM = #{ROOM_NUM} AND FILE_DEL = 'N' 
 	]]>
 	</select>
 
@@ -266,7 +266,7 @@
 		set
     	    hit_count=nvl(hit_count,0)+1
 		where
-    	    BOARD_NUM=#{BOARD_NUM}
+    	    ROOM_NUM=#{ROOM_NUM}
 	]]>
 	</update>
 
