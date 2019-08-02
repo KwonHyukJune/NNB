@@ -44,10 +44,8 @@ public class FavoriteServiceImpl implements FavoriteService{
 			String s=(String)iter.next(); //꺼내온 키에 대한 값을 s 에 저장. 그러므로 s 는 방번호를 가지고 있다.
 			int rn = (int)room.get(s);
 			FavRoom = favoriteDAO.selectFavRoomList(rn); //s에 들어있는 방 번호를 이용해서 특정 방에 대한 간략정보를 가져와서 favRoom 에 저장.
-			System.out.println(FavRoom);
 		}
 		return FavRoom; //반복된 작업을 거친 favRoom 리스트 객체를 리턴.
-		
 	}
 	@Override
 	public void deleteFavRoommate(Map<String, Object> map) throws Exception {

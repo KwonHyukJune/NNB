@@ -27,7 +27,7 @@ public class FavoriteDAO extends AbstractDAO {
 	@SuppressWarnings("unchecked")
 	public List<Map<String, Object>> selectFavRoomList(Object rn) throws Exception{
 		// TODO Auto-generated method stub
-		return (List<Map<String,Object>>)selectList("favorite.selectRoomList",rn);
+		return (List<Map<String,Object>>)selectList("favorite.selectFavRoomList",rn);
 	}
 
 	public void deleteFavRoommate(Map<String, Object> map) throws Exception {
@@ -39,6 +39,5 @@ public class FavoriteDAO extends AbstractDAO {
 		// TODO Auto-generated method stub
 		return (Map<String,Object>)selectOne("favorite.selectFavRoom",map);
 	}
-
 
 }

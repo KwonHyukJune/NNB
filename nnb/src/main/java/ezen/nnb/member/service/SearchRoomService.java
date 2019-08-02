@@ -1,8 +1,11 @@
 package ezen.nnb.member.service;
 
-import org.springframework.stereotype.Service;
+import java.util.List;
+import java.util.Map;
 
-@Service("searchRoomService")
-public class SearchRoomService {
+public interface SearchRoomService {
 
+	List<Map<String, Object>> selectRoomList(Map<String, Object> map) throws Exception;
+
+	int countRoomList(Map<String, Object> map) throws Exception;	
 }

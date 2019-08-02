@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="searchRoom">
+<!-- 방 리스트 쿼리 -->
+<select id="selectRoomList" parameterType="hashmap" resultType="hashmap">
+<![CDATA[
+select * from(select a.* ,ROOM_NUM as rnum,count(*) over() as totalCount from(
+SELECT
+	R1.ROOM_NUM,
+	R1.ROOM_TYPE,
+	R1.TRADE_TYPE,
+	R1.monthly_payment,
+	R1.monthly_DEPOSIT,
+	R1.jeonse,
+	R1.THUMBNAIL,
+	R2.DESC_TITLE,
+	RB.UPLOAD_DATE
+FROM
+	ROOM_INFO1 R1, 
+	ROOM_INFO2 R2, 
+	ROOM_BOARD RB
+WHERE
+	R1.ROOM_NUM=r2.room_num and
+	R1.ROOM_NUM=rb.room_num and
+	RB.DEL_GB='N'
+	ORDER BY R1.ROOM_NUM DESC	
+]]>
+<!-- 주소에 조건이 있을 경우 -->
+<if test="address!=null and !address.equals('')">
+<![CDATA[
+	 AND R1.ROOM_NUM IN(SELECT ROOM_NUM FROM ROOM_INFO1 R1 WHERE ADDRESS1 LIKE '%'||#{address}||'%')
+]]>
+</if>
+<!-- 방 종류에 조건이 있을 경우(원룸, 투룸 등 등) -->
+<if test="room_type!=null and !room_type.equals('')">
+<![CDATA[
+	AND R1.ROOM_TYPE=#{room_type}
+]]>
+</if>
+<!-- 매물종류가 월세일 경우 -->
+<if test="monthly_payment!=null and !monthly_payment.equals('')">	
+<![CDATA[
+	AND R1.MONTHLY_PAYMENT=#{monthly_payment}
+]]>
+</if>
+<!-- 보증금이 있을 경우  -->
+<if test="monthly_deposit != null and !monthly_deposit.equals('')">
+<![CDATA[
+	AND R1.MONTHLY_DEPOSIT=#{monthly_deposit}
+]]>
+</if>
+<!-- 매물종류가 전세일경우 -->
+<if test="jeonse != null and !jeonse.equals('')">
+<![CDATA[
+	AND R1.JEONSE=#{jeonse}
+]]>
+</if>
+<if test="minMpayment !=null and !minMpayment.equals('')">
+<![CDATA[
+	AND R1.MONTHLY_PAYMENT > #{minPayment}
+]]>
+</if>
+<if test="maxMpayment !=null and !maxMpayment.equals('')">
+<![CDATA[
+	AND R1.MONTHLY_PAYMENT < #{maxPayment}
+]]>
+</if>
+<if test="minMdeposit!=null and !minMdeposit.equals('')">
+<![CDATA[
+	AND R1.MONTHLY_DEPOSIT>#{minMdeposit}
+]]>
+</if>
+<if test="maxMdeposit!=null and !maxMdeposit.equals('')">
+<![CDATA[
+	AND R1.MONTHLY_DEPOSIT<#{maxMdeposit}
+]]>
+</if>
+<if test="minJeonse!=null and !minJeonse.equals('')">
+<![CDATA[
+	AND R1.JEONSE>#{minJeonse}
+]]>
+</if>
+<if test="maxJeonse!=null and !maxJeonse.equals('')">
+<![CDATA[
+	AND R1.JEONSE<#{maxJeonse}
+]]>
+</if>	
+<if test="trade_type!=null and!trade_type.equals('')">
+<![CDATA[
+	AND R1.TRADE_TYPE=#{trade_type}
+]]>	
+</if>
+<if test="utility_check!=null and!utility_check.equals('')">
+	<if test="minUtility!=null and !minUtility.equals('')">
+		<![CDATA[
+			AND R2.UTILITY_PRICE>#{minUtility}
+		]]>
+	</if>
+	<if test="maxUtility!=null and !maxUtility.equals('')">
+		<![CDATA[
+			AND R2.UTILITY_PRICE>#{maxUtility}
+		]]>
+	</if>
+</if>
+<if test="real_size!=null and!trade_type.equals('')">
+<![CDATA[
+	AND R2.REAL_SIZE=#{real_size}
+]]>
+</if>
+<if test="room_floor!=null and!room_floor.equals('')">
+<![CDATA[
+	AND R2.ROOM_FLOOR=#{room_floor}
+]]>
+</if>
+<if test="structures!=null and!structures.equals('')">
+<![CDATA[
+	AND R2.STRUCTURES=#{structures}
+]]>
+</if>
+<if test="parking!=null and!parking.equals('')">
+<![CDATA[
+	AND R2.PARKING=#{parking}
+]]>
+</if>
+<if test="pet!=null and!pet.equals('')">
+<![CDATA[
+	AND R2.PET=#{pet}
+]]>
+</if>
+<if test="elevator!=null and!elevator.equals('')">
+<![CDATA[
+	AND R2.ELEVATOR=#{elevator}
+]]>
+</if>
+<if test="balcony!=null and!balcony.equals('')">
+<![CDATA[
+	AND R2.BALCONY=#{balcony}
+]]>
+</if>
+<if test="built_in!=null and!built_in.equals('')">
+<![CDATA[
+	AND R2.BUILT_IN=#{built_in}
+]]>
+</if>
+<if test="options!=null and!options.equals('')">
+<![CDATA[
+	AND R2.OPTIONS=#{options}
+]]>
+</if>
+<if test="loan_access!=null and!loan_access.equals('')">
+<![CDATA[
+	AND R2.LOAN_ACCESS=#{loan_access}
+]]>
+</if>
+<![CDATA[
+	)  a)
+   		rnum >=#{startCount} and rnum <=#{endCount};
+   ]]>	
+</select>
+
+<!-- 방 전체 개수 카운트 쿼리 -->
+<select id="countRoomList" parameterType="hashmap" resultType="hashmap">
+<![CDATA[
+SELECT
+	count(*)	
+FROM
+	ROOM_INFO1 R1, 
+	ROOM_INFO2 R2, 
+	ROOM_BOARD RB
+WHERE
+	R1.ROOM_NUM=r2.room_num and
+	R1.ROOM_NUM=rb.room_num 
+]]>
+</select>
+
+</mapper>
