@@ -20,9 +20,18 @@ public class BankController {
 	
 	@RequestMapping(value="/bank/list")
 	public ModelAndView bankList(CommandMap commandMap,HttpServletRequest request)throws Exception{
-		ModelAndView mv=new ModelAndView("/member/bank/bankList");
+		ModelAndView mv=new ModelAndView("member/bank/bankList");
 		List<Map<String,Object>>bankList=bankService.bankList(commandMap.getMap());
 		mv.addObject("bankList",bankList);
+		
+		return mv;
+	}
+	
+	@RequestMapping(value="/bank/view")
+	public ModelAndView bankview(CommandMap commandMap,HttpServletRequest request)throws Exception{
+		ModelAndView mv=new ModelAndView("member/bank/bankview");
+		Map<String,Object>bank=bankService.bankView(commandMap.getMap());
+		mv.addObject("bank",bank);
 		
 		return mv;
 	}

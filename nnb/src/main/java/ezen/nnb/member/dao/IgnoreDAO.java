@@ -11,12 +11,12 @@ import ezen.nnb.common.AbstractDAO;
 public class IgnoreDAO extends AbstractDAO{
 	public int countIgnoreUserList(Map<String, Object> map) throws Exception{
 		// TODO Auto-generated method stub
-		return (int)selectOne("ignore.countIgnoreUserList",map);
+		return (int)selectOne("ignore.countIgnoredUserList",map);
 	}
 	@SuppressWarnings("unchecked")
 	public List<Map<String, Object>> selectIgnoreUserList(Map<String, Object> map) throws Exception{
 		// TODO Auto-generated method stub
-		return (List<Map<String,Object>>)selectList("ignore.selectIgnoreList", map);
+		return (List<Map<String,Object>>)selectList("ignore.selectIgnoredUserList", map);
 	}
 	public void insertIgnore(Map<String, Object> map) throws Exception{
 		// TODO Auto-generated method stub
@@ -25,5 +25,9 @@ public class IgnoreDAO extends AbstractDAO{
 	public void deleteIgnore(Map<String, Object> map) throws Exception{
 		// TODO Auto-generated method stub
 		delete("ignore.deleteIgnore",map);
+	}
+	public int checkIgnore(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return (int)selectOne("ignore.checkIgnore",map);
 	}
 }

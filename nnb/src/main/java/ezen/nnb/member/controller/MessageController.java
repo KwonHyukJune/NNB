@@ -1,9 +1,12 @@
 package ezen.nnb.member.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -29,10 +32,17 @@ public class MessageController {
 	
 	//메세지함 리스트
 	@RequestMapping(value="/myPage/messageList") //요청 url
-	public ModelAndView messageList(CommandMap commandMap) throws Exception{
+	public ModelAndView messageList(CommandMap commandMap, HttpServletRequest request) throws Exception{
 		ModelAndView mv=new ModelAndView("member/myPage/messageList");
+		HttpSession session = request.getSession();
+		commandMap.put("MEM_ID", session.getAttribute("MEM_ID"));
 		
+		if(commandMap.containsKey("check")) {
+			mv.addObject("check",commandMap.get("check"));
+		}
 		List<Map<String,Object>> list=messageService.selectMessageList(commandMap.getMap());
+		int count = list.size();
+		mv.addObject("count",count);
 		mv.addObject("list", list);
 		
 		return mv;
@@ -41,20 +51,27 @@ public class MessageController {
 	@RequestMapping(value="/myPage/messageWriteForm")
 	public ModelAndView messageWriteForm(CommandMap commandMap) throws Exception{
 		ModelAndView mv=new ModelAndView("member/myPage/messageWriteForm");
+		if(commandMap.containsKey("receiver")) {
+			mv.addObject("receiver",commandMap.get("receiver"));
+		}
 		return mv;
 	}
 	//메세지 보내기
 	@RequestMapping(value="/myPage/messageWrite", method=RequestMethod.POST)
-	public ModelAndView messageWrite(CommandMap commandMap) throws Exception{
+	public ModelAndView messageWrite(CommandMap commandMap, HttpServletRequest request) throws Exception{
 		ModelAndView mv=new ModelAndView("member/myPage/messageWrite");
+		HttpSession session = request.getSession();
+		commandMap.put("SENDER", session.getAttribute("MEM_ID"));
 		messageService.insertMessage(commandMap.getMap());
 				
 		return mv;
 	}
 	//차단 목록+차단 목록 개수
 	@RequestMapping(value="/myPage/ignoreUserList")
-	public ModelAndView ignoreUserList(CommandMap commandMap) throws Exception{
+	public ModelAndView ignoreUserList(CommandMap commandMap, HttpServletRequest request) throws Exception{
 		ModelAndView mv=new ModelAndView("member/myPage/ignoreList");
+		HttpSession session = request.getSession();
+		commandMap.put("IGNORE_MEM", session.getAttribute("MEM_ID"));
 		
 		int count=ignoreService.countIgnoreUserList(commandMap.getMap());
 		mv.addObject("count",count);
@@ -66,16 +83,23 @@ public class MessageController {
 	}
 	// 차단하기
 	@RequestMapping(value="/myPage/ignoreUser")
-	public ModelAndView ignoreUser(CommandMap commandMap) throws Exception{
-		ModelAndView mv=new ModelAndView("redirect:member/myPage/messageList");
-		ignoreService.insertIgnore(commandMap.getMap());
-		
+	public ModelAndView ignoreUser(CommandMap commandMap, HttpServletRequest request) throws Exception{
+		ModelAndView mv=new ModelAndView("redirect:/myPage/messageList");
+		HttpSession session = request.getSession();
+		commandMap.put("IGNORE_MEM", session.getAttribute("MEM_ID"));
+		int check = ignoreService.checkIgnore(commandMap.getMap());
+			if(check==0) {
+				ignoreService.insertIgnore(commandMap.getMap());
+			}else {
+				Map<String,Object> map = new HashMap<String, Object>();
+				mv.addObject("check",check);
+			}
 		return mv;
 	}
 	// 차단해제
 	@RequestMapping(value="/myPage/ignoreCancel")
 	public ModelAndView ignoreCancel(CommandMap commandMap) throws Exception{
-		ModelAndView mv=new ModelAndView("redirect:member/myPage/ignoreList");
+		ModelAndView mv=new ModelAndView("redirect:/myPage/ignoreUserList");
 		ignoreService.deleteIgnore(commandMap.getMap());
 		
 		return mv;

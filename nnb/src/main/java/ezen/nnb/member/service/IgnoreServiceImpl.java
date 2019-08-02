@@ -37,4 +37,9 @@ public class IgnoreServiceImpl implements IgnoreService{
 		// TODO Auto-generated method stub
 		ignoreDAO.deleteIgnore(map);
 	}
+	@Override
+	public int checkIgnore(Map<String, Object> map) throws Exception{
+		// TODO Auto-generated method stub
+		return ignoreDAO.checkIgnore(map);
+	}
 }

@@ -14,4 +14,6 @@ public interface IgnoreService {
 	void insertIgnore(Map<String, Object> map) throws Exception;
 
 	void deleteIgnore(Map<String, Object> map) throws Exception;
+
+	int checkIgnore(Map<String, Object> map) throws Exception;
 }

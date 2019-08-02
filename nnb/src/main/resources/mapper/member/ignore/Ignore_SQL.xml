@@ -2,17 +2,26 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ignore">
 
-<select id="selectIgonoredUserList" parameterType="hashmap" resultType="hashmap">
+<select id="selectIgnoredUserList" parameterType="hashmap" resultType="hashmap">
 <![CDATA[
   SELECT
     row_number() over (ORDER BY IGNORE_NUM DESC) rnum,
-    IGONORE_NUM,
+    IGNORE_NUM,
     IGNORE_DATE,
     IGNORE_MEM,
-    IGONORE_D_MEM
+    IGNORE_D_MEM,
+    RI_MEM_ID,
+    RI_BIRTH,
+    RI_GENDER,
+    RI_REGION1,
+    RI_LOAN_BIG,
+    RI_LOAN_SMALL,
+    MEM_NICK
   FROM
-    IGNORE
+    IGNORE I, ROOMMATE_PROFILE P, MEMBER M
   Where 
+  	I.IGNORE_D_MEM IN P.RI_MEM_ID and
+    I.IGNORE_D_MEM IN M.MEM_ID and
     IGNORE_MEM=#{IGNORE_MEM}
     ORDER BY IGNORE_NUM DESC
 ]]>
@@ -20,7 +29,7 @@
 
 <select id="countIgnoredUserList" parameterType="hashmap" resultType="Integer">
 <![CDATA[
-	select count(*) from MEMBER where IGNORE_MEM=#{IGNORE_MEM}
+	select count(*) from IGNORE where IGNORE_MEM=#{IGNORE_MEM}
 ]]>
 </select>
 
@@ -34,14 +43,26 @@
     IGNORE_NUM_SEQ.NEXTVAL,
     #{IGNORE_MEM},
     #{IGNORE_D_MEM}
-);
+)
 ]]>
 </insert>
 
 <delete id="deleteIgnore" parameterType="hashmap">
 <![CDATA[
-  DELETE FROM IGNORE WHERE IGNORE_MEM=#{IGNORE_MEM}
+  DELETE FROM IGNORE WHERE IGNORE_NUM=#{IGNORE_NUM}
 ]]>
 </delete>
+
+<select id="checkIgnore" parameterType="hashmap" resultType="Integer">
+<![CDATA[
+	select
+		count(*)
+	from
+		IGNORE
+	where
+		IGNORE_MEM = #{IGNORE_MEM} and
+		IGNORE_D_MEM = #{IGNORE_D_MEM}
+]]>
+</select>
 
 </mapper>

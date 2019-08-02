@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,22 +28,23 @@ function fn_submit(){
 function validation(){
 	var mem = document.getElementById("mem").value;
 	if(mem==null || mem==""){
-		alert("¼ö½ÅÀÎÀ» ÀÔ·ÂÇÏ¼¼¿ä.");
+		alert("ìˆ˜ì‹ ì¸ì„ ì…ë ¥í•˜ì„¸ìš”.");
 		$("#mem").focus();
 		return false;
 	}
 	var title = document.getElementById("title").value;
 	if(title==null || title==""){
-		alert("Á¦¸ñÀ» ÀÔ·ÂÇÏ¼¼¿ä.");
+		alert("ì œëª©ì„ ì…ë ¥í•˜ì„¸ìš”.");
 		$("#title").focus();
 		return false;
 	}
 	var content = document.getElementById("content").value;
 	if(content==null || content==""){
-		alert("³»¿ëÀ» ÀÔ·ÂÇÏ¼¼¿ä.");
+		alert("ë‚´ìš©ì„ ì…ë ¥í•˜ì„¸ìš”.");
 		$("#content").focus();
 		return false;
 	}
+	frm.submit();
 }
 </script>
 </head>
@@ -52,26 +52,26 @@ function validation(){
 <%@ include file="/WEB-INF/include/header.jspf" %>
 <%@ include file="myPage.jspf" %>
 
-<div class="subtitle">¸Ş½ÃÁö ÀÛ¼º</div>
+<div class="subtitle">ë©”ì‹œì§€ ì‘ì„±</div>
 
 <div class="messageWriteForm">
-<form id="frm" name="frm">
+<form id="frm" name="frm" action="messageWrite" method="post">
 	<ul>
 	<li>
-		<div class="left">¼ö½ÅÀÎ</div>
-		<div class="right"><input type="text" name="mem" id="mem" value="${message.RECEIVER}"></div>
+		<div class="left">ìˆ˜ì‹ ì¸</div>
+		<div class="right"><input type="text" name="RECEIVER" id="mem" value="${receiver}"></div>
 	</li>
 	<li>
-		<div class="left">Á¦¸ñ</div>
-		<div class="right"><input type="text" name="title" id="title"></div>
+		<div class="left">ì œëª©</div>
+		<div class="right"><input type="text" name="MESSAGE_TITLE" id="title"></div>
 	</li>
 	<li>
-		<div class="left">³»¿ë</div>
-		<div class="right"><textarea name="content" id="content"></textarea></div>
+		<div class="left">ë‚´ìš©</div>
+		<div class="right"><textarea name="MESSAGE_CONTENT" id="content"></textarea></div>
 	</li>
 	<li>
-		<a href="#" id="submit" class="btn" onclick="validation()">º¸³»±â</a>
-		<a href="<c:url value='/myPage/messageWrite'/>" id="cancle" class="btn">Ãë¼Ò</a>
+		<a href="#" id="submit" class="btn" onclick="validation()">ë³´ë‚´ê¸°</a>
+		<a href="<c:url value='/myPage/messageList'/>" id="cancle" class="btn">ì·¨ì†Œ</a>
 	</li>
 	</ul>
 </form>

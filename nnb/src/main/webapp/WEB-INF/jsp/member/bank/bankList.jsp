@@ -21,7 +21,7 @@
 			<div>³¯Â¥</div>
 		</li>
 	<c:forEach var="bank" items="${bankList}">
-	<a href="<c:url value='/bank/view?num=${bank.NUM}'/>">
+	<a href="<c:url value='/bank/view?num=${bank.BANK_NUM}'/>">
 		<li>
 			<div>${bank.BANK_NUM}</div>
 			<div>${bank.BANK_KIND}</div>
@@ -33,6 +33,7 @@
 	</c:forEach>
 	</ul>
 	</div>
+	
 <%-- 	<div class="paging">
 		${pagingHtml}
 	</div> --%>

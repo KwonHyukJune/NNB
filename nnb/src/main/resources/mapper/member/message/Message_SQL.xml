@@ -4,34 +4,44 @@
 
 <select id="selectMessageList" parameterType="hashmap" resultType="hashmap">
 <![CDATA[
+select * from(
   select
      ROW_NUMBER() OVER (ORDER BY MESSAGE_NUM DESC) RNUM,
      MESSAGE_NUM,
      MESSAGE_CONTENT,
+     MESSAGE_TITLE,
      SENDER,
-     RECIEVER,
+     RECEIVER,
      SEND_DATE
   FROM
-     MESSAGE
+     MESSAGE M
+  WHERE
+	SENDER not in (select IGNORE_D_MEM FROM IGNORE WHERE IGNORE_MEM = #{MEM_ID}))
+]]>
   <choose>
-  <when test="MESSAGE=='수신'">
-  WHERE 
-     RECIEVER=#{RECEIVER}
+  <when test="type==1">
+<![CDATA[
+  WHERE
+     RECEIVER=#{MEM_ID}
   ORDER BY MESSAGE_NUM DESC
+]]>
   </when>
 
-  <when test="MESSAGE=='발신'">
-  WHERE 
-     SENDER=${SENDER}
+  <when test="type==2">
+<![CDATA[
+  WHERE
+     SENDER=#{MEM_ID}
   ORDER BY MESSAGE_NUM DESC
+]]>
   </when>
   <otherwise>
+<![CDATA[
   WHERE 
-     RECIEVER=#{RECEIVER} or SENDER=${SENDER}
+     RECEIVER=#{MEM_ID} or SENDER=#{MEM_ID}
   ORDER BY MESSAGE_NUM DESC
+]]>
   </otherwise>
   </choose>                        
-]]>
 </select>
 
 <insert id="insertMessage" parameterType="hashmap">

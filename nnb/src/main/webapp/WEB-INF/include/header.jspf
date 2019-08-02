@@ -20,7 +20,15 @@ function openMenu(){
 		$(".mymenu").hide();
 	else
 		$(".mymenu").show();
-}
+};
+function goMyPage(){
+	path = "<%=request.getContextPath()%>";
+	str = "<form id='id' action='"+path+"/myPage/messageList' method='post'>"
+		+ "<input type='hidden' name='MEM_ID' value='"+idChk+"'>"
+		+ "</form>";
+	$("div.login").append(str);
+	id.submit();
+};
 </script>
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/header.css'/>"/>
 <nav class="header">
@@ -40,7 +48,8 @@ function openMenu(){
 <div class="login" onclick="openMenu()">
 	<img src="">${MEM_ID}님
 	<ul class="mymenu" id="mymenu">
-		<li><a href="<c:url value='/myPage/messageList'/>">마이페이지</a></li>
+<%-- 		<li><a href="<c:url value='/myPage/messageList'/>">마이페이지</a></li>
+ --%>		<li><a href="javascript:goMyPage()">마이페이지</a></li>
 		<li><a href="<c:url value='/logout'/>">로그아웃</a></li>
 	</ul>
 </div>
