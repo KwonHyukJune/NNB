@@ -13,7 +13,7 @@ public class BankDAO extends AbstractDAO{
 	
 	@SuppressWarnings("unchecked")
 	public List<Map<String,Object>> bankList(Map<String,Object>map)throws Exception{
-		return (List<Map<String,Object>>)selectList("bank.selectBankBoardList",map);
+		return (List<Map<String,Object>>)selectList("bank.selectBankList",map);
 	}
 	
 	public void updateHitCnt(Map<String,Object>map)throws Exception{

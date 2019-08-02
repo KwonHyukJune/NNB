@@ -1,15 +1,29 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <%@ include file="/WEB-INF/include/include-header.jspf" %>
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/myPage.css'/>"/>
 <script type="text/javascript">
-/*
- * ÀüÃ¼,¼ö½Å,¹ß½Å ¼±ÅÃÇØ¼­ Ç¥½Ã µÇµµ·Ï
- */
-	var memId = sessionStorage.getItem("MEM_ID");
+var memId = sessionStorage.getItem("MEM_ID");
+var check = "${check}";
+$(document).ready(function(){
+	if(check!=null && check!="" && check!='0'){
+		alert('ì´ë¯¸ ì°¨ë‹¨í•œ íšŒì›ì…ë‹ˆë‹¤.');
+	};
+	var type = getParameterByName('type');
+	if(type=='1'){
+		$("#type").val("1").prop("selected",true);
+	}else if(type=='2'){
+		$("#type").val("2").prop("selected",true);
+	}else{
+		$("#type").val("0").prop("selected",true);
+	};
+	$("#type").change(function(){
+		var inputVal = $("#type option:selected").val();
+		location.href="messageList?type="+inputVal;
+	});
+});
 	function openMessage(num){
 		var content = document.getElementById(num);
 		if(content.style.display=="block"){
@@ -35,36 +49,71 @@
 
 	<div class="list">
 	<ul>
-		<li class="p1">¹øÈ£</li>
-		<li class="p2"><select>
-		<option>ÀüÃ¼</option>
-		<option>¼ö½Å</option>
-		<option>¹ß½Å</option>
-		</select></li>
-		<li class="p3">´ë»ó</li>
-		<li class="p4">Á¦¸ñ</li>
-		<li class="p5">³¯Â¥</li>
-	</ul>
-	<c:forEach var="message" items="${messageList}">
-	<div onclick="openMessage(${message.NUM})" class="message">
-	<ul>
-		<li class="p1">${message.MESSAGE_NUM}</li>
-		<li class="p2">${message.TYPE}</li>
-		<li class="p3">${message.MEM}</li>
-		<li class="p4">${message.MESSAGE_TITLE}</li>
-		<li class="p5">${message.SEND_DATE}</li>
-		<li>
-		<div class="content" style="display: block;" id="${message.NUM}">
-			<div style="width:10%">³»¿ë</div>
-			<div style="width:90%">${message.CONTENT}</div>
-			<a href="#" class="btn" onclick="reply(${message.MEM});">´äÀå</a>
-			<a href="javascript:openMessage(${message.NUM})" class="btn" id="close">´İ±â</a>
+	<li>
+		<div>ë²ˆí˜¸</div>
+		<div><select id="type">
+		<option value="0">ì „ì²´</option>
+		<option value="1">ìˆ˜ì‹ </option>
+		<option value="2">ë°œì‹ </option>
+		</select></div>
+		<div>ëŒ€ìƒ</div>
+		<div>ì œëª©</div>
+		<div>ë‚ ì§œ</div>
+	</li>
+	<c:forEach var="message" items="${list}" varStatus="i">
+	<li id="${i.index}">
+	<div onclick="openMessage(${message.MESSAGE_NUM})" class="message">
+		<div>${message.RNUM}</div>
+		<div>
 		</div>
-		</li>
+		<div id="${i.index}">
+		</div>
+		<script type="text/javascript">
+			if("${message.SENDER}"==memId){
+				$("li#${i.index}>div>div:nth-child(2)").text("ë°œì‹ ");
+				$("li#${i.index}>div>div:nth-child(3)").text("id4");
+				$("li#${i.index}>div>div:nth-child(2)").className="ë°œì‹ ";
+			}else if("${message.RECEIVER}"==memId){
+				$("li#${i.index}>div>div:nth-child(2)").text("ìˆ˜ì‹ ");
+				$("li#${i.index}>div>div:nth-child(3)").text("${message.SENDER}");
+				$("li#${i.index}>div>div:nth-child(2)").className="ìˆ˜ì‹ ";
+			}
+		</script>
+		<div>${message.MESSAGE_TITLE}</div>
+		<div>${message.SEND_DATE}</div>
+		<div class="content" style="display: none;" id="${message.MESSAGE_NUM}">
+			<div style="width:10%">ë‚´ìš©</div>
+			<div style="width:90%">${message.MESSAGE_CONTENT}</div>
+		</div>
+	</div>
+			<a href="#" class="btn" onclick="javascript:reply_${i.index}();">ë‹µì¥</a>
+			<a href="#" class="btn" onclick="javascript:ignore_${i.index}();">ì°¨ë‹¨</a>
+			<script type="text/javascript">
+				function reply_${i.index}(){
+					var mem = $("li#${i.index}>div>div:nth-child(3)").text();
+					var url = "messageWriteForm?receiver="+mem;
+					location.href=url;
+				};
+				function ignore_${i.index}(){
+					var mem = $("li#${i.index}>div>div:nth-child(3)").text();
+					if(confirm("'"+mem+"' íšŒì›ì„ ì°¨ë‹¨í•˜ì‹œê² ìŠµë‹ˆê¹Œ?")){
+						var str = "<form id='frm' action='ignoreUser' method='post'>"
+							+ "<input type='hidden' name='IGNORE_D_MEM' value='"+mem+"'>"
+							+ "</form>";
+						$(".messageList").after(str);
+						frm.submit();
+					};
+				};
+			</script>
+	</li>
+	</c:forEach>
 	</ul>
 	</div>
-	</c:forEach>
-	</div>
+	<c:if test="${count==0}">
+	ì¡°íšŒëœ ë©”ì‹œì§€ê°€ ì—†ìŠµë‹ˆë‹¤.
+	</c:if>
+	<a href="messageWriteForm">ìƒˆ ë©”ì‹œì§€ ì‘ì„±</a>
+	<a href="ignoreUserList">ì°¨ë‹¨ëª©ë¡</a>
 <%-- 	<div class="paging">
 		${pagingHtml}
 	</div> --%>

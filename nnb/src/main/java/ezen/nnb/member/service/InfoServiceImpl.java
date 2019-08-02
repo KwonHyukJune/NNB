@@ -8,9 +8,7 @@ import javax.annotation.Resource;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
-import ezen.nnb.member.dao.IgnoreDAO;
 import ezen.nnb.member.dao.InfoDAO;
-import ezen.nnb.member.dao.JoinDAO;
 
 @Service("infoService")
 public class InfoServiceImpl implements InfoService{	

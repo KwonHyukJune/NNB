@@ -74,7 +74,7 @@ VALUES
 	set
         bank_hitcount=nvl(bank_hitcount,0)+1
 	where
-        bank_num=#{bank_num}
+        bank_num=#{num}
 ]]>
 </update>
 

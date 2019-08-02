@@ -6,13 +6,14 @@
 <%@ include file="/WEB-INF/include/include-header.jspf" %>
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/myPage.css'/>"/>
 <script type="text/javascript">
-function unignore(id){
-	var mem = sessionStorage.getItem("MEM_ID");
-	var comAjax = new ComAjax();
-	comAjax.setUrl("<c:url value='/myPage/unIgnoreUser'/>");
-	comAjax.addParam("IGNORE_D_MEM",id);
-	comAjax.addParam("IGNORE_MEM",mem)
-	comAjax.ajax();
+function unignore(num){
+	if(confirm('차단 해제?')){
+		var str = "<form id='frm' action='ignoreCancel' method='post'>"
+				+ "<input type='hidden' name='IGNORE_NUM' value='"+num+"'>"
+				+ "</form>";
+		$(".ignoreList").after(str);
+		frm.submit();
+	};
 };
 </script>
 </head>
@@ -33,14 +34,22 @@ function unignore(id){
 	<div>지역</div>
 	<div>예산</div>
 	</li>
-<c:forEach var="mate" items="mateList">
+<c:forEach var="mate" items="${list}">
 	<li>
 	<div>${mate.MEM_NICK}</div>
-	<div>${mate.AGE}</div>
-	<div>${mate.RI_GENDER}</div>
+<fmt:parseDate var="birthst" value="${mate.RI_BIRTH}" pattern="yyyyMMdd"/>
+<fmt:formatDate var="birth" value="${birthst}" pattern="yyyy-MM-dd"/>
+	<div>${birth}</div>
+	<div>
+		<c:if test="${mate.RI_GENDER=='M'}">
+		남자
+		</c:if>
+		<c:if test="${mate.RI_GENDER=='F'}">
+		여자
+		</c:if>
 	<div>${mate.RI_REGION1}</div>
-	<div>${mate.RI_LOAN_SMALL}</div>
-	<div><a href="#" class="btn" id="unign" onclick="unignore(${mate.MEM_ID})">차단 해제</a></div>
+	<div>${mate.RI_LOAN_BIG}/${mate.RI_LOAN_SMALL}</div>
+	<div><a href="#" class="btn" id="unign" onclick="unignore(${mate.IGNORE_NUM})">차단 해제</a></div>
 	</li>
 </c:forEach>
 </ul>

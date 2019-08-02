@@ -50,6 +50,8 @@ function viewLarge(imgUrl){
 		</ul>
 		</c:if>
 	</div>
+	<a href="list">목록으로</a>
+
 <%-- 	<div class="paging">
 		${pagingHtml}
 	</div> --%>

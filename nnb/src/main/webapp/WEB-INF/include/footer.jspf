@@ -1,12 +1,17 @@
 <%@ page pageEncoding="UTF-8" %>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-
+<script type="text/javascript">
+function fn_open(url){
+	var gsWin = window.open("about:blank","winName");
+	
+}
+</script>
 <footer>
     <div>
-    	<a href="javascript:window.open('info/agree')">이용약관</a> 
-		<a href="javascript:window.open('info/personalData')">개인정보처리방침</a> 
-		<a href="javascript:window.open('info/articleRule')">매물관리규정</a> 
+    	<a href="javascript:window.open('<%=request.getContextPath() %>/info/agree')">이용약관</a> 
+		<a href="javascript:window.open('<%=request.getContextPath() %>/info/personalData')">개인정보처리방침</a> 
+		<a href="javascript:window.open('<%=request.getContextPath() %>/info/articleRule')">매물관리규정</a> 
 		<a href="javascript:window.open()">자동저장서비스</a>		
 		&nbsp;&nbsp;&nbsp;&nbsp;
 		<input type="text" id="search" onkeypress="if( event.keyCode == 13 ){searchData();}" />
