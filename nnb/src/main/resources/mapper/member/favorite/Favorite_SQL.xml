@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="favorite">
+
 <select id="selectFavRoomList" parameterType="hashmap" resultType="hashmap">
 <![CDATA[
 SELECT
@@ -39,5 +40,21 @@ WHERE
 ]]>
 
 </select>
+
+<insert id = "addFavRoom" parameterType="hashmap">
+<![CDATA[
+	insert into FAV_ROOM(
+		FAV_ROOM_NUM,
+		ROOM_NUM,
+		MEM_ID
+		)
+	values(
+		FAV_ROOM_NUM_SEQ.NEXTVAL,
+		#{ROOM_NUM},
+		#{MEM_ID}
+		)
+]]>
+</insert>
+
 
 </mapper>

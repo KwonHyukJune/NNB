@@ -47,6 +47,26 @@ public class RoomServiceImpl implements RoomService {
 	}
 
 	@Override
+	public void updateRoom(Map<String, Object> map, HttpServletRequest request) throws Exception {
+		// TODO Auto-generated method stub
+		roomDAO.updateRoom(map);
+		
+		roomDAO.deleteFileList(map);
+		
+		List<Map<String,Object>> list = fileUtils.parseUpdateFileInfo(map, request);
+		Map<String, Object> tempMap = null;
+		for(int i=0, size=list.size(); i<size; i++) {
+			tempMap =list.get(i);
+			if(tempMap.get("IS_NEW").equals("Y")) {
+				roomDAO.insertRoomFile(tempMap);
+			}
+			else {
+				roomDAO.updateFile(tempMap);
+			}
+		}
+	}
+	
+	@Override
 	public void deleteRoom(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub
 		roomDAO.deleteRoom(map);
@@ -75,6 +95,14 @@ public class RoomServiceImpl implements RoomService {
 		// TODO Auto-generated method stub
 		roomDAO.updateSoldRoom(map);
 	}
+
+	@Override
+	public Map<String, Object> selectLessorInfo(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return roomDAO.selectLessorInfo(map);
+	}
+
+	
 
 	
 

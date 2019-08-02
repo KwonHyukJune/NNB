@@ -21,6 +21,10 @@ public interface RoomService {
 
 	public void updateSoldRoom(Map<String, Object> map) throws Exception;
 
+	public void updateRoom(Map<String, Object> map, HttpServletRequest request) throws Exception;
+
+	public Map<String, Object> selectLessorInfo(Map<String, Object> map)throws Exception;
+
 
 
 }

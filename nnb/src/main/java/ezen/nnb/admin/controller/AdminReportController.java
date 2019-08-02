@@ -45,7 +45,7 @@ public class AdminReportController {
 	}
 	
 	@RequestMapping(value="/admin/report/detail")
-	public ModelAndView adminFaqDetail(CommandMap commandMap) throws Exception{
+	public ModelAndView adminReportDetail(CommandMap commandMap) throws Exception{
 		ModelAndView mv = new ModelAndView("/admin/faq/detail");
 		
 		Map<String,Object> map = adminReportService.selectReportDetail(commandMap.getMap());

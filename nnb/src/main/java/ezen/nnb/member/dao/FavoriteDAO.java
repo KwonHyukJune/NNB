@@ -40,5 +40,15 @@ public class FavoriteDAO extends AbstractDAO {
 		return (Map<String,Object>)selectOne("favorite.selectFavRoom",map);
 	}
 
+	public void addFavRoom(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		insert("favorite.addFavRoom", map);
+	}
+
+	public void cancelFavRoom(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		delete("favorite.cancelFavRoom", map);
+	}
+
 
 }
