@@ -2,13 +2,16 @@ package ezen.nnb.member.controller;
 
 import javax.annotation.Resource;
 
+
 import org.apache.log4j.Logger;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import ezen.nnb.common.CommandMap;
 import ezen.nnb.member.service.ReportService;
+
 
 @Controller
 public class ReportController {
@@ -31,3 +34,5 @@ public class ReportController {
 		return mv;
 	}
 }
+
+ 

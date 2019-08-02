@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="favorite">
 
+<!-- 회원이 찜 한 방 리스트 -->
 <select id="selectFavRoomList" parameterType="hashmap" resultType="hashmap">
 <![CDATA[
 SELECT
@@ -21,25 +22,56 @@ FROM
 WHERE
 	R1.ROOM_NUM=r2.room_num and
 	R1.ROOM_NUM=rb.room_num and
+	and	DEL_GB='N' and
 	R1.ROOM_NUM=#{rn}
+	ORDER BY R1.ROOM_NUM DESC
 ]]>
 </select>
-
-<delete id="deleteMember" parameterType="hashmap">
-<![CDATA[
-   delete from
-      FAV_ROOM
-   where
-      MEM_ID=#{MEM_ID}
-]]>
-</delete>   
-
+<!-- 전체 찜 한 방 조회 -->
 <select id = "selectFavRoom" parameterType="hashmap" resultType="hashmap">
 <![CDATA[
 	select fav_room.room_num from fav_room where mem_id=#{MEM_ID}
 ]]>
-
 </select>
+
+<!-- 찜 한 방 삭제 -->
+<delete id="deleteFavRoom" parameterType="hashmap">
+<![CDATA[
+   delete from FAV_ROOM where MEM_ID=#{MEM_ID}
+]]>
+</delete>   
+
+<!-- 찜 카운트 삭제 -->
+<update id="updateFavCountDec" parameterType="hashmap">
+<![CDATA[
+UPDATE 
+	ROOM_BOARD
+SET
+	FAV_COUNT=NVL(FAV_COUNT,0)-1
+WHERE 
+	ROOM_NUM=#{ROOM_NUM}
+]]>
+</update>
+<!-- 찜한 룸메이트 리스트 -->
+<select id="selectFavRoommateList" parameterType="hashmap" resultType="hashmap">
+<![CDATA[
+select
+     FAV_MATE_NUM,
+     RI_MEM_ID,
+     MEM_ID                       
+FROM
+     FAV_MATE
+WHERE 
+     MEM_ID=#{MEM_ID}
+     ORDER BY FAV_MATE_NUM DESC
+]]>
+</select>     
+<!-- 찜 한 룸메이트 취소 -->
+<delete id="deleteFavRoommate" parameterType="hashmap">
+<![CDATA[
+	delete from FAV_MATE where MEM_ID=#{MEM_ID}
+]]>
+</delete> 
 
 <insert id = "addFavRoom" parameterType="hashmap">
 <![CDATA[
