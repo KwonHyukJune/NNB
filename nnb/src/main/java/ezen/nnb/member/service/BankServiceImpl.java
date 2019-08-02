@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import ezen.nnb.member.dao.BankDAO;
@@ -12,6 +13,9 @@ import ezen.nnb.member.service.BankService;
 
 @Service("bankService")
 public class BankServiceImpl implements BankService{
+	
+	Logger log = Logger.getLogger(this.getClass());
+	
 	@Resource(name="bankDAO")
 	private BankDAO bankDAO;
 	

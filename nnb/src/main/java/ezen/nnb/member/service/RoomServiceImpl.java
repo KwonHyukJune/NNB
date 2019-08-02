@@ -7,13 +7,16 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 import ezen.nnb.common.FileUtils;
 import ezen.nnb.member.dao.RoomDAO;
 
 @Service("roomService")
 public class RoomServiceImpl implements RoomService {
-
+	
+	Logger log = Logger.getLogger(this.getClass());
+	
 	@Resource(name = "roomDAO")
 	private RoomDAO roomDAO;
 
