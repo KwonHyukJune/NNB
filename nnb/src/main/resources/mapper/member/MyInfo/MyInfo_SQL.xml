@@ -6,13 +6,13 @@
 	<select id="selctmyinfo" parameterType="hashmap" resultType="hashmap">
 	<![CDATA[
 	    SELECT 
-          MEM_ID AS memId, 
-          MEM_NICK AS memNick,
-          MEM_KIND AD memKind,
-          MEM_NAME AS memName,
-          MEM_EMAIL AS memEmail,
-          MEM_PHONE AS memPhone,
-          MEM_JOINDATE AS memJoindate
+          MEM_ID,  
+          MEM_NICK,
+          MEM_KIND,
+          MEM_NAME,
+          MEM_EMAIL,
+          MEM_PHONE,
+          MEM_JOINDATE
         FROM MEMBER
         WHERE MEM_ID = #{memId}
     ]]>
@@ -22,13 +22,13 @@
 	<![CDATA[
         UPDATE MEMBER
         SET
-            mem_pw = #{memPw},
-            mem_name = #{memName},
-            mem_email = #{memEmail},
-            mem_phone =#{memPhone},            
-        WHERE
-            user_id = #{userId}    
-    ]]>
+            MEM_PW  = #{MEM_PW},
+            MEM_NAME = #{MEM_NAME},
+            MEM_EMAIL = #{MEM_EMAIL},
+            MEM_PHONE = #{MEM_PHONE},                     
+       	WHERE MEM_ID = #{MEM_ID}
+     ]]>
     </update>
+
 </mapper>
 	 
