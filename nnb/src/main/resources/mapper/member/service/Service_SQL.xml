@@ -34,7 +34,7 @@ VALUES(
 </insert>
 
 
-	<select id="selectFAQDetail" parameterType="hashmap" resultType="hashmap">
+	<select id="selectNoticeList" parameterType="hashmap" resultType="hashmap">
 	<![CDATA[
 SELECT
 	row_number() over (ORDER BY NT_NUM DESC) rnum,
