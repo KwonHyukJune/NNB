@@ -18,12 +18,12 @@ public class ReportController {
 		//폼	
 		@RequestMapping(value="/report/form")  
 		public ModelAndView openReportForm(CommandMap commandMap) throws Exception{
-			ModelAndView mv = new ModelAndView("/report/reportForm");
+			ModelAndView mv = new ModelAndView("/report/form");
 			return mv;
 		}//등록
 		@RequestMapping(value="/report/submit")
 		public ModelAndView submitReport(CommandMap commandMap) throws Exception{
-			ModelAndView mv = new ModelAndView("/report/report");
+			ModelAndView mv = new ModelAndView("/report/submit");
 			reportService.submitReport(commandMap.getMap());
 			return mv;
 		}
