@@ -12,7 +12,7 @@ import ezen.nnb.member.service.ReportService;
 
 @Controller
 public class ReportController {
-			@Resource(name="ReportService")
+			@Resource(name="reportService")
 			private ReportService reportService;
 		
 		//폼	
