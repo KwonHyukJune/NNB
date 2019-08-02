@@ -159,7 +159,7 @@ WHERE
 </select>
 
 <!-- 방 전체 개수 카운트 쿼리 -->
-<select id="countRoomList" parameterType="hashmap" resultType="hashmap">
+<select id="countRoomList" parameterType="hashmap" resultType="integer">
 <![CDATA[
 SELECT
 	count(*)	

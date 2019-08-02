@@ -29,26 +29,20 @@ public class JoinController {
 	@Resource(name="joinService") //service 영역에 접근
 	private JoinService joinService;
 	
-	/*
-	 * @RequestMapping(value="/join") //회원가입 버튼 누르면 동작 public ModelAndView
-	 * join(CommandMap commandMap) throws Exception{ ModelAndView mv=new
-	 * ModelAndView("redirect:memeber/main/main");
-	 * joinService.insertMember(commandMap.getMap());
-	 * 
-	 * return mv;
-	 */
 	@RequestMapping(value="/joinForm") //회원가입 폼 
 	public ModelAndView joinForm(CommandMap commandMap) throws Exception{
 		ModelAndView mv=new ModelAndView("member/main/joinForm");
 		return mv;
 	}
-	@RequestMapping(value="/join/idCheck") /////////////////////////////////////////////////수정이 요구됨
+	@RequestMapping(value="/join/idCheck")
 	public ModelAndView idCheck(CommandMap commandMap) throws Exception{
 		ModelAndView mv=new ModelAndView();
+		
 		int idCheck = joinService.selectIdCheck(commandMap.getMap());
+		mv.addObject("idCheck", idCheck);
 		
 		return mv;
-	}/////////////////////////////////////////////////////////////////////////
+	}
 	@RequestMapping(value="/join/emailAuth")
 	//회원가입 할 경우 해당 이메일 인증을 요구하는 링크를 첨부한 이메일을 발송
 	public ModelAndView emailAuth(CommandMap commandMap) throws Exception{
