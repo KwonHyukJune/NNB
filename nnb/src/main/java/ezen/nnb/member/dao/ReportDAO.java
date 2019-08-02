@@ -8,5 +8,5 @@ import ezen.nnb.common.AbstractDAO;
 		public void insertReport(Map<String, Object> map) throws Exception {
 		insert("report.insertReport", map);
 	}
-	
-	}  
+}  
+

@@ -4,9 +4,7 @@ import java.util.Map;
 
 public interface ReportService {
 
-	void submitReport(Map<String, Object> map) throws Exception;
-
-	
-
+	public void report(Map<String, Object> map) throws Exception; 
+		
 }
   

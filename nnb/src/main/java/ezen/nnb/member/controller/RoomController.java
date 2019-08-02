@@ -28,10 +28,10 @@ public class RoomController {
 		ModelAndView mv = new ModelAndView("member/room/adminRoom");
 		
 		List<Map<String, Object>> list = roomService.selectAdminRoomList(commandMap.getMap());
-		Map<String,Object> map = roomService.selectAdminRoomCount(commandMap.getMap());
+		Map<String,Object> roomCount = roomService.selectAdminRoomCount(commandMap.getMap());
 		
-		mv.addObject("map", map);
-		mv.addObject("list", list);
+		mv.addObject("roomCount", roomCount); //내놓은 방 개수 확인
+		mv.addObject("list", list); //내가 내놓은 방 리스트
 		return mv;
 	}
 	
@@ -48,7 +48,7 @@ public class RoomController {
 		return mv;
 	}
 
-	@RequestMapping(value = "/room/detail") // 방 상세 정보를 찾아서 리턴해준다. + 첨부파일 해야함
+	@RequestMapping(value = "/room/detail") // 방 상세 정보를 찾아서 리턴해준다. + 첨부파일
 	public ModelAndView detailRoom(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("search/detailRoom");
 		
@@ -61,14 +61,22 @@ public class RoomController {
 	@RequestMapping(value = "/room/updateForm")
 	public ModelAndView updateRoomForm(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("member/room/adminRoom");
+		
+		Map<String, Object> map = roomService.selectRoomDetail(commandMap.getMap());
+		mv.addObject("map", map.get("map"));
+		mv.addObject("list", map.get("list"));
 		return mv;
 	}
 	
 	@RequestMapping(value="/room/update")
-	public ModelAndView updateRoom(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("search/detailRoom");
+	public ModelAndView updateRoom(CommandMap commandMap, HttpServletRequest request) throws Exception {
+		ModelAndView mv = new ModelAndView("redirect:search/detailRoom");
+		
+		roomService.updateRoom(commandMap.getMap(), request);
+		mv.addObject("ROOM_NUM", commandMap.get("ROOM_NUM"));
 		return mv;
 	}
+	
 	@RequestMapping(value = "/room/delete") // 방을 지운다.
 	public ModelAndView deleteRoom(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("redirect: member/room/adminRoom");
@@ -88,5 +96,11 @@ public class RoomController {
 		return mv;
 	}
 	
-	//정보 수정 + 파일 수정 + 디테일에서 찜하기 찜해제하기 + 임대인 상세정보 + 방신고 폼 +방신고 + 방디테일에서 찜여부체크, 갯수 카운트
+	@RequestMapping(value="/room/detail/landlordInfo")
+	public ModelAndView lessorInfo(CommandMap commandMap) throws Exception {
+		ModelAndView mv = new ModelAndView("search/lessor");
+		Map<String,Object> map = roomService.selectLessorInfo(commandMap.getMap());
+		mv.addObject("map",map);
+		return mv;
+	}
 }

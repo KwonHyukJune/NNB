@@ -14,30 +14,39 @@
 		REPORT_TYPE
 	FROM
 		report
+	]]>	
 	<choose>
 	<when test="ReportType==1">
+	<![CDATA[
 	Where 
 		report_type = '욕설 및 혐오발언' and report_post_num is not null;
+	]]>	
 	</when>
 	<when test="ReportType==2">
+	<![CDATA[
 	Where 
 		report_type = '허위정보 기재' and report_post_num is not null;
+	]]>	
 	</when>
 	<when test="ReportType==3">
+	<![CDATA[
 	Where 
 		report_type = '음란성 게시글' and report_post_num is not null;
+	]]>	
 	</when>
 	<when test="ReportType==4">
+	<![CDATA[
 	Where 
 		report_type = '도배/광고' and report_post_num is not null;
+	]]>	
 	</when>
 	<otherwise>
+	<![CDATA[
 	Where 
 		report_post_num is not null;
+	]]>	
 	</otherwise>
 	</choose>
-	]]>
-	
 </select>
 
 <select id="selectReportMemberList" parameterType="hashmap" resultType="hashmap"> 
@@ -54,7 +63,8 @@
 		report_post_num is null; 
 	]]>
 </select>
-<select id="selectFaqDetail" parameterType="hashmap" resultType="hashmap"> 
+
+<select id="selectReportDetail" parameterType="hashmap" resultType="hashmap"> 
 	<![CDATA[
 	SELECT
 		REPORT_ID,
@@ -70,24 +80,30 @@
 	]]>
 </select>
 
-<!-- <select id="insertFaq" parameterType="hashmap"> 
+<select id="insertReport" parameterType="hashmap"> 
 	<![CDATA[
-	INSERT INTO FAQ (
-		FAQ_NUM,
-		FAQ_TITLE,
-		FAQ_CATEGORY,
-		FAQ_CONTENT
+	INSERT INTO Report (
+		REPORT_NUM,
+		REPORT_ID,
+		REPORT_D_ID,
+		REPORT_POST_NUM,
+		REPORT_TITLE,
+		REPORT_REASON,
+		REPORT_TYPE
 		) 
 	VALUES(
-		FAQ_NUM_SEQ.NEXTVAL,
-		#{FAQ_TITLE},
-		#{FAQ_CATEGORY},
-		#{FAQ_CONTENT}
+		REPORT_NUM_SEQ.NEXTVAL,,
+		#{REPORT_ID},
+		#{REPORT_D_ID},
+		#{REPORT_POST_NUM},
+		#{REPORT_TITLE},
+		#{REPORT_REASON},
+		#{REPORT_TYPE}
 	)
 	]]>
 </select>
 
-<select id="updateFaq" parameterType="hashmap"> 
+<!-- <select id="updateFaq" parameterType="hashmap"> 
 	<![CDATA[
 	UPDATE FAQ
 	SET
@@ -103,5 +119,5 @@
 	DELETE FAQ
 	WHERE FAQ_NUM = #{FAQ_NUM}
 	]]>
-</select> -->
+</select>  -->
 </mapper>

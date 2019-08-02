@@ -116,7 +116,7 @@
 		)
 	]]>
 	</insert>
-	
+
 	<insert id="insertRoomFile" parameterType="hashmap"> 
 	<![CDATA[ 
 	INSERT INTO ROOM_FILES 
@@ -137,9 +137,9 @@
 		#{FILE_SIZE},
 		#{CREA_ID}
 		) 
-	]]> 
+	]]>
 	</insert>
-	
+
 	<update id="updateThumbnail" parameterType="hashmap"> 
 	<![CDATA[ 
 	UPDATE ROOM_INFO1
@@ -160,10 +160,11 @@
       	)
 	)
 	WHERE ROOM_NUM = #{ROOM_NUM}
-	]]> 
+	]]>
 	</update>
 
-	<select id= "selectAdminRoomList" parameterType="hashmap" resultType="hashmap">
+	<select id="selectAdminRoomList" parameterType="hashmap"
+		resultType="hashmap">
 	<![CDATA[
 	select * 
 	from
@@ -198,7 +199,8 @@
 	]]>
 	</select>
 
-	<select id="selectAdminRoomCount" parameterType="hashmap" resultType="hashmap">
+	<select id="selectAdminRoomCount" parameterType="hashmap"
+		resultType="hashmap">
 	<![CDATA[ 
 		SELECT 
 			count(*)
@@ -210,10 +212,11 @@
 			and rb.DEL_GB='N'
 			and r1.MEM_ID=#{MEM_ID}
 			
-	]]> 
+	]]>
 	</select>
-	
-	<select id="selectRoomInfoDetail" parameterType="hashmap" resultType="hashmap">
+
+	<select id="selectRoomInfoDetail" parameterType="hashmap"
+		resultType="hashmap">
 	<![CDATA[
 		SELECT 
 			R1.MEM_ID, R1.ROOM_NUM,
@@ -243,7 +246,8 @@
 	]]>
 	</select>
 
-	<select id="selectRoomFileList" parameterType="hashmap" resultType="hashmap"> 
+	<select id="selectRoomFileList" parameterType="hashmap"
+		resultType="hashmap"> 
 	<![CDATA[ 
 		SELECT 
 			ROOM_NUM, 
@@ -253,7 +257,7 @@
 			TB_FILE 
 		WHERE 
 			ROOM_NUM = #{ROOM_NUM} AND DEL_GB = 'N' 
-	]]> 
+	]]>
 	</select>
 
 	<update id="updateHitCount" parameterType="hashMap">
@@ -266,6 +270,54 @@
 	]]>
 	</update>
 
+	<update id="updateRoom" parameterType="hashmap"> 
+	<![CDATA[ 
+	update 
+		ROOM_INFO1 R1,
+		ROOM_INFO2 R2, 
+		ROOM_BOARD RB 
+	set
+		R1.TRADE_TYPE=#{R1.TRADE_TYPE,
+		R1.BUILDING_TYPE=#{R1.BUILDING_TYPE},
+		R1.ADDRESS1=#{R1.ADDRESS1}, 
+		R1.ADDRESS2=#{R1.ADDRESS2}, 
+		R1.ZIPCODE=#{R1.ZIPCODE},
+		R1.MONTHLY_PAYMENT=#{R1.MONTHLY_PAYMENT},
+		R1.MONTHLY_DEPOSIT=#{R1.MONTHLY_DEPOSIT},
+		R1.JEONSE=#{R1.JEONSE},
+		R1.THUMBNAIL=#{R1.THUMBNAIL},
+		R2.UTILITY_CHECK=#{R2.UTILITY_CHECK}, 
+		R2.UTILITY_PRICE=#{R2.UTILITY_PRICE},
+		R2.UTILITY_TYPE=#{R2.UTILITY_TYPE},
+		R2.SUPPLY_SIZE=#{R2.SUPPLY_SIZE}, 
+		R2.REAL_SIZE=#{R2.REAL_SIZE},
+		R2.ROOM_FLOOR=#{R2.ROOM_FLOOR},
+		R2.STRUCTURES=#{R2.STRUCTURES}, 
+		R2.PARKING=#{R2.PARKING},
+		R2.PET=#{R2.PET},		
+		R2.ELEVATOR=#{R2.ELEVATOR},
+		R2.BALCONY=#{R2.BALCONY}, 
+		R2.BUILT_IN=#{R2.BUILT_IN}, 
+		R2.OPTIONS=#{R2.OPTIONS},
+		R2.LOAN_ACCESS=#{R2.LOAN_ACCESS},
+		RB.TRADE_STATUS=#{RB.TRADE_STATUS}
+	WHERE 
+		R1.ROOM_NUM = R2.ROOM_NUM
+		AND R1.ROOM_NUM = RB.ROOM_NUM
+		AND DEL_GB='N' 
+	]]>
+	</update>
+	
+	<update id="updateFile" parameterType="hashMap">
+	<![CDATA[
+		update ROOM_FILES
+		set
+  	      FILE_GB='N'
+		where
+  	      ROOM_NUM=#{ROOM_NUM}
+	]]>
+	</update>
+	
 	<update id="deleteRoom" parameterType="hashMap">
 	<![CDATA[
 		update ROOM_BOARD 
@@ -273,6 +325,16 @@
   	      DEL_GB='Y'
 		where
   	      BOARD_NUM=#{BOARD_NUM}
+	]]>
+	</update>
+	
+	<update id="deleteFileList" parameterType="hashMap">
+	<![CDATA[
+		update ROOM_FILES
+		set
+  	      FILE_GB='Y'
+		where
+  	      ROOM_NUM=#{ROOM_NUM}
 	]]>
 	</update>
 
@@ -285,7 +347,7 @@
   	      BOARD_NUM=#{BOARD_NUM}
 	]]>
 	</update>
-	
+
 	<update id="updateSoldRoom" parameterType="hashMap">
 	<![CDATA[
 		update ROOM_BOARD 
@@ -295,5 +357,20 @@
   	      BOARD_NUM=#{BOARD_NUM}
 	]]>
 	</update>
+	
+	<select id="selectLessorInfo" resultType="hashmap" parameterType="hashmap">
+	<![CDATA[
+		SELECT
+			M.MEM_ID,
+			M.MEM_NAME,
+			M. MEM_EMAIL,
+			M.MEM_PHONE
+		FROM 
+			MEMBER
+		WHERE 
+			MEM_ID = #{MEM_ID}
+			AND MEM_DEL_GB='N'
+	]]>
+	</select>
 
 </mapper>

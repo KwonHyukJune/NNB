@@ -15,4 +15,8 @@ public interface FavoriteService {
 
 	void deleteFavRoommate(Map<String, Object> map) throws Exception;
 
+	void addFavRoom(Map<String, Object> map) throws Exception;
+
+	void cancelFavRoom(Map<String, Object> map) throws Exception;
+
 }

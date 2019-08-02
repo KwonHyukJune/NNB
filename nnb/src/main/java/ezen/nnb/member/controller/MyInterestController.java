@@ -39,15 +39,7 @@ public class MyInterestController {
 		mv.addObject("list",list);
 		return mv;
 	}
-	@RequestMapping("/myInterest/favRoomCancel")
-	public ModelAndView favRoomCancel(CommandMap commandMap)throws Exception{
-		ModelAndView mv=new ModelAndView("redirect:member/myInterest/favRoomList");
-		
-		favoriteService.deleteFavRoom(commandMap.getMap());
-		favoriteService.updateFavCountDec(commandMap.getMap());
-		
-		return mv;
-	}
+
 	@RequestMapping("/myInterest/favRoommateList")
 	public ModelAndView favRoommateList(CommandMap commandMap)throws Exception{
 		ModelAndView mv=new ModelAndView("member/myInterest/myRoommateList");
@@ -63,6 +55,24 @@ public class MyInterestController {
 		
 		return mv;
 	}
+	
+	@RequestMapping("/myInterest/changeFavRoom")
+	public ModelAndView addFavRoom(CommandMap commandMap) throws Exception{
+		ModelAndView mv = new ModelAndView("common/back");
+		String FavRoom = (String)commandMap.get("FavRoom"); 
+		//방이 찜이 되있는지 안되있는지를 확인하는 거...
+		//1 이면 찜이 아직 안된 상태 ---> 지금 컨트롤러가 작동하면서~ 찜!
+		//2 이면 찜이 이미 된 상태 ----> 지금 컨트롤러가 작동하면서 찜 취소
+		if(FavRoom.equals("1")) {
+			favoriteService.addFavRoom(commandMap.getMap());
+		}
+		else {
+			favoriteService.deleteFavRoom(commandMap.getMap());
+			favoriteService.updateFavCountDec(commandMap.getMap());
+		}
+		return mv;	
+	}
+	
 	
 	
 

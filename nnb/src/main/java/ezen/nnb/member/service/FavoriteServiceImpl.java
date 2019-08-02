@@ -52,5 +52,15 @@ public class FavoriteServiceImpl implements FavoriteService{
 		// TODO Auto-generated method stub
 		favoriteDAO.deleteFavRoommate(map);
 	}
+	@Override
+	public void addFavRoom(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		favoriteDAO.addFavRoom(map);
+	}
+	@Override
+	public void cancelFavRoom(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		favoriteDAO.cancelFavRoom(map);
+	}
 
 }

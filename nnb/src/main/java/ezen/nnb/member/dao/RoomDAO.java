@@ -63,14 +63,35 @@ public class RoomDAO extends AbstractDAO{
 		return (Map<String, Object>) selectOne("room.selectAdminRoomCount");
 	}
 
-	public void updateReAdRoom(Map<String, Object> map) {
+	public void updateReAdRoom(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub
 		update("room.updateReAdRoom",map);
 	}
 
-	public void updateSoldRoom(Map<String, Object> map) {
+	public void updateSoldRoom(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub
 		update("room.updateSoldRoom",map);
+	}
+
+	public void updateRoom(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		update("room.updateRoom", map);
+	}
+
+	public void deleteFileList(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		update("room.deleteFile", map);
+	}
+
+	public void updateFile(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		update("room.updateFile", map);
+	}
+
+	@SuppressWarnings("unchecked")
+	public Map<String, Object> selectLessorInfo(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return (Map<String, Object>)selectOne("room.selectLessorInfo", map);
 	}
 
 }
