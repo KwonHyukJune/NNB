@@ -1,5 +1,12 @@
 package ezen.nnb.member.service;
 
-public class ReportService {
+import java.util.Map;
+
+public interface ReportService {
+
+	void submitReport(Map<String, Object> map) throws Exception;
+
+	
 
 }
+  
