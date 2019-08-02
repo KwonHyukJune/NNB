@@ -18,7 +18,7 @@ public class SearchRoomServiceImpl implements SearchRoomService{
 	
 	@Resource(name="searchRoomDAO")
 	private SearchRoomDAO searchRoomDAO;
-	@Resource(name="FavoriteDAO")
+	@Resource(name="favoriteDAO")
 	private FavoriteDAO favoriteDAO;
 	
 	@Override
