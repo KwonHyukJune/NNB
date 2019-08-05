@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="member">
+
+  
+<select id="adminMemberList" parameterType="hashMap" resultType="hashMap">
+<![CDATA[  
+SELECT
+  MEM_NUM,
+  MEM_DEL_GB
+  MEM_KIND,
+  MEM_ID,
+  MEM_NAME,
+  MEM_NICK,
+  MEM_EMAIL,
+  MEM_PHONE
+FROM
+  MEMBER
+]]>
+</select>
+ 
+  
+<select id="selectMemberSearchID" parameterType="hashMap" resultType="hashMap">
+<![CDATA[  
+SELECT 
+MEM_NUM,
+MEM_ID,
+MEM_NAMQE,
+MEM_NICK,
+MEM_EMAIL,
+MEM_PHONE,
+MEM_JOINDATE,
+MEM_WARNING,
+MEM_DEL_GB
+FROM MEMBER
+WHERE MEM_ID like '%' || #{isSearch} || '%'
+]]>
+</select>
+
+<select id="selectMemberSearchNAME" parameterType="hashMap" resultType="hashMap">
+<![CDATA[  
+SELECT 
+MEM_NUM,
+MEM_ID,
+MEM_NAME,
+MEM_NICK,
+MEM_EMAIL,
+MEM_PHONE,
+MEM_JOINDATE,
+MEM_WARNING,
+MEM_DEL_GB
+FROM MEMBER
+WHERE MEM_NAME like '%' || #{isSearch} || '%'
+]]>
+</select>
+
+
+<select id="selectMemberSearchNICK" parameterType="hashMap" resultType="hashMap">
+<![CDATA[  
+SELECT 
+MEM_NUM,
+MEM_ID,
+MEM_NAMQE,
+MEM_NICK,
+MEM_EMAIL,
+MEM_PHONE,
+MEM_JOINDATE,
+MEM_WARNING,
+MEM_DEL_GB
+FROM MEMBER
+WHERE MEM_NICK like '%' || #{isSearch} || '%'
+]]>
+</select>
+
+<select id="adminMemberDetail" parameterType="hashMap" resultType="hashMap">
+<![CDATA[  
+SELECT
+M.MEM_NUM,
+M.MEM_ID,
+M.MEM_NAME,
+M.MEM_NICK,
+M.MEM_EMAIL,
+M.MEM_PHONE,
+M.MEM_KIND,
+M.MEM_JOINDATE,
+M.MEM_VERIFY,
+B.BAN_NUM,
+B.BAN_REMOVAL_DATE,
+B.BAN_REASON,
+RI_GENDER,
+RI_REGION1,
+RI_REGION2,
+RI_REGION3,
+RI_BIRTH,
+RI_LOAN_BIG,
+RI_LOAN_SMALL,
+RI_PROFILE,
+RI_DATE_START,
+RI_DATE_END,
+RI_EXPOSE
+
+FROM MEMBER M, BAN B, ROOMMATE_PROFILE RI
+WHERE
+               M.MEM_NUM = #{M.MEM_NUM}
+ ]]>
+</select>
+               
+<select id="adminMemberBan" parameterType="hashMap" resultType="hashMap">
+<![CDATA[                 
+               
+UPDATE BAN SET MEM_ID='Y'
+WHERE 
+  ]]>
+<if test="period==1">
+<![CDATA[                 
+BAN_REMOVAL_DATE=TO_CHAR(BAN_DATE+#{ban}'YYYY-MM-DD')
+  ]]>
+</if>
+<if test="period==2">
+<![CDATA[    
+AND BAN_REMOVAL_DATE=TO_CHAR(BAN_DATE+#{ban},'YYYY-MM-DD')
+  ]]>
+  </if>
+<if test="period==3">
+<![CDATA[    
+AND BAN_REMOVAL_DATE=TO_CHAR(BAN_DATE+#{ban},'YYYY-MM-DD')
+  ]]>
+  </if>
+<if test="period==4">
+<![CDATA[    
+AND BAN_REMOVAL_DATE=TO_CHAR(BAN_DATE+#{ban},'YYYY-MM-DD')               
+  ]]>
+  </if>
+</select>
+                           
+</mapper>
+  

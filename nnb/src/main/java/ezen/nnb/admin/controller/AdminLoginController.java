@@ -35,10 +35,10 @@ public class AdminLoginController {
 		HttpSession session=request.getSession();
 		Map<String,Object>map=adminLoginService.AdminLogin(commandMap.getMap());
 		if(map!=null) {
-			session.setAttribute("ADMIN_ID","Y");//?
+			if(session.getAttribute("ADMIN_ID")==null){
 			mv.addObject("adminJoin",map);
 			mv.setViewName("redirect:/admin/main/adminMain");
-			}else {
+			}}else {
 				mv.setViewName("/admin/login/adminLogin");
 				mv.addObject("message","해당아이디가 존재하지 않습니다");
 			}
