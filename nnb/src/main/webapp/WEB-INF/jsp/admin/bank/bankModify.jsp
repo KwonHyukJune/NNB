@@ -30,6 +30,7 @@
 			str = "<input type='hidden' name='delete1' value='1'>";
 			$("form[name='bankWriteForm']").append(str);
 		}
+		obj.prev().prev().prev().text('');
    }
    function fn_deleteFile2(obj){ 
 		obj.prev().val('');
@@ -38,6 +39,7 @@
 			str = "<input type='hidden' name='delete2' value='1'>";
 			$("form[name='bankWriteForm']").append(str);
 		}
+		obj.prev().prev().prev().text('');
    }
    
    $(document).ready(function(){
