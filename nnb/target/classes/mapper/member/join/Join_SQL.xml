@@ -3,15 +3,9 @@
 <mapper namespace="join">
 
 	<!-- 로그인, 회원정보수정 -->
-	<select id="selectIdCheck" parameterType="hashMap"
-		resultType="Integer">
+	<select id="selectIdCheck" parameterType="hashMap" resultType="Integer">
 	<![CDATA[
-    SELECT 
-    	count(*) 
-    FROM 
-    	member 
-    WHERE 
-    	mem_id=#{mem_id}
+    SELECT count(*) FROM member WHERE mem_id=#{mem_id}
 	]]>
 	</select>
 
@@ -41,12 +35,7 @@
 
 	<update id="updateVerify" parameterType="hashmap"> 
 	<![CDATA[
-    update 
-    	member 
-    set 
-    	mem_verify='Y' 
-    where 
-    	mem_email=#{mem_email}
+    update member set mem_verify='Y' where mem_email=#{mem_email}
 	]]>
 	</update>
 

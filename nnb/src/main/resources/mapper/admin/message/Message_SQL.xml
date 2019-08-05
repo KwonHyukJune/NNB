@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="message">
+
+<select id="adminMessageList" parameterType="hashMap" resultType="hashMap">
+<![CDATA[  
+SELECT DISTINCT
+  MEMBER.MEM_KIND,
+  MESSAGE.MESSAGE_NUM,
+  MESSAGE.MESSAGE_TITLE,
+  MESSAGE.SEND_DATE
+FROM
+  MEMBER,
+  MESSAGE
+WHERE
+  MESSAGE.SENDER = '관리자';
+
+]]>
+</select>
+<select id="adminMessageDetail" parameterType="hashMap" resultType="hashMap">
+<![CDATA[  
+SELECT
+  M.MEM_KIND,
+  S.MESSAGE_NUM,
+  S.MESSAGE_TITLE,
+  S.MESSAGE_CONTENT,
+  S.SEND_DATE
+FROM
+  MEMBER M,
+  MESSAGE S
+WHERE
+  MESSAGE_NUM = #{MASSAGE_NUM}  
+  ]]>
+  </select>
+  
+<select id="adminMessageWrite" parameterType="hashMap" resultType="hashMap">
+
+<![CDATA[ 
+INSERT INTO 
+MESSAGE (
+            MESSAGE_NUM, 
+            MESSAGE_TITLE, 
+            MESSAGE_CONTENT,
+            SENDER,
+            RECEIVER,
+            MESSAGE_DATE
+) VALUES
+           (MESSAGE_NUM_SEQ.NEXTVAL,           
+           #{MESSAGE_TITLE},
+           #{MESSAGE_CONTENT},
+           '관리자',
+           MEM_KIND,
+           SYSDATE
+)
+]]>
+</select>
+	
+<select id="adminMessageDelete" parameterType="hashMap" resultType="hashMap">
+<![CDATA[ 
+	DELETE FROM MESSAGE WHERE MESSAGE_NUM=#{MESSAGE_NUM}
+]]>
+</select>
+<select id="adminMessageSearchContent" parameterType="hashMap" resultType="hashMap">
+<![CDATA[ 
+	SELECT 
+MESSAGE_NUM
+MESSAGE_TITLE
+MESSAGE_CONTENT
+SENDER
+RECEIVER
+SEND_DATE
+FROM MESSAGE
+WHERE MESSAGE_CONTENT like '%' || #{isSearch} || '%'
+]]>
+</select>
+<select id="adminMessageSearchTitle" parameterType="hashMap" resultType="hashMap">
+<![CDATA[ 
+	SELECT 
+MESSAGE_NUM
+MESSAGE_TITLE
+MESSAGE_CONTENT
+SENDER
+RECEIVER
+SEND_DATE
+FROM MESSAGE
+WHERE MESSAGE_TITLE like '%' || #{isSearch} || '%'
+]]>
+</select>
+</mapper>
