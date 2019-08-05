@@ -32,25 +32,29 @@ function goMyPage(){
 </script>
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/header.css'/>"/>
 <nav class="header">
+<div class="img">
 <img src="<%=request.getContextPath()%>/images/NNBsmall.png" onclick="location.href='<%=request.getContextPath()%>/main'" width="100px">
-<div class="menu">
-	<a href="<c:url value='/bank/list'/>">제휴은행</a>
-	<a href="<c:url value='/main/searchRoom'/>">룸메이트찾기</a>
-	<a href="<c:url value='/search/roomList'/>">방찾기</a>
-	<a href="<c:url value='/myInterest/recentRoom'/>">관심목록</a>
-	<a href="<c:url value='/room/write'/>">방내놓기</a>
-	<a href="<c:url value=''/>">알림</a>	<!-- 알림이 프로젝트 흐름도에 누락됨 -->
 </div>
-<div class="logout">
-	<a href="<c:url value='/joinForm'/>">회원가입</a>
-	<a href="<c:url value='/loginForm'/>">로그인</a>
-</div>
-<div class="login" onclick="openMenu()">
-	<img src="">${MEM_ID}님
-	<ul class="mymenu" id="mymenu">
-<%-- 		<li><a href="<c:url value='/myPage/messageList'/>">마이페이지</a></li>
- --%>		<li><a href="javascript:goMyPage()">마이페이지</a></li>
-		<li><a href="<c:url value='/logout'/>">로그아웃</a></li>
-	</ul>
+<div class="cjODQK">
+	<div class="menu gRTWkG">
+		<a class="hVfzba" href="<c:url value='/bank/list'/>">제휴은행</a>
+		<a class="hVfzba" href="<c:url value='/main/searchRoom'/>">룸메이트찾기</a>
+		<a class="hVfzba" href="<c:url value='/search/roomList'/>">방찾기</a>
+		<a class="hVfzba" href="<c:url value='/myInterest/recentRoom'/>">관심목록</a>
+		<a class="hVfzba" href="<c:url value='/room/write'/>">방내놓기</a>
+		<a class="hVfzba" href="<c:url value=''/>">알림</a>	<!-- 알림이 프로젝트 흐름도에 누락됨 -->
+	</div>
+	<div class="logout">
+		<a class="hVfzba kiTmxU" href="<c:url value='/joinForm'/>">회원가입</a>
+		<a class="hVfzba kiTmxU" href="<c:url value='/loginForm'/>">로그인</a>
+	</div>
+	<div class="login hVfzba kiTmxU" onclick="openMenu()">
+		<img src="">${MEM_ID}님
+		<ul class="mymenu" id="mymenu">
+	<%-- 		<li><a href="<c:url value='/myPage/messageList'/>">마이페이지</a></li>
+	 --%>		<li><a href="javascript:goMyPage()">마이페이지</a></li>
+			<li><a href="<c:url value='/logout'/>">로그아웃</a></li>
+		</ul>
+	</div>
 </div>
 </nav>
