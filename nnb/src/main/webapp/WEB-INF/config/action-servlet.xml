@@ -30,6 +30,23 @@
 			<bean id="loggerInterceptor"
 				class="ezen.nnb.common.LoggerInterceptor"></bean>
 		</mvc:interceptor>
+		
+		<!-- 로그인 인터셉터 -->
+		<mvc:interceptor>
+			<mvc:mapping path="/*"/>
+			<mvc:mapping path="/**/*"/>
+			<mvc:exclude-mapping path="/needLogin"/>
+			<mvc:exclude-mapping path="/main"/>
+			<mvc:exclude-mapping path="/loginForm"/>
+			<mvc:exclude-mapping path="/login"/>
+			<mvc:exclude-mapping path="/findId"/>
+			<mvc:exclude-mapping path="/findIdResult"/>
+			<mvc:exclude-mapping path="/findPw"/>
+			<mvc:exclude-mapping path="/findPwConfirm"/>
+			<mvc:exclude-mapping path="/bank/*"/>
+			<mvc:exclude-mapping path="/info/*"/>
+			<bean id="loginInterceptor" class="ezen.nnb.common.LoginInterceptor"></bean>
+		</mvc:interceptor>
 	</mvc:interceptors>
 
 	<!-- LoggerAspect라는 클래스는 Controller, Service, DAO가 실행될 때, 어떤 계층의 어떤 메서드가 
