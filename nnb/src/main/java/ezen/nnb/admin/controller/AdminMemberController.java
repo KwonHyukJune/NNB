@@ -110,16 +110,16 @@ public class AdminMemberController{
 				return mv;		 
 	}
 			
-		@RequestMapping(value="admin/memberDelete")
+		@RequestMapping(value="/admin/memberDelete")
 		public ModelAndView adMemberBan(CommandMap commandMap,HttpServletRequest request)throws Exception{
 			ModelAndView mv=new ModelAndView();
 			adminMemberService.adminMemberBan(commandMap.getMap());
 			SimpleDateFormat s=new SimpleDateFormat("yyyy/MM/dd");
 			Calendar cal=Calendar.getInstance();
 			s.format(cal.getTime());
-			if(!(commandMap.getMap().get("MEM_ID").equals(""))) {
+			if(!(commandMap.getMap().get("ADMIN_ID").equals(""))) {
 				String id=(String)commandMap.getMap().put("MEM_ID", (String) request.getSession().getAttribute("MEM_ID"));
-				if(id.equals("Y")) {
+				if(id!=null) {
 					String ban="";//차단기간
 					//Date ban_date=(Date)commandMap.getMap().get("BAN_DATE");//제재시작
 					String totalBan="";
@@ -149,4 +149,3 @@ public class AdminMemberController{
 		}
 	}
 				
-

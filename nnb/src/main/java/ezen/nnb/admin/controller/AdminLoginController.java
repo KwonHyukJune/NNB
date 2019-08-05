@@ -36,11 +36,10 @@ public class AdminLoginController {
 		Map<String,Object>map=adminLoginService.AdminLogin(commandMap.getMap());
 		if(map!=null) {
 			if(session.getAttribute("ADMIN_ID")==null){
-			mv.addObject("adminJoin",map);
+			mv.addObject("admin",map);
 			mv.setViewName("redirect:/admin/main/adminMain");
 			}}else {
 				mv.setViewName("/admin/login/adminLogin");
-				mv.addObject("message","해당아이디가 존재하지 않습니다");
 			}
 		return mv;
 		}
@@ -53,6 +52,7 @@ public class AdminLoginController {
 		return mv;
 	}
 }
+
 
 
 

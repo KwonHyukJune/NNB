@@ -111,30 +111,27 @@ if(request.getParameter("currentPage")==null || request.getParameter("currentPag
 	@RequestMapping(value="/admin/messageWrite",method=RequestMethod.POST)
 	public ModelAndView adWrite(CommandMap commandMap,HttpServletRequest request,HttpServletResponse response)throws Exception{
 		ModelAndView mv=new ModelAndView();
-		HttpSession session=request.getSession();
-		Map<String,Object>map=adminLoginService.AdminLogin(commandMap.getMap());		
-		if(map!=null) {
-			session.setAttribute("ADMIN_ID", "Y"); //?
-			if(!(commandMap.getMap().get("MEM_ID").equals(""))) {
-		if (commandMap.getMap().get("MESSAGE_NUM")!=null){
-			mv.addObject("message","메세지가 성공적으로 전송되었습니다");
-			mv.setViewName("redirect:admin/message/messageList?MESSAGE_NUM="+commandMap.get("MESSAGE_NUM"));
+		HttpSession session=request.getSession();	
+		if (commandMap.getMap().get("SENDER")!=null){
+			commandMap.put("SENDER", session.getAttribute("ADMIN_ID"));
+			commandMap.put("MESSAGE_NUM", commandMap.get("MESSAGE_NUM"));			
+			mv.setViewName("redirect:/admin/message/messageList");
 		}else {
-			mv.addObject("message", "메세지 전송에 실패했습니다");
 			mv.setViewName("admin/message/messageWriteForm");
 			}
-		}
-	}		
+	
 		return mv;
 		
-	}
+}
 	@RequestMapping(value="/admin/messageDelete")
 	public ModelAndView adMessageDelete(CommandMap commandMap)throws Exception{
 		ModelAndView mv = new ModelAndView();
 		adminMessageService.adminMessageDelete(commandMap.getMap());
-		mv.setViewName("redirect:admin/message/messageList");
+		mv.setViewName("redirect:/admin/message/messageList");
 		return mv;
 		
 	}
 
 	}
+
+
