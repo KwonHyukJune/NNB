@@ -62,9 +62,9 @@ public class AdminBankController {
 		return mv;
 	}
 	@RequestMapping(value="/admin/bankModify")
-	public ModelAndView adminBankModify(CommandMap commandMap) throws Exception{
+	public ModelAndView adminBankModify(CommandMap commandMap, HttpServletRequest request) throws Exception{
 		ModelAndView mv = new ModelAndView("redirect:/admin/bankDetail");
-		adminBankService.updateBankModify(commandMap.getMap());
+		adminBankService.updateBankModify(commandMap.getMap(), request);
 		
 		mv.addObject("num", commandMap.get("num"));
 		return mv;

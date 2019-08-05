@@ -68,11 +68,7 @@ insert into bank(
 	update bank set                                
         bank_kind=#{bank_kind},                        
         bank_title=#{bank_title},                        
-        bank_content=#{bank_content},                        
-        bank_original_file1=#{bank_original_file1},                        
-        bank_stored_file1=#{bank_stored_file1},                        
-        bank_original_file2=#{bank_original_file2},                        
-        bank_stored_file2=#{bank_stored_file2}                        
+        bank_content=#{bank_content}
 	where                                
         bank_num=#{num}                        
 ]]>
@@ -80,11 +76,26 @@ insert into bank(
 
 	<update id="insertBankFile" parameterType="hashMap">
 <![CDATA[
-	update bank set                                
-        BANK_ORIGINAL_FILE1=#{ORIGINAL_FILE_NAME1},                        
-        BANK_STORED_FILE1=#{STORED_FILE_NAME1},                        
+	update bank set
+]]>
+	<if test="ORIGINAL_FILE_NAME1!=null">
+<![CDATA[
+        BANK_ORIGINAL_FILE1=#{ORIGINAL_FILE_NAME1},
+        BANK_STORED_FILE1=#{STORED_FILE_NAME1}
+]]>
+		<if test="ORIGINAL_FILE_NAME2!=null">
+<![CDATA[
+			,
+]]>
+		</if>
+	</if>
+	<if test="ORIGINAL_FILE_NAME2!=null">
+<![CDATA[
         BANK_ORIGINAL_FILE2=#{ORIGINAL_FILE_NAME2},                        
-        BANK_STORED_FILE2=#{STORED_FILE_NAME2}                     
+        BANK_STORED_FILE2=#{STORED_FILE_NAME2}
+]]>
+	</if>
+<![CDATA[
 	where                                
         bank_num=(select max(bank_num) from bank)
 ]]>
@@ -96,5 +107,32 @@ insert into bank(
 	delete from bank where bank_num=#{num}
 ]]>
 	</delete>
+	
+	<update id="deleteBankFile" parameterType="hashmap">
+<![CDATA[
+	update bank set
+]]>
+		<if test="delete1!=null">
+<![CDATA[
+		BANK_ORIGINAL_FILE1=null,
+		BANK_STORED_FILE1=null
+]]>
+			<if test="delete2!=null">
+<![CDATA[
+			,
+]]>
+			</if>
+		</if>
+		<if test="delete2!=null">
+<![CDATA[
+		BANK_ORIGINAL_FILE2=null,
+		BANK_STORED_FILE2=null
+]]>
+		</if>
+<![CDATA[
+	WHERE 
+        bank_num=#{num}
+]]>
+	</update>
 
 </mapper>

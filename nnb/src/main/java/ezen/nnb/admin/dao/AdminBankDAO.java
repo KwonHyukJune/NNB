@@ -31,4 +31,8 @@ public class AdminBankDAO extends AbstractDAO{
 		// TODO Auto-generated method stub
 		insert("bank.insertBankFile", map);
 	}
+	public void deleteBankFile(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		update("bank.deleteBankFile",map);
+	}
 }
