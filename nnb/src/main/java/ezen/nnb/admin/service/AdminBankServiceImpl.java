@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import ezen.nnb.admin.dao.AdminBankDAO;
 import ezen.nnb.common.BankFile;
-import ezen.nnb.common.FileUtils;
 
 @Service("adminBankService") // service 객체 임을 선언
 public class AdminBankServiceImpl implements AdminBankService {
