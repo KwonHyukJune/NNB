@@ -35,4 +35,10 @@ public class JoinServiceImpl implements JoinService{
 		joinDAO.verifyMember(map);
 	}
 
+	@Override
+	public int selectNickCheck(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return joinDAO.selectNickCheck(map);
+	}
+
 }

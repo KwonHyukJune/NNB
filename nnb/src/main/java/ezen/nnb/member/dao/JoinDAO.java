@@ -22,4 +22,8 @@ public class JoinDAO extends AbstractDAO{
 		// TODO Auto-generated method stub
 		update("join.updateVerify",map);
 	}
+	public int selectNickCheck(Map<String, Object> map) throws Exception{
+		// TODO Auto-generated method stub
+		return (int)selectOne("join.selectNickCheck",map);
+	}
 }

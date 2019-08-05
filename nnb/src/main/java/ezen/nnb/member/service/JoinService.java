@@ -10,4 +10,6 @@ public interface JoinService {
 
 	void verifyMember(Map<String, Object> map) throws Exception;
 
+	int selectNickCheck(Map<String, Object> map) throws Exception;
+
 }
