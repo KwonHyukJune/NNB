@@ -7,25 +7,47 @@ function fn_open(url){
 	
 }
 </script>
-<footer>
-    <div>
-    	<a href="javascript:window.open('<%=request.getContextPath() %>/info/agree')">이용약관</a> 
-		<a href="javascript:window.open('<%=request.getContextPath() %>/info/personalData')">개인정보처리방침</a> 
-		<a href="javascript:window.open('<%=request.getContextPath() %>/info/articleRule')">매물관리규정</a> 
-		<a href="javascript:window.open()">자동저장서비스</a>		
-		&nbsp;&nbsp;&nbsp;&nbsp;
-		<input type="text" id="search" onkeypress="if( event.keyCode == 13 ){searchData();}" />
-  	</div>	
-  	
-	<br/>	
-    <br/>
-    <div class="">
-        <span>EZEN Coperation</span><br/>
-        <span><strong>대표 :</strong> 최사랑  <strong>주소 :</strong> 서울시 강남구 서초대로빌딩 10층 (주)EZEN Coperation</span><br/>
-        <span><strong>고객센터 :</strong> 99-9999-9999  <strong>팩스 :</strong> 02-999-9999</span><br/>
-        <span><strong>사업자 번호 :</strong> 000-00-00000 <br/>
-        <strong>프로모션 / 사업 제휴문의 :</strong> ezen@naver.com</span>
-        <span><strong> 통신판매업 신고번호 :</strong> 제9999-서울 강남-99999호</span>
-        <p>EZEN Coperation., Inc.All right reserved.</p>
+<footer class="bGLXyI">
+<div class="cPXquZ">
+    <div class="fqUhil">
+    	<nav class="cYFCXq">
+	    	<a class="fHTOVi" href="javascript:window.open('<%=request.getContextPath() %>/info/agree')">이용약관</a> 
+			<a class="fHTOVi" href="javascript:window.open('<%=request.getContextPath() %>/info/personalData')">개인정보처리방침</a> 
+			<a class="fHTOVi" href="javascript:window.open('<%=request.getContextPath() %>/info/articleRule')">매물관리규정</a> 
+			<a class="fHTOVi" href="javascript:window.open()">자동저장서비스</a>		
+    	</nav>
+    	<form class="bJoVKf">
+    		<label>
+    			<h1 class="eGOkdr">매물번호 조회</h1>
+				<input class="cuuIWz" type="text" id="search" onkeypress="if( event.keyCode == 13 ){searchData();}" />
+    		</label>
+    		<button class="styled__Btn-sc-1sh9zg-9 kWBByy">
+    			<svg width="18" height="18" viewBox="0 0 18 18">
+    				<g fill="none" fill-rule="evenodd" stroke="#FFF">
+    					<circle cx="7.5" cy="7.5" r="6.5"></circle>
+    					<path d="M12 12l5 5"></path>
+    				</g>
+    			</svg>
+    		</button>
+    	</form>
+<!--     	<div class="styled__TopBtn-sc-1sh9zg-10 lldbbm"></div>
+ -->  	</div>	
+    <div class="hyhBst">
+        <p class="kbCJPh hnxVvN">EZEN Coperation</p>
+        <p class="hnxVvN">
+        	<span>대표 : 최사랑</span>
+        	<span>주소 : 서울시 강남구 서초대로빌딩 10층 (주)EZEN Coperation</span>
+        </p>
+        <p class="hnxVvN">
+			<span>고객센터 : 99-9999-9999</span>
+			<span>팩스 : 02-999-9999</span>
+        </p>
+        <p class="hnxVvN">
+			<span>사업자 번호 : 000-00-00000 </span>
+			<span>프로모션 /사업 제휴문의 : ezen@naver.com</span>
+			<span>통신판매업 신고번호 : 제9999-서울 강남-99999호</span>
+        </p>
+        <p class="jGqQVV">EZEN Coperation., Inc.All right reserved.</p>
     </div>
+</div>
 </footer>
