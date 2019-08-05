@@ -26,9 +26,11 @@ public class /*컨트롤러*/AdminNoticeController {
 	}   
 
 	//상세
-	@RequestMapping(value=/*MapperURL*/"/admin/noticeDetail")
+	@RequestMapping(value=/*MapperURL*/"/admin/notice/detail")
 	public ModelAndView /*메소드*/adminNoticeDetail(CommandMap commandMap) throws Exception{
 		ModelAndView mv = new ModelAndView(/*jsp*/"/admin/notice/noticeDetail");
+		System.out.println("dd"+commandMap.getMap());
+
 		Map<String,Object> map = adminNoticeService./*Mybatis ID*/selectNoticeDetail(commandMap.getMap());
 		mv.addObject("map", map);
 		return mv;
@@ -53,9 +55,9 @@ public class /*컨트롤러*/AdminNoticeController {
 	}//수정
 	@RequestMapping(value=/*MapperURL*/"/admin/noticeModify")
 	public ModelAndView /*메소드*/adminNoticeModify(CommandMap commandMap) throws Exception{
-		ModelAndView mv = new ModelAndView(/*jsp*/"redirect:/admin/noticeDetail");
+		ModelAndView mv = new ModelAndView(/*jsp*/"redirect:/admin/notice/detail");
 		adminNoticeService./*Mybatis ID*/updateNoticeModify(commandMap.getMap());
-		mv.addObject("IDX", commandMap.get("IDX"));
+		mv.addObject("num", commandMap.get("num"));
 		return mv;
 	}
 	//삭제

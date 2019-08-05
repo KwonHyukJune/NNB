@@ -24,10 +24,11 @@
             TERMS_REGDATE,
             TERMS_TITLE,
             TERMS_CONTENT
+            
 	FROM
             TERMS
 	WHERE
-    	    TERMS_NUM = #{NUM}
+    	    TERMS_NUM = #{num}
 ]]>
 </select>
 
@@ -54,17 +55,17 @@
 	UPDATE TERMS
 	SET
 			TERMS_TITLE = #{TERMS_TITLE},
-	       	TERMS_CONTENT = #{TERMS_CONTENT}
+	       	TERMS_CONTENT = #{TERMS_CONTENT},
         	TERMS_REGDATE = SYSDATE
 	WHERE
-			TERMS_NUM = #{NUM}
+			TERMS_NUM = #{num}
 
 ]]>
 </update>
 
 <delete id="deleteTerms" parameterType="hashMap">
 <![CDATA[
-	DELETE FROM TERMS WHERE TERMS=#{TERMS_NUM}
+	DELETE FROM TERMS WHERE TERMS_NUM=#{num}
 ]]>
 </delete>
 
