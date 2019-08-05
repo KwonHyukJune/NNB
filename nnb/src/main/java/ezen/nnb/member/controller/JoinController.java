@@ -13,6 +13,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import ezen.nnb.common.CommandMap;
@@ -34,19 +35,33 @@ public class JoinController {
 		ModelAndView mv=new ModelAndView("member/main/joinForm");
 		return mv;
 	}
-	@RequestMapping(value="/join/idCheck")
+	@RequestMapping(value="/join/idCheck", method = RequestMethod.POST)
+	@ResponseBody
 	public ModelAndView idCheck(CommandMap commandMap) throws Exception{
-		ModelAndView mv=new ModelAndView();
+		ModelAndView mv=new ModelAndView("member/main/idCheck");
+		System.out.println(commandMap.get("mem_id"));
 		
-		int idCheck = joinService.selectIdCheck(commandMap.getMap());
-		mv.addObject("idCheck", idCheck);
+		int mem_id = joinService.selectIdCheck(commandMap.getMap());
+		
+		mv.addObject("mem_id", String.valueOf(mem_id));
+		return mv;
+	}
+	
+	@RequestMapping(value="/join/nickCheck")
+	public ModelAndView nickCheck(CommandMap commandMap) throws Exception{
+		ModelAndView mv=new ModelAndView("member/main/nickCheck");
+		System.out.println(commandMap.get("mem_nick"));
+		int nickCheck = joinService.selectNickCheck(commandMap.getMap());
+		mv.addObject("nickCheck", nickCheck);
 		
 		return mv;
 	}
-	@RequestMapping(value="/join/emailAuth")
+	
+	@RequestMapping(value="/join/emailAuth", method=RequestMethod.POST)
 	//회원가입 할 경우 해당 이메일 인증을 요구하는 링크를 첨부한 이메일을 발송
 	public ModelAndView emailAuth(CommandMap commandMap) throws Exception{
 		ModelAndView mv=new ModelAndView("member/main/joinConfirm");
+		System.out.println(commandMap.get("mem_id"));
 		//mybatis로 inserMeber() 기능 처리 및 해당 이메일로 이메일 발송
 		joinService.insertMember(commandMap.getMap());
 		
@@ -68,7 +83,7 @@ public class JoinController {
 	//member table에 verfiy컬럼의 값을 바꿔준다.
 	public ModelAndView signSuccess(CommandMap commandMap) throws Exception{
 		//이메일 인증기능 처리
-		ModelAndView mv=new ModelAndView("member/main/joinConfirm");
+		ModelAndView mv=new ModelAndView("member/main/main");
 		commandMap.getMap().get("mem_email").toString();
 		joinService.verifyMember(commandMap.getMap());
 		

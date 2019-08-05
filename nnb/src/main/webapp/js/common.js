@@ -1,4 +1,4 @@
-function gfn_isNull(str){
+function gfn_isNull(str){ //null 값을 체크하는 함수
 	if(str==null) return true;
 	if(str=="NaN") return true;
 	if(new String(str).valueOf()=="undefined") return true;
@@ -9,9 +9,9 @@ function gfn_isNull(str){
 	return false;
 }
 
-function ComSubmit(opt_formId){
-	this.formId = gfn_isNull(opt_formId)==true? "commonForm" : opt_formId;
-	this.url = "";
+function ComSubmit(opt_formId){ 
+	this.formId = gfn_isNull(opt_formId)==true? "commonForm" : opt_formId; // 값이 없으면 commonForm, 있으면 그 아이디를 formId에 넣는다. 
+	this.url = ""; 
 	
 	if(this.formId=="commonForm"){
 		$("#commonForm")[0].reset();

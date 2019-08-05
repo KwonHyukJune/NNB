@@ -3,12 +3,23 @@
 <mapper namespace="join">
 
 	<!-- 로그인, 회원정보수정 -->
+	
 	<select id="selectIdCheck" parameterType="hashMap" resultType="Integer">
 	<![CDATA[
-    SELECT count(*) FROM member WHERE mem_id=#{mem_id}
+    SELECT count(*) 
+    FROM member 
+    WHERE mem_id=#{mem_id}
 	]]>
 	</select>
 
+	<select id="selectNickCheck" parameterType="hashMap" resultType="Integer">
+	<![CDATA[
+    SELECT count(*) 
+    FROM member 
+    WHERE mem_nick=#{mem_nick}
+	]]>
+	</select>
+	
 	<insert id="insertMember" parameterType="hashmap"> 
 	<![CDATA[
 	insert into member(
