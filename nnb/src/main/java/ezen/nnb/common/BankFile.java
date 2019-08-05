@@ -16,11 +16,13 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 @Component("bankFile")
 public class BankFile {
 	
-	private static final String filePath = "C:\\dev\\file\\";//파일이 저장될 위치를 지정.
+//	private static final String filePath;//파일이 저장될 위치를 지정.
 	
 	public Map<String,Object> parseInsertFileInfo(Map<String,Object> map, HttpServletRequest request) throws Exception{
 		MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest)request;
     	Iterator<String> iterator = multipartHttpServletRequest.getFileNames(); //파일들의 이름을 받아서 iterator에 집어넣는다.
+    	String filePath = request.getSession().getServletContext().getRealPath("/bankImages/");
+    	System.out.println(filePath);
     	
     	MultipartFile multipartFile = null;
     	String originalFileName = null;
@@ -37,9 +39,10 @@ public class BankFile {
         int i = 1;
         while(iterator.hasNext()){ // 파일이름들이 저장된 것을 하나씩 꺼낸다.
         	multipartFile = multipartHttpServletRequest.getFile(iterator.next()); //파일 정보를 담는다.
+        	System.out.println("empty?:"+multipartFile.isEmpty());
         	if(multipartFile.isEmpty() == false){ //이게 있으면~ 
         		originalFileName = multipartFile.getOriginalFilename();//오리지날 파일 이름을 저장.
-				
+				System.out.println(i+":"+originalFileName==null);
 				if(originalFileName==null) {
 					originalFileName=""; 
 					storedFileName="";
@@ -53,7 +56,6 @@ public class BankFile {
         		
         		map.put("ORIGINAL_FILE_NAME"+i, originalFileName); //오리지날 이름을 맵에 넣는다.
         		map.put("STORED_FILE_NAME"+i, storedFileName); //저장이름을 맵에 넣는다.
-        		System.out.println("dd:"+i);
         	}
         	i++;
         }
@@ -76,7 +78,7 @@ public class BankFile {
         String requestName = null;
         String idx = null;
         
-        
+ /*       
         while(iterator.hasNext()){
         	multipartFile = multipartHttpServletRequest.getFile(iterator.next());
         	if(multipartFile.isEmpty() == false){ //이게 비어있지 않으면~~
@@ -106,6 +108,7 @@ public class BankFile {
             	}
         	}
         }
+        */
 		return list;
 	}
 }

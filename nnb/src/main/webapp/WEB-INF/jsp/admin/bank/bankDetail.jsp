@@ -7,7 +7,20 @@
 <head>
 <%@ include file="/WEB-INF/include/include-header.jspf"%>
 <%@include file="/WEB-INF/include/adminHeader.jspf"%>
-
+<script type="text/javascript">
+	function pop(url){
+		console.log(url);
+		var OpenWindow = window.open();
+		OpenWindow.document.write("<img src="+url+">");
+	}
+$(document).ready(function(){
+	$(".image").on("click",function(e){
+		var src = e.this.src;
+		console.log(src);
+		window.open($(this).src);
+	});
+});
+</script>
 </head>
 <body>
 
@@ -53,14 +66,18 @@
 
       <hr>
       <br />
+      <c:if test="${bank.BANK_STORED_FILE1!=null && bank.BANK_STORED_FILE1!=''}">
       <div>
-         <img width="500" height="300"
-            src="<c:url value='/images/${bank.BANK_STORED_FILE1}'/>" />
+         <img width="500" height="300" onclick="pop(this.src)" style="cursor:pointer;"
+            src="<c:url value='/bankImages/${bank.BANK_STORED_FILE1}'/>" />
       </div>
-      <div>
-         <img width="500" height="300"
-            src="<c:url value='/images/${bank.BANK_STORED_FILE2}'/>" />
+      </c:if>
+      <c:if test="${bank.BANK_STORED_FILE2!=null && bank.BANK_STORED_FILE2!=''}">
+      <div class="image">
+         <img width="500" height="300" onclick="pop(this.src)" style="cursor:pointer;"
+            src="<c:url value='/bankImages/${bank.BANK_STORED_FILE2}'/>" />
       </div>
+      </c:if>
       <div>
          내용<br />
          <div>${bank.BANK_CONTENT}</div>

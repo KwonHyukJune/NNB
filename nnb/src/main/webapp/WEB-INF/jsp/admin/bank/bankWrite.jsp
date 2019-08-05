@@ -21,8 +21,22 @@
 		});
 	});
 	function fn_deleteFile(obj){
-		obj.prev().prev().val('');
+		obj.prev().val('');
 	}
+	function chk_file_type(obj) {
+		 var file_kind = obj.value.lastIndexOf('.');
+		 var file_name = obj.value.substring(file_kind+1,obj.length);
+		 var file_type = file_name.toLowerCase();
+
+		 check_file_type=['jpg','gif','png','jpeg','bmp'];
+
+		 if(check_file_type.indexOf(file_type)==-1){
+		  alert('이미지 파일만 선택할 수 있습니다.');
+		  var parent_Obj=obj.parentNode;
+		  var node=parent_Obj.replaceChild(obj.cloneNode(true),obj);
+		  return false;
+		 }
+	 }
 </script>
 </head>
 <body>
@@ -65,14 +79,14 @@
 			<br />
 			<hr>
 			<p>
-				<input type="file" name="bank_original_file1">첨부파일 1 <input
-					type="hidden" name="bank_stored_file1" value="dd1"> <a
-					href="#" class="btn" id="delete1" name="delete">삭제</a>
+				<input type="file" name="bank_original_file1" accept='image/jpeg,image/gif,image/png' onchange='chk_file_type(this)'>
+				첨부파일 1
+				<a href="#" class="btn" id="delete1" name="delete">삭제</a>
 			</p>
 			<p>
-				<input type="file" name="bank_original_file2">첨부파일 2 <input
-					type="hidden" name="bank_stored_file2" value="dd2"> <a
-					href="#" class="btn" id="delete2" name="delete">삭제</a>
+				<input type="file" name="bank_original_file2" accept='image/jpeg,image/gif,image/png' onchange='chk_file_type(this)'>
+				첨부파일 2 
+				<a href="#" class="btn" id="delete2" name="delete">삭제</a>
 			</p>
 			<hr>
 			<br />

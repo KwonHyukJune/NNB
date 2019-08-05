@@ -13,7 +13,7 @@ public interface AdminBankService {
 	
 	Map<String, Object> selectBankDetail(Map<String, Object> map)throws Exception;
 
-	void updateBankModify(Map<String, Object> map) throws Exception;
+	void updateBankModify(Map<String, Object> map, HttpServletRequest request) throws Exception;
 
 	void deleteBank(Map<String, Object> map) throws Exception;
 }

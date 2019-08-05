@@ -32,7 +32,9 @@ public class AdminBankServiceImpl implements AdminBankService {
 	public void insertBankWrite(Map<String, Object> map, HttpServletRequest request) throws Exception {
 		adminBankDAO.insertBankWrite(map);
 		Map<String,Object> map2 = bankFile.parseInsertFileInfo(map, request); 
-		adminBankDAO.insertBankFile(map2); 
+		if(map2.containsKey("ORIGINAL_FILE_NAME1") || map.containsKey("ORIGINAL_FILE_NAME2")) {
+			adminBankDAO.insertBankFile(map2); 
+		}
 
 	}
 	@Override
@@ -41,8 +43,18 @@ public class AdminBankServiceImpl implements AdminBankService {
 		return resultMap;
 	}
 	@Override
-	public void updateBankModify(Map<String, Object> map) throws Exception {
+	public void updateBankModify(Map<String, Object> map, HttpServletRequest request) throws Exception {
 		adminBankDAO.updateBankModify(map);
+		Map<String,Object> map2 = bankFile.parseInsertFileInfo(map, request); 
+		System.out.println("1:"+map2.containsKey("ORIGINAL_FILE_NAME1"));
+		System.out.println("2:"+map2.containsKey("ORIGINAL_FILE_NAME2"));
+		if(map.containsKey("delete1") || map.containsKey("delete2")) {
+			System.out.println("d1=:"+map.get("delete1"));
+			adminBankDAO.deleteBankFile(map);
+		}
+		if(map2.containsKey("ORIGINAL_FILE_NAME1") || map.containsKey("ORIGINAL_FILE_NAME2")) {
+			adminBankDAO.insertBankFile(map2); 
+		}
 	}
 	@Override
 	public void deleteBank(Map<String, Object> map) throws Exception {

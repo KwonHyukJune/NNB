@@ -22,11 +22,35 @@
          
       }
    
-   function fn_deleteFile(obj){ 
-      obj.parent().remove(); 
-      }
+   function fn_deleteFile1(obj){ 
+		obj.prev().val('');
+		obj.prev().prev().val('');
+		console.log("qka?:"+"${bank.BANK_STORED_FILE1!=null}");
+		if("${bank.BANK_STORED_FILE1!=null}"){
+			str = "<input type='hidden' name='delete1' value='1'>";
+			$("form[name='bankWriteForm']").append(str);
+		}
+		obj.prev().prev().prev().text('');
+   }
+   function fn_deleteFile2(obj){ 
+		obj.prev().val('');
+		obj.prev().prev().val('');
+		if("${bank.BANK_STORED_FILE2!=null && bank.BANK_STORED_FILE2!=''}"){
+			str = "<input type='hidden' name='delete2' value='1'>";
+			$("form[name='bankWriteForm']").append(str);
+		}
+		obj.prev().prev().prev().text('');
+   }
    
    $(document).ready(function(){
+		$("a[name='delete1']").on("click",function(e){	//삭제 버튼
+			e.preventDefault();
+			fn_deleteFile1($(this));
+		});
+		$("a[name='delete2']").on("click",function(e){	//삭제 버튼
+			e.preventDefault();
+			fn_deleteFile2($(this));
+		});
       (function(){
          var value = "${bank.BANK_KIND}";
          var key = $("select[name='bank_kind']>option");
@@ -51,7 +75,20 @@
          };
       })();
    });
+	function chk_file_type(obj) {
+		 var file_kind = obj.value.lastIndexOf('.');
+		 var file_name = obj.value.substring(file_kind+1,obj.length);
+		 var file_type = file_name.toLowerCase();
 
+		 check_file_type=['jpg','gif','png','jpeg','bmp'];
+
+		 if(check_file_type.indexOf(file_type)==-1){
+		  alert('이미지 파일만 선택할 수 있습니다.');
+		  var parent_Obj=obj.parentNode;
+		  var node=parent_Obj.replaceChild(obj.cloneNode(true),obj);
+		  return false;
+		 }
+	 }
 </script>
 </head>
 <body>
@@ -88,7 +125,7 @@
       <hr>
       <br />
    </div>
-   <form action="bankModify" method="post" name="bankWriteForm">
+   <form action="bankModify" method="post" name="bankWriteForm" enctype="multipart/form-data">
       <input type="hidden" name="num" value="${bank.BANK_NUM}">
       <div>
          은행종류 <select name="bank_kind">
@@ -115,17 +152,19 @@
          <br /> <br />
          <hr>
          <p>
-            <a href="#">${bank.BANK_ORIGINAL_FILE1}</a> <input type="hidden"
-               id="bank_stored_file1" name="bank_stored_file1"
-               velue="${bank.BANK_STORED_FILE1}"> <input type="file"
-               id="bank_original_file1" name="bank_original_file1">첨부파일 1
+            <a href="#">${bank.BANK_ORIGINAL_FILE1}</a> 
+            <input type="hidden" id="bank_stored_file1" name="bank_stored_file1" value="${bank.BANK_STORED_FILE1}"> 
+            <input type="file" id="bank_original_file1" name="bank_original_file1"
+            	accept='image/jpeg,image/gif,image/png' onchange='chk_file_type(this)'>
+            	첨부파일 1
             <a href="#" class="btn" id="delete1" name="delete1">삭제</a>
          </p>
          <p>
             <a href="#">${bank.BANK_ORIGINAL_FILE2}</a> <input type="hidden"
                id="bank_stored_file2" name="bank_stored_file2"
-               velue="${bank.BANK_STORED_FILE2}"> <input type="file"
-               id="bank_original_file2" name="bank_original_file2">첨부파일 2
+               value="${bank.BANK_STORED_FILE2}"> <input type="file"
+               id="bank_original_file2" name="bank_original_file2" accept='image/jpeg,image/gif,image/png' onchange='chk_file_type(this)'>
+               	첨부파일 2
             <a href="#" class="btn" id="delete2" name="delete2">삭제</a>
          </p>
          <hr>
