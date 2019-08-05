@@ -46,23 +46,21 @@ public class LoginController {
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ModelAndView login(CommandMap commandMap, HttpServletRequest request) throws Exception {
-		ModelAndView mv = new ModelAndView("/member/main/login");
+		ModelAndView mv = new ModelAndView("redirect:/member/main/main");
 		String message = "";
 		String url = "";
 
 		HttpSession session = request.getSession();
-
-		System.out.println("MEM_ID:"+commandMap.get("MEM_ID"));
+		
 		Map<String, Object> chk = loginService.loginCheck(commandMap.getMap());
 		Map<String, Object> banChk = adminBanService.banDateCheck(commandMap.getMap());
 		if (chk==null) { // 아이디가 있는지 없는지를 확인
 			message = "해당 아이디가 존재하지 않습니다.";
-
 		} else {
 			if (chk.get("MEM_PW").equals(commandMap.get("MEM_PW"))) {
 				if (chk.get("MEM_VERIFY").equals("Y")) { // 이메일 인증을 했을ㄸ ㅐ
 					if (banChk==null || ((BigDecimal)banChk.get("EXP_DATE")).intValue() <= 0) {// 모든 조건을 충족시키면 로그인!
-						session.setAttribute("MEM_ID", commandMap.get("MEM_ID")); // ���ǿ� ���̵� �־��
+						session.setAttribute("MEM_ID", commandMap.get("MEM_ID")); 
 					} else { // 제재기한이 아직 남았을 때
 						java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
 						message = "회원님은 " + sdf.format(banChk.get("BAN_REMOVAL_DATE")) + "까지 이용이 제재되었습니다.";
@@ -79,6 +77,7 @@ public class LoginController {
 		}
 		mv.addObject("message",message);
 		mv.addObject("url",url);
+		
 		return mv;
 	}
 
