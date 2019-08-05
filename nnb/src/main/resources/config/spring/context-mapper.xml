@@ -7,12 +7,7 @@
 
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-<<<<<<< Upstream, based on origin/sub-master
 		<property name="mapperLocations" value="classpath:/mapper/**/**/*_SQL.xml"/>
-		
-=======
-		<property name="mapperLocations" value="classpath:/mapper/**/**/*_SQL.xml" />		
->>>>>>> f8489da 김지우 2019-07-30 16:33
 	</bean>
 	
 	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
