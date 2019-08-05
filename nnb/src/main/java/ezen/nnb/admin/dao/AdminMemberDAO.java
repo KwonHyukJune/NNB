@@ -12,30 +12,30 @@ public class AdminMemberDAO extends AbstractDAO{
 
 	@SuppressWarnings("unchecked")
 	public List<Map<String,Object>>adminMemberList(Map<String,Object>map) throws Exception{
-		return (List<Map<String,Object>>)selectList("adminMember.adminMemberList",map);
+		return (List<Map<String,Object>>)selectList("member.adminMemberList",map);
 	}
 	@SuppressWarnings("unchecked")
 	public Map<String, Object> adminMemberDetail(Map<String, Object> map) throws Exception{
 		
-		return (Map<String,Object>) selectOne("adminMember.adminMemberDetail",map);
+		return (Map<String,Object>) selectOne("member.adminMemberDetail",map);
 	}
 
 	public void adminMemberBan(Map<String, Object> map) throws Exception {
-		update("adminMember.adminMemberBan", map);
+		update("member.adminMemberBan", map);
 	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Map<String, Object>> adminMemberSearchID(Map<String, Object> map) throws Exception {
-		return (List<Map<String, Object>>) selectList("adminMember.adminMemberSearchID", map);
+		return (List<Map<String, Object>>) selectList("member.adminMemberSearchID", map);
 	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Map<String, Object>> adminMemberSearchName(Map<String, Object> map) throws Exception {
-		return (List<Map<String, Object>>) selectList("adminMember.adminMemberSearchName", map);
+		return (List<Map<String, Object>>) selectList("member.adminMemberSearchName", map);
 	}
 	@SuppressWarnings("unchecked")
 	public List<Map<String, Object>> adminMemberSearchNICK(Map<String, Object> map) throws Exception {
-		return (List<Map<String, Object>>) selectList("adminMember.adminMemberSearchNICK", map);
+		return (List<Map<String, Object>>) selectList("member.adminMemberSearchNICK", map);
 	}
 	
 

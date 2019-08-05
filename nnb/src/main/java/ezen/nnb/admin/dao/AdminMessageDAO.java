@@ -15,22 +15,22 @@ public class AdminMessageDAO extends AbstractDAO{
 	}
 	@SuppressWarnings("unchecked")
 	public Map<String,Object>adminMessageDetail(Map<String,Object>map)throws Exception{
-		return(Map<String,Object>)selectOne("adminMessage.adminMessageDetail",map);
+		return(Map<String,Object>)selectOne("message.adminMessageDetail",map);
 	}
 	public void adminMessageWrite(Map<String,Object>map)throws Exception{
-		insert("adminMessage.adminMessageWrite",map);
+		insert("message.adminMessageWrite",map);
 	}
 	public void adminMessageDelete(Map<String,Object>map)throws Exception{
-		delete("adminMessage.adminMessageDelete",map);
+		delete("message.adminMessageDelete",map);
 	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Map<String,Object>>adminMessageSearchContent(Map<String,Object>map)throws Exception{
-		return(List<Map<String,Object>>)selectList("adminMessage.adminMessageSearchContent",map);
+		return(List<Map<String,Object>>)selectList("message.adminMessageSearchContent",map);
 	}
 	@SuppressWarnings("unchecked")
 	public List<Map<String,Object>>adminMessageSearchTitle(Map<String,Object>map)throws Exception{
-		return(List<Map<String,Object>>)selectList("adminMessage.adminMessageSearchTitle",map);
+		return(List<Map<String,Object>>)selectList("message.adminMessageSearchTitle",map);
 	}
 	
 }
