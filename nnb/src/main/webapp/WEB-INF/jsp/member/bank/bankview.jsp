@@ -6,8 +6,10 @@
 <%@ include file="/WEB-INF/include/include-header.jspf" %>
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/bank.css'/>"/>
 <script type="text/javascript">
-function viewLarge(imgUrl){
-	window.open(imgUrl);
+function pop(url){
+	console.log(url);
+	var OpenWindow = window.open();
+	OpenWindow.document.write("<img src="+url+">");
 }
 </script>
 </head>
@@ -36,13 +38,13 @@ function viewLarge(imgUrl){
 		<c:if test="${bank.BANK_STORED_FILE1!=null && bank.BANK_STORED_FILE1!=''}">
 		<ul>
 			<div class="image">
-				<a href="javascript:viewLarge('/files/${bank.BANK_STORED_FILE1}')">
-				<img src="/files/${bank.BANK_STORED_FILE1}">
+				<img src="<c:url value='/bankImages/${bank.BANK_STORED_FILE1}'/>"
+					 onclick="pop(this.src)" style="cursor:pointer;">
 				</a>
 			<c:if test="${bank.BANK_STORED_FILE2!=null && bank.BANK_STORED_FILE2!=''}">
 				<br>
-				<a href="javascript:viewLarge('/files/${bank.BANK_STORED_FILE2}')">
-				<img src="/files/${bank.BANK_STORED_FILE2}">
+				<img src="<c:url value='/bankImages/${bank.BANK_STORED_FILE1}'/>"
+					 onclick="pop(this.src)" style="cursor:pointer;">
 				</a>
 			</c:if>
 			</div>

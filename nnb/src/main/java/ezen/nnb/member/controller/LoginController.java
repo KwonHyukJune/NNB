@@ -117,7 +117,7 @@ public class LoginController {
 		return mv;
 	}
 
-	@RequestMapping(value = "/join/findPwConfirm")
+	@RequestMapping(value = "/findPwConfirm")
 	// 회원가입 할 경우 해당 이메일 인증을 요구하는 링크를 첨부한 이메일을 발송
 	public ModelAndView sendNewPw(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("member/main/findPwConfirm");
@@ -145,6 +145,17 @@ public class LoginController {
 		}
 
 		mv.addObject("eCheck", eCheck);
+		return mv;
+	}
+	
+	@RequestMapping("/needLogin")
+	//로그인 인터셉터
+	public ModelAndView needLogin(CommandMap commandMap) throws Exception {
+		ModelAndView mv = new ModelAndView("/member/main/login");
+		String message = "로그인이 필요한 서비스입니다.";
+		String url = "/loginForm";
+		mv.addObject("message",message);
+		mv.addObject("url",url);
 		return mv;
 	}
 }
