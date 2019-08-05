@@ -1,5 +1,6 @@
 package ezen.nnb.member.service;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -36,6 +37,54 @@ public class RoommateServiceImpl implements RoommateService {
 	@Override
 	public void myProfileDelete(Map<String, Object> map) throws Exception {
 		roommateDAO.myProfileDelete(map);
+	}
+
+	@Override
+	public List<Map<String, Object>> searchRoommate(Map<String, Object> map) throws Exception {
+		return roommateDAO.searchRoommate(map);
+	}
+
+	@Override
+	public int countRoommate() throws Exception {
+		return roommateDAO.countRoommate();
+	}
+
+	@Override
+	public void listAddFavRoommate(Map<String, Object> map) throws Exception {
+		roommateDAO.listAddFavRoommate(map);
+	}
+
+	@Override
+	public void listDeleteFavRoommate(Map<String, Object> map) throws Exception {
+		roommateDAO.listDeleteFavRoommate(map);
+		
+	}
+
+	@Override
+	public void detailAddFavRoommate(Map<String, Object> map) throws Exception {
+		roommateDAO.detailAddFavRoommate(map);
+	}
+
+	@Override
+	public void detailDeleteFavRoommate(Map<String, Object> map) throws Exception {
+		roommateDAO.detailDeleteFavRoommate(map);
+	}
+
+	@Override
+	public void messageWrite(Map<String, Object> map) throws Exception {
+		roommateDAO.messageWrite(map);
+		
+	}
+
+	@Override
+	public void ignoreUser(Map<String, Object> map) throws Exception {
+		roommateDAO.ignoreUser(map);
+	}
+
+	@Override
+	public void unIgnoreUser(Map<String, Object> map) throws Exception {
+		roommateDAO.unIgnoreUser(map);
+		
 	}
 
 }
