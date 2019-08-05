@@ -12,7 +12,7 @@ public class JoinDAO extends AbstractDAO{
 	
 	public int selectIdCheck(Map<String, Object> map) throws Exception{
 		// TODO Auto-generated method stub
-		return (int)selectOne("join.selectIdCheck",map);
+		return (Integer)selectOne("join.selectIdCheck",map);
 	}
 	public void insertMember(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub

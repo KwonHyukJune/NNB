@@ -35,26 +35,24 @@ public class JoinController {
 		ModelAndView mv=new ModelAndView("member/main/joinForm");
 		return mv;
 	}
-	@RequestMapping(value="/join/idCheck", method = RequestMethod.POST)
-	@ResponseBody
-	public ModelAndView idCheck(CommandMap commandMap) throws Exception{
-		ModelAndView mv=new ModelAndView("member/main/idCheck");
-		System.out.println(commandMap.get("mem_id"));
+	@RequestMapping(value="/join/idCheck")
+	public @ResponseBody String idCheck(CommandMap commandMap) throws Exception{
 		
-		int mem_id = joinService.selectIdCheck(commandMap.getMap());
+		System.out.println(commandMap.getMap());
+		String idCheck = String.valueOf(joinService.selectIdCheck(commandMap.getMap()));
+		System.out.println(idCheck);
+
 		
-		mv.addObject("mem_id", String.valueOf(mem_id));
-		return mv;
+		return idCheck;
 	}
 	
 	@RequestMapping(value="/join/nickCheck")
-	public ModelAndView nickCheck(CommandMap commandMap) throws Exception{
-		ModelAndView mv=new ModelAndView("member/main/nickCheck");
+	public @ResponseBody String nickCheck(CommandMap commandMap) throws Exception{
+
 		System.out.println(commandMap.get("mem_nick"));
-		int nickCheck = joinService.selectNickCheck(commandMap.getMap());
-		mv.addObject("nickCheck", nickCheck);
+		String nickCheck = String.valueOf(joinService.selectNickCheck(commandMap.getMap()));
 		
-		return mv;
+		return nickCheck;
 	}
 	
 	@RequestMapping(value="/join/emailAuth", method=RequestMethod.POST)
@@ -70,7 +68,7 @@ public class JoinController {
 		sendMail.setSubject("이메일 인증 확인 메일입니다.");
 		sendMail.setText(new StringBuffer()
 				.append("<h1>메일인증<h1>")
-				.append("<a href='http://localhost:8080/nnb/memberVerify?mem_email"
+				.append("<a href='http://localhost:8080/nnb/memberVerify?mem_email="
 						+ commandMap.getMap().get("mem_email")/* .toString() */)
 				.append("' target='_blenk'>이메일 인증 확인</a>").toString());
 		sendMail.setFrom("rrnjs1245@naver.com","테스트");
