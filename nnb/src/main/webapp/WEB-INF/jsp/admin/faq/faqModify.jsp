@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>공지사항 수정</title>
+<title>FAQ 질문 수정</title>
 <head>
 <%@ include file="/WEB-INF/include/include-header.jspf" %>
 <%@include file = "/WEB-INF/include/adminHeader.jspf" %>
@@ -11,54 +11,52 @@
 
 $(document).ready(function(){
 	$("#update").on("click", function(e){ //저장하기 버튼
-		updateNotice();
+		updateFAQ();
 	});
 
-	function updateNotice(){
+	function updateFAQ(){
 		var comSubmit = new ComSubmit("frm");
-		comSubmit.setUrl("<c:url value='/admin/noticeModify' />");
+		comSubmit.setUrl("<c:url value='/admin/faq/modify' />");
 		comSubmit.submit();
 	}
 	
 });
 
-
-	
 </script>
 </head>
 <body>
 
-<div><h1>공지 게시판</h1></div>
+<div><h1>FAQ 게시판</h1></div>
 
 <br/>
 <div>
-<h2>공지사항 수정</h2>
+<h2>질문 수정</h2>
 <hr>
 <br/>
 </div>
- <form action="updateNoticeModify" method="post" id="frm" name="updateNoticeModify" >
+ <form action="updateFaq" method="post" id="frm" name="updateNoticeModify" >
  	
 
  	<div>
-       	 공지유형
-        <select id="NT_TYPE" name="NT_TYPE" value="${map.NT_TYPE}" />
-        	<option value="공지유형1">공지유형1</option>
-        	<option value="공지유형2">공지유형2</option>
+       	 카테고리
+        <select id="FAQ_CATEGORY" name="FAQ_CATEGORY">
+        	<option value="회원정보">회원정보</option>
+        	<option value="신고관련">신고관련</option>
         </select>	
   	</div>
  
  
 	<div>
-		<input type="hidden" id="NT_NUM" name="num" value="${map.NT_NUM}">
+		<input type="hidden" id="FAQ_NUM" name="num" value="${map.FAQ_NUM}">
 	</div> 
 	<div>
         제목
-       	<input type="text" id="NT_TITLE" name="NT_TITLE" value= "${map.NT_TITLE }"/>
+       	<input type="text" id="FAQ_TITLE" name="FAQ_TITLE" value= "${map.FAQ_TITLE }"/>
 	</div>
  		<br/>
 	<div>    
 	내용
-		<textarea rows="20" cols="50" id="NT_CONTENT" name="NT_CONTENT">${map.NT_CONTENT}</textarea>
+		<textarea rows="20" cols="50" id="FAQ_CONTENT" name="FAQ_CONTENT">${map.FAQ_CONTENT}</textarea>
     </div>
 </form> 
     <div>
@@ -67,8 +65,7 @@ $(document).ready(function(){
 		<a href="javascript:back()">취소</a>
     </div>
 
-
-
+	
 <br/><br/><br/><br/><br/><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;
 <div>

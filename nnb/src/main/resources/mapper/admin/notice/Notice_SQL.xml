@@ -4,19 +4,72 @@
 
 <!-- #####게시판(관리자, 회원) -->
 <select resultType="hashMap" parameterType="hashMap" id="selectNoticeList">
-<![CDATA[ SELECT NT_NUM, NT_TYPE, NT_TITLE, NT_DATE FROM NOTICE WHERE NT_TYPE='공지유형' ]]>
+<![CDATA[ 
+	SELECT 
+		ROW_NUMBER() OVER (ORDER BY NT_NUM ASC) RNUM,
+		NT_NUM, 
+		NT_TYPE, 
+		NT_TITLE, 
+		NT_DATE 
+	FROM 
+		NOTICE
+ 		ORDER BY RNUM DESC
+	]]>
 </select>
 
 <!-- #####글쓰기(관리자) -->
 <insert parameterType="hashMap" id="insertNoticeWrite">
-<![CDATA[ INSERT INTO NOTICE ( NT_NUM, NT_TYPE, NT_TITLE, NT_CONTENT, NT_DATE ) VALUES (NT_NUM_SEQ.NEXTVAL, #{NT_TYPE}, #{NT_TITLE}, #{NT_CONTENT}, SYSDATE ) ]]>
+<![CDATA[ 
+	INSERT INTO NOTICE ( 
+		NT_NUM, 
+		NT_TYPE, 
+		NT_TITLE, 
+		NT_CONTENT, 
+		NT_DATE 
+	) VALUES (
+		NT_NUM_SEQ.NEXTVAL, 
+		#{NT_TYPE}, 
+		#{NT_TITLE}, 
+		#{NT_CONTENT}, 
+		SYSDATE 
+		) 
+	]]>
 </insert>
+
+<update id="updateNotice" parameterType="hashMap">
+<![CDATA[
+	UPDATE NOTICE
+	SET
+			NT_TYPE = #{NT_TYPE},
+			NT_TITLE = #{NT_TITLE},
+	       	NT_CONTENT = #{NT_CONTENT},
+        	NT_DATE = SYSDATE
+	WHERE
+			NT_NUM = #{num}
+
+]]>
+</update>
+
+<!-- 상세보기 -->
 <select resultType="hashMap" parameterType="hashMap" id="selectNoticeDetail">
-<![CDATA[ SELECT NT_NUM, NT_TYPE, NT_DATE, NT_TITLE, NT_CONTENT FROM NOTICE WHERE NT_NUM = #{NT_NUM} ]]>
+<![CDATA[ 
+	SELECT 
+		NT_NUM, 
+		NT_TYPE, 
+		NT_DATE, 
+		NT_TITLE, 
+		NT_CONTENT 
+	FROM 
+		NOTICE 
+	WHERE 
+		NT_NUM = #{num} 
+]]>
 </select>
 
 <!-- #####글 삭제(관리자) -->
 <delete parameterType="hashmap" id="deleteNotice">
-<![CDATA[ DELETE NOTICE WHERE NT_NUM = #{NT_NUM} ]]>
+<![CDATA[ 
+	DELETE FROM NOTICE WHERE NT_NUM = #{num} 
+]]>
 </delete>
 </mapper>  

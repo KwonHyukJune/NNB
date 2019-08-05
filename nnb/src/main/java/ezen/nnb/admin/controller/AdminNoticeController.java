@@ -1,4 +1,5 @@
 package ezen.nnb.admin.controller;
+
 import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
@@ -13,20 +14,24 @@ import ezen.nnb.common.CommandMap;
 @Controller 
 public class /*컨트롤러*/AdminNoticeController {
 	Logger log=Logger.getLogger(this.getClass());
+	
 	@Resource(name="adminNoticeService") 
 	private AdminNoticeService adminNoticeService;
 	
 	//목록
-	@RequestMapping(value=/*MapperURL*/"/admin/noticeList")
+	@RequestMapping(value="/admin/noticeList")
 	public ModelAndView adminNoticeList(CommandMap commandMap) throws Exception{
-		ModelAndView mv=new ModelAndView(/*jsp*/"/admin/notice/noticeList");
+		ModelAndView mv=new ModelAndView("/admin/notice/noticeList");
+		System.out.println("noticeList"+commandMap.getMap());
+
+		
 		List<Map<String,Object>> list=adminNoticeService.selectNoticeList(commandMap.getMap());
 		mv.addObject("list",list);	
 		return mv;
 	}   
 
 	//상세
-	@RequestMapping(value=/*MapperURL*/"/admin/noticeDetail")
+	@RequestMapping(value=/*MapperURL*/"/admin/notice/detail")
 	public ModelAndView /*메소드*/adminNoticeDetail(CommandMap commandMap) throws Exception{
 		ModelAndView mv = new ModelAndView(/*jsp*/"/admin/notice/noticeDetail");
 		Map<String,Object> map = adminNoticeService./*Mybatis ID*/selectNoticeDetail(commandMap.getMap());
@@ -53,15 +58,18 @@ public class /*컨트롤러*/AdminNoticeController {
 	}//수정
 	@RequestMapping(value=/*MapperURL*/"/admin/noticeModify")
 	public ModelAndView /*메소드*/adminNoticeModify(CommandMap commandMap) throws Exception{
-		ModelAndView mv = new ModelAndView(/*jsp*/"redirect:/admin/noticeDetail");
+		ModelAndView mv = new ModelAndView(/*jsp*/"redirect:/admin/notice/detail");
 		adminNoticeService./*Mybatis ID*/updateNoticeModify(commandMap.getMap());
-		mv.addObject("IDX", commandMap.get("IDX"));
+		mv.addObject("num", commandMap.get("num"));
 		return mv;
 	}
 	//삭제
-	@RequestMapping(value=/*MapperURL*/"/admin/noticeDelete")
+	@RequestMapping(value="/admin/noticeDelete")
 	public ModelAndView /*메소드*/adminNoticeDelete(CommandMap commandMap) throws Exception{
 		ModelAndView mv = new ModelAndView(/*jsp*/"redirect:/admin/noticeList");
+		System.out.println("noticeDelete"+commandMap.getMap());
+
+		
 		adminNoticeService./*Mybatis ID*/deleteNotice(commandMap.getMap());
 		return mv;
 	}

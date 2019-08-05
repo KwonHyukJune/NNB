@@ -12,19 +12,21 @@
 		FAQ_TITLE
 	FROM
 		FAQ 
+		ORDER BY RNUM DESC
 	]]>
 </select>
 
 <select id="selectFaqDetail" parameterType="hashmap" resultType="hashmap"> 
 	<![CDATA[
 	SELECT
+		FAQ_NUM,
 		FAQ_CONTENT,
 		FAQ_TITLE,
 		FAQ_CATEGORY
 	FROM
 		FAQ
 	WHERE
-		FAQ_NUM = #{FAQ_NUM}"
+		FAQ_NUM = #{num}
 	]]>
 </select>
 
@@ -52,14 +54,15 @@
 		FAQ_TITLE = #{FAQ_TITLE},
 		FAQ_CATEGORY = #{FAQ_CATEGORY},
 		FAQ_CONTENT = #{FAQ_CONTENT}
-	WHERE FAQ_NUM = #{FAQ_NUM}
+	WHERE 
+		FAQ_NUM = #{num}
 	]]>
 </select>	
 
 <select id="deleteFaq" parameterType="hashmap"> 
 	<![CDATA[
 	DELETE FAQ
-	WHERE FAQ_NUM = #{FAQ_NUM}
+	WHERE FAQ_NUM = #{num}
 	]]>
 </select>
 </mapper>

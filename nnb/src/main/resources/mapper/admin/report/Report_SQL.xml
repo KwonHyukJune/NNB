@@ -4,46 +4,58 @@
 <mapper namespace="report">
 
 <select id="selectReportRoomList" parameterType="hashmap" resultType="hashmap"> 
-	<![CDATA[
+<![CDATA[
 	SELECT
-		ROW_NUMBER() OVER (ORDER BY FAQ_NUM DESC) RNUM,
+		ROW_NUMBER() OVER (ORDER BY REPORT_NUM DESC) RNUM,
+		REPORT_NUM,
 		REPORT_ID,
 		REPORT_D_ID,
 		REPORT_POST_NUM,
 		REPORT_DATE,
-		REPORT_TYPE
+		REPORT_TYPE,
+		REPORT_TITLE
 	FROM
-		report
+		REPORT
+ 
+]]>
 	<choose>
 	<when test="ReportType==1">
+<![CDATA[	
 	Where 
-		report_type = '욕설 및 혐오발언' and report_post_num is not null;
+		report_type = '욕설 및 혐오발언' and report_post_num is not null
+]]>		
 	</when>
 	<when test="ReportType==2">
+<![CDATA[	
 	Where 
-		report_type = '허위정보 기재' and report_post_num is not null;
-	</when>
+		report_type = '허위정보 기재' and report_post_num is not null
+]]>			
+	</when>	
 	<when test="ReportType==3">
+<![CDATA[	
 	Where 
-		report_type = '음란성 게시글' and report_post_num is not null;
+		report_type = '음란성 게시글' and report_post_num is not null
+]]>		
 	</when>
 	<when test="ReportType==4">
+<![CDATA[	
 	Where 
-		report_type = '도배/광고' and report_post_num is not null;
-	</when>
+		report_type = '도배/광고' and report_post_num is not null
+]]>			
+	</when>	
 	<otherwise>
+<![CDATA[	
 	Where 
-		report_post_num is not null;
+		report_post_num is not null
+]]>			
 	</otherwise>
-	</choose>
-	]]>
-	
+	</choose>	
 </select>
 
 <select id="selectReportMemberList" parameterType="hashmap" resultType="hashmap"> 
 	<![CDATA[
 	SELECT
-		ROW_NUMBER() OVER (ORDER BY FAQ_NUM DESC) RNUM,
+		ROW_NUMBER() OVER (ORDER BY REPORT_NUM DESC) RNUM,
 		REPORT_ID,
 		REPORT_D_ID,
 		REPORT_DATE,
@@ -51,22 +63,25 @@
 	FROM
 		report
 	where
-		report_post_num is null; 
+		report_post_num is null
 	]]>
 </select>
-<select id="selectFaqDetail" parameterType="hashmap" resultType="hashmap"> 
+
+<select id="selectReportDetail" parameterType="hashmap" resultType="hashmap"> 
 	<![CDATA[
 	SELECT
+		REPORT_NUM,
 		REPORT_ID,
 		REPORT_D_ID,
 		REPORT_POST_NUM,
 		REPORT_DATE,
 		REPORT_REASON,
-		REPORT_TYPE
+		REPORT_TYPE,
+		REPORT_TITLE
 	FROM
 		REPORT
 	WHERE
-		REPORT_NUM = #{REPORT_NUM}
+		REPORT_NUM = #{num}
 	]]>
 </select>
 

@@ -24,9 +24,10 @@ public class AdminReportController {
 	@Resource(name="adminRoomService") 
 	private AdminRoomService adminRoomService;
 
-	@RequestMapping(value = "/admin/report/roomList")
+	@RequestMapping(value = "/admin/report/list")
 	public ModelAndView adminReportRoomList(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("/admin/report/list");
+		ModelAndView mv = new ModelAndView("/admin/report/reportList");
+		System.out.println("reportList"+commandMap.getMap());
 
 		List<Map<String, Object>> list = adminReportService.selectReportRoomList(commandMap.getMap());
 		mv.addObject("list", list);
@@ -36,7 +37,7 @@ public class AdminReportController {
 	
 	@RequestMapping(value = "/admin/report/memberList")
 	public ModelAndView adminReportmemberList(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("/admin/report/list");
+		ModelAndView mv = new ModelAndView("/admin/report/reportList");
 
 		List<Map<String, Object>> list = adminReportService.selectReportMemberList(commandMap.getMap());
 		mv.addObject("list", list);
@@ -46,8 +47,9 @@ public class AdminReportController {
 	
 	@RequestMapping(value="/admin/report/detail")
 	public ModelAndView adminFaqDetail(CommandMap commandMap) throws Exception{
-		ModelAndView mv = new ModelAndView("/admin/faq/detail");
-		
+		ModelAndView mv = new ModelAndView("/admin/report/reportDetail");
+		System.out.println("reportDetail"+commandMap.getMap());
+
 		Map<String,Object> map = adminReportService.selectReportDetail(commandMap.getMap());
 		mv.addObject("map", map);
 		

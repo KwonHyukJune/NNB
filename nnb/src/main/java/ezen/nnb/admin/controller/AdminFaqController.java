@@ -19,9 +19,9 @@ public class AdminFaqController {
 	@Resource(name = "adminFaqService")
 	private AdminFaqService adminFaqService;
 
-	@RequestMapping(value = "/admin/faq/list")
+	@RequestMapping(value = "/admin/faq/faqList")
 	public ModelAndView adminFaqList(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("/admin/faq/list");
+		ModelAndView mv = new ModelAndView("/admin/faq/faqList");
 		List<Map<String, Object>> list = adminFaqService.selectFaqList(commandMap.getMap());
 		mv.addObject("list", list);
 		return mv;
@@ -29,13 +29,13 @@ public class AdminFaqController {
 
 	@RequestMapping(value="/admin/faq/writeForm")
 	public ModelAndView adminFaqWriteForm(CommandMap commandMap) throws Exception{
-		ModelAndView mv = new ModelAndView("/admin/faq/writeForm");
+		ModelAndView mv = new ModelAndView("/admin/faq/faqWrite");
 		return mv;
 	}
 	
 	@RequestMapping(value="/admin/faq/write")
 	public ModelAndView adminFaqWrite(CommandMap commandMap) throws Exception{
-		ModelAndView mv = new ModelAndView("redirect:/admin/faq/writeForm");
+		ModelAndView mv = new ModelAndView("redirect:/admin/faq/faqList");
 		
 		adminFaqService.writeFaq(commandMap.getMap());
 		
@@ -44,7 +44,7 @@ public class AdminFaqController {
 	
 	@RequestMapping(value="/admin/faq/detail")
 	public ModelAndView adminFaqDetail(CommandMap commandMap) throws Exception{
-		ModelAndView mv = new ModelAndView("/admin/faq/detail");
+		ModelAndView mv = new ModelAndView("/admin/faq/faqDetail");
 		
 		Map<String,Object> map = adminFaqService.selectFaqDetail(commandMap.getMap());
 		mv.addObject("map", map);
@@ -54,7 +54,7 @@ public class AdminFaqController {
 	
 	@RequestMapping(value="/admin/faq/modifyForm")
 	public ModelAndView adminFaqModifyForm(CommandMap commandMap) throws Exception{
-		ModelAndView mv = new ModelAndView("/admin/faq/modifyForm");
+		ModelAndView mv = new ModelAndView("/admin/faq/faqModify");
 		
 		Map<String,Object> map = adminFaqService.selectFaqDetail(commandMap.getMap());
 		mv.addObject("map", map);
@@ -64,11 +64,11 @@ public class AdminFaqController {
 	
 	@RequestMapping(value="/admin/faq/modify")
 	public ModelAndView adminFaqModify(CommandMap commandMap) throws Exception{
-		ModelAndView mv = new ModelAndView("redirect:/admin/faq/Detail");
+		ModelAndView mv = new ModelAndView("redirect:/admin/faq/detail");
 		
 		adminFaqService.updateFaq(commandMap.getMap());
 		
-		mv.addObject("FAQ_NUM", commandMap.get("FAQ_NUM"));
+		mv.addObject("num", commandMap.get("num"));
 		return mv;
 	}
 	

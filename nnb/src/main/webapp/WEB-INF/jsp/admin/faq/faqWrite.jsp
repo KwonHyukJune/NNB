@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>새 공지 등록</title>
+<title>FAQ 새 질문 등록</title>
 <head>
 <%@ include file="/WEB-INF/include/include-header.jspf" %>
 <%@include file = "/WEB-INF/include/adminHeader.jspf" %>
@@ -16,47 +16,53 @@ $(document).ready(function(){
 		
 	function insertBoard(){
 		var comSubmit = new ComSubmit("frm");
-		comSubmit.setUrl("<c:url value='/admin/noticeWrite' />");
+		comSubmit.setUrl("<c:url value='/admin/faq/write' />");
 		comSubmit.submit();
 	}
 });
 	
-	
-
 </script>
 </head>
 <body>
 
+<div><h1>FAQ 관리</h1></div>
+
+
+
 <div>
-<h2>새 공지 등록</h2>
+<h2>새 질문 등록</h2>
 <hr>
 <br/>
 </div>
-
- <form action="insertNoticeWrite" method="post" id="frm" name="frm">  
- 	<div>
-       	 공지유형
-        <select id="NT_TYPE" name="NT_TYPE">
-        	<option value="공지유형1">공지유형1</option>
-        	<option value="공지유형2">공지유형2</option>
-        </select>	
-  	</div>
- 
+ <form action="insertFaq" method="post" id="frm" name="frm">
 	<div>
-       	 제목
-        <input type="text" id="NT_TITLE" name="NT_TITLE"/>
-  	</div>
+      	  카테고리
+      	<select id="FAQ_CATEGORY" name="FAQ_CATEGORY">
+        	<option value="회원정보">회원정보</option>
+        	<option value="신고관련">신고관련</option>
+        </select>
+   </div>
+   <br/>
+   
+  
+		<div>
+       		 제목
+        	<input type="text" id="FAQ_TITLE" name="FAQ_TITLE"/>
+  		</div>
   		<br/>
-	<div>    
+		<div>    
 	       	 내용
-		<textarea rows="20" cols="50" title="내용" id="NT_CONTENT" name="NT_CONTENT"></textarea>
-	</div>
+		<textarea rows="20" cols="50" title="내용" id="FAQ_CONTENT" name="FAQ_CONTENT"></textarea>
+	    </div>
+
     <div>
     	<br/><br/>
     	<a href="#" id="write">작성하기</a>
     	 <a href="javascript:back()">취소</a>
     </div>
- </form>    
+ </form> 
+
+
 <br/><br/><br/><br/><br/><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;
 <div>

@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ezen.nnb.admin.service.AdminTermsService;
 import ezen.nnb.common.CommandMap;
+
 @Controller
 public class AdminTermsController {
 Logger log = Logger.getLogger(this.getClass());
@@ -21,7 +22,9 @@ Logger log = Logger.getLogger(this.getClass());
 
 	@RequestMapping(value = "/admin/terms/list")
 	public ModelAndView adminTermsList(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("admin/terms/termsList");
+		ModelAndView mv = new ModelAndView("/admin/terms/termsList");
+		System.out.println("termsList"+commandMap.getMap());
+
 		List<Map<String, Object>> list = adminTermsService.selectTermsList(commandMap.getMap());
 		mv.addObject("list", list);
 		return mv;
@@ -35,7 +38,7 @@ Logger log = Logger.getLogger(this.getClass());
 	
 	@RequestMapping(value="/admin/terms/write")
 	public ModelAndView adminTermsWrite(CommandMap commandMap) throws Exception{
-		ModelAndView mv = new ModelAndView("redirect:/admin/terms/termsWrite");
+		ModelAndView mv = new ModelAndView("redirect:/admin/terms/list");
 		
 		adminTermsService.writeTerms(commandMap.getMap());
 		
@@ -52,30 +55,32 @@ Logger log = Logger.getLogger(this.getClass());
 		return mv;
 	}
 	
-	@RequestMapping(value="/admin/terms/termsModify")
+	@RequestMapping(value="/admin/terms/termsModifyForm")
 	public ModelAndView adminTermsModifyForm(CommandMap commandMap) throws Exception{
 		ModelAndView mv = new ModelAndView("/admin/terms/termsModify");
-		
+		System.out.println(commandMap.getMap());
+
 		Map<String,Object> map = adminTermsService.selectTermsDetail(commandMap.getMap());
-		mv.addObject("map", map);
+		mv.addObject("terms", map);
 		
 		return mv;
 	}
 	
-	@RequestMapping(value="/admin/terms/modify")
+	@RequestMapping(value="/admin/terms/termsModify")
 	public ModelAndView adminTermsModify(CommandMap commandMap) throws Exception{
-		ModelAndView mv = new ModelAndView("redirect:/admin/terms/Detail");
-		
+		ModelAndView mv = new ModelAndView("redirect:/admin/terms/list");
+		System.out.println("dd"+commandMap.getMap());
+
 		adminTermsService.updateTermsModify(commandMap.getMap());
 		
-		mv.addObject("Terms_NUM", commandMap.get("Terms_NUM"));
+		mv.addObject("TERMS_NUM", commandMap.get("TERMS_NUM"));
 		return mv;
 	}
 	
 	@RequestMapping(value="/admin/terms/delete")
 	public ModelAndView adminTermsDelete(CommandMap commandMap) throws Exception{
-		ModelAndView mv = new ModelAndView("redirect:/admin/terms/termsList");
-		
+		ModelAndView mv = new ModelAndView("redirect:/admin/terms/list");
+		System.out.println(commandMap.getMap());
 		adminTermsService.deleteTerms(commandMap.getMap());
 		
 		return mv;

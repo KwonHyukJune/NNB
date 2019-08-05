@@ -5,14 +5,11 @@
 <title>약관 상세보기</title>
 <head>
 <%@ include file="/WEB-INF/include/include-header.jspf" %>
+<%@ include file="/WEB-INF/include/adminHeader.jspf" %>
 
 <script type="text/javascript">
 
-function frameclose() { 
-	parent.close() 
-	window.close() 
-	self.close() 
-	} 
+
 
 </script>
 
@@ -55,5 +52,8 @@ function frameclose() {
 	</div>
 </div>
 <br>
+<div>
+<%@ include file="/WEB-INF/include/footer.jspf" %>
+</div>
 </body>
 </html>

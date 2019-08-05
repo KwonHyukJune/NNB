@@ -31,7 +31,7 @@ function delet(num){
 		frm.submit();
 	}
 }
-
+ 
 </script>
 
 </head>
