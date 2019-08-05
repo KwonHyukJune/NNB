@@ -46,7 +46,7 @@ public class LoginController {
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ModelAndView login(CommandMap commandMap, HttpServletRequest request) throws Exception {
-		ModelAndView mv = new ModelAndView("redirect:/member/main/main");
+		ModelAndView mv = new ModelAndView("/member/main/login");
 		String message = "";
 		String url = "";
 
