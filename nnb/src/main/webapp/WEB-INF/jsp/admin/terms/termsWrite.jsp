@@ -33,12 +33,12 @@
    
    <form action="admin/terms/write" method="get" name="contents">
 	<div>
-       		 제목&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       		 제목
         	<input type="text" id="TITLE" name="TITLE" class="wdp_90"/>
   	</div>
   		<br/>
 	<div>    
-	       	 내용&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	       	 내용
 		<textarea rows="20" cols="50" title="내용" id="CONTENTS" name="CONTENTS"></textarea>
 	</div> 
     <div>
