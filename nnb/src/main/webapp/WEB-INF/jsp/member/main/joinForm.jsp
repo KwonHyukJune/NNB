@@ -16,9 +16,9 @@
 		<img src="NINAEBANG">
 		<form id="joinForm" method="post">
 			<input type="text" id="mem_id" name="mem_id" placeholder="아이디" > 
-			<a href="#this" class="btn" id="idCheck" onclick="idCheck()">아이디 중복 확인</a>
+			<a href="#this" class="btn" id="idCheck">아이디 중복 확인</a>
 			<br>
-			<span id = "chkMsg"></span>
+			<div id = "chkMsg"></div>
 			<br>
 			
 			<input type="password" id="mem_pw" name="mem_pw" placeholder="비밀번호"> 
@@ -34,8 +34,11 @@
 			<br> 
 			
 			<input type="text" id="mem_nick" name="mem_nick" placeholder="닉네임">
-			<a href="#" class="btn" id="nickCheck">닉네임 중복 확인</a> 
+			<a href="#this" class="btn" id="nickCheck">닉네임 중복 확인</a> 
 			<br> 
+			
+			<div id = "chkMsg2"></div>
+			<br>
 			
 			<input type="hidden" id="mem_email" name="mem_email">
 			<input type="text" id="email1" name="email1" placeholder="이메일"> @ 
@@ -85,25 +88,24 @@
 	<%@ include file="/WEB-INF/include/include-body.jspf" %>
 	<script type="text/javascript">
 	
-/* 	
 	$(document).ready(function() { //회원가입 (안됨)
 		$("#idCheck").on("click", function(e) {
 			e.preventDefault();
 			fn_idCheck();
 		});
 	});
-	 */
-	function idCheck(){
-	    var mem_id = $('#mem_id').val();
+
+	function fn_idCheck(){
+	    var mem_id = {mem_id : $('#mem_id').val()};
 	    $.ajax({
-	        url:'/join/idCheck',
-	        type:'post',
-	        data:{"mem_id":mem_id},
-	        success:function(data){
-	            if($.trim(data)==0){
-	            	$('#chkMsg').html("사용가능");         
+	        url:"<c:url value='/join/idCheck'/>",
+	        type:'get',
+	        data: mem_id,
+	        success:function(data){	        	
+	            if($.trim(data)=="0"){
+	            	$('#chkMsg').html("사용가능한 아이디 입니다.").css("color", "blue");         
 	            }else{
-	            	$('#chkMsg').html("사용불가"); 
+	            	$('#chkMsg').html("사용불가능한 아이디 입니다.").css("color", "red");
 	            }
 	        },
 	        error:function(){
@@ -112,12 +114,41 @@
 	    });
 	};
 	
+	$(document).ready(function() { //회원가입 (안됨)
+		$("#nickCheck").on("click", function(e) {
+			e.preventDefault();
+			fn_nickCheck();
+		});
+	});
+
+	function fn_nickCheck(){
+	    var mem_nick = {mem_nick : $('#mem_nick').val()};
+	    $.ajax({
+	        url:"<c:url value='/join/nickCheck'/>",
+	        type:'get',
+	        data: mem_nick,
+	        success:function(data){	        	
+	            if($.trim(data)=="0"){
+	            	$('#chkMsg2').html("사용가능한 닉네임 입니다.").css("color", "blue");         
+	            }else{
+	            	$('#chkMsg2').html("사용불가능한 닉네임입니다.").css("color", "red");
+	            }
+	        },
+	        error:function(){
+	                alert("에러입니다");
+	        }
+	    });
+	};
 	
-	
-	
-	
-	
-	
+	$(document).ready(function(){
+		/* 	$("input[name='findIdBy']").change(function(){
+				$(this).siblings("div").hide();
+				$(this).next().next().show();
+			}); */
+			$("#email").change(function(){
+				$("#email2").val($(this).val());
+			});
+		});
 	
 	$(document).ready(function() { //비밀번호 일치 확인
         //[1] lblError 레이어 클리어
@@ -139,14 +170,14 @@
         });
     });
 	
-	$(document).ready(function() { //회원가입 (안됨)
+	$(document).ready(function() { 
 		$("#join").on("click", function(e) {
 			e.preventDefault();
 			fn_join();
 		});
 	});
 	
-	function fn_join(joinForm) { //회원가입 (안됨)
+	function fn_join(joinForm) {
 		var comSubmit = new ComSubmit("joinForm");
 		comSubmit.setUrl("<c:url value='/join/emailAuth'/>");
 		var email = $("#email1").val()+"@"+$("#email2").val();
