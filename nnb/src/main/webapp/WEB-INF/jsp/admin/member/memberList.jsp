@@ -9,9 +9,6 @@
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/myInterest.css'/>"/>
 
 <script type="text/javascript">
-function showPopup() { 
-	  window.open("memberDetail.jsp", "회원상세보기", 
-			  "width=700, height=700, scrollbars=1, left=100, top=50"); }
 </script>
 
 </head>
@@ -21,13 +18,13 @@ function showPopup() {
 <body>
 
 
-<h1><div>회원 관리</div></h1>
+<div><h1>회원 관리</h1></div>
 <br/>
 	
 <div>
 <!-- 링크에 URL 제대로 바꿔줘야 됩니다. 지금은 테스트용 jsp 링크입니다. -->
-<a href=# onclick="location.href='noticeList.jsp'">회원 검색</a>&nbsp;&nbsp;&nbsp;&nbsp;
-<a href=# onclick="location.href='termsList.jsp'">전체 쪽지함</a>
+<a href=# onclick="location.href='memberList.jsp'">회원 검색</a>&nbsp;&nbsp;&nbsp;&nbsp;
+<a href=# onclick="location.href='messageList.jsp'">전체 쪽지함</a>
 </div>
 <br/>
 <select>
@@ -42,36 +39,12 @@ function showPopup() {
 	
 <br/>
 
-
-<!-- 테스트용 세팅 -->
-<%@ page import="java.util.HashMap" %>
-<%@ page import="java.util.Map" %>
-<%@ page import="java.util.List" %>
-<%@ page import="java.util.ArrayList" %>
-<%
-   Map<String,Object> member1 = new HashMap<String,Object>();
-	member1.put("MEM_NUM","1");
-	member1.put("MEM_KIND","임대");
-	member1.put("MEM_ID","ID4");
-	member1.put("MEM_EMAIL","ID4@NAVER.COM");
-	member1.put("MEM_PHONE","010-1234-1234");
-	   
-   
-   List<Map<String,Object>> memberList = new ArrayList<Map<String,Object>>();
-   memberList.add(member1);
- 
-   
- 
-   request.setAttribute("memberList",memberList);
-%>
-<!-- 테스트용 세팅 끝 -->
-
 <div class="selectMeberList">
 
 
 <div class="memberList">
   
-   <c:forEach var="member" items="${memberList}">
+   <c:forEach var="adminMemberList" items="${adminMemberList}">
    <div class="member">
       <div>
          ${member.MEM_NUM}&nbsp;	

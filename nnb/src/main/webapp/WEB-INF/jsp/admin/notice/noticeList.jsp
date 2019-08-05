@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<title>공지 게시판</title>
 <html>
+<title>공지 게시판</title>
 <head>
 <%@ include file="/WEB-INF/include/include-header.jspf" %>
 <%@include file = "/WEB-INF/include/adminHeader.jspf" %>
@@ -10,14 +10,26 @@
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/myInterest.css'/>"/>
 
 <script type="text/javascript">
-	$("#delete").on("click", function(e){ //삭제하기 버튼 
-		e.preventDefault(); 
-		fn_deleteBoard(); 
-	}); 
+	
+function delet(num){  // 삭제
+	if(confirm('삭제하시겠습니까?')){
+		var x = $('a#'+num);
+		var str = "<form id='frm' method='post' action='noticeDelete'>"
+				+ "<input type='hidden' name='num' value='"+num+"'>"
+				+ "</form>";
+		console.log(str);
+		x.html(str);
+		frm.submit();
+	}
+}
 
-function showPopup() { 
-	  window.open("noticeDetail", "회원상세보기", 
-			  "width=700, height=700, scrollbars=1, left=100, top=50"); }
+function goPage(num) {   // 수정
+	location.href="noticeModifyForm?num="+num; 
+	}
+	
+function goPage1(num) {   // 새 약관 등록
+	location.href="/nnb/admin/noticeWriteForm?num="+num; 
+	}	
 </script>
 
 </head>
@@ -27,71 +39,36 @@ function showPopup() {
 <body>
 
 
-<h1><div>게시판 관리</div></h1>
+<div><h1>게시판 관리</h1></div>
 <br/>
 	
 <div>
-<!-- 링크에 URL 제대로 바꿔줘야 됩니다. 지금은 테스트용 jsp 링크입니다. -->
-<a href=# onclick="location.href='noticeList'">공지 게시판</a>&nbsp;&nbsp;&nbsp;&nbsp;
-<a href=# onclick="location.href='roomList.jsp'">방 게시판</a>&nbsp;&nbsp;&nbsp;&nbsp;
-<a href=# onclick="location.href='termsList'">약관 관리</a>
+<a href=# onclick="location.href='/nnb/admin/noticeList'">공지 게시판</a>&nbsp;&nbsp;&nbsp;&nbsp;
+<a href=# onclick="location.href='/nnb/admin/roomList'">방 게시판</a>&nbsp;&nbsp;&nbsp;&nbsp;
+<a href=# onclick="location.href='/nnb/admin/terms/list'">약관 관리</a>
 </div>
 
 <br/><br/><br/>
-
-
-<!-- 테스트용 세팅 -->
-<%@ page import="java.util.HashMap" %>
-<%@ page import="java.util.Map" %>
-<%@ page import="java.util.List" %>
-<%@ page import="java.util.ArrayList" %>
-<%
-   Map<String,Object> notice1 = new HashMap<String,Object>();
- 	notice1.put("NT_NUM","1");
-    notice1.put("NT_TYPE","공지유형1");
-    notice1.put("NT_DATE","2019-07-25");
-    notice1.put("NT_TITLE","공지입니다");
-    notice1.put("NT_CONTENT","공지라구요 아시겠어요?");
-   
-   
-   List<Map<String,Object>> noticeList = new ArrayList<Map<String,Object>>();
-   noticeList.add(notice1);
-  // noticeList.add(noitce2);
-   
- 
-   request.setAttribute("noticeList",noticeList);
-%>
-<!-- 테스트용 세팅 끝 -->
 
 <div class="selectNoticeList">
 
 
 <div class="noticeList">
    
-   <c:forEach var="notice" items="${noticeList}">
+  <c:forEach var="map" items="${list}">
    <div class="notice">
-  <a href="#" onClick="javascript:showPopup()">
+   
+<a href="<c:url value='/admin/notice/detail?num=${map.NT_NUM}'/>">${map.RNUM}&nbsp;${map.NT_TYPE}&nbsp;${map.NT_DATE}&nbsp;${map.NT_TITLE} </a>
       
-      <div>
-         ${notice.NT_NUM}&nbsp;	
-      	
-		 ${notice.NT_TYPE}&nbsp;      
-      	
-         ${notice.NT_DATE}&nbsp;
-         
-         ${notice.NT_TITLE}&nbsp;
-         
-         ${notice.NT_CONTENT}	
-          
-      </div>
-      </a>
-      <a href="#" onClick="javascript:showPopup()">수정</a>
-      <a href="#this" class="btn" id="delete">삭제</a>
-
+   	  <a href="#" onClick="goPage(${map.NT_NUM})">수정</a>
+      <a href="#" class="btn" id="${map.NT_NUM}" onclick="delet(${map.NT_NUM})">삭제</a>
   
    </div>	
-   </c:forEach>
- 
+  </c:forEach>
+   
+   	<div>    
+  		<a href="#" onClick="goPage1(${map.NT_NUM})">새 공지 작성</a>
+	</div>
 </div>
 
 </div>
