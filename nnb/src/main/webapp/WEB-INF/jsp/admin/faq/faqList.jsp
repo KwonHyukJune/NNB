@@ -17,6 +17,18 @@ function writeFAQ(num) {   // 새 질문 등록
 function goPage(num) {   // 수정
 	location.href="modifyForm?num="+num; 
 	}	
+	
+function delet(num){  // 삭제
+	if(confirm('삭제하시겠습니까?')){
+		var x = $('a#'+num);
+		var str = "<form id='frm' method='post' action='/nnb/admin/faq/delete'>"
+				+ "<input type='hidden' name='num' value='"+num+"'>"
+				+ "</form>";
+		console.log(str);
+		x.html(str);
+		frm.submit();
+	}
+}	
 </script>
 
 </head>
