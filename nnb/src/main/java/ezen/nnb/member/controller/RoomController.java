@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -24,8 +25,12 @@ public class RoomController {
 	private RoomService roomService;
 
 	@RequestMapping(value = "/room/adminRoom") //내가 올린 방리스트를 리턴해준다.  + 내가 올린 방 개수 카운트 
-	public ModelAndView adminRoomList(CommandMap commandMap) throws Exception {
+	public ModelAndView adminRoomList(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("member/room/adminRoom");
+		HttpSession session = request.getSession();
+		
+		String MEM_ID = (String) session.getAttribute("MEM_ID");
+		commandMap.put("MEM_ID",MEM_ID);
 		
 		List<Map<String, Object>> list = roomService.selectAdminRoomList(commandMap.getMap());
 		Map<String,Object> roomCount = roomService.selectAdminRoomCount(commandMap.getMap());
@@ -44,6 +49,24 @@ public class RoomController {
 	@RequestMapping(value = "/room/write") // 방 내놓기 폼에서 등록한 정보들을 db에 저장. 
 	public ModelAndView writeRoom(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("member/room/adminRoom");
+		String[] arr = request.getParameterValues("UTILITY_TYPE");
+		String UTILITY_TYPE = "";
+		for(int i=0; i<arr.length; i++) {
+			UTILITY_TYPE = UTILITY_TYPE+arr[i]+",";
+		}
+		String[] arr2 = request.getParameterValues("OPTIONS");
+		String OPTIONS = "";
+		for(int i=0; i<arr2.length; i++) {
+			OPTIONS = OPTIONS+arr2[i]+",";
+		}
+		String[] arr3 = request.getParameterValues("STRUCTURES");
+		String STRUCTURES = "";
+		for(int i=0; i<arr3.length; i++) {
+			STRUCTURES = STRUCTURES+arr3[i]+",";
+		}
+		commandMap.put("UTILITY_TYPE", UTILITY_TYPE);
+		commandMap.put("OPTIONS", OPTIONS);
+		commandMap.put("STRUCTURES", STRUCTURES);
 		roomService.insertRoom(commandMap.getMap(), request);
 		return mv;
 	}

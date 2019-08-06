@@ -276,3 +276,72 @@
     margin-left: 86px;
     margin-right: 86px;
 }
+/* loginForm */
+.eaRvjJ {
+    width: 420px;
+    background-color: rgb(255, 255, 255);
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: relative;
+    z-index: 1001;
+    margin: 0px auto;
+}
+.flwTzf {
+    width: 100%;
+    padding: 50px 35px 0px;
+}
+.csAEhT {
+    margin-bottom: 20px;
+    color: rgb(34, 34, 34);
+    font-size: 25px;
+    text-align: center;
+    line-height: 37px;
+}
+h1 {
+    font-size: 24px;
+    font-weight: 500;
+}
+.kEQJNp {
+    width: 100%;
+}
+.kqUpLp {
+    width: 100%;
+    margin: 18px 0px;
+}
+.kqUpLp::after {
+    display: block;
+    content: "";
+    clear: both;
+}
+.kqUpLp > label {
+    float: left;
+}
+.kAqGVi {
+    display: block;
+    height: 22px;
+    padding-left: 23px;
+    position: relative;
+    cursor: pointer;
+}
+.PcMeW {
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+.kAqGVi > .CheckBox {
+    float: left;
+    width: 22px;
+    height: 22px;
+    background-color: rgb(255, 255, 255);
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(221, 221, 221);
+    border-image: initial;
+    border-radius: 3px;
+}
