@@ -1,12 +1,12 @@
-
 package ezen.nnb.member.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest; 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -27,35 +27,45 @@ public class RoommateController {
 private RoommateService roommateService;
 @Resource(name="ignoreService")
 private IgnoreService ignoreService;
-	int currentPage = 0;
+
+	int currentPage = 1;
 	int totalCount; 
-	int blockCount = 10;
-	int blockPage = 5;
+	int blockCount = 16;
+	int blockPage = 10;
 	private String pagingHtml;  
 	private Paging page;
-		
-
+	private String RI_AGE;
+	private String RI_NICK;
+	private String RI_GENDER;
+	private String RI_LOAN_BIG;
+	private String RI_REGION;
+	private int count;
 	@RequestMapping(value="/roommate/search")
 	public ModelAndView searchRoommate(HttpServletResponse response,HttpServletRequest request,CommandMap commandMap)throws Exception{
-			ModelAndView mv=new ModelAndView("member/roommate/roommateList");
+		ModelAndView mv=new ModelAndView("member/roommate/roommateList");
+		HttpSession session=request.getSession();
 			List<Map<String,Object>>searchRoommate=roommateService.searchRoommate(commandMap.getMap());	  
-			
-			String mateList=(String)commandMap.getMap().get("mateList");	
-			
-			//주소부분은 추가해야함(현재는 비워져 있음)
-			if((String)commandMap.getMap().get("ri_region")!=null) {
+				//int count =roommateService.countRoommate();
 				
+			if(session.getAttribute("MEM_ID")!=null) {//룸메이트 아이디가 존재하면
+				if(session.getAttribute("RI_EXPOSE")=="1") {//검색 여부 허락하면
+				if(session.getAttribute("id")==null) {//신고당한 회원은 제외한 나머지 
+			  //검색ㅇㅇ
+			RI_REGION=request.getParameter("RI_REGION");
+				if(RI_REGION!=null) {
+				mv.addObject("RI_REGION",RI_REGION);
 			}else {
-				
+				mv.addObject("searchRoommate",searchRoommate);
 			}
-			String MEM_NICK=request.getParameter("MEM_NICK");
-			if((String)commandMap.getMap().get("MEM_NICK")!=null) {
-				mv.addObject("MEM_NICK",MEM_NICK);
+			
+			RI_NICK=request.getParameter("RI_NICK");//닉네임검색
+			if(RI_NICK!=null) {
+				mv.addObject("RI_NICK",RI_NICK);
 			}else {
-				mv.addObject("searchRoommate",searchRoommate);			
+				mv.addObject("searchRoommate",searchRoommate);
 			}
-			String RI_AGE=request.getParameter("RI_AGE");
-			if((String)commandMap.getMap().get("RI_AGE")!=null) {
+			RI_AGE=request.getParameter("RI_AGE");//나이
+			if(RI_AGE!=null) {
 				mv.addObject("RI_AGE",RI_AGE);
 				commandMap.put("minyear", "minyear");
 				commandMap.put("maxyear", "maxyear");
@@ -63,57 +73,53 @@ private IgnoreService ignoreService;
 				mv.addObject("searchRoommate",searchRoommate);
 				commandMap.put("minyear",1);//....??
 			}
-			String RI_GENDER=request.getParameter("RI_GENDER");
-			if((String)commandMap.getMap().get("RI_GENDER")!=null) {
+			RI_GENDER=request.getParameter("RI_GENDER");//성별
+			if(RI_GENDER!=null) {
 				mv.addObject("RI_GENDER",RI_GENDER);
 			}else {
 				mv.addObject("searchRoommate",searchRoommate);
 			}
-			String RI_LOAN_BIG=request.getParameter("RI_LOAN_BIG");
-			if((String)commandMap.getMap().get("RI_LOAN_BIG")!=null) {
+			RI_LOAN_BIG=request.getParameter("RI_LOAN_BIG");//기간
+			if(RI_LOAN_BIG!=null) {
 				mv.addObject("RI_LOAN_BIG",RI_LOAN_BIG);
 				commandMap.put("mindeposit", "mindeposit");
 				commandMap.put("maxdeposit", "maxdeposit");
 			}else {
 				mv.addObject("searchRoommate",searchRoommate);
 			}
-			
-		
-			//다중 및 개별 검색?
-			try {
-				if(mateList!=null) {
-					for(int i=0;i<mateList.length();i++) 
-						commandMap.getMap().put("mateList",mateList);
-				}
-			}catch(Exception e) {
-				if(mateList!=null) {
-					commandMap.getMap().put("mateList",mateList);
-				}
+		} 
+		}
+	}
+			else if(session.getAttribute("MEM_ID")==null){//룸메이트 아이디 존재하지 않으면 
+				System.out.println("등록되지 않은 사용자입니다");
 			}
-			
 		
-	totalCount = searchRoommate.size();
-			
-			page = new Paging(currentPage, totalCount, blockCount, blockPage, "searchRoommate");
-			pagingHtml = page.getPagingHtml().toString();
-			
-			int lastCount = totalCount;
-			
-			if(page.getEndCount() < totalCount)
-				lastCount = page.getEndCount() + 1;
-			
-			searchRoommate = searchRoommate.subList(page.getStartCount(), lastCount);
-			
-			 mv.addObject("MEM_NICK",MEM_NICK);
-			 mv.addObject("RI_AGE",RI_AGE);
-			mv.addObject("RI_GENDER",RI_GENDER);
-			mv.addObject("RI_LOAN_BIG",RI_LOAN_BIG);
-			  mv.addObject("totalCount",totalCount);
-			  mv.addObject("pagingHtml",pagingHtml);
-			  mv.addObject("currentPage",currentPage);
-			  mv.addObject("searchRoommate",searchRoommate);
-			  mv.setViewName("member/roommate/roommateList");
-		
+		/*
+		 * Map<String,Object>mateList=new HashMap<String,Object>();
+		 * mateList.put("RI_AGE", RI_AGE); mateList.put("RI_GENDER", RI_GENDER);
+		 * mateList.put("RI_LOAN_BIG",RI_LOAN_BIG); mateList.put("RI_NICK", RI_NICK);
+		 * mateList.put("RI_REGION", RI_REGION); mateList.put("count", count);
+		 * mv.addObject("mateList",mateList);
+		 */
+		/*
+		 * totalCount = searchRoommate.size();
+		 * 
+		 * page = new Paging(currentPage, totalCount, blockCount, blockPage,
+		 * "searchRoommate"); pagingHtml = page.getPagingHtml().toString();
+		 * 
+		 * int lastCount = totalCount;
+		 * 
+		 * if(page.getEndCount() < totalCount) lastCount = page.getEndCount() + 1;
+		 * 
+		 * searchRoommate = searchRoommate.subList(page.getStartCount(), lastCount);
+		 * mv.addObject("RI_REGION",RI_REGION); mv.addObject("RI_NICK",RI_NICK);
+		 * mv.addObject("RI_AGE",RI_AGE); mv.addObject("RI_GENDER",RI_GENDER);
+		 * mv.addObject("RI_LOAN_BIG",RI_LOAN_BIG);
+		 * mv.addObject("totalCount",totalCount); mv.addObject("pagingHtml",pagingHtml);
+		 * mv.addObject("currentPage",currentPage);
+		 * mv.addObject("searchRoommate",searchRoommate);
+		 * mv.setViewName("member/roommate/roommateList");
+		 */
 			  return mv;
 	
 }
@@ -123,10 +129,10 @@ private IgnoreService ignoreService;
 			ModelAndView mv=new ModelAndView();
 			HttpSession session=request.getSession();
 			String check=request.getParameter("check");
-			commandMap.put("IGNORE_MEM",session.getAttribute("MEM_ID"));		
-			commandMap.put("IGNORE_NUM", commandMap.get("IGNORE_NUM"));
 			if(check=="1") {
 				roommateService.listAddFavRoommate(commandMap.getMap());
+				commandMap.put("IGNORE_MEM",session.getAttribute("MEM_ID"));		
+				commandMap.put("IGNORE_NUM", commandMap.get("IGNORE_NUM"));
 				mv.setViewName("member/roommate/roommateList");
 			}
 			return mv;
@@ -137,10 +143,10 @@ private IgnoreService ignoreService;
 		ModelAndView mv = new ModelAndView();
 		HttpSession session=request.getSession();
 		String check=request.getParameter("check");
-		commandMap.put("IGNORE_MEM",session.getAttribute("MEM_ID"));		
-		commandMap.put("IGNORE_NUM", commandMap.get("IGNORE_NUM"));
 		if(check=="0") {
 			roommateService.listDeleteFavRoommate(commandMap.getMap());
+			commandMap.put("IGNORE_MEM",session.getAttribute("MEM_ID"));		
+			commandMap.put("IGNORE_NUM", commandMap.get("IGNORE_NUM"));
 			mv.setViewName("redirect:/roommate/search");
 		} 
 		return mv;
@@ -160,8 +166,8 @@ private IgnoreService ignoreService;
 		ModelAndView mv=new ModelAndView();
 		HttpSession session=request.getSession();
 		if(session.getAttribute("MEM_ID")!=null) {
-			commandMap.put("FAV_MATE_NUM",commandMap.get("FAV_MATE_NUM"));
 			commandMap.put("MEM_ID", session.getAttribute("MEM_ID"));
+			commandMap.put("FAV_MATE_NUM",commandMap.get("FAV_MATE_NUM"));
 			roommateService.listAddFavRoommate(commandMap.getMap());
 		}else {
 			mv.setViewName("redirect:/member/main/loginForm");
@@ -189,8 +195,8 @@ public ModelAndView messageWrite(CommandMap commandMap, HttpServletRequest reque
 	HttpSession session = request.getSession();
 	
 	if (session.getAttribute("RECEIVER")!=null){
-		commandMap.put("MESSAGE_NUM", commandMap.get("MESSAGE_NUM"));
 		commandMap.put("SENDER", session.getAttribute("MEM_ID"));		
+		commandMap.put("MESSAGE_NUM", commandMap.get("MESSAGE_NUM"));
 		mv.setViewName("member/myPage/messageWrite");
 	}else {
 		mv.setViewName("redirect:/member/roommate/roommateDetail");
@@ -203,10 +209,10 @@ public ModelAndView ignoreUser(CommandMap commandMap, HttpServletRequest request
 	ModelAndView mv=new ModelAndView("redirect:/member/roommate/roommateDetail");
 	HttpSession session = request.getSession();
 	int check = ignoreService.checkIgnore(commandMap.getMap());
-		commandMap.put("IGNORE_MEM",session.getAttribute("MEM_ID"));		
-		commandMap.put("IGNORE_NUM", commandMap.get("IGNORE_NUM"));
 	if(check==0) {
 		ignoreService.insertIgnore(commandMap.getMap());
+		commandMap.put("IGNORE_MEM",session.getAttribute("MEM_ID"));		
+		commandMap.put("IGNORE_NUM", commandMap.get("IGNORE_NUM"));
 	}
 return mv;
 }

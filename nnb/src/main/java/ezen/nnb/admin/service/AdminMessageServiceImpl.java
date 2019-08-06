@@ -38,14 +38,14 @@ public class AdminMessageServiceImpl implements AdminMessageService{
 	}
 
 	@Override
-	public List<Map<String, Object>> adminMessageSearchContent(Map<String, Object> map) throws Exception {
+	public List<Map<String, Object>> adminMessageSearchContent(String isSearch) throws Exception {
 
-		return adminMessageDAO.adminMessageSearchContent(map);
+		return adminMessageDAO.adminMessageSearchContent(isSearch);
 	}
 
 	@Override
-	public List<Map<String, Object>> adminMessageSearchTitle(Map<String, Object> map) throws Exception {
-		return adminMessageDAO.adminMessageSearchTitle(map);
+	public List<Map<String, Object>> adminMessageSearchTitle(String isSearch) throws Exception {
+		return adminMessageDAO.adminMessageSearchTitle(isSearch);
 	}
 	
 }
