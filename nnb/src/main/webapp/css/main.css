@@ -130,6 +130,7 @@
 .bhsJD + div {
     margin-top: 20px;
 }
+
 .bJfKMv {
     float: left;
     width: 160px;
@@ -139,6 +140,10 @@
 .kTQnUD:focus {
     box-shadow: rgba(42, 144, 255, 0.15) 0px 0px 6px 0px;
     border-color: rgb(96, 163, 255);
+}
+.bhsJD+span{
+	padding:2px;
+	font-size: 10px;
 }
 .hBLrdP {
     float: left;

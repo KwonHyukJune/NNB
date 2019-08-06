@@ -15,8 +15,7 @@
 			MEMBER 
 		WHERE 
 			MEM_ID = #{MEM_ID} and 
-			MEM_DEL_GB ='N' and 
-			MEM_VERIFY='Y'
+			MEM_DEL_GB ='N'
 	]]>
 	</select>
 	
