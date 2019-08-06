@@ -19,7 +19,7 @@ import ezen.nnb.admin.service.AdminMemberService;
 import ezen.nnb.common.CommandMap;
 @Controller
 public class AdminMemberController{
-		
+		 
 	int currentPage = 0;
 	int totalCount; 
 	int blockCount = 10;
@@ -104,10 +104,10 @@ public class AdminMemberController{
 			@RequestMapping(value="/admin/memberDetail")
 		    public ModelAndView adMemberDetail(CommandMap commandMap) throws Exception{
 				ModelAndView mv = new ModelAndView();
-				System.out.println("detail"+commandMap.getMap());
-
 				Map<String,Object> map = adminMemberService.adminMemberDetail(commandMap.getMap());
+				List<Map<String,Object>>map2=adminMemberService.adminMemberBanDetail(commandMap.getMap());
 				mv.addObject("memberDetail",map);
+				mv.addObject("memberDetails",map2);
 				mv.setViewName("admin/member/memberDetail");			
 				return mv;		 
 	}
@@ -121,7 +121,7 @@ public class AdminMemberController{
 			s.format(cal.getTime());
 			if(!(commandMap.getMap().get("ADMIN_ID").equals(""))) {
 				String id=(String)commandMap.getMap().put("MEM_ID", (String) request.getSession().getAttribute("MEM_ID"));
-				if(id!=null) {
+				if(id=="N") {
 					String ban="";//차단기간
 					//Date ban_date=(Date)commandMap.getMap().get("BAN_DATE");//제재시작
 					String totalBan="";
