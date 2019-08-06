@@ -3,7 +3,8 @@
 <mapper namespace="notice">
 
 <!-- #####게시판(관리자, 회원) -->
-<select resultType="hashMap" parameterType="hashMap" id="selectNoticeList">
+<select id="selectNoticeList" parameterType="hashMap" resultType="hashMap">
+<include refid="common.pagingPre"/> 
 <![CDATA[ 
 	SELECT 
 		ROW_NUMBER() OVER (ORDER BY NT_NUM ASC) RNUM,
@@ -15,7 +16,9 @@
 		NOTICE
  		ORDER BY RNUM DESC
 	]]>
+<include refid="common.pagingPost"/> 
 </select>
+
 
 <!-- #####글쓰기(관리자) -->
 <insert parameterType="hashMap" id="insertNoticeWrite">
@@ -63,6 +66,8 @@
 		NOTICE 
 	WHERE 
 		NT_NUM = #{num} 
+	
+
 ]]>
 </select>
 

@@ -16,12 +16,25 @@ public class /*컨트롤러*/AdminNoticeController {
 	@Resource(name="adminNoticeService") 
 	private AdminNoticeService adminNoticeService;
 	
+	
+	@RequestMapping(value="/admin/openNoticeList") 
+	public ModelAndView openBoardList(CommandMap commandMap) throws Exception{ 
+		ModelAndView mv = new ModelAndView("/admin/notice/noticeList"); 
+		return mv; 
+	} 
+
 	//목록
 	@RequestMapping(value=/*MapperURL*/"/admin/noticeList")
 	public ModelAndView adminNoticeList(CommandMap commandMap) throws Exception{
-		ModelAndView mv=new ModelAndView(/*jsp*/"/admin/notice/noticeList");
+		ModelAndView mv=new ModelAndView(/*jsp*/"jsonView");
 		List<Map<String,Object>> list=adminNoticeService.selectNoticeList(commandMap.getMap());
 		mv.addObject("list",list);	
+		if(list.size() > 0){
+    		mv.addObject("TOTAL", list.get(0).get("TOTAL_COUNT"));
+    	}
+    	else{
+    		mv.addObject("TOTAL", 0);
+    	}
 		return mv;
 	}   
 
@@ -35,24 +48,29 @@ public class /*컨트롤러*/AdminNoticeController {
 		mv.addObject("map", map);
 		return mv;
 	}//등록폼	
+	
 	@RequestMapping(value=/*MapperURL*/"/admin/noticeWriteForm")  
 	public ModelAndView /*메소드*/adminNoticeWriteForm(CommandMap commandMap) throws Exception{
 		ModelAndView mv = new ModelAndView(/*jsp*/"/admin/notice/noticeWrite");
 		return mv;
 	}//등록
+	
 	@RequestMapping(value=/*MapperURL*/"/admin/noticeWrite")
 	public ModelAndView /*메소드*/adminNoticeWrite(CommandMap commandMap) throws Exception{
 		ModelAndView mv = new ModelAndView(/*jsp*/"redirect:/admin/noticeList");
 		adminNoticeService./*Mybatis ID*/insertNoticeWrite(commandMap.getMap());
 		return mv;
-	}//수정폼
+	}
+	//수정폼
 	@RequestMapping(value=/*MapperURL*/"/admin/noticeModifyForm")
 	public ModelAndView /*메소드*/adminNoticeModifyForm(CommandMap commandMap) throws Exception{
 		ModelAndView mv = new ModelAndView(/*jsp*/"/admin/notice/noticeModify");
 		Map<String,Object> map = adminNoticeService./*Mybatis ID*/selectNoticeDetail(commandMap.getMap());
 		mv.addObject("map", map);
 		return mv;
-	}//수정
+	}
+	
+	//수정
 	@RequestMapping(value=/*MapperURL*/"/admin/noticeModify")
 	public ModelAndView /*메소드*/adminNoticeModify(CommandMap commandMap) throws Exception{
 		ModelAndView mv = new ModelAndView(/*jsp*/"redirect:/admin/notice/detail");
@@ -61,6 +79,7 @@ public class /*컨트롤러*/AdminNoticeController {
 		return mv;
 	}
 	//삭제
+	
 	@RequestMapping(value=/*MapperURL*/"/admin/noticeDelete")
 	public ModelAndView /*메소드*/adminNoticeDelete(CommandMap commandMap) throws Exception{
 		ModelAndView mv = new ModelAndView(/*jsp*/"redirect:/admin/noticeList");

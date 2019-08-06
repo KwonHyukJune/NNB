@@ -141,10 +141,6 @@
 	};
 	
 	$(document).ready(function(){
-		/* 	$("input[name='findIdBy']").change(function(){
-				$(this).siblings("div").hide();
-				$(this).next().next().show();
-			}); */
 			$("#email").change(function(){
 				$("#email2").val($(this).val());
 			});
