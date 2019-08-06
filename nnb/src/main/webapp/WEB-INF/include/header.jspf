@@ -41,7 +41,7 @@ function goMyPage(){
 		<a class="hVfzba" href="<c:url value='/main/searchRoom'/>">룸메이트찾기</a>
 		<a class="hVfzba" href="<c:url value='/search/roomList'/>">방찾기</a>
 		<a class="hVfzba" href="<c:url value='/myInterest/recentRoom'/>">관심목록</a>
-		<a class="hVfzba" href="<c:url value='/room/write'/>">방내놓기</a>
+		<a class="hVfzba" href="<c:url value='/room/writeForm'/>">방내놓기</a>
 		<a class="hVfzba" href="<c:url value=''/>">알림</a>	<!-- 알림이 프로젝트 흐름도에 누락됨 -->
 	</div>
 	<div class="logout">

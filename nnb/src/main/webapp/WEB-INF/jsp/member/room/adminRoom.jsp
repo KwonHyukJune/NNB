@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- 테스트용 세팅 -->
+<%-- <!-- 테스트용 세팅 -->
 <%@ page import="java.util.HashMap" %>
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.List" %>
@@ -48,7 +48,7 @@
 	request.setAttribute("roomList", roomList);
 	request.setAttribute("count",1);
 %>
-<!-- 테스트용 세팅 끝 -->
+<!-- 테스트용 세팅 끝 --> --%>
 <%@ include file="/WEB-INF/include/include-header.jspf" %>
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/room.css'/>"/>
 <script type="text/javascript">
@@ -70,8 +70,8 @@
 </ul>
 </div>
 
-<c:if test="${count!=null && count!=''}">
-<c:forEach var="room" items="${roomList}">
+<c:if test="${roomCount!=null && roomCount!=''}">
+<c:forEach var="room" items="${list}">
 	<div class="room">
 		<div class="content">
 			<div>매물번호</div>

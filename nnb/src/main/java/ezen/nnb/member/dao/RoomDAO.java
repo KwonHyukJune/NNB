@@ -60,7 +60,7 @@ public class RoomDAO extends AbstractDAO{
 	@SuppressWarnings("unchecked")
 	public Map<String, Object> selectAdminRoomCount(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub
-		return (Map<String, Object>) selectOne("room.selectAdminRoomCount");
+		return (Map<String, Object>) selectOne("room.selectAdminRoomCount",map);
 	}
 
 	public void updateReAdRoom(Map<String, Object> map) throws Exception {
