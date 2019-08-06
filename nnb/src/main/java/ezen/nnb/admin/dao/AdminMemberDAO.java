@@ -19,6 +19,10 @@ public class AdminMemberDAO extends AbstractDAO{
 		
 		return (Map<String,Object>) selectOne("member.adminMemberDetail",map);
 	}
+	@SuppressWarnings("unchecked")
+	public List<Map<String,Object>>adminMemberBanDetail(Map<String,Object>map)throws Exception{
+		return(List<Map<String,Object>>)selectList("member.adminMemberBanDetail",map);
+	} 
 
 	public void adminMemberBan(Map<String, Object> map) throws Exception {
 		update("member.adminMemberBan", map);

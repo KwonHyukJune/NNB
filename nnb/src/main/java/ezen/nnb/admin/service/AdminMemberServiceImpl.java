@@ -18,8 +18,12 @@ public class AdminMemberServiceImpl implements AdminMemberService{
 		return AdminMemberDAO.adminMemberList(map);
 	}
 	@Override
-	public Map<String,Object>adminMemberDetail(Map<String,Object>map)throws Exception{
+	public Map<String,Object>adminMemberDetail(Map<String,Object>map)throws Exception{		
 		return (Map<String, Object>)AdminMemberDAO.adminMemberDetail(map);
+	}	
+	@Override
+	public List<Map<String, Object>> adminMemberBanDetail(Map<String, Object> map) throws Exception {
+		return AdminMemberDAO.adminMemberBanDetail(map);
 	}
 	@Override
 	public void adminMemberBan(Map<String, Object> map) throws Exception {
