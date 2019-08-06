@@ -9,7 +9,8 @@
 
 
 <link rel="stylesheet" type="text/css"
-	href="<c:url value='/css/myInterest.css'/>" />
+	href="<c:url value='/css/myInterest.css'/>" /> 
+<!-------------------------------------------------------------- -->
 </head>
 
 <br />
@@ -25,7 +26,7 @@
 	<br />
 
 	<div>
-		<a href=# onclick="location.href='/nnb/admin/noticeList'">공지 게시판</a>&nbsp;&nbsp;&nbsp;&nbsp;
+		<a href=# onclick="location.href='/nnb/admin/openNoticeList'">공지 게시판</a>&nbsp;&nbsp;&nbsp;&nbsp;
 		<a href=# onclick="location.href='/nnb/admin/roomList'">방 게시판</a>&nbsp;&nbsp;&nbsp;&nbsp;
 		<a href=# onclick="location.href='/nnb/admin/terms/list'">약관 관리</a>
 	</div>
@@ -60,7 +61,7 @@ function delet(num){  // 삭제
 	if(confirm('삭제하시겠습니까?')){
 		var x = $('a#'+num);
 		var str = "<form id='frm' method='post' action='noticeDelete'>"
-				+ "<input type='hidden' name='num' value='"+num+"'>"
+				+ "<input type='hidden' name='NT_NUM' value='"+num+"'>"
 				+ "</form>";
 		console.log(str);
 		x.html(str);
@@ -72,7 +73,7 @@ function goPage(num) {   // 수정
 	location.href="noticeModifyForm?num="+num; 
 	}
 	
-function goPage1(num) {   // 새 약관 등록
+function goPage1(num) {   // 새 공지사항 등록
 	location.href="/nnb/admin/noticeWriteForm?num="+num; 
 	}	
 	
@@ -93,14 +94,14 @@ function fn_selectNoticeListCallback(data){
 	var total = data.TOTAL; 
 	var body = $("div.selectNoticeList"); 
 	body.empty(); 
-	
 	if(total == 0){ 
 		var str = "<div class='notice'>" + "조회된 결과가 없습니다." 
 		+ "</div>"; 
 		body.append(str); 
 	
 	} else{ 
-		var params = { divId : "PAGE_NAVI", 
+		var params = { 
+					divId : "PAGE_NAVI", 
 					pageIndex : "PAGE_INDEX", 
 					totalCount : total, 
 					eventName : "fn_selectNoticeList" 
@@ -110,21 +111,12 @@ function fn_selectNoticeListCallback(data){
 		$.each(data.list, function(key, value){ 
 			str += 
 			    "<div class='notice'>" 
-	    			+ "<a href='<c:url value='/admin/notice/detail?num=${" + value.NT_NUM + "}'/>'>"+ 
+	    			+ "<a href='<c:url value='/admin/noticeDetail?num=${" + value.NT_NUM + "}'/>'>"+ 
 	    					value.RNUM +"&nbsp;"+ value.NT_TYPE +"&nbsp;"+ value.NT_DATE +"&nbsp;"+ value.NT_TITLE + "</a>"
 	    			+ "<a href='#' onClick='goPage(" + value.NT_NUM + ")'>+ 수정" + "</a>"
 					+ "<a href='#' class='btn' id='" + value.NT_NUM +"' onclick='delet("+ value.NT_NUM +")'>삭제</a>"
 				+ "</div>";
-				/* 
-				"<tr>" + 
-						"<td>" + value.IDX + "</td>" + 
-						"<td class='title'>" + 
-							"<a href='#this' name='title'>" + value.TITLE + "</a>" + 
-							"<input type='hidden' name='title' value=" + value.IDX + ">" + 
-						"</td>" + 
-						"<td>" + value.HIT_CNT + "</td>" + 
-						"<td>" + value.CREA_DTM + "</td>" + 
-					"</tr>";  */
+
 			}); 
 		body.append(str); 
 	} 

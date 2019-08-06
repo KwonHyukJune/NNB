@@ -10,10 +10,11 @@ import ezen.nnb.common.AbstractDAO;
 @Repository("adminFaqDAO")
 public class AdminFaqDAO extends AbstractDAO{
 
+
 	@SuppressWarnings("unchecked")
 	public List<Map<String, Object>> selectFaqList(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub
-		return (List<Map<String, Object>>) selectList("faq.selectFaqList", map);
+		return (List<Map<String, Object>>)selectPagingList("faq.selectFaqList", map);
 	}
 
 	public void writeFaq(Map<String, Object> map) throws Exception {

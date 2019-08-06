@@ -5,6 +5,7 @@ import javax.annotation.Resource;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import ezen.nnb.admin.service.AdminNoticeService;
 
@@ -18,7 +19,7 @@ public class /*컨트롤러*/AdminNoticeController {
 	
 	
 	@RequestMapping(value="/admin/openNoticeList") 
-	public ModelAndView openBoardList(CommandMap commandMap) throws Exception{ 
+	public ModelAndView openNoticeList(CommandMap commandMap) throws Exception{ 
 		ModelAndView mv = new ModelAndView("/admin/notice/noticeList"); 
 		return mv; 
 	} 
@@ -39,7 +40,7 @@ public class /*컨트롤러*/AdminNoticeController {
 	}   
 
 	//상세
-	@RequestMapping(value=/*MapperURL*/"/admin/notice/detail")
+	@RequestMapping(value=/*MapperURL*/"/admin/noticeDetail")
 	public ModelAndView /*메소드*/adminNoticeDetail(CommandMap commandMap) throws Exception{
 		ModelAndView mv = new ModelAndView(/*jsp*/"/admin/notice/noticeDetail");
 		System.out.println("dd"+commandMap.getMap());
@@ -57,7 +58,7 @@ public class /*컨트롤러*/AdminNoticeController {
 	
 	@RequestMapping(value=/*MapperURL*/"/admin/noticeWrite")
 	public ModelAndView /*메소드*/adminNoticeWrite(CommandMap commandMap) throws Exception{
-		ModelAndView mv = new ModelAndView(/*jsp*/"redirect:/admin/noticeList");
+		ModelAndView mv = new ModelAndView(/*jsp*/"redirect:/admin/openNoticeList");
 		adminNoticeService./*Mybatis ID*/insertNoticeWrite(commandMap.getMap());
 		return mv;
 	}
@@ -73,16 +74,17 @@ public class /*컨트롤러*/AdminNoticeController {
 	//수정
 	@RequestMapping(value=/*MapperURL*/"/admin/noticeModify")
 	public ModelAndView /*메소드*/adminNoticeModify(CommandMap commandMap) throws Exception{
-		ModelAndView mv = new ModelAndView(/*jsp*/"redirect:/admin/notice/detail");
+		ModelAndView mv = new ModelAndView(/*jsp*/"redirect:/admin/noticeDetail");
 		adminNoticeService./*Mybatis ID*/updateNoticeModify(commandMap.getMap());
 		mv.addObject("num", commandMap.get("num"));
 		return mv;
 	}
 	//삭제
 	
-	@RequestMapping(value=/*MapperURL*/"/admin/noticeDelete")
+	@RequestMapping(value=/*MapperURL*/"/admin/noticeDelete",method=RequestMethod.POST)
 	public ModelAndView /*메소드*/adminNoticeDelete(CommandMap commandMap) throws Exception{
-		ModelAndView mv = new ModelAndView(/*jsp*/"redirect:/admin/noticeList");
+		ModelAndView mv = new ModelAndView(/*jsp*/"redirect:/admin/openNoticeList");
+		System.out.println(commandMap.get("NT_NUM"));
 		adminNoticeService./*Mybatis ID*/deleteNotice(commandMap.getMap());
 		return mv;
 	}
