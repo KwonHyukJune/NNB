@@ -5,7 +5,6 @@
 <title>관리자 메인 페이지</title>
 
 <script>
-
 $(document).ready(function(){
     $("#btnLogin").click(function(){
         // 태크.val() : 태그에 입력된 값
