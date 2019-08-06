@@ -25,7 +25,7 @@ FROM
 SELECT 
 MEM_NUM,
 MEM_ID,
-MEM_NAMQE,
+MEM_NAME,
 MEM_NICK,
 MEM_EMAIL,
 MEM_PHONE,
@@ -60,7 +60,7 @@ WHERE MEM_NAME like '%' || #{isSearch} || '%'
 SELECT 
 MEM_NUM,
 MEM_ID,
-MEM_NAMQE,
+MEM_NAME,
 MEM_NICK,
 MEM_EMAIL,
 MEM_PHONE,
@@ -101,7 +101,10 @@ RI_EXPOSE
 
 FROM MEMBER M, BAN B, ROOMMATE_PROFILE RI
 WHERE
-               M.MEM_NUM = #{M.MEM_NUM}
+  	 M.MEM_ID = RI_MEM_ID
+     AND 
+               M.MEM_NUM = #{MEM_NUM}
+               
  ]]>
 </select>
                

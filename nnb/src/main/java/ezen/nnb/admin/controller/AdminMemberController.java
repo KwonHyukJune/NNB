@@ -104,7 +104,9 @@ public class AdminMemberController{
 			@RequestMapping(value="/admin/memberDetail")
 		    public ModelAndView adMemberDetail(CommandMap commandMap) throws Exception{
 				ModelAndView mv = new ModelAndView();
-				Map<String,Object>map = adminMemberService.adminMemberDetail(commandMap.getMap());
+				System.out.println("detail"+commandMap.getMap());
+
+				Map<String,Object> map = adminMemberService.adminMemberDetail(commandMap.getMap());
 				mv.addObject("memberDetail",map);
 				mv.setViewName("admin/member/memberDetail");			
 				return mv;		 

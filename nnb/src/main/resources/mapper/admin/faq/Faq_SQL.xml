@@ -6,29 +6,31 @@
 <select id="selectFaqList" parameterType="hashmap" resultType="hashmap"> 
 	<![CDATA[
 	SELECT
-		ROW_NUMBER() OVER (ORDER BY FAQ_NUM DESC) RNUM,
+		ROW_NUMBER() OVER (ORDER BY FAQ_NUM ASC) RNUM,
 		FAQ_NUM,
 		FAQ_CATEGORY,
 		FAQ_TITLE
 	FROM
 		FAQ 
+		ORDER BY RNUM DESC
 	]]>
 </select>
 
 <select id="selectFaqDetail" parameterType="hashmap" resultType="hashmap"> 
 	<![CDATA[
 	SELECT
+		FAQ_NUM,
 		FAQ_CONTENT,
 		FAQ_TITLE,
 		FAQ_CATEGORY
 	FROM
 		FAQ
 	WHERE
-		FAQ_NUM = #{FAQ_NUM}"
+		FAQ_NUM = #{num}
 	]]>
 </select>
 
-<insert id="insertFaq" parameterType="hashmap"> 
+<select id="insertFaq" parameterType="hashmap"> 
 	<![CDATA[
 	INSERT INTO FAQ (
 		FAQ_NUM,
@@ -43,23 +45,24 @@
 		#{FAQ_CONTENT}
 	)
 	]]>
-</insert>
+</select>
 
-<update id="updateFaq" parameterType="hashmap"> 
+<select id="updateFaq" parameterType="hashmap"> 
 	<![CDATA[
 	UPDATE FAQ
 	SET
 		FAQ_TITLE = #{FAQ_TITLE},
 		FAQ_CATEGORY = #{FAQ_CATEGORY},
 		FAQ_CONTENT = #{FAQ_CONTENT}
-	WHERE FAQ_NUM = #{FAQ_NUM}
+	WHERE 
+		FAQ_NUM = #{num}
 	]]>
-</update>	
+</select>	
 
-<delete id="deleteFaq" parameterType="hashmap"> 
+<select id="deleteFaq" parameterType="hashmap"> 
 	<![CDATA[
 	DELETE FAQ
-	WHERE FAQ_NUM = #{FAQ_NUM}
+	WHERE FAQ_NUM = #{num}
 	]]>
-</delete>
+</select>
 </mapper>

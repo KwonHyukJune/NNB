@@ -9,6 +9,13 @@
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/myInterest.css'/>"/>
 
 <script type="text/javascript">
+
+function showPopup(num){
+    var url = "/nnb/admin/memberDetail?MEM_NUM="+num;
+    var name = "회원정보";
+    var option = "width = 500, height = 500, top = 100, left = 200, location = no, resizeable = yes, scrollbars = yes"
+    window.open(url, name, option);
+}
 </script>
 
 </head>
@@ -44,22 +51,22 @@
 
 <div class="memberList">
   
-   <c:forEach var="adminMemberList" items="${adminMemberList}">
+   <c:forEach var="memberDetail" items="${adminMemberList}">
    <div class="member">
       <div>
-         ${member.MEM_NUM}&nbsp;	
+         ${memberDetail.MEM_NUM}&nbsp;	
       	
-		 ${member.MEM_KIND}&nbsp;      
+		 ${memberDetail.MEM_KIND}&nbsp;      
       	
-         ${member.MEM_ID}&nbsp;
+         ${memberDetail.MEM_ID}&nbsp;
          
-         ${member.MEM_EMAIL}&nbsp;
+         ${memberDetail.MEM_EMAIL}&nbsp;
          
-         ${member.MEM_PHONE}	
+         ${memberDetail.MEM_PHONE}	
           
       </div>
        
-    <input type="button" value="상세보기" onclick="showPopup();" />
+    <input type="button" value="상세보기" onclick="showPopup(${memberDetail.MEM_NUM});" />
       <a href="#this" class="btn" id="delete">활성화</a>
 
   

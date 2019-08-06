@@ -34,51 +34,25 @@ function submit(){
 <hr>
 <br/><br/><br/>
 
+   <div class="adminMemberDetail">      
 
-<!-- 테스트용 세팅 -->
-<%@ page import="java.util.HashMap" %>
-<%@ page import="java.util.Map" %>
-<%@ page import="java.util.List" %>
-<%@ page import="java.util.ArrayList" %>
-<%
-   Map<String,Object> member1 = new HashMap<String,Object>();
-	member1.put("MEM_NUM","1");
-	member1.put("RI_PROFILE","안녕 룸메구한다");
-	member1.put("RI_BIRTH","2019-07-25");
-	member1.put("MEM_ID","id4");
-	member1.put("MEM_PHONE","010-1234-1234 ");
-	member1.put("RI_GENDER","남자");
-	member1.put("TRADE_TYPE","전세");
-	member1.put("ROOM_NUM","이집은 강남에 있었던거 같다");
-	member1.put("TRADE_STATUS","광고 중"); 	
-   
-   List<Map<String,Object>>memberList = new ArrayList<Map<String,Object>>();
-   memberList.add(member1);
-
-
-   
- 
-   request.setAttribute("member",member1);
-%>
-<!-- 테스트용 세팅 끝 -->
-   <div class="room">      
-	
+		
+		<p>번호 :
+		 ${memberDetail.MEM_NUM} &nbsp; 
+		 </p> 
 		<p>아이디 :
-		 ${member.MEM_ID} &nbsp;     
-		</p>	
+		 ${memberDetail.MEM_ID} &nbsp;     
+		</p>
+		<p>이름 :
+		 ${memberDetail.MEM_NAME} &nbsp;     
+		</p>
 		<p>이메일 : 
-         ${member.MEM_EMAIL}&nbsp;
+         ${memberDetail.MEM_EMAIL}&nbsp;
       	</p>
       	<p>연락처  :      	
-         ${member.MEM_PHONE}&nbsp;
+         ${memberDetail.MEM_PHONE}&nbsp;
          </p>
-    <c:forEach var="ban" items="${banList}">
-      	 <p>제제내역 <br/>
-	      	&nbsp; 날짜 : <br/>
-	      	&nbsp; 사유 : <br/>
-	      	&nbsp; 제재내용 : 
-	     </p> 
-     </c:forEach>    
+    
      
      </div>
      <br/><br/><br/>
@@ -88,27 +62,30 @@ function submit(){
 		<br/><br/><br/>
 <div class="임차">      
 		<b>임차회원</b>
+		<p>닉네임 :
+			${memberDetail.MEM_NICK} &nbsp;     
+		</p>	
 		<p>성별 :
-		 	${member.RI_GENDER} &nbsp;     
+		 	${memberDetail.RI_GENDER} &nbsp;     
 		</p>	
 		<p>생일 : 
-         	${member.RI_BIRTH}&nbsp;
+         	${memberDetail.RI_BIRTH}&nbsp;
       	</p>
       	<p>자기소개  :      	
-        	 ${member.RI_PROFILE}&nbsp;
+        	 ${memberDetail.RI_PROFILE}&nbsp;
         </p>     
 </div>
 
 <div class="임대">      
 		<b>임차회원</b>
 		<p>성별 :
-		 	${member.RI_GENDER} &nbsp;     
+		 	${memberDetail.RI_GENDER} &nbsp;     
 		</p>	
 		<p>생일 : 
-         	${member.RI_BIRTH}&nbsp;
+         	${memberDetail.RI_BIRTH}&nbsp;
       	</p>
       	<p>자기소개  :      	
-        	 ${member.RI_PROFILE}&nbsp;
+        	 ${memberDetail.RI_PROFILE}&nbsp;
         </p>  
 <div>
 등록한 방&nbsp;&nbsp; 거래상태
@@ -140,7 +117,7 @@ function submit(){
      </select> &nbsp;&nbsp;
   
 	
-	  	<a href="#" onClick="javascript:showPopup()">메시지 보내기</a> &nbsp;&nbsp;
+	  	<a href="#" onClick="javascript:showPopup1()">메시지 보내기</a> &nbsp;&nbsp;
 	
 	   	<a href="javascript:submit()">확인</a> &nbsp;&nbsp;  
 	

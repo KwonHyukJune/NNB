@@ -5,10 +5,13 @@
 <select id="selectAdminLogin" parameterType="hashMap" resultType="hashMap">
 <![CDATA[  
 SELECT 
-ADMIN_ID
-FROM ADMIN
-WHERE ADMIN_ID= #{ADMIN_ID} 
-AND ADMIN_PASSWORD= #{ADMIN_PASSWORD}
+	ADMIN_ID
+FROM 
+	ADMIN
+WHERE 
+	ADMIN_ID= #{ADMIN_ID} 
+AND 
+	ADMIN_PASSWORD= #{ADMIN_PASSWORD}
 
 ]]>
 </select>

@@ -57,51 +57,14 @@ function showPopup() {
 
 <br/>
 
-
-<!-- 테스트용 세팅 -->
-<%@ page import="java.util.HashMap" %>
-<%@ page import="java.util.Map" %>
-<%@ page import="java.util.List" %>
-<%@ page import="java.util.ArrayList" %>
-<%
-   Map<String,Object> qna1 = new HashMap<String,Object>();
-	qna1.put("QNA_NUM","1");
-	qna1.put("QNA_STATE","답변대기");
-	qna1.put("QNA_DATE","2019-07-23");
-	qna1.put("MEM_ID","ID4");
-	qna1.put("QNA_TITLE","회원가입 어떻게 하나요?");
-   
-   
-   List<Map<String,Object>> QNAList = new ArrayList<Map<String,Object>>();
-   QNAList.add(qna1);
-  
- 
-   request.setAttribute("QNAList",QNAList);
-%>
-<!-- 테스트용 세팅 끝 -->
-
 <div class="selectQNAList">
 
 
 <div class="QNAList">
    
-   <c:forEach var="qna" items="${QNAList}">
+   <c:forEach var="map" items="${list}">
    <div class="qna">
-  <a href="#" onClick="javascript:showPopup()">
-      
-      <div>
-         ${qna.QNA_NUM}&nbsp;	
-      	
-		 ${qna.QNA_STATE}&nbsp;      
-      	
-      	 ${qna.QNA_DATE}&nbsp;  
-      	
-         ${qna.MEM_ID}&nbsp;
-         
-         ${qna.QNA_TITLE}	
-          
-      </div>
-      </a>
+	<a href="<c:url value='/admin/qna/detail?num=${map.QNA_NUM}'/>">${map.RNUM}&nbsp;${map.RES_STATE}&nbsp;${map.QNA_DATE}&nbsp;${map.MEM_ID}&nbsp;${map.QNA_TITLE}</a>
   
    </div>	
    </c:forEach>

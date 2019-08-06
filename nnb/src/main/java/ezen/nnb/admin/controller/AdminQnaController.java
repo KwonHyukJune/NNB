@@ -21,7 +21,7 @@ public class AdminQnaController {
 
 	@RequestMapping(value = "/admin/qna/list")
 	public ModelAndView adminQnaList(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("/admin/qna/list");
+		ModelAndView mv = new ModelAndView("/admin/qna/qnaList");
 		List<Map<String, Object>> list = adminQnaService.selectQnaList(commandMap.getMap());
 		mv.addObject("list", list);
 		return mv;
@@ -29,7 +29,7 @@ public class AdminQnaController {
 	
 	@RequestMapping(value="/admin/qna/detail")
 	public ModelAndView adminQnaDetail(CommandMap commandMap) throws Exception{
-		ModelAndView mv = new ModelAndView("/admin/qna/detail");
+		ModelAndView mv = new ModelAndView("/admin/qna/qnaAnswer");
 		
 		Map<String,Object> map = adminQnaService.selectQnaDetail(commandMap.getMap());
 		mv.addObject("map", map);
@@ -50,8 +50,9 @@ public class AdminQnaController {
 	
 	@RequestMapping(value="/admin/qna/reply")
 	public ModelAndView adminFaqModify(CommandMap commandMap) throws Exception{
-		ModelAndView mv = new ModelAndView("redirect:/admin/qna/detail");
-		
+		ModelAndView mv = new ModelAndView("/admin/qna/qnaAnswerComplete");
+		System.out.println("reply"+commandMap.getMap());
+
 		adminQnaService.updateQna(commandMap.getMap());
 		
 		mv.addObject("FAQ_NUM", commandMap.get("FAQ_NUM"));

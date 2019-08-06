@@ -23,7 +23,9 @@ public class AdminLoginController {
 	@RequestMapping(value="/admin/login")
     public ModelAndView adminloginform(CommandMap commandMap,HttpServletRequest request) throws Exception{
 		
-		ModelAndView mv = new ModelAndView();		
+		ModelAndView mv = new ModelAndView();	
+		System.out.println("adminLogin"+commandMap.getMap());
+
 		mv.setViewName("/admin/login/adminLogin");
 
 		return mv;
@@ -32,6 +34,8 @@ public class AdminLoginController {
 	@RequestMapping(value="/admin/main")
 	public ModelAndView AdminLogin(CommandMap commandMap, HttpServletRequest request,HttpServletResponse response) throws Exception {
 		ModelAndView mv=new ModelAndView();
+		System.out.println("adminLoginForm"+commandMap.getMap());
+
 		HttpSession session=request.getSession();
 		Map<String,Object>map=adminLoginService.AdminLogin(commandMap.getMap());
 		if(map!=null) {
