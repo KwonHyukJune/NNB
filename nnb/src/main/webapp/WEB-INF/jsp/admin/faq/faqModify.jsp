@@ -16,7 +16,7 @@ $(document).ready(function(){
 
 	function updateFAQ(){
 		var comSubmit = new ComSubmit("frm");
-		comSubmit.setUrl("<c:url value='/admin/faq/modify' />");
+		comSubmit.setUrl("<c:url value='/admin/faq/modify'/>");
 		comSubmit.submit();
 	}
 	
@@ -47,7 +47,7 @@ $(document).ready(function(){
  
  
 	<div>
-		<input type="hidden" id="FAQ_NUM" name="num" value="${map.FAQ_NUM}">
+		<input type="hidden" id="FAQ_NUM" name="FAQ_NUM" value="${map.FAQ_NUM}">
 	</div> 
 	<div>
         제목
