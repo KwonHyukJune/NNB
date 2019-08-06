@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import ezen.nnb.admin.service.AdminFaqService;
@@ -75,13 +76,13 @@ public class AdminFaqController {
 		return mv;
 	}
 	
-	@RequestMapping(value="/admin/faq/modify")
+	@RequestMapping(value="/admin/faq/modify", method=RequestMethod.POST)
 	public ModelAndView adminFaqModify(CommandMap commandMap) throws Exception{
 		ModelAndView mv = new ModelAndView("redirect:/admin/faq/detail");
 		
 		adminFaqService.updateFaq(commandMap.getMap());
 		
-		mv.addObject("num", commandMap.get("num"));
+		mv.addObject("FAQ_NUM", commandMap.get("FAQ_NUM"));
 		return mv;
 	}
 	

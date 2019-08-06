@@ -11,8 +11,8 @@
 
 <script type="text/javascript">
 
-function goPage1(num) {   // 새 약관 등록
-	location.href="/nnb/admin/faq/faqList?num="+num; 
+function goPage1(num) {   // 목록으로
+	location.href="/nnb/admin/openFaqList?FAQ_NUM="+num; 
 	}
 
 

@@ -29,7 +29,7 @@
 	FROM
 		FAQ
 	WHERE
-		FAQ_NUM = #{num}
+		FAQ_NUM = #{FAQ_NUM}
 	]]>
 </select>
 
@@ -58,14 +58,14 @@
 		FAQ_CATEGORY = #{FAQ_CATEGORY},
 		FAQ_CONTENT = #{FAQ_CONTENT}
 	WHERE 
-		FAQ_NUM = #{num}
+		FAQ_NUM = #{FAQ_NUM}
 	]]>
 </select>	
 
 <select id="deleteFaq" parameterType="hashmap"> 
 	<![CDATA[
 	DELETE FAQ
-	WHERE FAQ_NUM = #{num}
+	WHERE FAQ_NUM = #{FAQ_NUM}
 	]]>
 </select>
 </mapper>

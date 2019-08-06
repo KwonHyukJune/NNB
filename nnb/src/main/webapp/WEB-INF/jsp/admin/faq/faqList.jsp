@@ -76,7 +76,7 @@ function delet(num){  // 삭제
 }
 
 function goPage(num) {   // 수정
-	location.href="modifyForm?FAQ_NUM="+num; 
+	location.href="<c:url value='/admin/faq/modifyForm?FAQ_NUM="+num+"'/>"
 	}
 	
 function goPage1(num) {   // 새 약관 등록
@@ -117,14 +117,15 @@ function fn_selectFaqListCallback(data){
 		$.each(data.list, function(key, value){ 
 			str += 
 			    "<div class='faq'>" 
-	    			+ "<a href='<c:url value='/admin/faq/detail?num=${" + value.FAQ_NUM + "}'/>'>"
-	    					+ value.RNUM +"&nbsp;"+ value.FAQ_CATEGORY +"&nbsp;"+ value.FAQ_TITLE + "</a>"
-	    			+ "<a href='#' onClick='goPage(" + value.FAQ_NUM + ")'> 수정" + "</a>"
+	    			+ "<div class='title' onclick='toggle("+ value.FAQ_NUM +");'>"
+	    					+ value.RNUM +"&nbsp;"+ value.FAQ_CATEGORY +"&nbsp;"+ value.FAQ_TITLE 
+	    			+ "</div>"
+					+ "<div class='content' id='" + value.FAQ_NUM + "' style='display: none;'>"
+						+ "<div class='p4'>내용</div>"
+						+ "<div class='p5'>"+ value.FAQ_CONTENT+ "</div>"
+					+ "</div>"
+					+ "<a href='#' onClick='goPage(" + value.FAQ_NUM + ")'> 수정 </a>"
 					+ "<a href='#' class='btn' id='" + value.FAQ_NUM +"' onclick='delet("+ value.FAQ_NUM +")'>삭제</a>"
-						+ "<div class='content' id=" + value.FAQ_NUM + "style= display: none;>"
-							+ "<div class='p4'>내용</div>"
-							+ "<div class='p5'>"+ value.FAQ_CONTENT+ "</div>"
-						+ "</div>"
 				+ "</div>";
 			}); 
 		body.append(str); 
