@@ -18,12 +18,25 @@ public class AdminFaqController {
 	
 	@Resource(name = "adminFaqService")
 	private AdminFaqService adminFaqService;
-
-	@RequestMapping(value = "/admin/faq/faqList")
+	
+	@RequestMapping(value="/admin/openFaqList") 
+	public ModelAndView openBoardList(CommandMap commandMap) throws Exception{ 
+		ModelAndView mv = new ModelAndView("/admin/faq/faqList"); 
+		return mv; 
+	} 
+	
+	@RequestMapping(value = "/admin/faq/list")
 	public ModelAndView adminFaqList(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("/admin/faq/faqList");
+		ModelAndView mv = new ModelAndView("jsonView");
 		List<Map<String, Object>> list = adminFaqService.selectFaqList(commandMap.getMap());
+		
 		mv.addObject("list", list);
+		if(list.size() > 0){
+    		mv.addObject("TOTAL", list.get(0).get("TOTAL_COUNT"));
+    	}
+    	else{
+    		mv.addObject("TOTAL", 0);
+    	}
 		return mv;
 	}
 
@@ -74,7 +87,7 @@ public class AdminFaqController {
 	
 	@RequestMapping(value="/admin/faq/delete")
 	public ModelAndView adminFaqDelete(CommandMap commandMap) throws Exception{
-		ModelAndView mv = new ModelAndView("redirect:/admin/faq/faqList");
+		ModelAndView mv = new ModelAndView("redirect:/admin/faq/list");
 		System.out.println("FAQ_DELETE"+commandMap.getMap());
 
 		adminFaqService.deleteFaq(commandMap.getMap());

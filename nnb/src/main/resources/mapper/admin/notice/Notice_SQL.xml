@@ -74,7 +74,7 @@
 <!-- #####글 삭제(관리자) -->
 <delete parameterType="hashmap" id="deleteNotice">
 <![CDATA[ 
-	DELETE FROM NOTICE WHERE NT_NUM = #{num} 
+	DELETE FROM NOTICE WHERE NT_NUM = #{NT_NUM} 
 ]]>
 </delete>
 </mapper>  
