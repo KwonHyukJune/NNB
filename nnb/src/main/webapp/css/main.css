@@ -288,7 +288,7 @@
 }
 .flwTzf {
     width: 100%;
-    padding: 50px 35px 0px;
+    padding: 50px 35px 100px;
 }
 .csAEhT {
     margin-bottom: 20px;
@@ -344,4 +344,65 @@ h1 {
     border-color: rgb(221, 221, 221);
     border-image: initial;
     border-radius: 3px;
+}
+.etlPzr {
+    margin-left: 6px;
+    color: rgb(136, 136, 136);
+    font-size: 14px;
+    line-height: 22px;
+}
+.ewSpjL {
+    color: rgb(68, 68, 68);
+    font-size: 14px;
+    line-height: 22px;
+    cursor: pointer;
+    margin-top: 20px;
+    margin: auto;
+}
+.PcMeW:checked + .CheckBox::after {
+    content: "";
+    display: block;
+    width: 47%;
+    height: 27%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    transform-origin: 30% 35%;
+    border-left: 2px solid rgb(255, 255, 255);
+    border-bottom: 2px solid rgb(255, 255, 255);
+}
+.PcMeW:checked + .CheckBox {
+    background-color: rgb(0, 108, 255);
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(0, 108, 255);
+    border-image: initial;
+}
+.bLigTE {
+    width: 100%;
+    margin-top: 8px;
+}
+.hgemcD {
+    width: 100%;
+    height: 60px;
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+    font-weight: 500;
+    background-color: rgb(26, 90, 232);
+    border-width: 0px;
+    border-style: initial;
+    border-color: initial;
+    border-image: initial;
+}
+.ewSpjL2{
+	padding-top: 20px;
+	text-align: center;
+}
+.ewSpjL + span{
+	color: rgb(68, 68, 68);
+    font-size: 14px;
+    line-height: 22px;
+    margin-top: 20px;
+    margin: auto;
 }
