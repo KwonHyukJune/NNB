@@ -14,7 +14,7 @@
           MEM_PHONE,
           MEM_JOINDATE
         FROM MEMBER
-        WHERE MEM_ID = #{memId}
+        WHERE MEM_ID = #{MEM_ID}
     ]]>
 	</select>
 	

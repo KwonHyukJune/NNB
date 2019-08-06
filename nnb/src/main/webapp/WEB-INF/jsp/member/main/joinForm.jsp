@@ -8,7 +8,9 @@
 <%@ include file="/WEB-INF/include/include-header.jspf"%>
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/main.css'/>"/>
 <script type="text/javascript">
-	
+	function back(){
+		history.go(-1);
+	}
 	$(document).ready(function() {
 		$("#idCheck").on("click", function(e) {
 			e.preventDefault();
@@ -292,7 +294,7 @@
 				</div>
 			</div>
 			<button class="kvrxoz3" id="join">회원가입</button>
-			<button class="kvrxoz3" onclick="back();">취소</button>
+			<button class="kvrxoz3" onclick="back();" type="button">취소</button>
 
 		</form>
 

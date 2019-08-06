@@ -1,13 +1,15 @@
 <%@ page pageEncoding="utf-8"%>
-	<div class="title">마이페이지</div>
-	<div class="tab">
-		<div>
-		<a class="tabmenu" href="<c:url value='/myPage/myPageInfo'/>">내정보</a>
-		</div>
-		<div>
-		<a class="tabmenu" href="<c:url value='/myPage/messageList'/>">메시지함</a>
-		</div>
-		<div>
-		<a class="tabmenu" href="<c:url value='/myPage/myProfile'/>">내 룸메이트 정보</a>
-		</div>
-	</div>
+<div class="ePpFLV">
+	<h1 class="hZLJjR">마이페이지</h1>
+	<ul class="styled__Tabs-sc-180r82h-2 hxsNQO">
+		<li>
+			<a id="amyPage" href="<c:url value='/myPage/MyInfodetail'/>">내정보</a>
+		</li>
+		<li>
+			<a id="amessage" href="<c:url value='/myPage/messageList'/>">메시지함</a>
+		</li>
+		<li>
+			<a id="amyProfile" href="<c:url value='/myPage/myProfile'/>">내 룸메이트 정보</a>
+		</li>
+	</ul>
+</div>

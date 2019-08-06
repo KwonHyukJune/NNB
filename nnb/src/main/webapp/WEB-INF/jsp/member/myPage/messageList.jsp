@@ -11,6 +11,7 @@ $(document).ready(function(){
 	if(check!=null && check!="" && check!='0'){
 		alert('이미 차단한 회원입니다.');
 	};
+	$('#amessage').addClass('active');
 	var type = getParameterByName('type');
 	if(type=='1'){
 		$("#type").val("1").prop("selected",true);
@@ -45,7 +46,7 @@ $(document).ready(function(){
 <%@ include file="/WEB-INF/include/header.jspf" %>
 <%@ include file="myPage.jspf" %>
 
-<div class="messageList">
+<div class="messageList cAeKOJ">
 
 	<div class="list">
 	<ul>

@@ -7,6 +7,8 @@ http://localhost:8080/ninaebang/myPage/MyInfoDelete		회원탈퇴	/myInfo/MyInfo
 package ezen.nnb.member.controller;
 import java.util.Map;
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,26 +22,32 @@ public class MyInfoController {
 	private MyInfoService myInfoService;
 	
 ///MyInfoDetail
-@RequestMapping(value="/mypage/MyInfodetail")
-public ModelAndView MyInfoDetail(CommandMap commandMap) throws Exception{
-	ModelAndView mv = new ModelAndView("mypage/MyInfo/detail");
+@RequestMapping(value="/myPage/MyInfodetail")
+public ModelAndView MyInfoDetail(CommandMap commandMap, HttpServletRequest request) throws Exception{
+	ModelAndView mv = new ModelAndView("member/myPage/myPageInfo");
+	HttpSession session = request.getSession();
+	String id = (String) session.getAttribute("MEM_ID");
+	commandMap.put("MEM_ID",id);
 	Map<String,Object> map = myInfoService.selectMyInfoDetail(commandMap.getMap());	
 	mv.addObject("map",map);
 	return mv;
 }
 
 ///MyInfoModifyFrom
-@RequestMapping(value="/mypage/MyInfo/modifyForm")
-public ModelAndView MyInfoModifyForm(CommandMap commandMap) throws Exception{
-	ModelAndView mv = new ModelAndView("mypage/MyInfo/modifyForm");
+@RequestMapping(value="/myPage/modifyForm")
+public ModelAndView MyInfoModifyForm(CommandMap commandMap, HttpServletRequest request) throws Exception{
+	ModelAndView mv = new ModelAndView("member/myPage/myPageInfoForm");
+	HttpSession session = request.getSession();
+	String id = (String) session.getAttribute("MEM_ID");
+	commandMap.put("MEM_ID",id);
 	Map<String,Object> map = myInfoService.selectMyInfoDetail(commandMap.getMap());	
 	mv.addObject("map",map);
 	return mv;
 }
 ///MyInfoModify
-@RequestMapping(value="/mypage/MyInfo/modify")
+@RequestMapping(value="/myPage/modify")
 public ModelAndView MyInfoModify(CommandMap commandMap)throws Exception{
-	ModelAndView mv=new ModelAndView("redirect:/mypage/MyInfo/detail");	
+	ModelAndView mv=new ModelAndView("redirect:/myPage/MyInfoModify");	
 	myInfoService.updateMyInfoModify(commandMap.getMap());	
 	mv.addObject("MyInfo", commandMap.get("MyInfo"));
 	return mv;
@@ -49,9 +57,9 @@ public ModelAndView MyInfoModify(CommandMap commandMap)throws Exception{
 */
 
 ///MyInfoDelete
-	@RequestMapping(value="mypage/MyInfoDelete")
+	@RequestMapping(value="/myPage/MyInfoDelete")
 	public ModelAndView MyInfoDelete(CommandMap commandMap)throws Exception{
-	ModelAndView mv=new ModelAndView("redirect: main");	
+	ModelAndView mv=new ModelAndView("redirect:/myPage/MyInfodetail");	
 	myInfoService.deleteMyInfo(commandMap.getMap());	
 	return mv;
 }

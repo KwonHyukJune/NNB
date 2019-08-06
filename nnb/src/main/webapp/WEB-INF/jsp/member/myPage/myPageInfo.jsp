@@ -21,7 +21,7 @@
 	<div>연락처</div>
 		${map.MEM_PHONE}
 	<div>
-		<a href="<c:url value='/myPage/myPageModifyForm'/>" class="btn">수정</a>
+		<a href="<c:url value='/myPage/modifyForm'/>" class="btn">수정</a>
 	</div>
 	
 </div>

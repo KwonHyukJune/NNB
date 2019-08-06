@@ -1,17 +1,50 @@
 @charset "EUC-KR";
-a.tabmenu{
-	width:25%;
+.ePpFLV {
+    width: 100%;
 }
-.messageWriteForm li{
-	list-style: none;
+.hZLJjR {
+    height: 54px;
+    color: rgb(34, 34, 34);
+    font-size: 33px;
+    text-align: center;
+    font-weight: 400;
+    margin: 70px auto 45px;
 }
-.left{
-	width:20%;
-	float: left;
+.hxsNQO {
+    width: 100%;
+    height: 57px;
+    border-bottom: 1px solid rgba(232, 232, 232, 0.7);
 }
-.right{
-	width:80%;
-	float: left;
+.hxsNQO::after {
+    display: block;
+    content: "";
+    clear: both;
+}
+.hxsNQO > li {
+    float: left;
+    width: 33.3333%;
+    height: 57px;
+}
+.hxsNQO > li > a.active {
+    color: rgb(34, 34, 34);
+    font-weight: 500;
+    border-bottom-color: rgb(72, 72, 72);
+}
+.hxsNQO > li > a:hover, .hxsNQO > li > a:active {
+    color: rgb(34, 34, 34);
+}
+.hxsNQO > li > a {
+    display: block;
+    width: 100%;
+    height: 57px;
+    color: rgb(136, 136, 136);
+    font-size: 16px;
+    line-height: 57px;
+    text-align: center;
+    border-bottom: 2px solid transparent;
+}
+ul, li {
+    list-style: none;
 }
 .h{
 	width:20%;
@@ -24,4 +57,10 @@ a.tabmenu{
 .tab div{
 	width:33%;
 	float:left;
+}
+/* messageList */
+.cAeKOJ {
+    width: 850px;
+    padding-bottom: 200px;
+    margin: 0px auto;
 }

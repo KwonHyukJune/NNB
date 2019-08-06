@@ -50,10 +50,18 @@ function goMyPage(){
 	</div>
 	<div class="login hVfzba kiTmxU" onclick="openMenu()">
 		<img src="">${MEM_ID}님
-		<ul class="mymenu" id="mymenu">
+		<ul class="mymenu kNVAlJ" id="mymenu">
 	<%-- 		<li><a href="<c:url value='/myPage/messageList'/>">마이페이지</a></li>
-	 --%>		<li><a href="javascript:goMyPage()">마이페이지</a></li>
-			<li><a href="<c:url value='/logout'/>">로그아웃</a></li>
+	 --%>		<li><a href="javascript:goMyPage()" class="gQxELh">마이페이지</a></li>
+			<li><a href="<c:url value='/logout'/>" class="gQxELh">로그아웃
+			<svg width="17" height="15" viewBox="0 0 17 15">
+				<g fill="#979797" fill-rule="nonzero">
+					<path d="M9 14V9.398h1V15H0V0h9.965v5.352h-1V1H1v13z"></path>
+					<path d="M5 8V7h10.05v1z"></path>
+					<path d="M12 4.707L12.707 4l3.4 3.4-3.391 3.392-.707-.707L14.693 7.4z"></path>
+				</g>
+			</svg>
+			</a></li>
 		</ul>
 	</div>
 </div>

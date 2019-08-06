@@ -6,6 +6,9 @@
 <%@ include file="/WEB-INF/include/include-header.jspf" %>
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/myPage.css'/>"/>
 <script type="text/javascript">
+$(document).ready(function(){
+	$('#amessage').addClass('active');
+});
 function unignore(num){
 	if(confirm('차단 해제?')){
 		var str = "<form id='frm' action='ignoreCancel' method='post'>"

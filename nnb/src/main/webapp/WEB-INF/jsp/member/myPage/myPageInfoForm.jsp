@@ -7,22 +7,50 @@
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/myPage.css'/>"/>
 <script type="text/javascript">
 	var check = 0;
-	function modifyHP(){
-		$("#modifybt").hide();
-		$("#identifybt").show();
-		$(".identify").show();
-		check = 1;
+	function fn_nickCheck(){ 
+		if($('#nickname').val()!="${map.MEM_NICK}"){
+		    var mem_nick = {mem_nick : $('#nickname').val()};
+		    $.ajax({
+		        url:"<c:url value='/join/nickCheck'/>",
+		        type:'get',
+		        data: mem_nick,
+		        success:function(data){	        	
+		            if($.trim(data)=="0"){
+		            	$('#chkMsg2').html("사용가능한 닉네임 입니다.").css("color", "blue");         
+		            }else{
+		            	$('#chkMsg2').html("사용불가능한 닉네임입니다.").css("color", "red");
+		            }
+		        },
+		        error:function(){
+		                alert("에러입니다");
+		        }
+		    });
+		}else{
+			$('#chkMsg2').html("사용가능한 닉네임 입니다.").css("color", "blue");
+		}
 	};
 	$(document).ready(function(){
 		$("#submit").on("click",function(e){
 			e.preventDefault();
 			fn_submit();
 		});
+		var emailArray = '${map.MEM_EMAIL}'.split('@');
+		$("#email1").val(emailArray[0]);
+		$("#email2").val(emailArray[1]);
+		var phone1 = '${map.MEM_PHONE}'.substring(0,3);
+		var phone2 = '${map.MEM_PHONE}'.substring(3,7);
+		var phone3 = '${map.MEM_PHONE}'.substring(7,11);
+		$("#phone2").val(phone2);
+		$("#phone3").val(phone3);
+		var key = $("select[name='phone1']>option");
+		for(var i=0;i<key.length;i++){
+			if(key[i].value==phone1){
+				key[i].selected = true;
+			}
+		};
 	});
 	function fn_submit(){
-		var conSubmit = new ComSubmit(frm);
-		conSubmit.setUrl("<c:url value='/myPage/myPageModify'/>");
-		conSubmit.submit();
+		frm.submit();
 	};
 	/*
 	휴대폰인증 스크립트 -> identify()
@@ -37,18 +65,21 @@
 
 <div class="myPageInfoForm">
 
-	<form id="frm" name="frm">
+	<form id="frm" name="frm" action="modify" method="post">
 	<div>이름</div>
-		<input type="text" id="name" name="name" value="${name}">
+		<input type="text" id="name" name="name" value="${map.MEM_NAME}">
 	<div>비밀번호</div>
 		<input type="password" id="password" name="password">
 	<div>닉네임</div>
-		<input type="text" id="nickname" name="nickname" value="${nickname}">
-		<a href="checknick()">중복확인</a>
+	<div class="bhsJD">
+		<input type="text" id="nickname" name="nickname" placeholder="닉네임" class="jYdxqx2 kTQnUD" value="${map.MEM_NICK}">
+		<button class="kvrxoz2" onclick="fn_nickCheck();" type="button">닉네임 중복 확인</button>
+	</div>
+	<span id="chkMsg2"></span>
 	<div>이메일</div>
-		<input type="text" id="email1" name="email1" value="${email1}">
+		<input type="text" id="email1" name="email1" value="${map.email1}">
 		@
-		<input type="text" id="email2" name="email2" value="${email2}">
+		<input type="text" id="email2" name="email2" value="${map.email2}">
 		<select id="email">
 			<option>직접입력</option>
 			<option>naver.com</option>
@@ -68,17 +99,12 @@
 			</select>
 			<input type="number" id="phone2" name="phone2">
 			<input type="number" id="phone3" name="phone3">
-			<button type="button" onclick="modifyHP()" id="modifybt" style="display:block;">변경</button>
-			<button type="button" onclick="idenfity()" id="identifybt" style="display:none;">인증번호 전송</button>
-		</div>
-		<div class="identify" style="display:none;">
-			<input type="text" id="phoneId" placeholder="인증번호 입력">
-			<button type="button" onclick="">인증번호 확인</button>
 		</div>
 		
 	</form>
 	<div>
-	<a href="#" id="submit" class="btn" onclick="validation()">확인</a>
+	<button onclick="fn_submit();">확인</button>
+	<a href="#" id="submit" class="btn">확인</a>
 	<a href="<c:url value='/myPage/myPageInfo'/>" id="cancle" class="btn">취소</a>
 	</div>
 	<div><a href="<c:url value='/myPage/myPageDeleteComfirm'/>">회원탈퇴</a></div>
