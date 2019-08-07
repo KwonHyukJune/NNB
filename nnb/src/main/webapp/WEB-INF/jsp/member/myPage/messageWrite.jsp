@@ -5,11 +5,15 @@
 <head>
 <%@ include file="/WEB-INF/include/include-header.jspf" %>
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/myPage.css'/>"/>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#amessage').addClass('active');
+}); 
+</script>
 </head>
 <body>
 <%@ include file="/WEB-INF/include/header.jspf" %>
 <%@ include file="myPage.jspf" %>
-
 <div class="messageWrite">
 
 메시지가 전송되었습니다.<br>

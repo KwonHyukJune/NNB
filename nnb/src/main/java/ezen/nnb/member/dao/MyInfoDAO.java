@@ -17,11 +17,11 @@ public class MyInfoDAO extends AbstractDAO {
 	}
 	//수정
 	public void updateMyInfoModify(Map<String, Object> map) throws Exception {
-		update("myInfo.updatemyinfo",map);
+		update("myInfo.insertmyinfo",map);
 	}
 	//회원 탈퇴
 	public void deleteMyInfo(Map<String, Object> map) throws Exception {
-		update("myInfo.insertmyinfo",map);
+		update("myInfo.deleteMember",map);
 	}
 	//인증
 	public void verifyMember(Map<String, Object> map) throws Exception{
