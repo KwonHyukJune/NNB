@@ -84,9 +84,6 @@ M.MEM_PHONE,
 M.MEM_KIND,
 M.MEM_JOINDATE,
 M.MEM_VERIFY,
-B.BAN_NUM,
-B.BAN_REMOVAL_DATE,
-B.BAN_REASON,
 RI_GENDER,
 RI_REGION1,
 RI_REGION2,
@@ -99,13 +96,25 @@ RI_DATE_START,
 RI_DATE_END,
 RI_EXPOSE
 
-FROM MEMBER M, BAN B, ROOMMATE_PROFILE RI
+FROM MEMBER M, ROOMMATE_PROFILE RI
 WHERE
   	 M.MEM_ID = RI_MEM_ID
      AND 
                M.MEM_NUM = #{MEM_NUM}
                
  ]]>
+</select>
+
+<select id="adminMemberBanDetail" parameterType="hashMap" resultType="hashMap">
+SELECT
+       BAN_NUM,
+	   BAN_REMOVAL_DATE,
+	   BAN_REASON
+FROM
+	   FROM BAN
+WHERE
+		MEM_ID=#{MEM_ID}	   
+
 </select>
                
 <select id="adminMemberBan" parameterType="hashMap" resultType="hashMap">
