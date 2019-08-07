@@ -20,18 +20,18 @@ public class AdminLoginController {
 	private AdminLoginService adminLoginService;
 	
 	
-	@RequestMapping(value="/admin/login")
+	@RequestMapping(value="/admin/loginForm")
     public ModelAndView adminloginform(CommandMap commandMap,HttpServletRequest request) throws Exception{
 		
 		ModelAndView mv = new ModelAndView();	
 		System.out.println("adminLogin"+commandMap.getMap());
 
-		mv.setViewName("/admin/login/adminLogin");
+		mv.setViewName("admin/login/adminLogin");
 
 		return mv;
 		
 	}
-	@RequestMapping(value="/admin/main")
+	@RequestMapping(value="/adminLogin")
 	public ModelAndView AdminLogin(CommandMap commandMap, HttpServletRequest request,HttpServletResponse response) throws Exception {
 		ModelAndView mv=new ModelAndView();
 		System.out.println("adminLoginForm"+commandMap.getMap());
@@ -39,23 +39,36 @@ public class AdminLoginController {
 		HttpSession session=request.getSession();
 		Map<String,Object>map=adminLoginService.AdminLogin(commandMap.getMap());
 		if(map!=null) {
-			if(session.getAttribute("ADMIN_ID")==null){
-			mv.addObject("admin",map);
-			mv.setViewName("redirect:/admin/main/adminMain");
-			}}else {
-				mv.setViewName("/admin/login/adminLogin");
-			}
-		return mv;
+			System.out.println("ff");
+			session.setAttribute("ADMIN_ID", commandMap.get("ADMIN_ID"));
+			mv.setViewName("/admin/main/adminMain");
+		}else {
+			mv.setViewName("/admin/login/adminLogin");
 		}
+		return mv;
+	}
 	
 	@RequestMapping(value="/admin/logout")
 	public ModelAndView logout(HttpServletRequest request,CommandMap commandMap) {
 		HttpSession session=request.getSession(false);
 		session.invalidate();
-		ModelAndView mv=new ModelAndView("redirect:/main");
+		ModelAndView mv=new ModelAndView("redirect:/admin/loginForm");
 		return mv;
 	}
+	
+	@RequestMapping("/needAdminLogin")
+	//로그인 인터셉터
+	public ModelAndView needLogin(CommandMap commandMap) throws Exception {
+		ModelAndView mv = new ModelAndView("/admin/login/login");
+		String message = "관리자 로그인이 필요한 서비스입니다.";
+		String url = "/admin/loginForm";
+		mv.addObject("message",message);
+		mv.addObject("url",url);
+		return mv;
+	}
+	
 }
+
 
 
 
