@@ -1,281 +1,418 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<%@ include file="/WEB-INF/include/include-header.jspf" %>
-<link rel="stylesheet" type="text/css" href="<c:url value='/css/room.css'/>"/>
+<%@ include file="/WEB-INF/include/include-header.jspf"%>
+<link rel="stylesheet" type="text/css"
+	href="<c:url value='/css/room.css'/>" />
 <script type="text/javascript">
-/* °Ç¹° À¯Çü¿¡ µû¶ó ¼±ÅÃ ¿É¼Ç ´Þ¶óÁö°Ô */
-/* ÁÖ¼Ò API */
-/* Àü¼¼/¿ù¼¼ ¼±ÅÃÇÏ¸é ±Ý¾×ÀÔ·Â Ã¢ ¶ß°Ô */
-/* div ¼±ÅÃÇÏ¸é ¶óµð¿À Ã¼Å©µÇ°í div ½ºÅ¸ÀÏ ¹Ù²ñ */
-/* °ü¸®ºñ ÀÖÀ½ ´©¸£¸é UTILITY_PRICE º¸ÀÌ°Ô */
-/* div ¼±ÅÃÇÏ¸é Ã¼Å©¹Ú½º Ã¼Å©µÇ°í div ½ºÅ¸ÀÏ ¹Ù²ñ */
-/* ÁÖÂ÷¿©ºÎ 1ÀÌ¸é ÁÖÂ÷±Ý¾× º¯°æºÒ°¡¿¡¼­ º¯°æ°¡´ÉÀ¸·Î ¹Ù²î°Ô */
-/* ÁÖÂ÷¿©ºÎ 0ÀÌ¸é ÁÖÂ÷±Ý¾× º¯°æ°¡´É¿¡¼­ º¯°æºÒ°¡·Î ¹Ù²î°í ¹ë·ù »èÁ¦ */
-/* ÆÄÀÏ µî·ÏÇÒ ¶§ ÀÌ¹ÌÁö ÆÄÀÏ¸¸ µî·ÏµÇ°Ô °¡´ÉÇÑ°¡? ¹°·Ð °¡´ÉÇÏ°ÚÁö.. */
-	var gfv_count = 1;
- 	var mem = sessionStorage.getItem("MEM_ID");
-	function addFile(){
-		var str = "<p><input type='file' name='file_"+(gfv_count++)+"'><a href='#this' class='btn' name='delete'>»èÁ¦</a></p>";
-		$("#fileDiv").append(str);
-		$("a[name='delete']").on("click",function(e){
-			e.preventDefault();
-			fn_deleteFile($(this));
-		});
-	};/* ÈçÇÑ°³¹ßÀÚ ÄÚµå ±×´ë·Î ±Ü¾î¿ÔÀ½ */
-	function fn_deleteFile(obj){
-		obj.parent().remove();
-	};
-	function submit(){
-		var comSubmit = new ComSubmit(frm);
-		comSubmit.setUrl("<c:url value='/room/write'/>");
-		/* EXPIRATION_DATE´Â ÀÚ¹Ù¿¡¼­ ¿À´Ã³¯Â¥+30ÀÏ·Î */
-		comSubmit.addParam("MEM_ID",mem);
-		comSubmit.submit(frm);
-	};
+/* ê±´ë¬¼ ìœ í˜•ì— ë”°ë¼ ì„ íƒ ì˜µì…˜ ë‹¬ë¼ì§€ê²Œ */
+/* ì£¼ì†Œ API */
+/* ì „ì„¸/ì›”ì„¸ ì„ íƒí•˜ë©´ ê¸ˆì•¡ìž…ë ¥ ì°½ ëœ¨ê²Œ */
+/* div ì„ íƒí•˜ë©´ ë¼ë””ì˜¤ ì²´í¬ë˜ê³  div ìŠ¤íƒ€ì¼ ë°”ë€œ */
+/* ê´€ë¦¬ë¹„ ìžˆìŒ ëˆ„ë¥´ë©´ UTILITY_PRICE ë³´ì´ê²Œ */
+/* div ì„ íƒí•˜ë©´ ì²´í¬ë°•ìŠ¤ ì²´í¬ë˜ê³  div ìŠ¤íƒ€ì¼ ë°”ë€œ */
+/* ì£¼ì°¨ì—¬ë¶€ 1ì´ë©´ ì£¼ì°¨ê¸ˆì•¡ ë³€ê²½ë¶ˆê°€ì—ì„œ ë³€ê²½ê°€ëŠ¥ìœ¼ë¡œ ë°”ë€Œê²Œ */
+/* ì£¼ì°¨ì—¬ë¶€ 0ì´ë©´ ì£¼ì°¨ê¸ˆì•¡ ë³€ê²½ê°€ëŠ¥ì—ì„œ ë³€ê²½ë¶ˆê°€ë¡œ ë°”ë€Œê³  ë°¸ë¥˜ ì‚­ì œ */
+/* íŒŒì¼ ë“±ë¡í•  ë•Œ ì´ë¯¸ì§€ íŒŒì¼ë§Œ ë“±ë¡ë˜ê²Œ ê°€ëŠ¥í•œê°€? ë¬¼ë¡  ê°€ëŠ¥í•˜ê² ì§€.. */
+   var gfv_count = 1;
+    var mem = sessionStorage.getItem("MEM_ID");
+   function addFile(){
+      var str = "<p><input type='file' name='file_"+(gfv_count++)+"'><a href='#this' class='btn' name='delete'>ì‚­ì œ</a></p>";
+      $("#fileDiv").append(str);
+      $("a[name='delete']").on("click",function(e){
+         e.preventDefault();
+         fn_deleteFile($(this));
+      });
+   };/* í”í•œê°œë°œìž ì½”ë“œ ê·¸ëŒ€ë¡œ ê¸ì–´ì™”ìŒ */
+   function fn_deleteFile(obj){
+      obj.parent().remove();
+   };
+   $('#chkBox:checked').each(function() { 
+      alert($(this).val()); 
+   });
+
+   function fsubmit(){
+      str = "<input type='hidden' name='MEM_ID' value='"+mem+"'>";
+      $("#frm").append(str);
+      frm.submit();
+   };
 </script>
 </head>
 <body>
-<%@ include file="/WEB-INF/include/header.jspf" %>
-<%@ include file="room.jspf" %>
-<div class="roomWrite">
+	<%@ include file="/WEB-INF/include/header.jspf"%>
+	<%@ include file="room.jspf"%>
+	<div class="roomWrite">
 
-<div class="inform">
-µî·ÏÇÑ ¸Å¹°Àº 30ÀÏ µ¿¾È ¾îÂ¼±¸~
-</div>
+		<div class="inform">ë“±ë¡í•œ ë§¤ë¬¼ì€ 30ì¼ ë™ì•ˆ ì–´ì©Œêµ¬~</div>
 
-<form id="frm" name="frm" enctype="multipart/form-data">
-<div class="table">
-	<div class="thead">¸Å¹° Á¾·ù</div>
-	<div class="tbody">
-		<div class="h">Á¾·ù ¼±ÅÃ</div>
-		<div class="b">
-			<input type="radio" name="ROOM_TYPE" class="ROOM_TYPE" value="¿ø·ë"><div class="button">¿ø·ë</div>
-			<input type="radio" name="ROOM_TYPE" class="ROOM_TYPE" value="Åõ·ë"><div class="button">Åõ·ë</div>
-			<input type="radio" name="ROOM_TYPE" class="ROOM_TYPE" value="¾²¸®·ë"><div class="button">¾²¸®·ë</div>
-			<input type="radio" name="ROOM_TYPE" class="ROOM_TYPE" value="¿ÀÇÇ½ºÅÚ"><div class="button">¿ÀÇÇ½ºÅÚ</div>
-			<input type="radio" name="ROOM_TYPE" class="ROOM_TYPE" value="¾ÆÆÄÆ®"><div class="button">¾ÆÆÄÆ®</div>
-		</div>
-		<div class="h">°Ç¹° À¯Çü</div>
-		<div class="b" id="building">
-			<input type="radio" name="BUILDING_TYPE" class="BUILDING_TYPE" value="´Üµ¶ÁÖÅÃ"><div class="button">´Üµ¶ÁÖÅÃ</div>
-			<input type="radio" name="BUILDING_TYPE" class="BUILDING_TYPE" value="´Ù°¡±¸ÁÖÅÃ"><div class="button">´Ù°¡±¸ÁÖÅÃ</div>
-			<input type="radio" name="BUILDING_TYPE" class="BUILDING_TYPE" value="ºô¶ó/¿¬¸³/´Ù¼¼´ë"><div class="button">ºô¶ó/¿¬¸³/´Ù¼¼´ë</div>
-			<input type="radio" name="BUILDING_TYPE" class="BUILDING_TYPE" value="»ó°¡ÁÖÅÃ"><div class="button">»ó°¡ÁÖÅÃ</div>
-		</div>
-		<div class="b" id="building_office">
-			<input type="radio" name="BUILDING_TYPE" class="BUILDING_TYPE" value="¿ÀÇÇ½ºÅÚ"><div class="button">¿ÀÇÇ½ºÅÚ</div>
-			<input type="radio" name="BUILDING_TYPE" class="BUILDING_TYPE" value="µµ½ÃÇü»ýÈ°ÁÖÅÃ"><div class="button">µµ½ÃÇü»ýÈ°ÁÖÅÃ</div>
-		</div>
-		<div class="b" id="building_apart">
-			<input type="hidden" name="BUILDING_TYPE" value="¾ÆÆÄÆ®">
-		</div>
-	</div>
-</div>
-<div class="table">
-	<div class="thead">À§Ä¡ Á¤º¸</div>
-	<div class="tbody">
-		<div class="h">ÁÖ¼Ò</div>
-		<div class="b">
-			ÁÖ¼ÒAPI Áöµµ¶û °°ÀÌ
-		</div>
-	</div>
-</div>
-<div class="table">
-	<div class="thead">°Å·¡ Á¤º¸</div>
-	<div class="tbody">
-		<div class="h">°Å·¡ Á¾·ù</div>
-		<div class="b">
-			<div>
-				<input type="radio" name="trade_type" class="trade_type" value="¿ù¼¼"><div class="button">¿ù¼¼</div>
-				<input type="radio" name="trade_type" class="trade_type" value="Àü¼¼"><div class="button">Àü¼¼</div>
-			</div>
-			<div id="monthly">
-				<input type="number" name="deposit" id="deposit" placeholder="º¸Áõ±Ý">/
-				<input type="number" name="pay" id="pay" placeholder="¿ù¼¼"> ¸¸¿ø
-			</div>
-			<div id="jeonsediv">
-				<input type="number" name="jeonse" id="jeonse" placeholder="Àü¼¼"> ¸¸¿ø
-			</div>
-		</div>
-	</div>
-</div>
-<div class="table">
-	<div class="thead">±âº» Á¤º¸</div>
-	<div class="tbody">
-		<div class="h">°Ç¹° Å©±â</div>
-		<div class="b">
-			<div>
-				°ø±Þ ¸éÀû 
-				<input type="number" name="sup_p" id="sup_p"> Æò 
-				<input type="number" name="sup_m" id="sup_m"> m2
-			</div>
-			<div>
-				Àü¿ë ¸éÀû 
-				<input type="number" name="real_p" id="real_p"> Æò 
-				<input type="number" name="real_m" id="real_m"> m2
-			</div>
-		</div>
-		<div class="h">°Ç¹° Ãþ¼ö</div>
-		<div class="b">
-			<div>
-				°Ç¹° Ãþ¼ö
-				<select name="building_story" id="building_story">
-					<option>--°Ç¹° Ãþ¼ö ¼±ÅÃ--</option>
-					<c:forEach var="i" begin="1" end="50">
-					<option value="${i}">${i}Ãþ</option>
-					</c:forEach>
-				</select>
-			</div>
-			<div>
-				ÇØ´ç Ãþ¼ö
-				<select name="room_floor" id="room_floor">
-					<option>--ÇØ´ç Ãþ¼ö ¼±ÅÃ--</option>
-					<option value="0">¹ÝÁöÃþ</option>
-					<option value="-1">¿ÁÅ¾</option>
-					<c:forEach var="i" begin="1" end="50">
-					<option value="${i}">${i}Ãþ</option>
-					</c:forEach>
-				</select>
-			</div>
-		</div>
-		<div class="h">³­¹æ Á¾·ù</div>
-		<div class="b">
-			<select name="heating_system" id="heating_system">
-				<option>--³­¹æ Á¾·ù ¼±ÅÃ--</option>
-				<option value="1">Áß¾Ó³­¹æ</option>
-				<option value="2">°³º°³­¹æ</option>
-				<option value="3">Áö¿ª³­¹æ</option>
-			</select>
-		</div>
-		<div class="h">ÀÔÁÖ °¡´ÉÀÏ</div>
-		<div class="b"><input type="date" name="move_in_date" id="move_in_date"></div>
-	</div>
-</div>
-<div class="table">
-	<div class="thead">Ãß°¡Á¤º¸</div>
-	<div class="tbody">
-		<div class="h">°ü¸®ºñ</div>
-		<div class="b">
-			<div>
-				<input type="radio" class="UTILITY_CHECK" name="UTILITY_CHECK" value="0"><div class="button">¾øÀ½</div>
-				<input type="radio" class="UTILITY_CHECK" name="UTILITY_CHECK" value="1"><div class="button">ÀÖÀ½</div>
-				<div class="UTILITY_PRICE">
-				<input type="text" name="UTILITY_PRICE" id="UTILITY_PRICE"> ¸¸¿ø
+		<form id="frm" name="frm" enctype="multipart/form-data" action="write"
+			method="post">
+			<div class="table">
+				<div class="thead">ë§¤ë¬¼ ì¢…ë¥˜</div>
+				<div class="tbody">
+					<div class="h">ì¢…ë¥˜ ì„ íƒ</div>
+					<div class="b">
+						<input type="radio" name="ROOM_TYPE" class="ROOM_TYPE" value="ì›ë£¸">
+						<div class="button">ì›ë£¸</div>
+						<input type="radio" name="ROOM_TYPE" class="ROOM_TYPE" value="íˆ¬ë£¸">
+						<div class="button">íˆ¬ë£¸</div>
+						<input type="radio" name="ROOM_TYPE" class="ROOM_TYPE" value="ì“°ë¦¬ë£¸">
+						<div class="button">ì“°ë¦¬ë£¸</div>
+						<input type="radio" name="ROOM_TYPE" class="ROOM_TYPE"
+							value="ì˜¤í”¼ìŠ¤í…”">
+						<div class="button">ì˜¤í”¼ìŠ¤í…”</div>
+						<input type="radio" name="ROOM_TYPE" class="ROOM_TYPE" value="ì•„íŒŒíŠ¸">
+						<div class="button">ì•„íŒŒíŠ¸</div>
+					</div>
+					<div class="h">ê±´ë¬¼ ìœ í˜•</div>
+					<div class="b" id="building">
+						<input type="radio" name="BUILDING_TYPE" class="BUILDING_TYPE"
+							value="ë‹¨ë…ì£¼íƒ">
+						<div class="button">ë‹¨ë…ì£¼íƒ</div>
+						<input type="radio" name="BUILDING_TYPE" class="BUILDING_TYPE"
+							value="ë‹¤ê°€êµ¬ì£¼íƒ">
+						<div class="button">ë‹¤ê°€êµ¬ì£¼íƒ</div>
+						<input type="radio" name="BUILDING_TYPE" class="BUILDING_TYPE"
+							value="ë¹Œë¼/ì—°ë¦½/ë‹¤ì„¸ëŒ€">
+						<div class="button">ë¹Œë¼/ì—°ë¦½/ë‹¤ì„¸ëŒ€</div>
+						<input type="radio" name="BUILDING_TYPE" class="BUILDING_TYPE"
+							value="ìƒê°€ì£¼íƒ">
+						<div class="button">ìƒê°€ì£¼íƒ</div>
+					</div>
+					<div class="b" id="building_office">
+						<input type="radio" name="BUILDING_TYPE" class="BUILDING_TYPE"
+							value="ì˜¤í”¼ìŠ¤í…”">
+						<div class="button">ì˜¤í”¼ìŠ¤í…”</div>
+						<input type="radio" name="BUILDING_TYPE" class="BUILDING_TYPE"
+							value="ë„ì‹œí˜•ìƒí™œì£¼íƒ">
+						<div class="button">ë„ì‹œí˜•ìƒí™œì£¼íƒ</div>
+					</div>
+					<div class="b" id="building_apart">
+						<input type="radio" name="BUILDING_TYPE" value="ì•„íŒŒíŠ¸">
+					</div>
 				</div>
 			</div>
-			<div>
-				°ü¸®ºñ Ç×¸ñ
-				<input type="checkbox" class="UTILITY_TYPE" value="1"><div class="c_button">ÀÎÅÍ³Ý</div>
-				<input type="checkbox" class="UTILITY_TYPE" value="2"><div class="c_button">À¯¼±TV</div>
-				<input type="checkbox" class="UTILITY_TYPE" value="3"><div class="c_button">Ã»¼Òºñ</div>
-				<input type="checkbox" class="UTILITY_TYPE" value="4"><div class="c_button">¼öµµ¼¼</div>
-				<input type="checkbox" class="UTILITY_TYPE" value="5"><div class="c_button">µµ½Ã°¡½º</div>
-				<input type="checkbox" class="UTILITY_TYPE" value="6"><div class="c_button">Àü±â¼¼</div>
-				<input type="checkbox" class="UTILITY_TYPE" value="7"><div class="c_button">±âÅ¸</div>
+			<!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
+			<div class="table">
+				<div class="thead">ìœ„ì¹˜ ì •ë³´</div>
+				<div class="tbody">
+					<div class="h">ì£¼ì†Œ</div>
+					<div class="b">
+
+						<input type="text" name="ZIPCODE" id="sample6_postcode"
+							placeholder="ìš°íŽ¸ë²ˆí˜¸"> <input type="button"
+							onclick="sample6_execDaumPostcode()" value="ì£¼ì†Œ ê²€ìƒ‰"><br>
+						<input type="text" name="ADDRESS1" id="sample6_address" size="50"
+							placeholder="ì£¼ì†Œ">
+						<input type="text" name="ADDRESS2" id="sample6_address2" size="50"
+							placeholder="ìƒì„¸ì£¼ì†Œ">
+
+
+						<div id="map"
+							style="width: 50%; height: 300px; margin-top: 10px; display: none"></div>
+					</div>
+				</div>
 			</div>
-		</div>
-		<div class="h">ÁÖÂ÷¿©ºÎ</div>
-		<div class="b">
-			<input type="radio" class="PARKING" name="PARKING" value="0"><div class="button">ºÒ°¡´É</div>
-			<input type="radio" class="PARKING" name="PARKING" value="1"><div class="button">°¡´É</div>
-			<input type="number" name="PARKING_BILL" id="PARKING_BILL"> ¸¸¿ø
-		</div>
-		<div class="h">¹Ý·Áµ¿¹°</div>
-		<div class="b">
-			<input type="radio" class="PET" name="PET" value="0"><div class="button">ºÒ°¡´É</div>
-			<input type="radio" class="PET" name="PET" value="1"><div class="button">°¡´É</div>
-		</div>
-		<div class="h">¿¤¸®º£ÀÌÅÍ</div>
-		<div class="b">
-			<input type="radio" class="ELEVATOR" name="ELEVATOR" value="0"><div class="button">¾øÀ½</div>
-			<input type="radio" class="ELEVATOR" name="ELEVATOR" value="1"><div class="button">ÀÖÀ½</div>
-		</div>
-		<div class="h">º£¶õ´Ù/¹ßÄÚ´Ï</div>
-		<div class="b">
-			<input type="radio" class="BALCONY" name="BALCONY" value="0"><div class="button">¾øÀ½</div>
-			<input type="radio" class="BALCONY" name="BALCONY" value="1"><div class="button">ÀÖÀ½</div>
-		</div>
-		<div class="h">ºôÆ®ÀÎ</div>
-		<div class="b">
-			<input type="radio" class="BUILT_IN" name="BUILT_IN" value="0"><div class="button">¾øÀ½</div>
-			<input type="radio" class="BUILT_IN" name="BUILT_IN" value="1"><div class="button">ÀÖÀ½</div>
-		</div>
-		<div class="h">±¸Á¶</div>
-		<div class="b">
-			<input type="checkbox" class="STRUCTURES" value="1"><div class="c_button">º¹Ãþ</div>
-			<input type="checkbox" class="STRUCTURES" value="2"><div class="c_button">1.5·ë/ÁÖ¹æºÐ¸®Çü</div>
-		</div>
-		<div class="h">¿É¼ÇÇ×¸ñ</div>
-		<div class="b">
-			<input type="checkbox" class="OPTIONS" value="1"><div class="c_button">¿¡¾îÄÁ</div>
-			<input type="checkbox" class="OPTIONS" value="2"><div class="c_button">¼¼Å¹±â</div>
-			<input type="checkbox" class="OPTIONS" value="3"><div class="c_button">Ä§´ë</div>
-			<input type="checkbox" class="OPTIONS" value="4"><div class="c_button">Ã¥»ó</div>
-			<input type="checkbox" class="OPTIONS" value="4"><div class="c_button">¿ÊÀå</div>
-			<input type="checkbox" class="OPTIONS" value="5"><div class="c_button">TV</div>
-			<input type="checkbox" class="OPTIONS" value="6"><div class="c_button">½Å¹ßÀå</div>
-			<input type="checkbox" class="OPTIONS" value="7"><div class="c_button">³ÃÀå°í</div>
-			<input type="checkbox" class="OPTIONS" value="8"><div class="c_button">°¡½º·¹ÀÎÁö</div>
-			<input type="checkbox" class="OPTIONS" value="9"><div class="c_button">ÀÎ´ö¼Ç</div>
-			<input type="checkbox" class="OPTIONS" value="10"><div class="c_button">ÀüÀÚ·¹ÀÎÁö</div>
-			<input type="checkbox" class="OPTIONS" value="11"><div class="c_button">ÀüÀÚµµ¾î¶ô</div>
-			<input type="checkbox" class="OPTIONS" value="12"><div class="c_button">ºñµ¥</div>
-		</div>
-		<div class="h">Àü¼¼ÀÚ±Ý´ëÃâ</div>
-		<div class="b">
-			<input type="radio" class="LOAN_ACCESS" name="LOAN_ACCESS" value="0"><div class="button">ºÒ°¡´É</div>
-			<input type="radio" class="LOAN_ACCESS" name="LOAN_ACCESS" value="1"><div class="button">°¡´É</div>
-		</div>
-	</div>
-</div>
-<div class="table">
-	<div class="thead">»ó¼¼¼³¸í</div>
-	<div class="tbody">
-		<div class="h">Á¦¸ñ</div>
-		<div class="b"><input type="text" name="DESC_TITLE" id="DESC_TITLE" placeholder="¿¹)"></div>
-		<div class="h">»ó¼¼¼³¸í</div>
-		<div class="b"><textarea name="DESC_DETAIL" id="DESC_DETAIL" placeholder="»ó¼¼¼³¸í ÀÛ¼º ½Ã ÁÖÀÇ»çÇ×&#13;&#10;¤·¤·"></textarea></div>
-		<div class="h">ºñ°ø°³ ¸Þ¸ð</div>
-		<div class="b"><textarea name="DESC_SECRET" id="DESC_SECRET" placeholder="¿ÜºÎ¿¡ °ø°³µÇÁö ¾ÊÀ¸¸ç, µî·ÏÀÚ¿¡°Ô¸¸ º¸¿©Áö´Â ¸Þ¸ðÀÔ´Ï´Ù."></textarea></div>
-	</div>
-</div>
-<div class="table">
-	<div class="thead">»çÁø µî·Ï</div>
-	<div class="tbody">
-		<div>
-			- »çÁøÀº °¡·Î·Î ÂïÀº »çÁøÀ» ±ÇÀåÇÕ´Ï´Ù. (°¡·Î »çÀÌÁî ÃÖ¼Ò 800px)<br>
-			- »çÁø ¿ë·®Àº »çÁø ÇÑ Àå´ç 10MB±îÁö µî·ÏÀÌ °¡´ÉÇÕ´Ï´Ù.<br>
-			- »çÁøÀº ÃÖ¼Ò 1Àå ÀÌ»ó µî·ÏÇØ¾ß ÇÏ¸ç, ÃÖ´ë 15Àå±îÁö ±ÇÀåÇÕ´Ï´Ù. ±× ÀÌ»ó µî·ÏÇÒ °æ¿ì ¾÷·Îµå ½Ã°£ÀÌ ´Ù¼Ò Áö¿¬µÉ ¼ö ÀÖ½À´Ï´Ù.
-		</div>
-		<div id="fileDiv">
-			<p>
-				<input type="file" id="file" name="file_0">
-				<a href="#" class="btn" id="delete" name="delete">»èÁ¦</a>
-			</p>
-		</div>
-		<a href="#addFile" class="btn" id="addFile" onclick="addFile();">ÆÄÀÏ Ãß°¡</a>
-		<div class="caution">
-			ÇãÀ§ ¸Å¹°À» µî·ÏÇÒ °æ¿ì ´Ï³»¹æ¿¡¼­ ÀÓÀÇ·Î °èÁ¤ ¹× ¸Å¹° ÀüÃ¼ »èÁ¦ Ã³¸®µË´Ï´Ù.
-			<a href="#">ÇãÀ§¸Å¹° Á¦Àç Á¤Ã¥ È®ÀÎÇÏ±â</a>
-		</div>
-	</div>
-</div>
-</form>
-<div class="check">
-	<input type="checkbox" id="check">¸Å¹°°ü¸®±ÔÁ¤À» È®ÀÎÇÏ¿´À¸¸ç, ÀÔ·ÂÇÑ Á¤º¸´Â ½ÇÁ¦ ¸Å¹°°ú ´Ù¸§ÀÌ ¾ø½À´Ï´Ù.
-</div>
+			<!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
 
-<a href="#" class="btn" onclick="submit();">¸Å¹° µî·Ï</a>
-<a href="<c:url value='/room/adminRoom'/>" class="btn">Ãë¼Ò</a>
+			<div class="table">
+				<div class="thead">ê±°ëž˜ ì •ë³´</div>
+				<div class="tbody">
+					<div class="h">ê±°ëž˜ ì¢…ë¥˜</div>
+					<div class="b">
+						<div>
+							<input type="radio" name="TRADE_TYPE" class="trade_type"
+								value="ì›”ì„¸">
+							<div class="button">ì›”ì„¸</div>
+							<input type="radio" name="TRADE_TYPE" class="trade_type"
+								value="ì „ì„¸">
+							<div class="button">ì „ì„¸</div>
+						</div>
+						<div id="monthly">
+							<input type="number" name="MONTHLY_DEPOSIT" id="deposit"
+								placeholder="ë³´ì¦ê¸ˆ">/ <input type="number"
+								name="MONTHLY_PAYMENT" id="pay" placeholder="ì›”ì„¸"> ë§Œì›
+						</div>
+						<div id="jeonsediv">
+							<input type="number" name="JEONSE" id="jeonse" placeholder="ì „ì„¸">
+							ë§Œì›
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="table">
+				<div class="thead">ê¸°ë³¸ ì •ë³´</div>
+				<div class="tbody">
+					<div class="h">ê±´ë¬¼ í¬ê¸°</div>
+					<div class="b">
+						<div>
+							ê³µê¸‰ ë©´ì  <input type="number" id="sup_p"> í‰ <input
+								type="number" name="SUPPLY_SIZE" id="sup_m"> m2
+						</div>
+						<div>
+							ì „ìš© ë©´ì  <input type="number" id="real_p"> í‰ <input
+								type="number" name="REAL_SIZE" id="real_m"> m2
+						</div>
+					</div>
+					<div class="h">ê±´ë¬¼ ì¸µìˆ˜</div>
+					<div class="b">
+						<div>
+							ê±´ë¬¼ ì¸µìˆ˜ <select name="BUILDING_STORY" id="building_story">
+								<option>--ê±´ë¬¼ ì¸µìˆ˜ ì„ íƒ--</option>
+								<c:forEach var="i" begin="1" end="50">
+									<option value="${i}">${i}ì¸µ</option>
+								</c:forEach>
+							</select>
+						</div>
+						<div>
+							í•´ë‹¹ ì¸µìˆ˜ <select name="ROOM_FLOOR" id="room_floor">
+								<option>--í•´ë‹¹ ì¸µìˆ˜ ì„ íƒ--</option>
+								<option value="0">ë°˜ì§€ì¸µ</option>
+								<option value="-1">ì˜¥íƒ‘</option>
+								<c:forEach var="i" begin="1" end="50">
+									<option value="${i}">${i}ì¸µ</option>
+								</c:forEach>
+							</select>
+						</div>
+					</div>
+					<div class="h">ë‚œë°© ì¢…ë¥˜</div>
+					<div class="b">
+						<select name="HEATING_SYSTEM" id="heating_system">
+							<option>--ë‚œë°© ì¢…ë¥˜ ì„ íƒ--</option>
+							<option value="1">ì¤‘ì•™ë‚œë°©</option>
+							<option value="2">ê°œë³„ë‚œë°©</option>
+							<option value="3">ì§€ì—­ë‚œë°©</option>
+						</select>
+					</div>
+					<div class="h">ìž…ì£¼ ê°€ëŠ¥ì¼</div>
+					<div class="b">
+						<input type="date" name="MOVE_IN_DATE" id="move_in_date">
+					</div>
+				</div>
+			</div>
+			<div class="table">
+				<div class="thead">ì¶”ê°€ì •ë³´</div>
+				<div class="tbody">
+					<div class="h">ê´€ë¦¬ë¹„</div>
+					<div class="b">
+						<div>
+							<input type="radio" class="UTILITY_CHECK" name="UTILITY_CHECK"
+								value="0">
+							<div class="button">ì—†ìŒ</div>
+							<input type="radio" class="UTILITY_CHECK" name="UTILITY_CHECK"
+								value="1">
+							<div class="button">ìžˆìŒ</div>
+							<div class="UTILITY_PRICE">
+								<input type="text" name="UTILITY_PRICE" id="UTILITY_PRICE">
+								ë§Œì›
+							</div>
+						</div>
+						<div>
+							ê´€ë¦¬ë¹„ í•­ëª© <input type="checkbox" class="UTILITY_TYPE" value="1" name="UTILITY_TYPE">
+							<div class="c_button">ì¸í„°ë„·</div>
+							<input type="checkbox" class="UTILITY_TYPE" value="2" name="UTILITY_TYPE">
+							<div class="c_button">ìœ ì„ TV</div>
+							<input type="checkbox" class="UTILITY_TYPE" value="3" name="UTILITY_TYPE">
+							<div class="c_button">ì²­ì†Œë¹„</div>
+							<input type="checkbox" class="UTILITY_TYPE" value="4" name="UTILITY_TYPE">
+							<div class="c_button">ìˆ˜ë„ì„¸</div>
+							<input type="checkbox" class="UTILITY_TYPE" value="5" name="UTILITY_TYPE">
+							<div class="c_button">ë„ì‹œê°€ìŠ¤</div>
+							<input type="checkbox" class="UTILITY_TYPE" value="6" name="UTILITY_TYPE">
+							<div class="c_button">ì „ê¸°ì„¸</div>
+							<input type="checkbox" class="UTILITY_TYPE" value="7" name="UTILITY_TYPE">
+							<div class="c_button">ê¸°íƒ€</div>
+						</div>
+					</div>
+					<div class="h">ì£¼ì°¨ì—¬ë¶€</div>
+					<div class="b">
+						<input type="radio" class="PARKING" name="PARKING" value="0">
+						<div class="button">ë¶ˆê°€ëŠ¥</div>
+						<input type="radio" class="PARKING" name="PARKING" value="1">
+						<div class="button">ê°€ëŠ¥</div>
+						<input type="number" name="PARKING_BILL" id="PARKING_BILL">
+						ë§Œì›
+					</div>
+					<div class="h">ë°˜ë ¤ë™ë¬¼</div>
+					<div class="b">
+						<input type="radio" class="PET" name="PET" value="0">
+						<div class="button">ë¶ˆê°€ëŠ¥</div>
+						<input type="radio" class="PET" name="PET" value="1">
+						<div class="button">ê°€ëŠ¥</div>
+					</div>
+					<div class="h">ì—˜ë¦¬ë² ì´í„°</div>
+					<div class="b">
+						<input type="radio" class="ELEVATOR" name="ELEVATOR" value="0">
+						<div class="button">ì—†ìŒ</div>
+						<input type="radio" class="ELEVATOR" name="ELEVATOR" value="1">
+						<div class="button">ìžˆìŒ</div>
+					</div>
+					<div class="h">ë² ëž€ë‹¤/ë°œì½”ë‹ˆ</div>
+					<div class="b">
+						<input type="radio" class="BALCONY" name="BALCONY" value="0">
+						<div class="button">ì—†ìŒ</div>
+						<input type="radio" class="BALCONY" name="BALCONY" value="1">
+						<div class="button">ìžˆìŒ</div>
+					</div>
+					<div class="h">ë¹ŒíŠ¸ì¸</div>
+					<div class="b">
+						<input type="radio" class="BUILT_IN" name="BUILT_IN" value="0">
+						<div class="button">ì—†ìŒ</div>
+						<input type="radio" class="BUILT_IN" name="BUILT_IN" value="1">
+						<div class="button">ìžˆìŒ</div>
+					</div>
+					<div class="h">êµ¬ì¡°</div>
+					<div class="b">
+						<input type="checkbox" class="STRUCTURES" value="1" name="STRUCTURES">
+						<div class="c_button">ë³µì¸µ</div>
+						<input type="checkbox" class="STRUCTURES" value="2" name="STRUCTURES">
+						<div class="c_button">1.5ë£¸/ì£¼ë°©ë¶„ë¦¬í˜•</div>
+					</div>
+					<div class="h">ì˜µì…˜í•­ëª©</div>
+					<div class="b">
+						<input type="checkbox" class="OPTIONS" value="1" name="OPTIONS">
+						<div class="c_button">ì—ì–´ì»¨</div>
+						<input type="checkbox" class="OPTIONS" value="2" name="OPTIONS">
+						<div class="c_button">ì„¸íƒê¸°</div>
+						<input type="checkbox" class="OPTIONS" value="3" name="OPTIONS">
+						<div class="c_button">ì¹¨ëŒ€</div>
+						<input type="checkbox" class="OPTIONS" value="4" name="OPTIONS">
+						<div class="c_button">ì±…ìƒ</div>
+						<input type="checkbox" class="OPTIONS" value="5" name="OPTIONS">
+						<div class="c_button">ì˜·ìž¥</div>
+						<input type="checkbox" class="OPTIONS" value="6" name="OPTIONS">
+						<div class="c_button">TV</div>
+						<input type="checkbox" class="OPTIONS" value="7" name="OPTIONS">
+						<div class="c_button">ì‹ ë°œìž¥</div>
+						<input type="checkbox" class="OPTIONS" value="8" name="OPTIONS">
+						<div class="c_button">ëƒ‰ìž¥ê³ </div>
+						<input type="checkbox" class="OPTIONS" value="9" name="OPTIONS">
+						<div class="c_button">ê°€ìŠ¤ë ˆì¸ì§€</div>
+						<input type="checkbox" class="OPTIONS" value="10" name="OPTIONS">
+						<div class="c_button">ì¸ë•ì…˜</div>
+						<input type="checkbox" class="OPTIONS" value="11" name="OPTIONS">
+						<div class="c_button">ì „ìžë ˆì¸ì§€</div>
+						<input type="checkbox" class="OPTIONS" value="12" name="OPTIONS">
+						<div class="c_button">ì „ìžë„ì–´ë½</div>
+						<input type="checkbox" class="OPTIONS" value="13" name="OPTIONS">
+						<div class="c_button">ë¹„ë°</div>
+					</div>
+					<div class="h">ì „ì„¸ìžê¸ˆëŒ€ì¶œ</div>
+					<div class="b">
+						<input type="radio" class="LOAN_ACCESS" name="LOAN_ACCESS"
+							value="0">
+						<div class="button">ë¶ˆê°€ëŠ¥</div>
+						<input type="radio" class="LOAN_ACCESS" name="LOAN_ACCESS"
+							value="1">
+						<div class="button">ê°€ëŠ¥</div>
+					</div>
+				</div>
+			</div>
+			<div class="table">
+				<div class="thead">ìƒì„¸ì„¤ëª…</div>
+				<div class="tbody">
+					<div class="h">ì œëª©</div>
+					<div class="b">
+						<input type="text" name="DESC_TITLE" id="DESC_TITLE"
+							placeholder="ì˜ˆ)">
+					</div>
+					<div class="h">ìƒì„¸ì„¤ëª…</div>
+					<div class="b">
+						<textarea name="DESC_DETAIL" id="DESC_DETAIL"
+							placeholder="ìƒì„¸ì„¤ëª… ìž‘ì„± ì‹œ ì£¼ì˜ì‚¬í•­&#13;&#10;ã…‡ã…‡"></textarea>
+					</div>
+					<div class="h">ë¹„ê³µê°œ ë©”ëª¨</div>
+					<div class="b">
+						<textarea name="DESC_SECRET" id="DESC_SECRET"
+							placeholder="ì™¸ë¶€ì— ê³µê°œë˜ì§€ ì•Šìœ¼ë©°, ë“±ë¡ìžì—ê²Œë§Œ ë³´ì—¬ì§€ëŠ” ë©”ëª¨ìž…ë‹ˆë‹¤."></textarea>
+					</div>
+				</div>
+			</div>
+			<div class="table">
+				<div class="thead">ì‚¬ì§„ ë“±ë¡</div>
+				<div class="tbody">
+					<div>
+						- ì‚¬ì§„ì€ ê°€ë¡œë¡œ ì°ì€ ì‚¬ì§„ì„ ê¶Œìž¥í•©ë‹ˆë‹¤. (ê°€ë¡œ ì‚¬ì´ì¦ˆ ìµœì†Œ 800px)<br> - ì‚¬ì§„ ìš©ëŸ‰ì€ ì‚¬ì§„ í•œ
+						ìž¥ë‹¹ 10MBê¹Œì§€ ë“±ë¡ì´ ê°€ëŠ¥í•©ë‹ˆë‹¤.<br> - ì‚¬ì§„ì€ ìµœì†Œ 1ìž¥ ì´ìƒ ë“±ë¡í•´ì•¼ í•˜ë©°, ìµœëŒ€ 15ìž¥ê¹Œì§€
+						ê¶Œìž¥í•©ë‹ˆë‹¤. ê·¸ ì´ìƒ ë“±ë¡í•  ê²½ìš° ì—…ë¡œë“œ ì‹œê°„ì´ ë‹¤ì†Œ ì§€ì—°ë  ìˆ˜ ìžˆìŠµë‹ˆë‹¤.
+					</div>
+					<div id="fileDiv">
+						<p>
+							<input type="file" id="file" name="file_0"> <a href="#"
+								class="btn" id="delete" name="delete">ì‚­ì œ</a>
+						</p>
+					</div>
+					<a href="#addFile" class="btn" id="addFile" onclick="addFile();">íŒŒì¼
+						ì¶”ê°€</a>
+					<div class="caution">
+						í—ˆìœ„ ë§¤ë¬¼ì„ ë“±ë¡í•  ê²½ìš° ë‹ˆë‚´ë°©ì—ì„œ ìž„ì˜ë¡œ ê³„ì • ë° ë§¤ë¬¼ ì „ì²´ ì‚­ì œ ì²˜ë¦¬ë©ë‹ˆë‹¤. <a href="#">í—ˆìœ„ë§¤ë¬¼
+							ì œìž¬ ì •ì±… í™•ì¸í•˜ê¸°</a>
+					</div>
+				</div>
+			</div>
+		</form>
+		<div class="check">
+			<input type="checkbox" id="check">ë§¤ë¬¼ê´€ë¦¬ê·œì •ì„ í™•ì¸í•˜ì˜€ìœ¼ë©°, ìž…ë ¥í•œ ì •ë³´ëŠ” ì‹¤ì œ
+			ë§¤ë¬¼ê³¼ ë‹¤ë¦„ì´ ì—†ìŠµë‹ˆë‹¤.
+		</div>
 
-</div>
+		<a href="#" class="btn" onclick="fsubmit();">ë§¤ë¬¼ ë“±ë¡</a> <a
+			href="<c:url value='/room/adminRoom'/>" class="btn">ì·¨ì†Œ</a>
 
-<br>
-<div>
-<%@ include file="/WEB-INF/include/footer.jspf" %>
-</div>
+	</div>
+
+	<br>
+	<div>
+		<%@ include file="/WEB-INF/include/footer.jspf"%>
+	</div>
 </body>
+
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e603a6f6c5db5707c8168383f3516651&libraries=services,clusterer,drawing"></script>
+<script>
+var mapContainer = document.getElementById('map'), // ì§€ë„ë¥¼ í‘œì‹œí•  div 
+    mapOption = { 
+        center: new daum.maps.LatLng(37.502541, 127.024711), // ì§€ë„ì˜ ì¤‘ì‹¬ì¢Œí‘œ
+        level: 3 // ì§€ë„ì˜ í™•ëŒ€ ë ˆë²¨
+    };
+var map = new daum.maps.Map(mapContainer, mapOption); //ì§€ë„ë¥¼ ë¯¸ë¦¬ ìƒì„±
+
+var geocoder = new daum.maps.services.Geocoder(); //ì£¼ì†Œ-ì¢Œí‘œ ë³€í™˜ ê°ì²´ë¥¼ ìƒì„±
+//ë§ˆì»¤ë¥¼ ë¯¸ë¦¬ ìƒì„±
+var marker = new daum.maps.Marker({
+    position: new daum.maps.LatLng(37.537187, 127.005476),
+    map: map
+});
+function sample6_execDaumPostcode() {
+    new daum.Postcode({
+        oncomplete: function(data) {
+            var addr = data.address; // ìµœì¢… ì£¼ì†Œ ë³€ìˆ˜
+            // ì£¼ì†Œ ì •ë³´ë¥¼ í•´ë‹¹ í•„ë“œì— ë„£ëŠ”ë‹¤.
+            document.getElementById('sample6_postcode').value = data.zonecode;
+            document.getElementById("sample6_address").value = addr;
+            // ì£¼ì†Œë¡œ ìƒì„¸ ì •ë³´ë¥¼ ê²€ìƒ‰
+            geocoder.addressSearch(data.address, function(results, status) {
+                // ì •ìƒì ìœ¼ë¡œ ê²€ìƒ‰ì´ ì™„ë£Œëìœ¼ë©´
+                if (status === daum.maps.services.Status.OK) {
+
+                    var result = results[0]; //ì²«ë²ˆì§¸ ê²°ê³¼ì˜ ê°’ì„ í™œìš©
+
+                    // í•´ë‹¹ ì£¼ì†Œì— ëŒ€í•œ ì¢Œí‘œë¥¼ ë°›ì•„ì„œ
+                    var coords = new daum.maps.LatLng(result.y, result.x);
+                    // ì§€ë„ë¥¼ ë³´ì—¬ì¤€ë‹¤.
+                    mapContainer.style.display = "block";
+                    map.relayout();
+                    // ì§€ë„ ì¤‘ì‹¬ì„ ë³€ê²½í•œë‹¤.
+                    map.setCenter(coords);
+                    // ë§ˆì»¤ë¥¼ ê²°ê³¼ê°’ìœ¼ë¡œ ë°›ì€ ìœ„ì¹˜ë¡œ ì˜®ê¸´ë‹¤.
+                    marker.setPosition(coords)
+                }
+            });
+        }
+    }).open();
+}
+</script>
 </html>

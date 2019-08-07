@@ -49,18 +49,18 @@ if(request.getParameter("currentPage")==null || request.getParameter("currentPag
 		ModelAndView mv=new ModelAndView();
 		List<Map<String,Object>>adminMessageList=adminMessageService.adminMessageList(commandMap.getMap());
 		
-		Map<String,Object>isSearchMap=new HashMap<String,Object>();
+
 		
 		isSearch=request.getParameter("isSearch");
 		  
 		if(isSearch !=null) {
 		  searchNum=Integer.parseInt(request.getParameter("searchNum"));
-		  isSearchMap.put("isSearch", isSearch);
+		  isSearch=request.getParameter("isSearch");
 			  
 		  if(searchNum==1) {
-			  adminMessageList=adminMessageService.adminMessageSearchContent(isSearchMap);
+			  adminMessageList=adminMessageService.adminMessageSearchContent(isSearch);
 			  }if(searchNum==2) {
-				  adminMessageList=adminMessageService.adminMessageSearchTitle(isSearchMap);
+				  adminMessageList=adminMessageService.adminMessageSearchTitle(isSearch);
 			  }  totalCount=adminMessageList.size();
 			  page=new Paging(currentPage,totalCount,blockCount,blockPage,"adminMessageList");
 			  pagingHtml=page.getPagingHtml().toString();

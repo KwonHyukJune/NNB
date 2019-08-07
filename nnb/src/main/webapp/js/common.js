@@ -60,7 +60,7 @@ function ComAjax(opt_formId){
 		this.url = url;
 	};
 	
-	this.setCallback = function setCallback(callBack){
+	this.setCallback = function setCallback(callBack){ //데이터를 전송한 후 호출 될 함수를 지정.
 		fv_ajaxCallback = callBack;
 	};
 	
@@ -74,9 +74,9 @@ function ComAjax(opt_formId){
 		}
 		$.ajax({
 			url:this.url,
-			type:"POST",
-			data:this.param,
-			async:false,
+			type:"POST", //통신 방식을 설정. 그냥 post로 지정
+			data:this.param, //서버로 전달한 인자 (parameter), 보통은 object형식으로 데이터를 지정.//여기서는 addParam또는 form 자체를 전송하기때문에 이렇게 만듬 
+			async:false, 
 			success:function(data,status){
 				if(typeof(fv_ajaxCallback)=="function"){
 					fv_ajaxCallback(data);
@@ -98,7 +98,7 @@ eventName: 페이징 하단의 숫자 등의 버튼이 클릭되었을 때 호�
 */
 var gfv_pageIndex = null;
 var gfv_eventName = null;
-function gfn_renderPaging(params){
+function gfn_renderPaging(params){ //페이징 태그를 작성하는 역할.
 	var divId = params.divId;	//페이징이 그려질 div id
 	gfv_pageIndex = params.pageIndex;	//현재 위치가 저장될 input 태그
 	var totalCount = params.totalCount;	//전체 조회 건수
@@ -107,17 +107,17 @@ function gfn_renderPaging(params){
 		currentIndex = 1;
 	}
 	
-	var recordCount = params.recordCount;	//페이지 당 레코드 수
+	var recordCount = params.recordCount;	//페이지 당 레코드 수 (줄 수)
 	if(gfn_isNull(recordCount)==true){
 		recordCount = 20;
 	}
-	var totalIndexCount = Math.ceil(totalCount/recordCount);	//전체 인덱스 수
+	var totalIndexCount = Math.ceil(totalCount/recordCount);	//전체 인덱스 수 (올림해서 구하긔)
 	gfv_eventName = params.eventName;
 	
-	$("#"+divId).empty();
-	var preStr = "";
-	var postStr = "";
-	var str = "";
+	$("#"+divId).empty(); //페이징이 그려질 div id를 비운다.
+	var preStr = ""; //맨앞으로 이동하는 태그
+	var postStr = "";// 맨뒤로 이동하는 태그
+	var str = ""; //인덱스 태그
 	
 	var first = (parseInt((currentIndex-1)/10)*10)+1;
 	var last = (parseInt(totalIndexCount/10)==parseInt(currentIndex/10))? totalIndexCount%10: 10;
@@ -151,7 +151,7 @@ function gfn_renderPaging(params){
 	$("#"+divId).append(preStr+str+postStr);
 }
 
-function _movePage(value){
+function _movePage(value){ //페이징 태그를 눌렀을 경우 페이지를 이동하는 역할.
 	$("$"+gfv_pageIndex).val(value);
 	if(typeof(gfv_eventName)=="function"){
 		gfv_eventName(value);

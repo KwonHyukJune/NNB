@@ -21,3 +21,84 @@
 	list-style:none;
 	padding: 5px;
 }
+
+.header{
+    width: 100%;
+    min-width: 1366px;
+    height: 70px;
+    background-color: rgb(255, 255, 255);
+    position: relative;
+    z-index: 21;
+    padding: 0px 30px;
+    border-bottom: 1px solid rgb(235, 235, 235);
+}
+
+.cjODQK {
+    float: right;
+}
+
+.menu{
+    float: left;
+    height: 70px;
+    line-height: 70px;
+}
+
+.logout{
+    float: left;
+    height: 70px;
+    line-height: 60px;
+    margin-left: 50px;
+    color: rgb(136, 136, 136);
+    font-size: 13px;
+}
+
+.login {
+    float: left;
+    height: 70px;
+    line-height: 60px;
+    margin-left: 50px;
+    color: rgb(136, 136, 136);
+    font-size: 13px;
+}
+
+.hVfzba {
+    display: inline-block;
+    color: rgb(34, 34, 34);
+    font-size: 15px;
+    line-height: 27px;
+    position: relative;
+    cursor: pointer;
+    padding: 5px 0px;
+}
+
+.hVfzba + a {
+    margin-left: 35px;
+}
+
+
+.jFKmOy {
+    float: left;
+    width: 61px;
+    height: 70px;
+    position: relative;
+}
+
+.hVfzba:hover {
+    color: rgb(21, 100, 249);
+}
+.kiTmxU {
+    float: left;
+    height: 70px;
+    line-height: 60px;
+    margin-left: 50px;
+    color: rgb(136, 136, 136);
+    font-size: 13px;
+}
+html body {
+    height: 100%;
+}
+.gRTWkG {
+    float: left;
+    height: 70px;
+    line-height: 70px;
+}

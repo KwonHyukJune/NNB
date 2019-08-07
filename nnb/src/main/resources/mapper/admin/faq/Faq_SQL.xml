@@ -4,16 +4,19 @@
 <mapper namespace="faq">
 
 <select id="selectFaqList" parameterType="hashmap" resultType="hashmap"> 
+<include refid="common.pagingPre"/> 
 	<![CDATA[
 	SELECT
 		ROW_NUMBER() OVER (ORDER BY FAQ_NUM ASC) RNUM,
 		FAQ_NUM,
 		FAQ_CATEGORY,
-		FAQ_TITLE
+		FAQ_TITLE,
+		FAQ_CONTENT
 	FROM
 		FAQ 
 		ORDER BY RNUM DESC
 	]]>
+<include refid="common.pagingPost"/> 
 </select>
 
 <select id="selectFaqDetail" parameterType="hashmap" resultType="hashmap"> 
@@ -26,7 +29,7 @@
 	FROM
 		FAQ
 	WHERE
-		FAQ_NUM = #{num}
+		FAQ_NUM = #{FAQ_NUM}
 	]]>
 </select>
 
@@ -55,14 +58,14 @@
 		FAQ_CATEGORY = #{FAQ_CATEGORY},
 		FAQ_CONTENT = #{FAQ_CONTENT}
 	WHERE 
-		FAQ_NUM = #{num}
+		FAQ_NUM = #{FAQ_NUM}
 	]]>
 </select>	
 
 <select id="deleteFaq" parameterType="hashmap"> 
 	<![CDATA[
 	DELETE FAQ
-	WHERE FAQ_NUM = #{num}
+	WHERE FAQ_NUM = #{FAQ_NUM}
 	]]>
 </select>
 </mapper>

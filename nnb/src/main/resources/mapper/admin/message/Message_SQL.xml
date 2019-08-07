@@ -33,7 +33,7 @@ WHERE
   ]]>
   </select>
   
-<select id="adminMessageWrite" parameterType="hashMap" resultType="hashMap">
+<insert id="adminMessageWrite" parameterType="hashMap">
 
 <![CDATA[ 
 INSERT INTO 
@@ -53,7 +53,7 @@ MESSAGE (
            SYSDATE
 )
 ]]>
-</select>
+</insert>
 	
 <select id="adminMessageDelete" parameterType="hashMap" resultType="hashMap">
 <![CDATA[ 

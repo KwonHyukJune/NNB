@@ -19,20 +19,38 @@ function mateSearch(){
 </head>
 <body>
 <%@ include file="/WEB-INF/include/header.jspf" %>
-<div class="main">
-	<p>어떤 동네, 어떤 방에서 <br>살고싶으신가요?</p>
-	<div class="search">
-	<input type="text" id="roomSearch"/>
-	<a href="#" class="btn" onclick="roomSearch();">방 찾기</a>
-	</div>
+<div class="main bsRnpg">
+	<p class="ipvawL blue"><span>어떤 동네, 어떤 방</span>에서 </p>
+	<p class="ipvawL">살고싶으신가요?</p>
+	<form class="fRnXmp">
+		<div class="search kMYYOo">
+				<svg width="18" height="18" viewBox="0 0 18 18">
+					<g fill="none" fill-rule="evenodd" stroke="#222">
+						<circle cx="7.5" cy="7.5" r="6.5"></circle>
+						<path d="M12 12l5 5"></path>
+					</g>
+				</svg>
+			<input type="text" id="roomSearch" class="kZIxja"/>
+			<button class="kvrxoz" onclick="roomSearch();">방 찾기</button>
+		</div>
+	</form>
 	
 	<br>
 	
-	<p>누구와 어떤 방에서 <br>살고싶으신가요?</p>
-	<div class="search">
-	<input type="text" id="mateSearch"/>
-	<a href="#" class="btn" onclick="mateSearch();">룸메이트 찾기</a>
-	</div>
+	<p class="ipvawL red"><span>누구와 어떤 방</span>에서</p>
+	<p class="ipvawL">살고싶으신가요?</p>
+	<form class="fRnXmp">
+		<div class="search kMYYOo">
+			<svg width="18" height="18" viewBox="0 0 18 18">
+				<g fill="none" fill-rule="evenodd" stroke="#222">
+					<circle cx="7.5" cy="7.5" r="6.5"></circle>
+					<path d="M12 12l5 5"></path>
+				</g>
+			</svg>
+			<input type="text" id="mateSearch" class="kZIxja"/>
+			<button class="kvrxoz" onclick="mateSearch();">룸메이트 찾기</button>
+		</div>
+	</form>
 </div>
 <div>
 <%@ include file="/WEB-INF/include/footer.jspf" %>

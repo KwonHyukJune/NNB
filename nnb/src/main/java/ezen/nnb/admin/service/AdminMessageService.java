@@ -12,7 +12,7 @@ public interface AdminMessageService {
 	
 	public void adminMessageDelete(Map<String,Object>map)throws Exception;
 	
-	public List<Map<String,Object>> adminMessageSearchContent(Map<String,Object>map)throws Exception;
+	public List<Map<String,Object>> adminMessageSearchContent(String isSearch)throws Exception;
 	
-	public List<Map<String,Object>> adminMessageSearchTitle(Map<String,Object>map)throws Exception;
+	public List<Map<String,Object>> adminMessageSearchTitle(String isSearch)throws Exception;
 }

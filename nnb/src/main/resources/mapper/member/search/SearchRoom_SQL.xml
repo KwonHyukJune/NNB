@@ -4,7 +4,6 @@
 <!-- 방 리스트 쿼리 -->
 <select id="selectRoomList" parameterType="hashmap" resultType="hashmap">
 <![CDATA[
-select * from(select a.* ,ROOM_NUM as rnum,count(*) over() as totalCount from(
 SELECT
 	R1.ROOM_NUM,
 	R1.ROOM_TYPE,
@@ -13,6 +12,7 @@ SELECT
 	R1.monthly_DEPOSIT,
 	R1.jeonse,
 	R1.THUMBNAIL,
+	R1.ADDRESS1,
 	R2.DESC_TITLE,
 	RB.UPLOAD_DATE
 FROM
@@ -152,10 +152,6 @@ WHERE
 	AND R2.LOAN_ACCESS=#{loan_access}
 ]]>
 </if>
-<![CDATA[
-	)  a)
-   		rnum >=#{startCount} and rnum <=#{endCount};
-   ]]>	
 </select>
 
 <!-- 방 전체 개수 카운트 쿼리 -->

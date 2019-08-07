@@ -21,7 +21,7 @@ public class RoommateInfoController {
 	public ModelAndView openRoommateDetail(CommandMap commandMap)throws Exception{
 		ModelAndView mv=new ModelAndView("/member/myPage/myProfile");
 		Map<String,Object>map=roommateService.openRoommateDetail(commandMap.getMap());
-		mv.addObject("map",map.get("map"));
+		mv.addObject("map",map);
 		return mv;
 	}
 	@RequestMapping(value="/myPage/registMyProfileForm")

@@ -106,24 +106,19 @@ WHERE
                
  ]]>
 </select>
-    
+
 <select id="adminMemberBanDetail" parameterType="hashMap" resultType="hashMap">
-<![CDATA[  
-
-SELECT
-
-B.BAN_NUM,
-B.BAN_COUNT,
-B.BAN_REASON
-
-FROM MEMBER M, BAN B
+<![CDATA[ 
+  SELECT
+       BAN_NUM,
+	   BAN_REMOVAL_DATE,
+	   BAN_REASON
+FROM
+	   FROM BAN
 WHERE
-  	 M.MEM_ID = B.MEM_ID
-AND 
-	 B.MEM_ID = #{MEM_ID}
-               
+		MEM_ID=#{MEM_ID}	   
  ]]>
-</select>    
+</select>
                
 <select id="adminMemberBan" parameterType="hashMap" resultType="hashMap">
 <![CDATA[                 

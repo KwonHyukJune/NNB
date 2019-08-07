@@ -10,8 +10,8 @@
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/myInterest.css'/>"/>
 
 <script type="text/javascript">
-function goPage1(num) {   // 새 약관 등록
-	location.href="/nnb/admin/noticeList?num="+num; 
+function goPage1(num) {   // 공지사항 목록으로
+	location.href="/nnb/admin/openNoticeList?num="+num; 
 	}	
 </script>
 

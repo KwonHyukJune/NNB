@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import ezen.nnb.admin.service.AdminFaqService;
@@ -18,12 +19,25 @@ public class AdminFaqController {
 	
 	@Resource(name = "adminFaqService")
 	private AdminFaqService adminFaqService;
-
-	@RequestMapping(value = "/admin/faq/faqList")
+	
+	@RequestMapping(value="/admin/openFaqList") 
+	public ModelAndView openBoardList(CommandMap commandMap) throws Exception{ 
+		ModelAndView mv = new ModelAndView("/admin/faq/faqList"); 
+		return mv; 
+	} 
+	
+	@RequestMapping(value = "/admin/faq/list")
 	public ModelAndView adminFaqList(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("/admin/faq/faqList");
+		ModelAndView mv = new ModelAndView("jsonView");
 		List<Map<String, Object>> list = adminFaqService.selectFaqList(commandMap.getMap());
+		
 		mv.addObject("list", list);
+		if(list.size() > 0){
+    		mv.addObject("TOTAL", list.get(0).get("TOTAL_COUNT"));
+    	}
+    	else{
+    		mv.addObject("TOTAL", 0);
+    	}
 		return mv;
 	}
 
@@ -62,19 +76,19 @@ public class AdminFaqController {
 		return mv;
 	}
 	
-	@RequestMapping(value="/admin/faq/modify")
+	@RequestMapping(value="/admin/faq/modify", method=RequestMethod.POST)
 	public ModelAndView adminFaqModify(CommandMap commandMap) throws Exception{
 		ModelAndView mv = new ModelAndView("redirect:/admin/faq/detail");
 		
 		adminFaqService.updateFaq(commandMap.getMap());
 		
-		mv.addObject("num", commandMap.get("num"));
+		mv.addObject("FAQ_NUM", commandMap.get("FAQ_NUM"));
 		return mv;
 	}
 	
 	@RequestMapping(value="/admin/faq/delete")
 	public ModelAndView adminFaqDelete(CommandMap commandMap) throws Exception{
-		ModelAndView mv = new ModelAndView("redirect:/admin/faq/faqList");
+		ModelAndView mv = new ModelAndView("redirect:/admin/faq/list");
 		System.out.println("FAQ_DELETE"+commandMap.getMap());
 
 		adminFaqService.deleteFaq(commandMap.getMap());
