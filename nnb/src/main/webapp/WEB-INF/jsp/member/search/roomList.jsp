@@ -148,17 +148,68 @@
 	</div>
 </div>
 
-<div id="map">
-지도 영역..ㅡㅡ
+<div class="roomAddress" id="map"style="width: 50%; height: 300px; margin-top: 10px;">
+<input type="hidden" name="ADDRESS1" value="${room.ADDRESS1 }"/>
 </div>
 
 </div>
-
 <br>
+
 <div>
 <%@ include file="/WEB-INF/include/footer.jspf" %>
 </div>
 </body>
-<script type="text/javascript">
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e603a6f6c5db5707c8168383f3516651&libraries=services,clusterer,drawing"></script>
+	<script>
+
+	var markers = [];
+	function hideMarkers() {
+	    setMarkers(null);    
+	}
+	// 배열에 추가된 마커들을 지도에 표시하거나 삭제하는 함수입니다
+	function setMarkers(map) {
+	    for (var i = 0; i < markers.length; i++) {
+	        markers[i].setMap(map);
+	    }            
+	}
+	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = { 
+        center: new kakao.maps.LatLng(37.502541, 127.024711), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };
+	
+var map = new kakao.maps.Map(mapContainer, mapOption); //지도를 미리 생성
+
+var zoomControl = new daum.maps.ZoomControl();
+map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
+var gecoder=new kakao.maps.services.Geocoder();
+        var addressArray = [];
+        var roomList = $('.roomAddress');
+ 
+        for (var i = 0; i < roomList.length; i++) {
+            addressArray.push({'groupAddress' : $("input[name='ADDRESS1']").eq(i).val()
+            });
+        }
+        for (var i = 0; i < addressArray.length; i++) {
+            geocoder.addressSearch(
+                            addressArray[i].groupAddress,
+                            function(result, status, data) {
+                                // 정상적으로 검색이 완료됐으면 
+                                if (status === kakao.maps.services.Status.OK) {
+ 
+                                    var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+                                    // 결과값으로 받은 위치를 마커로 표시합니다
+                                    var marker = new kakao.maps.Marker({
+                                        map : map,
+                                        position : coords
+                                    });
+ 
+                                    // 마커를 지도에 표시합니다.
+                                    marker.setMap(map);
+                                }
+                            });
+        }
+
 </script>
 </html>
