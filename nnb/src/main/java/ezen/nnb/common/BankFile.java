@@ -22,7 +22,6 @@ public class BankFile {
 		MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest)request;
     	Iterator<String> iterator = multipartHttpServletRequest.getFileNames(); //파일들의 이름을 받아서 iterator에 집어넣는다.
     	String filePath = request.getSession().getServletContext().getRealPath("/bankImages/");
-    	System.out.println(filePath);
     	
     	MultipartFile multipartFile = null;
     	String originalFileName = null;

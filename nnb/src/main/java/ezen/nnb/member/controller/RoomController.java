@@ -49,24 +49,36 @@ public class RoomController {
 	@RequestMapping(value = "/room/write") // 방 내놓기 폼에서 등록한 정보들을 db에 저장. 
 	public ModelAndView writeRoom(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("member/room/adminRoom");
-		String[] arr = request.getParameterValues("UTILITY_TYPE");
-		String UTILITY_TYPE = "";
-		for(int i=0; i<arr.length; i++) {
-			UTILITY_TYPE = UTILITY_TYPE+arr[i]+",";
+		if(request.getParameterValues("UTILITY_TYPE")!=null) {
+			String[] arr = request.getParameterValues("UTILITY_TYPE");
+			String UTILITY_TYPE = "";
+			for(int i=0; i<arr.length; i++) {
+				UTILITY_TYPE = UTILITY_TYPE+arr[i]+",";
+			}
+			commandMap.put("UTILITY_TYPE", UTILITY_TYPE);
+		}else {
+			commandMap.put("UTILITY_TYPE", "");
 		}
-		String[] arr2 = request.getParameterValues("OPTIONS");
-		String OPTIONS = "";
-		for(int i=0; i<arr2.length; i++) {
-			OPTIONS = OPTIONS+arr2[i]+",";
+		if(request.getParameterValues("OPTIONS")!=null) {
+			String[] arr2 = request.getParameterValues("OPTIONS");
+			String OPTIONS = "";
+			for(int i=0; i<arr2.length; i++) {
+				OPTIONS = OPTIONS+arr2[i]+",";
+			}
+			commandMap.put("OPTIONS", OPTIONS);
+		}else {
+			commandMap.put("OPTIONS", "");
 		}
-		String[] arr3 = request.getParameterValues("STRUCTURES");
-		String STRUCTURES = "";
-		for(int i=0; i<arr3.length; i++) {
-			STRUCTURES = STRUCTURES+arr3[i]+",";
+		if(request.getParameterValues("STRUCTURES")!=null) {
+			String[] arr3 = request.getParameterValues("STRUCTURES");
+			String STRUCTURES = "";
+			for(int i=0; i<arr3.length; i++) {
+				STRUCTURES = STRUCTURES+arr3[i]+",";
+			}
+			commandMap.put("STRUCTURES", STRUCTURES);
+		}else {
+			commandMap.put("STRUCTURES", "");
 		}
-		commandMap.put("UTILITY_TYPE", UTILITY_TYPE);
-		commandMap.put("OPTIONS", OPTIONS);
-		commandMap.put("STRUCTURES", STRUCTURES);
 		roomService.insertRoom(commandMap.getMap(), request);
 		return mv;
 	}
@@ -83,18 +95,46 @@ public class RoomController {
 	
 	@RequestMapping(value = "/room/updateForm")
 	public ModelAndView updateRoomForm(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("member/room/adminRoom");
-		
+		ModelAndView mv = new ModelAndView("member/room/update");
 		Map<String, Object> map = roomService.selectRoomDetail(commandMap.getMap());
-		mv.addObject("map", map.get("map"));
+		mv.addObject("room", map.get("map"));
 		mv.addObject("list", map.get("list"));
 		return mv;
 	}
 	
 	@RequestMapping(value="/room/update")
 	public ModelAndView updateRoom(CommandMap commandMap, HttpServletRequest request) throws Exception {
-		ModelAndView mv = new ModelAndView("redirect:search/detailRoom");
-		
+		ModelAndView mv = new ModelAndView("member/room/adminRoom");
+		if(request.getParameterValues("UTILITY_TYPE")!=null) {
+			String[] arr = request.getParameterValues("UTILITY_TYPE");
+			String UTILITY_TYPE = "";
+			for(int i=0; i<arr.length; i++) {
+				UTILITY_TYPE = UTILITY_TYPE+arr[i]+",";
+			}
+			commandMap.put("UTILITY_TYPE", UTILITY_TYPE);
+		}else {
+			commandMap.put("UTILITY_TYPE", "");
+		}
+		if(request.getParameterValues("OPTIONS")!=null) {
+			String[] arr2 = request.getParameterValues("OPTIONS");
+			String OPTIONS = "";
+			for(int i=0; i<arr2.length; i++) {
+				OPTIONS = OPTIONS+arr2[i]+",";
+			}
+			commandMap.put("OPTIONS", OPTIONS);
+		}else {
+			commandMap.put("OPTIONS", "");
+		}
+		if(request.getParameterValues("STRUCTURES")!=null) {
+			String[] arr3 = request.getParameterValues("STRUCTURES");
+			String STRUCTURES = "";
+			for(int i=0; i<arr3.length; i++) {
+				STRUCTURES = STRUCTURES+arr3[i]+",";
+			}
+			commandMap.put("STRUCTURES", STRUCTURES);
+		}else {
+			commandMap.put("STRUCTURES", "");
+		}
 		roomService.updateRoom(commandMap.getMap(), request);
 		mv.addObject("ROOM_NUM", commandMap.get("ROOM_NUM"));
 		return mv;

@@ -3,56 +3,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="<c:url value='/css/search.css'/>"/>
-<!-- 테스트용 세팅 -->
-<%@ page import="java.util.HashMap" %>
-<%@ page import="java.util.Map" %>
-<%@ page import="java.util.List" %>
-<%@ page import="java.util.ArrayList" %>
-<%
-	Map<String,Object> room = new HashMap<String,Object>();
-	room.put("check","1");
-	room.put("ROOM_TYPE","원룸");
-	room.put("BUILDING_TYPE","단독주택");
-	room.put("TRADE_TYPE","월세");
-	room.put("MONTHLY_DEPOSIT","300");
-	room.put("MONTHLY_PAYMENT","30");
-	room.put("SUPPLY_SIZE","20");
-	room.put("REAL_SIZE","20");
-	room.put("BUILDING_STORY","20");
-	room.put("ROOM_FLOOR","3");
-	room.put("HEATING_SYSTEM","1");
-	room.put("MOVE_IN_DATE","2019-08-08");	//데이터 이렇게 받아야 함;;
-	room.put("UTILITY_CHECK","1");
-	room.put("UTILITY_PRICE","10");
-	room.put("UTILITY_TYPE","1,3,5");
-	room.put("PARKING","1");
-	room.put("PARKING_BILL","5");
-	room.put("PET","1");
-	room.put("ELEVATOR","1");
-	room.put("BALCONY","1");
-	room.put("BUILT_IN","1");
-	room.put("STRUCTURES","1");
-	room.put("OPTIONS","2,4,6");
-	room.put("LOAN_ACCESS","0");
-	room.put("DESC_TITLE","싸다싸");
-	room.put("DESC_DETAIL","이가격에 이만한 퀄리티");
-	room.put("DESC_SECRET","미끼");
-	room.put("MEM_ID","cheolsu");
-	room.put("UPLOAD_DATE","2019-07-31");
-	room.put("HIT_COUNT","4");
-	room.put("FAV_COUNT","1");
-	
-	Map<String,Object> file = new HashMap<String,Object>();
-	file.put("STD_NAME","room1.png");
-	
-	List<Map<String,Object>> fileList = new ArrayList<Map<String,Object>>();
-	fileList.add(file);
-
-	request.setAttribute("room", room);
-	request.setAttribute("fileList", fileList);
-%>
-<!-- 테스트용 세팅 끝 -->
 <%@ include file="/WEB-INF/include/include-header.jspf" %>
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/search.css'/>"/>
 <script type="text/javascript">

@@ -75,7 +75,8 @@ public class RoomDAO extends AbstractDAO{
 
 	public void updateRoom(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub
-		update("room.updateRoom", map);
+		update("room.updateRoomInfo1", map);
+		update("room.updateRoomInfo2", map);
 	}
 
 	public void deleteFileList(Map<String, Object> map) throws Exception {

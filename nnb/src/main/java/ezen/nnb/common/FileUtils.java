@@ -16,12 +16,14 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 @Component("fileUtils")
 public class FileUtils {
 	
-	private static final String filePath = "C:\\dev\\file\\";//파일이 저장될 위치를 지정.
-	
+	/*
+	 * private static final String filePath = "C:\\dev\\file\\";//파일이 저장될 위치를 지정.
+	 */	
 	public List<Map<String,Object>> parseInsertFileInfo(Map<String,Object> map, HttpServletRequest request) throws Exception{
 		MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest)request;
     	Iterator<String> iterator = multipartHttpServletRequest.getFileNames(); //파일들의 이름을 받아서 iterator에 집어넣는다.
-    	
+    	String filePath = request.getSession().getServletContext().getRealPath("/roomImages/");
+
     	MultipartFile multipartFile = null;
     	String originalFileName = null;
     	String originalFileExtension = null;
@@ -30,9 +32,8 @@ public class FileUtils {
     	List<Map<String,Object>> list = new ArrayList<Map<String,Object>>(); 
     	//클라이언트에서 전송된 파일 정보를 담아서 반환을 해줄 list (다중파일전송을 위해서 list)
         Map<String, Object> listMap = null; 
-        //ServiceImple 영역에서 전달해준 맵에서 신규 생성되는 게시글의 번호를 받아오도록 하였다.
-        
-        String room_Num = (String)map.get("ROOM_NUM");
+		String roomIdx = (String)map.get("idx");
+        String MEM_ID = (String)request.getSession().getAttribute("MEM_ID");
         //만약 폴더가 없으면 폴더를 생성하기로한다.
         File file = new File(filePath);
         if(file.exists() == false){
@@ -50,9 +51,10 @@ public class FileUtils {
         		multipartFile.transferTo(file); //방금 만들 파일을 저장경로에 저장한다.
         		
         		listMap = new HashMap<String,Object>(); //해쉬맵 객체생성
-        		listMap.put("ROOM_NUM",room_Num);
-        		listMap.put("ORIGINAL_FILE_NAME", originalFileName); //오리지날 이름을 맵에 넣는다.
-        		listMap.put("STORED_FILE_NAME", storedFileName); //저장이름을 맵에 넣는다.
+        		listMap.put("ROOM_NUM",roomIdx);
+        		listMap.put("CREA_ID",MEM_ID);
+        		listMap.put("ORG_NAME", originalFileName); //오리지날 이름을 맵에 넣는다.
+        		listMap.put("STD_NAME", storedFileName); //저장이름을 맵에 넣는다.
         		listMap.put("FILE_SIZE", multipartFile.getSize()); //파일사이즈를 맵에 넣는다.
         		list.add(listMap); //방금 만든 맵을 리스트에 넣는다.
         	}
@@ -63,7 +65,8 @@ public class FileUtils {
 	public List<Map<String, Object>> parseUpdateFileInfo(Map<String, Object> map, HttpServletRequest request) throws Exception{
 		MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest)request;
     	Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
-    	
+    	String filePath = request.getSession().getServletContext().getRealPath("/roomImages/");
+
     	MultipartFile multipartFile = null;
     	String originalFileName = null;
     	String originalFileExtension = null;
@@ -71,6 +74,8 @@ public class FileUtils {
     	
     	List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
         Map<String, Object> listMap = null; 
+		String roomIdx = (String)map.get("idx");
+        String MEM_ID = (String)request.getSession().getAttribute("MEM_ID");        
         
         String room_Num = (String)map.get("ROOM_NUM");
         String requestName = null;
@@ -88,9 +93,10 @@ public class FileUtils {
         		
         		listMap = new HashMap<String,Object>();
         		listMap.put("IS_NEW", "Y");
+        		listMap.put("CREA_ID",MEM_ID);
         		listMap.put("ROOM_NUM", room_Num);
-        		listMap.put("ORIGINAL_FILE_NAME", originalFileName);
-        		listMap.put("STORED_FILE_NAME", storedFileName);
+        		listMap.put("ORG_NAME", originalFileName);
+        		listMap.put("STD_NAME", storedFileName);
         		listMap.put("FILE_SIZE", multipartFile.getSize());
         		list.add(listMap);
         	}

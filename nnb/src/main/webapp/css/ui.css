@@ -154,7 +154,9 @@ svg[Attributes Style] {
 	border-right: 1px solid rgb(69, 69, 69);
 	border-bottom: 1px solid rgb(69, 69, 69);
 }
-
+ul, li {
+    list-style: none;
+}
 .bGLXyI {
 	width: 100%;
 	min-width: 1366px;
