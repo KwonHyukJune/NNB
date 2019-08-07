@@ -6,6 +6,9 @@
 <%@ include file="/WEB-INF/include/include-header.jspf" %>
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/myPage.css'/>"/>
 <script type="text/javascript">
+$(document).ready(function(){
+	$('#amyPage').addClass('active');
+}); 
 	var check = 0;
 	function fn_nickCheck(){ 
 		if($('#nickname').val()!="${map.MEM_NICK}"){
@@ -50,7 +53,21 @@
 		};
 	});
 	function fn_submit(){
+		var emailval = $("#email1").val()+"@"+$("#email2").val();
+		alert(emailval);
+		var phoneval = $("#phone1").val()+$("#phone2").val()+$("#phone3").val();
+		str = "<input type='hidden' name='mem_email' value='"+emailval+"'>"
+			+ "<input type='hidden' name='mem_phone' value='"+phoneval+"'>";
+		$("#frm").append(str);
 		frm.submit();
+/* 		var comSubmit = new ComSubmit("frm");
+		comSubmit.setUrl("modify");
+		var email = $("#email1").val()+"@"+$("#email2").val();
+		var phone = $("#phone1").val()+$("#phone2").val()+$("#phone3").val();
+		$("#mem_email").val(email);
+		$("#mem_phone").val(phone);
+		comSubmit.submit();*/
+		
 	};
 	/*
 	휴대폰인증 스크립트 -> identify()
@@ -65,11 +82,11 @@
 
 <div class="myPageInfoForm">
 
-	<form id="frm" name="frm" action="modify" method="post">
+	<form id="frm" name="frm" method="post" action="modify">
 	<div>이름</div>
-		<input type="text" id="name" name="name" value="${map.MEM_NAME}">
+		<input type="text" id="name" name="name" value="${map.MEM_NAME}" disabled="disabled">
 	<div>비밀번호</div>
-		<input type="password" id="password" name="password">
+		<input type="password" id="password" name="MEM_PW">
 	<div>닉네임</div>
 	<div class="bhsJD">
 		<input type="text" id="nickname" name="nickname" placeholder="닉네임" class="jYdxqx2 kTQnUD" value="${map.MEM_NICK}">

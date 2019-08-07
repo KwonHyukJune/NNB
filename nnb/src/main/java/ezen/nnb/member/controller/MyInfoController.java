@@ -46,8 +46,12 @@ public ModelAndView MyInfoModifyForm(CommandMap commandMap, HttpServletRequest r
 }
 ///MyInfoModify
 @RequestMapping(value="/myPage/modify")
-public ModelAndView MyInfoModify(CommandMap commandMap)throws Exception{
-	ModelAndView mv=new ModelAndView("redirect:/myPage/MyInfoModify");	
+public ModelAndView MyInfoModify(CommandMap commandMap, HttpServletRequest request)throws Exception{
+	ModelAndView mv=new ModelAndView("member/myPage/myPageModify");	
+	HttpSession session = request.getSession();
+	String id = (String) session.getAttribute("MEM_ID");
+	commandMap.put("MEM_ID",id);
+	System.out.println("email:"+commandMap.get("mem_email"));
 	myInfoService.updateMyInfoModify(commandMap.getMap());	
 	mv.addObject("MyInfo", commandMap.get("MyInfo"));
 	return mv;
