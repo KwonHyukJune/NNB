@@ -35,9 +35,10 @@ public class FavoriteDAO extends AbstractDAO {
 		delete("favorite.deleteFavRoommate",map);
 	}
 	@SuppressWarnings("unchecked")
-	public Map<String, Object> selectFavRoom(Map<String, Object> map) throws Exception{
+	
+public List<Map<String, Object>> selectFavRoom(Map<String, Object> map) throws Exception{
 		// TODO Auto-generated method stub
-		return (Map<String,Object>)selectOne("favorite.selectFavRoom",map);
+		return (List<Map<String,Object>>)selectList("favorite.selectFavRoom",map);
 	}
 
 	public void addFavRoom(Map<String, Object> map) throws Exception {

@@ -3,185 +3,202 @@
 <!DOCTYPE html>
 <html>
 <head>
-<%@ include file="/WEB-INF/include/include-header.jspf" %>
+<%@ include file="/WEB-INF/include/include-header.jspf"%>
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/search.css'/>"/>
-<script type="text/javascript">
-/* Ãß°¡ÇÊÅÍ-Ãş¼ö : ÀüÃ¼ ´©¸£¸é ´Ù¸¥°Å Ã¼Å©ÇØÁ¦µÇ°í ´Ù¸¥°Å ´©¸£¸é ÀüÃ¼ ÇØÁ¦µÇ°í */
-/* Ãß°¡ÇÊÅÍ-Ãş¼ö : 7Ãş ÀÌ»óÀº ¾î¶»°Ô °ªÀ» ÁÙÁö */
-/* Ãß°¡ÇÊÅÍ-¹æ±¸Á¶ : ¿ø·ëÀÏ ¶§¸¸ ¶ß°Ô */
-/* Ãß¶óÇÊÅÍ-Ãß°¡¿É¼Ç : Ç®¿É¼Ç ¾î¶»°Ô ÁÙÁö */
-</script>
 </head>
+<!-------------------------------------------------------------- -->
 <body>
 <%@ include file="/WEB-INF/include/header.jspf" %>
 
-<div class="roomList">
-
 <div id="searchOption">
 	<input type="text" name="region" class="search" id="region">
-	<div class="select">¹æ Á¾·ù</div>
-	<div class="select">°Å·¡ Á¾·ù</div>
-	<div class="select">°¡°İ´ë</div>
-	<div class="select">°ü¸®ºñ</div>
-	<div class="select">¹æÅ©±â</div>
-	<div class="select">Ãß°¡ÇÊÅÍ</div>
+	<div class="select">ë°© ì¢…ë¥˜</div>
+	<div class="select">ê±°ë˜ ì¢…ë¥˜</div>
+	<div class="select">ê°€ê²©ëŒ€</div>
+	<div class="select">ê´€ë¦¬ë¹„</div>
+	<div class="select">ë°©í¬ê¸°</div>
+	<div class="select">ì¶”ê°€í•„í„°</div>
 	<div class="option" id="roomType">
-		<div>¹æÁ¾·ù</div>
-		<div>Áßº¹¼±ÅÃÀÌ °¡´ÉÇÕ´Ï´Ù.</div>
+		<div>ë°©ì¢…ë¥˜</div>
+		<div>ì¤‘ë³µì„ íƒì´ ê°€ëŠ¥í•©ë‹ˆë‹¤.</div>
 		<div>
-			<input type="checkbox" class="ROOM_TYPE" value="¿ø·ë">¿ø·ë
-			<input type="checkbox" class="ROOM_TYPE" value="Åõ·ë">Åõ·ë
-			<input type="checkbox" class="ROOM_TYPE" value="¾²¸®·ë">¾²¸®·ë
-			<input type="checkbox" class="ROOM_TYPE" value="¿ÀÇÇ½ºÅÚ">¿ÀÇÇ½ºÅÚ
-			<input type="checkbox" class="ROOM_TYPE" value="¾ÆÆÄÆ®">¾ÆÆÄÆ®
+			<input type="checkbox" class="ROOM_TYPE" value="ì›ë£¸">ì›ë£¸
+			<input type="checkbox" class="ROOM_TYPE" value="íˆ¬ë£¸">íˆ¬ë£¸
+			<input type="checkbox" class="ROOM_TYPE" value="ì“°ë¦¬ë£¸">ì“°ë¦¬ë£¸
+			<input type="checkbox" class="ROOM_TYPE" value="ì˜¤í”¼ìŠ¤í…”">ì˜¤í”¼ìŠ¤í…”
+			<input type="checkbox" class="ROOM_TYPE" value="ì•„íŒŒíŠ¸">ì•„íŒŒíŠ¸
 		</div>
 	</div>
 	<div class="option" id="tradeType">
-		<div>¸Å¹° Á¾·ù</div>
-		<div>Áßº¹¼±ÅÃÀÌ °¡´ÉÇÕ´Ï´Ù.</div>
+		<div>ë§¤ë¬¼ ì¢…ë¥˜</div>
+		<div>ì¤‘ë³µì„ íƒì´ ê°€ëŠ¥í•©ë‹ˆë‹¤.</div>
 		<div>
-			<input type="checkbox" class="TRADE_TYPE" value="¿ù¼¼">¿ù¼¼
-			<input type="checkbox" class="TRADE_TYPE" value="Àü¼¼">Àü¼¼
+			<input type="checkbox" class="TRADE_TYPE" value="ì›”ì„¸">ì›”ì„¸
+			<input type="checkbox" class="TRADE_TYPE" value="ì „ì„¸">ì „ì„¸
 		</div>
 	</div>
 	<div class="option" id="price">
-		<div>º¸Áõ±İ/Àü¼¼°¡</div>
+		<div>ë³´ì¦ê¸ˆ/ì „ì„¸ê°€</div>
 		<div>
 			<input type="number" name="MONTHLY_DEPOSIT_MIN" id="MONTHLY_DEPOSIT_MIN">
 			<input type="number" name="MONTHLY_DEPOSIT_MAX" id="MONTHLY_DEPOSIT_MAX">
 			<input type="number" name="JEONSE_MIN" id="JEONSE_MIN">
 			<input type="number" name="JEONSE_MAX" id="JEONSE_MAX">
 		</div>
-		<div>¿ù¼¼</div>
+		<div>ì›”ì„¸</div>
 		<div>
 			<input type="number" name="MONTHLY_PAYMENT_MIN" id="MONTHLY_PAYMENT_MIN">
 			<input type="number" name="MONTHLY_PAYMENT_MAX" id="MONTHLY_PAYMENT_MAX">
 		</div>
 	</div>
 	<div class="option" id="utilityPrice">
-		<div>°ü¸®ºñ</div>
+		<div>ê´€ë¦¬ë¹„</div>
 		<div>
 			<input type="number" name="UTILITY_PRICE_MIN" id="UTILITY_PRICE_MIN">
 			<input type="number" name="UTILITY_PRICE_MAX" id="UTILITY_PRICE_MAX">
 		</div>
 	</div>
 	<div class="option" id="size">
-		<div>¹æÅ©±â</div>
+		<div>ë°©í¬ê¸°</div>
 		<div>
 			<input type="number" name="REAL_SIZE_MIN" id="REAL_SIZE_MIN">
 			<input type="number" name="REAL_SIZE_MAX" id="REAL_SIZE_MAX">
 		</div>
 	</div>
 	<div class="option" id="additional">
-		<div>Ãş¼ö</div>
+		<div>ì¸µìˆ˜</div>
 		<div>
-			<input type="checkbox" class="ROOM_FLOOR" value="" checked="checked">ÀüÃ¼
-			<input type="checkbox" class="ROOM_FLOOR" value="1">1Ãş
-			<input type="checkbox" class="ROOM_FLOOR" value="2">2Ãş
-			<input type="checkbox" class="ROOM_FLOOR" value="3">3Ãş
-			<input type="checkbox" class="ROOM_FLOOR" value="4">4Ãş
-			<input type="checkbox" class="ROOM_FLOOR" value="5">5Ãş
-			<input type="checkbox" class="ROOM_FLOOR" value="6">6Ãş
-			<input type="checkbox" class="ROOM_FLOOR" value="7">7Ãş ÀÌ»ó
-			<input type="checkbox" class="ROOM_FLOOR" value="¹İÁöÃş">¹İÁöÃş
-			<input type="checkbox" class="ROOM_FLOOR" value="¿ÁÅ¾¹æ">¿ÁÅ¾¹æ
+			<input type="checkbox" class="ROOM_FLOOR" value="" checked="checked">ì „ì²´
+			<input type="checkbox" class="ROOM_FLOOR" value="1">1ì¸µ
+			<input type="checkbox" class="ROOM_FLOOR" value="2">2ì¸µ
+			<input type="checkbox" class="ROOM_FLOOR" value="3">3ì¸µ
+			<input type="checkbox" class="ROOM_FLOOR" value="4">4ì¸µ
+			<input type="checkbox" class="ROOM_FLOOR" value="5">5ì¸µ
+			<input type="checkbox" class="ROOM_FLOOR" value="6">6ì¸µ
+			<input type="checkbox" class="ROOM_FLOOR" value="7">7ì¸µ ì´ìƒ
+			<input type="checkbox" class="ROOM_FLOOR" value="ë°˜ì§€ì¸µ">ë°˜ì§€ì¸µ
+			<input type="checkbox" class="ROOM_FLOOR" value="ì˜¥íƒ‘ë°©">ì˜¥íƒ‘ë°©
 		</div>
-		<div>¹æ ±¸Á¶</div>
+		<div>ë°© êµ¬ì¡°</div>
 		<div>
-			<input type="checkbox" class="STRUCTURES" value="2">ÁÖ¹æ ºĞ¸®Çü(1.5·ë)
-			<input type="checkbox" class="STRUCTURES" value="1">º¹Ãş
+			<input type="checkbox" class="STRUCTURES" value="2">ì£¼ë°© ë¶„ë¦¬í˜•(1.5ë£¸)
+			<input type="checkbox" class="STRUCTURES" value="1">ë³µì¸µ
 		</div>
-		<div>Ãß°¡¿É¼Ç</div>
-		<div>Áßº¹¼±ÅÃÀÌ °¡´ÉÇÕ´Ï´Ù.</div>
+		<div>ì¶”ê°€ì˜µì…˜</div>
+		<div>ì¤‘ë³µì„ íƒì´ ê°€ëŠ¥í•©ë‹ˆë‹¤.</div>
 		<div>
-			<input type="checkbox" class="PARKING" value="1">ÁÖÂ÷°¡´É
-			<input type="checkbox" class="PET" value="1">¹İ·Áµ¿¹°
-			<input type="checkbox" class="ELEVATOR" value="1">¿¤¸®º£ÀÌÅÍ
-			<input type="checkbox" class="BALCONY" value="1">º£¶õ´Ù/¹ßÄÚ´Ï
-			<input type="checkbox" class="BUILT_IN" value="1">ºôÆ®ÀÎ
-			<input type="checkbox" class="OPTIONS" value="1,2,8,9">Ç®¿É¼Ç
-			<input type="checkbox" class="LOAN_ACCESS" value="1">Àü¼¼ÀÚ±İ´ëÃâ
+			<input type="checkbox" class="PARKING" value="1">ì£¼ì°¨ê°€ëŠ¥
+			<input type="checkbox" class="PET" value="1">ë°˜ë ¤ë™ë¬¼
+			<input type="checkbox" class="ELEVATOR" value="1">ì—˜ë¦¬ë² ì´í„°
+			<input type="checkbox" class="BALCONY" value="1">ë² ë€ë‹¤/ë°œì½”ë‹ˆ
+			<input type="checkbox" class="BUILT_IN" value="1">ë¹ŒíŠ¸ì¸
+			<input type="checkbox" class="OPTIONS" value="1,2,8,9">í’€ì˜µì…˜
+			<input type="checkbox" class="LOAN_ACCESS" value="1">ì „ì„¸ìê¸ˆëŒ€ì¶œ
 		</div>
 	</div>
+</div>
+   <div>ì „ì²´ ë°© ${count}ê°œ</div>
+<div class="selectSearchRoomList">
+
 </div>
 
-<div id="searchResult">
-	<div>ÀüÃ¼ ¹æ : ${count}°³</div>
-	<div class="roomList">
-		<c:forEach var="room" items="${list}">
-		<div class="room">
-	<!-- 	<a href="#" onclick="select()"> -->
-			<div class="fav">
-				<c:if test="${room.check=='0'}">
-				<div class="insertFav" onclick="insertFav(${room.ROOM_NUM});">
-				</div>
-				</c:if>
-				<c:if test="${room.check=='1'}">
-				<div class="deleteFav" onclick="deleteFav(${room.ROOM_NUM});">
-				</div>
-				</c:if>
-			</div>
-		<a href="<c:url value='/room/detail?ROOM_NUM=${room.ROOM_NUM}'/>">
-			<div class="img">
-			<img src="<c:url value='/files/${room.STD_NAME}'/>">
-			</div>
-			<div>${room.ROOM_TYPE}</div>
-			<div>
-				${room.TRADE_TYPE} 
-				<c:if test="${room.TRADE_TYPE=='¿ù¼¼'}">
-				${room.MONTHLY_DEPOSIT}/${room.MONTHLY_PAYMENT}
-				</c:if>
-				<c:if test="${room.TRADE_TYPE=='Àü¼¼'}">
-				${room.JEONSE}
-				</c:if>
-			</div>
-			<div>
-				${room.ROOM_FLOOR}Ãş, ${room.REAL_SIZE}m2,
-				<c:if test="${room.UTILITY_PRICE!=null && room.UTILITY_PRICE!=''}">
-				°ü¸®ºñ ${room.UTILITY_PRICE}¸¸
-				</c:if>
-			</div>
-			<div>${room.DESC_TITLE}</div>
-		</a>
-		</div>
-		</c:forEach>
-	</div>
-</div>
+<div id="PAGE_NAVI">  </div>
+		<input type="hidden" id="PAGE_INDEX" name="PAGE_INDEX" />
+<br>
 
 <div id="map"style="width: 50%; height: 300px; margin-top: 10px;"></div>
 
-<script type="text/javascript"	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e603a6f6c5db5707c8168383f3516651&libraries=services,clusterer,drawing"></script>
-		<c:forEach var="address" items="${list}">
-			<script>
-				var mapContainer = document.getElementById('map'), // Áöµµ¸¦ Ç¥½ÃÇÒ div 
-				mapOption = { 
-		    	center: new kakao.maps.LatLng(37.502541, 127.024711), // ÁöµµÀÇ Áß½ÉÁÂÇ¥
-		    	level: 3 // ÁöµµÀÇ È®´ë ·¹º§
-				};
-				var map = new kakao.maps.Map(mapContainer, mapOption); //Áöµµ¸¦ ¹Ì¸® »ı¼º
-				var geocoder = new kakao.maps.services.Geocoder(); // ÁÖ¼Ò-ÁÂÇ¥ º¯È¯ °´Ã¼¸¦ »ı¼ºÇÕ´Ï´Ù
-				
-				geocoder.addressSearch('${address.ADDRESS1}', function(result, status) { // ÁÖ¼Ò·Î ÁÂÇ¥¸¦ °Ë»öÇÕ´Ï´Ù
-				   // Á¤»óÀûÀ¸·Î °Ë»öÀÌ ¿Ï·áµÆÀ¸¸é 
-				if (status === kakao.maps.services.Status.OK) {
-				var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-			       // °á°ú°ªÀ¸·Î ¹ŞÀº À§Ä¡¸¦ ¸¶Ä¿·Î Ç¥½ÃÇÕ´Ï´Ù
-			   var marker = new kakao.maps.Marker({
-			         map: map,
-			         position: coords
-			       });
-			       map.setCenter(coords);
-				  } 
-				});    
-			</script>
-		</c:forEach>
-	</div>
-</div>
-</div>
-<br>
-
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e603a6f6c5db5707c8168383f3516651&libraries=services,clusterer,drawing"></script>
+	<c:forEach var="address" items="${list}">
+		<script>
+            var mapContainer = document.getElementById('map'), // ì§€ë„ë¥¼ í‘œì‹œí•  div 
+            mapOption = { 
+             center: new kakao.maps.LatLng(37.502541, 127.024711), // ì§€ë„ì˜ ì¤‘ì‹¬ì¢Œí‘œ
+             level: 3 // ì§€ë„ì˜ í™•ëŒ€ ë ˆë²¨
+            };
+            var map = new kakao.maps.Map(mapContainer, mapOption); //ì§€ë„ë¥¼ ë¯¸ë¦¬ ìƒì„±
+            var geocoder = new kakao.maps.services.Geocoder(); // ì£¼ì†Œ-ì¢Œí‘œ ë³€í™˜ ê°ì²´ë¥¼ ìƒì„±í•©ë‹ˆë‹¤
+            
+            geocoder.addressSearch('${address.ADDRESS1}', function(result, status) { // ì£¼ì†Œë¡œ ì¢Œí‘œë¥¼ ê²€ìƒ‰í•©ë‹ˆë‹¤
+               // ì •ìƒì ìœ¼ë¡œ ê²€ìƒ‰ì´ ì™„ë£Œëìœ¼ë©´ 
+            if (status === kakao.maps.services.Status.OK) {
+            var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+                // ê²°ê³¼ê°’ìœ¼ë¡œ ë°›ì€ ìœ„ì¹˜ë¥¼ ë§ˆì»¤ë¡œ í‘œì‹œí•©ë‹ˆë‹¤
+            var marker = new kakao.maps.Marker({
+                  map: map,
+                  position: coords
+                });
+                map.setCenter(coords);
+              } 
+            });    
+         </script>
+	</c:forEach>
 <div>
 <%@ include file="/WEB-INF/include/footer.jspf" %>
 </div>
+
+<%@ include file="/WEB-INF/include/include-body.jspf"%>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	fn_selectSearchRoomList(1);
+});
+
+
+function fn_selectSearchRoomList(pageNo){
+	var comAjax = new ComAjax(); 
+	comAjax.setUrl("<c:url value='/search/roomList'/>"); 
+	comAjax.setCallback("fn_selectSearchRoomListCallback"); 
+	comAjax.addParam("PAGE_INDEX",pageNo); 
+	comAjax.addParam("PAGE_ROW", 15); 
+	comAjax.ajax(); }
+
+function fn_selectSearchRoomListCallback(data){ 
+	var total = data.TOTAL; 
+	var body = $("div.selectSearchRoomList"); 
+	body.empty(); 
+	
+	if(total == 0){ 
+		var str = "<div class='roomList'>" + "ì¡°íšŒëœ ê²°ê³¼ê°€ ì—†ìŠµë‹ˆë‹¤. </div>"; 
+		body.append(str); 
+        	
+	} else{ 
+		var params = { 
+			divId : "PAGE_NAVI", 
+			pageIndex : "PAGE_INDEX", 
+			totalCount : total, 
+			eventName : "fn_selectSearchRoomList" 
+			}; 
+		
+		gfn_renderPaging(params); 
+			var str = ""; 
+			$.each(data.list, function(key, value){ 
+				str += 
+					"<div class='roomList'>" 
+						+ "<a href='<c:url value='/room/detail?ROOM_NUM="+ value.ROOM_NUM + "'/>'>"
+							+ "<div class='img'>"
+								+ "<img src='<c:url value='/files/"+ value.THUMBNAIL + "'/>'>"
+							+ "</div>"
+							+ "<div>"+ value.ROOM_TYPE + "</div>"
+							+"<div>"
+								+ value.TRADE_TYPE
+									+ value.MONTHLY_DEPOSIT + "/" + value.MONTHLY_PAYMENT
+									+ value.JEONSE
+							+ "</div>"
+							+ "<div>"
+								+ value.ROOM_FLOOR + "ì¸µ," + value.SUPPLY_SIZE+ "m2,"
+									+ "ê´€ë¦¬ë¹„  "+ value.UTILITY_PRICE + "ë§Œ"
+							+ "</div>"
+							+ "<div>" + value.DESC_TITLE + "</div>"
+						+ "</a>"
+    				+ "</div>";
+
+        	}); 
+        	body.append(str); 
+		} 
+}
+        
+</script>
+
 </body>
 </html>

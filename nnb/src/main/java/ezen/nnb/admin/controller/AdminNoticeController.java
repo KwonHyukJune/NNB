@@ -2,6 +2,7 @@ package ezen.nnb.admin.controller;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
+
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,9 +18,8 @@ public class /*컨트롤러*/AdminNoticeController {
 	@Resource(name="adminNoticeService") 
 	private AdminNoticeService adminNoticeService;
 	
-	
 	@RequestMapping(value="/admin/openNoticeList") 
-	public ModelAndView openNoticeList(CommandMap commandMap) throws Exception{ 
+	public ModelAndView openNoticeList(CommandMap commandMap) throws Exception { 
 		ModelAndView mv = new ModelAndView("/admin/notice/noticeList"); 
 		return mv; 
 	} 
@@ -28,6 +28,7 @@ public class /*컨트롤러*/AdminNoticeController {
 	@RequestMapping(value=/*MapperURL*/"/admin/noticeList")
 	public ModelAndView adminNoticeList(CommandMap commandMap) throws Exception{
 		ModelAndView mv=new ModelAndView(/*jsp*/"jsonView");
+		
 		List<Map<String,Object>> list=adminNoticeService.selectNoticeList(commandMap.getMap());
 		mv.addObject("list",list);	
 		if(list.size() > 0){

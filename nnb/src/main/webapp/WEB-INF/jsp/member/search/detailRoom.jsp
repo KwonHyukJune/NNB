@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<%@ include file="/WEB-INF/include/include-header.jspf" %>
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/search.css'/>"/>
 <!-- 테스트용 세팅 -->
 <%@ page import="java.util.HashMap" %>
@@ -53,7 +54,7 @@
 	request.setAttribute("fileList", fileList);
 %>
 <!-- 테스트용 세팅 끝 -->
-<%@ include file="/WEB-INF/include/include-header.jspf" %>
+
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/search.css'/>"/>
 <script type="text/javascript">
 /* convert(m): 평수<->제곱미터 변환 */

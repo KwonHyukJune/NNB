@@ -30,7 +30,7 @@ WHERE
 <!-- 전체 찜 한 방 조회 -->
 <select id = "selectFavRoom" parameterType="hashmap" resultType="hashmap">
 <![CDATA[
-	select fav_room.room_num from fav_room where mem_id=#{MEM_ID}
+	select ROOM_NUM from fav_room where mem_id=#{MEM_ID}
 ]]>
 </select>
 
