@@ -23,21 +23,21 @@ WHERE
 	R1.ROOM_NUM=r2.room_num and
 	R1.ROOM_NUM=rb.room_num and
 	and	DEL_GB='N' and
-	R1.ROOM_NUM=#{rn}
+	R1.ROOM_NUM=#{rn,jdbcType=INTEGER}
 	ORDER BY R1.ROOM_NUM DESC
 ]]>
 </select>
 <!-- 전체 찜 한 방 조회 -->
 <select id = "selectFavRoom" parameterType="hashmap" resultType="hashmap">
 <![CDATA[
-	select fav_room.room_num from fav_room where mem_id=#{MEM_ID}
+	select fav_room.room_num from fav_room where mem_id=#{MEM_ID,jdbcType=VARCHAR }
 ]]>
 </select>
 
 <!-- 찜 한 방 삭제 -->
 <delete id="deleteFavRoom" parameterType="hashmap">
 <![CDATA[
-   delete from FAV_ROOM where MEM_ID=#{MEM_ID}
+   delete from FAV_ROOM where MEM_ID=#{MEM_ID,jdbcType=VARCHAR }
 ]]>
 </delete>   
 
@@ -49,7 +49,7 @@ UPDATE
 SET
 	FAV_COUNT=NVL(FAV_COUNT,0)-1
 WHERE 
-	ROOM_NUM=#{ROOM_NUM}
+	ROOM_NUM=#{ROOM_NUM,jdbcType=INTEGER}
 ]]>
 </update>
 <!-- 찜한 룸메이트 리스트 -->
@@ -62,14 +62,14 @@ select
 FROM
      FAV_MATE
 WHERE 
-     MEM_ID=#{MEM_ID}
+     MEM_ID=#{MEM_ID,jdbcType=VARCHAR }
      ORDER BY FAV_MATE_NUM DESC
 ]]>
 </select>     
 <!-- 찜 한 룸메이트 취소 -->
 <delete id="deleteFavRoommate" parameterType="hashmap">
 <![CDATA[
-	delete from FAV_MATE where MEM_ID=#{MEM_ID}
+	delete from FAV_MATE where MEM_ID=#{MEM_ID,jdbcType=VARCHAR }
 ]]>
 </delete> 
 
@@ -82,8 +82,8 @@ WHERE
 		)
 	values(
 		FAV_ROOM_NUM_SEQ.NEXTVAL,
-		#{ROOM_NUM},
-		#{MEM_ID}
+		#{ROOM_NUM,jdbcType=INTEGER },
+		#{MEM_ID,jdbcType=VARCHAR }
 		)
 ]]>
 </insert>
