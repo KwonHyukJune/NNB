@@ -45,8 +45,8 @@ public class RoommateServiceImpl implements RoommateService {
 	}
 
 	@Override
-	public int countRoommate() throws Exception {
-		return roommateDAO.countRoommate();
+	public int countRoommate(Map<String, Object> map) throws Exception {
+		return roommateDAO.countRoommate(map);
 	}
 
 	@Override

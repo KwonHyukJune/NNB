@@ -10,7 +10,7 @@ import ezen.nnb.common.AbstractDAO;
 public class RoommateDAO extends AbstractDAO{
 	@SuppressWarnings("unchecked")
 	public Map<String,Object>myProfile(Map<String,Object>map)throws Exception{
-		return(Map<String,Object>)selectOne("roommate.selectRoommateDetail",map);		
+		return(Map<String,Object>)selectOne("roommate.selectMyInfoList",map);		
 	}
 	public void registMyProfile(Map<String,Object>map)throws Exception{
 		insert("roommate.insertMyRoommateProfile",map);
@@ -26,8 +26,8 @@ public class RoommateDAO extends AbstractDAO{
 	public List<Map<String,Object>>searchRoommate(Map<String,Object>map)throws Exception{
 		return (List<Map<String,Object>>)selectList("roommate.selectRoommateList",map);
 	}
-	public int countRoommate()throws Exception{
-		return (int)selectOne("rommate.countRoommateList");
+	public int countRoommate(Map<String,Object>map)throws Exception{
+		return (int)selectOne("rommate.countRoommateList",map);
 	}
 	public void listAddFavRoommate(Map<String,Object>map)throws Exception{
 		insert("roommate.insertFavRoommate",map);
