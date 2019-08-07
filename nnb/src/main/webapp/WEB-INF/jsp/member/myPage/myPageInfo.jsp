@@ -5,6 +5,11 @@
 <head>
 <%@ include file="/WEB-INF/include/include-header.jspf" %>
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/myPage.css'/>"/>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#amyPage').addClass('active');
+}); 
+</script>
 </head>
 <body>
 <%@ include file="/WEB-INF/include/header.jspf" %>
@@ -21,7 +26,7 @@
 	<div>연락처</div>
 		${map.MEM_PHONE}
 	<div>
-		<a href="<c:url value='/myPage/myPageModifyForm'/>" class="btn">수정</a>
+		<a href="<c:url value='/myPage/modifyForm'/>" class="btn">수정</a>
 	</div>
 	
 </div>

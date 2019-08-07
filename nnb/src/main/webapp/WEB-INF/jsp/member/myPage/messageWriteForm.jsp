@@ -10,6 +10,9 @@ $(document).ready(function(){
 		e.preventDefault();
 		fn_submit();
 	});
+	$(document).ready(function(){
+		$('#amessage').addClass('active');
+	}); 
 });
 
 function fn_submit(){

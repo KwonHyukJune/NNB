@@ -5,7 +5,8 @@
 <title>관리자 메인 페이지</title>
 
 <script>
-   
+
+  
 </script>
 
 
@@ -17,7 +18,10 @@
 
 <body>
 
-관리자 로그인 중입니다.
+
+<br/><br/>
+   
+
 
 <br/><br/><br/><br/><br/><br/>
 

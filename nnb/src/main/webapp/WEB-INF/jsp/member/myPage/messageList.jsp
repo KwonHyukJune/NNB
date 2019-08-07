@@ -11,6 +11,7 @@ $(document).ready(function(){
 	if(check!=null && check!="" && check!='0'){
 		alert('이미 차단한 회원입니다.');
 	};
+	$('#amessage').addClass('active');
 	var type = getParameterByName('type');
 	if(type=='1'){
 		$("#type").val("1").prop("selected",true);
@@ -45,7 +46,7 @@ $(document).ready(function(){
 <%@ include file="/WEB-INF/include/header.jspf" %>
 <%@ include file="myPage.jspf" %>
 
-<div class="messageList">
+<div class="messageList cAeKOJ">
 
 	<div class="list">
 	<ul>
@@ -71,7 +72,7 @@ $(document).ready(function(){
 		<script type="text/javascript">
 			if("${message.SENDER}"==memId){
 				$("li#${i.index}>div>div:nth-child(2)").text("발신");
-				$("li#${i.index}>div>div:nth-child(3)").text("id4");
+				$("li#${i.index}>div>div:nth-child(3)").text("${message.RECEIVER}");
 				$("li#${i.index}>div>div:nth-child(2)").className="발신";
 			}else if("${message.RECEIVER}"==memId){
 				$("li#${i.index}>div>div:nth-child(2)").text("수신");

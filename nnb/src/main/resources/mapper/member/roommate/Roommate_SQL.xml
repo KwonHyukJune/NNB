@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="roommate">
+
+
+	<select id="selectRoommateList" parameterType="hashmap"
+		resultType="hashmap">
+	<![CDATA[
+	SELECT
+	row_number() over (ORDER BY RI_NUM DESC) rnum,
+	MEM_ID
+	RI_MEM_NUM,
+	MEM_NICK,
+	RI_GENDER,
+	RI_LOAN_BIG,
+	RI_LOAN_SMALL,
+	RI_REGION1,
+	RI_REGION2,
+	RI_REGION3,
+	RI_BIRTH,
+  	RI_DATE_START,
+  	RI_DATE_END
+FROM
+	MEMBER M,
+<if test="ri_region!=null and !ri_region.equals('')">
+	(SELECT * FROM ROOMMATE_PROFILE 
+	WHERE
+		RI_REGION1 LIKE %#{RI_REGION}%
+		OR RI_REGION2 LIKE %#{RI_REGION}%
+		OR RI_REGION3 LIKE %#{RI_REGION}%) R,
+</if>
+<if test="ri_retion==null or ri_region.equals('')">
+	ROOMMATE_PROFILE R,
+</if>
+	IGNORE I
+WHERE
+	M.MEM_ID=R.RI_MEM_ID
+  	and M.MEM_ID=I.IGNORE_MEM
+	and RI_EXPOSE=1
+	and MEM_ID NOT IN (
+		SELECT 
+			IGNORE_D_MEM
+		FROM IGNORE
+		WHERE IGNORE_MEM = #{id}
+		)
+<if test="gender!=null and !gender.equals('')">
+	AND RI_GENDER = #{gender}
+</if>
+<if test="minyear!=null and !minyear.equals('')">
+	AND RI_BIRTH > #{minyear}
+</if>
+<if test="maxyear!=null and !maxyear.equals('')">
+	AND RI_BIRTH < #{maxyear}
+</if>
+<if test="mindeposit!=null and !mindeposit.equals('')">
+	AND RI_LOAN_BIG > #{mindeposit}
+</if>
+<if test="maxdeposit!=null and !maxdeposit.equals('')">
+	AND RI_LOAN_BIG < #{maxdeposit}
+</if>
+<if test="minrent!=null and !minrent.equals('')">
+	AND RI_LOAN_SMALL > #{minrent}
+</if>
+<if test="maxrent!=null and !maxrent.equals('')">
+	AND RI_LOAN_SMALL < #{maxrent}
+</if>
+<if test="maxdate!=null and !maxdate.equals('')">
+	AND RI_DATE_START < #{maxdate}
+</if>
+<if test="mindate!=null and !mindate.equals('')">
+	AND RI_DATE_END < #{mindate}
+</if>
+	]]>
+	</select>
+	<select id="countRoommateList" parameterType="hashmap"
+		resultType="hashmap">
+	<![CDATA[
+	SELECT 
+	COUNT(*)
+FROM
+	MEMBER M,
+<if test="ri_region!=null and !ri_region.equals('')">
+	(SELECT * FROM ROOMMATE_PROFILE 
+	WHERE
+		RI_REGION1 LIKE %#{RI_REGION}%
+		OR RI_REGION2 LIKE %#{RI_REGION}%
+		OR RI_REGION3 LIKE %#{RI_REGION}%) R,
+</if>
+<if test="ri_retion==null or ri_region.equals('')">
+	ROOMMATE_PROFILE R,
+</if>
+	IGNORE I
+WHERE
+	M.MEM_ID=R.RI_MEM_ID
+  	and M.MEM_ID=I.IGNORE_MEM
+	and RI_EXPOSE=1
+	and MEM_ID NOT IN (
+		SELECT 
+			IGNORE_D_MEM
+		FROM IGNORE
+		WHERE IGNORE_MEM = #{id}
+		)
+<if test="gender!=null and !gender.equals('')">
+	AND RI_GENDER = #{gender}
+</if>
+<if test="minyear!=null and !minyear.equals('')">
+	AND RI_BIRTH > #{minyear}
+</if>
+<if test="maxyear!=null and !maxyear.equals('')">
+	AND RI_BIRTH < #{maxyear}
+</if>
+<if test="mindeposit!=null and !mindeposit.equals('')">
+	AND RI_LOAN_BIG > #{mindeposit}
+</if>
+<if test="maxdeposit!=null and !maxdeposit.equals('')">
+	AND RI_LOAN_BIG < #{maxdeposit}
+</if>
+<if test="minrent!=null and !minrent.equals('')">
+	AND RI_LOAN_SMALL > #{minrent}
+</if>
+<if test="maxrent!=null and !maxrent.equals('')">
+	AND RI_LOAN_SMALL < #{maxrent}
+</if>
+<if test="maxdate!=null and !maxdate.equals('')">
+	AND RI_DATE_START < #{maxdate}
+</if>
+<if test="mindate!=null and !mindate.equals('')">
+	AND RI_DATE_END < #{mindate}
+</if>	
+	]]>
+	</select>
+	
+	<select id="selectRoommateDetail" parameterType="hashmap"
+		resultType="hashmap">
+	<![CDATA[
+	SELECT
+	MEM_ID
+	MEM_NICK,
+	RI_GENDER,
+	RI_LOAN_BIG,
+	RI_LOAN_SMALL,
+	RI_REGION1,
+	RI_REGION2,
+	RI_REGION3,
+	RI_BIRTH,
+	RI_DATE_START,
+	RI_DATE_END,
+	RI_PROFILE
+FROM
+	MEMBER M,
+	ROOMMATE_PROFILE R
+WHERE
+	M.MEM_ID=R.RI_MEM_ID
+	and RI_MEM_ID = #{RI_MEM_NUM, jdbcType=VARCHAR}
+	]]>
+	</select>
+	
+	<insert id="insertFavRoommate" parameterType="hashmap">
+	<![CDATA[
+	INSERT INTO FAV_MATE(
+	FAV_MATE_NUM,
+	MEM_ID,
+	RI_MEM_ID
+)
+VALUES(
+	FAV_MATE_NUM_SEQ.NEXTVAL,
+	#{id1},
+	#{id2}
+)
+	]]>
+	</insert>
+	<delete id="deleteFavRoommate">
+	<![CDATA[
+	DELETE FROM FAV_MATE
+WHERE
+	MEM_ID = #{id1}
+	AND RI_MEM_ID = #{id2}
+	]]>
+	</delete>
+	<insert id="insertMessage" parameterType="hashmap">
+	<![CDATA[
+	INSERT INTO MESSAGE(
+	MESSAGE_NUM,
+  MESSAGE_TITLE,
+	MESSAGE_CONTENT,
+	SENDER,
+	RECEIVER
+)
+VALUES(
+	MESSAGE_NUM_SEQ.NEXTVAL,
+	#{title},
+	#{content},
+	#{id1},
+	#{id2}
+)
+	]]>
+	</insert>
+	
+
+</mapper>

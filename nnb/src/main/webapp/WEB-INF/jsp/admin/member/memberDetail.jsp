@@ -29,7 +29,7 @@ function submit(){
 <body>
 
 
-<h1><div>회원 정보</div></h1>
+<div><h1>회원 정보</h1></div>
 <br/>
 <hr>
 <br/><br/><br/>
@@ -52,7 +52,11 @@ function submit(){
       	<p>연락처  :      	
          ${memberDetail.MEM_PHONE}&nbsp;
          </p>
-    
+    </div>
+    <div class="adminMemberBanDetail">
+    제제내역
+  <p>제재 사유 : ${memberDetail.BAN_REASON}</p>
+  <p>제재 횟수 : ${memberDetail.BAN_COUNT}</p>
      
      </div>
      <br/><br/><br/>

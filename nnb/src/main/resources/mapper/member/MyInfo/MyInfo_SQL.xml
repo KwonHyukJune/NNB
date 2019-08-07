@@ -14,7 +14,7 @@
           MEM_PHONE,
           MEM_JOINDATE
         FROM MEMBER
-        WHERE MEM_ID = #{memId}
+        WHERE MEM_ID = #{MEM_ID}
     ]]>
 	</select>
 	
@@ -23,12 +23,21 @@
         UPDATE MEMBER
         SET
             MEM_PW  = #{MEM_PW},
-            MEM_NAME = #{MEM_NAME},
-            MEM_EMAIL = #{MEM_EMAIL},
-            MEM_PHONE = #{MEM_PHONE},                     
+            MEM_EMAIL = #{mem_email},
+            MEM_NICK = #{nickname},
+            MEM_PHONE = #{mem_phone}
        	WHERE MEM_ID = #{MEM_ID}
      ]]>
     </update>
+    
+    <delete id="deleteMember" parameterType="hashmap">
+        <![CDATA[
+                delete from
+                        MEMBER
+                where
+                        MEM_ID=#{MEM_ID}
+        ]]>
+	</delete>
 
 </mapper>
 	 
