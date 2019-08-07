@@ -72,6 +72,8 @@ WHERE MEM_NICK like '%' || #{isSearch} || '%'
 ]]>
 </select>
 
+
+
 <select id="adminMemberDetail" parameterType="hashMap" resultType="hashMap">
 <![CDATA[  
 SELECT
@@ -106,7 +108,8 @@ WHERE
 </select>
 
 <select id="adminMemberBanDetail" parameterType="hashMap" resultType="hashMap">
-SELECT
+<![CDATA[ 
+  SELECT
        BAN_NUM,
 	   BAN_REMOVAL_DATE,
 	   BAN_REASON
@@ -114,7 +117,7 @@ FROM
 	   FROM BAN
 WHERE
 		MEM_ID=#{MEM_ID}	   
-
+ ]]>
 </select>
                
 <select id="adminMemberBan" parameterType="hashMap" resultType="hashMap">

@@ -24,7 +24,7 @@ public class AdminReportController {
 	@Resource(name="adminRoomService") 
 	private AdminRoomService adminRoomService;
 
-	@RequestMapping(value = "/admin/report/roomList")
+	@RequestMapping(value = "/admin/reportMemberList")
 	public ModelAndView adminReportRoomList(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("/admin/report/roomList");
 
