@@ -22,7 +22,7 @@ public class FavoriteDAO extends AbstractDAO {
 	@SuppressWarnings("unchecked")
 	public List<Map<String, Object>> selectRoommateList(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub
-		return (List<Map<String,Object>>)selectList("favorite.selectRoommateList",map);
+		return (List<Map<String,Object>>)selectList("favorite.selectFavRoommateList",map);
 	}
 	@SuppressWarnings("unchecked")
 	public List<Map<String, Object>> selectFavRoomList(Object rn) throws Exception{

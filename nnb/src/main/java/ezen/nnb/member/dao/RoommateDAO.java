@@ -27,7 +27,7 @@ public class RoommateDAO extends AbstractDAO{
 		return (List<Map<String,Object>>)selectList("roommate.selectRoommateList",map);
 	}
 	public int countRoommate(Map<String,Object>map)throws Exception{
-		return (int)selectOne("rommate.countRoommateList",map);
+		return (int)selectOne("roommate.countRoommateList",map);
 	}
 	public void listAddFavRoommate(Map<String,Object>map)throws Exception{
 		insert("roommate.insertFavRoommate",map);
