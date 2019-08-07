@@ -71,8 +71,6 @@ WHERE
 <if test="mindate!=null and !mindate.equals('')">
 	AND RI_DATE_END < #{mindate}
 </if>
-;
-	
 	]]>
 	</select>
 	<select id="countRoommateList" parameterType="hashmap"
@@ -129,11 +127,10 @@ WHERE
 </if>
 <if test="mindate!=null and !mindate.equals('')">
 	AND RI_DATE_END < #{mindate}
-</if>
-;
-	
+</if>	
 	]]>
 	</select>
+	
 	<select id="selectRoommateDetail" parameterType="hashmap"
 		resultType="hashmap">
 	<![CDATA[
@@ -155,7 +152,7 @@ FROM
 	ROOMMATE_PROFILE R
 WHERE
 	M.MEM_ID=R.RI_MEM_ID
-	and RI_MEM_ID = #{RI_MEM_NUM};
+	and RI_MEM_ID = #{RI_MEM_NUM, jdbcType=VARCHAR}
 	]]>
 	</select>
 	
@@ -170,8 +167,7 @@ VALUES(
 	FAV_MATE_NUM_SEQ.NEXTVAL,
 	#{id1},
 	#{id2}
-);
-	
+)
 	]]>
 	</insert>
 	<delete id="deleteFavRoommate">
@@ -179,8 +175,7 @@ VALUES(
 	DELETE FROM FAV_MATE
 WHERE
 	MEM_ID = #{id1}
-	AND RI_MEM_ID = #{id2};
-	
+	AND RI_MEM_ID = #{id2}
 	]]>
 	</delete>
 	<insert id="insertMessage" parameterType="hashmap">
@@ -198,8 +193,7 @@ VALUES(
 	#{content},
 	#{id1},
 	#{id2}
-);
-	
+)
 	]]>
 	</insert>
 	
