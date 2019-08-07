@@ -368,6 +368,7 @@
 		<%@ include file="/WEB-INF/include/footer.jspf"%>
 	</div>
 </body>
+
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e603a6f6c5db5707c8168383f3516651&libraries=services,clusterer,drawing"></script>
