@@ -72,7 +72,7 @@ $(document).ready(function(){
 		<script type="text/javascript">
 			if("${message.SENDER}"==memId){
 				$("li#${i.index}>div>div:nth-child(2)").text("발신");
-				$("li#${i.index}>div>div:nth-child(3)").text("id4");
+				$("li#${i.index}>div>div:nth-child(3)").text("${message.RECEIVER}");
 				$("li#${i.index}>div>div:nth-child(2)").className="발신";
 			}else if("${message.RECEIVER}"==memId){
 				$("li#${i.index}>div>div:nth-child(2)").text("수신");

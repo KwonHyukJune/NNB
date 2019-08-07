@@ -1,16 +1,17 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <%@ include file="/WEB-INF/include/include-header.jspf" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>â€‹
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/myPage.css'/>"/>
 <script type="text/javascript">
 $(document).ready(function(){
 	$('#amessage').addClass('active');
 });
 function unignore(num){
-	if(confirm('Â÷´Ü ÇØÁ¦?')){
+	if(confirm('ì°¨ë‹¨ í•´ì œ?')){
 		var str = "<form id='frm' action='ignoreCancel' method='post'>"
 				+ "<input type='hidden' name='IGNORE_NUM' value='"+num+"'>"
 				+ "</form>";
@@ -26,37 +27,28 @@ function unignore(num){
 
 <div class="ignoreList">
 
-<div class="subtitle">Â÷´Ü ¸ñ·Ï</div>
-<p>ÃÑ ${count}°ÇÀÇ Â÷´Ü ¸ñ·ÏÀÌ ÀÖ½À´Ï´Ù.</p>
+<div class="subtitle">ì°¨ë‹¨ ëª©ë¡</div>
+<p>ì´ ${count}ê±´ì˜ ì°¨ë‹¨ ëª©ë¡ì´ ìˆìŠµë‹ˆë‹¤.</p>
 <c:if test="${count!=null && count!=''}">
 <ul>
 	<li>
-	<div>´Ğ³×ÀÓ</div>
-	<div>³ªÀÌ</div>
-	<div>¼ºº°</div>
-	<div>Áö¿ª</div>
-	<div>¿¹»ê</div>
+	<div>ë²ˆí˜¸</div>
+	<div>ì°¨ë‹¨ë‚ ì§œ</div>
+	<div>ì•„ì´ë””</div>
+	<div>ë‹‰ë„¤ì„</div>
 	</li>
 <c:forEach var="mate" items="${list}">
 	<li>
+	<div>${mate.RNUM}</div>
+	<div>${mate.IGNORE_DATE}</div>
+	<div>${mate.IGNORE_D_MEM}</div>
 	<div>${mate.MEM_NICK}</div>
-<fmt:parseDate var="birthst" value="${mate.RI_BIRTH}" pattern="yyyyMMdd"/>
-<fmt:formatDate var="birth" value="${birthst}" pattern="yyyy-MM-dd"/>
-	<div>${birth}</div>
-	<div>
-		<c:if test="${mate.RI_GENDER=='M'}">
-		³²ÀÚ
-		</c:if>
-		<c:if test="${mate.RI_GENDER=='F'}">
-		¿©ÀÚ
-		</c:if>
-	<div>${mate.RI_REGION1}</div>
-	<div>${mate.RI_LOAN_BIG}/${mate.RI_LOAN_SMALL}</div>
-	<div><a href="#" class="btn" id="unign" onclick="unignore(${mate.IGNORE_NUM})">Â÷´Ü ÇØÁ¦</a></div>
 	</li>
+	<div><a href="#" class="btn" id="unign" onclick="unignore(${mate.IGNORE_NUM})">ì°¨ë‹¨ í•´ì œ</a></div>
 </c:forEach>
 </ul>
 </c:if>
+<button type="button" onclick="javascript:location.href='messageList';">ë’¤ë¡œ</button>
 <%-- <div class="paging">
 	${pagingHtml}
 </div> --%>
