@@ -43,7 +43,7 @@
 <body>
 	<%@ include file="/WEB-INF/include/header.jspf"%>
 	<%@ include file="room.jspf"%>
-	<div class="roomWrite">
+	<div class="roomWrite" style="height:1300px">
 
 		<div class="inform">등록한 매물은 30일 동안 어쩌구~</div>
 
@@ -55,7 +55,7 @@
 					<div class="h">종류 선택</div>
 					<div class="b">
 						<input type="radio" name="ROOM_TYPE" class="ROOM_TYPE" value="원룸">
-						<div class="button">원룸</div>
+						<div class="button">원룸</div>[]
 						<input type="radio" name="ROOM_TYPE" class="ROOM_TYPE" value="투룸">
 						<div class="button">투룸</div>
 						<input type="radio" name="ROOM_TYPE" class="ROOM_TYPE" value="쓰리룸">
@@ -108,10 +108,11 @@
 							placeholder="주소">
 						<input type="text" name="ADDRESS2" id="sample6_address2" size="50"
 							placeholder="상세주소">
+					
 
-
-						<div id="map"
-							style="width: 50%; height: 300px; margin-top: 10px; display: none"></div>
+						<div id="map" style="width: 50%; height: 300px; margin-top: 10px;"></div>
+						<input type="text" name="LATITUDE" size="15">
+						<input type="text" name="LONGITUDE" size="15">
 					</div>
 				</div>
 			</div>
@@ -375,33 +376,35 @@
 <script>
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = { 
-        center: new daum.maps.LatLng(37.502541, 127.024711), // 지도의 중심좌표
+        center: new kakao.maps.LatLng(37.502541, 127.024711), // 지도의 중심좌표
         level: 3 // 지도의 확대 레벨
     };
-var map = new daum.maps.Map(mapContainer, mapOption); //지도를 미리 생성
+var map = new kakao.maps.Map(mapContainer, mapOption); //지도를 미리 생성
 
-var geocoder = new daum.maps.services.Geocoder(); //주소-좌표 변환 객체를 생성
-//마커를 미리 생성
-var marker = new daum.maps.Marker({
-    position: new daum.maps.LatLng(37.537187, 127.005476),
+var geocoder = new kakao.maps.services.Geocoder(); //주소-좌표 변환 객체를 생성
+
+var marker = new kakao.maps.Marker({
+    position: new kakao.maps.LatLng(37.502541, 127.024711),
     map: map
 });
+
 function sample6_execDaumPostcode() {
     new daum.Postcode({
-        oncomplete: function(data) {
+        oncomplete: function(data) { // 우편번호 검색 결과가 주소 정보에 들어간다.
             var addr = data.address; // 최종 주소 변수
+
             // 주소 정보를 해당 필드에 넣는다.
             document.getElementById('sample6_postcode').value = data.zonecode;
             document.getElementById("sample6_address").value = addr;
             // 주소로 상세 정보를 검색
-            geocoder.addressSearch(data.address, function(results, status) {
+            geocoder.addressSearch(addr, function(result, status) {
                 // 정상적으로 검색이 완료됐으면
                 if (status === daum.maps.services.Status.OK) {
 
-                    var result = results[0]; //첫번째 결과의 값을 활용
-
                     // 해당 주소에 대한 좌표를 받아서
-                    var coords = new daum.maps.LatLng(result.y, result.x);
+                    var coords = new daum.maps.LatLng(result[0].y, result[0].x);                    
+                    // 해당 주소에 대한 좌표를 저장                    
+                            
                     // 지도를 보여준다.
                     mapContainer.style.display = "block";
                     map.relayout();
