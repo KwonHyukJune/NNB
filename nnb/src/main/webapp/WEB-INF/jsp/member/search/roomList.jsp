@@ -3,19 +3,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<%@ include file="/WEB-INF/include/include-header.jspf" %>
+<%@ include file="/WEB-INF/include/include-header.jspf"%>
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/search.css'/>"/>
-<script type="text/javascript">
-/* 추가필터-층수 : 전체 누르면 다른거 체크해제되고 다른거 누르면 전체 해제되고 */
-/* 추가필터-층수 : 7층 이상은 어떻게 값을 줄지 */
-/* 추가필터-방구조 : 원룸일 때만 뜨게 */
-/* 추라필터-추가옵션 : 풀옵션 어떻게 줄지 */
-</script>
 </head>
+<!-------------------------------------------------------------- -->
 <body>
 <%@ include file="/WEB-INF/include/header.jspf" %>
-
-<div class="roomList">
 
 <div id="searchOption">
 	<input type="text" name="region" class="search" id="region">
@@ -104,112 +97,108 @@
 		</div>
 	</div>
 </div>
-
-<div id="searchResult">
-	<div>조건에 맞는 방 ${count}개</div>
-	<div class="roomList">
-		<c:forEach var="room" items="${list}">
-		<div class="room">
-	<!-- 	<a href="#" onclick="select()"> -->
-			<div class="fav">
-				<c:if test="${room.check=='0'}">
-				<div class="insertFav" onclick="insertFav(${room.ROOM_NUM});">
-				</div>
-				</c:if>
-				<c:if test="${room.check=='1'}">
-				<div class="deleteFav" onclick="deleteFav(${room.ROOM_NUM});">
-				</div>
-				</c:if>
-			</div>
-		<a href="<c:url value='/room/detail?ROOM_NUM=${room.ROOM_NUM}'/>">
-			<div class="img">
-			<img src="<c:url value='/files/${room.STD_NAME}'/>">
-			</div>
-			<div>${room.ROOM_TYPE}</div>
-			<div>
-				${room.TRADE_TYPE} 
-				<c:if test="${room.TRADE_TYPE=='월세'}">
-				${room.MONTHLY_DEPOSIT}/${room.MONTHLY_PAYMENT}
-				</c:if>
-				<c:if test="${room.TRADE_TYPE=='전세'}">
-				${room.JEONSE}
-				</c:if>
-			</div>
-			<div>
-				${room.ROOM_FLOOR}층, ${room.REAL_SIZE}m2,
-				<c:if test="${room.UTILITY_PRICE!=null && room.UTILITY_PRICE!=''}">
-				관리비 ${room.UTILITY_PRICE}만
-				</c:if>
-			</div>
-			<div>${room.DESC_TITLE}</div>
-		</a>
-		</div>
-		</c:forEach>
-	</div>
-</div>
-
-<div class="roomAddress" id="map"style="width: 50%; height: 300px; margin-top: 10px;">
-<input type="hidden" name="ADDRESS1" value="${room.ADDRESS1 }"/>
-</div>
+   <div>전체 방 ${count}개</div>
+<div class="selectSearchRoomList">
 
 </div>
+
+<div id="PAGE_NAVI">  </div>
+		<input type="hidden" id="PAGE_INDEX" name="PAGE_INDEX" />
+
 <br>
 
+<div id="map"style="width: 50%; height: 300px; margin-top: 10px;"></div>
+
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e603a6f6c5db5707c8168383f3516651&libraries=services,clusterer,drawing"></script>
+	<c:forEach var="address" items="${list}">
+		<script>
+            var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+            mapOption = { 
+             center: new kakao.maps.LatLng(37.502541, 127.024711), // 지도의 중심좌표
+             level: 3 // 지도의 확대 레벨
+            };
+            var map = new kakao.maps.Map(mapContainer, mapOption); //지도를 미리 생성
+            var geocoder = new kakao.maps.services.Geocoder(); // 주소-좌표 변환 객체를 생성합니다
+            
+            geocoder.addressSearch('${address.ADDRESS1}', function(result, status) { // 주소로 좌표를 검색합니다
+               // 정상적으로 검색이 완료됐으면 
+            if (status === kakao.maps.services.Status.OK) {
+            var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+                // 결과값으로 받은 위치를 마커로 표시합니다
+            var marker = new kakao.maps.Marker({
+                  map: map,
+                  position: coords
+                });
+                map.setCenter(coords);
+              } 
+            });    
+         </script>
+	</c:forEach>
 <div>
 <%@ include file="/WEB-INF/include/footer.jspf" %>
 </div>
-</body>
-<script type="text/javascript"
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e603a6f6c5db5707c8168383f3516651&libraries=services,clusterer,drawing"></script>
-	<script>
 
-	var markers = [];
-	function hideMarkers() {
-	    setMarkers(null);    
-	}
-	// 배열에 추가된 마커들을 지도에 표시하거나 삭제하는 함수입니다
-	function setMarkers(map) {
-	    for (var i = 0; i < markers.length; i++) {
-	        markers[i].setMap(map);
-	    }            
-	}
-	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-    mapOption = { 
-        center: new kakao.maps.LatLng(37.502541, 127.024711), // 지도의 중심좌표
-        level: 3 // 지도의 확대 레벨
-    };
+<%@ include file="/WEB-INF/include/include-body.jspf"%>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	fn_selectSearchRoomList(1);
+});
+
+
+function fn_selectSearchRoomList(pageNo){
+	var comAjax = new ComAjax(); 
+	comAjax.setUrl("<c:url value='/search/roomList'/>"); 
+	comAjax.setCallback("fn_selectSearchRoomListCallback"); 
+	comAjax.addParam("PAGE_INDEX",pageNo); 
+	comAjax.addParam("PAGE_ROW", 15); 
+	comAjax.ajax(); }
+
+function fn_selectSearchRoomListCallback(data){ 
+	var total = data.TOTAL; 
+	var body = $("div.selectSearchRoomList"); 
+	body.empty(); 
 	
-var map = new kakao.maps.Map(mapContainer, mapOption); //지도를 미리 생성
+	if(total == 0){ 
+		var str = "<div class='roomList'>" + "조회된 결과가 없습니다. </div>"; 
+		body.append(str); 
+        	
+	} else{ 
+		var params = { 
+			divId : "PAGE_NAVI", 
+			pageIndex : "PAGE_INDEX", 
+			totalCount : total, 
+			eventName : "fn_selectSearchRoomList" 
+			}; 
+		
+		gfn_renderPaging(params); 
+			var str = ""; 
+			$.each(data.list, function(key, value){ 
+				str += 
+					"<div class='roomList'>" 
+						+ "<a href='<c:url value='/room/detail?ROOM_NUM="+ value.ROOM_NUM + "'/>'>"
+							+ "<div class='img'>"
+								+ "<img src='<c:url value='/files/"+ value.THUMBNAIL + "'/>'>"
+							+ "</div>"
+							+ "<div>"+ value.ROOM_TYPE + "</div>"
+							+"<div>"
+								+ value.TRADE_TYPE
+									+ value.MONTHLY_DEPOSIT + "/" + value.MONTHLY_PAYMENT
+									+ value.JEONSE
+							+ "</div>"
+							+ "<div>"
+								+ value.ROOM_FLOOR + "층," + value.SUPPLY_SIZE+ "m2,"
+									+ "관리비  "+ value.UTILITY_PRICE + "만"
+							+ "</div>"
+							+ "<div>" + value.DESC_TITLE + "</div>"
+						+ "</a>"
+    				+ "</div>";
 
-var zoomControl = new daum.maps.ZoomControl();
-map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
-var gecoder=new kakao.maps.services.Geocoder();
-        var addressArray = [];
-        var roomList = $('.roomAddress');
- 
-        for (var i = 0; i < roomList.length; i++) {
-            addressArray.push({'groupAddress' : $("input[name='ADDRESS1']").eq(i).val()
-            });
-        }
-        for (var i = 0; i < addressArray.length; i++) {
-            geocoder.addressSearch(
-                            addressArray[i].groupAddress,
-                            function(result, status, data) {
-                                // 정상적으로 검색이 완료됐으면 
-                                if (status === kakao.maps.services.Status.OK) {
- 
-                                    var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-                                    // 결과값으로 받은 위치를 마커로 표시합니다
-                                    var marker = new kakao.maps.Marker({
-                                        map : map,
-                                        position : coords
-                                    });
- 
-                                    // 마커를 지도에 표시합니다.
-                                    marker.setMap(map);
-                                }
-                            });
-        }
-
+        	}); 
+        	body.append(str); 
+		} 
+}
+        
 </script>
+</body>
 </html>

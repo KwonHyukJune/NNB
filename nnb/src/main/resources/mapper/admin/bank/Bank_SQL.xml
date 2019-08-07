@@ -3,8 +3,8 @@
 <mapper namespace="bank">
 
 	<!-- 게시판(관리자, 회원) -->
-	<select id="selectBankList" parameterType="hashMap"
-		resultType="hashMap">
+<select id="selectBankList" parameterType="hashMap" resultType="hashMap">
+<include refid="common.pagingPre"/> 
 <![CDATA[
 	select
 		row_number() over (ORDER BY bank_num ASC) rnum,
@@ -17,7 +17,8 @@
 	from bank
 	order by rnum desc
 ]]>
-	</select>
+<include refid="common.pagingPost"/> 
+</select>
 
 	<!-- 글쓰기(관리자) -->
 	<insert id="insertBankWrite" parameterType="hashMap">
@@ -29,9 +30,9 @@ insert into bank(
         bank_content
 ) values (
         bank_num_seq.nextval,
-        #{bank_kind},
-        #{bank_title},
-        #{bank_content}
+        #{BANK_KIND},
+        #{BANK_TITLE},
+        #{BANK_CONTENT}
 )
 ]]>
 	</insert>
@@ -47,7 +48,7 @@ insert into bank(
 	<select id="selectBankDetail" parameterType="hashMap"
 		resultType="hashMap">
 <![CDATA[
-       select * from bank where bank_num=#{num}
+       select * from bank where bank_num=#{BANK_NUM}
 ]]>
 	</select>
 
@@ -58,7 +59,7 @@ insert into bank(
 	set
         bank_hitcount=nvl(bank_hitcount,0)+1
 	where
-        bank_num=#{num}
+        bank_num=#{BANK_NUM}
 ]]>
 	</update>
 
@@ -66,11 +67,11 @@ insert into bank(
 	<update id="updateBank" parameterType="hashMap">
 <![CDATA[
 	update bank set                                
-        bank_kind=#{bank_kind},                        
-        bank_title=#{bank_title},                        
-        bank_content=#{bank_content}
+        bank_kind=#{BANK_KIND},                        
+        bank_title=#{BANK_TITLE},                        
+        bank_content=#{BANK_CONTENT}
 	where                                
-        bank_num=#{num}                        
+        bank_num=#{BANK_NUM}                        
 ]]>
 	</update>
 
@@ -83,11 +84,6 @@ insert into bank(
         BANK_ORIGINAL_FILE1=#{ORIGINAL_FILE_NAME1},
         BANK_STORED_FILE1=#{STORED_FILE_NAME1}
 ]]>
-		<if test="ORIGINAL_FILE_NAME2!=null">
-<![CDATA[
-			,
-]]>
-		</if>
 	</if>
 	<if test="ORIGINAL_FILE_NAME2!=null">
 <![CDATA[
@@ -104,7 +100,7 @@ insert into bank(
 	<!-- 글 삭제(관리자) -->
 	<delete id="deleteBank" parameterType="hashmap">
 <![CDATA[
-	delete from bank where bank_num=#{num}
+	delete from bank where bank_num=#{BANK_NUM}
 ]]>
 	</delete>
 	
@@ -131,7 +127,7 @@ insert into bank(
 		</if>
 <![CDATA[
 	WHERE 
-        bank_num=#{num}
+        bank_num=#{BANK_NUM}
 ]]>
 	</update>
 

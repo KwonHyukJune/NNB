@@ -39,7 +39,7 @@ function goMyPage(){
 	<div class="menu gRTWkG">
 		<a class="hVfzba" href="<c:url value='/bank/list'/>">제휴은행</a>
 		<a class="hVfzba" href="<c:url value='/main/searchRoommate'/>">룸메이트찾기</a>
-		<a class="hVfzba" href="<c:url value='/search/roomList'/>">방찾기</a>
+		<a class="hVfzba" href="<c:url value='/search/openSearchRoomList'/>">방찾기</a>
 		<a class="hVfzba" href="<c:url value='/myInterest/recentRoom'/>">관심목록</a>
 		<a class="hVfzba" href="<c:url value='/room/writeForm'/>">방내놓기</a>
 		<a class="hVfzba" href="<c:url value=''/>">알림</a>	<!-- 알림이 프로젝트 흐름도에 누락됨 -->

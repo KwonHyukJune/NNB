@@ -19,4 +19,6 @@ public interface FavoriteService {
 
 	void cancelFavRoom(Map<String, Object> map) throws Exception;
 
+	List<Map<String, Object>> selectFavRoom(Map<String, Object> map) throws Exception;
+
 }

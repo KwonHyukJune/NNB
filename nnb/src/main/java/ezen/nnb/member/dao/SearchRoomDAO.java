@@ -12,7 +12,7 @@ public class SearchRoomDAO extends AbstractDAO {
 	@SuppressWarnings("unchecked")
 	public List<Map<String, Object>> selectRoomList(Map<String, Object> map) throws Exception{
 		// TODO Auto-generated method stub
-		return (List<Map<String,Object>>)selectList("searchRoom.selectRoomList",map);
+		return (List<Map<String,Object>>)selectPagingList("searchRoom.selectRoomList",map);
 	}
 	public int countRoomList(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub

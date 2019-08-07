@@ -111,7 +111,9 @@
 
 
 						<div id="map"
-							style="width: 50%; height: 300px; margin-top: 10px; display: none"></div>
+							style="width: 50%; height: 300px; margin-top: 10px; display: none">
+						</div>
+						
 					</div>
 				</div>
 			</div>
@@ -362,8 +364,6 @@
 			href="<c:url value='/room/adminRoom'/>" class="btn">취소</a>
 
 	</div>
-
-	<br>
 	<div>
 		<%@ include file="/WEB-INF/include/footer.jspf"%>
 	</div>
