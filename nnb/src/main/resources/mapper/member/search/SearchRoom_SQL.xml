@@ -3,25 +3,29 @@
 <mapper namespace="searchRoom">
 <!-- 방 리스트 쿼리 -->
 <select id="selectRoomList" parameterType="hashmap" resultType="hashmap">
+<include refid="common.pagingPre"/> 
 <![CDATA[
 SELECT
+	ROW_NUMBER() OVER (ORDER BY R1.ROOM_NUM ASC) RNUM,
 	R1.ROOM_NUM,
 	R1.ROOM_TYPE,
 	R1.TRADE_TYPE,
-	R1.monthly_payment,
-	R1.monthly_DEPOSIT,
-	R1.jeonse,
+	R1.MONTHLY_PAYMENT,
+	R1.MONTHLY_DEPOSIT,
+	R1.JEONSE,
 	R1.THUMBNAIL,
 	R1.ADDRESS1,
-	R2.DESC_TITLE,
-	RB.UPLOAD_DATE
+	R2.SUPPLY_SIZE,
+	R2.ROOM_FLOOR,
+	R2.UTILITY_PRICE,
+	R2.DESC_TITLE
 FROM
-	ROOM_INFO1 R1, 
-	ROOM_INFO2 R2, 
+	ROOM_INFO1 R1,
+	ROOM_INFO2 R2,
 	ROOM_BOARD RB
 WHERE
-	R1.ROOM_NUM=r2.room_num and
-	R1.ROOM_NUM=rb.room_num and
+	R1.ROOM_NUM=R2.room_num and
+	R1.ROOM_NUM=RB.room_num and
 	RB.DEL_GB='N'
 	ORDER BY R1.ROOM_NUM DESC	
 ]]>
@@ -152,6 +156,7 @@ WHERE
 	AND R2.LOAN_ACCESS=#{loan_access}
 ]]>
 </if>
+<include refid="common.pagingPost"/> 
 </select>
 
 <!-- 방 전체 개수 카운트 쿼리 -->

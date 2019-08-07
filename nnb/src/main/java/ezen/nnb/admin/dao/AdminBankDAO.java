@@ -11,7 +11,7 @@ import ezen.nnb.common.AbstractDAO;
 public class AdminBankDAO extends AbstractDAO{
 	@SuppressWarnings("unchecked")//검증되지 않은 연산자 관련 경고 억제
 	public List<Map<String, Object>> selectBankList(Map<String, Object> map)throws Exception{
-		return (List<Map<String,Object>>)selectList("bank.selectBankList", map);
+		return (List<Map<String,Object>>)selectPagingList("bank.selectBankList", map);
 	}
 	public void insertBankWrite(Map<String, Object> map) throws Exception{
 		insert("bank.insertBankWrite",map);

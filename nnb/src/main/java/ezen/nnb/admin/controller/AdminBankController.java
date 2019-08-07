@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import ezen.nnb.admin.service.AdminBankService;
@@ -24,13 +25,24 @@ public class AdminBankController {
 	//@resource annotation을 통해서 필요한 bean을 수동으로 등록하는 것
 	private AdminBankService adminBankService;
 	
+	@RequestMapping(value="/admin/openBankList") 
+	public ModelAndView openBoardList(CommandMap commandMap) throws Exception{ 
+		ModelAndView mv = new ModelAndView("admin/bankList"); 
+		return mv; 
+	} 
+	
 	@RequestMapping(value="/admin/bankList")
 	public ModelAndView adminBankList(CommandMap commandMap) throws Exception{
 		ModelAndView mv=new ModelAndView("admin/bank/bankList");
 		
 		List<Map<String,Object>> list=adminBankService.selectBankList(commandMap.getMap());
 		mv.addObject("list",list);
-		
+		if(list.size() > 0){
+    		mv.addObject("TOTAL", list.get(0).get("TOTAL_COUNT"));
+    	}
+    	else{
+    		mv.addObject("TOTAL", 0);
+    	}
 		return mv;
 	}
 	@RequestMapping(value="/admin/bankWriteForm")
@@ -70,7 +82,7 @@ public class AdminBankController {
 		return mv;
 	}
 	
-	@RequestMapping(value="/admin/bankDelete")
+	@RequestMapping(value="/admin/bankDelete", method=RequestMethod.POST)
 	public ModelAndView adminBankDelete(CommandMap commandMap) throws Exception{
 		ModelAndView mv = new ModelAndView("redirect:/admin/bankList");
 
