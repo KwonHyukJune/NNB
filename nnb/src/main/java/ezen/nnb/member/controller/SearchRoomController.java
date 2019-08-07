@@ -29,8 +29,13 @@ public class SearchRoomController {
 	private FavoriteService favoriteService;
 	
 	@RequestMapping(value="/search/openSearchRoomList") 
-	public ModelAndView openSearchRoomList(CommandMap commandMap) throws Exception { 
+	public ModelAndView openSearchRoomList(CommandMap commandMap, HttpServletRequest request) throws Exception { 
 		ModelAndView mv = new ModelAndView("member/search/roomList"); 
+		
+		HttpSession session= request.getSession();
+		String MEM_ID = (String)session.getAttribute("MEM_ID");
+		commandMap.put("MEM_ID",MEM_ID);
+		
 		int count=searchRoomService.countRoomList(commandMap.getMap());
 		mv.addObject("count", count);
 		List<Map<String,Object>> favRoom=favoriteService.selectFavRoom(commandMap.getMap());
