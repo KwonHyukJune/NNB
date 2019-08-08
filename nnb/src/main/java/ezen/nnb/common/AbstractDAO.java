@@ -68,7 +68,7 @@ public class AbstractDAO {
 		String strPageRow = (String) map.get("PAGE_ROW");
 		
 		int nPageIndex = 0;
-		int nPageRow = 20;
+		int nPageRow = 15;
 		
 		if (StringUtils.isEmpty(strPageIndex) == false) { // 받아온 페이지 번호가 없는게 false 면 = 받아온 페이지가 있으면
 			nPageIndex = Integer.parseInt(strPageIndex) - 1; // 받아온 페이지를 인트로 바꾸고 -1 한다. 

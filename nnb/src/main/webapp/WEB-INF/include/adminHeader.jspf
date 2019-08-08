@@ -29,7 +29,7 @@ function openMenu(){
 		<a href="<c:url value='/admin/loginForm'/>">메인으로</a>
 		<a href="<c:url value='/admin/memberList'/>">회원 관리</a>
 		<a href="<c:url value='/admin/qna/list'/>">Q&A 관리</a>
-		<a href="<c:url value='/admin/noticeList'/>">게시판 관리</a>
+		<a href="<c:url value='/admin/openNoticeList'/>">게시판 관리</a>
 		<a href="<c:url value='/admin/bankList'/>">제휴 은행 관리</a>
 		<a href="<c:url value='/admin/reportMemberList'/>">신고 관리</a>
 	</div>

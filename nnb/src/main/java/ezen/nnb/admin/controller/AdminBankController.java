@@ -25,7 +25,7 @@ public class AdminBankController {
 	//@resource annotation을 통해서 필요한 bean을 수동으로 등록하는 것
 	private AdminBankService adminBankService;
 	
-	@RequestMapping(value="/admin/openBankList") 
+	@RequestMapping(value="/admin/openAdminBankList") 
 	public ModelAndView openBoardList(CommandMap commandMap) throws Exception{ 
 		ModelAndView mv = new ModelAndView("admin/bankList"); 
 		return mv; 
