@@ -4,7 +4,9 @@
 <html>
 <head>
 <%@ include file="/WEB-INF/include/include-header.jspf" %>
+<div style="display:none">
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>​
+</div>
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/room.css'/>"/>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -21,7 +23,7 @@ $(document).ready(function(){
 
 <div class="inform">
 <ul class="WQwFT">
-	<li>일반회원은 1개의 매물만 등록이 가능합니다. 등록한 매물은 최대 30일까지 공개 후 거래완료됩니다.</li>
+	<li>등록한 매물은 최대 30일까지 공개 후 거래완료됩니다.</li>
 	<li>광고중 : 내가 등록한 매물이 공개중인 상태</li>
 	<li>거래완료 : 등록한 매물이 거래완료된 상태</li>
 	<li>검수반려 : 운영원칙 위배 또는 신고로 비공개된 상태</li>
@@ -35,10 +37,10 @@ $(document).ready(function(){
 	<div class="room kcaUIg">
 		<div class="content dUvncE">
 			<p class="iTcrkc">매물번호</p>
-			<button class="kkaIZb2" type="button" onclick="location.href='detail?num=${room.ROOM_NUM}'">${room.ROOM_NUM}</button>
+			<button class="kkaIZb2" type="button" onclick="location.href='roomDetail?num=${room.ROOM_NUM}'">${room.ROOM_NUM}</button>
 			<p class="eRbhvo">${room.TRADE_STATUS}</p>
 		</div>
-		<a terget="_blank" rel="noopener noreferrer" class="jsEbdN" href="detail?num=${room.ROOM_NUM}">
+		<a terget="_blank" rel="noopener noreferrer" class="jsEbdN" href="roomDetail?num=${room.ROOM_NUM}">
 			<div class="lloFGK">
 			</div>
 			<h1>
