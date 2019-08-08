@@ -10,9 +10,9 @@
 <%@ include file="/WEB-INF/include/header.jspf" %>
 <%@ include file="myPage.jspf" %>
 
-<div class="myProfileModify">
+<div class="registMyProfile">
 
-룸메이트  정보가 수정되었습니다.
+내 정보가 등록되었습니다.
 <a href="<c:url value='/myPage/myProfile'/>" class="btn">목록으로</a>
 	
 </div>
