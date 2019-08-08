@@ -4,6 +4,9 @@
 <mapper namespace="room">
 
 	<insert id="insertRoomInfo1" parameterType="hashmap"> 
+		<selectKey keyProperty="idx" resultType="string" order="BEFORE">
+			SELECT ROOM_NUM_SEQ.NEXTVAL FROM DUAL
+		</selectKey>
 	<![CDATA[
 	INSERT INTO ROOM_INFO1
 		(
@@ -20,7 +23,7 @@
 		MEM_ID
 		)
 	VALUES (
-		ROOM_NUM_SEQ.NEXTVAL, 
+		#{idx}, 
 		#{ROOM_TYPE}, 
 		#{BUILDING_TYPE},
 		#{MONTHLY_PAYMENT},
@@ -64,7 +67,7 @@
 		) 
 	VALUES 
 		(
-		ROOM_NUM_SEQ.CURRVAL, 
+		#{idx}, 
 		#{SUPPLY_SIZE}, 
 		#{REAL_SIZE}, 
 		#{BUILDING_STORY}, 
@@ -105,8 +108,8 @@
 		) 
 	VALUES
 		(
-		ROOM_NUM_SEQ.CURRVAL,
-		ROOM_NUM_SEQ.CURRVAL,
+		#{idx},
+		#{idx},
 		'광고중',
 		sysdate+30,
 		0,
@@ -130,8 +133,8 @@
 		) 
 	VALUES 
 		( 
-		FILE_NUM_SEQ, 
-		ROOM_NUM_SEQ.CURRVAL, 
+		ROOM_FILE_NUM_SEQ.nextval, 
+		#{ROOM_NUM}, 
 		#{ORG_NAME}, 
 		#{STD_NAME}, 
 		#{FILE_SIZE},
@@ -214,7 +217,7 @@
 		resultType="hashmap">
 	<![CDATA[
 		SELECT 
-			R1.MEM_ID, R1.ROOM_NUM,
+			R1.MEM_ID, R1.ROOM_NUM, R1.ROOM_TYPE,
 			R1.TRADE_TYPE,R1.BUILDING_TYPE,R1.ADDRESS1, 
 			R1.ADDRESS2, R1.ZIPCODE,
 			R1.MONTHLY_PAYMENT,
@@ -237,7 +240,7 @@
     	WHERE R1.ROOM_NUM= R2.ROOM_NUM
 			AND R1.ROOM_NUM=RB.ROOM_NUM
 			AND DEL_GB='N' 
-			AND R1.ROOM_NUM=#{ROOM_NUM}
+			AND R1.ROOM_NUM=#{num}
 	]]>
 	</select>
 
@@ -245,13 +248,14 @@
 		resultType="hashmap"> 
 	<![CDATA[ 
 		SELECT 
+			FILE_NUM,
 			ROOM_NUM, 
 			ORG_NAME, 
 			ROUND(FILE_SIZE/1024,1) AS FILE_SIZE 
 		FROM 
 			ROOM_FILES 
 		WHERE 
-			ROOM_NUM = #{ROOM_NUM} AND FILE_DEL = 'N' 
+			ROOM_NUM = #{num} AND FILE_DEL = 'N' 
 	]]>
 	</select>
 
@@ -261,45 +265,48 @@
 		set
     	    hit_count=nvl(hit_count,0)+1
 		where
-    	    ROOM_NUM=#{ROOM_NUM}
+    	    ROOM_NUM=#{num}
 	]]>
 	</update>
 
-	<update id="updateRoom" parameterType="hashmap"> 
+	<update id="updateRoomInfo1" parameterType="hashmap"> 
 	<![CDATA[ 
 	update 
-		ROOM_INFO1 R1,
-		ROOM_INFO2 R2, 
-		ROOM_BOARD RB 
+		ROOM_INFO1 R1
 	set
-		R1.TRADE_TYPE=#{R1.TRADE_TYPE,
-		R1.BUILDING_TYPE=#{R1.BUILDING_TYPE},
-		R1.ADDRESS1=#{R1.ADDRESS1}, 
-		R1.ADDRESS2=#{R1.ADDRESS2}, 
-		R1.ZIPCODE=#{R1.ZIPCODE},
-		R1.MONTHLY_PAYMENT=#{R1.MONTHLY_PAYMENT},
-		R1.MONTHLY_DEPOSIT=#{R1.MONTHLY_DEPOSIT},
-		R1.JEONSE=#{R1.JEONSE},
-		R1.THUMBNAIL=#{R1.THUMBNAIL},
-		R2.UTILITY_CHECK=#{R2.UTILITY_CHECK}, 
-		R2.UTILITY_PRICE=#{R2.UTILITY_PRICE},
-		R2.UTILITY_TYPE=#{R2.UTILITY_TYPE},
-		R2.SUPPLY_SIZE=#{R2.SUPPLY_SIZE}, 
-		R2.REAL_SIZE=#{R2.REAL_SIZE},
-		R2.ROOM_FLOOR=#{R2.ROOM_FLOOR},
-		R2.STRUCTURES=#{R2.STRUCTURES}, 
-		R2.PARKING=#{R2.PARKING},
-		R2.PET=#{R2.PET},		
-		R2.ELEVATOR=#{R2.ELEVATOR},
-		R2.BALCONY=#{R2.BALCONY}, 
-		R2.BUILT_IN=#{R2.BUILT_IN}, 
-		R2.OPTIONS=#{R2.OPTIONS},
-		R2.LOAN_ACCESS=#{R2.LOAN_ACCESS},
-		RB.TRADE_STATUS=#{RB.TRADE_STATUS}
+		R1.TRADE_TYPE=#{TRADE_TYPE},
+		R1.BUILDING_TYPE=#{BUILDING_TYPE},
+		R1.ADDRESS1=#{ADDRESS1}, 
+		R1.ADDRESS2=#{ADDRESS2}, 
+		R1.ZIPCODE=#{ZIPCODE},
+		R1.MONTHLY_PAYMENT=#{MONTHLY_PAYMENT},
+		R1.MONTHLY_DEPOSIT=#{MONTHLY_DEPOSIT},
+		R1.JEONSE=#{JEONSE}
 	WHERE 
-		R1.ROOM_NUM = R2.ROOM_NUM
-		AND R1.ROOM_NUM = RB.ROOM_NUM
-		AND DEL_GB='N' 
+		R1.ROOM_NUM = #{ROOM_NUM}
+	]]>
+	</update>
+	<update id="updateRoomInfo2" parameterType="hashmap"> 
+	<![CDATA[ 
+	update 
+		ROOM_INFO2 R2
+	set
+		R2.UTILITY_CHECK=#{UTILITY_CHECK}, 
+		R2.UTILITY_PRICE=#{UTILITY_PRICE},
+		R2.UTILITY_TYPE=#{UTILITY_TYPE},
+		R2.SUPPLY_SIZE=#{SUPPLY_SIZE}, 
+		R2.REAL_SIZE=#{REAL_SIZE},
+		R2.ROOM_FLOOR=#{ROOM_FLOOR},
+		R2.STRUCTURES=#{STRUCTURES}, 
+		R2.PARKING=#{PARKING},
+		R2.PET=#{PET},		
+		R2.ELEVATOR=#{ELEVATOR},
+		R2.BALCONY=#{BALCONY}, 
+		R2.BUILT_IN=#{BUILT_IN}, 
+		R2.OPTIONS=#{OPTIONS},
+		R2.LOAN_ACCESS=#{LOAN_ACCESS}
+	WHERE 
+		R2.ROOM_NUM = #{ROOM_NUM}
 	]]>
 	</update>
 	
@@ -307,9 +314,9 @@
 	<![CDATA[
 		update ROOM_FILES
 		set
-  	      FILE_GB='N'
+  	      FILE_del='N'
 		where
-  	      ROOM_NUM=#{ROOM_NUM}
+  	      FILE_NUM=#{FILE_NUM}
 	]]>
 	</update>
 	
@@ -323,11 +330,11 @@
 	]]>
 	</update>
 	
-	<update id="deleteFileList" parameterType="hashMap">
+	<update id="deleteFile" parameterType="hashMap">
 	<![CDATA[
 		update ROOM_FILES
 		set
-  	      FILE_GB='Y'
+  	      FILE_DEL='Y'
 		where
   	      ROOM_NUM=#{ROOM_NUM}
 	]]>

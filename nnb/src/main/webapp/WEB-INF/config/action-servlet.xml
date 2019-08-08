@@ -42,6 +42,7 @@
 			<mvc:mapping path="/search/*"/>
 			<mvc:mapping path="/roommate/*"/>
 			<mvc:mapping path="/myPage/*"/>
+			<mvc:mapping path="/room/*"/>
 			<mvc:mapping path="/logout"/>
 			<bean id="loginInterceptor" class="ezen.nnb.common.LoginInterceptor"></bean>
 		</mvc:interceptor>

@@ -4,7 +4,6 @@
 <html>
 <head>
 <%@ include file="/WEB-INF/include/include-header.jspf" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>​
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/myPage.css'/>"/>
 <script type="text/javascript">
 $(document).ready(function(){

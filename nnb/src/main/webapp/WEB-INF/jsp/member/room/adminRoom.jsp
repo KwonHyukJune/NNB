@@ -1,118 +1,90 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<%-- <!-- Å×½ºÆ®¿ë ¼¼ÆÃ -->
-<%@ page import="java.util.HashMap" %>
-<%@ page import="java.util.Map" %>
-<%@ page import="java.util.List" %>
-<%@ page import="java.util.ArrayList" %>
-<%
-	Map<String,Object> room = new HashMap<String,Object>();
-	room.put("ROOM_NUM","1");
-	room.put("TRADE_STATUS","±¤°íÁß");
-	room.put("ROOM_TYPE","¿ø·ë");
-	room.put("BUILDING_TYPE","´Üµ¶ÁÖÅÃ");
-	room.put("TRADE_TYPE","¿ù¼¼");
-	room.put("MONTHLY_DEPOSIT","300");
-	room.put("MONTHLY_PAYMENT","30");
-	room.put("SUPPLY_SIZE","20");
-	room.put("REAL_SIZE","20");
-	room.put("BUILDING_STORY","20");
-	room.put("ROOM_FLOOR","3");
-	room.put("HEATING_SYSTEM","1");
-	room.put("MOVE_IN_DATE","2019-08-08");	//µ¥ÀÌÅÍ ÀÌ·¸°Ô ¹Þ¾Æ¾ß ÇÔ;;
-	room.put("UTILITY_CHECK","1");
-	room.put("UTILITY_PRICE","10");
-	room.put("UTILITY_TYPE","1,3,5");
-	room.put("PARKING","1");
-	room.put("PARKING_BILL","5");
-	room.put("PET","1");
-	room.put("ELEVATOR","1");
-	room.put("BALCONY","1");
-	room.put("BUILT_IN","1");
-	room.put("STRUCTURES","1");
-	room.put("OPTIONS","2,4,6");
-	room.put("LOAN_ACCESS","0");
-	room.put("DESC_TITLE","½Î´Ù½Î");
-	room.put("DESC_DETAIL","ÀÌ°¡°Ý¿¡ ÀÌ¸¸ÇÑ Ä÷¸®Æ¼");
-	room.put("DESC_SECRET","¹Ì³¢");
-	room.put("UPLOAD_DATE","2019-07-31");
-	room.put("HIT_COUNT","4");
-	room.put("FAV_COUNT","1");
-	
-	List<Map<String,Object>> roomList = new ArrayList<Map<String,Object>>();
-	roomList.add(room);
-	
-	request.setAttribute("roomList", roomList);
-	request.setAttribute("count",1);
-%>
-<!-- Å×½ºÆ®¿ë ¼¼ÆÃ ³¡ --> --%>
 <%@ include file="/WEB-INF/include/include-header.jspf" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>â€‹
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/room.css'/>"/>
 <script type="text/javascript">
-/* ¹öÆ°µé ¸µÅ© */
+$(document).ready(function(){
+	$('#aadmin').addClass('active');
+});
+/* ë²„íŠ¼ë“¤ ë§í¬ */
 </script>
 </head>
 <body>
 <%@ include file="/WEB-INF/include/header.jspf" %>
+
+<div class="adminRoom ggiCSo">
 <%@ include file="room.jspf" %>
 
-<div class="adminRoom">
-
 <div class="inform">
-<ul>
-	<li>ÀÏ¹ÝÈ¸¿øÀº 1°³ÀÇ ¸Å¹°¸¸ µî·ÏÀÌ °¡´ÉÇÕ´Ï´Ù. µî·ÏÇÑ ¸Å¹°Àº ÃÖ´ë 30ÀÏ±îÁö °ø°³ ÈÄ °Å·¡¿Ï·áµË´Ï´Ù.</li>
-	<li>±¤°íÁß : ³»°¡ µî·ÏÇÑ ¸Å¹°ÀÌ °ø°³ÁßÀÎ »óÅÂ</li>
-	<li>°Å·¡¿Ï·á : µî·ÏÇÑ ¸Å¹°ÀÌ °Å·¡¿Ï·áµÈ »óÅÂ</li>
-	<li>°Ë¼ö¹Ý·Á : ¿î¿µ¿øÄ¢ À§¹è ¶Ç´Â ½Å°í·Î ºñ°ø°³µÈ »óÅÂ</li>
+<ul class="WQwFT">
+	<li>ì¼ë°˜íšŒì›ì€ 1ê°œì˜ ë§¤ë¬¼ë§Œ ë“±ë¡ì´ ê°€ëŠ¥í•©ë‹ˆë‹¤. ë“±ë¡í•œ ë§¤ë¬¼ì€ ìµœëŒ€ 30ì¼ê¹Œì§€ ê³µê°œ í›„ ê±°ëž˜ì™„ë£Œë©ë‹ˆë‹¤.</li>
+	<li>ê´‘ê³ ì¤‘ : ë‚´ê°€ ë“±ë¡í•œ ë§¤ë¬¼ì´ ê³µê°œì¤‘ì¸ ìƒíƒœ</li>
+	<li>ê±°ëž˜ì™„ë£Œ : ë“±ë¡í•œ ë§¤ë¬¼ì´ ê±°ëž˜ì™„ë£Œëœ ìƒíƒœ</li>
+	<li>ê²€ìˆ˜ë°˜ë ¤ : ìš´ì˜ì›ì¹™ ìœ„ë°° ë˜ëŠ” ì‹ ê³ ë¡œ ë¹„ê³µê°œëœ ìƒíƒœ</li>
 </ul>
 </div>
 
 <c:if test="${roomCount!=null && roomCount!=''}">
+<div class="jkdKlr">
 <c:forEach var="room" items="${list}">
-	<div class="room">
-		<div class="content">
-			<div>¸Å¹°¹øÈ£</div>
-			<div>${room.ROOM_NUM}</div>
-			<div>${room.TRADE_STATUS}</div>
+<fmt:parseDate var="dateString" value="${room.UPLOAD_DATE}" pattern="yyyy-MM-dd"/>
+	<div class="room kcaUIg">
+		<div class="content dUvncE">
+			<p class="iTcrkc">ë§¤ë¬¼ë²ˆí˜¸</p>
+			<button class="kkaIZb2" type="button" onclick="location.href='detail?num=${room.ROOM_NUM}'">${room.ROOM_NUM}</button>
+			<p class="eRbhvo">${room.TRADE_STATUS}</p>
 		</div>
-		<div class="content">
-			<c:if test="${room.TRADE_TYPE=='¿ù¼¼'}">
-			<div>${room.ROOM_TYPE} ${room.TRADE_TYPE} ${room.MONTHLY_DEPOSIT}/${room.MONTHLY_PAYMENT}</div>
-			</c:if>
-			<c:if test="${room.TRADE_TYPE=='Àü¼¼'}">
-			<div>${room.ROOM_TYPE} ${room.TRADE_TYPE} ${room.JEONSE}</div>
-			</c:if>
+		<a terget="_blank" rel="noopener noreferrer" class="jsEbdN" href="detail?num=${room.ROOM_NUM}">
+			<div class="lloFGK">
+			</div>
+			<h1>
+				<span>${room.ROOM_TYPE}</span>
+				<span>${room.TRADE_TYPE}</span>
+				<span>${room.MONTHLY_DEPOSIT}/${room.MONTHLY_PAYMENT}</span>
+				<span>${room.JEONSE}</span>
+			</h1>
+		</a>
+		<div class="content gQXat">
+			<div class="kvgsgP">${room.DESC_SECRET}</div>
 		</div>
-		<div class="content">
-			<div>ºñ°ø°³ ¸Þ¸ð</div>
-			<div>${room.DESC_SECRET}</div>
-		</div>
-		<div class="content">
-			<div>µî·ÏÀÏ ${room.UPLOAD_DATE} / Á¶È¸¼ö ${room.HIT_COUNT} / Âò ${room.FAV_COUNT}</div>
-			<div>
-				<a href="#" class="btn" onclick="">¼öÁ¤</a>
-				<a href="#" class="btn" onclick="">»èÁ¦</a>
-				<c:if test="${room.TRADE_STATUS=='±¤°íÁß'}">
-				<a href="#" class="btn" onclick="">±¤°íÁ¾·á</a>
-				<a href="#" class="btn" onclick="">°Å·¡¿Ï·á</a>
+		<div class="content idxnWu">
+			<div class="bSemOn">
+				<p>ë“±ë¡ì¼ <fmt:formatDate value="${dateString}" pattern="yyyy-MM-dd"/></p>
+				<p>ì¡°íšŒìˆ˜ <span>${room.HIT_COUNT}</span></p>
+				<p>ì°œ <span>${room.FAV_COUNT}</span></p>
+			</div>
+			<div class="fLTNNO">
+				<c:if test="${room.TRADE_STATUS=='ê´‘ê³ ì¤‘'}">
+				<button class="eMNveq llAgXp" type="button" onclick="location.href='updateForm?num=${room.ROOM_NUM}'">ìˆ˜ì •</button>
+				<button class="ivmhMO llAgXp" type="button" onclick="location.href='delete?num=${room.ROOM_NUM}'">ì‚­ì œ</button>
+				<button class="ANDVz llAgXp" type="button" onclick="">ê´‘ê³ ì¢…ë£Œ</button>
+				<button class="HCCsy llAgXp" type="button" onclick="">ê±°ëž˜ì™„ë£Œ</button>
 				</c:if>
-				<c:if test="${room.TRADE_STATUS=='±¤°íÁ¾·á'}">
-				<a href="#" class="btn" onclick="">±¤°íÀç°³</a>
-				<a href="#" class="btn" onclick="">°Å·¡¿Ï·á</a>
+				<c:if test="${room.TRADE_STATUS=='ê´‘ê³ ì¢…ë£Œ'}">
+				<button class="eMNveq llAgXp" type="button" onclick="location.href='updateForm?num=${room.ROOM_NUM}'">ìˆ˜ì •</button>
+				<button class="ivmhMO llAgXp" type="button" onclick="location.href='delete?num=${room.ROOM_NUM}'">ì‚­ì œ</button>
+				<button class="ANDVz llAgXp" type="button" onclick="">ê´‘ê³ ìž¬ë“±ë¡</button>
+				<button class="HCCsy llAgXp" type="button" onclick="">ê±°ëž˜ì™„ë£Œ</button>
 				</c:if>
-				<c:if test="${room.TRADE_STATUS=='°Å·¡¿Ï·á'}">
-				<a href="#" class="btn" onclick="">±¤°íÀç°³</a>
+				<c:if test="${room.TRADE_STATUS=='ê±°ëž˜ì™„ë£Œ'}">
+				<button class="hxvBac llAgXp" type="button" onclick="location.href='updateForm?num=${room.ROOM_NUM}'">ìˆ˜ì •</button>
+				<button class="dPcOsn llAgXp" type="button" onclick="location.href='delete?num=${room.ROOM_NUM}'">ì‚­ì œ</button>
+				<button class="bDSVrJ llAgXp" type="button" onclick="">ê´‘ê³ ìž¬ë“±ë¡</button>
 				</c:if>
 			</div>
 		</div>
 	</div>
 </c:forEach>
+</div>
 </c:if>
-<c:if test="${count==null || count==''}">
-	µî·ÏµÈ ¸Å¹°ÀÌ ¾ø½À´Ï´Ù.<br>
+<c:if test="${roomCount==null || roomCount==''}">
+<div class="cbeboU">
+	<p>ë“±ë¡ëœ ë§¤ë¬¼ì´ ì—†ìŠµë‹ˆë‹¤.</p>
+</div>
 </c:if>
 
 </div>
