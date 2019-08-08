@@ -6,13 +6,10 @@
 <head>
 <%@ include file="/WEB-INF/include/include-header.jspf"%>
 <%@include file="/WEB-INF/include/adminHeader.jspf"%>
-
-
 <link rel="stylesheet" type="text/css"
 	href="<c:url value='/css/myInterest.css'/>" /> 
-<!-------------------------------------------------------------- -->
 </head>
-
+<!-------------------------------------------------------------- -->
 <br />
 <br />
 <br />
@@ -39,7 +36,8 @@
 
 
 	</div>
-	<div id="PAGE_NAVI"></div>
+	
+	<div id="PAGE_NAVI">  </div>
 		<input type="hidden" id="PAGE_INDEX" name="PAGE_INDEX" />
    
    <br>
@@ -79,7 +77,7 @@ function goPage1(num) {   // 새 공지사항 등록
 	
 $(document).ready(function(){
 	fn_selectNoticeList(1);
-})
+});
 
 
 function fn_selectNoticeList(pageNo){
@@ -94,6 +92,7 @@ function fn_selectNoticeListCallback(data){
 	var total = data.TOTAL; 
 	var body = $("div.selectNoticeList"); 
 	body.empty(); 
+	
 	if(total == 0){ 
 		var str = "<div class='notice'>" + "조회된 결과가 없습니다." 
 		+ "</div>"; 
@@ -111,7 +110,7 @@ function fn_selectNoticeListCallback(data){
 		$.each(data.list, function(key, value){ 
 			str += 
 			    "<div class='notice'>" 
-	    			+ "<a href='<c:url value='/admin/noticeDetail?num=${" + value.NT_NUM + "}'/>'>"+ 
+	    			+ "<a href='<c:url value='/admin/noticeDetail?num=" + value.NT_NUM + "'/>'>"+ 
 	    					value.RNUM +"&nbsp;"+ value.NT_TYPE +"&nbsp;"+ value.NT_DATE +"&nbsp;"+ value.NT_TITLE + "</a>"
 	    			+ "<a href='#' onClick='goPage(" + value.NT_NUM + ")'>+ 수정" + "</a>"
 					+ "<a href='#' class='btn' id='" + value.NT_NUM +"' onclick='delet("+ value.NT_NUM +")'>삭제</a>"

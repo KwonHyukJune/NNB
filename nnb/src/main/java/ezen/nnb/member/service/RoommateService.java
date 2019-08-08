@@ -15,7 +15,7 @@ public interface RoommateService {
 	
 	public List<Map<String,Object>>searchRoommate(Map<String,Object>map)throws Exception;
 	
-	public int countRoommate()throws Exception;
+	public int countRoommate(Map<String, Object> map)throws Exception;
 	
 	public void listAddFavRoommate(Map<String,Object>map)throws Exception;
 	

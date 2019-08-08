@@ -82,8 +82,8 @@ public class RoomController {
 		roomService.insertRoom(commandMap.getMap(), request);
 		return mv;
 	}
-
-	@RequestMapping(value = "/room/detail") // 방 상세 정보를 찾아서 리턴해준다. + 첨부파일
+	
+	@RequestMapping(value = "/room/roomDetail") // 방 상세 정보를 찾아서 리턴해준다. + 첨부파일
 	public ModelAndView detailRoom(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("member/search/detailRoom");
 		

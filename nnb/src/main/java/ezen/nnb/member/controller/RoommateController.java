@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,24 +24,22 @@ import ezen.nnb.member.service.RoommateService;
 
 @Controller
 public class RoommateController {
-
+	
+	Logger log=Logger.getLogger(this.getClass());
+	
 	@Resource(name = "roommateService")
 	private RoommateService roommateService;
 	@Resource(name = "ignoreService")
 	private IgnoreService ignoreService;
 
-	int currentPage = 1;
-	int totalCount;
-	int blockCount = 16;
-	int blockPage = 10;
-	private String pagingHtml;
-	private Paging page;
-	private String RI_AGE;
-	private String RI_NICK;
+	private String RI_BIRTH;
+	private String MEM_NICK;
 	private String RI_GENDER;
-	private String RI_LOAN_BIG;
 	private String RI_REGION;
-
+	private String RI_LOAN_BIG;
+	private String RI_LOAN_SMALL;
+	private String RI_DATE_START;
+	private String RI_DATE_END;
 
 	@RequestMapping(value = "/main/searchRoommate")
 	public ModelAndView searchRoommate(HttpServletResponse response, HttpServletRequest request, CommandMap commandMap)
@@ -48,55 +47,19 @@ public class RoommateController {
 		ModelAndView mv = new ModelAndView("/member/roommate/roommateList");
 		HttpSession session = request.getSession();
 		List<Map<String, Object>> searchRoommate = roommateService.searchRoommate(commandMap.getMap());
+		int Count = roommateService.countRoommate(commandMap.getMap());
+		
 		// int count =roommateService.countRoommate();
-
+//리스트?
 		if (session.getAttribute("MEM_ID") != null) {// 룸메이트 아이디가 존재하면
 			if (session.getAttribute("RI_EXPOSE") == "1") {// 검색 여부 허락하면
 				if (session.getAttribute("id") == null) {// 신고당한 회원은 제외한 나머지
 														//이게 필요한가
-					
-					RI_REGION = request.getParameter("RI_REGION");
-					if (RI_REGION != null) {
-						mv.addObject("RI_REGION", RI_REGION);
-					} else {
-						mv.addObject("searchRoommate", searchRoommate);
-					}
-
-					RI_NICK = request.getParameter("RI_NICK");// 닉네임검색
-					if (RI_NICK != null) {
-						mv.addObject("RI_NICK", RI_NICK);
-					} else {
-						mv.addObject("searchRoommate", searchRoommate);
-					}
-					RI_AGE = request.getParameter("RI_AGE");// 나이
-					if (RI_AGE != null) {
-						mv.addObject("RI_AGE", RI_AGE);
-						commandMap.put("minyear", "minyear");
-						commandMap.put("maxyear", "maxyear");
-					} else {
-						mv.addObject("searchRoommate", searchRoommate);
-						commandMap.put("minyear", 1);// ....??
-					}
-					RI_GENDER = request.getParameter("RI_GENDER");// 성별
-					if (RI_GENDER != null) {
-						mv.addObject("RI_GENDER", RI_GENDER);
-					} else {
-						mv.addObject("searchRoommate", searchRoommate);
-					}
-					RI_LOAN_BIG = request.getParameter("RI_LOAN_BIG");// 기간
-					if (RI_LOAN_BIG != null) {
-						mv.addObject("RI_LOAN_BIG", RI_LOAN_BIG);
-						commandMap.put("mindeposit", "mindeposit");
-						commandMap.put("maxdeposit", "maxdeposit");
-					} else {
-						mv.addObject("searchRoommate", searchRoommate);
-					}
+					mv.addObject("searchRoommate",searchRoommate);
+					mv.addObject("Count",Count);
 				}
 			}
-		} else if (session.getAttribute("MEM_ID") == null) {// 룸메이트 아이디 존재하지 않으면
-			mv.addObject("message", "등록되지 않은 사용자입니다");
-		}
-
+		}		
 		
 		/*
 		 * Map<String,Object>mateList=new HashMap<String,Object>();
@@ -105,28 +68,62 @@ public class RoommateController {
 		 * mateList.put("RI_REGION", RI_REGION); mateList.put("count", count);
 		 * mv.addObject("mateList",mateList);
 		 */
+		//검색?
+		RI_REGION = request.getParameter("RI_REGION");
+		if (RI_REGION != null) {
+			mv.addObject("RI_REGION", RI_REGION);
+		} else {
+			mv.addObject("searchRoommate", searchRoommate);
+		}
+
+		MEM_NICK = request.getParameter("MEM_NICK");// 닉네임검색
+		if (MEM_NICK != null) {
+			mv.addObject("MEM_NICK", MEM_NICK);
+		} else {
+			mv.addObject("searchRoommate", searchRoommate);
+		}
+		String []mateList1=request.getParameterValues("RI_BIRTH");
+		for(int i=0;i<mateList1.length;i++) {
+			RI_BIRTH=RI_BIRTH+mateList1[i];
+			commandMap.put("minyear", mateList1[0]);
+			commandMap.put("maxyear", mateList1[1]);
+		}
+		RI_GENDER = request.getParameter("RI_GENDER");
+		if (RI_GENDER != null) {
+			mv.addObject("RI_GENDER", RI_GENDER);
+		} else {
+			mv.addObject("searchRoommate", searchRoommate);
+		}
+		RI_DATE_START=request.getParameter("RI_DATE_START");
+		if(RI_DATE_START!=null) {
+			mv.addObject("RI_DATE_START",RI_DATE_START);
+		}else {
+			mv.addObject("searchRoommate",searchRoommate);
+		}
+		RI_DATE_END=request.getParameter("RI_DATE_END");
+		if(RI_DATE_END!=null) {
+			mv.addObject("RI_DATE_END",RI_DATE_END);
+		}else {
+			mv.addObject("searchRoommate",searchRoommate);
+		}
+		String[]mateList3=request.getParameterValues("RI_LOAN_BIG");
+		for(int i=0;i<mateList3.length;i++) {
+			RI_LOAN_BIG=RI_LOAN_BIG+mateList3[i];
+			commandMap.put("maxdeposit", mateList3[0]);
+			commandMap.put("maxrent",mateList3[1]);
+		}
+		String[]mateList4=request.getParameterValues("RI_LOAN_SMALL");
+		for(int i=0;i<mateList4.length;i++) {
+			RI_LOAN_SMALL=RI_LOAN_SMALL+mateList4[i];
+			commandMap.put("mindeposit",mateList4[0]);
+			commandMap.put("minrent", mateList4[1]);
+		}
 		
-		  
-		  totalCount = roommateService.countRoommate();
-		  
-		  page = new Paging(currentPage, totalCount, blockCount, blockPage,"searchRoommate"); 
-		  pagingHtml = page.getPagingHtml().toString();
-		 
-		  int lastCount = totalCount;
-		  
-		  if(page.getEndCount() < totalCount) lastCount = page.getEndCount() + 1;
-		 
-		 searchRoommate = searchRoommate.subList(page.getStartCount(), lastCount);
-		  mv.addObject("RI_REGION",RI_REGION); mv.addObject("RI_NICK",RI_NICK);
-		  mv.addObject("RI_AGE",RI_AGE); mv.addObject("RI_GENDER",RI_GENDER);
-		  mv.addObject("RI_LOAN_BIG",RI_LOAN_BIG);
-		  mv.addObject("totalCount",totalCount); mv.addObject("pagingHtml",pagingHtml);
-		  mv.addObject("currentPage",currentPage);
-		  mv.addObject("searchRoommate",searchRoommate);
 		  mv.setViewName("member/roommate/roommateList");
 		 
 		return mv;
-
+				
+			
 	}
 
 	@RequestMapping(value = "/roommate/list/addFavRoommate", method = RequestMethod.POST)
