@@ -109,7 +109,7 @@ SELECT
 FROM
 	MEMBER M,
 ]]>
-<if test="ri_region!=null and !ri_region.equals('')">
+<if test="RI_REGION!=null and !RI_REGION.equals('')">
 	<![CDATA[
 	(SELECT * FROM ROOMMATE_PROFILE 
 	WHERE
@@ -118,7 +118,7 @@ FROM
 		OR RI_REGION3 LIKE %#{RI_REGION,jdbcType=VARCHAR}%) R,
 		]]>
 </if>
-<if test="ri_region==null or ri_region.equals('')">
+<if test="RI_REGION==null or RI_REGION.equals('')">
 	<![CDATA[
 	ROOMMATE_PROFILE R,
 	]]>
@@ -136,13 +136,14 @@ WHERE
 		WHERE IGNORE_MEM = #{id,jdbcType=VARCHAR}
 		)
 	]]>	
-<if test="nickname!=null and!nickname.equals('')">
+<if test="MEM_NICK!=null and!MEM_NICK.equals('')">
 	<![CDATA[
-	AND MEM_NICK = #{MEM_NICK,jdbcType=VARCHAR}
+	AND MEM_NICK LIKE %#{MEM_NICK}%
+	
 	]]>
 </if>
 	
-<if test="gender!=null and !gender.equals('')">
+<if test="RI_GENDER!=null and !RI_GENDER.equals('')">
 	<![CDATA[
 	AND RI_GENDER = #{RI_GENDER,jdbcType=VARCHAR}
 	]]>
@@ -197,7 +198,7 @@ WHERE
 FROM
 	MEMBER M,
 ]]>
-<if test="ri_region!=null and !ri_region.equals('')">
+<if test="RI_REGION!=null and !RI_REGION.equals('')">
 	<![CDATA[
 	(SELECT * FROM ROOMMATE_PROFILE 
 	WHERE
@@ -206,7 +207,7 @@ FROM
 		OR RI_REGION3 LIKE %#{RI_REGION,jdbcType=VARCHAR}%) R,
 		]]>
 </if>
-<if test="ri_region==null or ri_region.equals('')">
+<if test="RI_REGION==null or RI_REGION.equals('')">
 	<![CDATA[
 	ROOMMATE_PROFILE R,
 	]]>
@@ -224,13 +225,13 @@ WHERE
 		WHERE IGNORE_MEM = #{id,jdbcType=VARCHAR}
 		)
 	]]>	
-<if test="nickname!=null and!nickname.equals('')">
+<if test="MEM_NICK!=null and!MEM_NICK.equals('')">
 	<![CDATA[
-	AND MEM_NICK = #{MEM_NICK,jdbcType=VARCHAR}
+	AND MEM_NICK LIKE %#{MEM_NICK}%
 	]]>
 </if>
 	
-<if test="gender!=null and !gender.equals('')">
+<if test="RI_GENDER!=null and !RI_GENDER.equals('')">
 	<![CDATA[
 	AND RI_GENDER = #{RI_GENDER,jdbcType=VARCHAR}
 	]]>
