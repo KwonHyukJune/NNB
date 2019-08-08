@@ -22,12 +22,12 @@
 	});
 	
 	function fn_submit(){
-		var conSubmit = new ComSubmit(frm);
+		var conSubmit = new ComSubmit("frm");
 		conSubmit.setUrl("<c:url value='/myPage/myProfileModify'/>");
 		conSubmit.submit();
 	};
 	function fn_delete(){
-		var conSubmit = new ComSubmit(frm);
+		var conSubmit = new ComSubmit("frm");
 		conSubmit.setUrl("<c:url value='/myPage/myProfileDelete'/>");
 		conSubmit.addParam("MEM_ID",memId);
 		conSubmit.submit();
@@ -102,23 +102,28 @@
 <script type="text/javascript">
 /* 헤드에 써도 되나? */
 window.onload = function(){
+
 	if(${map.RI_GENDER=="M"}){
 		$("#male").prop("checked",true);
-	}else if(${map.RI_GENDER=="F"}){
+		else if(${map.RI_GENDER=="F"}; {
 		$("#female").prop("checked",true);
 	};
+	
 	if(${map.RI_LOAN_BIG!=null || map.RI_LOAN_BIG!=""}){
 		$("#loan_big").prop("value","${map.RI_LOAN_BIG}");
 	};
+	
 	if(${map.RI_LOAN_SMALL!=null || map.RI_LOAN_SMALL!=""}){
 		$("#loan_small").prop("value","${map.RI_LOAN_SMALL}");
 	};
+	
 	var b_year = "${map.RI_BIRTH}".slice(0,4);
 	if("${map.RI_BIRTH}".slice(4,5)==0){
 		var b_month = "${map.RI_BIRTH}".slice(5,6);
 	}else{
 		var b_month = "${map.RI_BIRTH}".slice(4,6);
 	};
+	
 	if("${map.RI_BIRTH}".slice(6,7)==0){
 		var b_date = "${map.RI_BIRTH}".slice(7,8);
 	}else{
