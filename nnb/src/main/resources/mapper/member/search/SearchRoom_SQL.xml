@@ -15,7 +15,7 @@ SELECT
 	S.JEONSE,
 	S.THUMBNAIL,
 	S.ADDRESS1,
-	S.SUPPLY_SIZE,
+	S.REAL_SIZE,
 	S.ROOM_FLOOR,
 	S.UTILITY_PRICE,
 	S.DESC_TITLE
@@ -31,7 +31,7 @@ FROM
 			R1.JEONSE,
 			R1.THUMBNAIL,
 			R1.ADDRESS1,
-			R2.SUPPLY_SIZE,
+			R2.REAL_SIZE,
 			R2.ROOM_FLOOR,
 			R2.UTILITY_PRICE,
 			R2.DESC_TITLE
@@ -42,7 +42,8 @@ FROM
 		WHERE
 			R1.ROOM_NUM=R2.room_num and
 			R1.ROOM_NUM=RB.room_num and
-			RB.DEL_GB='N'	
+			RB.DEL_GB='N' and
+			RB.TRADE_STATUS='광고중'
 
 
 ]]>
@@ -53,27 +54,32 @@ FROM
 ]]>
 </if>
 <!-- 방 종류에 조건이 있을 경우(원룸, 투룸 등 등) -->
-<if test="room_type!=null and !room_type.equals('')">
-<![CDATA[
-	AND R1.ROOM_TYPE=#{room_type}
-]]>
+<if test="ROOM_TYPE!=null and !ROOM_TYPE.equals('')">
+	<![CDATA[
+		AND R1.ROOM_TYPE in
+	]]>
+		<foreach collection="ROOM_TYPE" item="item" index="index" separator="," open="(" close=")">
+	<![CDATA[
+			#{item}
+	]]>
+		</foreach>
 </if>
 <!-- 매물종류가 월세일 경우 -->
-<if test="monthly_payment!=null and !monthly_payment.equals('')">	
+<if test="MONTHLY_PAYMENT!=null and !MONTHLY_PAYMENT.equals('')">	
 <![CDATA[
-	AND R1.MONTHLY_PAYMENT=#{monthly_payment}
+	AND R1.MONTHLY_PAYMENT=#{MONTHLY_PAYMENT}
 ]]>
 </if>
 <!-- 보증금이 있을 경우  -->
-<if test="monthly_deposit != null and !monthly_deposit.equals('')">
+<if test="MONTHLY_DEPOSIT != null and !MONTHLY_DEPOSIT.equals('')">
 <![CDATA[
-	AND R1.MONTHLY_DEPOSIT=#{monthly_deposit}
+	AND R1.MONTHLY_DEPOSIT=#{MONTHLY_DEPOSIT}
 ]]>
 </if>
 <!-- 매물종류가 전세일경우 -->
-<if test="jeonse != null and !jeonse.equals('')">
+<if test="JEONSE != null and !JEONSE.equals('')">
 <![CDATA[
-	AND R1.JEONSE=#{jeonse}
+	AND R1.JEONSE=#{JEONSE}
 ]]>
 </if>
 <if test="minMpayment !=null and !minMpayment.equals('')">
@@ -106,12 +112,17 @@ FROM
 	AND R1.JEONSE<#{maxJeonse}
 ]]>
 </if>	
-<if test="trade_type!=null and!trade_type.equals('')">
-<![CDATA[
-	AND R1.TRADE_TYPE=#{trade_type}
-]]>	
+<if test="TRADE_TYPE!=null and!TRADE_TYPE.equals('')">
+	<![CDATA[
+		AND R1.TRADE_TYPE in
+	]]>
+		<foreach collection="TRADE_TYPE" item="item" index="index" separator="," open="(" close=")">
+	<![CDATA[
+			#{item}
+	]]>
+		</foreach>
 </if>
-<if test="utility_check!=null and!utility_check.equals('')">
+<if test="UTILITY_CHECK!=null and!UTILITY_CHECK.equals('')">
 	<if test="minUtility!=null and !minUtility.equals('')">
 		<![CDATA[
 			AND R2.UTILITY_PRICE>#{minUtility}
@@ -123,54 +134,64 @@ FROM
 		]]>
 	</if>
 </if>
-<if test="real_size!=null and!trade_type.equals('')">
+<if test="REAL_SIZE!=null and!REAL_SIZE.equals('')">
 <![CDATA[
-	AND R2.REAL_SIZE=#{real_size}
+	AND R2.REAL_SIZE=#{REAL_SIZE}
 ]]>
 </if>
-<if test="room_floor!=null and!room_floor.equals('')">
+<if test="ROOM_FLOOR!=null and!ROOM_FLOOR.equals('')">
 <![CDATA[
-	AND R2.ROOM_FLOOR=#{room_floor}
+		AND R2.ROOM_FLOOR in
+	]]>
+		<foreach collection="ROOM_FLOOR" item="item" index="index" separator="," open="(" close=")">
+	<![CDATA[
+			#{item}
+	]]>
+		</foreach>
+</if>
+<if test="STRUCTURES!=null and!STRUCTURES.equals('')">
+<![CDATA[
+			AND R2.STRUCTURES in
+	]]>
+		<foreach collection="STRUCTURES" item="item" index="index" separator="," open="(" close=")">
+	<![CDATA[
+			#{item}
+	]]>
+		</foreach>
+</if>
+<if test="PARKING!=null and!PARKING.equals('')">
+<![CDATA[
+	AND R2.PARKING=#{PARKING}
 ]]>
 </if>
-<if test="structures!=null and!structures.equals('')">
+<if test="PET!=null and!PET.equals('')">
 <![CDATA[
-	AND R2.STRUCTURES=#{structures}
+	AND R2.PET=#{PET}
 ]]>
 </if>
-<if test="parking!=null and!parking.equals('')">
+<if test="ELEVATOR!=null and!ELEVATOR.equals('')">
 <![CDATA[
-	AND R2.PARKING=#{parking}
+	AND R2.ELEVATOR=#{ELEVATOR}
 ]]>
 </if>
-<if test="pet!=null and!pet.equals('')">
+<if test="BALCONY!=null and!BALCONY.equals('')">
 <![CDATA[
-	AND R2.PET=#{pet}
+	AND R2.BALCONY=#{BALCONY}
 ]]>
 </if>
-<if test="elevator!=null and!elevator.equals('')">
+<if test="BUILT_IN!=null and!BUILT_IN.equals('')">
 <![CDATA[
-	AND R2.ELEVATOR=#{elevator}
+	AND R2.BUILT_IN=#{BUILT_IN}
 ]]>
 </if>
-<if test="balcony!=null and!balcony.equals('')">
+<if test="OPTIONS!=null and!OPTIONS.equals('')">
 <![CDATA[
-	AND R2.BALCONY=#{balcony}
+	AND R2.OPTIONS=#{OPTIONS}
 ]]>
 </if>
-<if test="built_in!=null and!built_in.equals('')">
+<if test="LOAN_ACCESS!=null and!LOAN_ACCESS.equals('')">
 <![CDATA[
-	AND R2.BUILT_IN=#{built_in}
-]]>
-</if>
-<if test="options!=null and!options.equals('')">
-<![CDATA[
-	AND R2.OPTIONS=#{options}
-]]>
-</if>
-<if test="loan_access!=null and!loan_access.equals('')">
-<![CDATA[
-	AND R2.LOAN_ACCESS=#{loan_access}
+	AND R2.LOAN_ACCESS=#{LOAN_ACCESS}
 ]]>
 </if>
 <![CDATA[
@@ -179,6 +200,8 @@ FROM
 ) AA ) AAA WHERE AAA.ROW_NUM BETWEEN 1 AND 15
 ]]>
 </select>
+
+
 
 <!-- 방 전체 개수 카운트 쿼리 -->
 <select id="countRoomList" parameterType="hashmap" resultType="integer">
@@ -191,7 +214,8 @@ FROM
 	ROOM_BOARD RB
 WHERE
 	R1.ROOM_NUM=r2.room_num and
-	R1.ROOM_NUM=rb.room_num 
+	R1.ROOM_NUM=rb.room_num and
+	RB.DEL_GB='N'
 ]]>
 </select>
 

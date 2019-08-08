@@ -524,12 +524,32 @@ $(document).ready(function(){
 });
 
 $("input").on("change",function(){
-	fn_search($(this));
+	fn_search();
 });
-function fn_search(param){
+function fn_search(){
 	var comAjax = new ComAjax();
 	comAjax.setUrl("<c:url value='/search/roomList'/>");
 	comAjax.setCallback("fn_selectSearchRoomListCallback");
+
+	var ROOM_TYPE = $("input[name=ROOM_TYPE]");
+	
+	fn_addParam(comAjax,ROOM_TYPE);
+	fn_addParam(comAjax,TRADE_TYPE);
+	fn_addParam(comAjax,ROOM_FLOOR);
+	fn_addParam(comAjax,STRUCTURES);
+	fn_addParam(comAjax,PARKING);
+	fn_addParam(comAjax,PET);
+	fn_addParam(comAjax,ELEVATOR);
+	fn_addParam(comAjax,BALCONY);
+	fn_addParam(comAjax,BUILT_IN);
+	fn_addParam(comAjax,OPTIONS);
+	fn_addParam(comAjax,LOAN_ACCESS);
+	
+	comAjax.addParam("PAGE_INDEX",$("#PAGE_INDEX").val()); 
+	comAjax.addParam("PAGE_ROW", 15); 
+	comAjax.ajax();
+}
+function fn_addParam(ajax,param){
 	var key = param.attr("name");
 	var value = [];
 	$('input[name='+key+']').each(function(){
@@ -537,12 +557,7 @@ function fn_search(param){
 			value.push(this.value);
 		}
 	});
-	console.log("key:"+param.attr("name"));
-	console.log("value:"+value);
 	comAjax.addParam(key,value);
-	comAjax.addParam("PAGE_INDEX",$("#PAGE_INDEX").val()); 
-	comAjax.addParam("PAGE_ROW", 15); 
-	comAjax.ajax();
 }
 
 function fn_selectSearchRoomList(pageNo){
