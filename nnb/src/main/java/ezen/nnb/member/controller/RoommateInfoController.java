@@ -26,7 +26,7 @@ public class RoommateInfoController {
 	}
 	@RequestMapping(value="/myPage/registMyProfileForm")
 	public ModelAndView registProfileForm()throws Exception{
-		ModelAndView mv=new ModelAndView("/member/myPage/myPageInfoForm");
+		ModelAndView mv=new ModelAndView("/member/myPage/registMyProfileForm");
 		return mv;
 	}
 	@RequestMapping(value="/myPage/registMyProfile")
