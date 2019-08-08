@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ezen.nnb.common.CommandMap;
 import ezen.nnb.member.service.FavoriteService;
+import ezen.nnb.member.service.RoomService;
 import ezen.nnb.member.service.SearchRoomService;
 
 @Controller
@@ -24,7 +25,8 @@ public class SearchRoomController {
 	
 	@Resource(name="searchRoomService")
 	private SearchRoomService searchRoomService;
-	
+	@Resource(name="roomService")
+	private RoomService roomService;
 	@Resource(name="favoriteService")
 	private FavoriteService favoriteService;
 	
@@ -71,7 +73,17 @@ public class SearchRoomController {
 		mv.addObject("count", count);
 
 		return mv;
-	}	
+	}
+	
+	@RequestMapping(value = "/search/roomDetail") // 방 상세 정보를 찾아서 리턴해준다. + 첨부파일
+	public ModelAndView detailRoom(CommandMap commandMap) throws Exception {
+		ModelAndView mv = new ModelAndView("member/search/roomDetail");
+		
+		Map<String,Object> map = roomService.selectRoomDetail(commandMap.getMap());
+		mv.addObject("map", map.get("map")); //게시글 상세정보.
+		mv.addObject("list", map.get("list")); // 첨부파일의 목록을 가지고 있는 리스트.
+		return mv;
+	}
 }
 
 

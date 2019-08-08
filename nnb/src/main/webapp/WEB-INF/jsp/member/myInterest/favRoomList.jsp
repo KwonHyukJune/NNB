@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- 테스트용 세팅 -->
+<%-- <!-- 테스트용 세팅 -->
 <%@ page import="java.util.HashMap" %>
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.List" %>
@@ -40,23 +40,9 @@
 	request.setAttribute("count", count);
 	request.setAttribute("roomList",roomList);
 %>
-<!-- 테스트용 세팅 끝 -->
+<!-- 테스트용 세팅 끝 --> --%>
 <%@ include file="/WEB-INF/include/include-header.jspf" %>
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/myInterest.css'/>"/>
-<script type="text/javascript">
-	function insertFav(num){
-		var comAjax = new ComAjax();
-		comAjax.setUrl("<c:url value='/search/list/addFavRoom'/>");
-		comAjax.addParam("ROOM_NUM",num);
-		comAjax.ajax();
-	};
-	function deleteFav(num){
-		var comAjax = new ComAjax();
-		comAjax.setUrl("<c:url value='/search/list/deleteFavRoom'/>");
-		comAjax.addParam("ROOM_NUM",num);
-		comAjax.ajax();
-	};
-</script>
 </head>
 <body>
 <%@ include file="/WEB-INF/include/header.jspf" %>
@@ -81,7 +67,7 @@
 			</div>
 			</c:if>
 		</div>
-		<a href="<c:url value='/search/detailRoom?num=${room.ROOM_NUM}'/>">
+		<a href="<c:url value='/search/detailRoom?ROOM_NUM=${room.ROOM_NUM}'/>">
 			<div class="img">
 			<img src="<c:url value='/files/${room.STD_NAME}'/>">
 			</div>
@@ -108,17 +94,28 @@
 	</div>
 </c:if>
 <c:if test="${count==null || count==''}">
-<a href="<c:url value='/search/roomList'/>" class="btn">방 보러가기</a>
+<a href="<c:url value='/search/openSearchRoomList'/>" class="btn">방 보러가기</a>
 </c:if>
 
-<%-- <div class="page">
-	${pageHtml}
-</div> --%>
 	
 </div>
 <br>
 <div class="footer">
 <%@ include file="/WEB-INF/include/footer.jspf" %>
 </div>
+<script type="text/javascript">
+	function insertFav(num){
+		var comAjax = new ComAjax();
+		comAjax.setUrl("<c:url value='/search/list/addFavRoom'/>");
+		comAjax.addParam("ROOM_NUM",num);
+		comAjax.ajax();
+	};
+	function deleteFav(num){
+		var comAjax = new ComAjax();
+		comAjax.setUrl("<c:url value='/search/list/deleteFavRoom'/>");
+		comAjax.addParam("ROOM_NUM",num);
+		comAjax.ajax();
+	};
+</script>
 </body>
 </html>

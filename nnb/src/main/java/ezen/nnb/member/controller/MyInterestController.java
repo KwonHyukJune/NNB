@@ -32,6 +32,7 @@ public class MyInterestController {
 	
 	 return mv; 
 	}
+	 
 	@RequestMapping(value="/myInterest/favRoomList")
 	public ModelAndView favRoomList(CommandMap commandMap)throws Exception{
 		ModelAndView mv=new ModelAndView("member/myInterest/favRoomList");
