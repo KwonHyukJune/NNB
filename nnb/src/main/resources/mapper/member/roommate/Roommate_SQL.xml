@@ -4,8 +4,93 @@
 
 <mapper namespace="roommate">
 
-	<select id="selectRoommateList" parameterType="hashmap"
-		resultType="hashmap">
+
+<select id="selectMyInfoList" parameterType="hashmap" resultType="hashmap">
+                <![CDATA[
+                        SELECT
+                                RI_NUM,
+                                RI_MEM_ID,
+                                RI_REGION1,
+                                RI_REGION2,
+                                RI_REGION3,
+                                RI_GENDER,
+                                RI_BIRTH,
+                                RI_LOAN_BIG,
+                                RI_LOAN_SMALL,
+                                RI_PROFILE,
+                                RI_DATE_START,
+                                RI_DATE_END,
+                                RI_EXPOSE
+                        FROM
+                                ROOMMATE_PROFILE
+                        WHERE 
+                                RI_MEM_ID=#{RI_MEM_ID}
+                ]]>
+</select>                                               						
+<insert id="insertMyRoommateProfile" parameterType="hashmap">
+                <![CDATA[
+                        insert into MESSAGE
+                        (
+                                RI_NUM,
+                                RI_MEM_ID,
+                                RI_REGION1,
+                                RI_REGION2,
+                                RI_REGION3,
+                                RI_GENDER,
+                                RI_BIRTH,
+                                RI_LOAN_BIG,
+                                RI_LOAN_SMALL,
+                                RI_PROFILE,
+                                RI_DATE_START,
+                                RI_DATE_END,
+                                RI_EXPOSE
+                        )
+                        values
+                        (
+                                RI_NUM_SEQ.NEXTVAL,
+                                #{RI_MEM_ID},
+                                #{RI_REGION1},
+                                #{RI_REGION2},
+                                #{RI_REGION3},
+                                #{RI_GENDER},
+                                #{RI_BIRTH},
+                                #{RI_LOAN_BIG},
+                                #{RI_PROFILE},
+                                #{RI_DATE_START},
+                                #{RI_DATE_END},
+                                #{RI_EXPOSE}
+                        )
+                ]]>
+</insert>						
+<update id="updateMyProfile" parameterType="hashmap">
+                <![CDATA[
+                        UPDATE MEMBER 
+                        SET
+                                RI_REGION1=#{RI_REGION1},
+                                RI_REGION2=#{RI_REGION2},
+                                RI_REGION3=#{RI_REGION3},
+                                RI_GENDER=#{GENDER},
+                                RI_BIRTH=#{BIRTH},
+                                RI_LOAN_BIG=#{RI_LOAN_BIG},
+                                RI_LOAN_SMALL=#{RI_LOAN_SMALL},
+                                RI_PROFILE=#{RI_PROFILE},
+                                RI_DATE_START=#{RI_DATE_START},
+                                RI_DATE_END=#{RI_DATE_END},
+                                RI_EXPOSE=#{RI_EXPOSE}
+                        WHERE
+                                RI_MEM_ID = #{RI_MEM_ID}        
+                ]]>
+</update>			
+		
+<delete id="deleteProfile" parameterType="hashmap">
+        <![CDATA[
+                delete from
+                        ROOMMATE_PROFILE
+                where
+                        RI_MEM_ID=#{RI_MEM_ID}
+        ]]>
+</delete>                              			
+	<select id="selectRoommateList" parameterType="hashmap" resultType="hashmap">
 	<![CDATA[
 SELECT
 	row_number() over (ORDER BY RI_NUM DESC) rnum,
@@ -25,14 +110,18 @@ FROM
 	MEMBER M,
 ]]>
 <if test="ri_region!=null and !ri_region.equals('')">
+	<![CDATA[
 	(SELECT * FROM ROOMMATE_PROFILE 
 	WHERE
 		RI_REGION1 LIKE %#{RI_REGION,jdbcType=VARCHAR}%
 		OR RI_REGION2 LIKE %#{RI_REGION,jdbcType=VARCHAR}%
 		OR RI_REGION3 LIKE %#{RI_REGION,jdbcType=VARCHAR}%) R,
+		]]>
 </if>
-<if test="ri_retion==null or ri_region.equals('')">
+<if test="ri_region==null or ri_region.equals('')">
+	<![CDATA[
 	ROOMMATE_PROFILE R,
+	]]>
 </if>
 <![CDATA[
 	IGNORE I
@@ -47,32 +136,56 @@ WHERE
 		WHERE IGNORE_MEM = #{id,jdbcType=VARCHAR}
 		)
 	]]>	
+<if test="nickname!=null and!nickname.equals('')">
+	<![CDATA[
+	AND MEM_NICK = #{MEM_NICK,jdbcType=VARCHAR}
+	]]>
+</if>
+	
 <if test="gender!=null and !gender.equals('')">
-	AND RI_GENDER = #{gender,jdbcType=VARCHAR}
+	<![CDATA[
+	AND RI_GENDER = #{RI_GENDER,jdbcType=VARCHAR}
+	]]>
 </if>
 <if test="minyear!=null and !minyear.equals('')">
+	<![CDATA[
 	AND RI_BIRTH > #{minyear,jdbcType=DATE}
+]]>
 </if>
 <if test="maxyear!=null and !maxyear.equals('')">
+	<![CDATA[
 	AND RI_BIRTH &lt; #{maxyear,jdbcType=DATE}
+	]]>
 </if>
 <if test="mindeposit!=null and !mindeposit.equals('')">
+	<![CDATA[
 	AND RI_LOAN_BIG > #{mindeposit,jdbcType=INTEGER}
+]]>
 </if>
 <if test="maxdeposit!=null and !maxdeposit.equals('')">
+	<![CDATA[
 	AND RI_LOAN_BIG &lt; #{maxdeposit,jdbcType=INTEGER}
+	]]>
 </if>
 <if test="minrent!=null and !minrent.equals('')">
+	<![CDATA[
 	AND RI_LOAN_SMALL > #{minrent,jdbcType=INTEGER}
+	]]>
 </if>
 <if test="maxrent!=null and !maxrent.equals('')">
+	<![CDATA[
 	AND RI_LOAN_SMALL &lt; #{maxrent,jdbcType=INTEGER}
-</if>0
+	]]>
+</if>
 <if test="maxdate!=null and !maxdate.equals('')">
+	<![CDATA[
 	AND RI_DATE_START &lt; #{maxdate,jdbcType=DATE}
+	]]>
 </if>
 <if test="mindate!=null and !mindate.equals('')">
+	<![CDATA[
 	AND RI_DATE_END &lt; #{mindate,jdbcType=DATE}
+	]]>
 </if>
 	</select>
 	
@@ -83,18 +196,22 @@ WHERE
 	COUNT(*)
 FROM
 	MEMBER M,
-	]]>
+]]>
 <if test="ri_region!=null and !ri_region.equals('')">
+	<![CDATA[
 	(SELECT * FROM ROOMMATE_PROFILE 
 	WHERE
 		RI_REGION1 LIKE %#{RI_REGION,jdbcType=VARCHAR}%
 		OR RI_REGION2 LIKE %#{RI_REGION,jdbcType=VARCHAR}%
 		OR RI_REGION3 LIKE %#{RI_REGION,jdbcType=VARCHAR}%) R,
+		]]>
 </if>
-<if test="ri_retion==null or ri_region.equals('')">
-	ROOMMATE_PROFILE R,
-</if>
+<if test="ri_region==null or ri_region.equals('')">
 	<![CDATA[
+	ROOMMATE_PROFILE R,
+	]]>
+</if>
+<![CDATA[
 	IGNORE I
 WHERE
 	M.MEM_ID=R.RI_MEM_ID
@@ -106,34 +223,58 @@ WHERE
 		FROM IGNORE
 		WHERE IGNORE_MEM = #{id,jdbcType=VARCHAR}
 		)
+	]]>	
+<if test="nickname!=null and!nickname.equals('')">
+	<![CDATA[
+	AND MEM_NICK = #{MEM_NICK,jdbcType=VARCHAR}
 	]]>
+</if>
+	
 <if test="gender!=null and !gender.equals('')">
-	AND RI_GENDER = #{gender,jdbcType=VARCHAR}
+	<![CDATA[
+	AND RI_GENDER = #{RI_GENDER,jdbcType=VARCHAR}
+	]]>
 </if>
 <if test="minyear!=null and !minyear.equals('')">
+	<![CDATA[
 	AND RI_BIRTH > #{minyear,jdbcType=DATE}
+]]>
 </if>
 <if test="maxyear!=null and !maxyear.equals('')">
+	<![CDATA[
 	AND RI_BIRTH &lt; #{maxyear,jdbcType=DATE}
+	]]>
 </if>
 <if test="mindeposit!=null and !mindeposit.equals('')">
+	<![CDATA[
 	AND RI_LOAN_BIG > #{mindeposit,jdbcType=INTEGER}
+]]>
 </if>
 <if test="maxdeposit!=null and !maxdeposit.equals('')">
+	<![CDATA[
 	AND RI_LOAN_BIG &lt; #{maxdeposit,jdbcType=INTEGER}
+	]]>
 </if>
 <if test="minrent!=null and !minrent.equals('')">
+	<![CDATA[
 	AND RI_LOAN_SMALL > #{minrent,jdbcType=INTEGER}
+	]]>
 </if>
 <if test="maxrent!=null and !maxrent.equals('')">
+	<![CDATA[
 	AND RI_LOAN_SMALL &lt; #{maxrent,jdbcType=INTEGER}
+	]]>
 </if>
 <if test="maxdate!=null and !maxdate.equals('')">
+	<![CDATA[
 	AND RI_DATE_START &lt; #{maxdate,jdbcType=DATE}
+	]]>
 </if>
 <if test="mindate!=null and !mindate.equals('')">
+	<![CDATA[
 	AND RI_DATE_END &lt; #{mindate,jdbcType=DATE}
-</if>	
+	]]>
+</if>
 	</select>
 	<select id="selectRoommateDetail" parameterType="hashmap"
 		resultType="hashmap">
@@ -169,18 +310,18 @@ WHERE
 )
 VALUES(
 	FAV_MATE_NUM_SEQ.NEXTVAL,
-	#{id1,jdbcType=VARCHAR},
-	#{id2,jdbcType=VARCHAR}
+	#{MEM_ID,jdbcType=VARCHAR},
+	#{RI_MEM_ID,jdbcType=VARCHAR}
 )
 	]]>
 	</insert>
-	
+	 
 	<delete id="deleteFavRoommate">
 	<![CDATA[
 	DELETE FROM FAV_MATE
 WHERE
-	MEM_ID = #{id1,jdbcType=VARCHAR}
-	AND RI_MEM_ID = #{id2,jdbcType=VARCHAR}
+	MEM_ID = #{MEM_ID,jdbcType=VARCHAR}
+	AND RI_MEM_ID = #{RI_MEM_ID,jdbcType=VARCHAR}
 	]]>
 	</delete>
 	
@@ -195,10 +336,10 @@ WHERE
 )
 VALUES(
 	MESSAGE_NUM_SEQ.NEXTVAL,
-	#{title,jdbcType=VARCHAR},
-	#{content,jdbcType=VARCHAR},
-	#{id1,jdbcType=VARCHAR},
-	#{id2,jdbcType=VARCHAR}
+	#{MESSAGE_TITLE,jdbcType=VARCHAR},
+	#{MESSAGE_CONTENT,jdbcType=VARCHAR},
+	#{SENDER,jdbcType=VARCHAR},
+	#{RECEIVER,jdbcType=VARCHAR}
 )
 	]]>
 	</insert>
