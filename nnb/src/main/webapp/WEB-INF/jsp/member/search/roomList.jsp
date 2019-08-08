@@ -4,108 +4,522 @@
 <head>
 <%@ include file="/WEB-INF/include/include-header.jspf"%>
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/search.css'/>"/>
+<script type="text/javascript">
+function toggle(obj){
+	if(obj.attr("class")=="fJNXpX"){
+		$(".cRtqxV").attr("class","fJNXpX");
+		$(".hKGAZL").attr("class","fUMVvC");
+		$(".kdfXro").attr("class","bAZEbe");
+		$(".fhfjff").hide();
+		$(".dIVcAa").hide();
+		obj.attr("class","cRtqxV");
+		obj.next().show();
+	}else if(obj.attr("class")=="cRtqxV"){
+		obj.attr("class","fJNXpX");
+		obj.next().hide();
+	}
+	if(obj.attr("class")=="fUMVvC"){
+		$(".cRtqxV").attr("class","fJNXpX");
+		$(".hKGAZL").attr("class","fUMVvC");
+		$(".kdfXro").attr("class","bAZEbe");
+		$(".fhfjff").hide();
+		$(".dIVcAa").hide();
+		obj.attr("class","hKGAZL");
+		obj.next().show();
+	}else if(obj.attr("class")=="hKGAZL"){
+		obj.attr("class","fUMVvC");
+		obj.next().hide();
+	}
+	if(obj.attr("class")=="bAZEbe"){
+		$(".cRtqxV").attr("class","fJNXpX");
+		$(".hKGAZL").attr("class","fUMVvC");
+		$(".kdfXro").attr("class","bAZEbe");
+		$(".fhfjff").hide();
+		obj.attr("class","kdfXro");
+		obj.next().show();
+	}else if(obj.attr("class")=="kdfXro"){
+		obj.attr("class","bAZEbe");
+		obj.next().hide();
+	}
+}
+</script>
 </head>
 <!-------------------------------------------------------------- -->
 <body>
+<div class="root">
+<!-- 전체 -->
+<div id="searchOption" class="ePlFZY">
+<!-- 헤더+검색창 -->
+<div class="hJtKYy">
 <%@ include file="/WEB-INF/include/header.jspf" %>
-
-<div id="searchOption">
-	<input type="text" name="region" class="search" id="region">
-	<div class="select">방 종류</div>
-	<div class="select">거래 종류</div>
-	<div class="select">가격대</div>
-	<div class="select">관리비</div>
-	<div class="select">방크기</div>
-	<div class="select">추가필터</div>
-	<div class="option" id="roomType">
-		<div>방종류</div>
-		<div>중복선택이 가능합니다.</div>
-		<div>
-			<input type="checkbox" class="ROOM_TYPE" value="원룸">원룸
-			<input type="checkbox" class="ROOM_TYPE" value="투룸">투룸
-			<input type="checkbox" class="ROOM_TYPE" value="쓰리룸">쓰리룸
-			<input type="checkbox" class="ROOM_TYPE" value="오피스텔">오피스텔
-			<input type="checkbox" class="ROOM_TYPE" value="아파트">아파트
-		</div>
+<!-- 검색 영역 -->
+<div class="dWEBFj">
+	<div class="byjidO">
+		<input class="keOJyH" type="text" name="region" class="search" id="region" placeholder="잠실동 아파트">
+		<svg width="18" height="18" viewBox="0 0 18 18"><g fill="none" fill-rule="evenodd" stroke="#222"><circle cx="7.5" cy="7.5" r="6.5"></circle><path d="M12 12l5 5"></path></g></svg>
 	</div>
-	<div class="option" id="tradeType">
-		<div>매물 종류</div>
-		<div>중복선택이 가능합니다.</div>
-		<div>
-			<input type="checkbox" class="TRADE_TYPE" value="월세">월세
-			<input type="checkbox" class="TRADE_TYPE" value="전세">전세
+	<div class="fvkqQK">
+		<div class="hWgOZv">
+			<div class="fJNXpX" onclick="toggle($(this));">
+				<span>원룸, 투·쓰리룸, 오피스텔</span>
+				<svg width="11" height="7" viewBox="0 0 11 7"><path fill="none" fill-rule="evenodd" stroke-width="1.5" d="M.658 1.021l4.537 4.263 4.463-4.263"></path></svg>
+			</div>
+			<div class="fhfjff" style="left:0px;">
+				<h1 class="lmqlXb">방 종류	<p class="dUdesp">중복선택이 가능합니다.</p></h1>
+				<ul class="hpBewf">
+					<li>
+						<label class="kAqGVi">
+							<input type="checkbox" class="ROOM_TYPE PcMeW" value="원룸">
+							<span class="CheckBox"></span>
+							<span class="kMvalg">원룸</span>
+						</label>
+					</li>
+					<li>
+						<label class="kAqGVi">
+							<input type="checkbox" class="ROOM_TYPE PcMeW" value="투룸">
+							<span class="CheckBox"></span>
+							<span class="kMvalg">투룸</span>
+						</label>
+					</li>
+					<li>
+						<label class="kAqGVi">
+							<input type="checkbox" class="ROOM_TYPE PcMeW" value="쓰리룸">
+							<span class="CheckBox"></span>
+							<span class="kMvalg">쓰리룸</span>
+						</label>
+					</li>
+					<li>
+						<label class="kAqGVi">
+							<input type="checkbox" class="ROOM_TYPE PcMeW" value="오피스텔">
+							<span class="CheckBox"></span>
+							<span class="kMvalg">오피스텔</span>
+						</label>
+					</li>
+					<li>
+						<label class="kAqGVi">
+							<input type="checkbox" class="ROOM_TYPE PcMeW" value="아파트">
+							<span class="CheckBox"></span>
+							<span class="kMvalg">아파트</span>
+						</label>
+					</li>
+				</ul>
+			</div>
 		</div>
-	</div>
-	<div class="option" id="price">
-		<div>보증금/전세가</div>
-		<div>
-			<input type="number" name="MONTHLY_DEPOSIT_MIN" id="MONTHLY_DEPOSIT_MIN">
-			<input type="number" name="MONTHLY_DEPOSIT_MAX" id="MONTHLY_DEPOSIT_MAX">
-			<input type="number" name="JEONSE_MIN" id="JEONSE_MIN">
-			<input type="number" name="JEONSE_MAX" id="JEONSE_MAX">
+		<div class="hWgOZv">
+			<div class="fJNXpX" onclick="toggle($(this));">
+				<span>월세, 전세, 매매</span>
+				<svg width="11" height="7" viewBox="0 0 11 7"><path fill="none" fill-rule="evenodd" stroke-width="1.5" d="M.658 1.021l4.537 4.263 4.463-4.263"></path></svg>
+			</div>
+			<div class="fhfjff" style="left:0px;">
+				<h1 class="lmqlXb">매물 종류<p class="dUdesp">중복선택이 가능합니다.</p></h1>
+				<ul class="eLjSYd">
+					<li>
+						<label class="kAqGVi">
+							<input type="checkbox" class="ROOM_TYPE PcMeW" value="월세">
+							<span class="CheckBox"></span>
+							<span class="nmQzi">월세</span>
+						</label>
+					</li>
+					<li>
+						<label class="kAqGVi">
+							<input type="checkbox" class="ROOM_TYPE PcMeW" value="전세">
+							<span class="CheckBox"></span>
+							<span class="nmQzi">전세</span>
+						</label>
+					</li>
+				</ul>
+			</div>
 		</div>
-		<div>월세</div>
-		<div>
-			<input type="number" name="MONTHLY_PAYMENT_MIN" id="MONTHLY_PAYMENT_MIN">
-			<input type="number" name="MONTHLY_PAYMENT_MAX" id="MONTHLY_PAYMENT_MAX">
+		<div class="hWgOZv">
+			<div class="fUMVvC" onclick="toggle($(this));">
+				<span>가격대</span>
+				<svg width="11" height="7" viewBox="0 0 11 7"><path fill="none" fill-rule="evenodd" stroke-width="1.5" d="M.658 1.021l4.537 4.263 4.463-4.263"></path></svg>
+			</div>
+			<div class="fhfjff" style="left:0px;">
+				<div class="fBFAQm">
+					<h1 class="lmqlXb">보증금/전세가<p class="eavwzc">무제한</p></h1>
+					<div class="jqwYlT">
+						<input type="hidden" name="MONTHLY_DEPOSIT_MIN" id="MONTHLY_DEPOSIT_MIN">
+						<input type="hidden" name="MONTHLY_DEPOSIT_MAX" id="MONTHLY_DEPOSIT_MAX">
+						<input type="hidden" name="JEONSE_MIN" id="JEONSE_MIN">
+						<input type="hidden" name="JEONSE_MAX" id="JEONSE_MAX">
+						<div class="noUi-target noUi-ltr noUi-horizontal">
+							<div class="noUi-base">
+								<div class="noUi-connects">
+									<div class="noUi-connect noUi-draggable" style="transform: translate(0%, 0px) scale(1, 1);"></div>
+								</div>
+								<div class="noUi-origin" style="transform: translate(-100%, 0px) z-index:5;">
+									<div class="noUi-handle noUi-handle-lower" data-handle="0" tabindex="0" role="slider" aria-orientation="horizontal" aria-valuemin="0.0" aria-valuemax="100.0" aria-valuenow="0.0" aria-valuetext="0.00"></div>
+								</div>
+								<div class="noUi-origin" style="transform: translate(0%, 0px); z-index: 4;">
+									<div class="noUi-handle noUi-handle-upper" data-handle="1" tabindex="0" role="slider" aria-orientation="horizontal" aria-valuemin="0.0" aria-valuemax="100.0" aria-valuenow="100.0" aria-valuetext="999999.00"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<ul class="ghXquW">
+						<li>0</li>
+						<li>1억 2000만 원</li>
+						<li>무제한</li>
+					</ul>
+				</div>
+				<div class="fBFAQm">
+					<h1 class="lmqlXb">월세<p class="eavwzc">무제한</p></h1>
+					<div class="jqwYlT">
+						<input type="hidden" name="MONTHLY_PAYMENT_MIN" id="MONTHLY_PAYMENT_MIN">
+						<input type="hidden" name="MONTHLY_PAYMENT_MAX" id="MONTHLY_PAYMENT_MAX">
+						<div class="noUi-target noUi-ltr noUi-horizontal">
+							<div class="noUi-base">
+								<div class="noUi-connects">
+									<div class="noUi-connect noUi-draggable" style="transform: translate(0%, 0px) scale(1, 1);"></div>
+								</div>
+								<div class="noUi-origin" style="transform: translate(-100%, 0px) z-index:5;">
+									<div class="noUi-handle noUi-handle-lower" data-handle="0" tabindex="0" role="slider" aria-orientation="horizontal" aria-valuemin="0.0" aria-valuemax="100.0" aria-valuenow="0.0" aria-valuetext="0.00"></div>
+								</div>
+								<div class="noUi-origin" style="transform: translate(0%, 0px); z-index: 4;">
+									<div class="noUi-handle noUi-handle-upper" data-handle="1" tabindex="0" role="slider" aria-orientation="horizontal" aria-valuemin="0.0" aria-valuemax="100.0" aria-valuenow="100.0" aria-valuetext="999999.00"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<ul class="ghXquW">
+						<li>0</li>
+						<li>60만 원</li>
+						<li>무제한</li>
+					</ul>
+				</div>
+				<div class="kaLNCK">
+					<button class="dBaYDj">
+						<svg width="22" height="22" viewBox="0 0 22 22"><path fill="#000" fill-rule="evenodd" d="M15.344 10.344h-2L16 7.688l2.688 2.656h-2c0 .96-.245 1.856-.736 2.688-.47.81-1.11 1.45-1.92 1.92a5.201 5.201 0 0 1-2.688.736c-.512 0-1.01-.075-1.496-.224a5.476 5.476 0 0 1-1.352-.624l.976-.96c.565.31 1.19.464 1.872.464.725 0 1.395-.179 2.008-.536a3.972 3.972 0 0 0 1.456-1.456 3.918 3.918 0 0 0 .536-2.008zm-9.344 0c0-.96.245-1.856.736-2.688.47-.81 1.11-1.45 1.92-1.92A5.201 5.201 0 0 1 11.344 5c.512 0 1.013.072 1.504.216.49.144.939.355 1.344.632l-.976.96a3.835 3.835 0 0 0-1.872-.464c-.725 0-1.395.179-2.008.536A3.972 3.972 0 0 0 7.88 8.336a3.918 3.918 0 0 0-.536 2.008h2L6.688 13 4 10.344h2z"></path></svg>
+						조건삭제
+					</button>
+				</div>
+			</div>
 		</div>
-	</div>
-	<div class="option" id="utilityPrice">
-		<div>관리비</div>
-		<div>
-			<input type="number" name="UTILITY_PRICE_MIN" id="UTILITY_PRICE_MIN">
-			<input type="number" name="UTILITY_PRICE_MAX" id="UTILITY_PRICE_MAX">
+		<div class="hWgOZv">
+			<div class="fUMVvC" onclick="toggle($(this));">
+				<span>관리비</span>
+				<svg width="11" height="7" viewBox="0 0 11 7"><path fill="none" fill-rule="evenodd" stroke-width="1.5" d="M.658 1.021l4.537 4.263 4.463-4.263"></path></svg>
+			</div>
+			<div class="fhfjff" style="left:0px;">
+				<div class="fBFAQm">
+					<h1 class="lmqlXb">관리비<p class="eavwzc">무제한</p></h1>
+					<div class="jqwYlT">
+						<input type="hidden" name="UTILITY_PRICE_MIN" id="UTILITY_PRICE_MIN">
+						<input type="hidden" name="UTILITY_PRICE_MAX" id="UTILITY_PRICE_MAX">
+						<div class="noUi-target noUi-ltr noUi-horizontal">
+							<div class="noUi-base">
+								<div class="noUi-connects">
+									<div class="noUi-connect noUi-draggable" style="transform: translate(0%, 0px) scale(1, 1);"></div>
+								</div>
+								<div class="noUi-origin" style="transform: translate(-100%, 0px) z-index:5;">
+									<div class="noUi-handle noUi-handle-lower" data-handle="0" tabindex="0" role="slider" aria-orientation="horizontal" aria-valuemin="0.0" aria-valuemax="100.0" aria-valuenow="0.0" aria-valuetext="0.00"></div>
+								</div>
+								<div class="noUi-origin" style="transform: translate(0%, 0px); z-index: 4;">
+									<div class="noUi-handle noUi-handle-upper" data-handle="1" tabindex="0" role="slider" aria-orientation="horizontal" aria-valuemin="0.0" aria-valuemax="100.0" aria-valuenow="100.0" aria-valuetext="999999.00"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<ul class="ghXquW">
+						<li>0</li>
+						<li>20만 원</li>
+						<li>무제한</li>
+					</ul>
+				</div>
+				<div class="kaLNCK">
+					<button class="dBaYDj">
+						<svg width="22" height="22" viewBox="0 0 22 22"><path fill="#000" fill-rule="evenodd" d="M15.344 10.344h-2L16 7.688l2.688 2.656h-2c0 .96-.245 1.856-.736 2.688-.47.81-1.11 1.45-1.92 1.92a5.201 5.201 0 0 1-2.688.736c-.512 0-1.01-.075-1.496-.224a5.476 5.476 0 0 1-1.352-.624l.976-.96c.565.31 1.19.464 1.872.464.725 0 1.395-.179 2.008-.536a3.972 3.972 0 0 0 1.456-1.456 3.918 3.918 0 0 0 .536-2.008zm-9.344 0c0-.96.245-1.856.736-2.688.47-.81 1.11-1.45 1.92-1.92A5.201 5.201 0 0 1 11.344 5c.512 0 1.013.072 1.504.216.49.144.939.355 1.344.632l-.976.96a3.835 3.835 0 0 0-1.872-.464c-.725 0-1.395.179-2.008.536A3.972 3.972 0 0 0 7.88 8.336a3.918 3.918 0 0 0-.536 2.008h2L6.688 13 4 10.344h2z"></path></svg>
+						조건삭제
+					</button>
+				</div>
+			</div>
 		</div>
-	</div>
-	<div class="option" id="size">
-		<div>방크기</div>
-		<div>
-			<input type="number" name="REAL_SIZE_MIN" id="REAL_SIZE_MIN">
-			<input type="number" name="REAL_SIZE_MAX" id="REAL_SIZE_MAX">
+		<div class="hWgOZv">
+			<div class="fUMVvC" onclick="toggle($(this));">
+				<span>방크기</span>
+				<svg width="11" height="7" viewBox="0 0 11 7"><path fill="none" fill-rule="evenodd" stroke-width="1.5" d="M.658 1.021l4.537 4.263 4.463-4.263"></path></svg>
+			</div>
+			<div class="fhfjff" style="left:0px;">
+				<div class="fBFAQm">
+					<h1 class="lmqlXb">방크기<p class="eavwzc">무제한</p></h1>
+					<input type="hidden" name="REAL_SIZE_MIN" id="REAL_SIZE_MIN">
+					<input type="hidden" name="REAL_SIZE_MAX" id="REAL_SIZE_MAX">
+					<div class="jqwYlT">
+						<div class="noUi-target noUi-ltr noUi-horizontal">
+							<div class="noUi-base">
+								<div class="noUi-connects">
+									<div class="noUi-connect noUi-draggable" style="transform: translate(0%, 0px) scale(1, 1);"></div>
+								</div>
+								<div class="noUi-origin" style="transform: translate(-100%, 0px) z-index:5;">
+									<div class="noUi-handle noUi-handle-lower" data-handle="0" tabindex="0" role="slider" aria-orientation="horizontal" aria-valuemin="0.0" aria-valuemax="100.0" aria-valuenow="0.0" aria-valuetext="0.00"></div>
+								</div>
+								<div class="noUi-origin" style="transform: translate(0%, 0px); z-index: 4;">
+									<div class="noUi-handle noUi-handle-upper" data-handle="1" tabindex="0" role="slider" aria-orientation="horizontal" aria-valuemin="0.0" aria-valuemax="100.0" aria-valuenow="100.0" aria-valuetext="999999.00"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<ul class="ghXquW">
+						<li>0m²(0평)</li>
+						<li>33m²(10평)</li>
+						<li>무제한</li>
+					</ul>
+				</div>
+				<div class="kaLNCK">
+					<button class="dBaYDj">
+						<svg width="22" height="22" viewBox="0 0 22 22"><path fill="#000" fill-rule="evenodd" d="M15.344 10.344h-2L16 7.688l2.688 2.656h-2c0 .96-.245 1.856-.736 2.688-.47.81-1.11 1.45-1.92 1.92a5.201 5.201 0 0 1-2.688.736c-.512 0-1.01-.075-1.496-.224a5.476 5.476 0 0 1-1.352-.624l.976-.96c.565.31 1.19.464 1.872.464.725 0 1.395-.179 2.008-.536a3.972 3.972 0 0 0 1.456-1.456 3.918 3.918 0 0 0 .536-2.008zm-9.344 0c0-.96.245-1.856.736-2.688.47-.81 1.11-1.45 1.92-1.92A5.201 5.201 0 0 1 11.344 5c.512 0 1.013.072 1.504.216.49.144.939.355 1.344.632l-.976.96a3.835 3.835 0 0 0-1.872-.464c-.725 0-1.395.179-2.008.536A3.972 3.972 0 0 0 7.88 8.336a3.918 3.918 0 0 0-.536 2.008h2L6.688 13 4 10.344h2z"></path></svg>
+						조건삭제
+					</button>
+				</div>
+			</div>
 		</div>
-	</div>
-	<div class="option" id="additional">
-		<div>층수</div>
-		<div>
-			<input type="checkbox" class="ROOM_FLOOR" value="" checked="checked">전체
-			<input type="checkbox" class="ROOM_FLOOR" value="1">1층
-			<input type="checkbox" class="ROOM_FLOOR" value="2">2층
-			<input type="checkbox" class="ROOM_FLOOR" value="3">3층
-			<input type="checkbox" class="ROOM_FLOOR" value="4">4층
-			<input type="checkbox" class="ROOM_FLOOR" value="5">5층
-			<input type="checkbox" class="ROOM_FLOOR" value="6">6층
-			<input type="checkbox" class="ROOM_FLOOR" value="7">7층 이상
-			<input type="checkbox" class="ROOM_FLOOR" value="반지층">반지층
-			<input type="checkbox" class="ROOM_FLOOR" value="옥탑방">옥탑방
-		</div>
-		<div>방 구조</div>
-		<div>
-			<input type="checkbox" class="STRUCTURES" value="2">주방 분리형(1.5룸)
-			<input type="checkbox" class="STRUCTURES" value="1">복층
-		</div>
-		<div>추가옵션</div>
-		<div>중복선택이 가능합니다.</div>
-		<div>
-			<input type="checkbox" class="PARKING" value="1">주차가능
-			<input type="checkbox" class="PET" value="1">반려동물
-			<input type="checkbox" class="ELEVATOR" value="1">엘리베이터
-			<input type="checkbox" class="BALCONY" value="1">베란다/발코니
-			<input type="checkbox" class="BUILT_IN" value="1">빌트인
-			<input type="checkbox" class="OPTIONS" value="1,2,8,9">풀옵션
-			<input type="checkbox" class="LOAN_ACCESS" value="1">전세자금대출
+		<div class="dgiYtt">
+			<div class="bAZEbe" onclick="toggle($(this));">
+				<span>추가필터</span>
+				<svg width="11" height="7" viewBox="0 0 11 7"><path fill="none" fill-rule="evenodd" stroke-width="1.5" d="M.658 1.021l4.537 4.263 4.463-4.263"></path></svg>
+			</div>
+			<div class="dIVcAa">
+				<table class="cgRTwE">
+					<colgroup><col width="240px"><col width="240px"><col width="240px"><col width="240px"></colgroup>
+					<tbody>
+						<tr style="height: 290px;">
+							<td>
+								<h1 class="jpAxXq">
+									층수<font>중복선택이 가능합니다.</font>
+								</h1>
+								<ul class="gpNskk">
+									<li class="cHPNZJ">
+										<label class="kAqGVi">
+											<input type="checkbox" name="ROOM_FLOOR" class="PcMeW ROOM_FLOOR" value="" checked="checked">
+											<span class="CheckBox"></span>
+											<span class="cmTDVA">전체</span>
+										</label>
+									</li>
+									<li class="cHPNZJ">
+										<label class="kAqGVi">
+											<input type="checkbox" name="ROOM_FLOOR" class="PcMeW ROOM_FLOOR" value="1" checked="checked">
+											<span class="CheckBox"></span>
+											<span class="cmTDVA">1층</span>
+										</label>
+									</li>
+									<li class="cHPNZJ">
+										<label class="kAqGVi">
+											<input type="checkbox" name="ROOM_FLOOR" class="PcMeW ROOM_FLOOR" value="2" checked="checked">
+											<span class="CheckBox"></span>
+											<span class="cmTDVA">2층</span>
+										</label>
+									</li>
+									<li class="cHPNZJ">
+										<label class="kAqGVi">
+											<input type="checkbox" name="ROOM_FLOOR" class="PcMeW ROOM_FLOOR" value="3" checked="checked">
+											<span class="CheckBox"></span>
+											<span class="cmTDVA">3층</span>
+										</label>
+									</li>
+									<li class="cHPNZJ">
+										<label class="kAqGVi">
+											<input type="checkbox" name="ROOM_FLOOR" class="PcMeW ROOM_FLOOR" value="4" checked="checked">
+											<span class="CheckBox"></span>
+											<span class="cmTDVA">4층</span>
+										</label>
+									</li>
+								</ul>
+								<ul class="gpNskk">
+									<li class="cHPNZJ">
+										<label class="kAqGVi">
+											<input type="checkbox" name="ROOM_FLOOR" class="PcMeW ROOM_FLOOR" value="5" checked="checked">
+											<span class="CheckBox"></span>
+											<span class="cmTDVA">5층</span>
+										</label>
+									</li>
+									<li class="cHPNZJ">
+										<label class="kAqGVi">
+											<input type="checkbox" name="ROOM_FLOOR" class="PcMeW ROOM_FLOOR" value="6" checked="checked">
+											<span class="CheckBox"></span>
+											<span class="cmTDVA">6층</span>
+										</label>
+									</li>
+									<li class="cHPNZJ">
+										<label class="kAqGVi">
+											<input type="checkbox" name="ROOM_FLOOR" class="PcMeW ROOM_FLOOR" value="7" checked="checked">
+											<span class="CheckBox"></span>
+											<span class="cmTDVA">7층</span>
+										</label>
+									</li>
+									<li class="cHPNZJ">
+										<label class="kAqGVi">
+											<input type="checkbox" name="ROOM_FLOOR" class="ROOM_FLOOR PcMeW " value="반지층" checked="checked">
+											<span class="CheckBox"></span>
+											<span class="cmTDVA">반지층</span>
+										</label>
+									</li>
+									<li class="cHPNZJ">
+										<label class="kAqGVi">
+											<input type="checkbox" name="ROOM_FLOOR" class="ROOM_FLOOR PcMeW " value="옥탑방" checked="checked">
+											<span class="CheckBox"></span>
+											<span class="cmTDVA">옥탑방</span>
+										</label>
+									</li>
+								</ul>
+							</td>
+							<td>
+								<h1 class="jpAxXq">
+									방구조<font>중복선택이 가능합니다.</font>
+								</h1>
+								<ul>
+									<li class="bKVwEL">
+										<label class="kAqGVi">
+											<input type="checkbox" class="PcMeW STRUCTURES" name="STRUCTURES" value="2">
+											<span class="CheckBox"></span>
+											<span class="cmTDVA">주방 분리형(1.5룸)</span>
+										</label>
+									</li>
+									<li class="bKVwEL">
+										<label class="kAqGVi">
+											<input type="checkbox" class="PcMeW STRUCTURES" name="STRUCTURES" value="1">
+											<span class="CheckBox"></span>
+											<span class="cmTDVA">복층</span>
+										</label>
+									</li>
+								</ul>
+							</td>
+						</tr>
+						<tr style="height:237px;">
+							<td colspan="3">
+								<h1 class="jpAxXq" style="margin-bottom:12px;">
+									<span>추가 옵션</span>
+									<font>중복선택이 가능합니다.</font>
+								</h1>
+								<ul class="geOCej">
+									<li>
+										<label class="jAoody">
+											<input type="checkbox" name="PARKING" class="PARKING" value="1">
+											<p class="jhkKdW">주차가능</p>
+										</label>
+									</li>
+									<li>
+										<label class="jAoody">
+											<input type="checkbox" name="PET" class="PET" value="1">
+											<p class="jhkKdW">반려동물</p>
+										</label>
+									</li>
+									<li>
+										<label class="jAoody">
+											<input type="checkbox" name="ELEVATOR" class="ELEVATOR" value="1">
+											<p class="jhkKdW">엘리베이터</p>
+										</label class="jAoody">
+									</li>
+									<li>
+										<label class="jAoody">
+											<input type="checkbox" name="BALCONY" class="BALCONY" value="1">
+											<p class="jhkKdW">베란다/발코니</p>
+										</label>
+									</li>
+									<li>
+										<label class="jAoody">
+											<input type="checkbox" name="BUILT_IN" class="BUILT_IN" value="1">
+											<p class="jhkKdW">빌트인</p>
+										</label>
+									</li>
+									<li>
+										<label class="jAoody">
+											<input type="checkbox" name="OPTIONS" class="OPTIONS" value="1,2,8,9">
+											<p class="jhkKdW">풀옵션</p>
+										</label>
+									</li>
+									<li>
+										<label class="jAoody">
+											<input type="checkbox" name="LOAN_ACCESS" class="LOAN_ACCESS" value="1">
+											<p class="jhkKdW">전세자금대출</p>
+										</label>
+									</li>
+								</ul>
+								<div class="bFZgGt">
+									<svg x="0" y="0" width="18" height="18" viewBox="0 0 27 27"><clipPath id="c1_1"><path d="M13.7,20.6c-.6,0,-1.1,-.5,-1.1,-1.1c0,-.7,.5,-1.2,1.1,-1.2c.7,0,1.2,.5,1.2,1.2c0,.6,-.5,1.1,-1.2,1.1Zm.1,-3.8c-1,0,-1.2,-8.3,-1.2,-9.2c0,-.8,.5,-1.5,1.2,-1.5c.6,0,1.1,.7,1.1,1.5c0,.9,-.2,9.2,-1.1,9.2Z"></path></clipPath><g><circle cx="13.5" cy="13.5" r="13.5" fill="#E6E7EA"></circle><path fill="#9C9EA3" d="M5,28.3H22.5V-1.4H5V28.3Z" clip-path="url(#c1_1)"></path></g></svg>
+									<p class="styled__Desc-gzb3pm-4 diBSwb">풀옵션 항목은 세탁기, 냉장고, 에어컨, 가스레인지입니다.</p>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</div>
 </div>
-   <div>전체 방 ${count}개</div>
-<div class="selectSearchRoomList">
+<!-- 검색 영역 끝 -->
+</div>
+<!-- 헤더+검색 영역 끝 -->
+<!-- 방 정보 영역 -->
+<div class="gftUiJ">
+	<!-- 방 리스트 영역 -->
+	<div class="bcjswF">
+		<div class="eXwtu">
+			<div class="jLBlsX">
+				<a class="hXdylP">조건에 맞는 방 ${count} 개</a>
+			</div>
+			<!-- 방 리스트 영역 --> 
+			<div class="cDzGDZ">
+				<ul class="fxRDHg">
+					<c:forEach var="room" items="${list}">
+					<li class="room hxpbDF">
+						<div class="OUJOU">
+							<!-- 찜 -->
+							<div class="fav">
+								<div class="insertFav"></div>
+							</div>
+							<a href="<c:url value='/room/roomDetail?num=${room.ROOM_NUM}'/>" class="kpKjGs">
+								<div class="img jHIGoX">
+									<img src="<c:url value='/roomImages/${room.THUMBNAIL}'/>">
+								</div>
+								<p class="kCTBqT jBkVAv">${room.ROOM_TYPE}</p>
+								<p class="glovZ jBkVAv">
+									<span>
+										${room.TRADE_TYPE} 
+										<c:if test="${room.TRADE_TYPE=='월세'}">
+										${room.MONTHLY_DEPOSIT}/${room.MONTHLY_PAYMENT}
+										</c:if>
+										<c:if test="${room.TRADE_TYPE=='전세'}">
+										${room.JEONSE}
+										</c:if>
+									</span>
+								</p>
+								<p class="jBkVAv">
+									${room.ROOM_FLOOR}층, ${room.REAL_SIZE}m2,
+									<c:if test="${room.UTILITY_PRICE!=null && room.UTILITY_PRICE!=''}">
+									관리비 ${room.UTILITY_PRICE}만
+									</c:if>
+								</p>
+								<p class="jBkVAv">${room.DESC_TITLE}</p>
+							</a>
+						</div>
+					</li>
+					</c:forEach>					
+				</ul>
+				<!-- 페이징 영역 -->
+				<div class="dzQBoq">
+				</div>
+			</div>
+		</div>
+		<button class="cHCsIX">
+			<svg width="13" height="8" viewBox="0 0 11 7"><path fill="none" fill-rule="evenodd" stroke="#444" stroke-width="1.7" d="M.658 1.021l4.537 4.263 4.463-4.263"></path></svg>
+		</button>
+	</div>
+	<!-- 지도 영역 -->
+	<div class="gdoUVB" id="mapContainer">
+		<!-- 지도 -->
+		<div class="UmEWE" id="map" style="overflow: hidden; background: url("https://t1.daumcdn.net/mapjsapi/images/bg_tile.png");">
+		</div>
+		<!-- 축척 -->
+		<div style="position: absolute;cursor: default;z-index: 1;margin: 0px 6px;height: 19px;line-height: 14px;left: 0px;bottom: 0px;color: rgb(0, 0, 0);"><div style="color: rgb(0, 0, 0); text-align: center; font-size: 10px; float: left;"><div style="float: left; margin: 2px 3px 0px 4px; height: 6px; transition: width 0.1s ease 0s; border-top: none rgb(0, 0, 0); border-right: 2px solid rgb(0, 0, 0); border-bottom: 2px solid rgb(0, 0, 0); border-left: 2px solid rgb(0, 0, 0); border-image: initial; width: 58px;"></div><div style="float: left; margin: 0px 4px 0px 0px; font-family: AppleSDGothicNeo-Regular, 돋움, dotum, sans-serif; font-weight: bold; color: rgb(0, 0, 0);">4km</div></div><div style="margin: 0px 4px; float: left;"><a target="_blank" href="http://map.kakao.com/" title="Kakao 지도로 보시려면 클릭하세요." style="float: left; width: 32px; height: 10px;"><img src="https://t1.daumcdn.net/mapjsapi/images/m_bi_b.png" alt="Kakao 지도로 이동" style="float: left; width: 32px; height: 10px; border: none;"></a><div style="font: 11px/11px Arial, Tahoma, Dotum, sans-serif; float: left;"></div></div></div>
+		<!-- ?? -->
+		<div style="cursor: auto;position: absolute;z-index: 2;left: 0px;top: 0px;"></div>
+	</div>
+	<!-- 방 리스트 영역 끝 -->
+</div>
+<!-- 방 정보 영역 긑 -->
 
 </div>
-
-<div id="PAGE_NAVI">  </div>
-		<input type="hidden" id="PAGE_INDEX" name="PAGE_INDEX" />
-<br>
-
-<div id="map"style="width: 50%; height: 300px; margin-top: 10px;"></div>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e603a6f6c5db5707c8168383f3516651&libraries=services,clusterer,drawing"></script>
 	<c:forEach var="address" items="${list}">
@@ -132,8 +546,6 @@
             });    
          </script>
 	</c:forEach>
-<div>
-<%@ include file="/WEB-INF/include/footer.jspf" %>
 </div>
 
 <%@ include file="/WEB-INF/include/include-body.jspf"%>
