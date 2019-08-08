@@ -323,3 +323,30 @@ ul, li {
     width: 100px;
     height: 100%;
 }
+.fEjgY {
+    display: inline-block;
+    margin-top: 22px;
+    margin-left: 20px;
+    line-height: 19px;
+}
+.bFIMNX {
+    position: relative;
+    font-size: 13px;
+    letter-spacing: -0.5px;
+    color: rgb(136, 136, 136);
+}
+.bFIMNX:hover {
+    color: rgb(50, 108, 249);
+}
+.img > img {
+    max-height: 100%;
+    max-width: 100%;
+    position: absolute;
+    width: auto;
+    height: auto;
+    margin: auto;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+}
