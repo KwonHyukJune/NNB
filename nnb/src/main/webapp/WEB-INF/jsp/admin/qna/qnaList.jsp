@@ -27,7 +27,7 @@ function showPopup() {
 <body>
 
 
-<h1><div>Q&A 관리</div></h1>
+<div><h1>Q&A 관리</h1></div>
 <br/>
 	
 <div>
