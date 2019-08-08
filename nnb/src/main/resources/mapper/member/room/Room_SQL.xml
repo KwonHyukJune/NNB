@@ -31,7 +31,7 @@
 		#{JEONSE}, 
 		#{ADDRESS1}, 
 		#{ADDRESS2},
-		#{ZIPCODE},
+		#{ZIPCODE, jdbcType=CHAR},
 		#{TRADE_TYPE},
 		#{MEM_ID}
 		)
@@ -159,10 +159,10 @@
     	FROM
       		ROOM_FILES
     	WHERE
-      		ROOM_NUM = #{ROOM_NUM} AND FILE_DEL = 'N'
+      		ROOM_NUM = #{idx} AND FILE_DEL = 'N'
       	)
 	)
-	WHERE ROOM_NUM = #{ROOM_NUM}
+	WHERE ROOM_NUM = #{idx}
 	]]>
 	</update>
 
@@ -170,20 +170,40 @@
 		resultType="hashmap">
 	<![CDATA[
 	   SELECT   
-	      R1.MEM_ID, R1.ROOM_NUM,
-	      R1.TRADE_TYPE,R1.BUILDING_TYPE,R1.ADDRESS1, 
-	      R1.ADDRESS2, R1.ZIPCODE,
+	      R1.MEM_ID, 
+	      R1.ROOM_NUM,
+	      R1.ROOM_TYPE,
+	      R1.TRADE_TYPE,
+	      R1.BUILDING_TYPE,
+	      R1.ADDRESS1, 
+	      R1.ADDRESS2, 
+	      R1.ZIPCODE,
 	      R1.MONTHLY_PAYMENT,
 	      R1.MONTHLY_DEPOSIT,
-	      R1.JEONSE,R1.MEM_ID,
+	      R1.JEONSE,
+	      R1.MEM_ID,
 	      R1.THUMBNAIL,
-	      R2.UTILITY_CHECK, R2.UTILITY_PRICE,
-	      R2.UTILITY_TYPE,R2.SUPPLY_SIZE, R2.REAL_SIZE,
-	      R2.ROOM_FLOOR,R2.STRUCTURES, R2.PARKING,R2.PET,      
-	      R2.ELEVATOR,R2.BALCONY, R2.BUILT_IN, R2.OPTIONS,
-	      R2.LOAN_ACCESS,RB.BOARD_NUM,R2.DESC_SECRET,
-	      RB.EXPIRATION_DATE, RB.HIT_COUNT,
-	      RB.FAV_COUNT, RB.TRADE_STATUS, RB.UPLOAD_DATE,
+	      R2.UTILITY_CHECK, 
+	      R2.UTILITY_PRICE,
+	      R2.UTILITY_TYPE,
+	      R2.SUPPLY_SIZE, 
+	      R2.REAL_SIZE,
+	      R2.ROOM_FLOOR,
+	      R2.STRUCTURES, 
+	      R2.PARKING,
+	      R2.PET,      
+	      R2.ELEVATOR,
+	      R2.BALCONY, 
+	      R2.BUILT_IN, 
+	      R2.OPTIONS,
+	      R2.LOAN_ACCESS,
+	      RB.BOARD_NUM,
+	      R2.DESC_SECRET,
+	      RB.EXPIRATION_DATE, 
+	      RB.HIT_COUNT,
+	      RB.FAV_COUNT, 
+	      RB.TRADE_STATUS, 
+	      RB.UPLOAD_DATE,
 	      RB.DEL_GB         
 	   FROM
 	      ROOM_INFO1 R1,
@@ -240,7 +260,7 @@
     	WHERE R1.ROOM_NUM= R2.ROOM_NUM
 			AND R1.ROOM_NUM=RB.ROOM_NUM
 			AND DEL_GB='N' 
-			AND R1.ROOM_NUM=#{num}
+			AND R1.ROOM_NUM=#{ROOM_NUM}
 	]]>
 	</select>
 
@@ -255,7 +275,7 @@
 		FROM 
 			ROOM_FILES 
 		WHERE 
-			ROOM_NUM = #{num} AND FILE_DEL = 'N' 
+			ROOM_NUM = #{ROOM_NUM} AND FILE_DEL = 'N' 
 	]]>
 	</select>
 
@@ -265,7 +285,7 @@
 		set
     	    hit_count=nvl(hit_count,0)+1
 		where
-    	    ROOM_NUM=#{num}
+    	    ROOM_NUM=#{ROOM_NUM}
 	]]>
 	</update>
 
@@ -326,7 +346,7 @@
 		set
   	      DEL_GB='Y'
 		where
-  	      BOARD_NUM=#{BOARD_NUM}
+  	      ROOM_NUM=#{ROOM_NUM}
 	]]>
 	</update>
 	
@@ -346,7 +366,7 @@
 		set
   	      TRADE_STATUS='광고중'
 		where
-  	      BOARD_NUM=#{BOARD_NUM}
+  	      ROOM_NUM=#{ROOM_NUM}
 	]]>
 	</update>
 
@@ -356,7 +376,7 @@
 		set
   	      TRADE_STATUS='거래완료'
 		where
-  	      BOARD_NUM=#{BOARD_NUM}
+  	      ROOM_NUM=#{ROOM_NUM}
 	]]>
 	</update>
 	

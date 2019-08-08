@@ -16,7 +16,7 @@ $(document).ready(function(){
 		
 	function insertBoard(){
 		var comSubmit = new ComSubmit("frm");
-		comSubmit.setUrl("<c:url value='/admin/faq/write' />");
+		comSubmit.setUrl("<c:url value='/admin/faq/write'/>");
 		comSubmit.submit();
 	}
 });
@@ -34,7 +34,7 @@ $(document).ready(function(){
 <hr>
 <br/>
 </div>
- <form action="insertFaq" method="post" id="frm" name="frm">
+ <form method="post" id="frm" name="frm">
 	<div>
       	  카테고리
       	<select id="FAQ_CATEGORY" name="FAQ_CATEGORY">

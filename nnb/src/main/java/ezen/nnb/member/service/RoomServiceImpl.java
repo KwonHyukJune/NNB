@@ -32,6 +32,7 @@ public class RoomServiceImpl implements RoomService {
 		for (int i = 0, size = list.size(); i < size; i++) {
 			roomDAO.insertRoomFile(list.get(i));
 		}
+		roomDAO.updateThumbnail(map);
 	}
 
 	@Override
