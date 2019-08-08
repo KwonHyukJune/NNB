@@ -16,7 +16,7 @@ $(document).ready(function(){
 });
 
 function fn_submit(){
-	var conSubmit = new ComSubmit(frm);
+	var conSubmit = new ComSubmit("frm");
 	conSubmit.setUrl("<c:url value='/myPage/registMyProfile'/>");
 	conSubmit.submit();
 };

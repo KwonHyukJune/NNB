@@ -94,8 +94,8 @@
 	<![CDATA[
 SELECT
 	row_number() over (ORDER BY RI_NUM DESC) rnum,
-	MEM_ID
-	RI_MEM_NUM,
+	MEM_ID,
+	RI_MEM_ID,
 	MEM_NICK,
 	RI_GENDER,
 	RI_LOAN_BIG,
