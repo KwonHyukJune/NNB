@@ -35,6 +35,9 @@ function goMyPage(){
 <div class="img">
 <img src="<%=request.getContextPath()%>/images/NNBsmall.png" onclick="location.href='<%=request.getContextPath()%>/main'" width="100px">
 </div>
+<div class="fEjgY">
+<a class="bFIMNX" href="<%=request.getContextPath()%>/admin/loginForm">관리자 사이트</a>
+</div>
 <div class="cjODQK">
 	<div class="menu gRTWkG">
 		<a class="hVfzba" href="<c:url value='/bank/openBankList'/>">제휴은행</a>

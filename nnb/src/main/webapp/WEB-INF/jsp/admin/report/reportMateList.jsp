@@ -10,6 +10,24 @@
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/myInterest.css'/>"/>
 
 <script type="text/javascript">
+function showPopup(num, id){
+    var url = "/nnb/admin/report/detail?REPORT_NUM="+num
+    var name = "회원정보";
+    var option = "width = 500, height = 500, top = 100, left = 200, location = no, resizeable = yes, scrollbars = yes"
+    window.open(url, name, option);
+}
+
+function delet(num){  // 삭제
+	if(confirm('삭제하시겠습니까?')){
+		var x = $('a#'+num);
+		var str = "<form id='frm' method='post' action='delete'>"
+				+ "<input type='hidden' name='num' value='"+num+"'>"
+				+ "</form>";
+		console.log(str);
+		x.html(str);
+		frm.submit();
+	}
+}
  </script>
 
 </head>
@@ -24,8 +42,8 @@
 	
 <div>
 <!-- 링크에 URL 제대로 바꿔줘야 됩니다. 지금은 테스트용 jsp 링크입니다. -->
-<a href=# onclick="location.href='/nnb/admin/report/list'">신고 게시글 관리</a>&nbsp;&nbsp;&nbsp;&nbsp;
-<a href=# onclick="location.href='/nnb/admin/memberList'">신고 룸메이트 관리</a>
+<a href=# onclick="location.href='/nnb/admin/reportRoomList'">신고 게시글 관리</a>&nbsp;&nbsp;&nbsp;&nbsp;
+<a href=# onclick="location.href='/nnb/admin/reportMateList'">신고 룸메이트 관리</a>
 </div>
 <br/>
 <select>
@@ -56,15 +74,27 @@
 
 
 
-<div class="selectReportList">
-<div class="reportList">
+<div class="selectReportMemberList">
+<div class="reportMateList">
    
    <c:forEach var="map" items="${list}">
    <div class="report">
-  
-	 <a href="<c:url value='/admin/report/detail?num=${map.REPORT_NUM}'/>">${map.RNUM}&nbsp;${map.REPORT_TYPE}&nbsp;${map.REPORT_DATE}&nbsp;${map.REPORT_TITLE}&nbsp;${map.REPORT_POST_NUM}&nbsp;</a> 
-      
-      <a href="#this" class="btn" id="delete">삭제</a>
+  <div>
+         ${map.RNUM}&nbsp;	
+      	
+		 ${map.REPORT_TYPE}&nbsp;      
+      	
+         ${map.REPORT_DATE}&nbsp;
+         
+         ${map.REPORT_D_ID}&nbsp;	
+         
+         ${map.REPORT_TITLE}
+     
+      <input type="button" value="상세보기" onclick="showPopup(${map.REPORT_NUM});" /> 
+      <a href="#" class="btn" id="${map.REPORT_NUM}" onclick="delet(${map.REPORT_NUM})">삭제</a>
+        
+   </div>
+     
    </div>	
   
    </c:forEach>

@@ -9,7 +9,7 @@ public interface AdminMemberService {
 	public Map<String,Object>adminMemberDetail(Map<String,Object>map)throws Exception;
 	public List<Map<String,Object>>adminMemberBanDetail(Map<String,Object>map)throws Exception;
 	
-	public void adminMemberBan(Map<String,Object>map)throws Exception;
+	public Map<String, Object> adminMemberBan(Map<String,Object>map)throws Exception;
 	
 	public List<Map<String,Object>>adminMemberSearchID(Map<String, Object>map)throws Exception;
 	public List<Map<String,Object>>adminMemberSearchName(Map<String, Object>map)throws Exception;

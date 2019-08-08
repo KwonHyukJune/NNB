@@ -26,14 +26,24 @@ public class AdminReportServiceImpl implements AdminReportService{
 	}
 
 	@Override
-	public List<Map<String, Object>> selectReportMemberList(Map<String, Object> map) throws Exception {
+	public List<Map<String, Object>> selectReportMateList(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub
-		return adminReportDAO.selectReportMemberList(map);
+		return adminReportDAO.selectReportMateList(map);
 	}
 
 	@Override
-	public Map<String, Object> selectReportDetail(Map<String, Object> map) throws Exception {
+	public Map<String, Object> selectReportRoomDetail(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub
-		return adminReportDAO.selectReportDetail(map);
+		return adminReportDAO.selectReportRoomDetail(map);
 	}
+	
+	@Override
+	public Map<String, Object> selectReportMateDetail(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return adminReportDAO.selectReportMateDetail(map);
+	}
+
+	
+
+
 }

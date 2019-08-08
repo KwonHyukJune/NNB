@@ -26,8 +26,8 @@ public class AdminMemberServiceImpl implements AdminMemberService{
 		return AdminMemberDAO.adminMemberBanDetail(map);
 	}
 	@Override
-	public void adminMemberBan(Map<String, Object> map) throws Exception {
-		AdminMemberDAO.adminMemberBan(map);
+	public Map<String,Object>adminMemberBan(Map<String, Object> map) throws Exception {
+		return (Map<String,Object>)AdminMemberDAO.adminMemberBan(map);
 		
 	}
 	@Override

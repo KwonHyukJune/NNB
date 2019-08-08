@@ -24,7 +24,7 @@
                         FROM
                                 ROOMMATE_PROFILE
                         WHERE 
-                                RI_MEM_ID=#{RI_MEM_ID}
+                                RI_MEM_ID=#{RI_MEM_ID,jdbcType=VARCHAR}
                 ]]>
 </select>                                               						
 <insert id="insertMyRoommateProfile" parameterType="hashmap">
@@ -48,17 +48,17 @@
                         values
                         (
                                 RI_NUM_SEQ.NEXTVAL,
-                                #{RI_MEM_ID},
-                                #{RI_REGION1},
-                                #{RI_REGION2},
-                                #{RI_REGION3},
-                                #{RI_GENDER},
-                                #{RI_BIRTH},
-                                #{RI_LOAN_BIG},
-                                #{RI_PROFILE},
-                                #{RI_DATE_START},
-                                #{RI_DATE_END},
-                                #{RI_EXPOSE}
+                                #{RI_MEM_ID,jdbcType=VARCHAR},
+                                #{RI_REGION1,jdbcType=VARCHAR},
+                                #{RI_REGION2,jdbcType=VARCHAR},
+                                #{RI_REGION3,jdbcType=VARCHAR},
+                                #{RI_GENDER,jdbcType=VARCHAR},
+                                #{RI_BIRTH,jdbcType=DATE},
+                                #{RI_LOAN_BIG,jdbcType=INTEGER},
+                                #{RI_PROFILE,jdbcType=VARCHAR},
+                                #{RI_DATE_START,jdbcType=DATE},
+                                #{RI_DATE_END,jdbcType=DATE},
+                                #{RI_EXPOSE,jdbcType=INTEGER}
                         )
                 ]]>
 </insert>						
@@ -66,17 +66,17 @@
                 <![CDATA[
                         UPDATE MEMBER 
                         SET
-                                RI_REGION1=#{RI_REGION1},
-                                RI_REGION2=#{RI_REGION2},
-                                RI_REGION3=#{RI_REGION3},
-                                RI_GENDER=#{GENDER},
-                                RI_BIRTH=#{BIRTH},
-                                RI_LOAN_BIG=#{RI_LOAN_BIG},
-                                RI_LOAN_SMALL=#{RI_LOAN_SMALL},
-                                RI_PROFILE=#{RI_PROFILE},
-                                RI_DATE_START=#{RI_DATE_START},
-                                RI_DATE_END=#{RI_DATE_END},
-                                RI_EXPOSE=#{RI_EXPOSE}
+                                RI_REGION1=#{RI_REGION1,jdbcType=VARCHAR},
+                                RI_REGION2=#{RI_REGION2,jdbcType=VARCHAR},
+                                RI_REGION3=#{RI_REGION3,jdbcType=VARCHAR},
+                                RI_GENDER=#{GENDER,jdbcType=VARCHAR},
+                                RI_BIRTH=#{BIRTH,jdbcType=DATE},
+                                RI_LOAN_BIG=#{RI_LOAN_BIG,jdbcType=INTEGER},
+                                RI_LOAN_SMALL=#{RI_LOAN_SMALL,jdbcType=INTEGER},
+                                RI_PROFILE=#{RI_PROFILE,jdbcType=VARCHAR},
+                                RI_DATE_START=#{RI_DATE_START,jdbcType=DATE},
+                                RI_DATE_END=#{RI_DATE_END,jdbcType=DATE},
+                                RI_EXPOSE=#{RI_EXPOSE,jdbcType=INTEGER}
                         WHERE
                                 RI_MEM_ID = #{RI_MEM_ID}        
                 ]]>
@@ -87,7 +87,7 @@
                 delete from
                         ROOMMATE_PROFILE
                 where
-                        RI_MEM_ID=#{RI_MEM_ID}
+                        RI_MEM_ID=#{RI_MEM_ID,jdbcType=VARCHAR}
         ]]>
 </delete>                              			
 	<select id="selectRoommateList" parameterType="hashmap" resultType="hashmap">
@@ -109,7 +109,7 @@ SELECT
 FROM
 	MEMBER M,
 ]]>
-<if test="ri_region!=null and !ri_region.equals('')">
+<if test="RI_REGION!=null and !RI_REGION.equals('')">
 	<![CDATA[
 	(SELECT * FROM ROOMMATE_PROFILE 
 	WHERE
@@ -118,7 +118,7 @@ FROM
 		OR RI_REGION3 LIKE %#{RI_REGION,jdbcType=VARCHAR}%) R,
 		]]>
 </if>
-<if test="ri_region==null or ri_region.equals('')">
+<if test="RI_REGION==null or RI_REGION.equals('')">
 	<![CDATA[
 	ROOMMATE_PROFILE R,
 	]]>
@@ -136,13 +136,14 @@ WHERE
 		WHERE IGNORE_MEM = #{id,jdbcType=VARCHAR}
 		)
 	]]>	
-<if test="nickname!=null and!nickname.equals('')">
+<if test="MEM_NICK!=null and!MEM_NICK.equals('')">
 	<![CDATA[
-	AND MEM_NICK = #{MEM_NICK,jdbcType=VARCHAR}
+	AND MEM_NICK LIKE %#{MEM_NICK}%
+	
 	]]>
 </if>
 	
-<if test="gender!=null and !gender.equals('')">
+<if test="RI_GENDER!=null and !RI_GENDER.equals('')">
 	<![CDATA[
 	AND RI_GENDER = #{RI_GENDER,jdbcType=VARCHAR}
 	]]>
@@ -189,15 +190,15 @@ WHERE
 </if>
 	</select>
 	
-<select id="countRoommateList" parameterType="hashmap"
-		resultType="hashmap">
+<select id="countRoommateList" parameterType="int"
+		resultType="int"><!--  -->
 	<![CDATA[
 	SELECT 
 	COUNT(*)
 FROM
 	MEMBER M,
 ]]>
-<if test="ri_region!=null and !ri_region.equals('')">
+<if test="RI_REGION!=null and !RI_REGION.equals('')">
 	<![CDATA[
 	(SELECT * FROM ROOMMATE_PROFILE 
 	WHERE
@@ -206,7 +207,7 @@ FROM
 		OR RI_REGION3 LIKE %#{RI_REGION,jdbcType=VARCHAR}%) R,
 		]]>
 </if>
-<if test="ri_region==null or ri_region.equals('')">
+<if test="RI_REGION==null or RI_REGION.equals('')">
 	<![CDATA[
 	ROOMMATE_PROFILE R,
 	]]>
@@ -224,13 +225,13 @@ WHERE
 		WHERE IGNORE_MEM = #{id,jdbcType=VARCHAR}
 		)
 	]]>	
-<if test="nickname!=null and!nickname.equals('')">
+<if test="MEM_NICK!=null and!MEM_NICK.equals('')">
 	<![CDATA[
-	AND MEM_NICK = #{MEM_NICK,jdbcType=VARCHAR}
+	AND MEM_NICK LIKE %#{MEM_NICK}%
 	]]>
 </if>
 	
-<if test="gender!=null and !gender.equals('')">
+<if test="RI_GENDER!=null and !RI_GENDER.equals('')">
 	<![CDATA[
 	AND RI_GENDER = #{RI_GENDER,jdbcType=VARCHAR}
 	]]>
