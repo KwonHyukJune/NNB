@@ -7,24 +7,7 @@
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
-<%
-	Map<String,Object> mate = new HashMap<String,Object>();
-	mate.put("check","1");
-	mate.put("RI_MEM_NUM","1");
-	mate.put("MEM_NICK","withfour");
-	mate.put("RI_BIRTH","19960914");
-	mate.put("RI_GENDER","여자");
-	mate.put("RI_REGION1","서울");
-	mate.put("RI_REGION2","인천");
-	mate.put("RI_REGION3","경기");
-	mate.put("RI_LOAN_BIG","300");
-	mate.put("RI_LOAN_SMALL","30");
-	mate.put("RI_PROFILE","꺼억");
-	mate.put("RI_DATE_START","20190606");
-	mate.put("RI_DATE_END","20190808");
-	
-	request.setAttribute("mate", mate);
-%>
+
 <head>
 <%@ include file="/WEB-INF/include/include-header.jspf" %>
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/roommate.css'/>"/>
@@ -32,7 +15,7 @@
 	var mem = sessionStorage.getItem("MEM_ID");
 	function report(){
 		var comAjax = new ComAjax();
-		comAjax.setUrl("<c:url value='/report/form'/>");
+		comAjax.setUrl("<c:url value='/report'/>");
 		comAjax.addParam("REPORT_D_ID","${mate.RI_MEM_ID}");
 		comAjax.ajax();
 	};
