@@ -49,7 +49,7 @@ public class AdminFaqController {
 	
 	@RequestMapping(value="/admin/faq/write")
 	public ModelAndView adminFaqWrite(CommandMap commandMap) throws Exception{
-		ModelAndView mv = new ModelAndView("redirect:/admin/faq/faqList");
+		ModelAndView mv = new ModelAndView("redirect:/admin/openFaqList");
 		
 		adminFaqService.writeFaq(commandMap.getMap());
 		

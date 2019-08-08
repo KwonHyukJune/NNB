@@ -7,14 +7,22 @@
 <include refid="common.pagingPre"/> 
 	<![CDATA[
 	SELECT
-		ROW_NUMBER() OVER (ORDER BY FAQ_NUM ASC) RNUM,
+		ROW_NUMBER() OVER (ORDER BY FAQ_NUM DESC) ROW_NUM,
 		FAQ_NUM,
 		FAQ_CATEGORY,
 		FAQ_TITLE,
 		FAQ_CONTENT
-	FROM
-		FAQ 
-		ORDER BY RNUM DESC
+	FROM(
+		SELECT
+			ROW_NUMBER() OVER (ORDER BY FAQ_NUM DESC) RNUM,
+			FAQ_NUM,
+			FAQ_CATEGORY,
+			FAQ_TITLE,
+			FAQ_CONTENT
+		FROM
+			FAQ
+		) 
+	ORDER BY RNUM DESC
 	]]>
 <include refid="common.pagingPost"/> 
 </select>

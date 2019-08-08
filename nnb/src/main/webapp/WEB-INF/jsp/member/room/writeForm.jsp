@@ -7,6 +7,22 @@
 <link rel="stylesheet" type="text/css"
 	href="<c:url value='/css/room.css'/>" />
 <script type="text/javascript">
+function calculator1(chk){
+	  if(chk==1){ 
+		  document.getElementById('sup_m').value = (parseFloat(document.getElementById('sup_p').value) * 3.3058).toFixed(2);       
+	  }
+	  else { 
+		  document.getElementById('sup_p').value = (parseFloat(document.getElementById('sup_m').value) / 3.3058).toFixed(2);
+	  }
+}
+function calculator2(chk){
+	  if(chk==1){ 
+		  document.getElementById('real_m').value = (parseFloat(document.getElementById('real_p').value) * 3.3058).toFixed(2);       
+	  }
+	  else { 
+		  document.getElementById('real_p').value = (parseFloat(document.getElementById('real_m').value) / 3.3058).toFixed(2);
+	  }
+}
 $(document).ready(function(){
 	$('#awrite').addClass('active');
 	$('tr.bt').hide();
@@ -40,7 +56,25 @@ $(document).ready(function(){
 			$('td#monthly').hide();
 			$('td#jeonse').show();
 		}
-	})
+	});
+	
+	$('input:radio[name=UTILITY_CHECK]').on("change",function(){
+		if($('input:radio[name=UTILITY_CHECK]:checked').val()=="0"){
+			$('input:text[name=UTILITY_PRICE]').attr("disabled",true);
+		}else if($('input:radio[name=UTILITY_CHECK]:checked').val()=="1"){
+			$('input:text[name=UTILITY_PRICE]').attr("disabled",false);
+		}
+	});
+	
+	$('input:radio[name=PARKING]').on("change",function(){
+		if($('input:radio[name=PARKING]:checked').val()=="0"){
+			$('input:text[name=PARKING_BILL]').attr("disabled",true);
+		}else if($('input:radio[name=PARKING]:checked').val()=="1"){
+			$('input:text[name=PARKING_BILL]').attr("disabled",false);
+		}
+	});
+	
+
 });
 /* 건물 유형에 따라 선택 옵션 달라지게 */
 /* 주소 API */
@@ -74,6 +108,7 @@ $(document).ready(function(){
       frm.submit();
    };
 </script>
+
 </head>
 <body>
 	<%@ include file="/WEB-INF/include/header.jspf"%>
@@ -183,10 +218,10 @@ $(document).ready(function(){
 								</div>
 								<div class="fUXvpI addressarea"></div>
 								<div class="kXKUhT">
-								<div class="gnEBbX">
-								<input class="bVCGUR kTQnUD" type="text" name="ADDRESS2" id="sample6_address2" size="50"
-									placeholder="상세주소">
-								</div>
+									<div class="gnEBbX">
+										<input class="bVCGUR kTQnUD" type="text" name="ADDRESS2" id="sample6_address2" size="50"
+										placeholder="상세주소">
+									</div>
 								</div>
 								<input type="hidden" name="ZIPCODE" id="sample6_postcode"
 									placeholder="우편번호">
@@ -262,9 +297,9 @@ $(document).ready(function(){
 						<th rowspan="2" class="h"><p>건물 크기</p><span>(1P = 3.3058㎡)</span></th>
 						<td class="b ggZjqG">
 							<p class="hNdXGi">공급 면적 </p>
-							<input class="gsCYXz kTQnUD " type="number" id="sup_p">
+							<input class="gsCYXz kTQnUD" type="text" id="sup_p" onkeyup="calculator1(1);">
 							<p class="cmXpqK">평</p>
-							<input class="gsCYXz kTQnUD " type="number" name="SUPPLY_SIZE" id="sup_m">
+							<input class="gsCYXz kTQnUD" type="text" name="SUPPLY_SIZE" id="sup_m" onkeyup="calculator1(2);">
 							<p class="cmXpqK">m2</p>
 						</td>
 						<th rowspan="2">건물 층수</th>
@@ -281,9 +316,9 @@ $(document).ready(function(){
 					<tr>
 						<td class="ggZjqG">
 							<p class="hNdXGi">전용 면적 </p>
-							<input class="gsCYXz kTQnUD " type="number" id="real_p">
+							<input class="gsCYXz kTQnUD " type="text" id="real_p" onkeyup="calculator2(1);">
 							<p class="cmXpqK">평</p>
-							<input class="gsCYXz kTQnUD " type="number" name="REAL_SIZE" id="real_m">
+							<input class="gsCYXz kTQnUD " type="text" name="REAL_SIZE" id="real_m" onkeyup="calculator2(2);">
 							<p class="cmXpqK">m2</p>							
 						</td>
 						<td class="ggZjqG">
@@ -387,7 +422,7 @@ $(document).ready(function(){
 								<input type="radio" class="PARKING" name="PARKING" value="1">
 								<p>가능</p>
 							</label>
-							<input class="esuiyZ kTQnUD" type="number" name="PARKING_BILL" id="PARKING_BILL">
+							<input class="esuiyZ kTQnUD" type="text" name="PARKING_BILL" id="PARKING_BILL">
 							<p class="iOAqhO">만원</p>
 						</td>
 						
@@ -574,8 +609,8 @@ $(document).ready(function(){
 					<div class="heKOml">
 						<div id="fileDiv" class="jAfNtH">
 							<p>
-								<input type="file" id="file" name="file_0"> <a href="#"
-									class="btn" id="delete" name="delete">삭제</a>
+								<input type="file" id="file" name="file_0"> 
+								<a href="#" class="btn" id="delete" name="delete">삭제</a>
 							</p>
 						</div>
 						<div class="gpqhxG"></div>
@@ -606,11 +641,10 @@ $(document).ready(function(){
 	<div>
 		<%@ include file="/WEB-INF/include/footer.jspf"%>
 	</div>
-</body>
-
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e603a6f6c5db5707c8168383f3516651&libraries=services,clusterer,drawing"></script>
+
 <script>
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = { 
@@ -633,7 +667,7 @@ function sample6_execDaumPostcode() {
             var jibunaddr = data.jibunAddress; // 최종 주소 변수
             // 주소 정보를 해당 필드에 넣는다.
             document.getElementById('sample6_postcode').value = data.zonecode;
-            document.getElementById("sample6_address").value = addr;
+            document.getElementById("sample6_address").value = roadaddr;
             str = "<p><span>도로명:</span>"+roadaddr+"</p>"
             	+ "<p><span>지번:</span>"+jibunaddr+"</p>";
             $(".addressarea").html(str);
@@ -660,5 +694,8 @@ function sample6_execDaumPostcode() {
     	q: keyword
     });
 }
+
+
 </script>
+</body>
 </html>

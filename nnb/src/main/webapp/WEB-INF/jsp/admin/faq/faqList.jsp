@@ -26,8 +26,8 @@
 
 	<div>
 <!-- 링크에 URL 제대로 바꿔줘야 됩니다. 지금은 테스트용 jsp 링크입니다. -->
-	<a href=# onclick="location.href='/nnb/admin/OpenFaqList'">자주 묻는 질문</a>&nbsp;&nbsp;&nbsp;&nbsp;
-	<a href=# onclick="location.href='OpenQnaList.jsp'">1:1 질문</a>
+	<a href=# onclick="location.href='/nnb/admin/openFaqList'">자주 묻는 질문</a>&nbsp;&nbsp;&nbsp;&nbsp;
+	<a href=# onclick="location.href='openQnaList.jsp'">1:1 질문</a>
 	</div>
 
 <br/><br/><br/>
@@ -80,7 +80,7 @@ function goPage(num) {   // 수정
 	}
 	
 function goPage1(num) {   // 새 약관 등록
-	location.href="writeForm?FAQ_NUM="+num; 
+	location.href="<c:url value='/admin/faq/writeForm?FAQ_NUM="+num+"'/>"
 	}	
 	
 $(document).ready(function(){
@@ -92,7 +92,7 @@ function fn_selectFaqList(pageNo){
 	var comAjax = new ComAjax(); 
 	comAjax.setUrl("<c:url value='/admin/faq/list'/>"); 
 	comAjax.setCallback("fn_selectFaqListCallback"); 
-	comAjax.addParam("PAGE_INDEX",pageNo); 
+	comAjax.addParam("PAGE_INDEX",$("#PAGE_INDEX").val()); 
 	comAjax.addParam("PAGE_ROW", 15); 
 	comAjax.ajax(); }
 

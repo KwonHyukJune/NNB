@@ -36,7 +36,7 @@ public class RoomController {
 		Map<String,Object> roomCount = roomService.selectAdminRoomCount(commandMap.getMap());
 		
 		mv.addObject("roomCount", roomCount); //내놓은 방 개수 확인
-		mv.addObject("list", list); //내가 내놓은 방 리스트
+		mv.addObject("list", list); //내가 내 놓은 방 리스트
 		return mv;
 	}
 	
@@ -78,6 +78,12 @@ public class RoomController {
 			commandMap.put("STRUCTURES", STRUCTURES);
 		}else {
 			commandMap.put("STRUCTURES", "");
+		}
+		if(commandMap.get("UTILITY_PRICE")==null) {
+			commandMap.put("UTILITY_PRICE", "");
+		}
+		if(commandMap.get("PARKING_BILL")==null) {
+			commandMap.put("PARKING_BILL", "");
 		}
 		roomService.insertRoom(commandMap.getMap(), request);
 		return mv;
@@ -142,7 +148,8 @@ public class RoomController {
 	
 	@RequestMapping(value = "/room/delete") // 방을 지운다.
 	public ModelAndView deleteRoom(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("redirect: member/room/adminRoom");
+		ModelAndView mv = new ModelAndView("redirect:/room/adminRoom");
+		System.out.println(commandMap.get("ROOM_NUM"));
 		roomService.deleteRoom(commandMap.getMap());
 		return mv;
 	}
