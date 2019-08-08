@@ -18,18 +18,30 @@ public class BankController {
 	@Resource(name="bankService")
 	private BankService bankService;
 	
-	@RequestMapping(value="/bank/list")
-	public ModelAndView bankList(CommandMap commandMap,HttpServletRequest request)throws Exception{
+	@RequestMapping(value="/bank/openBankList")
+	public ModelAndView openBankList(CommandMap commandMap,HttpServletRequest request)throws Exception{
 		ModelAndView mv=new ModelAndView("member/bank/bankList");
-		List<Map<String,Object>>bankList=bankService.bankList(commandMap.getMap());
-		mv.addObject("bankList",bankList);
-		
 		return mv;
 	}
 	
-	@RequestMapping(value="/bank/view")
-	public ModelAndView bankview(CommandMap commandMap,HttpServletRequest request)throws Exception{
-		ModelAndView mv=new ModelAndView("member/bank/bankview");
+	@RequestMapping(value="/bank/bankList")
+	public ModelAndView bankList(CommandMap commandMap,HttpServletRequest request)throws Exception{
+		ModelAndView mv=new ModelAndView("jsonView");
+		List<Map<String,Object>>list=bankService.bankList(commandMap.getMap());
+		
+		mv.addObject("list",list);
+		if(list.size() > 0){
+    		mv.addObject("TOTAL", list.get(0).get("TOTAL_COUNT"));
+    	}
+    	else{
+    		mv.addObject("TOTAL", 0);
+    	}
+		return mv;
+	}
+	
+	@RequestMapping(value="/bank/bankDetail")
+	public ModelAndView bankDetail(CommandMap commandMap,HttpServletRequest request)throws Exception{
+		ModelAndView mv=new ModelAndView("member/bank/bankDetail");
 		Map<String,Object>bank=bankService.bankView(commandMap.getMap());
 		mv.addObject("bank",bank);
 		
