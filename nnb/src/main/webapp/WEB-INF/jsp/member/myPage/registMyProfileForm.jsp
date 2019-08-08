@@ -11,38 +11,15 @@
 $(document).ready(function(){
 	$("#submit").on("click",function(e){
 		e.preventDefault();
-		frm_submit();
+		fn_submit();
 	});
 });
 
-function frm_submit(){
-	var conSubmit = new ConSubmit(frm);
+function fn_submit(){
+	var conSubmit = new ComSubmit(frm);
 	conSubmit.setUrl("<c:url value='/myPage/registMyProfile'/>");
 	conSubmit.submit();
 };
-
-function validation(){
-	var gender = document.getElementById("gender").value;
-	if(gender==null || gender==""){
-		alert("성별을 입력하세요.");
-		$("#gender").focus();
-		return false;
-	}
-	var birth_ymd = document.getElementById("birth_ymd").value;
-	if(birth_ymd==null || birth_ymd==""){
-		alert("생일을 입력하세요.");
-		$("#birth_ymd").focus();
-		return false;
-	}
-	var date_start = document.getElementById("date_start").value;
-	if(date_start==null || date_start==""){
-		alert("입주날짜를 선택하세요.");
-		$("#date_start").focus();
-		return false;
-	}
-	frm.submit();
-}
-
 </script>
 </head>
 <body>
@@ -52,7 +29,7 @@ function validation(){
 <div class="myProfileForm">
 <div class="title">룸메이트 정보 등록</div>
 
-<form id="frm" name="frm" action="registmyProfile" method="post">
+<form id="frm" name="frm">
 <div class="h">성별</div>
 <div class="b">
 	<input type="radio" name="gender" value="M">남
@@ -69,13 +46,10 @@ function validation(){
 </div>
 <div class="h">생년월일</div>
 <div class="b">
-<input type="date" id="birth_ymd" name="birth_ymd">
-</div>
-<!--  
-<c:set var="now" value="<%= new java.util.Date() %>" />
-<fmt:formatDate value="${now}" var="currentYear" pattern="yyyy" /> <br>
+	<c:set var="nowTime" value="<%=new Date() %>"/>
+	<fmt:formatDate value="${nowTime}" type="date" var="currentYear" pattern="yyyy"/>
 	<select id="birth_year" name="birth_year">
-		<c:forEach var="i" begin="2000" end="1900">
+		<c:forEach var="i" begin="1900" end="${currentYear}">
 		<option value="${i}">${i}</option>
 		</c:forEach>
 	</select>년
@@ -90,7 +64,6 @@ function validation(){
 		</c:forEach>
 	</select>일
 </div>
--->
 <div class="h">입주시기</div>
 <div class="b">
 	<input type="date" id="date_start" name="date_start"> ~ 
@@ -98,12 +71,12 @@ function validation(){
 </div>
 <div class="h">자기소개</div>
 <div class="b"><textarea></textarea></div>
+</form>
 
 <a href="#" id="submit" class="btn">등록</a>
-<a href="<c:url value='/myPage/myProfile'/>" id="cancle" class="btn">취소</a>
-</form>
-</div>
+<a href="<c:url value='/myPage/myProfile'/>">취소</a>
 
+</div>
 <br>
 <div>
 <%@ include file="/WEB-INF/include/footer.jspf" %>
