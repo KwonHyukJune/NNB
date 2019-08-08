@@ -37,11 +37,12 @@ $(document).ready(function(){
 	<div class="room kcaUIg">
 		<div class="content dUvncE">
 			<p class="iTcrkc">매물번호</p>
-			<button class="kkaIZb2" type="button" onclick="location.href='roomDetail?num=${room.ROOM_NUM}'">${room.ROOM_NUM}</button>
+			<button class="kkaIZb2" type="button" onclick="location.href='roomDetail?ROOM_NUM=${room.ROOM_NUM}'">${room.ROOM_NUM}</button>
 			<p class="eRbhvo">${room.TRADE_STATUS}</p>
 		</div>
-		<a terget="_blank" rel="noopener noreferrer" class="jsEbdN" href="roomDetail?num=${room.ROOM_NUM}">
-			<div class="lloFGK">
+		<a target="_blank" rel="noopener noreferrer" class="jsEbdN" href="roomDetail?ROOM_NUM=${room.ROOM_NUM}">
+			<div class="lloFGK"><img src="<c:url value='/roomImages/${room.THUMBNAIL}'/>"
+				onclick="pop(this.src)" style="cursor:pointer;" width=100% height=auto>
 			</div>
 			<h1>
 				<span>${room.ROOM_TYPE}</span>
@@ -61,21 +62,14 @@ $(document).ready(function(){
 			</div>
 			<div class="fLTNNO">
 				<c:if test="${room.TRADE_STATUS=='광고중'}">
-				<button class="eMNveq llAgXp" type="button" onclick="location.href='updateForm?num=${room.ROOM_NUM}'">수정</button>
-				<button class="ivmhMO llAgXp" type="button" onclick="location.href='delete?num=${room.ROOM_NUM}'">삭제</button>
-				<button class="ANDVz llAgXp" type="button" onclick="">광고종료</button>
-				<button class="HCCsy llAgXp" type="button" onclick="">거래완료</button>
-				</c:if>
-				<c:if test="${room.TRADE_STATUS=='광고종료'}">
-				<button class="eMNveq llAgXp" type="button" onclick="location.href='updateForm?num=${room.ROOM_NUM}'">수정</button>
-				<button class="ivmhMO llAgXp" type="button" onclick="location.href='delete?num=${room.ROOM_NUM}'">삭제</button>
-				<button class="ANDVz llAgXp" type="button" onclick="">광고재등록</button>
-				<button class="HCCsy llAgXp" type="button" onclick="">거래완료</button>
+				<button class="hxvBac llAgXp" type="button" onclick="location.href='updateForm?ROOM_NUM=${room.ROOM_NUM}'">수정</button>
+				<button class="dPcOsn llAgXp" type="button" onclick="location.href='delete?ROOM_NUM=${room.ROOM_NUM}'">삭제</button>
+				<button class="bDSVrJ llAgXp" type="button" onclick="location.href='tradeStatus?TRADE_STATUS=2&ROOM_NUM=${room.ROOM_NUM}'">광고종료</button>
 				</c:if>
 				<c:if test="${room.TRADE_STATUS=='거래완료'}">
-				<button class="hxvBac llAgXp" type="button" onclick="location.href='updateForm?num=${room.ROOM_NUM}'">수정</button>
-				<button class="dPcOsn llAgXp" type="button" onclick="location.href='delete?num=${room.ROOM_NUM}'">삭제</button>
-				<button class="bDSVrJ llAgXp" type="button" onclick="">광고재등록</button>
+				<button class="hxvBac llAgXp" type="button" onclick="location.href='updateForm?ROOM_NUM=${room.ROOM_NUM}'">수정</button>
+				<button class="dPcOsn llAgXp" type="button" onclick="location.href='delete?ROOM_NUM=${room.ROOM_NUM}'">삭제</button>
+				<button class="bDSVrJ llAgXp" type="button" onclick="location.href='tradeStatus?TRADE_STATUS=1&ROOM_NUM=${room.ROOM_NUM}'">광고재등록</button>
 				</c:if>
 			</div>
 		</div>

@@ -11,15 +11,40 @@
 $(document).ready(function(){
 	$("#submit").on("click",function(e){
 		e.preventDefault();
-		fn_submit();
+		frm_submit();
 	});
 });
 
+
 function fn_submit(){
 	var conSubmit = new ComSubmit("frm");
+
 	conSubmit.setUrl("<c:url value='/myPage/registMyProfile'/>");
 	conSubmit.submit();
 };
+
+function validation(){
+	var gender = document.getElementById("gender").value;
+	if(gender==null || gender==""){
+		alert("ì„±ë³„ì„ ì…ë ¥í•˜ì„¸ìš”.");
+		$("#gender").focus();
+		return false;
+	}
+	var birth_ymd = document.getElementById("birth_ymd").value;
+	if(birth_ymd==null || birth_ymd==""){
+		alert("ìƒì¼ì„ ì…ë ¥í•˜ì„¸ìš”.");
+		$("#birth_ymd").focus();
+		return false;
+	}
+	var date_start = document.getElementById("date_start").value;
+	if(date_start==null || date_start==""){
+		alert("ì…ì£¼ë‚ ì§œë¥¼ ì„ íƒí•˜ì„¸ìš”.");
+		$("#date_start").focus();
+		return false;
+	}
+	frm.submit();
+}
+
 </script>
 </head>
 <body>
@@ -27,56 +52,60 @@ function fn_submit(){
 <%@ include file="myPage.jspf" %>
 
 <div class="myProfileForm">
-<div class="title">·ë¸ŞÀÌÆ® Á¤º¸ µî·Ï</div>
+<div class="title">ë£¸ë©”ì´íŠ¸ ì •ë³´ ë“±ë¡</div>
 
-<form id="frm" name="frm">
-<div class="h">¼ºº°</div>
+<form id="frm" name="frm" action="registmyProfile" method="post">
+<div class="h">ì„±ë³„</div>
 <div class="b">
-	<input type="radio" name="gender" value="M">³²
-	<input type="radio" name="gender" value="F">¿©
+	<input type="radio" name="gender" value="M">ë‚¨
+	<input type="radio" name="gender" value="F">ì—¬
 </div>
-<div class="h">ºÎ´ã°¡´É±İ¾×</div>
+<div class="h">ë¶€ë‹´ê°€ëŠ¥ê¸ˆì•¡</div>
 <div class="b">
-	º¸Áõ±İ: <input type="number" name="loan_big" id="loan_big">¸¸¿ø<br>
-	¿ù¼¼: <input type="number" name="loan_small" id="loan_small">¸¸¿ø
+	ë³´ì¦ê¸ˆ: <input type="number" name="loan_big" id="loan_big">ë§Œì›<br>
+	ì›”ì„¸: <input type="number" name="loan_small" id="loan_small">ë§Œì›
 </div>
-<div class="h">¼±È£Áö¿ª</div>
+<div class="h">ì„ í˜¸ì§€ì—­</div>
 <div class="b">
-	Áöµµ API »ç¿ëÇØ¼­ Áö¿ª ¼±ÅÃÇÏ°í Ãß°¡ ´©¸£¸é 3°³±îÁö ÀÚµ¿À¸·Î Ãß°¡µÇµµ·Ï?
+	ì§€ë„ API ì‚¬ìš©í•´ì„œ ì§€ì—­ ì„ íƒí•˜ê³  ì¶”ê°€ ëˆ„ë¥´ë©´ 3ê°œê¹Œì§€ ìë™ìœ¼ë¡œ ì¶”ê°€ë˜ë„ë¡?
 </div>
-<div class="h">»ı³â¿ùÀÏ</div>
+<div class="h">ìƒë…„ì›”ì¼</div>
 <div class="b">
-	<c:set var="nowTime" value="<%=new Date() %>"/>
-	<fmt:formatDate value="${nowTime}" type="date" var="currentYear" pattern="yyyy"/>
+<input type="date" id="birth_ymd" name="birth_ymd">
+</div>
+<!--  
+<c:set var="now" value="<%= new java.util.Date() %>" />
+<fmt:formatDate value="${now}" var="currentYear" pattern="yyyy" /> <br>
 	<select id="birth_year" name="birth_year">
-		<c:forEach var="i" begin="1900" end="${currentYear}">
+		<c:forEach var="i" begin="2000" end="1900">
 		<option value="${i}">${i}</option>
 		</c:forEach>
-	</select>³â
+	</select>ë…„
 	<select id="birth_month" name="birth_month">
 		<c:forEach var="i" begin="1" end="12">
 		<option value="${i}">${i}</option>
 		</c:forEach>
-	</select>¿ù
+	</select>ì›”
 	<select id="birth_date" name="birth_date">
 		<c:forEach var="i" begin="1" end="31">
 		<option value="${i}">${i}</option>
 		</c:forEach>
-	</select>ÀÏ
+	</select>ì¼
 </div>
-<div class="h">ÀÔÁÖ½Ã±â</div>
+-->
+<div class="h">ì…ì£¼ì‹œê¸°</div>
 <div class="b">
 	<input type="date" id="date_start" name="date_start"> ~ 
 	<input type="date" id="date_end" name="date_end">
 </div>
-<div class="h">ÀÚ±â¼Ò°³</div>
+<div class="h">ìê¸°ì†Œê°œ</div>
 <div class="b"><textarea></textarea></div>
+
+<a href="#" id="submit" class="btn">ë“±ë¡</a>
+<a href="<c:url value='/myPage/myProfile'/>" id="cancle" class="btn">ì·¨ì†Œ</a>
 </form>
-
-<a href="#" id="submit" class="btn">µî·Ï</a>
-<a href="<c:url value='/myPage/myProfile'/>">Ãë¼Ò</a>
-
 </div>
+
 <br>
 <div>
 <%@ include file="/WEB-INF/include/footer.jspf" %>

@@ -36,7 +36,7 @@ public class RoomController {
 		Map<String,Object> roomCount = roomService.selectAdminRoomCount(commandMap.getMap());
 		
 		mv.addObject("roomCount", roomCount); //내놓은 방 개수 확인
-		mv.addObject("list", list); //내가 내놓은 방 리스트
+		mv.addObject("list", list); //내가 내 놓은 방 리스트
 		return mv;
 	}
 	
@@ -78,6 +78,12 @@ public class RoomController {
 			commandMap.put("STRUCTURES", STRUCTURES);
 		}else {
 			commandMap.put("STRUCTURES", "");
+		}
+		if(commandMap.get("UTILITY_PRICE")==null) {
+			commandMap.put("UTILITY_PRICE", "");
+		}
+		if(commandMap.get("PARKING_BILL")==null) {
+			commandMap.put("PARKING_BILL", "");
 		}
 		roomService.insertRoom(commandMap.getMap(), request);
 		return mv;
@@ -142,15 +148,16 @@ public class RoomController {
 	
 	@RequestMapping(value = "/room/delete") // 방을 지운다.
 	public ModelAndView deleteRoom(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("redirect: member/room/adminRoom");
+		ModelAndView mv = new ModelAndView("redirect:/room/adminRoom");
+		System.out.println(commandMap.get("ROOM_NUM"));
 		roomService.deleteRoom(commandMap.getMap());
 		return mv;
 	}
 
 	@RequestMapping(value="/room/tradeStatus") //광고상태 변경 
 	public ModelAndView updateTradeStatus(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("redirect:search/detailRoom");
-		if(commandMap.get("Trade_Status").equals("1")) {// 광고 중/거래 완료를 받아주는 키값. 키에 대한 값이 1이면 광고 중으로 바꾸기.
+		ModelAndView mv = new ModelAndView("redirect:/room/adminRoom");
+		if(commandMap.get("TRADE_STATUS").equals("1")) {// 광고 중/거래 완료를 받아주는 키값. 키에 대한 값이 1이면 광고 중으로 바꾸기.
 														//2 이면 거래 완료.
 			roomService.updateReAdRoom(commandMap.getMap());
 		}else {

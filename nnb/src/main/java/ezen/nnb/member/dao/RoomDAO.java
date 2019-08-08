@@ -90,9 +90,14 @@ public class RoomDAO extends AbstractDAO{
 	}
 
 	@SuppressWarnings("unchecked")
-	public Map<String, Object> selectLessorInfo(Map<String, Object> map) {
+	public Map<String, Object> selectLessorInfo(Map<String, Object> map) throws Exception  {
 		// TODO Auto-generated method stub
 		return (Map<String, Object>)selectOne("room.selectLessorInfo", map);
+	}
+
+	public void updateThumbnail(Map<String, Object> map) throws Exception  {
+		// TODO Auto-generated method stub
+		update("room.updateThumbnail", map);
 	}
 
 }

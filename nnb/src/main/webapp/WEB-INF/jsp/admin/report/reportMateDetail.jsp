@@ -47,6 +47,10 @@ $(document).ready(function(){
 		   
 		   <div class="notice">      
 			<ul>
+				<li>
+				${map.REPORT_ID}님이 신고하셨습니다.
+				</li>
+				<br/>
 				<li>번호 :
 				 ${map.REPORT_NUM} &nbsp;     
 				</li>
@@ -56,8 +60,8 @@ $(document).ready(function(){
 		      	<li>날짜  :     	
 		         ${map.REPORT_DATE}&nbsp;
 		         </li>
-		         <li>매물번호  :     	
-		         ${map.REPORT_POST_NUM}&nbsp;
+		         <li>아이디  :     	
+		         ${map.REPORT_D_ID}&nbsp;
 		         </li>
 		         <li>제목  :     	
 		         ${map.REPORT_TITLE}&nbsp;
