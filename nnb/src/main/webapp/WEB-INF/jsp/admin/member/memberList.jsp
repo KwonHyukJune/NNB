@@ -10,8 +10,8 @@
 
 <script type="text/javascript">
 
-function showPopup(num){
-    var url = "/nnb/admin/memberDetail?MEM_NUM="+num;
+function showPopup(num, id){
+    var url = "/nnb/admin/memberDetail?MEM_NUM="+num+"&MEM_ID=id"+num;
     var name = "회원정보";
     var option = "width = 500, height = 500, top = 100, left = 200, location = no, resizeable = yes, scrollbars = yes"
     window.open(url, name, option);
@@ -28,11 +28,11 @@ function showPopup(num){
 <div><h1>회원 관리</h1></div>
 <br/>
 	
-<div>
+<div><h3>
 <!-- 링크에 URL 제대로 바꿔줘야 됩니다. 지금은 테스트용 jsp 링크입니다. -->
-<a href=# onclick="location.href='memberList.jsp'">회원 검색</a>&nbsp;&nbsp;&nbsp;&nbsp;
+<a href=# onclick="location.href='/nnb/admin/memberList'">회원 검색</a>&nbsp;&nbsp;&nbsp;&nbsp;
 <a href=# onclick="location.href='messageList.jsp'">전체 쪽지함</a>
-</div>
+</h3></div>
 <br/>
 <select>
 	<option>검색유형1</option>
@@ -65,10 +65,10 @@ function showPopup(num){
          ${memberDetail.MEM_PHONE}	
           
       </div>
-       
+     <form>    
     <input type="button" value="상세보기" onclick="showPopup(${memberDetail.MEM_NUM});" />
       <a href="#this" class="btn" id="delete">활성화</a>
-
+	</form> 
   
    </div>	
  

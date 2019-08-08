@@ -27,12 +27,12 @@ function showPopup() {
 <body>
 
 
-<h1><div>Q&A 관리</div></h1>
+<div><h1>Q&A 관리</h1></div>
 <br/>
 	
 <div>
 <!-- 링크에 URL 제대로 바꿔줘야 됩니다. 지금은 테스트용 jsp 링크입니다. -->
-<a href=# onclick="location.href='FAQList.jsp'">자주 묻는 질문</a>&nbsp;&nbsp;&nbsp;&nbsp;
+<a href=# onclick="location.href='/nnb/admin/openFaqList'">자주 묻는 질문</a>&nbsp;&nbsp;&nbsp;&nbsp;
 <a href=# onclick="location.href='QNAList.jsp'">1:1 질문</a>
 </div>
 <br/>

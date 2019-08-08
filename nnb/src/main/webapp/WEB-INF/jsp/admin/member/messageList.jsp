@@ -70,30 +70,6 @@ function searchCheck(frm){
 	
 <br/><br/>
 
-
-<!-- 테스트용 세팅 -->
-<%@ page import="java.util.HashMap" %>
-<%@ page import="java.util.Map" %>
-<%@ page import="java.util.List" %>
-<%@ page import="java.util.ArrayList" %>
-<%
-   Map<String,Object> message1 = new HashMap<String,Object>();
-	message1.put("MESSAGE_NUM","1");
-	message1.put("MEM_KIND","임대");
-	message1.put("RECEIVER","ID4");
-	message1.put("MESSAGE_TITLE","보세요 보시라구요~");
-	message1.put("SEND_DATE","2019-07-31");
-		   
-   
-   List<Map<String,Object>> messageList = new ArrayList<Map<String,Object>>();
-   messageList.add(message1);
- 
-   
- 
-   request.setAttribute("messageList",messageList);
-%>
-<!-- 테스트용 세팅 끝 -->
-
 <div class="selectMessageList">
 
 <div class="messageList">
