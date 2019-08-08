@@ -29,7 +29,7 @@
 </select>                                               						
 <insert id="insertMyRoommateProfile" parameterType="hashmap">
                 <![CDATA[
-                        insert into MESSAGE
+                        insert into ROOMMATE_PROFILE
                         (
                                 RI_NUM,
                                 RI_MEM_ID,
@@ -53,8 +53,9 @@
                                 #{RI_REGION2,jdbcType=VARCHAR},
                                 #{RI_REGION3,jdbcType=VARCHAR},
                                 #{RI_GENDER,jdbcType=VARCHAR},
-                                #{RI_BIRTH,jdbcType=DATE},
+                                #{RI_BIRTH,jdbcType=INTEGER},
                                 #{RI_LOAN_BIG,jdbcType=INTEGER},
+                                #{RI_LOAN_SMALL,jdbcType=INTEGER},
                                 #{RI_PROFILE,jdbcType=VARCHAR},
                                 #{RI_DATE_START,jdbcType=DATE},
                                 #{RI_DATE_END,jdbcType=DATE},
@@ -64,13 +65,13 @@
 </insert>						
 <update id="updateMyProfile" parameterType="hashmap">
                 <![CDATA[
-                        UPDATE MEMBER 
+                        UPDATE ROOMMATE_PROFILE 
                         SET
                                 RI_REGION1=#{RI_REGION1,jdbcType=VARCHAR},
                                 RI_REGION2=#{RI_REGION2,jdbcType=VARCHAR},
                                 RI_REGION3=#{RI_REGION3,jdbcType=VARCHAR},
                                 RI_GENDER=#{GENDER,jdbcType=VARCHAR},
-                                RI_BIRTH=#{BIRTH,jdbcType=DATE},
+                                RI_BIRTH=#{BIRTH,jdbcType=INTEGER},
                                 RI_LOAN_BIG=#{RI_LOAN_BIG,jdbcType=INTEGER},
                                 RI_LOAN_SMALL=#{RI_LOAN_SMALL,jdbcType=INTEGER},
                                 RI_PROFILE=#{RI_PROFILE,jdbcType=VARCHAR},
@@ -150,12 +151,12 @@ WHERE
 </if>
 <if test="minyear!=null and !minyear.equals('')">
 	<![CDATA[
-	AND RI_BIRTH > #{minyear,jdbcType=DATE}
+	AND RI_BIRTH > #{minyear,jdbcType=INTEGER}
 ]]>
 </if>
 <if test="maxyear!=null and !maxyear.equals('')">
 	<![CDATA[
-	AND RI_BIRTH &lt; #{maxyear,jdbcType=DATE}
+	AND RI_BIRTH &lt; #{maxyear,jdbcType=INTEGER}
 	]]>
 </if>
 <if test="mindeposit!=null and !mindeposit.equals('')">
@@ -238,12 +239,12 @@ WHERE
 </if>
 <if test="minyear!=null and !minyear.equals('')">
 	<![CDATA[
-	AND RI_BIRTH > #{minyear,jdbcType=DATE}
+	AND RI_BIRTH > #{minyear,jdbcType=INTEGER}
 ]]>
 </if>
 <if test="maxyear!=null and !maxyear.equals('')">
 	<![CDATA[
-	AND RI_BIRTH &lt; #{maxyear,jdbcType=DATE}
+	AND RI_BIRTH &lt; #{maxyear,jdbcType=INTEGER}
 	]]>
 </if>
 <if test="mindeposit!=null and !mindeposit.equals('')">
