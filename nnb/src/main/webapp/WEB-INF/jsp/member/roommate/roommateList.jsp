@@ -3,42 +3,6 @@
 <!DOCTYPE html>
 
 <html>
-<!-- 테스트용 세팅 -->
-<%@ page import="java.util.HashMap" %>
-<%@ page import="java.util.Map" %>
-<%@ page import="java.util.List" %>
-<%@ page import="java.util.ArrayList" %>
-<%
-	Map<String,Object> mate1 = new HashMap<String,Object>();
-	mate1.put("check","1");
-	mate1.put("RI_MEM_NUM","1");
-	mate1.put("MEM_NICK","withfour");
-	mate1.put("RI_AGE","24");
-	mate1.put("RI_GENDER","여자");
-	mate1.put("RI_REGION1","서울");
-	mate1.put("RI_LOAN_BIG","300");
-	mate1.put("RI_LOAN_SMALL","30");
-	Map<String,Object> mate2 = new HashMap<String,Object>();
-	mate2.put("check","0");
-	mate2.put("RI_MEM_NUM","2");
-	mate2.put("MEM_NICK","withfour");
-	mate2.put("RI_AGE","24");
-	mate2.put("RI_GENDER","여자");
-	mate2.put("RI_REGION1","서울");
-	mate2.put("RI_LOAN_BIG","300");
-	mate2.put("RI_LOAN_SMALL","30");
-	
-	List<Map<String,Object>> mateList = new ArrayList<Map<String,Object>>();
-	mateList.add(mate1);
-	mateList.add(mate2);
-	
-	int count = mateList.size();
-	request.setAttribute("count", count);
-	request.setAttribute("mateList",mateList);
-	
-	request.setAttribute("MEM_ID", "id1");
-%>
-<!-- 테스트용 세팅 끝 -->
 
 <head>
 <%@ include file="/WEB-INF/include/include-header.jspf" %>
@@ -46,14 +10,14 @@
 <script type="text/javascript">
 	var mem = sessionStorage.getItem("MEM_ID");
 /* 	window.onload = function(){
-		document.getElementById("ageMinValue").value = document.getElementById("ageMin").value;
-		document.getElementById("ageMaxValue").value = document.getElementById("ageMax").value;
+		document.getElementById("minyear").value = document.getElementById("minyear").value;
+		document.getElementById("maxyear").value = document.getElementById("maxyear").value;
 	}
 	$(document).ready(function(){
-		$("#ageMin").on("change",function(){
+		$("#minyear").on("change",function(){
 			fn_ageMin();
 		});
-		$("#ageMax").on("change",function(){
+		$("#minyear").on("change",function(){
 			fn_ageMax();
 		})
 	});
@@ -85,8 +49,11 @@
 		x.style.width = 100-Number(x.value)+"px";
 		z.style.width = 100+Number(x.value)+"px";
 	}; */
+	
+	
+	
 	function openDetail(url){
-		var strUrl = "/nnb"+url;
+		var strUrl = "/first"+url;
 		window.open(strUrl);
 	};
 	function insertFav(num){
@@ -105,6 +72,8 @@
 	};
 	window.onload = function(){
 		$("#search").on("click",function(){
+			comAjax.setUrl("<c:url value='/roommate/search'/>");
+			comAjax.addParam("RI_NICK","${RI_NICK}");
 			fn_search();
 		});
 	};
@@ -114,34 +83,44 @@
 		comSubmit.addParam("IGNORE_MEM",mem);
 		comSubmit.submit(frm);
 	}
+	
+	
 </script>
 </head>
 <body>
 <%@ include file="/WEB-INF/include/header.jspf" %>
 
 <div class="roommateList">
-
 <div class="title">룸메이트 찾기</div>
 <div class="search">
+
 	<form id="frm">
+	<c:if test="${RI_REGION}">
 		지역 ㅡㅡ 지도로? 검색으로?
-		<select id="gender" name="gender">
-			<option value="">성별</option>
+	</c:if>
+	<c:if test="${MEM_NICK}">
+	<input type="text" name="MEM_NICK" id="MEM_NICK">
+	</c:if>
+	<c:if test="${RI_GENDER}">
+		<select id="RI_GENDER" name="RI_GENDER">
+			<option value="GENDER">성별</option>
 			<option value="F">여성</option>
 			<option value="M">남성</option>
 		</select>
-		나이 
-		<input type="text" id="ageMinValue">~
+	</c:if>
+		<c:if test="${RI_BIRTH eq minyear}">
+		</c:if>
+		<input type="text" id="minyear" name="minyear">~
 <!-- 		<input type="range" class="slider" id="ageMin" step="1" min="0" max="50" value="0"><input type="range" class="slider" id="ageMax" step="1" min="50" max="100" value="100"> -->
-		<input type="text" id="ageMaxValue">
-		보증금 <input type="text" id="depositMin">~<input type="text" id="depositMax">
-		월세 <input type="text" id="monthlyPayMin">~<input type="text" id="monthlyPayMax">
-		<a href="#" id="search" class="btn">검색</a>
+		<input type="text" id="maxyear" name="maxyear">
+		보증금 <input type="text" id="mindeposit" name="mindeposit">~<input type="text" id="maxdeposit" name="maxdeposit">
+		월세 <input type="text" id="minrent">~<input type="text" id="minrent">
+		
+		<input type="text" id="keyword" name="keyword"><a href="#" id="search" class="btn">검색</a>
 	</form>
 </div>
-
-<p>총 ${count}명의 검색 결과가 있습니다.</p>
-<c:if test="${count!=null && count!=''}">
+<p>총 ${Count}명의 검색 결과가 있습니다.</p>
+<c:if test="${Count!=null && Count!=''}">
 <div class="mateList">
 	<div class="listheader">
 		<div class="p1">닉네임</div>
@@ -150,10 +129,12 @@
 		<div class="p4">지역</div>
 		<div class="p5">부담가능금액</div>
 		<div class="p6">찜하기</div>
+		
 	</div>
-	<c:forEach var="mate" items="${mateList}">
+	
+	<c:forEach var="mate" items="${searchRoommate}">
 	<div class="mate">
-	<a href="#" onclick="openDetail('/roommate/detail?num=${mate.RI_MEM_NUM}');" class="btn">
+	<a href="#" onclick="openDetail('/roommate/detail?num=${mate.RI_MEM_ID}');" class="btn">
 		<div class="p1">${mate.MEM_NICK}</div>
 		<div class="p2">${mate.RI_AGE}</div>
 		<div class="p3">${mate.RI_GENDER}</div>
@@ -176,7 +157,7 @@
 	</c:forEach>
 </div>
 </c:if>
-<c:if test="${count==null || count==''}">
+<c:if test="${Count==null || Count==''}">
 	아직 등록된 사용자가 없습니다.<br>
 	<a href="<c:url value='/myPage/registMyProfileForm'/>" class="btn">룸메이트 정보 등록하러 가기</a>
 </c:if>
