@@ -6,73 +6,76 @@
 <select id="selectReportRoomList" parameterType="hashmap" resultType="hashmap"> 
 	<![CDATA[
 	SELECT
-		ROW_NUMBER() OVER (ORDER BY FAQ_NUM DESC) RNUM,
+		ROW_NUMBER() OVER (ORDER BY REPORT_NUM DESC) RNUM,
 		REPORT_ID,
 		REPORT_D_ID,
 		REPORT_POST_NUM,
 		REPORT_DATE,
-		REPORT_TYPE
+		REPORT_TYPE,
+		REPORT_TITLE		
 	FROM
-		report
+		REPORT
 	]]>	
 	<choose>
 	<when test="ReportType==1">
 	<![CDATA[
-	Where 
-		report_type = '욕설 및 혐오발언' and report_post_num is not null;
+	WHERE 
+		REPORT_TYPE = '욕설 및 혐오발언' AND REPORT_POST_NUM IS NOT NULL
 	]]>	
 	</when>
 	<when test="ReportType==2">
 	<![CDATA[
-	Where 
-		report_type = '허위정보 기재' and report_post_num is not null;
+	WHERE 
+		REPORT_TYPE = '허위정보 기재' AND REPORT_POST_NUM IS NOT NULL
 	]]>	
 	</when>
 	<when test="ReportType==3">
 	<![CDATA[
-	Where 
-		report_type = '음란성 게시글' and report_post_num is not null;
+	WHERE 
+		REPORT_TYPE = '음란성 게시글' AND REPORT_POST_NUM IS NOT NULL
 	]]>	
 	</when>
 	<when test="ReportType==4">
 	<![CDATA[
-	Where 
-		report_type = '도배/광고' and report_post_num is not null;
+	WHERE 
+		REPORT_TYPE = '도배/광고' AND REPORT_POST_NUM IS NOT NULL
 	]]>	
 	</when>
 	<otherwise>
 	<![CDATA[
-	Where 
-		report_post_num is not null;
+	WHERE 
+		REPORT_POST_NUM IS NOT NULL
 	]]>	
 	</otherwise>
 	</choose>
 </select>
 
-<select id="selectReportMemberList" parameterType="hashmap" resultType="hashmap"> 
+<select id="selectReportMateList" parameterType="hashmap" resultType="hashmap"> 
 	<![CDATA[
 	SELECT
-		ROW_NUMBER() OVER (ORDER BY FAQ_NUM DESC) RNUM,
+		ROW_NUMBER() OVER (ORDER BY REPORT_NUM DESC) RNUM,
 		REPORT_ID,
 		REPORT_D_ID,
 		REPORT_DATE,
-		REPORT_TYPE
+		REPORT_TYPE,
+		REPORT_TITLE
 	FROM
-		report
+		REPORT
 	where
-		report_post_num is null; 
+		REPORT_POST_NUM IS NULL
 	]]>
 </select>
 
-<select id="selectReportDetail" parameterType="hashmap" resultType="hashmap"> 
+<select id="selectReportMateDetail" parameterType="hashmap" resultType="hashmap"> 
 	<![CDATA[
 	SELECT
+		ROW_NUMBER() OVER (ORDER BY REPORT_NUM DESC) RNUM,
 		REPORT_ID,
 		REPORT_D_ID,
-		REPORT_POST_NUM,
 		REPORT_DATE,
 		REPORT_REASON,
-		REPORT_TYPE
+		REPORT_TYPE,
+		REPORT_TITLE
 	FROM
 		REPORT
 	WHERE
@@ -80,44 +83,67 @@
 	]]>
 </select>
 
+<select id="selectReportRoomDetail" parameterType="hashmap" resultType="hashmap"> 
+	<![CDATA[
+	SELECT
+		ROW_NUMBER() OVER (ORDER BY REPORT_NUM DESC) RNUM,
+		REPORT_ID,
+		REPORT_D_ID,
+		REPORT_POST_NUM,
+		REPORT_DATE,
+		REPORT_REASON,
+		REPORT_TYPE,
+		REPORT_TITLE
+	FROM
+		REPORT
+	WHERE
+		REPORT_NUM = #{REPORT_NUM}
+	]]>
+</select>
+
+
+<!-- 밑에껀 멤버가 신고하는거 -->
 <select id="insertReport" parameterType="hashmap"> 
 	<![CDATA[
-	INSERT INTO Report (
+	INSERT INTO REPORT (
+		ROW_NUMBER() OVER (ORDER BY REPORT_NUM DESC) RNUM,
 		REPORT_NUM,
 		REPORT_ID,
 		REPORT_D_ID,
 		REPORT_POST_NUM,
 		REPORT_TITLE,
 		REPORT_REASON,
-		REPORT_TYPE
+		REPORT_TYPE,
+		REPORT_TITLE
 		) 
 	VALUES(
-		REPORT_NUM_SEQ.NEXTVAL,,
+		REPORT_NUM_SEQ.NEXTVAL,
 		#{REPORT_ID},
 		#{REPORT_D_ID},
 		#{REPORT_POST_NUM},
 		#{REPORT_TITLE},
 		#{REPORT_REASON},
-		#{REPORT_TYPE}
+		#{REPORT_TYPE},
+		#{REPORT_TITLE}
 	)
 	]]>
 </select>
 
-<!-- <select id="updateFaq" parameterType="hashmap"> 
+<!-- <select id="updateREPORT" parameterType="hashmap"> 
 	<![CDATA[
-	UPDATE FAQ
+	UPDATE REPORT
 	SET
-		FAQ_TITLE = #{FAQ_TITLE},
-		FAQ_CATEGORY = #{FAQ_CATEGORY},
-		FAQ_CONTENT = #{FAQ_CONTENT}
-	WHERE FAQ_NUM = #{FAQ_NUM}
+		REPORT_TITLE = #{REPORT_TITLE},
+		REPORT_CATEGORY = #{REPORT_CATEGORY},
+		REPORT_CONTENT = #{REPORT_CONTENT}
+	WHERE REPORT_NUM = #{REPORT_NUM}
 	]]>
 </select>	
 
-<select id="deleteFaq" parameterType="hashmap"> 
+<select id="deleteREPORT" parameterType="hashmap"> 
 	<![CDATA[
-	DELETE FAQ
-	WHERE FAQ_NUM = #{FAQ_NUM}
+	DELETE REPORT
+	WHERE REPORT_NUM = #{REPORT_NUM}
 	]]>
 </select>  -->
 </mapper>

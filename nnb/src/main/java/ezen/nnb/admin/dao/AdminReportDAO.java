@@ -17,15 +17,21 @@ public class AdminReportDAO extends AbstractDAO{
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Map<String, Object>> selectReportMemberList(Map<String, Object> map) throws Exception {
+	public List<Map<String, Object>> selectReportMateList(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub
-		return (List<Map<String, Object>>) selectList("report.selectReportMemberList", map);
+		return (List<Map<String, Object>>) selectList("report.selectReportMateList", map);
 	}
-
+	
 	@SuppressWarnings("unchecked")
-	public Map<String, Object> selectReportDetail(Map<String, Object> map) throws Exception {
+	public Map<String, Object> selectReportRoomDetail(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub
-		return (Map<String, Object>) selectOne("report.selectReportDetail", map);
+		return (Map<String, Object>) selectOne("report.selectReportRoomDetail", map);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public Map<String, Object> selectReportMateDetail(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return (Map<String, Object>) selectOne("report.selectReportMateDetail", map);
 	}
 
 }
