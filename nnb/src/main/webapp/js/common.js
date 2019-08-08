@@ -90,84 +90,74 @@ function ComAjax(opt_formId){
 }
 /* paging tag */
 /*
-divId: 페이징 태그가 그려질 div
-pageIdx: 현재 페이지 위치가 저장될 input 태그 id
-recordCount: 페이지당 레코드 수
-totalCount: 전체 조회 건수
-eventName: 페이징 하단의 숫자 등의 버튼이 클릭되었을 때 호출될 함수 이름
+/*
+divId : 페이징 태그가 그려질 div
+pageIndx : 현재 페이지 위치가 저장될 input 태그 id
+recordCount : 페이지당 레코드 수
+totalCount : 전체 조회 건수 
+eventName : 페이징 하단의 숫자 등의 버튼이 클릭되었을 때 호출될 함수 이름
 */
 var gfv_pageIndex = null;
 var gfv_eventName = null;
-function gfn_renderPaging(params){ //페이징 태그를 작성하는 역할.
-	var divId = params.divId;	//페이징이 그려질 div id
-	gfv_pageIndex = params.pageIndex;	//현재 위치가 저장될 input 태그
-	var totalCount = params.totalCount;	//전체 조회 건수
-	var currentIndex = $("#"+params.pageIndex).val();	//현재 위치
-	if($("#"+params.pageIndex).length==0 || gfn_isNull(currentIndex)==true){
+function gfn_renderPaging(params){
+	var divId = params.divId; //페이징이 그려질 div id
+	gfv_pageIndex = params.pageIndex; //현재 위치가 저장될 input 태그
+	var totalCount = params.totalCount; //전체 조회 건수
+	var currentIndex = $("#"+params.pageIndex).val(); //현재 위치
+	if($("#"+params.pageIndex).length == 0 || gfn_isNull(currentIndex) == true){
 		currentIndex = 1;
 	}
 	
-	var recordCount = params.recordCount;	//페이지 당 레코드 수 (줄 수)
-	if(gfn_isNull(recordCount)==true){
+	var recordCount = params.recordCount; //페이지당 레코드 수
+	if(gfn_isNull(recordCount) == true){
 		recordCount = 20;
 	}
-	var totalIndexCount = Math.ceil(totalCount/recordCount);	//전체 인덱스 수 (올림해서 구하긔)
+	var totalIndexCount = Math.ceil(totalCount / recordCount); // 전체 인덱스 수
 	gfv_eventName = params.eventName;
 	
-	$("#"+divId).empty(); //페이징이 그려질 div id를 비운다.
-	var preStr = ""; //맨앞으로 이동하는 태그
-	var postStr = "";// 맨뒤로 이동하는 태그
-	var str = ""; //인덱스 태그
+	$("#"+divId).empty();
+	var preStr = "";
+	var postStr = "";
+	var str = "";
 	
-	var first = (parseInt((currentIndex-1)/10)*10)+1;
-	var last = (parseInt(totalIndexCount/10)==parseInt(currentIndex/10))? totalIndexCount%10: 10;
-	var prev = (parseInt((currentIndex-1)/10)*10)-1>0? (parseInt((currentIndex-1)/10)*10)-9: 1;
-	var next = (parseInt((currentIndex-1)/10)+1)*10+1<totalIndexCount? (parseInt((currentIndex-1)/10)+1)*10+1: totalIndexCount;
+	var first = (parseInt((currentIndex-1) / 10) * 10) + 1;
+	var last = (parseInt(totalIndexCount/10) == parseInt(currentIndex/10)) ? totalIndexCount%10 : 10;
+	var prev = (parseInt((currentIndex-1)/10)*10) - 9 > 0 ? (parseInt((currentIndex-1)/10)*10) - 9 : 1; 
+	var next = (parseInt((currentIndex-1)/10)+1) * 10 + 1 < totalIndexCount ? (parseInt((currentIndex-1)/10)+1) * 10 + 1 : totalIndexCount;
 	
-	if(totalIndexCount>10){	//전체 인덱스가 10이 넘을 경우 > 맨앞, 앞 태그 작성
-		preStr += "<a href='#this' class='pad_5' onclick='_movePage(1)'>[<<]</a>"
-			+ "<a href='#this' class='pad_5' onclick='_movePage("+prev+")'>[<]</a>";
+	if(totalIndexCount > 10){ //전체 인덱스가 10이 넘을 경우, 맨앞, 앞 태그 작성
+		preStr += "<a href='#this' class='pad_5' onclick='_movePage(1)'>[<<]</a>" +
+				"<a href='#this' class='pad_5' onclick='_movePage("+prev+")'>[<]</a>";
 	}
-	else if(totalIndexCount<=10 && totalIndexCount>1){	//전체 인덱스가 10보다 작을 경우 > 맨앞 태그 작성
+	else if(totalIndexCount <=10 && totalIndexCount > 1){ //전체 인덱스가 10보다 작을경우, 맨앞 태그 작성
 		preStr += "<a href='#this' class='pad_5' onclick='_movePage(1)'>[<<]</a>";
 	}
 	
-	if(totalIndexCount>10){	//전체 인덱스가 10이 넘을 경우 > 맨뒤, 뒤 태그 작성
-		postStr += "<a hef='#this' class='pad_5' onclick='_movePage("+next+")'>[>]</a>"
-			+ "<a href='#this' class='pad_5' onclick='_movePage("+totalIndexCount+")'>[>>]</a>";
+	if(totalIndexCount > 10){ //전체 인덱스가 10이 넘을 경우, 맨뒤, 뒤 태그 작성
+		postStr += "<a href='#this' class='pad_5' onclick='_movePage("+next+")'>[>]</a>" +
+					"<a href='#this' class='pad_5' onclick='_movePage("+totalIndexCount+")'>[>>]</a>";
 	}
-	else if(totalIndexCount<=10 && totalIndexCount>1){
-		postStr += "<a href='#this' class='pad_5' onclick='_mpvePage("+totalIndexCount+")'>[>>]</a>";
+	else if(totalIndexCount <=10 && totalIndexCount > 1){ //전체 인덱스가 10보다 작을경우, 맨뒤 태그 작성
+		postStr += "<a href='#this' class='pad_5' onclick='_movePage("+totalIndexCount+")'>[>>]</a>";
 	}
 	
 	for(var i=first; i<(first+last); i++){
-		if(i!=currentIndex){
+		if(i != currentIndex){
 			str += "<a href='#this' class='pad_5' onclick='_movePage("+i+")'>"+i+"</a>";
 		}
 		else{
-			str += "<b><a href='$this' class='pad_5' onclick='_movePage("+i+")'>"+i+"</a></b>";
+			str += "<strong><a href='#this' class='pad_5' onclick='_movePage("+i+")'>"+i+"</a></strong>";
 		}
 	}
-	$("#"+divId).append(preStr+str+postStr);
+	$("#"+divId).append(preStr + str + postStr);
 }
 
-function _movePage(value){ //페이징 태그를 눌렀을 경우 페이지를 이동하는 역할.
-	$("$"+gfv_pageIndex).val(value);
-	if(typeof(gfv_eventName)=="function"){
+function _movePage(value){
+	$("#"+gfv_pageIndex).val(value);
+	if(typeof(gfv_eventName) == "function"){
 		gfv_eventName(value);
 	}
-	else{
-		eval(gfv_eventName+"(value);");
+	else {
+		eval(gfv_eventName + "(value);");
 	}
-}
-
-function back(){
-	history.go(-1);
-}
-
-function getParameterByName(name){
-    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-        results = regex.exec(location.search);
-    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }

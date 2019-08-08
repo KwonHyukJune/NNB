@@ -6,15 +6,16 @@
 <select id="selectNoticeList" parameterType="hashMap" resultType="hashMap">
 <include refid="common.pagingPre"/> 
 <![CDATA[ 
+
 	SELECT 
-		ROW_NUMBER() OVER (ORDER BY NT_NUM ASC) RNUM,
+		ROW_NUMBER() OVER (ORDER BY NT_NUM DESC) RNUM,
 		NT_NUM, 
 		NT_TYPE, 
 		NT_TITLE, 
 		NT_DATE 
 	FROM 
 		NOTICE
- 		ORDER BY RNUM DESC
+
 	]]>
 <include refid="common.pagingPost"/> 
 </select>

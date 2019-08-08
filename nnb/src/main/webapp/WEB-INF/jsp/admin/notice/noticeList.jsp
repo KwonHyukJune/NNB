@@ -84,7 +84,7 @@ function fn_selectNoticeList(pageNo){
 	var comAjax = new ComAjax(); 
 	comAjax.setUrl("<c:url value='/admin/noticeList'/>"); 
 	comAjax.setCallback("fn_selectNoticeListCallback"); 
-	comAjax.addParam("PAGE_INDEX",pageNo); 
+	comAjax.addParam("PAGE_INDEX",$("#PAGE_INDEX").val()); 
 	comAjax.addParam("PAGE_ROW", 15); 
 	comAjax.ajax(); }
 

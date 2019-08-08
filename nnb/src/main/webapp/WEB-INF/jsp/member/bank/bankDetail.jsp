@@ -15,6 +15,8 @@ function pop(url){
 </head>
 <body>
 <%@ include file="/WEB-INF/include/header.jspf" %>
+
+
 <div class="bankview">
 
 	<div class="title">Á¦ÈÞÀºÇà</div>
@@ -62,5 +64,7 @@ function pop(url){
 <div>
 <%@ include file="/WEB-INF/include/footer.jspf" %>
 </div>
+
+
 </body>
 </html>
