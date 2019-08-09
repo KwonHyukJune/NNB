@@ -4,8 +4,8 @@
 
 <select id="selectAdminRoomList" resultType="hashMap" parameterType="hashMap" >
 <![CDATA[
-SELECT DISTINCT 
-BOARD_NUM,
+SELECT BOARD_NUM,
+	   B.ROOM_NUM,
        UPLOAD_DATE,
        MEM_ID,
        DESC_TITLE,
@@ -13,7 +13,7 @@ BOARD_NUM,
 FROM
        ROOM_BOARD B, ROOM_INFO1 I1, ROOM_INFO2 I2
 WHERE  B.ROOM_NUM = I2.ROOM_NUM
-AND B.ROOM_NUM = I1.ROOM_NUM
+AND    B.ROOM_NUM = I1.ROOM_NUM
 ]]>
 </select>
 

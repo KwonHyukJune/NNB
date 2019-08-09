@@ -5,6 +5,7 @@
 <title>1:1 문의 답변</title>
 <head>
 <%@ include file="/WEB-INF/include/include-header.jspf" %>
+<%@include file = "/WEB-INF/include/adminHeader.jspf" %>
 
 <script type="text/javascript">
 
@@ -94,5 +95,8 @@ function goPage1(num) {   // 취소
    
 
 <br>
+<div>
+<%@include file = "/WEB-INF/include/footer.jspf" %>
+</div>
 </body>
 </html>
