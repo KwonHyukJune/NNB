@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import ezen.nnb.admin.paging.Paging;
 import ezen.nnb.common.CommandMap;
 import ezen.nnb.member.service.IgnoreService;
 import ezen.nnb.member.service.RoommateService;
@@ -38,7 +37,6 @@ public class RoommateController {
 			throws Exception {
 		ModelAndView mv = new ModelAndView("/member/roommate/roommateList");
 		HttpSession session = request.getSession();
-		commandMap.put("id", session.getAttribute("MEM_ID"));
 		List<Map<String, Object>> searchRoommate = roommateService.searchRoommate(commandMap.getMap());
 		int Count = roommateService.countRoommate(commandMap.getMap());
 		
@@ -86,8 +84,7 @@ public class RoommateController {
 	@RequestMapping(value = "/roommate/detail")
 	public ModelAndView openRoommateDetail(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("/member/roommate/roommateDetail");
-		Map<String,Object>map=roommateService.openRoommateDetail(commandMap.getMap());
-		mv.addObject("mate",map);
+		roommateService.openRoommateDetail(commandMap.getMap());
 		return mv;
 	}
 
@@ -131,13 +128,11 @@ public class RoommateController {
 		ModelAndView mv = new ModelAndView();
 		HttpSession session = request.getSession();
 		
-		if (session.getAttribute("RECEIVER") != null) {
+	
 			commandMap.put("SENDER", session.getAttribute("MEM_ID"));
 			commandMap.put("MESSAGE_NUM", commandMap.get("MESSAGE_NUM"));
 			mv.setViewName("member/myPage/messageWrite");
-		} else {
-			mv.setViewName("redirect:/member/roommate/roommateDetail");
-		}
+	
 
 		return mv;
 	}
@@ -146,21 +141,18 @@ public class RoommateController {
 	public ModelAndView ignoreUser(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("redirect:/member/roommate/roommateDetail");
 		HttpSession session = request.getSession();
-		Map<String,Object>map=roommateService.openRoommateDetail(commandMap.getMap());
-		commandMap.put("IGNORE_MEM", session.getAttribute("MEM_ID"));
 		int check = ignoreService.checkIgnore(commandMap.getMap());
 		if (check == 0) {
 			ignoreService.insertIgnore(commandMap.getMap());
-			mv.addObject("mate",map);
+			commandMap.put("IGNORE_MEM", session.getAttribute("MEM_ID"));
+			commandMap.put("IGNORE_NUM", commandMap.get("IGNORE_NUM"));
 		}
-		
 		return mv;
 	}
 
 	@RequestMapping(value = "/roommate/ignoreUser")
 	public ModelAndView unIgnoreUser(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("redirect:/member/roommate/roommateDetail");
-		
 		int check = ignoreService.checkIgnore(commandMap.getMap());
 		if (check == 1) {
 			ignoreService.insertIgnore(commandMap.getMap());

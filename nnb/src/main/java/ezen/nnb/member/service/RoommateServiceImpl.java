@@ -22,7 +22,7 @@ public class RoommateServiceImpl implements RoommateService {
 	public Map<String, Object> openRoommateDetail(Map<String,Object>map) throws Exception {
 		return roommateDAO.openRoommatesDetail(map);
 	}
-
+  
 	@Override
 	public void registProfile(Map<String, Object> map) throws Exception {
 		roommateDAO.registMyProfile(map);
