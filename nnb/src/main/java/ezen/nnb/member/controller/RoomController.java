@@ -168,9 +168,9 @@ public class RoomController {
 	
 	@RequestMapping(value="/room/detail/lessorInfo")
 	public ModelAndView lessorInfo(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("search/lessor");
+		ModelAndView mv = new ModelAndView("/member/search/lessor");
 		Map<String,Object> map = roomService.selectLessorInfo(commandMap.getMap());
-		mv.addObject("map",map);
+		mv.addObject("lessor",map);
 		return mv;
 	}
 }

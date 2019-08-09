@@ -41,12 +41,12 @@ function openPopup(url) {
 <hr>
 <br/><br/><br/>
 
-<div class="selectNoticeist">
+<div class="selectReportRoomDetail">
 
 
-		<div class="noticeList">
+		<div class="reportRoomList">
 		   
-		   <div class="notice">      
+		   <div class="report">      
 			<ul>
 				<li>
 				${map.REPORT_ID}님이 신고하셨습니다.
@@ -60,6 +60,9 @@ function openPopup(url) {
 		      	</li>
 		      	<li>날짜  :     	
 		         ${map.REPORT_DATE}&nbsp;
+		         </li>
+		         <li>아이디  :     	
+		         ${map.REPORT_D_ID}&nbsp;
 		         </li>
 		         <li>    			        	
 		         <a href = javascript:openPopup("/nnb/admin/memberList")>매물번호  : ${map.REPORT_POST_NUM}&nbsp;</a> 
@@ -75,7 +78,7 @@ function openPopup(url) {
 		    <br/><br/><br/> 
 		   <form action="insertBan" method="post" id="frm" name="contents">     		  
 		    <a href="#" id="submit">확인</a>    
-		    <a href="#" onClick="goPage1(${map.REPORT_NUM})">목록으로</a>
+		   
 		   </form>
    		</div>	
 	</div>

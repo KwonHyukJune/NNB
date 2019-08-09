@@ -1,5 +1,7 @@
 package ezen.nnb.member.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -57,8 +59,52 @@ public class SearchRoomController {
 		String MEM_ID = (String)session.getAttribute("MEM_ID");
 		commandMap.put("MEM_ID",MEM_ID);
 		
+		if(commandMap.containsKey("ROOM_TYPE") && commandMap.get("ROOM_TYPE")!="") {
+			List<String> ROOM_TYPE = new ArrayList<String>();
+			String[] array = ((String) commandMap.get("ROOM_TYPE")).split(",");
+			for(int i=0; i<array.length; i++) {
+				ROOM_TYPE.add(array[i]);
+			}
+			commandMap.put("ROOM_TYPE", ROOM_TYPE);
+		}
+		
+		if(commandMap.containsKey("TRADE_TYPE") && commandMap.get("TRADE_TYPE")!="") {
+			List<String> TRADE_TYPE = new ArrayList<String>();
+			String[] array = ((String) commandMap.get("TRADE_TYPE")).split(",");
+			for(int i=0; i<array.length; i++) {
+				TRADE_TYPE.add(array[i]);
+			}
+			commandMap.put("TRADE_TYPE", TRADE_TYPE);
+		}
+		if(commandMap.containsKey("ROOM_FLOOR") && commandMap.get("ROOM_FLOOR")!="") {
+			List<String> ROOM_FLOOR = new ArrayList<String>();
+			String[] array = ((String) commandMap.get("ROOM_FLOOR")).split(",");
+			for(int i=0; i<array.length; i++) {
+				if(array[i].equals("7")) {
+					commandMap.put("ROOM_FLOOR7", array[i]);
+				}
+				ROOM_FLOOR.add(array[i]);
+			}
+			commandMap.put("ROOM_FLOOR", ROOM_FLOOR);
+		}
+		if(commandMap.containsKey("STRUCTURES") && commandMap.get("STRUCTURES")!="") {
+			List<String> STRUCTURES = new ArrayList<String>();
+			String[] array = ((String) commandMap.get("STRUCTURES")).split(",");
+			for(int i=0; i<array.length; i++) {
+				STRUCTURES.add(array[i]);
+			}
+			commandMap.put("STRUCTURES", STRUCTURES);
+		}
+		/*
+		 * if(commandMap.containsKey("OPTIONS")) { List<String> ROOM_TYPE = new
+		 * ArrayList<String>(); String[] array = ((String)
+		 * commandMap.get("OPTIONS")).split(","); for(int i=0; i<array.length; i++) {
+		 * ROOM_TYPE.add(array[i]); } commandMap.put("TRADE_TYPE", ROOM_TYPE); }
+		 */
+		
 		List<Map<String,Object>> favRoom=favoriteService.selectFavRoom(commandMap.getMap());
 		mv.addObject("favRoom",favRoom);
+		
 		List<Map<String,Object>> list=searchRoomService.selectRoomList(commandMap.getMap());
 		mv.addObject("list", list);
 		

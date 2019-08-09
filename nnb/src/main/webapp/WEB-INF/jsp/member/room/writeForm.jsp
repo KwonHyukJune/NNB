@@ -307,6 +307,8 @@ $(document).ready(function(){
 							<p class="hNdXGi">건물 층수 </p>
 							<select class="freEbZ hRFrgm" name="BUILDING_STORY" id="building_story">
 								<option>--건물 층수 선택--</option>
+								<option value="반지층">반지층</option>]
+								<option value="옥탑방">옥탑방</option>
 								<c:forEach var="i" begin="1" end="50">
 									<option value="${i}">${i}층</option>
 								</c:forEach>
@@ -481,11 +483,11 @@ $(document).ready(function(){
 						<th>구조</th>
 						<td class="cCUCai ">
 							<label class="hrokF cdcjQK">
-								<input class="fyqlMy cdcjQK" type="checkbox" class="STRUCTURES" value="1" name="STRUCTURES">
+								<input class="fyqlMy cdcjQK" type="checkbox" class="STRUCTURES" value="1" name="STRUCTURES" checked="true">
 								<p>복층</p>
 							</label>
 							<label class="hrokF cdcjQK">
-								<input class="fyqlMy cdcjQK" type="checkbox" class="STRUCTURES" value="2" name="STRUCTURES">
+								<input class="fyqlMy cdcjQK" type="checkbox" class="STRUCTURES" value="2" name="STRUCTURES" checked="true">
 								<p>1.5룸/주방분리형</p>
 							</label>
 						</td>
@@ -498,51 +500,51 @@ $(document).ready(function(){
 								<p>에어컨</p>
 							</label>
 							<label class="hrokF cdcjQK">
-								<input class="hrokF cdcjQK" type="checkbox" class="STRUCTURES" value="2" name="STRUCTURES">
+								<input class="hrokF cdcjQK" type="checkbox" class="STRUCTURES" value="2" name="OPTIONS">
 								<p>세탁기</p>
 							</label>
 							<label class="hrokF cdcjQK">
-								<input class="hrokF cdcjQK" type="checkbox" class="STRUCTURES" value="3" name="STRUCTURES">
+								<input class="hrokF cdcjQK" type="checkbox" class="STRUCTURES" value="3" name="OPTIONS">
 								<p>침대</p>
 							</label>
 							<label class="hrokF cdcjQK">
-								<input class="hrokF cdcjQK" type="checkbox" class="STRUCTURES" value="4" name="STRUCTURES">
+								<input class="hrokF cdcjQK" type="checkbox" class="STRUCTURES" value="4" name="OPTIONS">
 								<p>책상</p>
 							</label>
 							<label class="hrokF cdcjQK">
-								<input class="hrokF cdcjQK" type="checkbox" class="STRUCTURES" value="5" name="STRUCTURES">
+								<input class="hrokF cdcjQK" type="checkbox" class="STRUCTURES" value="5" name="OPTIONS">
 								<p>옷장</p>
 							</label>
 							<label class="hrokF cdcjQK">
-								<input class="hrokF cdcjQK" type="checkbox" class="STRUCTURES" value="6" name="STRUCTURES">
+								<input class="hrokF cdcjQK" type="checkbox" class="STRUCTURES" value="6" name="OPTIONS">
 								<p>TV</p>
 							</label>
 							<label class="hrokF cdcjQK">
-								<input class="hrokF cdcjQK" type="checkbox" class="STRUCTURES" value="7" name="STRUCTURES">
+								<input class="hrokF cdcjQK" type="checkbox" class="STRUCTURES" value="7" name="OPTIONS">
 								<p>신발장</p>
 							</label>
 							<label class="hrokF cdcjQK">
-								<input class="hrokF cdcjQK" type="checkbox" class="STRUCTURES" value="8" name="STRUCTURES">
+								<input class="hrokF cdcjQK" type="checkbox" class="STRUCTURES" value="8" name="OPTIONS">
 								<p>냉장고</p>
 							</label>
 							<label class="hrokF cdcjQK">
-								<input class="hrokF cdcjQK" type="checkbox" class="STRUCTURES" value="9" name="STRUCTURES">
+								<input class="hrokF cdcjQK" type="checkbox" class="STRUCTURES" value="9" name="OPTIONS">
 								<p>가스레인지</p>
 							</label>
 							<label class="hrokF cdcjQK">
-								<input class="hrokF cdcjQK" type="checkbox" class="STRUCTURES" value="10" name="STRUCTURES">
+								<input class="hrokF cdcjQK" type="checkbox" class="STRUCTURES" value="10" name="OPTIONS">
 								<p>인덕션</p>
 							</label>
 							<label class="hrokF cdcjQK">
-								<input class="hrokF cdcjQK" type="checkbox" class="STRUCTURES" value="11" name="STRUCTURES">
+								<input class="hrokF cdcjQK" type="checkbox" class="STRUCTURES" value="11" name="OPTIONS">
 								<p>전자레인지</p>
 							</label>
 							<label class="hrokF cdcjQK">
-								<input class="hrokF cdcjQK" type="checkbox" class="STRUCTURES" value="12" name="STRUCTURES">
+								<input class="hrokF cdcjQK" type="checkbox" class="STRUCTURES" value="12" name="OPTIONS">
 								<p>전자도어락</p>
 							</label>
 							<label class="hrokF cdcjQK">
-								<input class="hrokF cdcjQK" type="checkbox" class="STRUCTURES" value="13" name="STRUCTURES">
+								<input class="hrokF cdcjQK" type="checkbox" class="STRUCTURES" value="13" name="OPTIONS">
 								<p>비데</p>
 							</label>
 						</td>
@@ -652,6 +654,17 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
         level: 3 // 지도의 확대 레벨
     };
 var map = new daum.maps.Map(mapContainer, mapOption); //지도를 미리 생성
+
+//일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
+var mapTypeControl = new kakao.maps.MapTypeControl();
+
+// 지도에 컨트롤을 추가해야 지도위에 표시됩니다
+// kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
+map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
+
+// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
+var zoomControl = new kakao.maps.ZoomControl();
+map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 
 var geocoder = new daum.maps.services.Geocoder(); //주소-좌표 변환 객체를 생성
 //마커를 미리 생성

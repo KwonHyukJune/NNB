@@ -35,73 +35,27 @@ public class AdminMessageController {
 private AdminMessageService adminMessageService;
 
 @Resource(name="adminLoginService")
+
 private AdminLoginService adminLoginService;	
 
-public ModelAndView adMessageList(CommandMap commandMap,HttpServletRequest request)throws Exception {
-		
-if(request.getParameter("currentPage")==null || request.getParameter("currentPage").trim().isEmpty()
-				  || request.getParameter("currentPage").equals("0")) {
-			  currentPage=1;
-		  }else {
-			  currentPage=Integer.parseInt(request.getParameter("currentPage"));
-			  
-		  }
+	@RequestMapping(value="/admin/messageList")
+	public ModelAndView adMessageList(CommandMap commandMap,HttpServletRequest request)throws Exception {
 		ModelAndView mv=new ModelAndView();
 		List<Map<String,Object>>adminMessageList=adminMessageService.adminMessageList(commandMap.getMap());
-		
+    	mv.addObject("adminMessageList",adminMessageList);
+		mv.setViewName("admin/message/messageList");
+		return mv;
+    }
 
-		
-		isSearch=request.getParameter("isSearch");
-		  
-		if(isSearch !=null) {
-		  searchNum=Integer.parseInt(request.getParameter("searchNum"));
-		  isSearch=request.getParameter("isSearch");
-			  
-		  if(searchNum==1) {
-			  adminMessageList=adminMessageService.adminMessageSearchContent(isSearch);
-			  }if(searchNum==2) {
-				  adminMessageList=adminMessageService.adminMessageSearchTitle(isSearch);
-			  }  totalCount=adminMessageList.size();
-			  page=new Paging(currentPage,totalCount,blockCount,blockPage,"adminMessageList");
-			  pagingHtml=page.getPagingHtml().toString();
-				  
-			  int lastCount=totalCount;
-			  
-			  if(page.getEndCount()<totalCount)
-				  lastCount=page.getEndCount()+1;
-			  adminMessageList=adminMessageList.subList(page.getStartCount(),lastCount);
-			  
-			  mv.addObject("isSearch",isSearch);
-			  mv.addObject("searchNum",searchNum);
-			  mv.addObject("totalCount",totalCount);
-			  mv.addObject("pagingHtml",pagingHtml);
-			  mv.addObject("currentPage",currentPage);
-			  mv.addObject("adminMessageList",adminMessageList);
-			  mv.setViewName("admin/message/messageList");
-			  
-			  return mv;
-			 }else {
-			  totalCount=adminMessageList.size();
-			  page=new Paging(currentPage,totalCount,blockCount,blockPage,"adminMessageList");
-			  pagingHtml=page.getPagingHtml().toString();
-				  
-			  int lastCount=totalCount;
-				  
-			  if(page.getEndCount()<totalCount)
-				  lastCount=page.getEndCount()+1;
-			  adminMessageList=adminMessageList.subList(page.getStartCount(),lastCount);
-			  
-			  mv.addObject("isSearch",isSearch);
-			  mv.addObject("searchNum",searchNum);
-			  mv.addObject("totalCount",totalCount);
-			  mv.addObject("pagingHtml",pagingHtml);
-			  mv.addObject("currentPage",currentPage);
-			  mv.addObject("adminMessageList",adminMessageList);
-			  mv.setViewName("admin/message/messageList");
-				  
-			 return mv;
-		  }
+	@RequestMapping(value="/admin/messageDetail")
+	public ModelAndView adminMessageDetail(CommandMap commandMap) throws Exception {
+	   ModelAndView mv=new ModelAndView();
+	   Map<String,Object>map=adminMessageService.adminMessageDetail(commandMap.getMap());
+	   mv.addObject("map",map);
+	   mv.setViewName("admin/message/messageDetail");
+	   return mv;
 	}
+
 	@RequestMapping(value="/admin/messageWriteForm")
 	public ModelAndView adWriteForm()throws Exception{
 		ModelAndView mv=new ModelAndView();
@@ -112,13 +66,10 @@ if(request.getParameter("currentPage")==null || request.getParameter("currentPag
 	public ModelAndView adWrite(CommandMap commandMap,HttpServletRequest request,HttpServletResponse response)throws Exception{
 		ModelAndView mv=new ModelAndView();
 		HttpSession session=request.getSession();	
-		if (commandMap.getMap().get("SENDER")!=null){
 			commandMap.put("SENDER", session.getAttribute("ADMIN_ID"));
 			commandMap.put("MESSAGE_NUM", commandMap.get("MESSAGE_NUM"));			
 			mv.setViewName("redirect:/admin/message/messageList");
-		}else {
-			mv.setViewName("admin/message/messageWriteForm");
-			}
+	
 	
 		return mv;
 		

@@ -4,6 +4,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,15 +19,19 @@ public class RoommateInfoController {
 	private RoommateService roommateService;
 	
 	@RequestMapping(value="/myPage/myProfile")
-	public ModelAndView openRoommateDetail(CommandMap commandMap)throws Exception{
+	public ModelAndView openRoommateDetail(CommandMap commandMap,HttpServletRequest request)throws Exception{
 		ModelAndView mv=new ModelAndView("/member/myPage/myProfile");
+		HttpSession session= request.getSession();
+		String MEM_ID = (String)session.getAttribute("MEM_ID");
+		commandMap.put("MEM_ID",MEM_ID);
+		
 		Map<String,Object>map=roommateService.openRoommateDetail(commandMap.getMap());
 		mv.addObject("map",map);
 		return mv;
 	}
 	@RequestMapping(value="/myPage/registMyProfileForm")
 	public ModelAndView registProfileForm()throws Exception{
-		ModelAndView mv=new ModelAndView("/member/myPage/myPageInfoForm");
+		ModelAndView mv=new ModelAndView("/member/myPage/registMyProfileForm");
 		return mv;
 	}
 	@RequestMapping(value="/myPage/registMyProfile")

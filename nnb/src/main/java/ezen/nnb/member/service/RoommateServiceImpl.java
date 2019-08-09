@@ -20,9 +20,9 @@ public class RoommateServiceImpl implements RoommateService {
 	
 	@Override
 	public Map<String, Object> openRoommateDetail(Map<String,Object>map) throws Exception {
-		return roommateDAO.myProfile(map);
+		return roommateDAO.openRoommatesDetail(map);
 	}
-
+  
 	@Override
 	public void registProfile(Map<String, Object> map) throws Exception {
 		roommateDAO.registMyProfile(map);
@@ -73,17 +73,6 @@ public class RoommateServiceImpl implements RoommateService {
 	@Override
 	public void messageWrite(Map<String, Object> map) throws Exception {
 		roommateDAO.messageWrite(map);
-		
-	}
-
-	@Override
-	public void ignoreUser(Map<String, Object> map) throws Exception {
-		roommateDAO.ignoreUser(map);
-	}
-
-	@Override
-	public void unIgnoreUser(Map<String, Object> map) throws Exception {
-		roommateDAO.unIgnoreUser(map);
 		
 	}
 

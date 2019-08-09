@@ -34,38 +34,6 @@ function showPopup() {
 <hr>
 <br/><br/><br/>
 
-
-<!-- 테스트용 세팅 -->
-<%@ page import="java.util.HashMap" %>
-<%@ page import="java.util.Map" %>
-<%@ page import="java.util.List" %>
-<%@ page import="java.util.ArrayList" %>
-<%
-   Map<String,Object> room1 = new HashMap<String,Object>();
-	room1.put("ROOM_NUM","1");
-	room1.put("BOARD_NUM","18293123");
-	room1.put("UPLOAD_DATE","2019-07-25");
-	room1.put("MEM_ID","id4");
-	room1.put("ADDRESS1","지구 서울시 강남구 ");
-	room1.put("ADDRESS2","어딘가에 있는 1004동 2호");
-	room1.put("ROOM_TYPE","원룸");
-	room1.put("TRADE_TYPE","전세");
-	room1.put("JEONSE","3000");
-	room1.put("ROOM_FLOOR","2");
-	room1.put("REAL_SIZE","20");
-	room1.put("DESC_TITLE","이집은 강남에 있었던거 같다");
-	room1.put("TRADE_STATUS","광고 중"); 	
-   
-   List<Map<String,Object>>roomList = new ArrayList<Map<String,Object>>();
-   roomList.add(room1);
-
-
-   
- 
-   request.setAttribute("room",room1);
-%>
-<!-- 테스트용 세팅 끝 -->
-
 <div class="selectRoomList">
 
 
