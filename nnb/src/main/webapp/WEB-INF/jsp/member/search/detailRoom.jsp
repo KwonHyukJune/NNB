@@ -1,14 +1,19 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <%@ include file="/WEB-INF/include/include-header.jspf" %>
+<div style="display:none;">
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>â€‹
+</div>
+<fmt:parseDate var="dateString" value="${room.MOVE_IN_DATE}" pattern="yyyy-MM-dd"/>
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/search.css'/>"/>
 <script type="text/javascript">
-/* convert(m): Æò¼ö<->Á¦°ö¹ÌÅÍ º¯È¯ */
-/* report(): ½Å°íÇÏ±â »õÃ¢À¸·Î */
-/* readMore() : »ó¼¼¼³¸í ´õº¸±â */
+/* convert(m): í‰ìˆ˜<->ì œê³±ë¯¸í„° ë³€í™˜ */
+/* openlessorInfo(id): ì„ëŒ€ì¸ ì •ë³´ë³´ê¸° ìƒˆì°½ìœ¼ë¡œ /room/detail/lessorInfo */
+/* report(): ì‹ ê³ í•˜ê¸° ìƒˆì°½ìœ¼ë¡œ */
+/* readMore() : ìƒì„¸ì„¤ëª… ë”ë³´ê¸° */
 	function insertFav(num){
 		var comAjax = new ComAjax();
 		comAjax.setUrl("<c:url value='/search/detail/addFavRoom'/>");
@@ -24,220 +29,317 @@
 </script>
 </head>
 <body>
+<!-- ì „ì²´ -->
+<div class="detailRoom dQBfA">
+<!-- í—¤ë” -->
 <%@ include file="/WEB-INF/include/header.jspf" %>
 
-<div class="detailRoom">
+<!-- ì›ë£¸,ì›”ì„¸,í‰ìˆ˜,ì°œ,ì‹ ê³ ,ì„ëŒ€ì¸ì •ë³´ -->
+	<div id="detail1" class="kZTRnS">
+		<div class="kBQneM">
+			<!-- ì •ë³´ -->
+			<ul class="ixyaqW">
+				<li class="UuNuJ">
+					<p class="hzbdBs"><span>${room.ROOM_TYPE}</span></p>
+					<div class="dUILvV">
+						<h1 class="dUuerR">
+							${room.TRADE_TYPE} 
+							<c:if test="${room.TRADE_TYPE=='ì›”ì„¸'}">
+							${room.MONTHLY_DEPOSIT}/${room.MONTHLY_PAYMENT}
+							</c:if>
+							<c:if test="${room.TRADE_TYPE=='ì „ì„¸'}">
+							${room.JEONSE}
+							</c:if>
+							<span class="gYSPds">ë§Œì›</span>
+						</h1>
+					</div>
+				</li>
+				<li class="cqojtY">
+					<p class="hzbdBs">ì „ìš©ë©´ì </p>
+					<div class="dUILvV">
+						<h1 class="dUuerR">
+							${room.REAL_SIZE}ã¡
+						</h1>
+						<button class="ktfeIl" type="button" onclick="convert($(this));">
+							<svg width="11" height="23" viewBox="0 0 11 23"><g fill="#222" fill-rule="evenodd" stroke="#222" stroke-width=".2"><path d="M8.066 8.378L6.955 9.624a.335.335 0 0 0 0 .436.26.26 0 0 0 .194.09c.07 0 .14-.03.194-.09L8.92 8.293c.054-.06.08-.14.08-.22a.32.32 0 0 0-.094-.232l-1.563-1.75a.255.255 0 0 0-.388 0 .334.334 0 0 0 0 .435l1.102 1.236h-5.49c-1.415 0-2.567 1.3-2.567 2.9v1.03c0 .17.123.308.275.308.152 0 .275-.138.275-.308v-1.03c0-1.259.905-2.284 2.018-2.284h5.498zM.934 14.622l1.11-1.246a.335.335 0 0 0 0-.436.26.26 0 0 0-.193-.09c-.07 0-.141.03-.195.09L.08 14.707a.325.325 0 0 0-.08.22.32.32 0 0 0 .093.232l1.563 1.75c.108.121.282.121.389 0a.334.334 0 0 0 0-.435L.942 15.238h5.49c1.416 0 2.567-1.3 2.567-2.9v-1.03c0-.17-.123-.308-.274-.308-.153 0-.275.138-.275.308v1.03c0 1.259-.905 2.284-2.018 2.284H.934z"></path></g></svg>
+							<span></span>
+						</button>
+					</div>
+				</li>
+				<li class="byeNFK">
+					<div style="float:left;">
+						<p class="hhDakc">ì„ëŒ€ì¸</p>
+						<p class="gTIMxh">${room.MEM_ID}</p>
+					</div>
+					<button class="fEkbZe" onclick="openLessorInfo(${room.MEM_ID});">
+						<svg width="18" height="18" viewBox="0 0 18 18"><path fill="#222" fill-rule="evenodd" d="M4.324.404c.328.457.689.979 1.081 1.565.393.586.818 1.236 1.275 1.95.117.188.167.4.15.634a1.834 1.834 0 0 1-.256.756c-.058.117-.158.304-.299.562L5.73 6.873c.247.352.56.744.94 1.178.382.433.824.902 1.328 1.406.516.516.987.964 1.415 1.345.428.38.812.694 1.151.94.399-.234.73-.425.994-.571.263-.147.454-.25.57-.308.142-.082.285-.143.432-.184.146-.041.284-.062.413-.062a1.066 1.066 0 0 1 .545.14c.527.317 1.084.672 1.67 1.064.585.393 1.212.824 1.88 1.292.118.082.211.188.282.317.07.129.117.27.14.422.012.164-.006.33-.052.5-.047.17-.13.343-.247.52a2.446 2.446 0 0 1-.21.298 19.35 19.35 0 0 1-.335.404c-.117.153-.269.325-.457.519-.187.193-.41.407-.668.641-.246.235-.471.41-.676.528-.205.117-.384.175-.536.175h-.036a6.392 6.392 0 0 1-1.916-.395 11.957 11.957 0 0 1-2.109-1.028 19.487 19.487 0 0 1-2.32-1.67 38.968 38.968 0 0 1-2.532-2.303A34.717 34.717 0 0 1 3.085 9.51a20.91 20.91 0 0 1-1.67-2.32A11.08 11.08 0 0 1 .387 5.07C.152 4.397.023 3.761 0 3.164 0 3 .059 2.815.176 2.61c.117-.205.293-.436.527-.694.235-.258.445-.478.633-.66.187-.18.357-.33.51-.447.14-.106.275-.205.404-.3.129-.093.24-.175.334-.245.129-.094.264-.161.404-.202C3.128.02 3.281 0 3.445 0c.188 0 .355.032.501.097a.947.947 0 0 1 .378.307zm-1.145.694a8.368 8.368 0 0 0-.688.538c-.223.194-.44.397-.652.609-.212.211-.38.394-.503.546a1.349 1.349 0 0 0-.238.389c.023.529.147 1.093.37 1.693.224.6.547 1.238.97 1.914.424.676.947 1.388 1.57 2.135a35.836 35.836 0 0 0 2.17 2.355 35.836 35.836 0 0 0 2.355 2.17 19.601 19.601 0 0 0 2.135 1.57c.676.423 1.317.746 1.923.97a6.12 6.12 0 0 0 1.702.388c.082-.035.2-.118.353-.247.153-.13.335-.3.547-.512.212-.211.411-.432.6-.661.188-.23.37-.462.547-.697a.417.417 0 0 0 .07-.132.19.19 0 0 0 0-.115 71.472 71.472 0 0 0-1.879-1.288c-.57-.376-1.085-.711-1.543-1.005-.047 0-.1.009-.159.026a1.231 1.231 0 0 0-.194.08c-.094.058-.27.158-.53.3l-1.005.546-.582.353-.582-.388c-.377-.259-.791-.59-1.244-.997-.453-.405-.95-.879-1.49-1.42a40.393 40.393 0 0 1-1.394-1.49c-.4-.453-.73-.868-.988-1.244l-.423-.547.352-.617a101.22 101.22 0 0 1 .847-1.535c.035-.07.062-.135.08-.194a.559.559 0 0 0 .026-.159c-.412-.647-.803-1.252-1.173-1.817a81.447 81.447 0 0 0-1.067-1.588h-.036a.48.48 0 0 0-.132.018.407.407 0 0 0-.115.053z"></path></svg>
+						<span>ì—°ë½ì²˜ë³´ê¸°</span>
+					</button>
+				</li>
+			</ul>
+			<div class="bbfToB">
+				<p class="dojagi">
+					<!-- ì°œ ì•„ì´ì½˜. ë¹¨ê°›ê²Œ í•˜ë ¤ë©´ path fill, stroke ë¥¼ #F63C4Aìœ¼ë¡œ -->
+					<svg width="23" height="22" viewBox="0 0 23 22"><path fill="none" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.5 19c.92-.7 6.89-5.628 8.41-7.623.877-1.154 1.09-2.17 1.09-3.358C21 5.247 18.776 3 16.033 3 13.32 3 11.5 5.862 11.5 5.862S9.68 3 6.967 3C4.224 3 2 5.247 2 8.019c0 1.187.213 2.204 1.09 3.358C4.61 13.372 10.58 18.3 11.5 19z"></path></svg>
+					${room.FAV_COUNT}
+				</p>
+				<p class="fEBzAW">â€¢</p>
+				<button type="button" class="lhWOpc">
+					<svg width="17" height="18" viewBox="0 0 17 18"><g fill="none" fill-rule="evenodd"><path stroke-width="1.2" d="M8.6.6h1v1.8h-1zM15.207 2.934l.707.707-1.273 1.273-.707-.707zM1.934 2.793l.707-.707 1.273 1.273-.707.707z"></path><path d="M3.5 17.5h10V11A4.5 4.5 0 0 0 9 6.5H8A4.5 4.5 0 0 0 3.5 11v6.5z"></path><path stroke-width="1.2" d="M.6 17.6h15.8v1H.6z"></path></g></svg>
+					<span>ì‹ ê³ í•˜ê¸°</span>
+				</button>
+			</div>
+		</div>
+	</div>
+	
+	<!-- ìƒì„¸ì •ë³´ í‘œ. ì¸µìˆ˜, ë©´ì , ë‚œë°©, ì˜µì…˜, ... -->
+	<div id="detail2" class="kZTRnS">
+		<div class="kBQneM">
+			<ul class="iuNQqL">
+				<li class="gWdVQs">
+					<p class="gPsGgb">í•´ë‹¹ì¸µ/ê±´ë¬¼ì¸µ</p>
+					<div class="gbAeEp">${room.ROOM_FLOOR}ì¸µ/${room.BUILDING_STORY}ì¸µ</div>
+				</li>
+				<li class="gWdVQs">
+					<p class="gPsGgb">ì „ìš©/ê³µê¸‰ë©´ì </p>
+					<div class="gbAeEp">
+						<span>${room.REAL_SIZE}/${room.SUPPLY_SIZE}m2</span>
+						<button class="bHPFKV">
+							<svg width="11" height="23" viewBox="0 0 11 23"><g fill="#222" fill-rule="evenodd" stroke="#222" stroke-width=".2"><path d="M8.066 8.378L6.955 9.624a.335.335 0 0 0 0 .436.26.26 0 0 0 .194.09c.07 0 .14-.03.194-.09L8.92 8.293c.054-.06.08-.14.08-.22a.32.32 0 0 0-.094-.232l-1.563-1.75a.255.255 0 0 0-.388 0 .334.334 0 0 0 0 .435l1.102 1.236h-5.49c-1.415 0-2.567 1.3-2.567 2.9v1.03c0 .17.123.308.275.308.152 0 .275-.138.275-.308v-1.03c0-1.259.905-2.284 2.018-2.284h5.498zM.934 14.622l1.11-1.246a.335.335 0 0 0 0-.436.26.26 0 0 0-.193-.09c-.07 0-.141.03-.195.09L.08 14.707a.325.325 0 0 0-.08.22.32.32 0 0 0 .093.232l1.563 1.75c.108.121.282.121.389 0a.334.334 0 0 0 0-.435L.942 15.238h5.49c1.416 0 2.567-1.3 2.567-2.9v-1.03c0-.17-.123-.308-.274-.308-.153 0-.275.138-.275.308v1.03c0 1.259-.905 2.284-2.018 2.284H.934z"></path></g></svg>
+							<span></span>
+						</button>
+					</div>
+				</li>
+				<li class="gWdVQs">
+					<p class="gPsGgb">ë‚œë°©ì¢…ë¥˜</p>
+					<div class="gbAeEp">${room.HEATING_SYSTEM}</div>
+				</li>
+				<li class="gWdVQs">
+					<p class="gPsGgb">ë¹ŒíŠ¸ì¸</p>
+					<div class="gbAeEp">
+						<c:if test="${room.BUILT_IN=='1'}">ìˆìŒ</c:if>
+						<c:if test="${room.BUILT_IN=='0'}">ì—†ìŒ</c:if>
+					</div>
+				</li>
+				<li class="gWdVQs">
+					<p class="gPsGgb">ì—˜ë¦¬ë² ì´í„°</p>
+					<div class="gbAeEp">
+						<c:if test="${room.ELEVATOR}">ìˆìŒ</c:if>
+						<c:if test="${room.ELEVATOR}">ì—†ìŒ</c:if>
+					</div>
+				</li>
+				<li class="gWdVQs">
+					<p class="gPsGgb">ë°˜ë ¤ë™ë¬¼</p>
+					<div class="gbAeEp">
+						<c:if test="${room.PET}">ê°€ëŠ¥</c:if>
+						<c:if test="${room.PET}">ë¶ˆê°€ëŠ¥</c:if>					
+					</div>
+				</li>
+				<li class="gWdVQs">
+					<p class="gPsGgb">ë² ë€ë‹¤/ë°œì½”ë‹ˆ</p>
+					<div class="gbAeEp">
+						<c:if test="${room.BALCONY}">ìˆìŒ</c:if>
+						<c:if test="${room.BALCONY}">ì—†ìŒ</c:if>					
+					</div>
+				</li>
+				<li class="gWdVQs">
+					<p class="gPsGgb">ì „ì„¸ìê¸ˆëŒ€ì¶œ</p>
+					<div class="gbAeEp">
+						<c:if test="${room.LOAN_ACCESS}">ê°€ëŠ¥</c:if>
+						<c:if test="${room.LOAN_ACCESS}">ë¶ˆê°€ëŠ¥</c:if>					
+					</div>
+				</li>
+				<li class="gWdVQs">
+					<p class="gPsGgb">ì…ì£¼ê°€ëŠ¥ì¼</p>
+					<div class="gbAeEp"><fmt:formatDate value="${dateString}" pattern="yyyy-MM-dd"/></div>
+				</li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+		</div>
+	</div>
+	
+	<!-- ì´ë¯¸ì§€  -->
+	<div class="kZTRnS">
+		<div id="image" class="kBQneM">
+			<div class="fQSDcO">
+			<c:forEach var="file" items="${list}" varStatus="i">
+				<c:if test="${i.index==0}">
+					<div class="URMBL">
+						<img src="<c:url value='/roomImages/${file.STD_NAME}'/>" onclick="popup(${file.STD_NAME})">
+					</div>
+				</c:if>
+				<c:if test="${i.index>0 && i.index<5}">
+					<div class="fGrzEs">
+						<img src="<c:url value='/roomImages/${file.STD_NAME}'/>" onclick="popup(${file.STD_NAME})">
+					</div>
+				</c:if>
+			</c:forEach>
+			</div>
+		</div>
+	</div>
+	
+	<!-- ì„¤ëª… -->
+	<div class="kZTRnS">
+		<div id="description" class="kBQneM">
+			<div class="kVQrqD">
+				<h1 class="eRkCVv">${room.DESC_TITLE}</h1>
+				<div class="cDEjhR" style="height:130px;">
+					<div>${room.DESC_DETAIL}</div>
+				</div>
+				<button class="jQYbpN" type="button" onclick="readMore();">
+					ìƒì„¸ì„¤ëª… ë”ë³´ê¸°
+					<!-- ì ‘ê¸°ëŠ” path-dë¥¼ M2 9l6-6 6 6 ë¡œ -->
+					<svg width="16" height="12" viewBox="0 0 16 12"><path fill="none" fill-rule="evenodd" stroke="#1476FC" d="M2 3l6 6 6-6"></path></svg>
+				</button>
+			</div>
+		</div>
+	</div>
+	
+	<!-- ë¶„ì„ -->
 
-<div id="detail">
-	<div id="detail1">
-		<div>
-			<div>${room.ROOM_TYPE}</div>
-			<c:if test="${room.TRADE_TYPE=='¿ù¼¼'}">
-			<div>${room.TRADE_TYPE} ${room.MONTHLY_DEPOSIT}/${room.MONTHLY_PAYMENT}</div>
-			</c:if>
-			<c:if test="${room.TRADE_TYPE=='Àü¼¼'}">
-			<div>${room.TRADE_TYPE} ${room.JEONSE}</div>
-			</c:if>
-			<div>¸¸¿ø</div>
-		</div>
-		<div>
-			<div>Àü¿ë¸éÀû</div>
-			<div>${room.REAL_SIZE}m2</div><button onclick="convert(${room.REAL_SIZE});"><->Æò</button>
-		</div>
-		<div>
-			<div>ÀÓ´ëÀÎ</div>
-			<div>${room.MEM_ID}</div>
-			<a href="<c:url value='/room/detail/lessorInfo?MEM_ID=${room.MEM_ID}'/>" class="btn" >ÀÓ´ëÀÎ Á¤º¸ º¸±â</a>
-		</div>
-	</div>
-	
-	<div id="action">
-		<div>
-			<c:if test="${room.check=='0'}">
-			<div class="insertFav" onclick="insertFav(${room.ROOM_NUM});">
-			</div>
-			</c:if>
-			<c:if test="${room.check=='1'}">
-			<div class="deleteFav" onclick="deleteFav(${room.ROOM_NUM});">
-			</div>
-			</c:if>
-		</div>
-		<div>${room.FAV_COUNT}</div>
-		<div>
-			<a href="#" class="btn" onclick="report(${room.ROOM_NUM});">½Å°íÇÏ±â</a>
-		</div>	
-	</div>
-	
-	<div id="detail2">
-		<div>
-			<div>ÇØ´çÃş/°Ç¹°Ãş</div>
-			<div>${room.ROOM_FLOOR}Ãş/${room.BUILDING_STORY}Ãş</div>
-		</div>
-		<div>
-			<div>Àü¿ë/°ø±Ş¸éÀû</div>
-			<div>${room.REAL_SIZE}/${room.SUPPLY_SIZE}m2<button onclick="convert(${room.REAL_SIZE},${room.SUPPLY_SIZE})"><->Æò</button></div>
-		</div>
-		<div>
-			<div>³­¹æÁ¾·ù</div>
-			<div>${room.HEATING_SYSTEM}</div>
-		</div>
-		<div>
-			<div>ºôÆ®ÀÎ</div>
-			<div>
-				<c:if test="${room.BUILT_IN=='1'}">ÀÖÀ½</c:if>
-				<c:if test="${room.BUILT_IN=='0'}">¾øÀ½</c:if>
+	<div id="analysis">
+		<a class="styled__HiddenLink-sc-3pld98-0 kztjpN"></a>
+		<div id="tab" class="eQtsIB">
+			<div class="iMVDBW">
+				<a href="#price" class="tab jClTEN">ê°€ê²©ì •ë³´</a>
+				<a href="#option" class="tab jClTEN">ì˜µì…˜</a>
+				<a href="#location" class="tab jClTEN">ìœ„ì¹˜</a>
 			</div>
 		</div>
-		<div>
-			<div>¿¤¸®º£ÀÌÅÍ</div>
-			<div>
-				<c:if test="${room.ELEVATOR}">ÀÖÀ½</c:if>
-				<c:if test="${room.ELEVATOR}">¾øÀ½</c:if>
+		
+		<div id="price" class="kZTRnS">
+			<div class="jFMhNO">
+				<h1 class="GYLAC">ê°€ê²©ì •ë³´</h1>
+				<table class="iSPaSs">
+					<colgroup><col width="25%"><col width="25%"><col width="25%"><col width="25%"></colgroup>
+					
+					<thead>
+						<tr>
+							<th>ì›”ì„¸</th>
+							<th>ì „ì„¸</th>
+							<th>ê´€ë¦¬ë¹„</th>
+							<th>ì£¼ì°¨ë¹„</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><p>${room.MONTHLY_DEPOSIT}/${room.MONTHLY_PAYMENT}ë§Œ ì›</p></td>
+							<td><p>
+								${room.JEONSE}<c:if test="${room.JEONSE==null || room.JEONSE==''}">-</c:if>
+							</p></td>
+							<td><p>
+								<c:if test="${room.UTILITY_PRICE==null}">
+									ì—†ìŒ
+								</c:if>
+								<c:if test="${room.UTILITY_PRICE!=null}">
+									${room.UTILITY_PRICE}ë§Œ ì›
+									<script type="text/javascript">
+										var utility = "${room.UTILITY_TYPE}";
+										document.write("("+utility.replace('1','ì¸í„°ë„·')
+												.replace('2','ìœ ì„ TV')
+												.replace('3','ì²­ì†Œë¹„')
+												.replace('4','ìˆ˜ë„ì„¸')
+												.replace('5','ë„ì‹œê°€ìŠ¤')
+												.replace('6','ì „ê¸°ì„¸')
+												.replace('7','ê¸°íƒ€')
+												+")");
+									</script>
+								</c:if>
+							</p></td>
+							<td><p>
+								<c:if test="${room.UTILITY_PRICE==null}">
+									ì—†ìŒ
+								</c:if>
+								<c:if test="${room.UTILITY_PRICE!=null}">
+									${room.PARKING_BILL}ë§Œ ì›
+								</c:if>
+							</p></td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="boQZaR">
+					<p>í•œë‹¬ ìƒí™œë¹„</p>
+					<div>
+						<script type="text/javascript">
+							var monthly = Number("${room.MONTHLY_PAYMENT}");
+							var utility = Number("${room.UTILITY_PRICE}");
+							var park = Number("${room.PARKING_BILL}");
+							document.write(monthly+utility+park+"ë§Œ ì› + Î±");
+						</script>
+						<span>
+							<script type="text/javascript">
+								var monthly = Number("${room.MONTHLY_PAYMENT}");
+								var utility = Number("${room.UTILITY_PRICE}");
+								var park = Number("${room.PARKING_BILL}");
+								var str = "(";
+								if(monthly!=0){
+									str = str+"ì›”ì„¸";
+									if(utility!=0 || park!=0){
+										str = str+"+";
+									}
+								}
+								if(utility!=0){
+									str = str+"ê´€ë¦¬ë¹„";
+									if(park!=0){
+										str = str+"+";
+									}
+								}
+								if(park!=0){
+									str = str+"ì£¼ì°¨ë¹„";
+								}
+								str = str+")";
+								document.write(str);
+							</script>
+						</span>
+					</div>
+				</div>
 			</div>
 		</div>
-		<div>
-			<div>¹İ·Áµ¿¹°</div>
-			<div>
-				<c:if test="${room.PET}">°¡´É</c:if>
-				<c:if test="${room.PET}">ºÒ°¡´É</c:if>
-			</div>
-		</div>
-		<div>
-			<div>º£¶õ´Ù/¹ßÄÚ´Ï</div>
-			<div>
-				<c:if test="${room.BALCONY}">ÀÖÀ½</c:if>
-				<c:if test="${room.BALCONY}">¾øÀ½</c:if>
-			</div>
-		</div>
-		<div>
-			<div>Àü¼¼ÀÚ±İ´ëÃâ</div>
-			<div>
-				<c:if test="${room.LOAN_ACCESS}">°¡´É</c:if>
-				<c:if test="${room.LOAN_ACCESS}">ºÒ°¡´É</c:if>
-			</div>
-		</div>
-		<div>
-			<div>ÀÔÁÖ°¡´ÉÀÏ</div>
-			<div>${room.MOVE_IN_DATE}</div>
-		</div>
-	</div>
-	
-	<div id="image">
-		<c:forEach var="file" items="${fileList}">
-			<img src="<c:url value='/files/${file.STD_NAME}'/>" onclick="popup(${file.STD_NAME})">
-		</c:forEach>
-	</div>
-	
-	<div id="description">
-		<div>${room.DESC_TITLE}</div>
-		<div>${room.DESC_DETAIL}</div>
-		<div onclick="readMore();">»ó¼¼¼³¸í ´õº¸±â</div>
-	</div>
-</div>
-
-<div id="analysis">
-	<div id="tab">
-		<a href="#price" class="tab">°¡°İÁ¤º¸</a>
-		<a href="#option" class="tab">¿É¼Ç</a>
-		<a href="#location" class="tab">À§Ä¡</a>
-	</div>
-	
-	<div id="price">
-		<div>°¡°İÁ¤º¸</div>
-		<div class="table">
-			<div class="thead">
-				<div>¿ù¼¼</div>
-				<div>Àü¼¼</div>
-				<div>°ü¸®ºñ</div>
-				<div>ÁÖÂ÷ºñ</div>
-			</div>
-			<div class="tbody">
-				<div>${room.MONTHLY_DEPOSIT}/${room.MONTHLY_PAYMENT}¸¸ ¿ø</div>
-				<div>${room.JEONSE}<c:if test="${room.JEONSE==null || room.JEONSE==''}">-</c:if></div>
-				<div>
-					${room.UTILITY_PRICE}¸¸ ¿ø<br>
+		
+		<!-- ì˜µì…˜ -->
+		<div id="option" class="kZTRnS">
+			<div class="jFMhNO kBQneM">
+				<h1 class="lnMkbZ ">ì˜µì…˜</h1>
+				<div class="dDctva">
 					<script type="text/javascript">
-						var utility = "${room.UTILITY_TYPE}";
-						document.write("("+utility.replace('1','ÀÎÅÍ³İ')
-								.replace('2','À¯¼±TV')
-								.replace('3','Ã»¼Òºñ')
-								.replace('4','¼öµµ¼¼')
-								.replace('5','µµ½Ã°¡½º')
-								.replace('6','Àü±â¼¼')
-								.replace('7','±âÅ¸')
-								+")");
+						var option = "${room.OPTIONS}";
+						option = option.replace('1','ì—ì–´ì»¨')
+							.replace('2','"ì„¸íƒê¸°"')
+							.replace('3','"ì¹¨ëŒ€"')
+							.replace('4','"ì±…ìƒ"')
+							.replace('5','"ì˜·ì¥"')
+							.replace('6','"TV"')
+							.replace('7','"ì‹ ë°œì¥"')
+							.replace('8','"ëƒ‰ì¥ê³ "')
+							.replace('9','"ê°€ìŠ¤ë ˆì¸ì§€"')
+							.replace('10','"ì¸ë•ì…˜"')
+							.replace('11','"ì „ìë ˆì¸ì§€"')
+							.replace('12','"ì „ìë„ì–´ë½"')
+							.replace('13','"ë¹„ë°"');
+						option = eval("["+option+"]");
+						for(var i=0;i<option.length;i++){
+							document.write("<div class='gqtsIc'><p>"+option[i]+"</p></div>");
+						}
+						if(option.length==0){
+							document.write("<span>ì˜µì…˜ì´ ì—†ìŠµë‹ˆë‹¤.</span>");
+						}
 					</script>
 				</div>
-				<div>${room.PARKING_BILL}¸¸ ¿ø</div>
 			</div>
-			<div>
-				<span>ÇÑ´Ş »ıÈ°ºñ</span>
-				<span>
-					<script type="text/javascript">
-						var monthly = Number("${room.MONTHLY_PAYMENT}");
-						var utility = Number("${room.UTILITY_PRICE}");
-						var park = Number("${room.PARKING_BILL}");
-						document.write(monthly+utility+park+"¸¸ ¿ø+");
-					</script>
-				</span>
-				<span>
-					<script type="text/javascript">
-						var monthly = Number("${room.MONTHLY_PAYMENT}");
-						var utility = Number("${room.UTILITY_PRICE}");
-						var park = Number("${room.PARKING_BILL}");
-						var str = "(";
-						if(monthly!=0){
-							str = str+"¿ù¼¼";
-							if(utility!=0 || park!=0){
-								str = str+"+";
-							}
-						}
-						if(utility!=0){
-							str = str+"°ü¸®ºñ";
-							if(park!=0){
-								str = str+"+";
-							}
-						}
-						if(park!=0){
-							str = str+"ÁÖÂ÷ºñ";
-						}
-						str = str+")";
-						document.write(str);
-					</script>
-				</span>
+		</div>
+		
+		<!-- ìœ„ì¹˜ -->
+		<div id="location" class="kZTRnS ">
+			<div class="jFMhNO kBQneM">
+				<h1 class="fIqmuM">ìœ„ì¹˜</h1>
+				<p class="hwnvlX">${room.ADDRESS1}</p>
+				<!-- ì§€ë„ ì˜ì—­ -->
+				<div class="jdAEqt" id="map">ì§€ë„ ì˜ì—­</div>
 			</div>
 		</div>
 	</div>
-	
-	<div id="option">
-		<div>¿É¼Ç</div>
-		<script type="text/javascript">
-			var option = "${room.OPTIONS}";
-			option = option.replace('1','¿¡¾îÄÁ')
-				.replace('2','"¼¼Å¹±â"')
-				.replace('3','"Ä§´ë"')
-				.replace('4','"Ã¥»ó"')
-				.replace('5','"¿ÊÀå"')
-				.replace('6','"TV"')
-				.replace('7','"½Å¹ßÀå"')
-				.replace('8','"³ÃÀå°í"')
-				.replace('9','"°¡½º·¹ÀÎÁö"')
-				.replace('10','"ÀÎ´ö¼Ç"')
-				.replace('11','"ÀüÀÚ·¹ÀÎÁö"')
-				.replace('12','"ÀüÀÚµµ¾î¶ô"')
-				.replace('13','"ºñµ¥"');
-			option = eval("["+option+"]");
-			for(var i=0;i<option.length;i++){
-				document.write("<span>"+option[i]+"</span>");
-			}
-		</script>
-	</div>
-	
-	<div id="location">
-		<div>À§Ä¡</div>
-		<div>Áöµµ ¿µ¿ª</div>
-	</div>
-</div>
 
 </div>
 
@@ -246,6 +348,29 @@
 <%@ include file="/WEB-INF/include/footer.jspf" %>
 </div>
 </body>
-<script type="text/javascript">
-</script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e603a6f6c5db5707c8168383f3516651&libraries=services,clusterer,drawing"></script>
+	<c:forEach var="address" items="${list}">
+		<script>
+            var mapContainer = document.getElementById('map'), // ì§€ë„ë¥¼ í‘œì‹œí•  div 
+            mapOption = { 
+             center: new kakao.maps.LatLng(37.502541, 127.024711), // ì§€ë„ì˜ ì¤‘ì‹¬ì¢Œí‘œ
+             level: 3 // ì§€ë„ì˜ í™•ëŒ€ ë ˆë²¨
+            };
+            var map = new kakao.maps.Map(mapContainer, mapOption); //ì§€ë„ë¥¼ ë¯¸ë¦¬ ìƒì„±
+            var geocoder = new kakao.maps.services.Geocoder(); // ì£¼ì†Œ-ì¢Œí‘œ ë³€í™˜ ê°ì²´ë¥¼ ìƒì„±í•©ë‹ˆë‹¤
+            
+            geocoder.addressSearch('${room.ADDRESS1}', function(result, status) { // ì£¼ì†Œë¡œ ì¢Œí‘œë¥¼ ê²€ìƒ‰í•©ë‹ˆë‹¤
+               // ì •ìƒì ìœ¼ë¡œ ê²€ìƒ‰ì´ ì™„ë£Œëìœ¼ë©´ 
+            if (status === kakao.maps.services.Status.OK) {
+            var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+                // ê²°ê³¼ê°’ìœ¼ë¡œ ë°›ì€ ìœ„ì¹˜ë¥¼ ë§ˆì»¤ë¡œ í‘œì‹œí•©ë‹ˆë‹¤
+            var marker = new kakao.maps.Marker({
+                  map: map,
+                  position: coords
+                });
+                map.setCenter(coords);
+              } 
+            });    
+         </script>
+	</c:forEach>
 </html>

@@ -4,7 +4,9 @@
 <html>
 <head>
 <%@ include file="/WEB-INF/include/include-header.jspf" %>
+<div style="display:none;">
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>​
+</div>
 <fmt:parseDate var="dateString" value="${room.MOVE_IN_DATE}" pattern="yyyy-MM-dd"/>
 <script type="text/javascript">
 $(document).ready(function(){
