@@ -65,6 +65,24 @@ WHERE I1.MEM_ID = M.MEM_ID
 
 </select>
 
+<select id="selectAdminRoomDetail" resultType="hashMap" parameterType="hashMap" >
+<![CDATA[ 
+SELECT 
+
+ROOM_NUM
+UPLOAD_DATE
+BOARD_NUM
+TRADE_STATUS
+EXPIRATION_DATE
+HIT_COUNT
+FAV_COUNT
+DEL_GB
+
+FROM
+       ROOM_BOARD
+]]>
+</select>
+
 
 <!-- #####글 삭제(관리자) -->
 <update id="deleteAdminRoom" parameterType="hashmap" >
