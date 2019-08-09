@@ -51,13 +51,13 @@ public class MessageController {
 	@RequestMapping(value="/myPage/messageWriteForm")
 	public ModelAndView messageWriteForm(CommandMap commandMap) throws Exception{
 		ModelAndView mv=new ModelAndView("member/myPage/messageWriteForm");
-		if(commandMap.containsKey("receiver")) {
-			mv.addObject("receiver",commandMap.get("receiver"));
+		if(commandMap.containsKey("RECEIVER")) {
+			mv.addObject("RECEIVER",commandMap.get("RECEIVER"));
 		}
 		return mv;
 	}
 	//메세지 보내기
-	@RequestMapping(value="/myPage/messageWrite", method=RequestMethod.POST)
+	@RequestMapping(value="/myPage/messageWrite")
 	public ModelAndView messageWrite(CommandMap commandMap, HttpServletRequest request) throws Exception{
 		ModelAndView mv=new ModelAndView("member/myPage/messageWrite");
 		HttpSession session = request.getSession();

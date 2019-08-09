@@ -94,7 +94,7 @@ public class RoomController {
 		ModelAndView mv = new ModelAndView("member/search/detailRoom");
 		
 		Map<String,Object> map = roomService.selectRoomDetail(commandMap.getMap());
-		mv.addObject("map", map.get("map")); //게시글 상세정보.
+		mv.addObject("room", map.get("map")); //게시글 상세정보.
 		mv.addObject("list", map.get("list")); // 첨부파일의 목록을 가지고 있는 리스트.
 		return mv;
 	}
@@ -168,9 +168,9 @@ public class RoomController {
 	
 	@RequestMapping(value="/room/detail/lessorInfo")
 	public ModelAndView lessorInfo(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("search/lessor");
+		ModelAndView mv = new ModelAndView("/member/search/lessor");
 		Map<String,Object> map = roomService.selectLessorInfo(commandMap.getMap());
-		mv.addObject("map",map);
+		mv.addObject("lessor",map);
 		return mv;
 	}
 }
