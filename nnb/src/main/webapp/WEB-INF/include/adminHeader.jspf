@@ -24,20 +24,23 @@ function openMenu(){
 </script>
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/header.css'/>"/>
 <nav class="header">
-<img src="<%=request.getContextPath()%>/images/NNBsmall.png" onclick="location.href='<%=request.getContextPath()%>/main'" width="100px">
-	<div class="menu">
-		<a href="<c:url value='/admin/loginForm'/>">메인으로</a>
-		<a href="<c:url value='/admin/memberList'/>">회원 관리</a>
-		<a href="<c:url value='/admin/qna/list'/>">Q&A 관리</a>
-		<a href="<c:url value='/admin/openNoticeList'/>">게시판 관리</a>
-		<a href="<c:url value='/admin/bankList'/>">제휴 은행 관리</a>
-		<a href="<c:url value='/admin/reportRoomList'/>">신고 관리</a>
+<div class="img">
+	<img src="<%=request.getContextPath()%>/images/NNBsmall.png" onclick="location.href='<%=request.getContextPath()%>/main'" width="100px">
+</div>
+<div class="fEjgY">
+	<a class="bFIMNX" href="<%=request.getContextPath()%>/main">고객 사이트</a>
+</div>
+<div class="cjODQK">
+	<div class="menu gRTWkG">
+		<a class="hVfzba" href="<c:url value='/admin/memberList'/>">회원 관리</a>
+		<a class="hVfzba" href="<c:url value='/admin/qna/list'/>">Q&A 관리</a>
+		<a class="hVfzba" href="<c:url value='/admin/openNoticeList'/>">게시판 관리</a>
+		<a class="hVfzba" href="<c:url value='/admin/openAdminBankList'/>">제휴 은행 관리</a>
+		<a class="hVfzba" href="<c:url value='/admin/reportRoomList'/>">신고 관리</a>
 	</div>
 
-	<div class="login" onclick="openMenu()">
-		<img src="">${ADMIN_ID}님
-		<ul class="mymenu" id="mymenu">
-			<li><a href="<c:url value='/admin/logout'/>">로그아웃</a></li>
-		</ul>
+	<div class="login hVfzba kiTmxU" onclick="location.href='<%=request.getContextPath()%>/admin/logout'">
+		<img src="">로그아웃
+	</div>
 </div>
 </nav>

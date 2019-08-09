@@ -7,6 +7,10 @@
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/search.css'/>"/>
 <script type="text/javascript">
 /* convert(m): 평수<->제곱미터 변환 */
+ var pyeong = document.getElementById("pyeong");      
+ var p = (parseFloat(document.getElementById('m2').value) / 3.3058).toFixed(2);
+ pyeong.innerHTML = p;
+ 
 /* report(): 신고하기 새창으로 */
 /* readMore() : 상세설명 더보기 */
 	function insertFav(num){
@@ -21,6 +25,9 @@
 		comAjax.addParam("ROOM_NUM",num);
 		comAjax.ajax();
 	};
+	
+	
+	
 </script>
 </head>
 <body>
@@ -42,7 +49,7 @@
 		</div>
 		<div>
 			<div>전용면적</div>
-			<div>${room.REAL_SIZE}m2</div><button onclick="convert(${room.REAL_SIZE});"><->평</button>
+			<div id="m2">${room.REAL_SIZE}m2</div> <div id="pyeong"></div>
 		</div>
 		<div>
 			<div>임대인</div>

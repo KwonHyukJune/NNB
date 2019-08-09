@@ -54,7 +54,7 @@ function pop(url){
 		</ul>
 		</c:if>
 	</div>
-	<a href="list">목록으로</a>
+	<a href="/nnb/bank/openBankList">목록으로</a>
 
 <%-- 	<div class="paging">
 		${pagingHtml}

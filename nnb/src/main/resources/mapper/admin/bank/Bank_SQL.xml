@@ -6,16 +6,27 @@
 <select id="selectBankList" parameterType="hashMap" resultType="hashMap">
 <include refid="common.pagingPre"/> 
 <![CDATA[
-	select
-		row_number() over (ORDER BY bank_num ASC) rnum,
-		BANK_NUM,
-		BANK_KIND,
-		BANK_TITLE,
-		BANK_CONTENT,
-		BANK_HITCOUNT,
-		BANK_REGDATE
-	from bank
-	order by rnum desc
+select 
+	row_number() over (order by RNUM desc) row_num, 
+	RNUM, 
+	BANK_NUM,
+	BANK_KIND,
+	BANK_TITLE,
+	BANK_CONTENT,
+	BANK_HITCOUNT,
+	BANK_REGDATE
+from(
+		SELECT 
+     		ROW_NUMBER() OVER (ORDER BY BANK_NUM DESC) RNUM,
+     		BANK_NUM,
+			BANK_KIND,
+			BANK_TITLE,
+			BANK_CONTENT,
+			BANK_HITCOUNT,
+			BANK_REGDATE
+		FROM		 
+      		BANK
+) order by row_num desc
 ]]>
 <include refid="common.pagingPost"/> 
 </select>

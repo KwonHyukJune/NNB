@@ -9,11 +9,18 @@
 <%@include file="/WEB-INF/include/adminHeader.jspf"%>
 
 <script type="text/javascript">
-	function submit(){
-	    var f=document.bankWriteForm;   //폼 name
-	    	f.action = "bankWrite";
-		    f.submit();	 
-		}
+$(document).ready(function(){
+	
+	$("#write").on("click", function(e){ //작성하기 버튼
+		insertBoard();
+	});
+		
+	function insertBoard(){
+		var comSubmit = new ComSubmit("frm");
+		comSubmit.setUrl("<c:url value='/admin/bankWrite' />");
+		comSubmit.submit();
+	}
+});
 	$(document).ready(function(){
 		$("a[name='delete']").on("click",function(e){	//삭제 버튼
 			e.preventDefault();
@@ -52,9 +59,9 @@
 		<hr>
 		<br />
 	</div>
-	<form method="post" name="bankWriteForm" enctype="multipart/form-data">
+	<form method="post" name="frm" id="frm" enctype="multipart/form-data">
 		<div>
-			은행종류 <select name="bank_kind">
+			은행종류 <select name="BANK_KIND">
 				<option>은행종류</option>
 				<option value="국민">국민 은행</option>
 				<option value="신한">신한 은행</option>
@@ -64,14 +71,13 @@
 
 
 		<div>
-			제목&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text"
-				id="bank_title" name="bank_title" />
+			제목&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" id="BANK_TITLE" name="BANK_TITLE" />
 		</div>
 		<br />
 		<div>
 			내용&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<textarea rows="20" cols="50" title="내용" id="bank_content"
-				name="bank_content"></textarea>
+			<textarea rows="20" cols="50" title="내용" id="BANK_CONTENT"
+				name="BANK_CONTENT"></textarea>
 		</div>
 
 		<div>
@@ -79,18 +85,18 @@
 			<br />
 			<hr>
 			<p>
-				<input type="file" name="bank_original_file1" accept='image/jpeg,image/gif,image/png' onchange='chk_file_type(this)'>
+				<input type="file" name="BANK_ORIGINAL_FILE1" accept='image/jpeg,image/gif,image/png' onchange='chk_file_type(this)'>
 				첨부파일 1
 				<a href="#" class="btn" id="delete1" name="delete">삭제</a>
 			</p>
 			<p>
-				<input type="file" name="bank_original_file2" accept='image/jpeg,image/gif,image/png' onchange='chk_file_type(this)'>
+				<input type="file" name="BANK_ORIGINAL_FILE2" accept='image/jpeg,image/gif,image/png' onchange='chk_file_type(this)'>
 				첨부파일 2 
 				<a href="#" class="btn" id="delete2" name="delete">삭제</a>
 			</p>
 			<hr>
 			<br />
-			<br /> <a href="javascript:submit()">등록</a> <a
+			<br /> <a href=# id="write">등록</a> <a
 				href="javascript:back();">닫기</a>
 		</div>
 	</form>

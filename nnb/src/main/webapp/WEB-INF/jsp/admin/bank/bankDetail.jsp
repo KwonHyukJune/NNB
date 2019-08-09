@@ -86,8 +86,8 @@ $(document).ready(function(){
       <div>
          <br />
          <hr>
-         <a href="bankList">목록으로</a> <a
-            href="bankModifyForm?num=${bank.BANK_NUM}">수정</a>
+         <a href="openAdminBankList">목록으로</a> <a
+            href="bankModifyForm?BANK_NUM=${bank.BANK_NUM}">수정</a>
       </div>
       <hr>
    </form>

@@ -6,7 +6,8 @@
 
 <head>
 <%@ include file="/WEB-INF/include/include-header.jspf" %>
-<%@include file = "/WEB-INF/include/adminHeader.jspf" %>
+<%@ include file="/WEB-INF/include/header.jspf" %>
+<link rel="stylesheet" type="text/css" href="<c:url value='/css/main.css'/>"/>
 </head>
 
 <script>
@@ -37,21 +38,18 @@ $(document).ready(function(){
 
 <body>
 
-<div class="loginForm">
-관리자 로그인
-<form id="loginForm" name="loginForm" action="/nnb/adminLogin" method="POST">
-<input type="text" id="ADMIN_ID" name="ADMIN_ID" placeholder="아이디 입력"><br>
-<input type="password" id="ADMIN_PW" name="ADMIN_PW" placeholder="비밀번호 입력" onkeypress="if( event.keyCode == 13 ){fsubmit();}">
-</form>
-<br/>
-	<a href="#" class="btn" onclick="fsubmit();">로그인</a>
-	<a href="javascript:back()">취소</a>
-	
+<div class="loginForm eaRvjJ">
+	<div class='flwTzf'>
+		<h1 class="csAEhT">관리자 로그인</h1>
+		<form id="loginForm" name="loginForm" action="/nnb/adminLogin" method="POST">
+			<input type="text" id="ADMIN_ID" name="ADMIN_ID" placeholder="아이디 입력" class="kEQJNp kTQnUD "><br>
+			<input type="password" id="ADMIN_PW" name="ADMIN_PW" placeholder="비밀번호 입력" onkeypress="if( event.keyCode == 13 ){fsubmit();}" class="kTQnUD bLigTE">
+		</form>
+			<button class="hgemcD" type="button" onclick="fsubmit();">로그인</button>
+	</div>
 </div>
 
-<br/><br/><br/><br/><br/><br/>
 
-&nbsp;&nbsp;&nbsp;&nbsp;
 <div>
 <%@include file = "/WEB-INF/include/footer.jspf" %>
 </div>
