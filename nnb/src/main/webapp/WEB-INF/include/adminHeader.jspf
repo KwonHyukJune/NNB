@@ -24,6 +24,7 @@ function openMenu(){
 </script>
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/header.css'/>"/>
 <nav class="header">
+
 <div class="img">
 	<img src="<%=request.getContextPath()%>/images/NNBsmall.png" onclick="location.href='<%=request.getContextPath()%>/main'" width="100px">
 </div>

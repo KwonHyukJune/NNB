@@ -13,7 +13,7 @@ FROM
   MEMBER,
   MESSAGE
 WHERE
-  MESSAGE.SENDER = '관리자';
+  MESSAGE.SENDER = '관리자'
 
 ]]>
 </select>

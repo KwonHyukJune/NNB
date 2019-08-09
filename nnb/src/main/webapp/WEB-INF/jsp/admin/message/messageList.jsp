@@ -74,21 +74,21 @@ function searchCheck(frm){
 
 <div class="messageList">
    
-   <c:forEach var="message" items="${messageList}">
+   <c:forEach var="message" items="${adminMessageList}">
    <div class="message">
   <a href="#" onClick="javascript:messageDetail()">
       
 	     
 		<div>
-			 ${message.MESSAGE_NUM}&nbsp;	
+			 ${map.MESSAGE_NUM}&nbsp;	
 			      	
-			 ${member.MEM_KIND}&nbsp;      
+			 ${map.MEM_KIND}&nbsp;      
 	      	
-	         ${message.RECEIVER}&nbsp;
+	         ${map.RECEIVER}&nbsp;
 	         
-	         ${message.MESSAGE_TITLE}&nbsp;&nbsp;|&nbsp;
+	         ${map.MESSAGE_TITLE}&nbsp;&nbsp;|&nbsp;
 	         
-	         ${message.SEND_DATE}	
+	         ${map.SEND_DATE}	
           
 		</div>
       </a>

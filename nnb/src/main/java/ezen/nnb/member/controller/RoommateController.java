@@ -1,7 +1,5 @@
 package ezen.nnb.member.controller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import ezen.nnb.admin.paging.Paging;
 import ezen.nnb.common.CommandMap;
 import ezen.nnb.member.service.IgnoreService;
 import ezen.nnb.member.service.RoommateService;
@@ -33,7 +30,7 @@ public class RoommateController {
 	private IgnoreService ignoreService;
 
 
-	@RequestMapping(value = "/main/searchRoommate")
+	@RequestMapping(value = "/searchRoommate")
 	public ModelAndView searchRoommate(HttpServletResponse response, HttpServletRequest request, CommandMap commandMap)
 			throws Exception {
 		ModelAndView mv = new ModelAndView("/member/roommate/roommateList");
@@ -85,7 +82,8 @@ public class RoommateController {
 	@RequestMapping(value = "/roommate/detail")
 	public ModelAndView openRoommateDetail(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("/member/roommate/roommateDetail");
-		roommateService.openRoommateDetail(commandMap.getMap());
+		Map<String,Object>map=roommateService.openRoommateDetail(commandMap.getMap());
+		mv.addObject("mate",map);
 		return mv;
 	}
 
@@ -129,13 +127,11 @@ public class RoommateController {
 		ModelAndView mv = new ModelAndView();
 		HttpSession session = request.getSession();
 		
-		if (session.getAttribute("RECEIVER") != null) {
+	
 			commandMap.put("SENDER", session.getAttribute("MEM_ID"));
 			commandMap.put("MESSAGE_NUM", commandMap.get("MESSAGE_NUM"));
 			mv.setViewName("member/myPage/messageWrite");
-		} else {
-			mv.setViewName("redirect:/member/roommate/roommateDetail");
-		}
+	
 
 		return mv;
 	}

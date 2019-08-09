@@ -61,8 +61,9 @@
 
 <script type="text/javascript">
 
-function showPopup(num, id){
-    var url = "/nnb/admin/memberDetail?MEM_NUM="+num+"&MEM_ID=id";
+function showPopup(num,id){
+
+    var url = "/nnb/admin/memberDetail?MEM_NUM="+num+"&MEM_ID="+id;
     var name = "회원정보";
     var option = "width = 500, height = 500, top = 100, left = 200, location = no, resizeable = yes, scrollbars = yes"
     window.open(url, name, option);
@@ -111,7 +112,7 @@ function showPopup(num, id){
           
       </div>
      <form>    
-    <input type="button" value="상세보기" onclick="showPopup(${memberDetail.MEM_NUM});" />
+    <input type="button" value="상세보기" onclick="showPopup(${memberDetail.MEM_NUM},'${memberDetail.MEM_ID}');" />
       <a href="#this" class="btn" id="delete">활성화</a>
 	</form> 
   

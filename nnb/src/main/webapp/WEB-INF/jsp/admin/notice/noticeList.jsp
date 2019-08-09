@@ -73,6 +73,7 @@
 		<div class="selectNoticeList" style="margin:0 700px">
 
 
+
 		</div>
 	</div>
 	

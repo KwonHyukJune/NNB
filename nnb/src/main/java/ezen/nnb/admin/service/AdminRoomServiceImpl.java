@@ -18,6 +18,11 @@ public class AdminRoomServiceImpl implements AdminRoomService{
 		return AdminRoomDAO.selectAdminRoomList(map);
 	}
 	@Override
+	public Map<String, Object>selectAdminRoomDetail(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return AdminRoomDAO.selectAdminRoomDetail(map);
+	}
+	@Override
 	public Map<String,Object>detailRoom(Map<String,Object>map)throws Exception{
 		return (Map<String, Object>)AdminRoomDAO.detailRoom(map);
 	}
@@ -30,6 +35,8 @@ public class AdminRoomServiceImpl implements AdminRoomService{
 	public List<Map<String, Object>> selectAdminRoomA(Map<String, Object> map) throws Exception {
 		return AdminRoomDAO.selectAdminRoomA(map);
 	}
+		
+
 
 	
 }   

@@ -78,6 +78,7 @@ function showPopup() {
 <%@ include file="/WEB-INF/include/adminQnaHeader.jspf"%>
 <br><br>
 <div style="margin:0 700px">
+
 <select>
 	<option>답변완료</option>
 	<option>답변대기</option>

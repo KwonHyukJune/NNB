@@ -1,7 +1,5 @@
 package ezen.nnb.admin.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,7 +29,7 @@ public class AdminRoomController{
 	@Resource(name="adminRoomService")
 	private AdminRoomService adminRoomService;
 		
-			@RequestMapping(value/*##MU*/="admin/roomList")
+			@RequestMapping(value="admin/roomList")
 			public ModelAndView adminRoomList(CommandMap commandMap,HttpServletRequest request)throws Exception{
 			
 			if(request.getParameter("currentPage")==null || request.getParameter("currentPage").trim().isEmpty()
@@ -70,7 +68,7 @@ public class AdminRoomController{
 			  mv.addObject("pagingHtml",pagingHtml);
 			  mv.addObject("currentPage",currentPage);
 			  mv.addObject("adminRoomList",adminRoomList);
-			  mv.setViewName/*##��*/("admin/roomList");
+			  mv.setViewName("admin/roomList");
 			  
 			  return mv;
 			 }else {
@@ -90,33 +88,42 @@ public class AdminRoomController{
 			  mv.addObject("pagingHtml",pagingHtml);
 			  mv.addObject("currentPage",currentPage);
 			  mv.addObject("adminRoomList",adminRoomList);
-			  mv.setViewName/*##��*/("admin/roomList");
+			  mv.setViewName("admin/roomList");
 				  
 			 return mv;
 			 	}
 			}	  
-
-			@RequestMapping(value/*##MU*/="/admin/roomDetail")
+			//관리자 룸 상세
+			@RequestMapping(value="/admin/roomDetail")
 		    public ModelAndView adminRoomDetail(CommandMap commandMap) throws Exception{
+				ModelAndView mv = new ModelAndView();
+				Map<String,Object>map = adminRoomService.selectAdminRoomDetail(commandMap.getMap());
+				mv.addObject("roomDetail",map);
+				mv.setViewName("/admin/roomDetail");			
+				return mv;	
+			}
+			//관리자가 회원이 보는 방 상세로 연결
+			@RequestMapping(value="/admin/detailRoom")
+		    public ModelAndView detailRoom(CommandMap commandMap) throws Exception{
 				ModelAndView mv = new ModelAndView();
 				Map<String,Object>map = adminRoomService.detailRoom(commandMap.getMap());
 				mv.addObject("roomDetail",map);
-				mv.setViewName/*##��*/("searchDetail/room");			
-				return mv;		 
+				mv.setViewName("/admin/roomDetail");			
+				return mv;		 	
 			}
-			@RequestMapping(value/*##MU*/="admin/roomStatus")
+			@RequestMapping(value="admin/roomStatus")
 			public ModelAndView adminRoomStatus(CommandMap commandMap) throws Exception{
 			ModelAndView mv = new ModelAndView();
 			adminRoomService.updateAdminRoomStatus(commandMap.getMap());
 			mv.addObject("room_status", commandMap.get("room_status"));
-			mv.setViewName("redirect:/searchDetail/room");
+			mv.setViewName("redirect:/admin/roomDetail");
 			return mv;	
 			}
 
-			@RequestMapping(value/*##MU*/="admin/roomDelete")
+			@RequestMapping(value="admin/roomDelete")
 			public ModelAndView adminMemberBan(CommandMap commandMap)throws Exception{
 				ModelAndView mv=new ModelAndView();
-				mv.setViewName/*##��*/("redirect:/admin/roomList");
+				mv.setViewName("redirect:/admin/roomList");
 				return mv;
 			}
 		}    ////

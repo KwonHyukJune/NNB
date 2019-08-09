@@ -71,6 +71,7 @@
 	<div class="selectFaqList" style="margin:0 700px">
 
 
+
 	</div>
 	<div id="PAGE_NAVI" style="margin:0 700px"></div>
 		<input type="hidden" id="PAGE_INDEX" name="PAGE_INDEX" />
@@ -162,5 +163,6 @@ function fn_selectFaqListCallback(data){
 	} 
 }
 </script>
+
 </body>
 </html>
