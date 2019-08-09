@@ -50,11 +50,7 @@ function openPopup(url) {
 		         ${map.REPORT_DATE}&nbsp;
 		         </li>
 		         <li>    	
-		         <a href = javascript:openPopup("/nnb/admin/memberDetail?MEM_NUM='${memberDetail.MEM_NUM}'&MEM_ID=${map.REPORT_D_ID}")>아이디  :  ${map.REPORT_D_ID}&nbsp;</a> 
-		         
-		         <a href = javascript:openPopup("/nnb/admin/memberDetail?MEM_NUM=${map.REPORT_NUM});" /> 
 		         <a href="<c:url value='/admin/memberDetail?MEM_NUM=${memberDetail.MEM_NUM}&MEM_ID=${map.REPORT_D_ID}'/>">아이디  :  ${map.REPORT_D_ID}&nbsp;</a>
-		         
 		         </li>
 		         <li>제목  :     	
 		         ${map.REPORT_TITLE}&nbsp;
