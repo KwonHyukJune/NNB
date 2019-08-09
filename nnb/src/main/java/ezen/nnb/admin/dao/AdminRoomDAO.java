@@ -10,7 +10,7 @@ import ezen.nnb.common.AbstractDAO;
 
 @Repository("adminRoomDAO")
 public class AdminRoomDAO extends AbstractDAO{
-
+ 
 	//관리자 방 목록
 	@SuppressWarnings("unchecked")
 	public List<Map<String,Object>>selectAdminRoomList(Map<String,Object>map) throws Exception{

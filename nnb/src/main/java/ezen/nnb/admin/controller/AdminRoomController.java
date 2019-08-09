@@ -29,7 +29,7 @@ public class AdminRoomController{
 	@Resource(name="adminRoomService")
 	private AdminRoomService adminRoomService;
 		
-	
+	 
 	
 	//목록 임시
 	@RequestMapping(value=/*MapperURL*/"/admin/roomList")
