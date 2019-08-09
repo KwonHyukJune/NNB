@@ -24,12 +24,12 @@
                         FROM
                                 ROOMMATE_PROFILE
                         WHERE 
-                                RI_MEM_ID=#{MEM_ID}
+                                RI_MEM_ID=#{RI_MEM_ID,jdbcType=VARCHAR}
                 ]]>
 </select>                                               						
 <insert id="insertMyRoommateProfile" parameterType="hashmap">
                 <![CDATA[
-                        insert into ROOMMATE_PROFILE
+                        insert into MESSAGE
                         (
                                 RI_NUM,
                                 RI_MEM_ID,
@@ -53,9 +53,8 @@
                                 #{RI_REGION2,jdbcType=VARCHAR},
                                 #{RI_REGION3,jdbcType=VARCHAR},
                                 #{RI_GENDER,jdbcType=VARCHAR},
-                                #{RI_BIRTH,jdbcType=INTEGER},
+                                #{RI_BIRTH,jdbcType=DATE},
                                 #{RI_LOAN_BIG,jdbcType=INTEGER},
-                                #{RI_LOAN_SMALL,jdbcType=INTEGER},
                                 #{RI_PROFILE,jdbcType=VARCHAR},
                                 #{RI_DATE_START,jdbcType=DATE},
                                 #{RI_DATE_END,jdbcType=DATE},
@@ -65,13 +64,13 @@
 </insert>						
 <update id="updateMyProfile" parameterType="hashmap">
                 <![CDATA[
-                        UPDATE ROOMMATE_PROFILE 
+                        UPDATE MEMBER 
                         SET
                                 RI_REGION1=#{RI_REGION1,jdbcType=VARCHAR},
                                 RI_REGION2=#{RI_REGION2,jdbcType=VARCHAR},
                                 RI_REGION3=#{RI_REGION3,jdbcType=VARCHAR},
                                 RI_GENDER=#{GENDER,jdbcType=VARCHAR},
-                                RI_BIRTH=#{BIRTH,jdbcType=INTEGER},
+                                RI_BIRTH=#{BIRTH,jdbcType=DATE},
                                 RI_LOAN_BIG=#{RI_LOAN_BIG,jdbcType=INTEGER},
                                 RI_LOAN_SMALL=#{RI_LOAN_SMALL,jdbcType=INTEGER},
                                 RI_PROFILE=#{RI_PROFILE,jdbcType=VARCHAR},
@@ -139,7 +138,7 @@ WHERE
 	]]>	
 <if test="MEM_NICK!=null and!MEM_NICK.equals('')">
 	<![CDATA[
-	AND MEM_NICK LIKE %#{MEM_NICK,jdbcType=VARCHAR}%
+	AND MEM_NICK LIKE '%' || #{MEM_NICK} || '%'
 	
 	]]>
 </if>
@@ -151,44 +150,28 @@ WHERE
 </if>
 <if test="minyear!=null and !minyear.equals('')">
 	<![CDATA[
-	AND RI_BIRTH > #{minyear,jdbcType=INTEGER}
+	AND RI_BIRTH BETWEEN #{minyear,jdbcType=DATE} AND #{maxyear,jdbcType=DATE}
 ]]>
-</if>
-<if test="maxyear!=null and !maxyear.equals('')">
-	<![CDATA[
-	AND RI_BIRTH &lt; #{maxyear,jdbcType=INTEGER}
-	]]>
-</if>
+</if> 
+
 <if test="mindeposit!=null and !mindeposit.equals('')">
 	<![CDATA[
-	AND RI_LOAN_BIG > #{mindeposit,jdbcType=INTEGER}
+	AND RI_LOAN_BIG BETWEEN #{mindeposit,jdbcType=INTEGER} AND #{maxdeposit,jdbcType=INTEGER}
 ]]>
 </if>
-<if test="maxdeposit!=null and !maxdeposit.equals('')">
-	<![CDATA[
-	AND RI_LOAN_BIG &lt; #{maxdeposit,jdbcType=INTEGER}
-	]]>
-</if>
+
 <if test="minrent!=null and !minrent.equals('')">
 	<![CDATA[
-	AND RI_LOAN_SMALL > #{minrent,jdbcType=INTEGER}
+	AND RI_LOAN_SMALL BETWEEN #{minrent,jdbcType=INTEGER} AND  #{maxrent,jdbcType=INTEGER}
 	]]>
 </if>
-<if test="maxrent!=null and !maxrent.equals('')">
-	<![CDATA[
-	AND RI_LOAN_SMALL &lt; #{maxrent,jdbcType=INTEGER}
-	]]>
-</if>
+
 <if test="maxdate!=null and !maxdate.equals('')">
 	<![CDATA[
-	AND RI_DATE_START &lt; #{maxdate,jdbcType=DATE}
+	AND RI_DATE_START BETWEEM #{maxdate,jdbcType=DATE} AND #{mindate,jdbcType=DATE}
 	]]>
 </if>
-<if test="mindate!=null and !mindate.equals('')">
-	<![CDATA[
-	AND RI_DATE_END &lt; #{mindate,jdbcType=DATE}
-	]]>
-</if>
+
 	</select>
 	
 <select id="countRoommateList" parameterType="int"
@@ -228,7 +211,7 @@ WHERE
 	]]>	
 <if test="MEM_NICK!=null and!MEM_NICK.equals('')">
 	<![CDATA[
-	AND MEM_NICK LIKE %#{MEM_NICK ,jdbcType=VARCHAR}%
+	AND MEM_NICK LIKE '%' || #{MEM_NICK} || '%'
 	]]>
 </if>
 	
@@ -239,42 +222,25 @@ WHERE
 </if>
 <if test="minyear!=null and !minyear.equals('')">
 	<![CDATA[
-	AND RI_BIRTH > #{minyear,jdbcType=INTEGER}
+	AND RI_BIRTH BETWEEN TO_DATE(#{minyear,jdbcType=DATE},'YYYYMMDD') AND TO_DATE(#{maxyear,jdbcType=DATE},'YYYYMMDD')
 ]]>
 </if>
-<if test="maxyear!=null and !maxyear.equals('')">
-	<![CDATA[
-	AND RI_BIRTH &lt; #{maxyear,jdbcType=INTEGER}
-	]]>
-</if>
+
 <if test="mindeposit!=null and !mindeposit.equals('')">
 	<![CDATA[
-	AND RI_LOAN_BIG > #{mindeposit,jdbcType=INTEGER}
+	AND RI_LOAN_BIG BETWEEN #{mindeposit,jdbcType=INTEGER} AND #{maxdeposit,jdbcType=INTEGER}
 ]]>
 </if>
-<if test="maxdeposit!=null and !maxdeposit.equals('')">
-	<![CDATA[
-	AND RI_LOAN_BIG &lt; #{maxdeposit,jdbcType=INTEGER}
-	]]>
-</if>
+
 <if test="minrent!=null and !minrent.equals('')">
 	<![CDATA[
-	AND RI_LOAN_SMALL > #{minrent,jdbcType=INTEGER}
+	AND RI_LOAN_SMALL BETWEEN #{minrent,jdbcType=INTEGER} AND  #{maxrent,jdbcType=INTEGER}
 	]]>
 </if>
-<if test="maxrent!=null and !maxrent.equals('')">
-	<![CDATA[
-	AND RI_LOAN_SMALL &lt; #{maxrent,jdbcType=INTEGER}
-	]]>
-</if>
+
 <if test="maxdate!=null and !maxdate.equals('')">
 	<![CDATA[
-	AND RI_DATE_START &lt; #{maxdate,jdbcType=DATE}
-	]]>
-</if>
-<if test="mindate!=null and !mindate.equals('')">
-	<![CDATA[
-	AND RI_DATE_END &lt; #{mindate,jdbcType=DATE}
+	AND RI_DATE_START BETWEEM #{maxdate,jdbcType=DATE} AND #{mindate,jdbcType=DATE}
 	]]>
 </if>
 	</select>
@@ -282,7 +248,7 @@ WHERE
 		resultType="hashmap">
 	<![CDATA[
 SELECT
-	MEM_ID
+	MEM_ID,
 	MEM_NICK,
 	RI_GENDER,
 	RI_LOAN_BIG,
@@ -299,7 +265,7 @@ FROM
 	ROOMMATE_PROFILE R
 WHERE
 	M.MEM_ID=R.RI_MEM_ID
-	and RI_MEM_ID = #{RI_MEM_ID, jdbcType=VARCHAR}
+	and RI_MEM_ID = #{id}
 	]]>
 	</select>
 	

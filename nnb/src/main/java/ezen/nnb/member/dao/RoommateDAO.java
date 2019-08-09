@@ -48,12 +48,4 @@ public class RoommateDAO extends AbstractDAO{
 	public void messageWrite(Map<String,Object>map)throws Exception{
 		insert("roommate.insertMessage",map);
 	}
-	public void ignoreUser(Map<String,Object>map)throws Exception{
-		insert("roommate.insertIgnore",map);
-	}
-	
-	public void unIgnoreUser(Map<String,Object>map)throws Exception{
-		delete("roommate.deleteIgnore",map);
-	}
-	
 }

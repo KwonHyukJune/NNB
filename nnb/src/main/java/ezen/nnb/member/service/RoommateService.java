@@ -27,8 +27,5 @@ public interface RoommateService {
 	
 	public void messageWrite(Map<String,Object>map)throws Exception;
 	
-	public void ignoreUser(Map<String,Object>map)throws Exception;
-	
-	public void unIgnoreUser(Map<String,Object>map)throws Exception;
 
 	}

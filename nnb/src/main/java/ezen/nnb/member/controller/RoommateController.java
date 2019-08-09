@@ -38,6 +38,7 @@ public class RoommateController {
 			throws Exception {
 		ModelAndView mv = new ModelAndView("/member/roommate/roommateList");
 		HttpSession session = request.getSession();
+		commandMap.put("id", session.getAttribute("MEM_ID"));
 		List<Map<String, Object>> searchRoommate = roommateService.searchRoommate(commandMap.getMap());
 		int Count = roommateService.countRoommate(commandMap.getMap());
 		
@@ -85,7 +86,8 @@ public class RoommateController {
 	@RequestMapping(value = "/roommate/detail")
 	public ModelAndView openRoommateDetail(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("/member/roommate/roommateDetail");
-		roommateService.openRoommateDetail(commandMap.getMap());
+		Map<String,Object>map=roommateService.openRoommateDetail(commandMap.getMap());
+		mv.addObject("mate",map);
 		return mv;
 	}
 
@@ -144,18 +146,21 @@ public class RoommateController {
 	public ModelAndView ignoreUser(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("redirect:/member/roommate/roommateDetail");
 		HttpSession session = request.getSession();
+		Map<String,Object>map=roommateService.openRoommateDetail(commandMap.getMap());
+		commandMap.put("IGNORE_MEM", session.getAttribute("MEM_ID"));
 		int check = ignoreService.checkIgnore(commandMap.getMap());
 		if (check == 0) {
 			ignoreService.insertIgnore(commandMap.getMap());
-			commandMap.put("IGNORE_MEM", session.getAttribute("MEM_ID"));
-			commandMap.put("IGNORE_NUM", commandMap.get("IGNORE_NUM"));
+			mv.addObject("mate",map);
 		}
+		
 		return mv;
 	}
 
 	@RequestMapping(value = "/roommate/ignoreUser")
 	public ModelAndView unIgnoreUser(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("redirect:/member/roommate/roommateDetail");
+		
 		int check = ignoreService.checkIgnore(commandMap.getMap());
 		if (check == 1) {
 			ignoreService.insertIgnore(commandMap.getMap());

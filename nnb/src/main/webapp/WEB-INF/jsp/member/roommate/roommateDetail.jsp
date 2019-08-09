@@ -68,6 +68,20 @@
 <div class="b">${mate.RI_PROFILE}</div>
 	
 <div>
+		<a href="#" class="btn" onclick="javascript:ignore();">차단</a>
+	<script type="text/javascript">
+	function ignore(){
+		var mem = "${mate.MEM_ID}";
+		if(confirm("'"+mem+"' 회원을 차단하시겠습니까?")){
+			var str = "<form id='frm' action='ignoreUser' method='post'>"
+				+ "<input type='hidden' name='IGNORE_D_MEM' value='"+mem+"'>"
+				+ "</form>";
+			$(".report").after(str);
+			frm.submit();
+		};
+	};
+	
+	</script>	
 	<c:if test="${mate.check=='0'}">
 	<a href="#" class="btn" onclick="insertFav();">찜하기</a>
 	</c:if>
