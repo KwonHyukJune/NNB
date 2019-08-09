@@ -1,0 +1,11 @@
+<%@ page pageEncoding="utf-8"%>
+<div class="jtRefx">
+	<h1 class="title kuldyr">제휴 은행 관리</h1>
+	<ul class="tab jSSNqy">
+
+	</ul>
+</div>
+<!-- \
+		<a href=# onclick="location.href='/nnb/admin/openNoticeList'">공지 게시판</a>&nbsp;&nbsp;&nbsp;&nbsp;
+		<a href=# onclick="location.href='/nnb/admin/roomList'">방 게시판</a>&nbsp;&nbsp;&nbsp;&nbsp;
+		<a href=# onclick="location.href='/nnb/admin/terms/list'">약관 관리</a> -->

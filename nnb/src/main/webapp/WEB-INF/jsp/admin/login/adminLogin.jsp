@@ -45,6 +45,7 @@ $(document).ready(function(){
 			<input type="text" id="ADMIN_ID" name="ADMIN_ID" placeholder="아이디 입력" class="kEQJNp kTQnUD "><br>
 			<input type="password" id="ADMIN_PW" name="ADMIN_PW" placeholder="비밀번호 입력" onkeypress="if( event.keyCode == 13 ){fsubmit();}" class="kTQnUD bLigTE">
 		</form>
+		<br>
 			<button class="hgemcD" type="button" onclick="fsubmit();">로그인</button>
 	</div>
 </div>
