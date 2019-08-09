@@ -6,6 +6,7 @@ function fn_open(url){
 	var gsWin = window.open("about:blank","winName");
 	
 }
+
 </script>
 <footer class="bGLXyI">
 <div class="cPXquZ">
