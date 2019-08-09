@@ -10,16 +10,25 @@
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/myInterest.css'/>"/>
 
 <script type="text/javascript">
-function goPage1(num) {   
-	location.href="/nnb/admin/report/list?REPORT_NUM="+num; 
-	}
-		
-function insertBoard(){
-	var comSubmit = new ComSubmit("frm");
-	comSubmit.setUrl("<c:url value='/admin/ban' />");
-	comSubmit.submit();
-	}
 
+function frameclose() { 
+	parent.close() 
+	window.close() 
+	self.close() 
+	} 
+	
+$(document).ready(function(){
+	
+	$("#submit").on("click", function(e){ //확인 버튼
+		insertBoard();
+	});
+		
+	function insertBoard(){
+		var comSubmit = new ComSubmit("frm");
+		comSubmit.setUrl("<c:url value='/room/tradeStatus'/>");
+		comSubmit.submit();
+	}
+});
 
 
 
@@ -76,10 +85,17 @@ function openPopup(url) {
 		          
 		      </ul>
 		    <br/><br/><br/> 
-		   <form action="insertBan" method="post" id="frm" name="contents">     		  
-		    <a href="#" id="submit">확인</a>    
-		   
-		   </form>
+		    
+	<form action="insertBan" method="post" id="frm" name="contents">     
+		<select id="BAN_REMOVAL_DATE" name="BAN_REMOVAL_DATE">
+	     	<option value="1">광고종료</option>
+	     	<option value="2">거래완료</option>
+	     	<option value="3">삭제처리</option>
+	     </select> &nbsp;&nbsp;		 
+	      
+	   	<a href="#" id="submit">확인</a> &nbsp;&nbsp;  
+		<a href="javascript:frameclose()">닫기</a>
+	</form>
    		</div>	
 	</div>
 </div>
