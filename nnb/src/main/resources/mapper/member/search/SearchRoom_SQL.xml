@@ -149,7 +149,13 @@ FROM
 	]]>
 		</foreach>
 </if>
-<if test="STRUCTURES!=null and!STRUCTURES.equals('')">
+<if test="ROOM_FLOOR7!=null and ROOM_FLOOR7.equals('')">
+<![CDATA[
+		AND R2.ROOM_FLOOR >#{ROOM_FLOOR7}
+]]>
+</if>
+
+<if test="STRUCTURES!=null and !STRUCTURES.equals('')">
 <![CDATA[
 			AND R2.STRUCTURES in
 	]]>
@@ -207,15 +213,190 @@ FROM
 <select id="countRoomList" parameterType="hashmap" resultType="integer">
 <![CDATA[
 SELECT
-	count(*)	
+	count (*)
 FROM
-	ROOM_INFO1 R1, 
-	ROOM_INFO2 R2, 
-	ROOM_BOARD RB
-WHERE
-	R1.ROOM_NUM=r2.room_num and
-	R1.ROOM_NUM=rb.room_num and
-	RB.DEL_GB='N'
+	(
+		SELECT
+			ROW_NUMBER() OVER (ORDER BY R1.ROOM_NUM DESC) RNUM,
+			R1.ROOM_NUM,
+			R1.ROOM_TYPE,
+			R1.TRADE_TYPE,
+			R1.MONTHLY_PAYMENT,
+			R1.MONTHLY_DEPOSIT,
+			R1.JEONSE,
+			R1.THUMBNAIL,
+			R1.ADDRESS1,
+			R2.REAL_SIZE,
+			R2.ROOM_FLOOR,
+			R2.UTILITY_PRICE,
+			R2.DESC_TITLE
+		FROM
+			ROOM_INFO1 R1,
+			ROOM_INFO2 R2,
+			ROOM_BOARD RB
+		WHERE
+			R1.ROOM_NUM=R2.room_num and
+			R1.ROOM_NUM=RB.room_num and
+			RB.DEL_GB='N' and
+			RB.TRADE_STATUS='광고중'
+
+
+]]>
+<!-- 주소에 조건이 있을 경우 -->
+<if test="address!=null and !address.equals('')">
+<![CDATA[
+	 AND R1.ROOM_NUM IN(SELECT ROOM_NUM FROM ROOM_INFO1 R1 WHERE ADDRESS1 LIKE '%'||#{address}||'%')
+]]>
+</if>
+<!-- 방 종류에 조건이 있을 경우(원룸, 투룸 등 등) -->
+<if test="ROOM_TYPE!=null and !ROOM_TYPE.equals('')">
+	<![CDATA[
+		AND R1.ROOM_TYPE in
+	]]>
+		<foreach collection="ROOM_TYPE" item="item" index="index" separator="," open="(" close=")">
+	<![CDATA[
+			#{item}
+	]]>
+		</foreach>
+</if>
+<!-- 매물종류가 월세일 경우 -->
+<if test="MONTHLY_PAYMENT!=null and !MONTHLY_PAYMENT.equals('')">	
+<![CDATA[
+	AND R1.MONTHLY_PAYMENT=#{MONTHLY_PAYMENT}
+]]>
+</if>
+<!-- 보증금이 있을 경우  -->
+<if test="MONTHLY_DEPOSIT != null and !MONTHLY_DEPOSIT.equals('')">
+<![CDATA[
+	AND R1.MONTHLY_DEPOSIT=#{MONTHLY_DEPOSIT}
+]]>
+</if>
+<!-- 매물종류가 전세일경우 -->
+<if test="JEONSE != null and !JEONSE.equals('')">
+<![CDATA[
+	AND R1.JEONSE=#{JEONSE}
+]]>
+</if>
+<if test="minMpayment !=null and !minMpayment.equals('')">
+<![CDATA[
+	AND R1.MONTHLY_PAYMENT > #{minPayment}
+]]>
+</if>
+<if test="maxMpayment !=null and !maxMpayment.equals('')">
+<![CDATA[
+	AND R1.MONTHLY_PAYMENT < #{maxPayment}
+]]>
+</if>
+<if test="minMdeposit!=null and !minMdeposit.equals('')">
+<![CDATA[
+	AND R1.MONTHLY_DEPOSIT>#{minMdeposit}
+]]>
+</if>
+<if test="maxMdeposit!=null and !maxMdeposit.equals('')">
+<![CDATA[
+	AND R1.MONTHLY_DEPOSIT<#{maxMdeposit}
+]]>
+</if>
+<if test="minJeonse!=null and !minJeonse.equals('')">
+<![CDATA[
+	AND R1.JEONSE>#{minJeonse}
+]]>
+</if>
+<if test="maxJeonse!=null and !maxJeonse.equals('')">
+<![CDATA[
+	AND R1.JEONSE<#{maxJeonse}
+]]>
+</if>	
+<if test="TRADE_TYPE!=null and!TRADE_TYPE.equals('')">
+	<![CDATA[
+		AND R1.TRADE_TYPE in
+	]]>
+		<foreach collection="TRADE_TYPE" item="item" index="index" separator="," open="(" close=")">
+	<![CDATA[
+			#{item}
+	]]>
+		</foreach>
+</if>
+<if test="UTILITY_CHECK!=null and!UTILITY_CHECK.equals('')">
+	<if test="minUtility!=null and !minUtility.equals('')">
+		<![CDATA[
+			AND R2.UTILITY_PRICE>#{minUtility}
+		]]>
+	</if>
+	<if test="maxUtility!=null and !maxUtility.equals('')">
+		<![CDATA[
+			AND R2.UTILITY_PRICE>#{maxUtility}
+		]]>
+	</if>
+</if>
+<if test="REAL_SIZE!=null and!REAL_SIZE.equals('')">
+<![CDATA[
+	AND R2.REAL_SIZE=#{REAL_SIZE}
+]]>
+</if>
+<if test="ROOM_FLOOR!=null and!ROOM_FLOOR.equals('')">
+<![CDATA[
+		AND R2.ROOM_FLOOR in
+	]]>
+		<foreach collection="ROOM_FLOOR" item="item" index="index" separator="," open="(" close=")">
+	<![CDATA[
+			#{item}
+	]]>
+		</foreach>
+</if>
+<if test="ROOM_FLOOR7!=null and ROOM_FLOOR7.equals('')">
+<![CDATA[
+		AND R2.ROOM_FLOOR >#{ROOM_FLOOR7}
+]]>
+</if>
+
+<if test="STRUCTURES!=null and !STRUCTURES.equals('')">
+<![CDATA[
+			AND R2.STRUCTURES in
+	]]>
+		<foreach collection="STRUCTURES" item="item" index="index" separator="," open="(" close=")">
+	<![CDATA[
+			#{item}
+	]]>
+		</foreach>
+</if>
+<if test="PARKING!=null and!PARKING.equals('')">
+<![CDATA[
+	AND R2.PARKING=#{PARKING}
+]]>
+</if>
+<if test="PET!=null and!PET.equals('')">
+<![CDATA[
+	AND R2.PET=#{PET}
+]]>
+</if>
+<if test="ELEVATOR!=null and!ELEVATOR.equals('')">
+<![CDATA[
+	AND R2.ELEVATOR=#{ELEVATOR}
+]]>
+</if>
+<if test="BALCONY!=null and!BALCONY.equals('')">
+<![CDATA[
+	AND R2.BALCONY=#{BALCONY}
+]]>
+</if>
+<if test="BUILT_IN!=null and!BUILT_IN.equals('')">
+<![CDATA[
+	AND R2.BUILT_IN=#{BUILT_IN}
+]]>
+</if>
+<if test="OPTIONS!=null and!OPTIONS.equals('')">
+<![CDATA[
+	AND R2.OPTIONS=#{OPTIONS}
+]]>
+</if>
+<if test="LOAN_ACCESS!=null and!LOAN_ACCESS.equals('')">
+<![CDATA[
+	AND R2.LOAN_ACCESS=#{LOAN_ACCESS}
+]]>
+</if>
+<![CDATA[
+	)
 ]]>
 </select>
 

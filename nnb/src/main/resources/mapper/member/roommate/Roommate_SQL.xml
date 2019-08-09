@@ -24,7 +24,7 @@
                         FROM
                                 ROOMMATE_PROFILE
                         WHERE 
-                                RI_MEM_ID=#{RI_MEM_ID,jdbcType=VARCHAR}
+                                RI_MEM_ID=#{MEM_ID}
                 ]]>
 </select>                                               						
 <insert id="insertMyRoommateProfile" parameterType="hashmap">

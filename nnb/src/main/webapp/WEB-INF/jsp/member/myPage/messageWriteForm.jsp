@@ -18,7 +18,6 @@ $(document).ready(function(){
 function fn_submit(){
 	var conSubmit = new ComSubmit(frm);
 	conSubmit.setUrl("<c:url value='/myPage/messageWrite'/>");
-	conSubmit.addParam("SENDER","${MEM_ID}");
 	conSubmit.submit();
 };
 
@@ -62,7 +61,7 @@ function validation(){
 	<ul>
 	<li>
 		<div class="left">수신인</div>
-		<div class="right"><input type="text" name="RECEIVER" id="mem" value="${receiver}"></div>
+		<div class="right"><input type="text" name="RECEIVER" id="mem" value="${RECEIVER}"></div>
 	</li>
 	<li>
 		<div class="left">제목</div>

@@ -47,7 +47,7 @@
 		<div>
 			<div>임대인</div>
 			<div>${room.MEM_ID}</div>
-			<a href="<c:url value='/search/lessor?id=${room.MEM_ID}'/>" class="btn" >임대인 정보 보기</a>
+			<a href="<c:url value='/room/detail/lessorInfo?MEM_ID=${room.MEM_ID}'/>" class="btn" >임대인 정보 보기</a>
 		</div>
 	</div>
 	

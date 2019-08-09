@@ -69,35 +69,35 @@ function toggle(obj){
 				<ul class="hpBewf">
 					<li>
 						<label class="kAqGVi">
-							<input type="checkbox" class="ROOM_TYPE PcMeW" name="ROOM_TYPE" value="원룸">
+							<input type="checkbox" class="ROOM_TYPE PcMeW" name="ROOM_TYPE" value="원룸" checked="true">
 							<span class="CheckBox"></span>
 							<span class="kMvalg">원룸</span>
 						</label>
 					</li>
 					<li>
 						<label class="kAqGVi">
-							<input type="checkbox" class="ROOM_TYPE PcMeW" name="ROOM_TYPE" value="투룸">
+							<input type="checkbox" class="ROOM_TYPE PcMeW" name="ROOM_TYPE" value="투룸" checked="true">
 							<span class="CheckBox"></span>
 							<span class="kMvalg">투룸</span>
 						</label>
 					</li>
 					<li>
 						<label class="kAqGVi">
-							<input type="checkbox" class="ROOM_TYPE PcMeW" name="ROOM_TYPE" value="쓰리룸">
+							<input type="checkbox" class="ROOM_TYPE PcMeW" name="ROOM_TYPE" value="쓰리룸" checked="true">
 							<span class="CheckBox"></span>
 							<span class="kMvalg">쓰리룸</span>
 						</label>
 					</li>
 					<li>
 						<label class="kAqGVi">
-							<input type="checkbox" class="ROOM_TYPE PcMeW" name="ROOM_TYPE" value="오피스텔">
+							<input type="checkbox" class="ROOM_TYPE PcMeW" name="ROOM_TYPE" value="오피스텔" checked="true">
 							<span class="CheckBox"></span>
 							<span class="kMvalg">오피스텔</span>
 						</label>
 					</li>
 					<li>
 						<label class="kAqGVi">
-							<input type="checkbox" class="ROOM_TYPE PcMeW" name="ROOM_TYPE" value="아파트">
+							<input type="checkbox" class="ROOM_TYPE PcMeW" name="ROOM_TYPE" value="아파트" checked="true">
 							<span class="CheckBox"></span>
 							<span class="kMvalg">아파트</span>
 						</label>
@@ -115,14 +115,14 @@ function toggle(obj){
 				<ul class="eLjSYd">
 					<li>
 						<label class="kAqGVi">
-							<input type="checkbox" class="TRADE_TYPE PcMeW" name="TRADE_TYPE" value="월세">
+							<input type="checkbox" class="TRADE_TYPE PcMeW" name="TRADE_TYPE" value="월세" checked="true">
 							<span class="CheckBox"></span>
 							<span class="nmQzi">월세</span>
 						</label>
 					</li>
 					<li>
 						<label class="kAqGVi">
-							<input type="checkbox" class="TRADE_TYPE PcMeW" name="TRADE_TYPE" value="전세">
+							<input type="checkbox" class="TRADE_TYPE PcMeW" name="TRADE_TYPE" value="전세" checked="true">
 							<span class="CheckBox"></span>
 							<span class="nmQzi">전세</span>
 						</label>
@@ -291,35 +291,35 @@ function toggle(obj){
 								<ul class="gpNskk">
 									<li class="cHPNZJ">
 										<label class="kAqGVi">
-											<input type="checkbox" name="ROOM_FLOOR" class="PcMeW ROOM_FLOOR" value="" checked="checked">
+											<input type="checkbox" id="allChk" name="ROOM_FLOOR" class="PcMeW ROOM_FLOOR" value="" checked="checked">
 											<span class="CheckBox"></span>
 											<span class="cmTDVA">전체</span>
 										</label>
 									</li>
 									<li class="cHPNZJ">
 										<label class="kAqGVi">
-											<input type="checkbox" name="ROOM_FLOOR" class="PcMeW ROOM_FLOOR" value="1" checked="checked">
+											<input type="checkbox" id="ROOM_FLOOR" name="ROOM_FLOOR" class="PcMeW ROOM_FLOOR" value="1" checked="checked">
 											<span class="CheckBox"></span>
 											<span class="cmTDVA">1층</span>
 										</label>
 									</li>
 									<li class="cHPNZJ">
 										<label class="kAqGVi">
-											<input type="checkbox" name="ROOM_FLOOR" class="PcMeW ROOM_FLOOR" value="2" checked="checked">
+											<input type="checkbox" id="ROOM_FLOOR" name="ROOM_FLOOR" class="PcMeW ROOM_FLOOR" value="2" checked="checked">
 											<span class="CheckBox"></span>
 											<span class="cmTDVA">2층</span>
 										</label>
 									</li>
 									<li class="cHPNZJ">
 										<label class="kAqGVi">
-											<input type="checkbox" name="ROOM_FLOOR" class="PcMeW ROOM_FLOOR" value="3" checked="checked">
+											<input type="checkbox" id="ROOM_FLOOR" name="ROOM_FLOOR" class="PcMeW ROOM_FLOOR" value="3" checked="checked">
 											<span class="CheckBox"></span>
 											<span class="cmTDVA">3층</span>
 										</label>
 									</li>
 									<li class="cHPNZJ">
 										<label class="kAqGVi">
-											<input type="checkbox" name="ROOM_FLOOR" class="PcMeW ROOM_FLOOR" value="4" checked="checked">
+											<input type="checkbox" id="ROOM_FLOOR" name="ROOM_FLOOR" class="PcMeW ROOM_FLOOR" value="4" checked="checked">
 											<span class="CheckBox"></span>
 											<span class="cmTDVA">4층</span>
 										</label>
@@ -328,35 +328,35 @@ function toggle(obj){
 								<ul class="gpNskk">
 									<li class="cHPNZJ">
 										<label class="kAqGVi">
-											<input type="checkbox" name="ROOM_FLOOR" class="PcMeW ROOM_FLOOR" value="5" checked="checked">
+											<input type="checkbox" id="ROOM_FLOOR" name="ROOM_FLOOR" class="PcMeW ROOM_FLOOR" value="5" checked="checked">
 											<span class="CheckBox"></span>
 											<span class="cmTDVA">5층</span>
 										</label>
 									</li>
 									<li class="cHPNZJ">
 										<label class="kAqGVi">
-											<input type="checkbox" name="ROOM_FLOOR" class="PcMeW ROOM_FLOOR" value="6" checked="checked">
+											<input type="checkbox" id="ROOM_FLOOR" name="ROOM_FLOOR" class="PcMeW ROOM_FLOOR" value="6" checked="checked">
 											<span class="CheckBox"></span>
 											<span class="cmTDVA">6층</span>
 										</label>
 									</li>
 									<li class="cHPNZJ">
 										<label class="kAqGVi">
-											<input type="checkbox" name="ROOM_FLOOR" class="PcMeW ROOM_FLOOR" value="7" checked="checked">
+											<input type="checkbox" id="ROOM_FLOOR" name="ROOM_FLOOR" class="PcMeW ROOM_FLOOR" value="7" checked="checked">
 											<span class="CheckBox"></span>
-											<span class="cmTDVA">7층</span>
+											<span class="cmTDVA">7층 이상</span>
 										</label>
 									</li>
 									<li class="cHPNZJ">
 										<label class="kAqGVi">
-											<input type="checkbox" name="ROOM_FLOOR" class="ROOM_FLOOR PcMeW " value="반지층" checked="checked">
+											<input type="checkbox" id="ROOM_FLOOR" name="ROOM_FLOOR" class="PcMeW ROOM_FLOOR" value="0" checked="checked">
 											<span class="CheckBox"></span>
 											<span class="cmTDVA">반지층</span>
 										</label>
 									</li>
 									<li class="cHPNZJ">
 										<label class="kAqGVi">
-											<input type="checkbox" name="ROOM_FLOOR" class="ROOM_FLOOR PcMeW " value="옥탑방" checked="checked">
+											<input type="checkbox" id="ROOM_FLOOR" name="ROOM_FLOOR" class="PcMeW ROOM_FLOOR" value="-1" checked="checked">
 											<span class="CheckBox"></span>
 											<span class="cmTDVA">옥탑방</span>
 										</label>
@@ -456,7 +456,7 @@ function toggle(obj){
 	<div class="bcjswF">
 		<div class="eXwtu">
 			<div class="jLBlsX">
-				<a class="hXdylP">조건에 맞는 방 ${count} 개</a>
+				<a class="hXdylP">조건에 맞는 방: <span id="count"></span> 개</a>
 			</div>
 			<!-- 방 리스트 영역 --> 
 			<div class="cDzGDZ" >
@@ -519,17 +519,32 @@ function toggle(obj){
 <%@ include file="/WEB-INF/include/include-body.jspf"%>
 
 <script type="text/javascript">
+$("#allChk").click(function(){
+    if($("#allChk").is(":checked")){
+        $("input[name='ROOM_FLOOR']").prop("checked", true);
+    }
+    else{
+        $("input[name='ROOM_FLOOR']").prop("checked", false);
+    }
+});
+    
+// 한개의 체크박스 선택 해제시 전체선택 체크박스도 해제
+$("input[name='ROOM_FLOOR']").click(function(){
+    if($("input[name='ROOM_FLOOR']:checked").length >9){
+        $("#allChk").prop("checked", true);
+    }else{
+        $("#allChk").prop("checked", false);
+    }
+});
+
 $(document).ready(function(){
 	fn_selectSearchRoomList(1);
 });
 
 $("input").on("change",function(){
-	fn_search($(this));
+	fn_search();
 });
-function fn_search(param){
-	var comAjax = new ComAjax();
-	comAjax.setUrl("<c:url value='/search/roomList'/>");
-	comAjax.setCallback("fn_selectSearchRoomListCallback");
+function fn_addParam(ajax,param){
 	var key = param.attr("name");
 	var value = [];
 	$('input[name='+key+']').each(function(){
@@ -537,9 +552,37 @@ function fn_search(param){
 			value.push(this.value);
 		}
 	});
-	console.log("key:"+param.attr("name"));
-	console.log("value:"+value);
-	comAjax.addParam(key,value);
+	ajax.addParam(key,value);
+}
+function fn_search(){
+	var comAjax = new ComAjax();
+	comAjax.setUrl("<c:url value='/search/roomList'/>");
+	comAjax.setCallback("fn_selectSearchRoomListCallback");
+
+	var ROOM_TYPE = $("input[name=ROOM_TYPE]");
+	var TRADE_TYPE = $("input[name=TRADE_TYPE]");
+	var ROOM_FLOOR = $("input[name=ROOM_FLOOR]");
+	var STRUCTURES = $("input[name=STRUCTURES]");
+	var PARKING = $("input[name=PARKING]");
+	var PET = $("input[name=PET]");
+	var ELEVATOR = $("input[name=ELEVATOR]");
+	var BALCONY = $("input[name=BALCONY]");
+	var OPTIONS = $("input[name=OPTIONS]");
+	var LOAN_ACCESS = $("input[name=LOAN_ACCESS]");
+	var BUILT_IN = $("input[name=BUILT_IN]");
+	
+	fn_addParam(comAjax,ROOM_TYPE);
+	fn_addParam(comAjax,TRADE_TYPE);
+	fn_addParam(comAjax,ROOM_FLOOR);
+	fn_addParam(comAjax,STRUCTURES);
+	fn_addParam(comAjax,PARKING);
+	fn_addParam(comAjax,PET);
+	fn_addParam(comAjax,ELEVATOR);
+	fn_addParam(comAjax,BALCONY);
+	fn_addParam(comAjax,BUILT_IN);
+	fn_addParam(comAjax,OPTIONS);
+	fn_addParam(comAjax,LOAN_ACCESS);
+	
 	comAjax.addParam("PAGE_INDEX",$("#PAGE_INDEX").val()); 
 	comAjax.addParam("PAGE_ROW", 15); 
 	comAjax.ajax();
@@ -571,7 +614,10 @@ function fn_selectSearchRoomListCallback(data){
 			}; 
 		
 		gfn_renderPaging(params); 
-			var str = ""; 
+			var str = "";
+			var count = data.count;
+			$("#count").empty();
+			$("#count").append(count);
 			$.each(data.list, function(key, room){ 
 				str +=  "<li class='room hxpbDF'>"
 							+ "<div class='OUJOU'>"
@@ -608,7 +654,7 @@ function fn_selectSearchRoomListCallback(data){
         	body.append(str); 
 		} 
 }
-        
+     
 </script>
 
 </body>
