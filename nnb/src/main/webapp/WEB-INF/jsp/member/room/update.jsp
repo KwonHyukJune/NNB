@@ -249,7 +249,7 @@ $(document).ready(function(){
 			key[i].value = value;
 		};
 	})();
-	
+	/*
 	(function(){
 		var value = "${room.DESC_DETAIL}";
 		var key = $("textarea[name='DESC_DETAIL']");
@@ -257,7 +257,7 @@ $(document).ready(function(){
 			key[i].value = value;
 		};
 	})();
-	
+	*/
 	(function(){
 		var value = "${room.DESC_SECRET}";
 		var key = $("textarea[name='DESC_SECRET']");
@@ -405,10 +405,10 @@ $(document).ready(function(){
 							<div class="xMNKR">
 								<p class="styled__Text-sc-1wmqs5y-2 dvECgk"><svg width="18" height="18" viewBox="0 0 18 18"><g fill="none" fill-rule="evenodd"><circle cx="9" cy="9" r="9" fill="#E6E7EA"></circle><path fill="#9C9EA3" d="M8.997 13.5a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5zm.01-2.499c-.634 0-.75-5.449-.75-6.001 0-.552.336-1 .75-1s.75.448.75 1-.116 6.001-.75 6.001z"></path></g></svg><span>도로명, 건물명, 지번에 대해 통합검색이 가능합니다.</span></p>
 								<div class="styled__Form-sc-1wmqs5y-3 dhdAXv" id="frm_address">
-									<input autocomplete="off" class="styled__Keyword-sc-1wmqs5y-4 iqNWWF Input-sfsekm-0 kTQnUD" name="keyword" placeholder="예)번동 10-1, 강북구 번동" value="">
+									<input autocomplete="off" class="styled__Keyword-sc-1wmqs5y-4 iqNWWF Input-sfsekm-0 kTQnUD" name="keyword" placeholder="예)번동 10-1, 강북구 번동" value="${room.ADDRSSS1}">
 									<button onclick="sample6_execDaumPostcode()" type="button" class="styled__SearchBtn-sc-1wmqs5y-5 hdoEbx">주소검색</button>
 								</div>
-								<div class="fUXvpI addressarea"></div>
+								<div class="fUXvpI addressarea">${room.ADDRESS1}</div>
 								<div class="kXKUhT">
 								<div class="gnEBbX">
 								<input class="bVCGUR kTQnUD" type="text" name="ADDRESS2" id="sample6_address2" size="50"
@@ -770,7 +770,7 @@ $(document).ready(function(){
 					<tr>
 						<th>상세설명</th>
 						<td class="iXeisV">
-							<textarea class="iePFTd hunnDM" name="DESC_DETAIL" id="DESC_DETAIL"
+							<textarea class="iePFTd hunnDM" name="DESC_DETAIL" id="DESC_DETAIL" value="${room.DESC_DETAIL}"
 								placeholder="상세설명 작성 주의사항
 
 - 방 정보와 관련없는 홍보성 정보는 입력하실 수 없습니다. (홈페이지 주소, 블로그, SNS, 메신저ID, 전화번호, 이메일 등)

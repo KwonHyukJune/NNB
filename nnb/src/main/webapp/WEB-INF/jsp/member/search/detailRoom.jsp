@@ -306,6 +306,7 @@
 				<div class="dDctva">
 					<script type="text/javascript">
 						var option = "${room.OPTIONS}";
+						console.log(option);
 						option = option.replace('1','에어컨')
 							.replace('2','"세탁기"')
 							.replace('3','"침대"')
@@ -320,11 +321,9 @@
 							.replace('12','"전자도어락"')
 							.replace('13','"비데"');
 						option = eval("["+option+"]");
+						console.log(option);
 						for(var i=0;i<option.length;i++){
 							document.write("<div class='gqtsIc'><p>"+option[i]+"</p></div>");
-						}
-						if(option.length==0){
-							document.write("<span>옵션이 없습니다.</span>");
 						}
 					</script>
 				</div>
@@ -349,7 +348,7 @@
 <%@ include file="/WEB-INF/include/footer.jspf" %>
 </div>
 </body>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e603a6f6c5db5707c8168383f3516651&libraries=services,clusterer,drawing"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=340d0c25b07c60b5bc6548c7a084dc81&libraries=services,clusterer,drawing"></script>
 	<c:forEach var="address" items="${list}">
 		<script>
             var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
