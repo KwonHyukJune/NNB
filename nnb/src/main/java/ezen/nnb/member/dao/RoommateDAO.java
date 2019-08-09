@@ -14,7 +14,7 @@ public class RoommateDAO extends AbstractDAO{
 	}
 	public void registMyProfile(Map<String,Object>map)throws Exception{
 		insert("roommate.insertMyRoommateProfile",map);
-	}
+	} 
 
 	public void myProfileModify(Map<String,Object>map)throws Exception{
 		update("roommate.updateMyProfile",map);

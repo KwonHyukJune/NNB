@@ -12,7 +12,7 @@ public interface RoommateService {
 	public void myProfileModify(Map<String,Object>map)throws Exception;
 	
 	public void myProfileDelete(Map<String,Object>map)throws Exception;	
-	
+	 
 	public List<Map<String,Object>>searchRoommate(Map<String,Object>map)throws Exception;
 	
 	public int countRoommate(Map<String, Object> map)throws Exception;
