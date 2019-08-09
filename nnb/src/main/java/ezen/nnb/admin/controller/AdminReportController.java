@@ -31,7 +31,7 @@ public class AdminReportController {
 	
 	@RequestMapping(value = "/admin/reportRoomList")
 	public ModelAndView adminReportRoomList(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("/admin/reportRoomList");
+		ModelAndView mv = new ModelAndView("/admin/report/reportRoomList");
 
 		List<Map<String, Object>> list = adminReportService.selectReportRoomList(commandMap.getMap());
 		mv.addObject("list", list);
@@ -39,9 +39,10 @@ public class AdminReportController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "/admin/reportMemberList")
+	@RequestMapping(value = "/admin/reportMateList")
 	public ModelAndView adminReportMateList(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("reportMemberList");
+		ModelAndView mv = new ModelAndView("/admin/report/reportMateList");
+		System.out.println("mateList"+commandMap.getMap());
 
 		List<Map<String, Object>> list = adminReportService.selectReportMateList(commandMap.getMap());
 		mv.addObject("list", list);
@@ -51,8 +52,9 @@ public class AdminReportController {
 
 	@RequestMapping(value="/admin/reportRoomDetail")
 	public ModelAndView adminRoomReportDetail(CommandMap commandMap) throws Exception{
-		ModelAndView mv = new ModelAndView("/admin/reportRoomDetail");
-		
+		ModelAndView mv = new ModelAndView("/admin/report/reportRoomDetail");
+		System.out.println("roomDetail"+commandMap.getMap());
+
 		Map<String,Object> map = adminReportService.selectReportRoomDetail(commandMap.getMap());
 		mv.addObject("map", map);
 		
@@ -61,7 +63,7 @@ public class AdminReportController {
 	
 	@RequestMapping(value="/admin/reportMemberDetail")
 	public ModelAndView adminMateReportDetail(CommandMap commandMap) throws Exception{
-		ModelAndView mv = new ModelAndView("reportMemberDetail");
+		ModelAndView mv = new ModelAndView("/admin/report/reportMateDetail");
 		
 		Map<String,Object> map = adminReportService.selectReportMateDetail(commandMap.getMap());
 		mv.addObject("map", map);

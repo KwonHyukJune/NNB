@@ -36,7 +36,11 @@ $(document).ready(function(){
 		comSubmit.submit();
 	}
 });
-	
+
+
+
+
+
 </script>
 
 </head>
@@ -74,6 +78,7 @@ $(document).ready(function(){
 	    제제내역
     	<c:forEach var="memberDetails" items="${memberDetails}">
 	  <div>${memberDetails.RNUM}. 제재 사유 : ${memberDetails.BAN_REASON}</div>
+	  <div>제재 날짜 : ${memberDetails.BAN_REMOVAL_DATE}</div>
 	
 	     
     	</c:forEach>
@@ -153,29 +158,32 @@ $(document).ready(function(){
 <br/><br/><br/> 
 
   	
-<form action="/admin/memberDelete" method="post" id="frm" name="frm">    
+<form action="/admin/memberDelete" method="post" id="frm" name="frm">   
+ID: ${memberDetail.MEM_ID} /NAME: ${memberDetail.MEM_NAME} /PHONE: ${memberDetail.MEM_PHONE} /DATE: ${memberDetail.BAN_DATE}
+gg:${period}
+<br/><br/>
+	<input type="hidden" id="BAN_NUM" name="BAN_NUM" value="${memberDetail.BAN_NUM}">
 	<input type="hidden" id="MEM_ID" name="MEM_ID" value="${memberDetail.MEM_ID}">
 	<input type="hidden" id="MEM_NAME" name="MEM_NAME" value="${memberDetail.MEM_NAME}"> 
 	<input type="hidden" id="MEM_PHONE" name="MEM_PHONE" value="${memberDetail.MEM_PHONE}"> 
-	<input type="hidden" id="BAN_DATE" name="BAN_DATE" value="${memberDetail.BAN_DATE}"> 
+	<input type="hidden" name="MEM_NUM" value="${memberDetail.MEM_NUM}">
 
-	     <select id="BAN_REMOVAL_DATE" name="BAN_REMOVAL_DATE">
-	     	<option value="2019-08-11">1일</option>
+	  	<select id="BAN_REMOVAL_DATE" name="BAN_REMOVAL_DATE">
+	     	<option value="1">1일</option>
 	     	<option value="3">3일</option>
 	     	<option value="7">7일</option>
 	     	<option value="30">30일</option>
 	     </select> &nbsp;&nbsp;
-	     <select id="BAN_REASON" name="BAN_REMOVAL_DATE">
-	     	<option value="1">허위광고</option>
-	     	<option value="2">욕설</option>
-	     	<option value="3">불쾌한 아이디</option>
-	     	<option value="4">^^</option>
+	     <select id="BAN_REASON" name="BAN_REASON">
+	     	<option value="허위광고">허위광고</option>
+	     	<option value="욕설">욕설</option>
+	     	<option value="불쾌한 아이디">불쾌한 아이디</option>
+	     	<option value="4">4</option>
 	     </select> &nbsp;&nbsp;
 		
 		  	<a href="#" onClick="javascript:showPopup1()">메시지 보내기</a> &nbsp;&nbsp;
 			
 		   	<a href="#" id="submit">확인</a> &nbsp;&nbsp;  
-			
 		    <a href="javascript:frameclose()">닫기</a>
 		   	
 </form>

@@ -7,7 +7,7 @@
 <![CDATA[  
 SELECT
   MEM_NUM,
-  MEM_DEL_GB
+  MEM_DEL_GB,
   MEM_KIND,
   MEM_ID,
   MEM_NAME,
@@ -110,42 +110,36 @@ WHERE
 <select id="adminMemberBanDetail" parameterType="hashMap" resultType="hashMap">
 <![CDATA[ 
   SELECT
+  	   ROW_NUMBER() OVER (ORDER BY BAN_NUM ASC) RNUM,
        BAN_NUM,
+  	   MEM_ID,
 	   BAN_REMOVAL_DATE,
 	   BAN_REASON
 FROM
-	   FROM BAN
+	   BAN
 WHERE
 		MEM_ID=#{MEM_ID}	   
  ]]>
 </select>
                
-<select id="adminMemberBan" parameterType="hashMap" resultType="hashMap">
+<select id="adminMemberBan" parameterType="hashMap">
 <![CDATA[                 
-               
-UPDATE BAN SET MEM_ID='Y'
-WHERE 
+INSERT INTO BAN( 
+	BAN_NUM,
+	MEM_ID,
+	MEM_NAME,
+	MEM_PHONE,
+	BAN_REMOVAL_DATE,
+	BAN_REASON
+)VALUES(
+	BAN_NUM_SEQ.NEXTVAL,
+	#{MEM_ID},
+	#{MEM_NAME},
+	#{MEM_PHONE},
+	SYSDATE+#{BAN_REMOVAL_DATE},
+	#{BAN_REASON}
+)	        
   ]]>
-<if test="period==1">
-<![CDATA[                 
-BAN_REMOVAL_DATE=TO_CHAR(BAN_DATE+#{ban}'YYYY-MM-DD')
-  ]]>
-</if>
-<if test="period==2">
-<![CDATA[    
-AND BAN_REMOVAL_DATE=TO_CHAR(BAN_DATE+#{ban},'YYYY-MM-DD')
-  ]]>
-  </if>
-<if test="period==3">
-<![CDATA[    
-AND BAN_REMOVAL_DATE=TO_CHAR(BAN_DATE+#{ban},'YYYY-MM-DD')
-  ]]>
-  </if>
-<if test="period==4">
-<![CDATA[    
-AND BAN_REMOVAL_DATE=TO_CHAR(BAN_DATE+#{ban},'YYYY-MM-DD')               
-  ]]>
-  </if>
 </select>
                            
 </mapper>
