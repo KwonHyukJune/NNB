@@ -483,11 +483,11 @@ $(document).ready(function(){
 						<th>구조</th>
 						<td class="cCUCai ">
 							<label class="hrokF cdcjQK">
-								<input class="fyqlMy cdcjQK" type="checkbox" class="STRUCTURES" value="1" name="STRUCTURES" checked="true">
+								<input class="fyqlMy cdcjQK" type="checkbox" class="STRUCTURES" value="1" name="STRUCTURES">
 								<p>복층</p>
 							</label>
 							<label class="hrokF cdcjQK">
-								<input class="fyqlMy cdcjQK" type="checkbox" class="STRUCTURES" value="2" name="STRUCTURES" checked="true">
+								<input class="fyqlMy cdcjQK" type="checkbox" class="STRUCTURES" value="2" name="STRUCTURES">
 								<p>1.5룸/주방분리형</p>
 							</label>
 						</td>
