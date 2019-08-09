@@ -77,15 +77,6 @@ function showPopup(num,id){
 <body>
 <%@ include file="/WEB-INF/include/adminMemberHeader.jspf"%>
 
-
-
-<div><h1>회원 관리</h1></div>
-<br/>
-	
-<div><h3>
-<a href=# onclick="location.href='/nnb/admin/memberList'">회원 검색</a>&nbsp;&nbsp;&nbsp;&nbsp;
-<a href=# onclick="location.href='/nnb/admin/messageList'">전체 쪽지함</a>
-</h3></div>
 <br>
 
 <br/>
