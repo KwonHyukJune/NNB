@@ -24,11 +24,10 @@
 	</div>
 	<br />
 
-	<div>
-<!-- 링크에 URL 제대로 바꿔줘야 됩니다. 지금은 테스트용 jsp 링크입니다. -->
-	<a href=# onclick="location.href='/nnb/admin/openFaqList'">자주 묻는 질문</a>&nbsp;&nbsp;&nbsp;&nbsp;
-	<a href=# onclick="location.href='openQnaList.jsp'">1:1 질문</a>
-	</div>
+<div>
+<a href=# onclick="location.href='/nnb/admin/openFaqList'">자주 묻는 질문</a>&nbsp;&nbsp;&nbsp;&nbsp;
+<a href=# onclick="location.href='/nnb/admin/qna/list'">1:1 질문</a>	
+</div>
 
 <br/><br/><br/>
 
@@ -132,5 +131,6 @@ function fn_selectFaqListCallback(data){
 	} 
 }
 </script>
+
 </body>
 </html>

@@ -42,10 +42,9 @@ function goPage1(num) {   // 새 약관 등록
 <br/>
 	
 <div>
-<!-- 링크에 URL 제대로 바꿔줘야 됩니다. 지금은 테스트용 jsp 링크입니다. -->
-<a href=# onclick="location.href='/nnb/admin/noticeList'">공지 게시판</a>&nbsp;&nbsp;&nbsp;&nbsp;
-<a href=# onclick="location.href='/nnb/admin/roomList'">방 게시판</a>&nbsp;&nbsp;&nbsp;&nbsp;
-<a href=# onclick="location.href='/nnb/admin/terms/list'">약관 관리</a>
+	<a href=# onclick="location.href='/nnb/admin/openNoticeList'">공지 게시판</a>&nbsp;&nbsp;&nbsp;&nbsp;
+	<a href=# onclick="location.href='/nnb/admin/roomList'">방 게시판</a>&nbsp;&nbsp;&nbsp;&nbsp;
+	<a href=# onclick="location.href='/nnb/admin/terms/list'">약관 관리</a>
 </div>
 
 <br/><br/><br/>

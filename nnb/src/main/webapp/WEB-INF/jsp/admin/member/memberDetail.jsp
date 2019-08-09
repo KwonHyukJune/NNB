@@ -159,8 +159,7 @@ $(document).ready(function(){
 
   	
 <form action="/admin/memberDelete" method="post" id="frm" name="frm">   
-ID: ${memberDetail.MEM_ID} /NAME: ${memberDetail.MEM_NAME} /PHONE: ${memberDetail.MEM_PHONE} /DATE: ${memberDetail.BAN_DATE}
-gg:${period}
+
 <br/><br/>
 	<input type="hidden" id="BAN_NUM" name="BAN_NUM" value="${memberDetail.BAN_NUM}">
 	<input type="hidden" id="MEM_ID" name="MEM_ID" value="${memberDetail.MEM_ID}">

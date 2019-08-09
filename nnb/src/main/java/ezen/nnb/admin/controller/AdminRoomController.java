@@ -1,7 +1,5 @@
 package ezen.nnb.admin.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -90,7 +88,7 @@ public class AdminRoomController{
 			  mv.addObject("pagingHtml",pagingHtml);
 			  mv.addObject("currentPage",currentPage);
 			  mv.addObject("adminRoomList",adminRoomList);
-			  mv.setViewName/*##��*/("admin/roomList");
+			  mv.setViewName/*##��*/("admin/room/roomList");
 				  
 			 return mv;
 			 	}

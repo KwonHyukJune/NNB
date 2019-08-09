@@ -61,6 +61,9 @@ function openPopup(url) {
 		      	<li>날짜  :     	
 		         ${map.REPORT_DATE}&nbsp;
 		         </li>
+		         <li>아이디  :     	
+		         ${map.REPORT_D_ID}&nbsp;
+		         </li>
 		         <li>    			        	
 		         <a href = javascript:openPopup("/nnb/admin/memberList")>매물번호  : ${map.REPORT_POST_NUM}&nbsp;</a> 
 		         </li>

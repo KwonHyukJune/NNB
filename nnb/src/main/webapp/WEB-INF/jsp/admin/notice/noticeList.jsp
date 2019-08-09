@@ -21,7 +21,7 @@
 		<h1>게시판 관리</h1>
 	</div>
 	<br />
-
+	
 	<div>
 		<a href=# onclick="location.href='/nnb/admin/openNoticeList'">공지 게시판</a>&nbsp;&nbsp;&nbsp;&nbsp;
 		<a href=# onclick="location.href='/nnb/admin/roomList'">방 게시판</a>&nbsp;&nbsp;&nbsp;&nbsp;
