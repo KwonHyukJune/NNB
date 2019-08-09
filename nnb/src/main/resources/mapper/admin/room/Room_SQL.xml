@@ -4,7 +4,8 @@
 
 <select id="selectAdminRoomList" resultType="hashMap" parameterType="hashMap" >
 <![CDATA[
-SELECT BOARD_NUM,
+SELECT DISTINCT 
+BOARD_NUM,
        UPLOAD_DATE,
        MEM_ID,
        DESC_TITLE,
@@ -49,6 +50,7 @@ FROM ROOM_BOARD B, MEMBER M, ROOM_INFO1 I1, ROOM_INFO2 I2
 WHERE I1.MEM_ID = M.MEM_ID        
             AND B.ROOM_NUM = I2.ROOM_NUM
             AND B.ROOM_NUM = I1.ROOM_NUM
+]]>
 <choose>
       <when test="I2.DESC_TITLE == 1">        
             AND I2.DESC_TITLE like %#{DESC_TITLE}%
@@ -60,7 +62,7 @@ WHERE I1.MEM_ID = M.MEM_ID
         AND I1.MEM_ID like %#{MEM_ID}%
       </when>
 </choose>
-]]>
+
 </select>
 
 
