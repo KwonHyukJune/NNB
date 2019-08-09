@@ -58,7 +58,7 @@
 	
 	
 	function openDetail(url){
-		var strUrl = "/nnb"+url;
+		var strUrl = "/first"+url;
 		window.open(strUrl);
 	};
 	function insertFav(num){

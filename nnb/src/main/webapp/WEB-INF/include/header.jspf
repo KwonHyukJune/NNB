@@ -41,7 +41,7 @@ function goMyPage(){
 <div class="cjODQK">
 	<div class="menu gRTWkG">
 		<a class="hVfzba" href="<c:url value='/bank/openBankList'/>">제휴은행</a>
-		<a class="hVfzba" href="<c:url value='/main/searchRoommate'/>">룸메이트찾기</a>
+		<a class="hVfzba" href="<c:url value='/searchRoommate'/>">룸메이트찾기</a>
 		<a class="hVfzba" href="<c:url value='/search/openSearchRoomList'/>">방찾기</a>
 		<a class="hVfzba" href="<c:url value='/myInterest/recentRoom'/>">관심목록</a>
 		<a class="hVfzba" href="<c:url value='/room/writeForm'/>">방내놓기</a>
