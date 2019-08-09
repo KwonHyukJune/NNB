@@ -94,7 +94,7 @@ public class RoomController {
 		ModelAndView mv = new ModelAndView("member/search/detailRoom");
 		
 		Map<String,Object> map = roomService.selectRoomDetail(commandMap.getMap());
-		mv.addObject("map", map.get("map")); //게시글 상세정보.
+		mv.addObject("room", map.get("map")); //게시글 상세정보.
 		mv.addObject("list", map.get("list")); // 첨부파일의 목록을 가지고 있는 리스트.
 		return mv;
 	}
