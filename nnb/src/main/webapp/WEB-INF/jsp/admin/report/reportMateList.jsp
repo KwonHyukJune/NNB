@@ -11,7 +11,7 @@
 
 <script type="text/javascript">
 function showPopup(num, id){
-    var url = "/nnb/admin/report/detail?REPORT_NUM="+num
+    var url = "/nnb/admin/reportMemberDetail?REPORT_NUM="+num;
     var name = "회원정보";
     var option = "width = 500, height = 500, top = 100, left = 200, location = no, resizeable = yes, scrollbars = yes"
     window.open(url, name, option);
@@ -74,29 +74,26 @@ function delet(num){  // 삭제
 
 
 
-<div class="selectReportMemberList">
+<div class="selectReportMateList">
 <div class="reportMateList">
    
    <c:forEach var="map" items="${list}">
-   <div class="report">
-  <div>
-         ${map.RNUM}&nbsp;	
-      	
-		 ${map.REPORT_TYPE}&nbsp;      
-      	
-         ${map.REPORT_DATE}&nbsp;
-         
-         ${map.REPORT_D_ID}&nbsp;	
-         
-         ${map.REPORT_TITLE}
-     
-      <input type="button" value="상세보기" onclick="showPopup(${map.REPORT_NUM});" /> 
-      <a href="#" class="btn" id="${map.REPORT_NUM}" onclick="delet(${map.REPORT_NUM})">삭제</a>
-        
-   </div>
-     
-   </div>	
-  
+	   <div class="report">
+	         ${map.RNUM}&nbsp;	
+	      	
+			 ${map.REPORT_TYPE}&nbsp;      
+	      	
+	         ${map.REPORT_DATE}&nbsp;
+	         
+	         ${map.REPORT_D_ID}&nbsp;	
+	         
+	         ${map.REPORT_TITLE}
+	     
+	      <input type="button" value="상세보기" onclick="showPopup(${map.REPORT_NUM});" /> 
+	      <a href="#" class="btn" id="${map.REPORT_NUM}" onclick="delet(${map.REPORT_NUM})">삭제</a>
+	        
+	     
+	   </div>	 
    </c:forEach>
 </div>
 

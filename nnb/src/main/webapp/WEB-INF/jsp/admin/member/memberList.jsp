@@ -11,7 +11,7 @@
 <script type="text/javascript">
 
 function showPopup(num, id){
-    var url = "/nnb/admin/memberDetail?MEM_NUM="+num+"&MEM_ID=id"+num;
+    var url = "/nnb/admin/memberDetail?MEM_NUM="+num+"&MEM_ID=id";
     var name = "회원정보";
     var option = "width = 500, height = 500, top = 100, left = 200, location = no, resizeable = yes, scrollbars = yes"
     window.open(url, name, option);

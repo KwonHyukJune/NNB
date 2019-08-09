@@ -10,22 +10,11 @@
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/myInterest.css'/>"/>
 
 <script type="text/javascript">
-function goPage1(num) {   
-	location.href="/nnb/admin/report/list?num="+num; 
-	}
 
-$(document).ready(function(){
-	
-	$("#submit").on("click", function(e){ //작성하기 버튼
-		insertBoard();
-	});
-		
-	function insertBoard(){
-		var comSubmit = new ComSubmit("frm");
-		comSubmit.setUrl("<c:url value='/admin/ban' />");
-		comSubmit.submit();
-	}
-});
+function openPopup(url) {
+
+	window.open(url,"name","width = 500, height = 500, top = 100, left = 200, location = no, resizeable = yes, scrollbars = yes");
+}
 </script>
 
 </head>
@@ -60,8 +49,8 @@ $(document).ready(function(){
 		      	<li>날짜  :     	
 		         ${map.REPORT_DATE}&nbsp;
 		         </li>
-		         <li>아이디  :     	
-		         ${map.REPORT_D_ID}&nbsp;
+		         <li>    	
+		         <a href = javascript:openPopup("/nnb/admin/memberDetail?MEM_NUM='${memberDetail.MEM_NUM}'&MEM_ID=${map.REPORT_D_ID}")>아이디  :  ${map.REPORT_D_ID}&nbsp;</a> 
 		         </li>
 		         <li>제목  :     	
 		         ${map.REPORT_TITLE}&nbsp;
@@ -72,17 +61,9 @@ $(document).ready(function(){
 		          
 		      </ul>
 		    <br/><br/><br/> 
-		   <form action="insertBan" method="post" id="frm" name="contents">     
-		    <select id="BAN_DATE" name="BAN_DATE">
-		     	<option value="1">1일</option>
-		     	<option value="3">3일</option>
-		     	<option value="7">7일</option>
-		     	<option value="30">30일</option>
-		     </select>
-		  
+		    		  
 		    <a href="#" id="submit">확인</a>    
-		    <a href="#" onClick="goPage1(${map.REPORT_NUM})">목록으로</a>
-		   </form>
+
    		</div>	
 	</div>
 </div>
