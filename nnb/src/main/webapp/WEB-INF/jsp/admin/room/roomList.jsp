@@ -16,7 +16,7 @@
 	}); 
 
 	function showPopup(num, id){
-	    var url = "/nnb/admin/roomDetail?MEM_NUM="+num+"&MEM_ID=id";
+	    var url = "/nnb/admin/roomDetail?BOARD_NUM="+num;
 	    var name = "방정보";
 	    var option = "width = 500, height = 500, top = 100, left = 200, location = no, resizeable = yes, scrollbars = yes"
 	    window.open(url, name, option);
@@ -34,6 +34,7 @@
 <br/>
 	
 <div>
+
 <a href=# onclick="location.href='/nnb/admin/openNoticeList'">공지 게시판</a>&nbsp;&nbsp;&nbsp;&nbsp;
 <a href=# onclick="location.href='/nnb/admin/roomList'">방 게시판</a>&nbsp;&nbsp;&nbsp;&nbsp;
 <a href=# onclick="location.href='/nnb/admin/terms/list'">약관 관리</a>

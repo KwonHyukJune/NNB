@@ -6,7 +6,7 @@
 <select id="selectReportRoomList" parameterType="hashmap" resultType="hashmap"> 
 	<![CDATA[
 	SELECT
-		ROW_NUMBER() OVER (ORDER BY REPORT_NUM DESC) RNUM,
+		ROW_NUMBER() OVER (ORDER BY REPORT_NUM ASC) RNUM,
 		REPORT_NUM,
 		REPORT_ID,
 		REPORT_D_ID,
@@ -54,7 +54,7 @@
 <select id="selectReportMateList" parameterType="hashmap" resultType="hashmap"> 
 	<![CDATA[
 	SELECT
-		ROW_NUMBER() OVER (ORDER BY REPORT_NUM DESC) RNUM,
+		ROW_NUMBER() OVER (ORDER BY REPORT_NUM ASC) RNUM,
 		REPORT_NUM,
 		REPORT_ID,
 		REPORT_D_ID,
@@ -71,7 +71,7 @@
 <select id="selectReportMateDetail" parameterType="hashmap" resultType="hashmap"> 
 	<![CDATA[
 	SELECT
-		ROW_NUMBER() OVER (ORDER BY REPORT_NUM DESC) RNUM,
+		ROW_NUMBER() OVER (ORDER BY REPORT_NUM ASC) RNUM,
 		REPORT_NUM,
 		REPORT_ID,
 		REPORT_D_ID,
@@ -91,7 +91,7 @@
 <select id="selectReportRoomDetail" parameterType="hashmap" resultType="hashmap"> 
 	<![CDATA[
 	SELECT
-		ROW_NUMBER() OVER (ORDER BY REPORT_NUM DESC) RNUM,
+		ROW_NUMBER() OVER (ORDER BY REPORT_NUM ASC) RNUM,
 		REPORT_NUM,
 		REPORT_ID,
 		REPORT_D_ID,
