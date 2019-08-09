@@ -64,3 +64,60 @@ ul, li {
     padding-bottom: 200px;
     margin: 0px auto;
 }
+.pbYHJ::after {
+    display: block;
+    content: "";
+    clear: both;
+}
+.qUCQS {
+    width: 100%;
+    margin: 50px auto 150px;
+    border-top: 1px solid rgb(34, 34, 34);
+    border-bottom: 1px solid rgb(204, 204, 204);
+}
+.bryRNw {
+    height: 59px;
+    line-height: 58px;
+}
+.bryRNw2 + li {
+    border-top: 1px solid rgb(238, 238, 238);
+}
+.bryRNw2 {
+    margin: 0 20px;
+    margin-bottom: 20px;
+    padding-top: 20px;
+}
+.bryRNw + li {
+    border-top: 1px solid rgb(238, 238, 238);
+}
+div.message > p, li > p{
+	float:left;
+}
+div.message > p:first-child, li > p:first-child{
+	width:10%;
+    text-align: center;
+}
+div.message > p:nth-child(2), li > p:nth-child(2){
+	width:10%;
+    text-align: center;
+}
+div.message > p:nth-child(3), li > p:nth-child(3){
+	width:10%;
+    text-align: center;
+}
+li > p:nth-child(4){
+	width:50%;
+    text-align: center;
+}
+div.message > p:nth-child(5){
+	width:50%;
+}
+div.message > p:nth-child(6), li > p:nth-child(5){
+	width:20%;
+    text-align: center;
+}
+.pbYHJ {
+    height: 59px;
+    line-height: 58px;
+    border-bottom: 1px solid rgb(204, 204, 204);
+}

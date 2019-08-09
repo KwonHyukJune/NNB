@@ -3,6 +3,9 @@
 <html>
 <head>
 <%@ include file="/WEB-INF/include/include-header.jspf" %>
+<div style="display:none;">
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>​
+</div>
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/myPage.css'/>"/>
 <script type="text/javascript">
 var memId = sessionStorage.getItem("MEM_ID");
@@ -44,59 +47,54 @@ $(document).ready(function(){
 </head>
 <body>
 <%@ include file="/WEB-INF/include/header.jspf" %>
-<%@ include file="myPage.jspf" %>
 
 <div class="messageList cAeKOJ">
+<%@ include file="myPage.jspf" %>
 
 	<div class="list">
-	<ul>
-	<li>
-		<div>번호</div>
-		<div><select id="type">
-		<option value="0">전체</option>
-		<option value="1">수신</option>
-		<option value="2">발신</option>
-		</select></div>
-		<div>대상</div>
-		<div>제목</div>
-		<div>날짜</div>
+	<ul class="qUCQS">
+	<li class="pbYHJ">
+		<p>번호</p>
+		<p>
+			<select id="type">
+			<option value="0">전체</option>
+			<option value="1">수신</option>
+			<option value="2">발신</option>
+			</select>
+		</p>
+		<p>대상</p>
+		<p>제목</p>
+		<p>날짜</p>
 	</li>
 	<c:forEach var="message" items="${list}" varStatus="i">
-	<li id="${i.index}">
+	<fmt:parseDate var="dateString" value="${message.SEND_DATE}" pattern="yyyy-MM-dd"/>
+	<li id="${i.index}" class="bryRNw">
 	<div onclick="openMessage(${message.MESSAGE_NUM})" class="message">
-		<div>${message.RNUM}</div>
-		<div>
-		</div>
-		<div id="${i.index}">
-		</div>
+		<p>${message.RNUM}</p>
+		<p></p>
+		<p></p>
 		<script type="text/javascript">
 			if("${message.SENDER}"==memId){
-				$("li#${i.index}>div>div:nth-child(2)").text("발신");
-				$("li#${i.index}>div>div:nth-child(3)").text("${message.RECEIVER}");
-				$("li#${i.index}>div>div:nth-child(2)").className="발신";
+				$("li#${i.index}>div>p:nth-child(2)").text("발신");
+				$("li#${i.index}>div>p:nth-child(3)").text("${message.RECEIVER}");
+				$("li#${i.index}>div>p:nth-child(2)").className="발신";
 			}else if("${message.RECEIVER}"==memId){
-				$("li#${i.index}>div>div:nth-child(2)").text("수신");
-				$("li#${i.index}>div>div:nth-child(3)").text("${message.SENDER}");
-				$("li#${i.index}>div>div:nth-child(2)").className="수신";
+				$("li#${i.index}>div>p:nth-child(2)").text("수신");
+				$("li#${i.index}>div>p:nth-child(3)").text("${message.SENDER}");
+				$("li#${i.index}>div>p:nth-child(2)").className="수신";
 			}
 		</script>
-		<div>${message.MESSAGE_TITLE}</div>
-		<div>${message.SEND_DATE}</div>
-		<div class="content" style="display: none;" id="${message.MESSAGE_NUM}">
-			<div style="width:10%">내용</div>
-			<div style="width:90%">${message.MESSAGE_CONTENT}</div>
-		</div>
+		<p>${message.MESSAGE_TITLE}</p>
+		<p><fmt:formatDate value="${dateString}" pattern="yyyy-MM-dd"/></p>
 	</div>
-			<a href="#" class="btn" onclick="javascript:reply_${i.index}();">답장</a>
-			<a href="#" class="btn" onclick="javascript:ignore_${i.index}();">차단</a>
 			<script type="text/javascript">
 				function reply_${i.index}(){
-					var mem = $("li#${i.index}>div>div:nth-child(3)").text();
+					var mem = $("li#${i.index}>div>p:nth-child(3)").text();
 					var url = "messageWriteForm?receiver="+mem;
 					location.href=url;
 				};
 				function ignore_${i.index}(){
-					var mem = $("li#${i.index}>div>div:nth-child(3)").text();
+					var mem = $("li#${i.index}>div>p:nth-child(3)").text();
 					if(confirm("'"+mem+"' 회원을 차단하시겠습니까?")){
 						var str = "<form id='frm' action='ignoreUser' method='post'>"
 							+ "<input type='hidden' name='IGNORE_D_MEM' value='"+mem+"'>"
@@ -107,17 +105,24 @@ $(document).ready(function(){
 				};
 			</script>
 	</li>
+	<li class="content bryRNw2" style="display: none;" id="${message.MESSAGE_NUM}">
+		<p style="width:10%">내용</p>
+		<p style="width:90%; text-align:left">${message.MESSAGE_CONTENT}</p>
+		<div style="text-align:center; word-break: break-all;">
+		<a href="#" class="btn" onclick="javascript:reply_${i.index}();">답장</a>
+		<a href="#" class="btn" onclick="javascript:ignore_${i.index}();">차단</a>
+		</div>
+	</li>
 	</c:forEach>
 	</ul>
-	</div>
 	<c:if test="${count==0}">
-	조회된 메시지가 없습니다.
+	<li>조회된 메시지가 없습니다.</li>
 	</c:if>
-	<a href="messageWriteForm">새 메시지 작성</a>
+	</div>
+	<div>
+	<a href="messageWriteForm" style="">새 메시지 작성</a>
 	<a href="ignoreUserList">차단목록</a>
-<%-- 	<div class="paging">
-		${pagingHtml}
-	</div> --%>
+	</div>
 	
 </div>
 <br>
