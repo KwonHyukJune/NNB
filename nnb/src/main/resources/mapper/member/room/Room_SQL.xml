@@ -396,5 +396,12 @@
 			AND MEM_DEL_GB='N'
 	]]>
 	</select>
+	
+<update id="deleteAdminRoom" parameterType="hashmap" >
+<![CDATA[ 
+DELETE ROOM_BOARD
+WHERE BOARD_NUM = #{BOARD_NUM}]]>
+</update>
+	
 
 </mapper>

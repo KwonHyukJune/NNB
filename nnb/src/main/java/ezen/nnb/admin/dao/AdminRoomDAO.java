@@ -10,11 +10,11 @@ import ezen.nnb.common.AbstractDAO;
 
 @Repository("adminRoomDAO")
 public class AdminRoomDAO extends AbstractDAO{
-
+ 
 	//관리자 방 목록
 	@SuppressWarnings("unchecked")
 	public List<Map<String,Object>>selectAdminRoomList(Map<String,Object>map) throws Exception{
-		return (List<Map<String,Object>>)selectList("adminRoom.selectAdminRoomList",map);
+		return (List<Map<String,Object>>)selectList("room.selectAdminRoomList",map);
 	}
 	//관리자 방 상세
 	@SuppressWarnings("unchecked")
@@ -28,17 +28,17 @@ public class AdminRoomDAO extends AbstractDAO{
 	}
 	
 	public void updateAdminRoomStatus(Map<String, Object> map) throws Exception {
-		update("adminRoom.updateAdminRoomStatus", map);
+		update("room.updateAdminRoomStatus", map);
 	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Map<String, Object>> selectAdminRoomA(Map<String, Object> map) throws Exception {
-		return (List<Map<String, Object>>) selectList("adminRoom.selectAdminRoomA", map);
+		return (List<Map<String, Object>>) selectList("room.selectAdminRoomA", map);
 	}  
 	
 	@SuppressWarnings("unchecked")
 	public void deleteRoom(Map<String, Object> map) throws Exception {
-		delete("adminRoom.delectAdminRoom",map);
+		delete("room.delectAdminRoom",map);
 	}
 	
 	
