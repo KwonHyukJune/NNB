@@ -29,6 +29,24 @@ public class AdminRoomController{
 	@Resource(name="adminRoomService")
 	private AdminRoomService adminRoomService;
 		
+	
+	
+	//목록 임시
+	@RequestMapping(value=/*MapperURL*/"/admin/roomList")
+	public ModelAndView adminRoomList(CommandMap commandMap) throws Exception{
+		ModelAndView mv=new ModelAndView(/*jsp*/"jsonView");
+		
+		List<Map<String,Object>> list=adminRoomService.selectAdminRoomList(commandMap.getMap());
+		mv.addObject("list",list);	
+		if(list.size() > 0){
+    		mv.addObject("TOTAL", list.get(0).get("TOTAL_COUNT"));
+    	}
+    	else{
+    		mv.addObject("TOTAL", 0);
+    	}
+		return mv;
+	}   
+		/*
 			@RequestMapping(value="admin/roomList")
 			public ModelAndView adminRoomList(CommandMap commandMap,HttpServletRequest request)throws Exception{
 			
@@ -93,6 +111,8 @@ public class AdminRoomController{
 			 return mv;
 			 	}
 			}	  
+			*/
+			
 			//관리자 룸 상세
 			@RequestMapping(value="/admin/roomDetail")
 		    public ModelAndView adminRoomDetail(CommandMap commandMap) throws Exception{
