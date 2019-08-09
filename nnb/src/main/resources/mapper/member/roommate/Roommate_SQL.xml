@@ -150,8 +150,7 @@ WHERE
 </if>
 <if test="minyear!=null and !minyear.equals('')">
 	<![CDATA[
-	AND RI_BIRTH BETWEEN #{minyear,jdbcType=DATE} AND #{maxyear,jdbcType=DATE}
-]]>
+ AND RI_BIRTH BETWEEN #{minyear} AND #{maxyear} ]]>
 </if> 
 
 <if test="mindeposit!=null and !mindeposit.equals('')">
@@ -222,7 +221,7 @@ WHERE
 </if>
 <if test="minyear!=null and !minyear.equals('')">
 	<![CDATA[
-	AND RI_BIRTH BETWEEN TO_DATE(#{minyear,jdbcType=DATE},'YYYYMMDD') AND TO_DATE(#{maxyear,jdbcType=DATE},'YYYYMMDD')
+	 AND RI_BIRTH BETWEEN #{minyear} AND #{maxyear}
 ]]>
 </if>
 
@@ -240,7 +239,7 @@ WHERE
 
 <if test="maxdate!=null and !maxdate.equals('')">
 	<![CDATA[
-	AND RI_DATE_START BETWEEM #{maxdate,jdbcType=DATE} AND #{mindate,jdbcType=DATE}
+	AND RI_DATE_START BETWEEM #{maxdate,jdbcType=INTEGER} AND #{mindate,jdbcType=INTEGER}
 	]]>
 </if>
 	</select>
