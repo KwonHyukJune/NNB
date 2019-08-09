@@ -68,7 +68,7 @@ public class AdminRoomController{
 			  mv.addObject("pagingHtml",pagingHtml);
 			  mv.addObject("currentPage",currentPage);
 			  mv.addObject("adminRoomList",adminRoomList);
-			  mv.setViewName("admin/roomList");
+			  mv.setViewName("/admin/room/roomList");
 			  
 			  return mv;
 			 }else {
@@ -88,7 +88,7 @@ public class AdminRoomController{
 			  mv.addObject("pagingHtml",pagingHtml);
 			  mv.addObject("currentPage",currentPage);
 			  mv.addObject("adminRoomList",adminRoomList);
-			  mv.setViewName("admin/roomList");
+			  mv.setViewName("/admin/room/roomList");
 				  
 			 return mv;
 			 	}
@@ -99,7 +99,7 @@ public class AdminRoomController{
 				ModelAndView mv = new ModelAndView();
 				Map<String,Object>map = adminRoomService.selectAdminRoomDetail(commandMap.getMap());
 				mv.addObject("roomDetail",map);
-				mv.setViewName("/admin/roomDetail");			
+				mv.setViewName("/admin/room/roomDetail");			
 				return mv;	
 			}
 			//관리자가 회원이 보는 방 상세로 연결

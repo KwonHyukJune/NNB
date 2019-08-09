@@ -30,9 +30,8 @@ function showPopup(num,id){
 <br/>
 	
 <div><h3>
-<!-- 링크에 URL 제대로 바꿔줘야 됩니다. 지금은 테스트용 jsp 링크입니다. -->
 <a href=# onclick="location.href='/nnb/admin/memberList'">회원 검색</a>&nbsp;&nbsp;&nbsp;&nbsp;
-<a href=# onclick="location.href='messageList.jsp'">전체 쪽지함</a>
+<a href=# onclick="location.href='/nnb/admin/messageList'">전체 쪽지함</a>
 </h3></div>
 <br/>
 <select>

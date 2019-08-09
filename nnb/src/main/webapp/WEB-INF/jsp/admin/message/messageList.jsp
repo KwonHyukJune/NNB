@@ -9,9 +9,14 @@
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/myInterest.css'/>"/>
 
 <script type="text/javascript">
-function messageDetail() { 
-	  window.open("messageDetail.jsp", "회원상세보기", 
-			  "width=700, height=700, scrollbars=1, left=100, top=50"); }
+			  
+function showPopup(num){    //새 메시지 작성
+
+    var url = "/nnb/admin/messageWriteForm?MESSAGE_NUM="+num;
+    var name = "회원정보";
+    var option = "width = 500, height = 500, top = 100, left = 200, location = no, resizeable = yes, scrollbars = yes"
+    window.open(url, name, option);
+}			  
 			  
 			  
 function searchCheck(frm){
@@ -34,14 +39,15 @@ function searchCheck(frm){
 <body>
 
 
-<h1><div>회원 관리</div></h1>
+<div><h1>회원 관리</h1></div>
 <br/>
 	
-<div>
-<!-- 링크에 URL 제대로 바꿔줘야 됩니다. 지금은 테스트용 jsp 링크입니다. -->
-<a href=# onclick="location.href='noticeList.jsp'">회원 검색</a>&nbsp;&nbsp;&nbsp;&nbsp;
-<a href=# onclick="location.href='termsList.jsp'">전체 쪽지함</a>
-</div>
+
+<div><h3>
+<a href=# onclick="location.href='/nnb/admin/memberList'">회원 검색</a>&nbsp;&nbsp;&nbsp;&nbsp;
+<a href=# onclick="location.href='/nnb/admin/messageList'">전체 쪽지함</a>
+</h3></div>
+
 <br/>
 <select name="searchType">
 		<option value="n"
@@ -70,34 +76,21 @@ function searchCheck(frm){
 	
 <br/><br/>
 
-<div class="selectMessageList">
+<div class="adminMessageList">
 
 <div class="messageList">
    
-   <c:forEach var="message" items="${adminMessageList}">
-   <div class="message">
-  <a href="#" onClick="javascript:messageDetail()">
-      
-	     
+   <c:forEach var="map" items="${adminMessageList}">     
+   
 		<div>
-			 ${map.MESSAGE_NUM}&nbsp;	
-			      	
-			 ${map.MEM_KIND}&nbsp;      
-	      	
-	         ${map.RECEIVER}&nbsp;
-	         
-	         ${map.MESSAGE_TITLE}&nbsp;&nbsp;|&nbsp;
-	         
-	         ${map.SEND_DATE}	
-          
+			<a href="<c:url value='/admin/messageDetail?MASSAGE_NUM=${map.MESSAGE_NUM}'/>">${map.RNUM}&nbsp;${map.MEM_KIND}&nbsp;${map.RECEIVER}&nbsp;${map.MESSAGE_TITLE}&nbsp;&nbsp;|&nbsp;${map.SEND_DATE}</a>
+			
 		</div>
-      </a>
-      <div>
-      	<a href="#" onClick="javascript:showPopup2()">새 메시지 작성</a>
-      </div>
-   </div>	
- 
   </c:forEach> 
+   				<br/><br/>
+ 	 <div>
+ 	 			<input type="button" value="메시지 작성" onclick="showPopup(${map.MESSAGE_NUM});" />
+     </div>
 </div>
 
 </div>

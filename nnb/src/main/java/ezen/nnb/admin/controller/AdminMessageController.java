@@ -22,15 +22,6 @@ import ezen.nnb.common.CommandMap;
 @Controller
 public class AdminMessageController {
 	
-	int currentPage = 0;
-	int totalCount; 
-	int blockCount = 10;
-	int blockPage = 5;
-	private String pagingHtml;  
-	private Paging page;
-	private int searchNum;
-	private String isSearch;
-	
 @Resource(name="adminMessageService")
 private AdminMessageService adminMessageService;
 
@@ -41,7 +32,9 @@ private AdminLoginService adminLoginService;
 	@RequestMapping(value="/admin/messageList")
 	public ModelAndView adMessageList(CommandMap commandMap,HttpServletRequest request)throws Exception {
 		ModelAndView mv=new ModelAndView();
+		HttpSession session = request.getSession();
 		List<Map<String,Object>>adminMessageList=adminMessageService.adminMessageList(commandMap.getMap());
+		commandMap.put("ADMIN_ID", session.getAttribute("ADMIN_ID"));
     	mv.addObject("adminMessageList",adminMessageList);
 		mv.setViewName("admin/message/messageList");
 		return mv;

@@ -4,22 +4,26 @@
 
 <select id="adminMessageList" parameterType="hashMap" resultType="hashMap">
 <![CDATA[  
-SELECT DISTINCT
-  MEMBER.MEM_KIND,
+SELECT 
   MESSAGE.MESSAGE_NUM,
+  MEMBER.MEM_KIND,
+  MESSAGE.RECEIVER,
   MESSAGE.MESSAGE_TITLE,
   MESSAGE.SEND_DATE
 FROM
   MEMBER,
   MESSAGE
 WHERE
-  MESSAGE.SENDER = '관리자'
+  RECEIVER = MEM_ID
+AND
+  MESSAGE.SENDER = 'admin'
 
 ]]>
 </select>
 <select id="adminMessageDetail" parameterType="hashMap" resultType="hashMap">
 <![CDATA[  
 SELECT
+  ROW_NUMBER() OVER (ORDER BY MESSAGE_NUM DESC) RNUM,
   M.MEM_KIND,
   S.MESSAGE_NUM,
   S.MESSAGE_TITLE,
@@ -29,6 +33,8 @@ FROM
   MEMBER M,
   MESSAGE S
 WHERE
+  M.MEM_ID = RECEIVER
+AND
   MESSAGE_NUM = #{MASSAGE_NUM}  
   ]]>
   </select>
@@ -48,7 +54,7 @@ MESSAGE (
            (MESSAGE_NUM_SEQ.NEXTVAL,           
            #{MESSAGE_TITLE},
            #{MESSAGE_CONTENT},
-           '관리자',
+           'admin',
            MEM_KIND,
            SYSDATE
 )
