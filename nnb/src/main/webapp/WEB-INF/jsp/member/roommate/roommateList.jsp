@@ -149,6 +149,7 @@
 	
 	
 </script>
+
 </head>
 <body>
 <%@ include file="/WEB-INF/include/header.jspf" %>
@@ -158,9 +159,8 @@
 <div class="search">
 
 	<form id="frm">
-		지역 ㅡㅡ 지도로? 검색으로?
-		
-	닉네임<input type="text" name="MEM_NICK" id="MEM_NICK">
+	<ul>
+	닉네임<input type="text" name="MEM_NICK" id="MEM_NICK"></ul>
 		<select id="RI_GENDER" name="RI_GENDER">
 			<option value="">성별</option>
 			<option value="F">여성</option>

@@ -17,18 +17,18 @@ import ezen.nnb.member.service.RoommateService;
 public class RoommateInfoController {
 	@Resource(name="roommateService")
 	private RoommateService roommateService;
-	
 	@RequestMapping(value="/myPage/myProfile")
-	public ModelAndView openRoommateDetail(CommandMap commandMap,HttpServletRequest request)throws Exception{
+	public ModelAndView myProfile(CommandMap commandMap,HttpServletRequest request)throws Exception{
 		ModelAndView mv=new ModelAndView("/member/myPage/myProfile");
 		HttpSession session= request.getSession();
-		String MEM_ID = (String)session.getAttribute("MEM_ID");
-		commandMap.put("MEM_ID",MEM_ID);
+		commandMap.put("MEM_ID",session.getAttribute("RI_MEM_ID"));
 		
-		Map<String,Object>map=roommateService.openRoommateDetail(commandMap.getMap());
+		Map<String,Object>map=roommateService.myProfile(commandMap.getMap());
 		mv.addObject("map",map);
 		return mv;
 	}
+
+
 	@RequestMapping(value="/myPage/registMyProfileForm")
 	public ModelAndView registProfileForm()throws Exception{
 		ModelAndView mv=new ModelAndView("/member/myPage/registMyProfileForm");
