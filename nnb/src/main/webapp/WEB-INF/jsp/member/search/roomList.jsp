@@ -624,7 +624,7 @@ function fn_selectSearchRoomListCallback(data){
 						+ "<div class='fav'>"
 							+ "<div class='insertFav'></div>"
 						+ "</div>"
-						+ "<a href='<c:url value='/room/roomDetail?num="+ room.ROOM_NUM + "'/>' class='kpKjGs'>"
+						+ "<a href='<c:url value='/room/roomDetail?ROOM_NUM="+ room.ROOM_NUM + "'/>' class='kpKjGs'>"
 							+ "<div class='img jHIGoX'>"
 								+"<img src='<c:url value='/roomImages/"+ room.THUMBNAIL +"'/>'>"
 							+ "</div>"

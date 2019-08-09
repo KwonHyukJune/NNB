@@ -4,7 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 public interface RoommateService {
-
+	public Map<String,Object>myProfile(Map<String, Object> map)throws Exception;
+	
 	public Map<String,Object>openRoommateDetail(Map<String, Object> map)throws Exception;
 	
 	public void registProfile(Map<String,Object>map)throws Exception;

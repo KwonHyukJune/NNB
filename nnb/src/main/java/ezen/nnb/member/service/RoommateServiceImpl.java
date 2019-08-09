@@ -13,6 +13,12 @@ import ezen.nnb.member.dao.RoommateDAO;
 @Service("roommateService")
 public class RoommateServiceImpl implements RoommateService {
 
+	@Override
+	public Map<String, Object> myProfile(Map<String, Object> map) throws Exception {
+		
+		return roommateDAO.myProfile(map);
+	}
+
 	Logger log = Logger.getLogger(this.getClass());
 	
 	@Resource(name="roommateDAO")

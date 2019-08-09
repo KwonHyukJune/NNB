@@ -8,7 +8,58 @@
 <%@include file = "/WEB-INF/include/adminHeader.jspf" %>
 
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/myInterest.css'/>"/>
+<style>
+.kuldyr {
+	line-height: 54px;
+	color: rgb(34, 34, 34);
+	font-size: 33px;
+	text-align: center;
+	font-weight: 400;
+	margin: 70px auto 45px;
+}
+.jtRefx {
+	width: 100%;
+}
+.jSSNqy {
+	width: 100%;
+	height: 57px;
+	border-bottom: 1px solid rgba(232, 232, 232, 0.7);
+}
 
+.jSSNqy>li {
+	float: left;
+	width: 50%;
+	height: 57px;
+}
+
+.jSSNqy>li>a {
+	display: block;
+	width: 100%;
+	height: 57px;
+	color: rgb(136, 136, 136);
+	font-size: 16px;
+	line-height: 57px;
+	text-align: center;
+	cursor: pointer;
+	border-bottom: 2px solid transparent;
+}
+
+.jSSNqy>li>a.active {
+	color: rgb(34, 34, 34);
+	font-weight: 500;
+	border-bottom-color: rgb(72, 72, 72);
+}
+
+.jSSNqy::after {
+	display: block;
+	content: "";
+	clear: both;
+}
+
+.jSSNqy>li>a:hover, .jSSNqy>li>a:active {
+	color: rgb(34, 34, 34);
+}
+</style>
 <script type="text/javascript">
 function showPopup(num, id){
     var url = "/nnb/admin/reportMemberDetail?REPORT_NUM="+num;
@@ -35,17 +86,11 @@ function delet(num){  // 삭제
 <br/><br/><br/>
 
 <body>
+<%@ include file="/WEB-INF/include/adminReportHeader.jspf"%>
 
-
-<div><h1>신고 관리</h1></div>
 <br/>
-	
-<div>
-<!-- 링크에 URL 제대로 바꿔줘야 됩니다. 지금은 테스트용 jsp 링크입니다. -->
-<a href=# onclick="location.href='/nnb/admin/reportRoomList'">신고 게시글 관리</a>&nbsp;&nbsp;&nbsp;&nbsp;
-<a href=# onclick="location.href='/nnb/admin/reportMateList'">신고 룸메이트 관리</a>
-</div>
 <br/>
+<div style="margin:0 700px">
 <select>
 	<option>처리완료</option>
 	<option>처리대기</option>
@@ -71,6 +116,7 @@ function delet(num){  // 삭제
 <br/>
 
 <br/>
+</div>
 
 
 

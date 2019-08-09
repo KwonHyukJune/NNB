@@ -15,14 +15,14 @@ select
   NT_TITLE, 
   NT_DATE
 from(
-		SELECT 
-     		 ROW_NUMBER() OVER (ORDER BY NT_NUM DESC) RNUM,
-     		 NT_NUM, 
-     		 NT_TYPE, 
-   		   	 NT_TITLE, 
-     		 NT_DATE 
-		FROM		 
-      		NOTICE
+	SELECT 
+    	ROW_NUMBER() OVER (ORDER BY NT_NUM DESC) RNUM,
+     	NT_NUM, 
+     	NT_TYPE, 
+   		NT_TITLE, 
+     	NT_DATE 
+	FROM		 
+      	NOTICE
 ) order by row_num desc
 	]]>
 <include refid="common.pagingPost"/> 

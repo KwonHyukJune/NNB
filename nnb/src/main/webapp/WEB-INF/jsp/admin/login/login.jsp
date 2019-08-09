@@ -4,6 +4,7 @@
 <html>
 <head>
 <%@ include file="/WEB-INF/include/include-header.jspf"%>
+
 <script type="text/javascript">
 $(document).ready(function(){ 
 	var message = "${message}";
@@ -21,4 +22,5 @@ $(document).ready(function(){
 })
 </script>
 </head>
+
 </html>

@@ -1,7 +1,5 @@
 package ezen.nnb.member.controller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -32,7 +30,7 @@ public class RoommateController {
 	private IgnoreService ignoreService;
 
 
-	@RequestMapping(value = "/main/searchRoommate")
+	@RequestMapping(value = "/searchRoommate")
 	public ModelAndView searchRoommate(HttpServletResponse response, HttpServletRequest request, CommandMap commandMap)
 			throws Exception {
 		ModelAndView mv = new ModelAndView("/member/roommate/roommateList");
@@ -84,7 +82,8 @@ public class RoommateController {
 	@RequestMapping(value = "/roommate/detail")
 	public ModelAndView openRoommateDetail(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("/member/roommate/roommateDetail");
-		roommateService.openRoommateDetail(commandMap.getMap());
+		Map<String,Object>map=roommateService.openRoommateDetail(commandMap.getMap());
+		mv.addObject("mate",map);
 		return mv;
 	}
 

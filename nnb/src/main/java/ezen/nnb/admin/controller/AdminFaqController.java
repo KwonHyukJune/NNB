@@ -88,7 +88,7 @@ public class AdminFaqController {
 	
 	@RequestMapping(value="/admin/faq/delete")
 	public ModelAndView adminFaqDelete(CommandMap commandMap) throws Exception{
-		ModelAndView mv = new ModelAndView("redirect:/admin/faq/list");
+		ModelAndView mv = new ModelAndView("redirect:/admin/openFaqList");
 		System.out.println("FAQ_DELETE"+commandMap.getMap());
 
 		adminFaqService.deleteFaq(commandMap.getMap());
