@@ -261,6 +261,7 @@ $(document).ready(function(){
 	(function(){
 		var value = "${room.DESC_SECRET}";
 		var key = $("textarea[name='DESC_SECRET']");
+		console.log(key+value);
 		for(var i=0;i<key.length;i++){
 			key[i].value = value;
 		};
@@ -835,8 +836,7 @@ $(document).ready(function(){
 </body>
 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-<script type="text/javascript"
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e603a6f6c5db5707c8168383f3516651&libraries=services,clusterer,drawing"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=340d0c25b07c60b5bc6548c7a084dc81&libraries=services,clusterer,drawing"></script>
 <script>
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = { 
