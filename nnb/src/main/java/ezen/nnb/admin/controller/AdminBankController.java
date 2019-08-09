@@ -10,6 +10,7 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import ezen.nnb.admin.service.AdminBankService;
@@ -27,13 +28,14 @@ public class AdminBankController {
 	
 	@RequestMapping(value="/admin/openAdminBankList") 
 	public ModelAndView openBoardList(CommandMap commandMap) throws Exception{ 
-		ModelAndView mv = new ModelAndView("admin/bankList"); 
+		ModelAndView mv = new ModelAndView("admin/bank/bankList"); 
 		return mv; 
 	} 
 	
 	@RequestMapping(value="/admin/bankList")
+	@ResponseBody
 	public ModelAndView adminBankList(CommandMap commandMap) throws Exception{
-		ModelAndView mv=new ModelAndView("admin/bank/bankList");
+		ModelAndView mv=new ModelAndView("jsonView");
 		
 		List<Map<String,Object>> list=adminBankService.selectBankList(commandMap.getMap());
 		mv.addObject("list",list);
@@ -52,7 +54,7 @@ public class AdminBankController {
 	}
 	@RequestMapping(value="/admin/bankWrite")
 	public ModelAndView adminBankWrite(CommandMap commandMap, HttpServletRequest request) throws Exception{
-		ModelAndView mv = new ModelAndView("redirect:/admin/bankList");
+		ModelAndView mv = new ModelAndView("redirect:/admin/openAdminBankList");
 		adminBankService.insertBankWrite(commandMap.getMap(), request);
 		
 		return mv;
@@ -82,9 +84,9 @@ public class AdminBankController {
 		return mv;
 	}
 	
-	@RequestMapping(value="/admin/bankDelete", method=RequestMethod.POST)
+	@RequestMapping(value="/admin/bankDelete")
 	public ModelAndView adminBankDelete(CommandMap commandMap) throws Exception{
-		ModelAndView mv = new ModelAndView("redirect:/admin/bankList");
+		ModelAndView mv = new ModelAndView("redirect:/admin/openAdminBankList");
 
 		adminBankService.deleteBank(commandMap.getMap());
 		

@@ -85,7 +85,6 @@ public class /*컨트롤러*/AdminNoticeController {
 	@RequestMapping(value=/*MapperURL*/"/admin/noticeDelete",method=RequestMethod.POST)
 	public ModelAndView /*메소드*/adminNoticeDelete(CommandMap commandMap) throws Exception{
 		ModelAndView mv = new ModelAndView(/*jsp*/"redirect:/admin/openNoticeList");
-		System.out.println(commandMap.get("NT_NUM"));
 		adminNoticeService./*Mybatis ID*/deleteNotice(commandMap.getMap());
 		return mv;
 	}

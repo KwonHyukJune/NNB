@@ -6,8 +6,59 @@
 <head>
 <%@ include file="/WEB-INF/include/include-header.jspf"%>
 <%@include file="/WEB-INF/include/adminHeader.jspf"%>
-<link rel="stylesheet" type="text/css"
-	href="<c:url value='/css/myInterest.css'/>" /> 
+	
+<style>
+.kuldyr {
+	line-height: 54px;
+	color: rgb(34, 34, 34);
+	font-size: 33px;
+	text-align: center;
+	font-weight: 400;
+	margin: 70px auto 45px;
+}
+.jtRefx {
+	width: 100%;
+}
+.jSSNqy {
+	width: 100%;
+	height: 57px;
+	border-bottom: 1px solid rgba(232, 232, 232, 0.7);
+}
+
+.jSSNqy>li {
+	float: left;
+	width: 33%;
+	height: 57px;
+}
+
+.jSSNqy>li>a {
+	display: block;
+	width: 100%;
+	height: 57px;
+	color: rgb(136, 136, 136);
+	font-size: 16px;
+	line-height: 57px;
+	text-align: center;
+	cursor: pointer;
+	border-bottom: 2px solid transparent;
+}
+
+.jSSNqy>li>a.active {
+	color: rgb(34, 34, 34);
+	font-weight: 500;
+	border-bottom-color: rgb(72, 72, 72);
+}
+
+.jSSNqy::after {
+	display: block;
+	content: "";
+	clear: both;
+}
+
+.jSSNqy>li>a:hover, .jSSNqy>li>a:active {
+	color: rgb(34, 34, 34);
+}
+</style>
 </head>
 <!-------------------------------------------------------------- -->
 <br />
@@ -16,32 +67,22 @@
 
 <body>
 
-
-	<div>
-		<h1>게시판 관리</h1>
-	</div>
-	<br />
-	
-	<div>
-		<a href=# onclick="location.href='/nnb/admin/openNoticeList'">공지 게시판</a>&nbsp;&nbsp;&nbsp;&nbsp;
-		<a href=# onclick="location.href='/nnb/admin/roomList'">방 게시판</a>&nbsp;&nbsp;&nbsp;&nbsp;
-		<a href=# onclick="location.href='/nnb/admin/terms/list'">약관 관리</a>
-	</div>
-
-	<br />
-	<br />
-	<br />
-
-	<div class="selectNoticeList">
+<%@ include file="/WEB-INF/include/adminBoardHeader.jspf"%>
+	<div style="width:100%">
+	<br><br>
+		<div class="selectNoticeList" style="margin:0 700px">
 
 
+
+		</div>
 	</div>
 	
-	<div id="PAGE_NAVI">  </div>
+	<br><br>
+	<div id="PAGE_NAVI" style="margin:0 700px">  </div>
 		<input type="hidden" id="PAGE_INDEX" name="PAGE_INDEX" />
    
    <br>
-   	<div>    
+   	<div style="margin:0 700px">    
   		<a href="#" onClick="goPage1(${map.NT_NUM})">새 공지 작성</a>
 	</div>
 

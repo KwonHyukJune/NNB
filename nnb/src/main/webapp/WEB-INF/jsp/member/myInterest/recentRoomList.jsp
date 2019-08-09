@@ -94,7 +94,7 @@
 			</div>
 			</c:if>
 		</div>
-	<a href="<c:url value='/search/roomDetail?ROOM_NUM=${room.ROOM_NUM}'/>">
+	<a href="<c:url value='/search/detailRoom?ROOM_NUM=${room.ROOM_NUM}'/>">
 		<div class="img">
 		<img src="<c:url value='/files/${room.STD_NAME}'/>">
 		</div>
