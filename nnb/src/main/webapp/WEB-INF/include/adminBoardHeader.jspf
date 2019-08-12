@@ -6,10 +6,10 @@
 		<a id="awrite" class="tabmenu" href="<c:url value='/admin/openNoticeList'/>">공지게시판</a>
 		</li>
 		<li>
-		<a id="aadmin" class="tabmenu" href="<c:url value='/room/adminRoom'/>">방 게시판</a>
+		<a id="aadmin" class="tabmenu" href="<c:url value='/admin/roomList'/>">방 게시판</a>
 		</li>
 		<li>
-		<a id="aadmin" class="tabmenu" href="<c:url value='/room/adminRoom'/>">약관 관리</a>
+		<a id="aadmin" class="tabmenu" href="<c:url value='/admin/terms/list'/>">약관 관리</a>
 		</li>
 	</ul>
 </div>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="adminRoom">
+
+<select id="selectAdminRoomList" resultType="hashMap" parameterType="hashMap" >
+<![CDATA[
+SELECT BOARD_NUM,
+       UPLOAD_DATE,
+       MEM_ID,
+       DESC_TITLE,
+       HIT_COUNT
+FROM
+       ROOM_BOARD B, ROOM_INFO1 I1, ROOM_INFO2 I2
+WHERE  B.ROOM_NUM = I2.ROOM_NUM
+AND B.ROOM_NUM = I1.ROOM_NUMㅌ
+]]>
+</select>
+
+
+<select id="updateAdminRoomStatus" resultType="hashMap" parameterType="hashMap" >
+<![CDATA[ 
+UPDATE ROOM_BOARD
+SET
+             TRADE_STATE = #{TRADE_STATE}
+WHERE  
+	BOARD_NUM = #{BOARD_NUM}
+]]>
+</select>
+
+
+<select id="selectAdminRoomA" resultType="hashMap" parameterType="hashMap" >
+<![CDATA[ 
+SELECT 
+       	B.TRADE_STATUS,
+        	I1.ROOM_NUM,
+        	I1.MEM_ID,
+       	B.UPLOAD_DATE,
+       	I2.DESC_TITLE,
+       	I2.DESC_DETAIL,
+     	M.MEM_ID
+FROM ROOM_BOARD B, MEMBER M, ROOM_INFO1 I1, ROOM_INFO2 I2
+WHERE 
+	I1.MEM_ID = M.MEM_ID        
+       	 AND B.ROOM_NUM = I2.ROOM_NUM
+        	AND B.ROOM_NUM = I1.ROOM_NUM
+]]>
+<choose>
+      <when test="I2.DESC_TITLE == 1"> 
+      <![CDATA[        
+            AND I2.DESC_TITLE like %#{DESC_TITLE}%
+      ]]>
+      </when>
+      <when test="I2.DESC_TITLE == 2">
+      <![CDATA[  
+     	AND B.ROOM_NUM like %#{ROOM_NUM}%
+      ]]>
+      </when>
+      <when test="I2.DESC_TITLE == 3">
+      <![CDATA[ 
+        	AND I1.MEM_ID like %#{MEM_ID}%
+      ]]>
+      </when>
+</choose>
+</select>
+
+<update id="deleteAdminRoom" parameterType="hashmap" >
+<![CDATA[ 
+	DELETE ROOM_BOARD WHERE BOARD_NUM = #{BOARD_NUM}]]>
+</update>
+
+</mapper>
