@@ -5,7 +5,7 @@
 <select id="selectAdminRoomList" resultType="hashMap" parameterType="hashMap" >
 <![CDATA[
 SELECT BOARD_NUM,
-	   B.ROOM_NUM,
+       B.ROOM_NUM,
        UPLOAD_DATE,
        MEM_ID,
        DESC_TITLE,
@@ -13,90 +13,60 @@ SELECT BOARD_NUM,
 FROM
        ROOM_BOARD B, ROOM_INFO1 I1, ROOM_INFO2 I2
 WHERE  B.ROOM_NUM = I2.ROOM_NUM
-AND    B.ROOM_NUM = I1.ROOM_NUM
+AND B.ROOM_NUM = I1.ROOM_NUM
 ]]>
 </select>
 
-<select id="selectAdminRoomA" resultType="hashMap" parameterType="hashMap" >
-<![CDATA[ 
-SELECT 
-        B.TRADE_STATUS,
-        I1.ROOM_NUM,
-        I1.MEM_ID,
-        B.UPLOAD_DATE,
-        I2.DESC_TITLE,
-                   I2.DESC_DETAIL,
-        M.MEM_ID
-FROM ROOM_BOARD B, MEMBER M, ROOM_INFO1 I1, ROOM_INFO2 I2
-WHERE I1.MEM_ID = M.MEM_ID        
-            AND B.ROOM_NUM = I2.ROOM_NUM
-            AND B.ROOM_NUM = I1.ROOM_NUM
-]]>
-<choose>
-      <when test="I2.DESC_TITLE == 1">        
-            AND I2.DESC_TITLE like %#{DESC_TITLE}%
-      </when>
-      <when test="I2.DESC_TITLE == 2">
-        AND B.ROOM_NUM like %#{ROOM_NUM}%
-      </when>
-      <when test="I2.DESC_TITLE == 3">
-        AND I1.MEM_ID like %#{MEM_ID}%
-      </when>
-</choose>
-
-</select>
-
-
-<select id="selectAdminRoomDetail" resultType="hashMap" parameterType="hashMap" >
-<![CDATA[ 
-SELECT 
-B.ROOM_NUM,
-UPLOAD_DATE,
-BOARD_NUM,
-TRADE_STATUS,
-EXPIRATION_DATE,
-HIT_COUNT,
-FAV_COUNT,
-DEL_GB,
-I1.MEM_ID,
-I2.DESC_TITLE,
-I1.ADDRESS1,
-I1.ADDRESS2
-
-FROM
-       ROOM_BOARD B, ROOM_INFO1 I1, ROOM_INFO2 I2
-WHERE
-	B.ROOM_NUM = I1.ROOM_NUM AND
-	I1.ROOM_NUM = I2.ROOM_NUM
-AND
-	   
-	   BOARD_NUM= #{BOARD_NUM}       
-]]>
-</select>
-
-
-<!-- #####글 삭제(관리자) -->
-<update id="deleteAdminRoom" parameterType="hashmap" >
-<![CDATA[ 
-DELETE ROOM_BOARD
-WHERE BOARD_NUM = #{BOARD_NUM}]]>
-</update>
 
 <select id="updateAdminRoomStatus" resultType="hashMap" parameterType="hashMap" >
 <![CDATA[ 
 UPDATE ROOM_BOARD
 SET
-               TRADE_STATE = #{TRADE_STATE}
-WHERE  BOARD_NUM = #{BOARD_NUM}
+             TRADE_STATE = #{TRADE_STATE}
+WHERE  
+	BOARD_NUM = #{BOARD_NUM}
 ]]>
 </select>
 
-<!-- 
-<mapper namespace="room">
-<select id="detailRoom" resultType="hashmap" parameterType="hashmap">
+
+<select id="selectAdminRoomA" resultType="hashMap" parameterType="hashMap" >
 <![CDATA[ 
+SELECT 
+       	B.TRADE_STATUS,
+        	I1.ROOM_NUM,
+        	I1.MEM_ID,
+       	B.UPLOAD_DATE,
+       	I2.DESC_TITLE,
+       	I2.DESC_DETAIL,
+     	M.MEM_ID
+FROM ROOM_BOARD B, MEMBER M, ROOM_INFO1 I1, ROOM_INFO2 I2
+WHERE 
+	I1.MEM_ID = M.MEM_ID        
+       	 AND B.ROOM_NUM = I2.ROOM_NUM
+        	AND B.ROOM_NUM = I1.ROOM_NUM
 ]]>
+<choose>
+      <when test="I2.DESC_TITLE == 1"> 
+      <![CDATA[        
+            AND I2.DESC_TITLE like %#{DESC_TITLE}%
+      ]]>
+      </when>
+      <when test="I2.DESC_TITLE == 2">
+      <![CDATA[  
+     	AND B.ROOM_NUM like %#{ROOM_NUM}%
+      ]]>
+      </when>
+      <when test="I2.DESC_TITLE == 3">
+      <![CDATA[ 
+        	AND I1.MEM_ID like %#{MEM_ID}%
+      ]]>
+      </when>
+</choose>
 </select>
- -->
- 
- </mapper>
+
+<update id="deleteAdminRoom" parameterType="hashmap" >
+<![CDATA[ 
+	DELETE ROOM_BOARD WHERE BOARD_NUM = #{BOARD_NUM}]]>
+</update>
+
+</mapper>
