@@ -1,9 +1,13 @@
 package ezen.nnb.member.controller;
 
+import java.net.URLDecoder;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -11,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import ezen.nnb.common.CommandMap;
+import ezen.nnb.common.CookieBox;
 import ezen.nnb.member.service.FavoriteService;
 import ezen.nnb.member.service.RoommateService;
 import ezen.nnb.member.service.SearchRoomService;
@@ -26,11 +31,26 @@ public class MyInterestController {
 	@Resource(name="roommateService")
 	private RoommateService roommateService;
 	
-	 @RequestMapping("/myInterest/recentRoom") 
-	 public ModelAndView recentRoomList(CommandMap commandMap)throws Exception{ 
-	 ModelAndView mv=new ModelAndView("member/myInterest/recentRoomList");
-	
-	 return mv; 
+	@RequestMapping("/myInterest/recentRoom") 
+	public ModelAndView recentRoomList(CommandMap commandMap,HttpServletRequest request)throws Exception{ 
+		ModelAndView mv=new ModelAndView("member/myInterest/recentRoomList");
+		CookieBox cookieBox = new CookieBox(request);
+		List<String> ROOM_NUM = new ArrayList<String>();
+		if(cookieBox.exists("recentRoom")) {
+			String recentRoom = cookieBox.getValue("recentRoom");
+			String[] array = recentRoom.split(",");
+			for(int i=0; i<array.length; i++) {
+				ROOM_NUM.add(array[i]);
+			}
+			commandMap.put("ROOM_NUM", ROOM_NUM);
+			List<Map<String,Object>> list = favoriteService.selectRecentRoomList(commandMap.getMap());
+			mv.addObject("roomList",list);
+			mv.addObject("count",list.size());
+		}else {
+			mv.addObject("count",0);
+		}
+		
+		return mv; 
 	}
 	 
 	@RequestMapping(value="/myInterest/favRoomList")

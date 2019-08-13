@@ -52,7 +52,7 @@ function goMyPage(){
 		<a class="hVfzba kiTmxU" href="<c:url value='/loginForm'/>">로그인</a>
 	</div>
 	<div class="login hVfzba kiTmxU" onclick="openMenu()">
-		<img src="">${MEM_ID}님
+		${MEM_ID}님
 		<ul class="mymenu kNVAlJ" id="mymenu">
 	<%-- 		<li><a href="<c:url value='/myPage/messageList'/>">마이페이지</a></li>
 	 --%>		<li><a href="javascript:goMyPage()" class="gQxELh">마이페이지</a></li>

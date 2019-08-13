@@ -5,7 +5,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<head>
 <title>룸메이트 등록</title>
 <style>
     .map_wrap {position:relative;width:100%;height:350px;}
@@ -25,7 +24,7 @@
 
 <div class="title">룸메이트 정보 등록</div>
 
-<form id="frm" name="frm">
+<form id="frm" name="frm" method="post" action="registMyProfile">
 <div class="h">성별</div>
 <div class="b">
 	<input type="radio" name="gender" value="M">남
@@ -36,7 +35,13 @@
 	보증금: <input type="number" name="loan_big" id="loan_big">만원<br>
 	월세: <input type="number" name="loan_small" id="loan_small">만원
 </div>
-<div class="h">선호지역</div>
+<div class="h">
+선호지역
+	<button type="button" onclick="fn_addRegion($(this))">추가</button>
+</div>
+<div class="b" id="region">
+	<input type="text" readonly="readonly" name="region1" id="region1">
+</div>
 
 <!----------------------------------------------------------------------------------------------------->
 
@@ -83,9 +88,15 @@
 	<input type="date" id="date_end" name="date_end">
 </div>
 <div class="h">자기소개</div>
-<div class="b"><textarea></textarea></div>
+<div class="b"><textarea name="profile"></textarea></div>
+<div class="h">검색 노출 여부</div>
+<div class="b">
+<input type="radio" name="expose" value="1">가능
+<input type="radio" name="expose" value="0">블가능
+</div>
 </form>
 
+<button type="button" onclick="fn_submit();">등록</button>
 <a href="#" id="submit" class="btn">등록</a>
 <a href="<c:url value='/myPage/myProfile'/>">취소</a>
 
@@ -137,6 +148,10 @@ kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
                             '<span class="title">법정동 주소정보</span>' + 
                             detailAddr + 
                         '</div>';
+            
+            var count = $("#region").children().length;
+            console.log(count);
+            $("#region"+count).val(result[0].address.address_name);
                    
             // 마커를 클릭한 위치에 표시합니다 
             marker.setPosition(mouseEvent.latLng);
@@ -197,6 +212,40 @@ function fn_submit(){
 	conSubmit.setUrl("<c:url value='/myPage/registMyProfile'/>");
 	conSubmit.submit();
 };
+
+function fn_addRegion(obj){
+	var count = obj.parent().next().children().length + 1;
+	if(count<=3){
+		var str = "<div>"
+				+ "<input type='text' readonly='readonly' name='region"+count+"' id='region"+count+"'>"
+				+ "<button type='button' onclick='fn_deleteRegion($(this))'>삭제</button>"
+				+ "</div>";
+		obj.parent().next().append(str);
+	}else{
+		obj.siblings("span").remove();
+		obj.parent().append("<span style='color:red;'></span>");
+		obj.siblings("span").text("선호지역은 최대 3개까지 설정 가능합니다.");
+	}
+}
+
+function fn_deleteRegion(obj){
+	obj.parent().remove();
+}
+
+function fn_submit(){
+	var year = $("#birth_year option:selected").val();
+	var month = $("#birth_month option:selected").val();
+	if(month.length==1){
+		month = "0"+month;
+	}
+	var date = $("#birth_date option:selected").val();
+	if(date.length==1){
+		date = "0"+date;
+	}
+	var birth = year.toString()+month.toString()+date.toString();
+	$("#frm").append("<input type='hidden' name='birth' value='"+birth+"'>");
+	frm.submit();
+}
 </script>
 </body>
 </html>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
 <mapper namespace="adminRoom">
 
 <select id="selectAdminRoomList" resultType="hashMap" parameterType="hashMap" >
 <![CDATA[
 SELECT BOARD_NUM,
+       B.ROOM_NUM,
        UPLOAD_DATE,
        MEM_ID,
        DESC_TITLE,
@@ -13,7 +13,7 @@ SELECT BOARD_NUM,
 FROM
        ROOM_BOARD B, ROOM_INFO1 I1, ROOM_INFO2 I2
 WHERE  B.ROOM_NUM = I2.ROOM_NUM
-AND B.ROOM_NUM = I1.ROOM_NUMㅌ
+AND B.ROOM_NUM = I1.ROOM_NUM
 ]]>
 </select>
 

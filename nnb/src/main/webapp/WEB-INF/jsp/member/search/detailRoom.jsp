@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -27,6 +26,10 @@
 		comAjax.addParam("ROOM_NUM",num);
 		comAjax.ajax();
 	};
+/* 쿠키 */
+$(document).ready(function(){
+	addCookie('recentRoom','${room.ROOM_NUM}');
+});
 </script>
 </head>
 <body>

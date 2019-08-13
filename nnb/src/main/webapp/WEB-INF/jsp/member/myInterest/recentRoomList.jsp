@@ -36,50 +36,10 @@
 <body>
 <%@ include file="/WEB-INF/include/header.jspf" %>
 <%@ include file="myInterest.jspf" %>
-
-<!-- 테스트용 세팅 -->
-<%@ page import="java.util.HashMap" %>
-<%@ page import="java.util.Map" %>
-<%@ page import="java.util.List" %>
-<%@ page import="java.util.ArrayList" %>
-<%
-	Map<String,Object> room1 = new HashMap<String,Object>();
-	room1.put("check","0");
-	room1.put("ROOM_NUM","1");
-	room1.put("STD_NAME","room1.png");
-	room1.put("ROOM_TYPE","원룸");
-	room1.put("TRADE_TYPE","월세");
-	room1.put("MONTHLY_DEPOSIT","300");
-	room1.put("MONTHLY_PAYMENT","30");
-	room1.put("ROOM_FLOOR","2");
-	room1.put("REAL_SIZE","20");
-	room1.put("UTILITY_PRICE","5");
-	room1.put("DESC_TITLE","싸다싸");
-	Map<String,Object> room2 = new HashMap<String,Object>();
-	room2.put("check","1");
-	room2.put("ROOM_NUM","2");
-	room2.put("STD_NAME","room1.png");
-	room2.put("ROOM_TYPE","원룸");
-	room2.put("TRADE_TYPE","전세");
-	room2.put("JEONSE","3000");
-	room2.put("ROOM_FLOOR","2");
-	room2.put("REAL_SIZE","20");
-	room2.put("DESC_TITLE","싸다싸");
-	
-	List<Map<String,Object>> roomList = new ArrayList<Map<String,Object>>();
-	roomList.add(room1);
-	roomList.add(room2);
-	
-	int count = roomList.size();
-	request.setAttribute("count", count);
-	request.setAttribute("roomList",roomList);
-%>
-<!-- 테스트용 세팅 끝 -->
-
 <div class="recentRoomList">
 
-<p>총 ${count}개의 최근 본 방이 있습니다.</p>
-<c:if test="${count!=null && count!=''}">
+<p>총 <span>${count}</span>개의 최근 본 방이 있습니다.</p>
+<c:if test="${count!=0}">
 <div class="roomList">
 	<c:forEach var="room" items="${roomList}">
 	<div class="room">
@@ -94,7 +54,7 @@
 			</div>
 			</c:if>
 		</div>
-	<a href="<c:url value='/search/detailRoom?ROOM_NUM=${room.ROOM_NUM}'/>">
+	<a href="<c:url value='/room/roomDetail?ROOM_NUM=${room.ROOM_NUM}'/>">
 		<div class="img">
 		<img src="<c:url value='/files/${room.STD_NAME}'/>">
 		</div>
@@ -120,14 +80,12 @@
 	</c:forEach>
 </div>
 </c:if>
-<c:if test="${count==null || count==''}">
-<a href="<c:url value='/search/roomList'/>" class="btn">방 보러가기</a>
+<c:if test="${count eq 0}">
+<a href="<c:url value='/search/openSearchRoomList'/>" class="btn">방 보러가기</a>
 </c:if>
-
 <%-- <div class="page">
 	${pageHtml}
 </div> --%>
-
 </div>
 <br>
 <div class="footer">

@@ -35,6 +35,7 @@ public class RoommateController {
 			throws Exception {
 		ModelAndView mv = new ModelAndView("/member/roommate/roommateList");
 		HttpSession session = request.getSession();
+		commandMap.put("MEM_ID",session.getAttribute("MEM_ID"));
 		List<Map<String, Object>> searchRoommate = roommateService.searchRoommate(commandMap.getMap());
 		int Count = roommateService.countRoommate(commandMap.getMap());
 		
