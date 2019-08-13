@@ -9,6 +9,11 @@
 <%@ include file="/WEB-INF/include/include-header.jspf" %>
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/myPage.css'/>"/>
 <script type="text/javascript">
+$(document).ready(function(){
+	$('#amyProfile').addClass('active');
+}); 
+</script>
+<script type="text/javascript">
 	var memId = sessionStorage.getItem("MEM_ID");
 	$(document).ready(function(){
 		$("#submit").on("click",function(e){

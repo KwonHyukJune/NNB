@@ -58,7 +58,7 @@
 	
 	
 	function openDetail(url){
-		var strUrl = "/first"+url;
+		var strUrl = "<%=request.getContextPath()%>"+url;
 		window.open(strUrl);
 	};
 	function insertFav(num){

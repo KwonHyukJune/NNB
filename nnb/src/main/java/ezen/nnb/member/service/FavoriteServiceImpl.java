@@ -20,6 +20,12 @@ public class FavoriteServiceImpl implements FavoriteService{
 	private FavoriteDAO favoriteDAO;
 	
 	@Override
+	public List<Map<String, Object>> selectRecentRoomList(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return favoriteDAO.selectRecentRoomList(map);
+	}
+	
+	@Override
 	public void deleteFavRoom(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub
 		favoriteDAO.deleteFavRoom(map);

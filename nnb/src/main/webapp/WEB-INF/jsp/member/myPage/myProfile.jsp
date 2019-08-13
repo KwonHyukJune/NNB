@@ -5,22 +5,35 @@
 <head>
 <%@ include file="/WEB-INF/include/include-header.jspf" %>
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/myPage.css'/>"/>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#amyProfile').addClass('active');
+}); 
+</script>
 </head>
 <body>
 <%@ include file="/WEB-INF/include/header.jspf" %>
-<%@ include file="myPage.jspf" %>
 
 <div class="myProfile">
+<%@ include file="myPage.jspf" %>
 <div class="title">나의 룸메이트 프로필</div>
 <%-- <c:set var="check" value="1"></c:set> --%>
 <c:choose>
-<c:when test="${map.check==1}">
+<c:when test="${map!=null}">
 <div class="h">성별</div>
 <div class="b">${map.RI_GENDER}</div>
 <div class="h">부담가능금액</div>
 <div class="b">보증금: ${map.RI_LOAN_BIG}, 월세:${map.RI_LOAN_SMALL}</div>
 <div class="h">선호지역</div>
-<div class="b">${map.RI_REGION1},${map.RI_REGION2},${map.RI_REGION3}</div>
+<div class="b">
+${map.RI_REGION1}
+<c:if test="${map.RI_REGION2!=null}">
+, ${map.RI_REGION2}
+</c:if>
+<c:if test="${map.RI_REGION3!=null}">
+, ${map.RI_REGION3}
+</c:if>
+</div>
 <div class="h">생일</div>
 <div class="b">${map.RI_BIRTH}</div>
 <div class="h">입주시기</div>
