@@ -30,11 +30,11 @@ function fn_submit(obj){
 <div class="subtitle">회원탈퇴</div>
 <div>
 비밀번호 확인
-<form>
-<input type="password" id="password" name="password">
+<form action="MyInfoDelete" method="post">
+<input type="password" id="password" name="MEM_PW">
+<button type="submit">탈퇴하기</button>
 </form>
 </div>
-<a href="#" class="btn" id="submit">탈퇴하기</a>
 	
 </div>
 <br>
