@@ -10,10 +10,37 @@
 <fmt:parseDate var="dateString" value="${room.MOVE_IN_DATE}" pattern="yyyy-MM-dd"/>
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/search.css'/>"/>
 <script type="text/javascript">
-/* convert(m): 평수<->제곱미터 변환 */
 /* openlessorInfo(id): 임대인 정보보기 새창으로 /room/detail/lessorInfo */
 /* report(): 신고하기 새창으로 */
 /* readMore() : 상세설명 더보기 */
+
+ 
+ 
+/* $(function () { 
+            $('#converter').toggle(function () {
+                var m2 = $('#room_size').val();
+                var p = (parseFloat(m2)*3.3058).toFixed(2)
+                document.getElementById('room_size') = p
+            });
+}); */
+/* 
+-------convert(m): 평수<->제곱미터 변환--------------
+function calculator1(chk){
+	  if(chk==1){ 
+		  document.getElementById('sup_m').value = (parseFloat(document.getElementById('sup_p').value) * 3.3058).toFixed(2);       
+	  }
+	  else { 
+		  document.getElementById('sup_p').value = (parseFloat(document.getElementById('sup_m').value) / 3.3058).toFixed(2);
+	  }
+}
+function calculator2(chk){
+	  if(chk==1){ 
+		  document.getElementById('real_m').value = (parseFloat(document.getElementById('real_p').value) * 3.3058).toFixed(2);       
+	  }
+	  else { 
+		  document.getElementById('real_p').value = (parseFloat(document.getElementById('real_m').value) / 3.3058).toFixed(2);
+	  }
+} */
 	function insertFav(num){
 		var comAjax = new ComAjax();
 		comAjax.setUrl("<c:url value='/search/detail/addFavRoom'/>");
@@ -61,10 +88,10 @@ $(document).ready(function(){
 				<li class="cqojtY">
 					<p class="hzbdBs">전용면적</p>
 					<div class="dUILvV">
-						<h1 class="dUuerR">
+						<h1 id="room_size" class="dUuerR">
 							${room.REAL_SIZE}㎡
 						</h1>
-						<button class="ktfeIl" type="button" onclick="convert($(this));">
+						<button class="ktfeIl" type="button" id="converter" onclick="convert($(this));">
 							<svg width="11" height="23" viewBox="0 0 11 23"><g fill="#222" fill-rule="evenodd" stroke="#222" stroke-width=".2"><path d="M8.066 8.378L6.955 9.624a.335.335 0 0 0 0 .436.26.26 0 0 0 .194.09c.07 0 .14-.03.194-.09L8.92 8.293c.054-.06.08-.14.08-.22a.32.32 0 0 0-.094-.232l-1.563-1.75a.255.255 0 0 0-.388 0 .334.334 0 0 0 0 .435l1.102 1.236h-5.49c-1.415 0-2.567 1.3-2.567 2.9v1.03c0 .17.123.308.275.308.152 0 .275-.138.275-.308v-1.03c0-1.259.905-2.284 2.018-2.284h5.498zM.934 14.622l1.11-1.246a.335.335 0 0 0 0-.436.26.26 0 0 0-.193-.09c-.07 0-.141.03-.195.09L.08 14.707a.325.325 0 0 0-.08.22.32.32 0 0 0 .093.232l1.563 1.75c.108.121.282.121.389 0a.334.334 0 0 0 0-.435L.942 15.238h5.49c1.416 0 2.567-1.3 2.567-2.9v-1.03c0-.17-.123-.308-.274-.308-.153 0-.275.138-.275.308v1.03c0 1.259-.905 2.284-2.018 2.284H.934z"></path></g></svg>
 							<span></span>
 						</button>
@@ -351,7 +378,7 @@ $(document).ready(function(){
 <%@ include file="/WEB-INF/include/footer.jspf" %>
 </div>
 </body>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=340d0c25b07c60b5bc6548c7a084dc81&libraries=services,clusterer,drawing"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e603a6f6c5db5707c8168383f3516651&libraries=services,clusterer,drawing"></script>
 	<c:forEach var="address" items="${list}">
 		<script>
             var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
