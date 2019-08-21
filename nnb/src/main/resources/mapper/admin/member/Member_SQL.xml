@@ -16,6 +16,7 @@ SELECT
   MEM_PHONE
 FROM
   MEMBER
+ORDER BY MEM_NUM
 ]]>
 </select>
  
@@ -77,15 +78,27 @@ WHERE MEM_NICK like '%' || #{isSearch} || '%'
 <select id="adminMemberDetail" parameterType="hashMap" resultType="hashMap">
 <![CDATA[  
 SELECT DISTINCT
-M.MEM_NUM,
-M.MEM_ID,
-M.MEM_NAME,
-M.MEM_NICK,
-M.MEM_EMAIL,
-M.MEM_PHONE,
-M.MEM_KIND,
-M.MEM_JOINDATE,
-M.MEM_VERIFY,
+MEM_NUM,
+MEM_ID,
+MEM_NAME,
+MEM_NICK,
+MEM_EMAIL,
+MEM_PHONE,
+MEM_KIND,
+MEM_JOINDATE,
+MEM_VERIFY
+
+FROM MEMBER M
+WHERE
+     M.MEM_NUM = #{MEM_NUM}
+               
+ ]]>
+</select>
+
+<select id="adminMemberRoommateDetail" parameterType="hashMap" resultType="hashMap">
+<![CDATA[  
+SELECT DISTINCT
+
 RI_GENDER,
 RI_REGION1,
 RI_REGION2,
@@ -98,11 +111,9 @@ RI_DATE_START,
 RI_DATE_END,
 RI_EXPOSE
 
-FROM MEMBER M, ROOMMATE_PROFILE RI
+FROM ROOMMATE_PROFILE
 WHERE
-  	 M.MEM_ID = RI_MEM_ID
-     AND 
-               M.MEM_NUM = #{MEM_NUM}
+     RI_MEM_ID = #{MEM_ID}
                
  ]]>
 </select>

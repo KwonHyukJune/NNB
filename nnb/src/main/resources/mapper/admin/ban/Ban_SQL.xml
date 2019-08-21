@@ -28,8 +28,8 @@
 <select id="selectBanDate" parameterType="hashmap" resultType="hashmap"> 
 	<![CDATA[
 	SELECT
-		BAN_REMOVAL_DATE,
-		BAN_REMOVAL_DATE-sysdate EXP_DATE
+    max(BAN_REMOVAL_DATE) BAN_REMOVAL_DATE,
+		max(BAN_REMOVAL_DATE)-sysdate EXP_DATE
 	FROM
 		BAN
 	WHERE
