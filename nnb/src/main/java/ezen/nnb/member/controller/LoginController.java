@@ -59,10 +59,10 @@ public class LoginController {
 		} else {
 			if (chk.get("MEM_PW").equals(commandMap.get("MEM_PW"))) {
 				if (chk.get("MEM_VERIFY").equals("Y")) { // 이메일 인증을 했을ㄸ ㅐ
-					if (banChk==null || ((BigDecimal)banChk.get("EXP_DATE")).intValue() <= 0) {// 모든 조건을 충족시키면 로그인!
+					if (banChk==null || ((BigDecimal)banChk.get("EXP_DATE")).doubleValue() <= 0) {// 모든 조건을 충족시키면 로그인!
 						session.setAttribute("MEM_ID", commandMap.get("MEM_ID")); 
 					} else { // 제재기한이 아직 남았을 때
-						java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
+						java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 						message = "회원님은 " + sdf.format(banChk.get("BAN_REMOVAL_DATE")) + "까지 이용이 제재되었습니다.";
 						url = "/main";
 					}

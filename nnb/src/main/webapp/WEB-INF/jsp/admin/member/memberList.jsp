@@ -89,7 +89,7 @@ function showPopup(num,id){
 	<input type="text" name='keyword' id="keywordInput" value='${cri.keyword }' style="height: 15px; ">
     <a href="#this" class="btn" id="delete">조회</a>
 	<br/>
-	<p>총 ${count}x건의 검색 결과가 있습니다.</p>
+	<p>총 ${count}건의 검색 결과가 있습니다.</p>
 	
 <br/>
 
