@@ -6,6 +6,19 @@
 <head>
 <%@ include file="/WEB-INF/include/include-header.jspf" %>
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/myInterest.css'/>"/>
+<script type="text/javascript">
+$(document).ready(function(){
+	if('${param.receiver}'!=null && '${param.receiver}'=='all'){
+		str = '대상'
+			+ '<select name="type">'
+			+	 '<option value="all">전체</option>'
+			+	 '<option value="normal">임차인</option>'
+			+	 '<option value="lessor">임대인</option>'
+			+ '</select>'
+		$("#frm").prepend(str);
+	}
+});
+</script>
 </head>
 <body>
 <br/>
@@ -13,8 +26,9 @@
 <br/>
 <hr>	
 <br/><br/>
-<form action="messageWrite" method="post">
+<form action="messageWrite" method="post" id="frm">
 	<input type="hidden" name="RECEIVER" value="${param.id}">
+	<input type="hidden" name="forAll" value="${param.receiver}">
 	<div>
       	제목
        	<input type="text" id="TITLE" name="MESSAGE_TITLE"/>

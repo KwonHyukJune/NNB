@@ -6,7 +6,7 @@
 		<a id="awrite" class="tabmenu" href="<c:url value='memberList'/>">회원 검색</a>
 		</li>
 		<li>
-		<a id="aadmin" class="tabmenu" href="<c:url value='messageList.jsp'/>">전체 쪽지함</a>
+		<a id="aadmin" class="tabmenu" href="<c:url value='messageList'/>">전체 쪽지함</a>
 		</li>
 	</ul>
 </div>

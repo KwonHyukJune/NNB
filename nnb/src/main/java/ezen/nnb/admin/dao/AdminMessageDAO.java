@@ -11,14 +11,22 @@ public class AdminMessageDAO extends AbstractDAO{
 	
 	@SuppressWarnings("unchecked")
 	public List<Map<String,Object>>adminMessageList(Map<String,Object>map)throws Exception{
-		return (List<Map<String,Object>>)selectList("adminMessage.adminMessageList",map);
+		return (List<Map<String,Object>>)selectList("message.adminMessageList",map);
 	}
 	@SuppressWarnings("unchecked")
 	public Map<String,Object>adminMessageDetail(Map<String,Object>map)throws Exception{
 		return(Map<String,Object>)selectOne("message.adminMessageDetail",map);
 	}
+	@SuppressWarnings("unchecked")
+	public List<Map<String,Object>>selectMemberByType(Map<String,Object>map)throws Exception{
+		return (List<Map<String,Object>>)selectList("message.selectMemberByType",map);
+	}
 	public void adminMessageWrite(Map<String,Object>map)throws Exception{
-		insert("message.adminMessageWrite",map);
+		if(map.get("forAll").equals("all")) {
+			insert("message.adminAllMessageWrite",map);
+		}else {
+			insert("message.adminMessageWrite",map);
+		}
 	}
 	public void adminMessageDelete(Map<String,Object>map)throws Exception{
 		delete("message.adminMessageDelete",map);

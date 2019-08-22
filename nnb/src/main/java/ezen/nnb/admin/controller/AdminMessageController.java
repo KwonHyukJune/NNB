@@ -36,8 +36,8 @@ private MessageService messageService;
 	public ModelAndView adMessageList(CommandMap commandMap,HttpServletRequest request)throws Exception {
 		ModelAndView mv=new ModelAndView();
 		HttpSession session = request.getSession();
-		List<Map<String,Object>>adminMessageList=adminMessageService.adminMessageList(commandMap.getMap());
 		commandMap.put("ADMIN_ID", session.getAttribute("ADMIN_ID"));
+		List<Map<String,Object>>adminMessageList=adminMessageService.adminMessageList(commandMap.getMap());
     	mv.addObject("adminMessageList",adminMessageList);
 		mv.setViewName("admin/message/messageList");
 		return mv;
@@ -63,11 +63,12 @@ private MessageService messageService;
 		ModelAndView mv=new ModelAndView("admin/message/messageWrite");
 		HttpSession session=request.getSession();	
 		commandMap.put("SENDER", session.getAttribute("ADMIN_ID"));
-		messageService.insertMessage(commandMap.getMap());
+		System.out.println(commandMap.get("forAll"));
+		adminMessageService.adminMessageWrite(commandMap.getMap());
 	
 		return mv;
+	}
 		
-}
 	@RequestMapping(value="/admin/messageDelete")
 	public ModelAndView adMessageDelete(CommandMap commandMap)throws Exception{
 		ModelAndView mv = new ModelAndView();
