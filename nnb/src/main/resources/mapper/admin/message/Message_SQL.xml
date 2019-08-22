@@ -5,18 +5,18 @@
 <select id="adminMessageList" parameterType="hashMap" resultType="hashMap">
 <![CDATA[  
 SELECT 
-  MESSAGE.MESSAGE_NUM,
-  MEMBER.MEM_KIND,
-  MESSAGE.RECEIVER,
-  MESSAGE.MESSAGE_TITLE,
-  MESSAGE.SEND_DATE
+  mes.MESSAGE_NUM,
+  mem.MEM_KIND,
+  mes.RECEIVER,
+  mes.MESSAGE_TITLE,
+  mes.SEND_DATE
 FROM
-  MEMBER,
-  MESSAGE
+  MEMBER mem,
+  MESSAGE mes
 WHERE
-  RECEIVER = MEM_ID
+  mes.RECEIVER = mem.MEM_ID
 AND
-  MESSAGE.SENDER = 'admin'
+  mes.SENDER = #{ADMIN_ID}
 
 ]]>
 </select>
@@ -54,11 +54,45 @@ MESSAGE (
            (MESSAGE_NUM_SEQ.NEXTVAL,           
            #{MESSAGE_TITLE},
            #{MESSAGE_CONTENT},
-           'admin',
-           MEM_KIND,
+           #{SENDER},
+           #{RECEIVER},
            SYSDATE
 )
 ]]>
+</insert>
+
+<select id="selectMemberByType" parameterType="hashMap" resultType="hashMap">
+<![CDATA[  
+select mem_id from member where MEM_VERIFY='Y' and MEM_DEL_GB='N'
+]]>
+<if test="type!=null and !type.equals('all')">
+<![CDATA[  
+and mem_kind = #{type} 
+]]>
+</if>
+</select>
+
+<insert id="adminAllMessageWrite" parameterType="hashMap">
+<foreach item="MEM_ID" collection="MEM_ID" separator=";" open="begin" close="; end;">
+<![CDATA[ 
+    insert into message(
+      MESSAGE_NUM,
+      SENDER,
+      RECEIVER,
+      MESSAGE_TITLE,
+      MESSAGE_CONTENT,
+      SEND_DATE
+      )
+      values(
+      MESSAGE_NUM_SEQ.nextval,
+      #{SENDER},
+      #{MEM_ID.MEM_ID},
+      #{MESSAGE_TITLE},
+      #{MESSAGE_CONTENT},
+      sysdate
+      )
+]]>
+</foreach>
 </insert>
 	
 <select id="adminMessageDelete" parameterType="hashMap" resultType="hashMap">

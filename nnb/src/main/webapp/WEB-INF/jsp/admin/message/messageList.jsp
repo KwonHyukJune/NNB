@@ -12,7 +12,7 @@
 			  
 function showPopup(num){    //새 메시지 작성
 
-    var url = "/nnb/admin/messageWriteForm?MESSAGE_NUM="+num;
+    var url = "/nnb/admin/messageWriteForm?receiver=all";
     var name = "회원정보";
     var option = "width = 500, height = 500, top = 100, left = 200, location = no, resizeable = yes, scrollbars = yes"
     window.open(url, name, option);
@@ -89,7 +89,7 @@ function searchCheck(frm){
   </c:forEach> 
    				<br/><br/>
  	 <div>
- 	 			<input type="button" value="메시지 작성" onclick="showPopup(${map.MESSAGE_NUM});" />
+ 	 			<input type="button" value="메시지 작성" onclick="showPopup();" />
      </div>
 </div>
 

@@ -29,6 +29,9 @@ public class AdminMessageServiceImpl implements AdminMessageService{
 
 	@Override
 	public void adminMessageWrite(Map<String, Object> map) throws Exception {
+		if(map.get("forAll").equals("all")) {
+			map.put("MEM_ID",adminMessageDAO.selectMemberByType(map));
+		}
 		adminMessageDAO.adminMessageWrite(map);
 	}
 
