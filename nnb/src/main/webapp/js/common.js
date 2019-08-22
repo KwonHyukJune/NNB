@@ -14,7 +14,12 @@ function ComSubmit(opt_formId){
 	this.url = ""; 
 	
 	if(this.formId=="commonForm"){
-		$("#commonForm")[0].reset();
+		var frm = $("#commonForm");
+		if(frm.length>0){
+			frm.remove();
+		}
+		var str = "<form id='commonForm' name='commonForm'></form>";
+		$('body').append(str);
 	}
 	
 	this.setUrl = function setUrl(url){
@@ -27,6 +32,7 @@ function ComSubmit(opt_formId){
 	
 	this.submit = function submit(){
 		var frm = $("#"+this.formId)[0];
+		console.log('ddd'+this.url);
 		frm.action = this.url;
 		frm.method = "post";
 		frm.submit();

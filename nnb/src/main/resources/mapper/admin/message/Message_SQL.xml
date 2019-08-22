@@ -3,8 +3,10 @@
 <mapper namespace="message">
 
 <select id="adminMessageList" parameterType="hashMap" resultType="hashMap">
+<include refid="common.pagingPre"/> 
 <![CDATA[  
 SELECT 
+  ROW_NUMBER() OVER (ORDER BY mes.MESSAGE_NUM DESC) RNUM,
   mes.MESSAGE_NUM,
   mem.MEM_KIND,
   mes.RECEIVER,
@@ -19,12 +21,14 @@ AND
   mes.SENDER = #{ADMIN_ID}
 
 ]]>
+<include refid="common.pagingPost"/> 
 </select>
 <select id="adminMessageDetail" parameterType="hashMap" resultType="hashMap">
 <![CDATA[  
 SELECT
   ROW_NUMBER() OVER (ORDER BY MESSAGE_NUM DESC) RNUM,
   M.MEM_KIND,
+  M.MEM_ID,
   S.MESSAGE_NUM,
   S.MESSAGE_TITLE,
   S.MESSAGE_CONTENT,
@@ -33,9 +37,9 @@ FROM
   MEMBER M,
   MESSAGE S
 WHERE
-  M.MEM_ID = RECEIVER
+  M.MEM_ID = S.RECEIVER
 AND
-  MESSAGE_NUM = #{MASSAGE_NUM}  
+  MESSAGE_NUM = #{MESSAGE_NUM}  
   ]]>
   </select>
   

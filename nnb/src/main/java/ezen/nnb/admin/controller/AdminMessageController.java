@@ -33,13 +33,25 @@ private AdminLoginService adminLoginService;
 private MessageService messageService;
 
 	@RequestMapping(value="/admin/messageList")
+	public ModelAndView openMessageList(CommandMap commandMap,HttpServletRequest request)throws Exception {
+		ModelAndView mv = new ModelAndView("admin/message/messageList");
+		
+		return mv;
+	}
+	
+	@RequestMapping(value="/admin/selectMessageList")
 	public ModelAndView adMessageList(CommandMap commandMap,HttpServletRequest request)throws Exception {
-		ModelAndView mv=new ModelAndView();
+		ModelAndView mv=new ModelAndView("jsonView");
 		HttpSession session = request.getSession();
 		commandMap.put("ADMIN_ID", session.getAttribute("ADMIN_ID"));
 		List<Map<String,Object>>adminMessageList=adminMessageService.adminMessageList(commandMap.getMap());
-    	mv.addObject("adminMessageList",adminMessageList);
-		mv.setViewName("admin/message/messageList");
+    	mv.addObject("list",adminMessageList);
+		if(adminMessageList.size()>0) {
+			mv.addObject("total",adminMessageList.get(0).get("TOTAL_COUNT"));
+		}else {
+			mv.addObject("total",0);
+		}
+    	mv.addObject("count",adminMessageList.size());
 		return mv;
     }
 
