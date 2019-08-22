@@ -51,7 +51,6 @@ public ModelAndView MyInfoModify(CommandMap commandMap, HttpServletRequest reque
 	HttpSession session = request.getSession();
 	String id = (String) session.getAttribute("MEM_ID");
 	commandMap.put("MEM_ID",id);
-	System.out.println("email:"+commandMap.get("mem_email"));
 	myInfoService.updateMyInfoModify(commandMap.getMap());	
 	mv.addObject("MyInfo", commandMap.get("MyInfo"));
 	return mv;
@@ -59,12 +58,23 @@ public ModelAndView MyInfoModify(CommandMap commandMap, HttpServletRequest reque
 
 /*MyInfoDeleteComfirm
 */
+@RequestMapping(value="/myPage/myPageDeleteComfirm")
+public ModelAndView MyInfoDeleteConfirm(CommandMap commandMap, HttpServletRequest request) throws Exception{
+	ModelAndView mv = new ModelAndView("member/myPage/deleteForm");
+	return mv;
+}
 
 ///MyInfoDelete
 	@RequestMapping(value="/myPage/MyInfoDelete")
-	public ModelAndView MyInfoDelete(CommandMap commandMap)throws Exception{
-	ModelAndView mv=new ModelAndView("redirect:/myPage/MyInfodetail");	
-	myInfoService.deleteMyInfo(commandMap.getMap());	
+	public ModelAndView MyInfoDelete(CommandMap commandMap, HttpServletRequest request)throws Exception{
+	ModelAndView mv=new ModelAndView("member/myPage/delete");	
+	HttpSession session = request.getSession();
+	commandMap.put("MEM_ID",session.getAttribute("MEM_ID"));
+	int res = myInfoService.deleteMyInfo(commandMap.getMap());	
+	if(res==1) {
+		session.invalidate();
+	}
+	mv.addObject("res",res);
 	return mv;
 }
 

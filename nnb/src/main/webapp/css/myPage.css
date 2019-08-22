@@ -78,6 +78,7 @@ ul, li {
 .bryRNw {
     height: 59px;
     line-height: 58px;
+    cursor: pointer;
 }
 .bryRNw2 + li {
     border-top: 1px solid rgb(238, 238, 238);

@@ -483,11 +483,11 @@ $(document).ready(function(){
 						<th>구조</th>
 						<td class="cCUCai ">
 							<label class="hrokF cdcjQK">
-								<input class="fyqlMy cdcjQK" type="checkbox" class="STRUCTURES" value="1" name="STRUCTURES" checked="true">
+								<input class="fyqlMy cdcjQK" type="checkbox" class="STRUCTURES" value="1" name="STRUCTURES">
 								<p>복층</p>
 							</label>
 							<label class="hrokF cdcjQK">
-								<input class="fyqlMy cdcjQK" type="checkbox" class="STRUCTURES" value="2" name="STRUCTURES" checked="true">
+								<input class="fyqlMy cdcjQK" type="checkbox" class="STRUCTURES" value="2" name="STRUCTURES">
 								<p>1.5룸/주방분리형</p>
 							</label>
 						</td>
@@ -644,7 +644,7 @@ $(document).ready(function(){
 		<%@ include file="/WEB-INF/include/footer.jspf"%>
 	</div>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=340d0c25b07c60b5bc6548c7a084dc81&libraries=services,clusterer,drawing"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e603a6f6c5db5707c8168383f3516651&libraries=services,clusterer,drawing"></script>
 
 <script>
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 

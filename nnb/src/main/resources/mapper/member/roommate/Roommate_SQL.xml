@@ -24,12 +24,12 @@
                         FROM
                                 ROOMMATE_PROFILE
                         WHERE 
-                                RI_MEM_ID=#{RI_MEM_ID,jdbcType=VARCHAR}
+                                RI_MEM_ID=#{MEM_ID,jdbcType=VARCHAR}
                 ]]>
 </select>                                               						
 <insert id="insertMyRoommateProfile" parameterType="hashmap">
                 <![CDATA[
-                        insert into MESSAGE
+                        insert into ROOMMATE_PROFILE
                         (
                                 RI_NUM,
                                 RI_MEM_ID,
@@ -48,23 +48,24 @@
                         values
                         (
                                 RI_NUM_SEQ.NEXTVAL,
-                                #{RI_MEM_ID,jdbcType=VARCHAR},
-                                #{RI_REGION1,jdbcType=VARCHAR},
-                                #{RI_REGION2,jdbcType=VARCHAR},
-                                #{RI_REGION3,jdbcType=VARCHAR},
-                                #{RI_GENDER,jdbcType=VARCHAR},
-                                #{RI_BIRTH,jdbcType=DATE},
-                                #{RI_LOAN_BIG,jdbcType=INTEGER},
-                                #{RI_PROFILE,jdbcType=VARCHAR},
-                                #{RI_DATE_START,jdbcType=DATE},
-                                #{RI_DATE_END,jdbcType=DATE},
-                                #{RI_EXPOSE,jdbcType=INTEGER}
+                                #{MEM_ID,jdbcType=VARCHAR},
+                                #{region1,jdbcType=VARCHAR},
+                                #{region2,jdbcType=VARCHAR},
+                                #{region3,jdbcType=VARCHAR},
+                                #{gender,jdbcType=VARCHAR},
+                                #{birth,jdbcType=DATE},
+                                #{loan_big,jdbcType=INTEGER},
+                                #{loan_small,jdbcType=INTEGER},
+                                #{profile,jdbcType=VARCHAR},
+                                #{date_start,jdbcType=DATE},
+                                #{date_end,jdbcType=DATE},
+                                #{expose,jdbcType=INTEGER}
                         )
                 ]]>
 </insert>						
 <update id="updateMyProfile" parameterType="hashmap">
                 <![CDATA[
-                        UPDATE MEMBER 
+                        UPDATE ROOMMATE_PROFILE 
                         SET
                                 RI_REGION1=#{RI_REGION1,jdbcType=VARCHAR},
                                 RI_REGION2=#{RI_REGION2,jdbcType=VARCHAR},
@@ -87,7 +88,7 @@
                 delete from
                         ROOMMATE_PROFILE
                 where
-                        RI_MEM_ID=#{RI_MEM_ID,jdbcType=VARCHAR}
+                        RI_MEM_ID=#{MEM_ID,jdbcType=VARCHAR}
         ]]>
 </delete>                              			
 	<select id="selectRoommateList" parameterType="hashmap" resultType="hashmap">
@@ -120,20 +121,18 @@ FROM
 </if>
 <if test="RI_REGION==null or RI_REGION.equals('')">
 	<![CDATA[
-	ROOMMATE_PROFILE R,
+	ROOMMATE_PROFILE R
 	]]>
 </if>
 <![CDATA[
-	IGNORE I
 WHERE
 	M.MEM_ID=R.RI_MEM_ID
-  	and M.MEM_ID=I.IGNORE_MEM
 	and RI_EXPOSE=1
 	and MEM_ID NOT IN (
 		SELECT 
 			IGNORE_D_MEM
 		FROM IGNORE
-		WHERE IGNORE_MEM = #{id,jdbcType=VARCHAR}
+		WHERE IGNORE_MEM = #{MEM_ID,jdbcType=VARCHAR}
 		)
 	]]>	
 <if test="MEM_NICK!=null and!MEM_NICK.equals('')">
@@ -192,20 +191,18 @@ FROM
 </if>
 <if test="RI_REGION==null or RI_REGION.equals('')">
 	<![CDATA[
-	ROOMMATE_PROFILE R,
+	ROOMMATE_PROFILE R
 	]]>
 </if>
 <![CDATA[
-	IGNORE I
 WHERE
 	M.MEM_ID=R.RI_MEM_ID
-  	and M.MEM_ID=I.IGNORE_MEM
 	and RI_EXPOSE=1
 	and MEM_ID NOT IN (
 		SELECT 
 			IGNORE_D_MEM
 		FROM IGNORE
-		WHERE IGNORE_MEM = #{id ,jdbcType=VARCHAR}
+		WHERE IGNORE_MEM = #{MEM_ID ,jdbcType=VARCHAR}
 		)
 	]]>	
 <if test="MEM_NICK!=null and!MEM_NICK.equals('')">

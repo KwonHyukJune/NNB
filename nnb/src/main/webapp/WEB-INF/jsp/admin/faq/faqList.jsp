@@ -87,7 +87,7 @@
 	<div>
 		<%@include file="/WEB-INF/include/footer.jspf"%>
 	</div>
-	
+		
 <%@ include file="/WEB-INF/include/include-body.jspf"%>
 <script type="text/javascript">
 

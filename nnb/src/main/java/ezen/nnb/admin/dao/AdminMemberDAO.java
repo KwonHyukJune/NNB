@@ -1,9 +1,11 @@
 package ezen.nnb.admin.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.web.servlet.ModelAndView;
 
 import ezen.nnb.common.AbstractDAO;
 
@@ -16,8 +18,13 @@ public class AdminMemberDAO extends AbstractDAO{
 	}
 	@SuppressWarnings("unchecked")
 	public Map<String, Object> adminMemberDetail(Map<String, Object> map) throws Exception{
-		
-		return (Map<String,Object>) selectOne("member.adminMemberDetail",map);
+		Map<String,Object> res = new HashMap<String,Object>();
+		res.putAll((Map<String,Object>)selectOne("member.adminMemberDetail",map));
+		Map<String,Object> map2 = (Map<String,Object>)selectOne("member.adminMemberRoommateDetail",map);
+		if(map2!=null) {
+			res.putAll((Map<String,Object>)selectOne("member.adminMemberRoommateDetail",map));
+		}
+		return res;
 	}
 	@SuppressWarnings("unchecked")
 	public List<Map<String,Object>>adminMemberBanDetail(Map<String,Object>map)throws Exception{

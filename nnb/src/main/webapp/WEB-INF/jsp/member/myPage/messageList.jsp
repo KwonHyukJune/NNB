@@ -68,20 +68,20 @@ $(document).ready(function(){
 	</li>
 	<c:forEach var="message" items="${list}" varStatus="i">
 	<fmt:parseDate var="dateString" value="${message.SEND_DATE}" pattern="yyyy-MM-dd"/>
-	<li id="${i.index}" class="bryRNw">
+	<li id="li${i.index}" class="bryRNw">
 	<div onclick="openMessage(${message.MESSAGE_NUM})" class="message">
 		<p>${message.RNUM}</p>
 		<p></p>
 		<p></p>
 		<script type="text/javascript">
 			if("${message.SENDER}"==memId){
-				$("li#${i.index}>div>p:nth-child(2)").text("발신");
-				$("li#${i.index}>div>p:nth-child(3)").text("${message.RECEIVER}");
-				$("li#${i.index}>div>p:nth-child(2)").className="발신";
+				$("li#li${i.index}>div>p:nth-child(2)").text("발신");
+				$("li#li${i.index}>div>p:nth-child(3)").text("${message.RECEIVER}");
+				$("li#li${i.index}>div>p:nth-child(2)").className="발신";
 			}else if("${message.RECEIVER}"==memId){
-				$("li#${i.index}>div>p:nth-child(2)").text("수신");
-				$("li#${i.index}>div>p:nth-child(3)").text("${message.SENDER}");
-				$("li#${i.index}>div>p:nth-child(2)").className="수신";
+				$("li#li${i.index}>div>p:nth-child(2)").text("수신");
+				$("li#li${i.index}>div>p:nth-child(3)").text("${message.SENDER}");
+				$("li#li${i.index}>div>p:nth-child(2)").className="수신";
 			}
 		</script>
 		<p>${message.MESSAGE_TITLE}</p>
@@ -89,12 +89,12 @@ $(document).ready(function(){
 	</div>
 			<script type="text/javascript">
 				function reply_${i.index}(){
-					var mem = $("li#${i.index}>div>p:nth-child(3)").text();
+					var mem = $("li#li${i.index}>div>p:nth-child(3)").text();
 					var url = "messageWriteForm?receiver="+mem;
 					location.href=url;
 				};
 				function ignore_${i.index}(){
-					var mem = $("li#${i.index}>div>p:nth-child(3)").text();
+					var mem = $("li#li${i.index}>div>p:nth-child(3)").text();
 					if(confirm("'"+mem+"' 회원을 차단하시겠습니까?")){
 						var str = "<form id='frm' action='ignoreUser' method='post'>"
 							+ "<input type='hidden' name='IGNORE_D_MEM' value='"+mem+"'>"

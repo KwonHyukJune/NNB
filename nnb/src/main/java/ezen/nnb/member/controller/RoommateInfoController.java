@@ -21,7 +21,7 @@ public class RoommateInfoController {
 	public ModelAndView myProfile(CommandMap commandMap,HttpServletRequest request)throws Exception{
 		ModelAndView mv=new ModelAndView("/member/myPage/myProfile");
 		HttpSession session= request.getSession();
-		commandMap.put("MEM_ID",session.getAttribute("RI_MEM_ID"));
+		commandMap.put("MEM_ID",session.getAttribute("MEM_ID"));
 		
 		Map<String,Object>map=roommateService.myProfile(commandMap.getMap());
 		mv.addObject("map",map);
@@ -36,7 +36,9 @@ public class RoommateInfoController {
 	}
 	@RequestMapping(value="/myPage/registMyProfile")
 	public ModelAndView registProfile(CommandMap commandMap,HttpServletRequest request)throws Exception{
-		ModelAndView mv=new ModelAndView("redirect:/member/myPage/myProfile");
+		ModelAndView mv=new ModelAndView("redirect:/myPage/myProfile");
+		HttpSession session = request.getSession();
+		commandMap.put("MEM_ID",session.getAttribute("MEM_ID"));
 		roommateService.registProfile(commandMap.getMap());
 		return mv;
 	}
@@ -48,6 +50,8 @@ public class RoommateInfoController {
 	@RequestMapping(value="/myPage/myProfileModify")
 	public ModelAndView myProfileModify(CommandMap commandMap, HttpServletRequest request)throws Exception{
 		ModelAndView mv= new ModelAndView("/member/myPage/myProfileModify");
+		HttpSession session= request.getSession();
+		commandMap.put("MEM_ID",session.getAttribute("MEM_ID"));
 		roommateService.myProfileModify(commandMap.getMap());
 		mv.addObject("RI_NUM",commandMap.get("RI_NUM"));
 		return mv;

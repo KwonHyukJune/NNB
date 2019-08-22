@@ -13,7 +13,7 @@
 
 <script type="text/javascript">
 function showPopup1(){
-    var url = "/nnb/admin/messageWriteForm"
+    var url = "/nnb/admin/messageWriteForm?id="+"${memberDetail.MEM_ID}";
     var name = "메시지 작성";
     var option = "width = 500, height = 500, top = 100, left = 200, location = no, resizeable = yes, scrollbars = yes"
     window.open(url, name, option);
@@ -89,7 +89,7 @@ $(document).ready(function(){
 		<hr>
 		<br/><br/><br/>
 <c:choose>
-<c:when test='${memberDetail.MEM_KIND eq "임차"}'>
+<c:when test='${memberDetail.MEM_KIND eq "normal"}'>
 <div class="임차">      
 		<b>임차회원</b>
 		<br/><br/>
@@ -119,7 +119,7 @@ $(document).ready(function(){
         </p>
 </div>
 </c:when>
-<c:when test='${memberDetail.MEM_KIND eq "임대"}'>
+<c:when test='${memberDetail.MEM_KIND eq "lessor"}'>
 
 <div class="임대">      
 		<b>임대회원</b>

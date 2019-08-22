@@ -9,6 +9,23 @@
 </div>
 <fmt:parseDate var="dateString" value="${room.MOVE_IN_DATE}" pattern="yyyy-MM-dd"/>
 <script type="text/javascript">
+function calculator1(chk){
+	  if(chk==1){ 
+		  document.getElementById('sup_m').value = (parseFloat(document.getElementById('sup_p').value) * 3.3058).toFixed(2);       
+	  }
+	  else { 
+		  document.getElementById('sup_p').value = (parseFloat(document.getElementById('sup_m').value) / 3.3058).toFixed(2);
+	  }
+}
+function calculator2(chk){
+	  if(chk==1){ 
+		  document.getElementById('real_m').value = (parseFloat(document.getElementById('real_p').value) * 3.3058).toFixed(2);       
+	  }
+	  else { 
+		  document.getElementById('real_p').value = (parseFloat(document.getElementById('real_m').value) / 3.3058).toFixed(2);
+	  }
+}
+
 $(document).ready(function(){
 	$('#aadmin').addClass('active');
 	(function(){
@@ -249,7 +266,7 @@ $(document).ready(function(){
 			key[i].value = value;
 		};
 	})();
-	
+	/*
 	(function(){
 		var value = "${room.DESC_DETAIL}";
 		var key = $("textarea[name='DESC_DETAIL']");
@@ -257,7 +274,7 @@ $(document).ready(function(){
 			key[i].value = value;
 		};
 	})();
-	
+	*/
 	(function(){
 		var value = "${room.DESC_SECRET}";
 		var key = $("textarea[name='DESC_SECRET']");
@@ -266,6 +283,8 @@ $(document).ready(function(){
 			key[i].value = value;
 		};
 	})();
+	
+	
 });
 </script>
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/room.css'/>"/>
@@ -282,24 +301,6 @@ $(document).ready(function(){
 /* 파일 등록할 때 이미지 파일만 등록되게 가능한가? 물론 가능하겠지.. */
 /* 허위매물 제재 정책 링크 */
 /* 등록된 파일 불러오기 */
-	var gfv_count = 1;
- 	var mem = sessionStorage.getItem("MEM_ID");
-	function addFile(){
-		var str = "<p><input type='file' name='file_"+(gfv_count++)+"'><a href='#this' class='btn' name='delete'>삭제</a></p>";
-		$("#fileDiv").append(str);
-		$("a[name='delete']").on("click",function(e){
-			e.preventDefault();
-			fn_deleteFile($(this));
-		});
-	};/* 흔한개발자 코드 그대로 긁어왔음 */
-	function fn_deleteFile(obj){
-		obj.parent().remove();
-	};
-	function f_submit(){
-		var str = "<input type='hidden' name='ROOM_NUM' value='"+${room.ROOM_NUM}+"'>";
-		$("#frm").append(str);
-		frm.submit();
-	};
 </script>
 </head>
 <body>
@@ -313,7 +314,7 @@ $(document).ready(function(){
 		<li>일반 회원은 1개의 매물만 내놓을 수 있고, 직거래로 표시됩니다.</li>
 		</ul>
 		</div>
-
+		<input type="hidden" id="ROOM_NUM" name="ROOM_NUM" value="${room.ROOM_NUM }">
 		<form id="frm" name="frm" enctype="multipart/form-data" action="write"
 			method="post">
 			<div class="table etFHhl">
@@ -405,10 +406,10 @@ $(document).ready(function(){
 							<div class="xMNKR">
 								<p class="styled__Text-sc-1wmqs5y-2 dvECgk"><svg width="18" height="18" viewBox="0 0 18 18"><g fill="none" fill-rule="evenodd"><circle cx="9" cy="9" r="9" fill="#E6E7EA"></circle><path fill="#9C9EA3" d="M8.997 13.5a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5zm.01-2.499c-.634 0-.75-5.449-.75-6.001 0-.552.336-1 .75-1s.75.448.75 1-.116 6.001-.75 6.001z"></path></g></svg><span>도로명, 건물명, 지번에 대해 통합검색이 가능합니다.</span></p>
 								<div class="styled__Form-sc-1wmqs5y-3 dhdAXv" id="frm_address">
-									<input autocomplete="off" class="styled__Keyword-sc-1wmqs5y-4 iqNWWF Input-sfsekm-0 kTQnUD" name="keyword" placeholder="예)번동 10-1, 강북구 번동" value="">
+									<input autocomplete="off" class="styled__Keyword-sc-1wmqs5y-4 iqNWWF Input-sfsekm-0 kTQnUD" name="keyword" placeholder="예)번동 10-1, 강북구 번동" value="${room.ADDRSSS1}">
 									<button onclick="sample6_execDaumPostcode()" type="button" class="styled__SearchBtn-sc-1wmqs5y-5 hdoEbx">주소검색</button>
 								</div>
-								<div class="fUXvpI addressarea"></div>
+								<div class="fUXvpI addressarea">${room.ADDRESS1}</div>
 								<div class="kXKUhT">
 								<div class="gnEBbX">
 								<input class="bVCGUR kTQnUD" type="text" name="ADDRESS2" id="sample6_address2" size="50"
@@ -489,9 +490,9 @@ $(document).ready(function(){
 						<th rowspan="2" class="h"><p>건물 크기</p><span>(1P = 3.3058㎡)</span></th>
 						<td class="b ggZjqG">
 							<p class="hNdXGi">공급 면적 </p>
-							<input class="gsCYXz kTQnUD " type="number" id="sup_p">
+							<input class="gsCYXz kTQnUD " type="text" id="sup_p" onkeyup="calculator1(1);">
 							<p class="cmXpqK">평</p>
-							<input class="gsCYXz kTQnUD " type="number" name="SUPPLY_SIZE" id="sup_m">
+							<input class="gsCYXz kTQnUD " type="text" name="SUPPLY_SIZE" id="sup_m" onkeyup="calculator1(2);">
 							<p class="cmXpqK">m2</p>
 						</td>
 						<th rowspan="2">건물 층수</th>
@@ -508,9 +509,9 @@ $(document).ready(function(){
 					<tr>
 						<td class="ggZjqG">
 							<p class="hNdXGi">전용 면적 </p>
-							<input class="gsCYXz kTQnUD " type="number" id="real_p">
+							<input class="gsCYXz kTQnUD " type="text" id="real_p" onkeyup="calculator2(1);">
 							<p class="cmXpqK">평</p>
-							<input class="gsCYXz kTQnUD " type="number" name="REAL_SIZE" id="real_m">
+							<input class="gsCYXz kTQnUD " type="text" name="REAL_SIZE" id="real_m" onkeyup="calculator2(2);">
 							<p class="cmXpqK">m2</p>							
 						</td>
 						<td class="ggZjqG">
@@ -776,7 +777,7 @@ $(document).ready(function(){
 - 방 정보와 관련없는 홍보성 정보는 입력하실 수 없습니다. (홈페이지 주소, 블로그, SNS, 메신저ID, 전화번호, 이메일 등)
 - 중개수수료를 언급한 내용은 입력할 수 없습니다. (중개수수료 무료, 꽁짜, 반값 등)
 
-*주의사항 위반시 허위매물로 간주되어 매물 삭제 및 이용의 제한이 있을 수 있습니다."></textarea>
+*주의사항 위반시 허위매물로 간주되어 매물 삭제 및 이용의 제한이 있을 수 있습니다.">${room.DESC_DETAIL}</textarea>
 						</td>
 					</tr>
 					<tr>
@@ -800,13 +801,20 @@ $(document).ready(function(){
 					</div>
 					<div class="heKOml">
 						<div id="fileDiv" class="jAfNtH">
-							<p>
-								<input type="file" id="file" name="file_0"> <a href="#"
-									class="btn" id="delete" name="delete">삭제</a>
-							</p>
+							<c:forEach var="row" items="${list}" varStatus="var"> 
+								<p> 
+									<input type="hidden" id="IDX" name="FILE_NUM_${var.index }" value="${row.FILE_NUM }"> 
+									<a href="#this" id="name_${var.index }" name="name_${var.index }">${row.ORG_NAME }</a> 
+									<input type="file" id="file_${var.index }" name="file_${var.index }"> (${row.FILE_SIZE }kb) 
+									<a href="#this" class="btn" id="delete_${var.index }" name="delete_${var.index }">삭제</a> 
+								</p> 
+							</c:forEach> 
+						</div>
+
+
 						</div>
 						<div class="gpqhxG"></div>
-						<button type="button" class="kkaIZb" onclick="addFile();" style="position: relative; z-index: 1;">파일 추가</button>
+						<button type="button" class="kkaIZb" id="addFile" style="position: relative; z-index: 1;">파일 추가</button>
 					</div>
 					<p class="caution bhZAGT">
 						<svg width="18" height="18" viewBox="0 0 18 18"><g fill="none" fill-rule="evenodd"><circle cx="9" cy="9" r="9" fill="#E6E7EA"></circle><path fill="#9C9EA3" d="M8.997 13.5a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5zm.01-2.499c-.634 0-.75-5.449-.75-6.001 0-.552.336-1 .75-1s.75.448.75 1-.116 6.001-.75 6.001z"></path></g></svg>
@@ -826,13 +834,66 @@ $(document).ready(function(){
 				</span>
 			</label>
 			<button class="kcMULl" onclick="location.href=<c:url value='/room/adminRoom'/>">취소</button>
-			<button class="iEZQG" onclick="fsubmit();">매물 등록</button>
+			<button class="iEZQG" onclick="fn_updateBoard();">매물 등록</button>
+			<button class="kcMULl" id="delete">삭제하기</button>
 		</div>
 	</div>
 
 	<div>
 		<%@ include file="/WEB-INF/include/footer.jspf"%>
 	</div>
+	<script type="text/javascript"> 
+	
+	var gfv_count = '${fn:length(list)+1}'; 
+	
+	$(document).ready(function(){ 
+		
+		$("#delete").on("click", function(e){ //삭제하기 버튼 
+			e.preventDefault(); 
+			fn_deleteBoard(); 
+		}); 
+		
+		$("#addFile").on("click", function(e){ //파일 추가 버튼 
+			e.preventDefault(); 
+			fn_addFile(); 
+		}); 
+		
+		$("a[name^='delete']").on("click", function(e){ //파일 삭제 버튼 
+			e.preventDefault(); 
+			fn_deleteFile($(this)); 
+		});  
+		
+		
+		function fn_updateBoard(){ 
+			var comSubmit = new ComSubmit("frm"); 
+			comSubmit.setUrl("<c:url value='/room/adminRoom' />"); 
+			comSubmit.submit(); 
+		} 
+		
+		function fn_deleteBoard(){ 
+			var comSubmit = new ComSubmit(); 
+			comSubmit.setUrl("<c:url value='/room/delete' />"); 
+			comSubmit.addParam("ROOM_NUM", $("#ROOM_NUM").val()); 
+			comSubmit.submit(); 
+		} 
+		
+		function fn_addFile(){ 
+			var str = "<p>" + "<input type='file' id='file_"+(gfv_count)+"' name='file_"+(gfv_count)+"'>"
+						+ "<a href='#this' class='btn' id='delete_"+(gfv_count)+"' name='delete_"+(gfv_count)+"'>삭제</a>" 
+						+ "</p>"; 
+			$("#fileDiv").append(str); 
+			
+			$("#delete_"+(gfv_count++)).on("click", function(e){ //삭제 버튼 
+				e.preventDefault(); fn_deleteFile($(this)); 
+				}); 
+			} 
+		
+		function fn_deleteFile(obj){ 
+			obj.parent().remove(); 
+		} 
+	}
+
+</script>
 </body>
 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>

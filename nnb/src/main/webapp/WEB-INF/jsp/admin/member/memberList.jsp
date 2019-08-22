@@ -77,15 +77,6 @@ function showPopup(num,id){
 <body>
 <%@ include file="/WEB-INF/include/adminMemberHeader.jspf"%>
 
-
-
-<div><h1>회원 관리</h1></div>
-<br/>
-	
-<div><h3>
-<a href=# onclick="location.href='/nnb/admin/memberList'">회원 검색</a>&nbsp;&nbsp;&nbsp;&nbsp;
-<a href=# onclick="location.href='/nnb/admin/messageList'">전체 쪽지함</a>
-</h3></div>
 <br>
 
 <br/>
@@ -98,7 +89,7 @@ function showPopup(num,id){
 	<input type="text" name='keyword' id="keywordInput" value='${cri.keyword }' style="height: 15px; ">
     <a href="#this" class="btn" id="delete">조회</a>
 	<br/>
-	<p>총 ${count}x건의 검색 결과가 있습니다.</p>
+	<p>총 ${count}건의 검색 결과가 있습니다.</p>
 	
 <br/>
 
