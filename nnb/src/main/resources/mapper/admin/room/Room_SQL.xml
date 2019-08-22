@@ -17,23 +17,6 @@ AND    B.ROOM_NUM = I1.ROOM_NUM
 ]]>
 </select>
 
-<select id="selectAdminRoomDetail" resultType="hashMap" parameterType="hashMap" >
-<![CDATA[ 
-SELECT 
-
-ROOM_NUM,
-UPLOAD_DATE,
-BOARD_NUM,
-TRADE_STATUS,
-EXPIRATION_DATE,
-HIT_COUNT,
-FAV_COUNT,
-DEL_GB
-FROM
-       ROOM_BOARD
-]]>
-</select>
-
 <select id="selectAdminRoomA" resultType="hashMap" parameterType="hashMap" >
 <![CDATA[ 
 SELECT 
@@ -66,7 +49,7 @@ WHERE I1.MEM_ID = M.MEM_ID
 
 <select id="selectAdminRoomDetail" resultType="hashMap" parameterType="hashMap" >
 <![CDATA[ 
-SELECT 
+SELECT DISTINCT
 B.ROOM_NUM,
 UPLOAD_DATE,
 BOARD_NUM,
