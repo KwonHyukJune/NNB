@@ -67,6 +67,7 @@
 <div class="h">자기소개</div>
 <div class="b">${mate.RI_PROFILE}</div>
 	
+	
 <div>
 		<a href="#" class="btn" onclick="javascript:ignore();">차단</a>
 	<script type="text/javascript">

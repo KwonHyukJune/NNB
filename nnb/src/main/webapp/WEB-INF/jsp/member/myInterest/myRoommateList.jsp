@@ -13,8 +13,8 @@
 	function deleteFav(num){
 		var conSubmit = new ComSubmit();
 		conSubmit.setUrl("<c:url value='/myInterest/favRoommateCancel'/>");
-		conSubmit.addParam("RI_MEM_NUM",num);
-		conSubmit.addParam("MEM_NUM",${MEM_NUM});
+		conSubmit.addParam("RI_MEM_ID",num);
+		conSubmit.addParam("MEM_ID","${MEM_ID}");
 		conSubmit.submit();
 	};
 </script>
@@ -22,7 +22,7 @@
 <body>
 <%@ include file="/WEB-INF/include/header.jspf" %>
 <%@ include file="myInterest.jspf" %>
-
+<%-- 
 <!-- 테스트용 세팅 -->
 <%@ page import="java.util.HashMap" %>
 <%@ page import="java.util.Map" %>
@@ -54,12 +54,12 @@
 	request.setAttribute("count", count);
 	request.setAttribute("mateList",mateList);
 %>
-<!-- 테스트용 세팅 끝 -->
+<!-- 테스트용 세팅 끝 --> --%>
 
 <div class="myRoommateList">
 
-<p>총 ${count}명의 찜한 룸메이트가 있습니다.</p>
-<c:if test="${count!=null && count!=''}">
+<%-- <p>총 ${count}명의 찜한 룸메이트가 있습니다.</p>
+<c:if test="${count!=null && count!=''}"> --%>
 <div class="mateList">
 	<div class="listheader">
 		<div class="p1">닉네임</div>
@@ -69,9 +69,9 @@
 		<div class="p5">부담가능금액</div>
 		<div class="p6"></div>
 	</div>
-	<c:forEach var="mate" items="${mateList}">
+	<c:forEach var="mate" items="${list}">
 	<div class="mate">
-	<a href="#" onclick="openDetail('/roommate/detail?num=${mate.RI_MEM_NUM}');" class="btn">
+	<a href="#" onclick="openDetail('/roommate/detail?id=${mate.MEM_ID}');" class="btn">
 	<%-- <a href="javascript:window.open(<c:url value='/roommate/detail?num=${mate.RI_MEM_NUM}'/>)"> --%>
 		<div class="p1">${mate.MEM_NICK}</div>
 		<div class="p2">${mate.RI_AGE}</div>
@@ -79,14 +79,14 @@
 		<div class="p4">${mate.RI_REGION1}</div>
 		<div class="p5">${mate.RI_LOAN_BIG}/${mate.RI_LOAN_SMALL}</div>
 		<div class="p6">
-			<div class="deleteFav" onclick="deleteFav(${mate.RI_MEM_NUM});">
+			<div class="deleteFav" onclick="deleteFav(${mate.RI_MEM_ID});">
 			</div>
 		</div>
 	</a>
 	</div>
 	</c:forEach>
 </div>
-</c:if>
+<%-- </c:if> --%>
 <c:if test="${count==null || count==''}">
 	<a href="<c:url value='/search/roomList'/>" class="btn">룸메이트 찾으러가기</a>
 </c:if>
