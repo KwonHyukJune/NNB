@@ -17,7 +17,7 @@ $(document).ready(function(){
 		
 	function insertBoard(){
 		var comSubmit = new ComSubmit("frm");
-		comSubmit.setUrl("<c:url value='/admin/bankWrite' />");
+		comSubmit.setUrl("<c:url value='/admin/bankWrite'/>");
 		comSubmit.submit();
 	}
 });
