@@ -61,14 +61,12 @@ $(document).ready(function(){
 				<p>찜 <span>${room.FAV_COUNT}</span></p>
 			</div>
 			<div class="fLTNNO">
-				<c:if test="${room.TRADE_STATUS=='광고중'}">
 				<button class="hxvBac llAgXp" type="button" onclick="location.href='updateForm?ROOM_NUM=${room.ROOM_NUM}'">수정</button>
 				<button class="dPcOsn llAgXp" type="button" onclick="location.href='delete?ROOM_NUM=${room.ROOM_NUM}'">삭제</button>
+				<c:if test="${room.TRADE_STATUS=='광고중'}">
 				<button class="bDSVrJ llAgXp" type="button" onclick="location.href='tradeStatus?TRADE_STATUS=2&ROOM_NUM=${room.ROOM_NUM}'">광고종료</button>
 				</c:if>
 				<c:if test="${room.TRADE_STATUS=='거래완료'}">
-				<button class="hxvBac llAgXp" type="button" onclick="location.href='updateForm?ROOM_NUM=${room.ROOM_NUM}'">수정</button>
-				<button class="dPcOsn llAgXp" type="button" onclick="location.href='delete?ROOM_NUM=${room.ROOM_NUM}'">삭제</button>
 				<button class="bDSVrJ llAgXp" type="button" onclick="location.href='tradeStatus?TRADE_STATUS=1&ROOM_NUM=${room.ROOM_NUM}'">광고재등록</button>
 				</c:if>
 			</div>
