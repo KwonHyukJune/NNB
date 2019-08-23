@@ -544,16 +544,7 @@ $(document).ready(function(){
 $("input").on("change",function(){
 	fn_search();
 });
-function fn_addParam(ajax,param){
-	var key = param.attr("name");
-	var value = [];
-	$('input[name='+key+']').each(function(){
-		if(this.checked){
-			value.push(this.value);
-		}
-	});
-	ajax.addParam(key,value);
-}
+
 function fn_search(){
 	var comAjax = new ComAjax();
 	comAjax.setUrl("<c:url value='/search/roomList'/>");

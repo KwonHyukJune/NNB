@@ -10,9 +10,12 @@
 
 <script type="text/javascript">
 
-function goPage1(num) {   // 목록으로
-	location.href="/nnb/admin/messageList?MEMSSAGE_NUM="+${map.MESSAGE_NUM}; 
-	}	
+function fn_openBoardList(obj){   // 목록으로
+	var comSubmit = new ComSubmit();
+	comSubmit.setUrl("<c:url value='/admin/messageList'/>");
+	comSubmit.addParam("PAGE_INDEX","${param.PAGE_INDEX}");
+	comSubmit.submit();
+}	
 </script>
 
 </head>
@@ -38,7 +41,14 @@ function goPage1(num) {   // 목록으로
 		 ${map.MESSAGE_NUM} &nbsp;     
 		</li>	
 		<li>대상	  
-         ${map.MEM_KIND}&nbsp;
+         ${map.MEM_ID} (
+         	<c:if test="${map.MEM_KIND eq 'lessor'}">
+         	임대회원
+         	</c:if>
+         	<c:if test="${map.MEM_KIND eq 'normal'}">
+         	임차회원
+         	</c:if>
+         )
       	</li>
       	<li>날짜  :&nbsp;      	
          ${map.SEND_DATE}&nbsp;
@@ -52,7 +62,7 @@ function goPage1(num) {   // 목록으로
           
       </ul>
     <br/><br/><br/> 
-    <a href="#" onClick="goPage1(${map.MESSAGE_NUM})">목록으로</a>
+    <a href="#" onClick="fn_openBoardList($(this))">목록으로</a>
 
   
    </div>	

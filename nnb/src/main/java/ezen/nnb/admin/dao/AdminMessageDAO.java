@@ -11,7 +11,7 @@ public class AdminMessageDAO extends AbstractDAO{
 	
 	@SuppressWarnings("unchecked")
 	public List<Map<String,Object>>adminMessageList(Map<String,Object>map)throws Exception{
-		return (List<Map<String,Object>>)selectList("message.adminMessageList",map);
+		return (List<Map<String,Object>>)selectPagingList("message.adminMessageList",map);
 	}
 	@SuppressWarnings("unchecked")
 	public Map<String,Object>adminMessageDetail(Map<String,Object>map)throws Exception{
