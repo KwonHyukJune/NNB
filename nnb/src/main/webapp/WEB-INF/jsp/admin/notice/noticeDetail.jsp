@@ -48,7 +48,6 @@ function goPage1(num) {   // 공지사항 목록으로
        </li> 
        <li>내용 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;  
          ${map.NT_CONTENT}
-          
       </li>
     </ul>
     <br/><br/><br/> 

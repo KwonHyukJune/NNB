@@ -72,16 +72,16 @@
 
 	<br/>
 	<br>
-	<div class="selectBankList" style="margin:0 700px"> 
+	<div class="selectBankList" style="margin:0 300px"> 
 	
 	</div>
 	
-	<div id="PAGE_NAVI" style="margin:0 700px">  </div>
+	<div id="PAGE_NAVI" style="margin:0 300px; text-align: center;">  </div>
 		<input type="hidden" id="PAGE_INDEX" name="PAGE_INDEX" />
    
    <br>
    	<div>    
-  		<a href="#" style="margin:0 700px" onClick="goPage1(${map.NT_NUM})">새 글 등록</a>
+  		<a href="#" style="margin:0 300px; text-align: center;" onClick="goPage1(${map.NT_NUM})">새 글 등록</a>
 	</div>
 
 
@@ -144,7 +144,7 @@ function fn_selectBankListCallback(data){
 			str += 
 			      "<div class='bank'>" 
 	    			+ "<a href='<c:url value='/admin/bankDetail?BANK_NUM=" + value.BANK_NUM + "'/>'>" 
-	    					+ value.ROW_NUM +"&nbsp;"+ value.BANK_KIND +"&nbsp;"+ value.BANK_REGDATE +"&nbsp;"+ value.BANK_TITLE + "</a>"
+	    					+ value.ROW_NUM +"&nbsp;"+ value.BANK_KIND +"&nbsp;"+ value.REGDATE +"&nbsp;"+ value.BANK_TITLE + "</a>"
 	    			+ "<a href='#' onClick='goPage(" + value.BANK_NUM + ")'> 수정" + "</a>"
 					+ "<a href='#' class='btn' id='" + value.BANK_NUM +"' onclick='delet("+ value.BANK_NUM +")'>삭제</a>"
 				+ "</div>";

@@ -234,3 +234,7 @@ function addCookie(cookieName,id) {
 	    setCookie(cookieName, id, expire);
 	  }
 	}
+
+function fn_back(){
+	history.go(-1);
+}
