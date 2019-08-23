@@ -17,7 +17,7 @@ $(document).ready(function(){
 			history.go(-1);
 		}
 	}else{
-		location.href = "<c:url value='/main'/>";
+		location.href = "<c:url value='${url}'/>";
 	}
 })
 </script>
