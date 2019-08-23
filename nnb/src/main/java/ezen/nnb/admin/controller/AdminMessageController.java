@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import ezen.nnb.admin.paging.Paging;
@@ -40,10 +41,16 @@ private MessageService messageService;
 	}
 	
 	@RequestMapping(value="/admin/selectMessageList")
+	@ResponseBody
 	public ModelAndView adMessageList(CommandMap commandMap,HttpServletRequest request)throws Exception {
 		ModelAndView mv=new ModelAndView("jsonView");
 		HttpSession session = request.getSession();
 		commandMap.put("ADMIN_ID", session.getAttribute("ADMIN_ID"));
+		System.out.println("DD:"+commandMap.get("searchType"));
+		System.out.println("DD:"+commandMap.get("keyword"));
+		if(commandMap.get("searchType")!=null && commandMap.get("keyword")==null) {
+			commandMap.put("keyword","");
+		}
 		List<Map<String,Object>>adminMessageList=adminMessageService.adminMessageList(commandMap.getMap());
     	mv.addObject("list",adminMessageList);
 		if(adminMessageList.size()>0) {
@@ -51,7 +58,6 @@ private MessageService messageService;
 		}else {
 			mv.addObject("total",0);
 		}
-    	mv.addObject("count",adminMessageList.size());
 		return mv;
     }
 

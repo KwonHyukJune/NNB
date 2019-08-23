@@ -21,8 +21,39 @@ AND
   mes.SENDER = #{ADMIN_ID}
 
 ]]>
+	<if test='searchType!=null and searchType.equals("c")'>
+<![CDATA[  
+and MESSAGE_CONTENT like '%' || #{keyword} || '%'
+]]>
+	</if>
+	<if test='searchType!=null and searchType.equals("t")'>
+<![CDATA[  
+and MESSAGE_TITLE like '%' || #{keyword} || '%'
+]]>
+	</if>
+	<if test='searchType!=null and searchType.equals("tc")'>
+<![CDATA[  
+and (MESSAGE_CONTENT like '%' || #{keyword} || '%' or MESSAGE_TITLE like '%' || #{keyword} || '%')
+]]>
+	</if>
+	<if test='searchType!=null and searchType.equals("w")'>
+<![CDATA[  
+and RECEIVER like '%' || #{keyword} || '%'
+]]>
+	</if>
+	<if test='searchType!=null and searchType.equals("cw")'>
+<![CDATA[  
+and (MESSAGE_CONTENT like '%' || #{keyword} || '%' or RECEIVER like '%' || #{keyword} || '%')
+]]>
+	</if>
+	<if test='searchType!=null and searchType.equals("tcw")'>
+<![CDATA[  
+and (MESSAGE_TITLE like '%' || #{keyword} || '%' or MESSAGE_CONTENT like '%' || #{keyword} || '%' or RECEIVER like '%' || #{keyword} || '%')
+]]>
+	</if>
 <include refid="common.pagingPost"/> 
 </select>
+
 <select id="adminMessageDetail" parameterType="hashMap" resultType="hashMap">
 <![CDATA[  
 SELECT

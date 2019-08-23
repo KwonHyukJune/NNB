@@ -127,7 +127,7 @@ function gfn_renderPaging(params){
 	var str = "";
 	
 	var first = (parseInt((currentIndex-1) / 10) * 10) + 1;
-	var last = (parseInt(totalIndexCount/10) == parseInt(currentIndex/10)) ? totalIndexCount%10 : 10;
+	var last = (parseInt(totalIndexCount/10) == parseInt((currentIndex-1)/10)) ? totalIndexCount%10 : 10;
 	var prev = (parseInt((currentIndex-1)/10)*10) - 9 > 0 ? (parseInt((currentIndex-1)/10)*10) - 9 : 1; 
 	var next = (parseInt((currentIndex-1)/10)+1) * 10 + 1 < totalIndexCount ? (parseInt((currentIndex-1)/10)+1) * 10 + 1 : totalIndexCount;
 	
@@ -168,6 +168,19 @@ function _movePage(value){
 	}
 }
 
+// 검색
+function fn_addParam(ajax,param){
+	var key = param.attr("name");
+	var value = [];
+	$('input[name='+key+']').each(function(){
+		if(this.checked){
+			value.push(this.value);
+		}
+	});
+	ajax.addParam(key,value);
+}
+
+//
 function getParameterByName(name) {
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
     var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),

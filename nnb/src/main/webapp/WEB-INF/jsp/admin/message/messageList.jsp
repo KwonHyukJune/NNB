@@ -34,6 +34,7 @@
 		$("#PAGE_INDEX").val(PAGE_INDEX);
 		fn_selectSearchMessageList(PAGE_INDEX);
 	});
+	//상세보기
 	function fn_openMessageDetail(obj){
 		var comSubmit = new ComSubmit();
 		comSubmit.setUrl("<c:url value='messageDetail'/>");
@@ -41,22 +42,39 @@
 		comSubmit.addParam("PAGE_INDEX",$("#PAGE_INDEX").val());
 		comSubmit.submit();
 	}
-	function fn_selectSearchMessageList(pageNo) {
-		var comAjax = new ComAjax();
-		comAjax.setUrl("<c:url value='/admin/selectMessageList'/>");
+	//검색
+	function fn_search(){
+		var comAjax = new ComAjax()
+		comAjax.setUrl("<c:url value='selectMessageList'/>");
 		comAjax.setCallback("fn_selectSearchMessageListCallback");
+		comAjax.addParam("searchType",$("select[name=searchType]").val());
+		comAjax.addParam("keyword",$("input[name=keyword]").val());
 		comAjax.addParam("PAGE_INDEX", $("#PAGE_INDEX").val());
 		comAjax.addParam("PAGE_ROW", 15);
 		comAjax.ajax();
 	}
+	//몇페이지 목록 보기
+	function fn_selectSearchMessageList(pageNo) {
+		var comAjax = new ComAjax();
+		comAjax.setUrl("<c:url value='/admin/selectMessageList'/>");
+		comAjax.setCallback("fn_selectSearchMessageListCallback");
+		comAjax.addParam("searchType",$("select[name=searchType]").val());
+		comAjax.addParam("keyword",$("input[name=keyword]").val());
+		comAjax.addParam("PAGE_INDEX", $("#PAGE_INDEX").val());
+		comAjax.addParam("PAGE_ROW", 15);
+		comAjax.ajax();
+	}
+	//콜백함수
 	function fn_selectSearchMessageListCallback(data) {
 		var total = data.total;
 		var body = $("ul#selectSearchMessageList");
+		$("#count").empty();
 		body.empty();
 		
 		if (total == 0) {
 			var str = "<div class='messageList'>" + "조회된 결과가 없습니다." + "</div>";
 			body.append(str);
+			$("#PAGE_NAVI").empty();
 		} else {
 			var params = {
 				divId : "PAGE_NAVI",
@@ -68,7 +86,6 @@
 			gfn_renderPaging(params);
 			var str = "";
 			var count = "총 " + data.total + "개의 검색 결과가 있습니다.";
-			$("#count").empty();
 			$("#count").append(count);
 			$.each(data.list, function(key, message) {
 				str += "<li class='message'>"
@@ -124,20 +141,20 @@
 		<option value="c"
 			<c:out value="${cri.searchType eq 'c'?'selected':''}"/>>내용</option>
 		<option value="w"
-			<c:out value="${cri.searchType eq 'w'?'selected':''}"/>>작성자</option>
+			<c:out value="${cri.searchType eq 'w'?'selected':''}"/>>대상</option>
 		<option value="tc"
 			<c:out value="${cri.searchType eq 'tc'?'selected':''}"/>>
 			제목+ 내용</option>
 		<option value="cw"
 			<c:out value="${cri.searchType eq 'cw'?'selected':''}"/>>내용
-			+ 작성자</option>
+			+ 대상</option>
 		<option value="tcw"
 			<c:out value="${cri.searchType eq 'tcw'?'selected':''}"/>>
-			제목 + 내용 + 작성자</option>
+			제목 + 내용 + 대상</option>
 	</select>
 	<input type="text" name='keyword' id="keywordInput"
 		value='${cri.keyword }'>
-	<button type="button" id='searchBtn'>검색</button>
+	<button type="button" id='searchBtn' onclick="fn_search()">검색</button>
 
 
 	<br />
