@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import ezen.nnb.admin.paging.Paging;
@@ -29,121 +30,61 @@ public class AdminRoomController{
 	@Resource(name="adminRoomService")
 	private AdminRoomService adminRoomService;
 		
-	 
+	@RequestMapping(value="/admin/roomList")
+	public ModelAndView roomList(CommandMap commandMap) throws Exception{
+		ModelAndView mv = new ModelAndView("admin/room/roomList");
+		return mv;
+	}
 	
 	//목록 임시
-	@RequestMapping(value=/*MapperURL*/"/admin/roomList")
-	public ModelAndView adminRoomList(CommandMap commandMap) throws Exception{
+	@RequestMapping(value=/*MapperURL*/"/admin/selectRoomList")
+	@ResponseBody
+	public ModelAndView selectRoomList(CommandMap commandMap) throws Exception{
 		ModelAndView mv=new ModelAndView(/*jsp*/"jsonView");
 		
 		List<Map<String,Object>> list=adminRoomService.selectAdminRoomList(commandMap.getMap());
 		mv.addObject("list",list);	
 		if(list.size() > 0){
-    		mv.addObject("TOTAL", list.get(0).get("TOTAL_COUNT"));
+    		mv.addObject("total", list.get(0).get("TOTAL_COUNT"));
     	}
     	else{
-    		mv.addObject("TOTAL", 0);
+    		mv.addObject("total", 0);
     	}
 		return mv;
-	}   
-		/*
-			@RequestMapping(value="admin/roomList")
-			public ModelAndView adminRoomList(CommandMap commandMap,HttpServletRequest request)throws Exception{
-			
-			if(request.getParameter("currentPage")==null || request.getParameter("currentPage").trim().isEmpty()
-				  || request.getParameter("currentPage").equals("0")) {
-			  currentPage=1;
-		  	}else {
-			  currentPage=Integer.parseInt(request.getParameter("currentPage"));	  
-		  	}
-		  	ModelAndView mv=new ModelAndView();
-		  	List<Map<String,Object>>adminRoomList=adminRoomService.selectAdminRoomList(commandMap.getMap());
-				  
-			Map<String,Object> isSearchMap=new HashMap<String, Object>();
-			  
-			isSearch=request.getParameter("isSearch");
-			  
-			if(isSearch !=null) {
-			  searchNum=Integer.parseInt(request.getParameter("searchNum"));
-			  isSearchMap.put("isSearch", isSearch);
-				  
-			  if(searchNum==1) {
-				  adminRoomList=adminRoomService.selectAdminRoomA(isSearchMap);
-			  }
-			  totalCount=adminRoomList.size();
-			  page=new Paging(currentPage,totalCount,blockCount,blockPage,"adminRoomList");
-			  pagingHtml=page.getPagingHtml().toString();
-				  
-			  int lastCount=totalCount;
-			  
-			  if(page.getEndCount()<totalCount)
-				  lastCount=page.getEndCount()+1;
-			  adminRoomList=adminRoomList.subList(page.getStartCount(),lastCount);
-			  
-			  mv.addObject("isSearch",isSearch);
-			  mv.addObject("searchNum",searchNum);
-			  mv.addObject("totalCount",totalCount);
-			  mv.addObject("pagingHtml",pagingHtml);
-			  mv.addObject("currentPage",currentPage);
-			  mv.addObject("adminRoomList",adminRoomList);
-			  mv.setViewName("/admin/room/roomList");
-			  
-			  return mv;
-			 }else {
-			  totalCount=adminRoomList.size();
-			  page=new Paging(currentPage,totalCount,blockCount,blockPage,"adminRoomList");
-			  pagingHtml=page.getPagingHtml().toString();
-				  
-			  int lastCount=totalCount;
-				  
-			  if(page.getEndCount()<totalCount)
-				  lastCount=page.getEndCount()+1;
-			  adminRoomList=adminRoomList.subList(page.getStartCount(),lastCount);
-			  
-			  mv.addObject("isSearch",isSearch);
-			  mv.addObject("searchNum",searchNum);
-			  mv.addObject("totalCount",totalCount);
-			  mv.addObject("pagingHtml",pagingHtml);
-			  mv.addObject("currentPage",currentPage);
-			  mv.addObject("adminRoomList",adminRoomList);
-			  mv.setViewName("/admin/room/roomList");
-				  
-			 return mv;
-			 	}
-			}	  
-			*/
-			
-			//관리자 룸 상세
-			@RequestMapping(value="/admin/roomDetail")
-		    public ModelAndView adminRoomDetail(CommandMap commandMap) throws Exception{
-				ModelAndView mv = new ModelAndView();
-				Map<String,Object>map = adminRoomService.selectAdminRoomDetail(commandMap.getMap());
-				mv.addObject("roomDetail",map);
-				mv.setViewName("/admin/room/roomDetail");			
-				return mv;	
-			}
-			//관리자가 회원이 보는 방 상세로 연결
-			@RequestMapping(value="/admin/detailRoom")
-		    public ModelAndView detailRoom(CommandMap commandMap) throws Exception{
-				ModelAndView mv = new ModelAndView();
-				Map<String,Object>map = adminRoomService.detailRoom(commandMap.getMap());
-				mv.addObject("roomDetail",map);
-				mv.setViewName("/admin/roomDetail");			
-				return mv;		 	
-			}
-			@RequestMapping(value="admin/roomStatus")
-			public ModelAndView adminRoomStatus(CommandMap commandMap) throws Exception{
-			ModelAndView mv = new ModelAndView();
-			adminRoomService.updateAdminRoomStatus(commandMap.getMap());
-			mv.addObject("room_status", commandMap.get("room_status"));
-			mv.setViewName("redirect:/admin/roomDetail");
-			return mv;	
-			}
+	}
+	
+	//관리자 룸 상세
+	@RequestMapping(value="/admin/roomDetail")
+    public ModelAndView adminRoomDetail(CommandMap commandMap) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		Map<String,Object>map = adminRoomService.selectAdminRoomDetail(commandMap.getMap());
+		mv.addObject("roomDetail",map);
+		mv.setViewName("/admin/room/roomDetail");			
+		return mv;	
+	}
+	//관리자가 회원이 보는 방 상세로 연결
+	@RequestMapping(value="/admin/detailRoom")
+    public ModelAndView detailRoom(CommandMap commandMap) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		Map<String,Object>map = adminRoomService.detailRoom(commandMap.getMap());
+		mv.addObject("roomDetail",map);
+		mv.setViewName("/admin/roomDetail");			
+		return mv;		 	
+	}
+	@RequestMapping(value="admin/roomStatus")
+	public ModelAndView adminRoomStatus(CommandMap commandMap) throws Exception{
+	ModelAndView mv = new ModelAndView();
+	adminRoomService.updateAdminRoomStatus(commandMap.getMap());
+	mv.addObject("room_status", commandMap.get("room_status"));
+	mv.setViewName("redirect:/admin/roomList");
+	return mv;	
+	}
 
-			@RequestMapping(value="admin/roomDelete")
-			public ModelAndView adminMemberBan(CommandMap commandMap)throws Exception{
-				ModelAndView mv=new ModelAndView();
-				mv.setViewName("redirect:/admin/roomList");
-				return mv;
-			}
-		}    ////
+	@RequestMapping(value="admin/roomDelete")
+	public ModelAndView deleteRoom(CommandMap commandMap)throws Exception{
+		ModelAndView mv=new ModelAndView();
+		adminRoomService.deleteRoom(commandMap.getMap());
+		mv.setViewName("redirect:/admin/roomList");
+		return mv;
+	}
+}    ////
