@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import ezen.nnb.admin.service.AdminLoginService;
@@ -19,32 +20,39 @@ public class AdminLoginController {
 	@Resource(name="adminLoginService")
 	private AdminLoginService adminLoginService;
 	
+	@RequestMapping(value="/admin/main")
+	public ModelAndView adminMain(CommandMap commandMap, HttpServletRequest request) throws Exception{
+		ModelAndView mv = new ModelAndView("admin/main/adminMain");
+		return mv;
+	}
 	
 	@RequestMapping(value="/admin/loginForm")
     public ModelAndView adminloginform(CommandMap commandMap,HttpServletRequest request) throws Exception{
 		
 		ModelAndView mv = new ModelAndView();	
-		System.out.println("adminLogin"+commandMap.getMap());
 
 		mv.setViewName("admin/login/adminLogin");
 
 		return mv;
 		
 	}
-	@RequestMapping(value="/adminLogin")
+	@RequestMapping(value="/adminLogin", method = RequestMethod.POST)
 	public ModelAndView AdminLogin(CommandMap commandMap, HttpServletRequest request,HttpServletResponse response) throws Exception {
-		ModelAndView mv=new ModelAndView();
-		System.out.println("adminLoginForm"+commandMap.getMap());
+		ModelAndView mv=new ModelAndView("/admin/login/login");
+		String message = "";
+		String url = "";
 
 		HttpSession session=request.getSession();
 		Map<String,Object>map=adminLoginService.AdminLogin(commandMap.getMap());
 		if(map!=null) {
-			System.out.println("ff");
 			session.setAttribute("ADMIN_ID", commandMap.get("ADMIN_ID"));
-			mv.setViewName("/admin/main/adminMain");
+			url = "/admin/main";
 		}else {
-			mv.setViewName("/admin/login/adminLogin");
+			message = "아이디 또는 비밀번호가 틀렸습니다.";
 		}
+		mv.addObject("message",message);
+		mv.addObject("url",url);
+
 		return mv;
 	}
 	
