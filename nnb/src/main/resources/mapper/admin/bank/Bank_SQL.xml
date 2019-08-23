@@ -59,7 +59,15 @@ insert into bank(
 	<select id="selectBankDetail" parameterType="hashMap"
 		resultType="hashMap">
 <![CDATA[
-       select * from bank where bank_num=#{BANK_NUM}
+	select  
+		BANK_KIND,
+		BANK_TITLE,
+		BANK_CONTENT,
+		TO_CHAR(BANK_REGDATE, 'YYYY/MM/DD') as REGDATE
+	from 
+		bank 
+	where 
+		bank_num=#{BANK_NUM}
 ]]>
 	</select>
 

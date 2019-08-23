@@ -11,55 +11,50 @@ function pop(url){
 	var OpenWindow = window.open();
 	OpenWindow.document.write("<img src="+url+">");
 }
+
 </script>
 </head>
 <body>
 <%@ include file="/WEB-INF/include/header.jspf" %>
 
 
-<div class="bankview">
 
-	<div class="title">제휴은행</div>
-	<div class="detail">
+<h1 class="styled__Title-sc-1pis5dj-1 gHsEax">제휴 은행</h1>
+<div class="page_line"></div>
+<br><br><br>
+<div class="detail">
 	<div>
-		<ul>
-			<li class="p1">은행종류</li>
-			<li class="p2">${bank.BANK_KIND}</li>
-			<li class="p3">조회수</li>
-			<li class="p4">${bank.BANK_HITCOUNT}</li>
+		<ul class="board-top">
+			<li id ="title">${bank.BANK_TITLE}</li>
+			<li id = "bank">${bank.BANK_KIND}</li>
+			<li id ="date">${bank.REGDATE}</li>
 		</ul>
 	</div>
-	<div>
-		<ul>
-			<li class="p1">제목</li>
-			<li class="p2">${bank.BANK_TITLE}</li>
-			<li class="p3">날짜</li>
-			<li class="p4">${bank.BANK_REGDATE}</li>
-		</ul>
-	</div>
+		
+	<div class="content">
 		<c:if test="${bank.BANK_STORED_FILE1!=null && bank.BANK_STORED_FILE1!=''}">
-		<ul>
 			<div class="image">
 				<img src="<c:url value='/bankImages/${bank.BANK_STORED_FILE1}'/>"
-					 onclick="pop(this.src)" style="cursor:pointer;">
-				</a>
-			<c:if test="${bank.BANK_STORED_FILE2!=null && bank.BANK_STORED_FILE2!=''}">
-				<br>
-				<img src="<c:url value='/bankImages/${bank.BANK_STORED_FILE1}'/>"
-					 onclick="pop(this.src)" style="cursor:pointer;">
-				</a>
-			</c:if>
+					onclick="pop(this.src)" style="cursor:pointer;">
 			</div>
-			<div class="content">${bank.BANK_CONTENT}</div>
-		</ul>
 		</c:if>
+		<c:if test="${bank.BANK_STORED_FILE2!=null && bank.BANK_STORED_FILE2!=''}">
+			<div class="image">	
+				<img src="<c:url value='/bankImages/${bank.BANK_STORED_FILE1}'/>"
+					onclick="pop(this.src)" style="cursor:pointer;">
+			</div>
+		</c:if>
+		
+		${bank.BANK_CONTENT}
 	</div>
-	<a href="/nnb/bank/openBankList">목록으로</a>
-
+		
+</div>
+<div class="toList">
+	<button class="iEZQG" onclick="location.href='<c:url value='/bank/openBankList'/>'">목록으로</button>
+</div>
 <%-- 	<div class="paging">
 		${pagingHtml}
 	</div> --%>
-</div>
 <br>
 <div>
 <%@ include file="/WEB-INF/include/footer.jspf" %>
