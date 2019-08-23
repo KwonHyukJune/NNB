@@ -4,8 +4,10 @@
 
   
 <select id="adminMemberList" parameterType="hashMap" resultType="hashMap">
+<include refid="common.pagingPre"/> 
 <![CDATA[  
 SELECT 
+  ROW_NUMBER() OVER (ORDER BY MEM_NUM DESC) RNUM,
   MEM_NUM,
   MEM_DEL_GB,
   MEM_KIND,
@@ -16,8 +18,23 @@ SELECT
   MEM_PHONE
 FROM
   MEMBER
-ORDER BY MEM_NUM
 ]]>
+	<if test='searchType!=null and searchType.equals("id")'>
+<![CDATA[  
+where (MEM_ID like '%' || #{keyword} || '%' or MEM_NAME like '%' || #{keyword} || '%')
+]]>
+	</if>
+	<if test='searchType!=null and searchType.equals("email")'>
+<![CDATA[  
+where MEM_EMAIL like '%' || #{keyword} || '%'
+]]>
+	</if>
+	<if test='searchType!=null and searchType.equals("phone")'>
+<![CDATA[  
+where MEM_PHONE like '%' || #{keyword} || '%'
+]]>
+	</if>
+<include refid="common.pagingPost"/> 
 </select>
  
   

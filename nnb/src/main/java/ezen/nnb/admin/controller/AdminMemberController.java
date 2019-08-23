@@ -8,9 +8,11 @@ import java.util.Calendar;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import ezen.nnb.admin.paging.Paging;
@@ -25,11 +27,26 @@ public class AdminMemberController{
 	@RequestMapping(value="/admin/memberList")
 	public ModelAndView adMemberList(CommandMap commandMap,HttpServletRequest request)throws Exception{
 		ModelAndView mv=new ModelAndView("admin/member/memberList");
-		List<Map<String,Object>>adminMemberList=adminMemberService.adminMemberList(commandMap.getMap());  
-		mv.addObject("adminMemberList",adminMemberList);
-		mv.addObject("count",adminMemberList.size());
 		return mv;
-	}	  
+	}
+	
+	@RequestMapping(value="/admin/selectMemberList")
+	@ResponseBody
+	public ModelAndView selectMemberList(CommandMap commandMap) throws Exception{
+		ModelAndView mv = new ModelAndView("jsonView");
+		if(commandMap.get("searchType")!=null && commandMap.get("keyword")==null) {
+			commandMap.put("keyword","");
+		}
+		List<Map<String,Object>>adminMemberList=adminMemberService.adminMemberList(commandMap.getMap());  
+		mv.addObject("list",adminMemberList);
+		if(adminMemberList.size()>0) {
+			mv.addObject("total",adminMemberList.get(0).get("TOTAL_COUNT"));
+		}else {
+			mv.addObject("total",0);
+		}
+		
+		return mv;
+	}
 	
 	@RequestMapping(value="/admin/memberDetail")
     public ModelAndView adMemberDetail(CommandMap commandMap) throws Exception{

@@ -156,10 +156,6 @@
 		value='${cri.keyword }'>
 	<button type="button" id='searchBtn' onclick="fn_search()">검색</button>
 
-
-	<br />
-	<br />
-
 	<div class="adminMessageList">
 
 		<div class="messageList">

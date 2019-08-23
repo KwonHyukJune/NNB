@@ -46,8 +46,6 @@ private MessageService messageService;
 		ModelAndView mv=new ModelAndView("jsonView");
 		HttpSession session = request.getSession();
 		commandMap.put("ADMIN_ID", session.getAttribute("ADMIN_ID"));
-		System.out.println("DD:"+commandMap.get("searchType"));
-		System.out.println("DD:"+commandMap.get("keyword"));
 		if(commandMap.get("searchType")!=null && commandMap.get("keyword")==null) {
 			commandMap.put("keyword","");
 		}
