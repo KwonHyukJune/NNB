@@ -70,7 +70,7 @@
 <%@ include file="/WEB-INF/include/adminBoardHeader.jspf"%>
 	<div style="width:100%">
 	<br><br>
-		<div class="selectNoticeList" style="margin:0 700px">
+		<div class="selectNoticeList" style="margin:0 300px;">
 
 
 
@@ -78,11 +78,11 @@
 	</div>
 	
 	<br><br>
-	<div id="PAGE_NAVI" style="margin:0 700px">  </div>
+	<div id="PAGE_NAVI" style="margin:0 300px; text-align:center;">  </div>
 		<input type="hidden" id="PAGE_INDEX" name="PAGE_INDEX" />
    
    <br>
-   	<div style="margin:0 700px">    
+   	<div style="margin:0 300px; text-align:center;">    
   		<a href="#" onClick="goPage1(${map.NT_NUM})">새 공지 작성</a>
 	</div>
 
