@@ -63,6 +63,8 @@ public class AdminBankController {
 	public ModelAndView adminBankDetail(CommandMap commandMap) throws Exception{
 		ModelAndView mv = new ModelAndView("admin/bank/bankDetail");
 		Map<String,Object> map = adminBankService.selectBankDetail(commandMap.getMap());
+		String str = map.get("BANK_CONTENT").toString().replace("\n", "<br>");
+		map.replace("BANK_CONTENT", str);
 		mv.addObject("bank", map);
 		
 		return mv;

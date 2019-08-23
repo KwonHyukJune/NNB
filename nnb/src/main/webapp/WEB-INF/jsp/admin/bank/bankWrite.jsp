@@ -96,8 +96,8 @@ $(document).ready(function(){
 			</p>
 			<hr>
 			<br />
-			<br /> <a href=# id="write">등록</a> <a
-				href="javascript:back();">닫기</a>
+			<br /> <a href=# id="write">등록</a>
+		<button type="button" onclick="fn_back();">취소</button>
 		</div>
 	</form>
 

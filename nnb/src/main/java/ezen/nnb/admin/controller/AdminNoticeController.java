@@ -47,6 +47,8 @@ public class /*컨트롤러*/AdminNoticeController {
 		System.out.println("dd"+commandMap.getMap());
 
 		Map<String,Object> map = adminNoticeService./*Mybatis ID*/selectNoticeDetail(commandMap.getMap());
+		String str = map.get("NT_CONTENT").toString().replace("\n", "<br>");
+		map.replace("NT_CONTENT", str);
 		mv.addObject("map", map);
 		return mv;
 	}//등록폼	

@@ -51,6 +51,8 @@ Logger log = Logger.getLogger(this.getClass());
 		System.out.println("dd"+commandMap.getMap());
 
 		Map<String,Object> map = adminTermsService.selectTermsDetail(commandMap.getMap());
+		String str = map.get("TERMS_CONTENT").toString().replace("\n", "<br>");
+		map.replace("TERMS_CONTENT", str);
 		mv.addObject("terms", map);
 		
 		return mv;
