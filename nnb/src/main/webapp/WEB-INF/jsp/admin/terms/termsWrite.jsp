@@ -47,7 +47,7 @@ $(document).ready(function(){
     <div>
     <br/><br/>
   		<a href="#" id="write">작성하기</a>
-    	 <a href="javascript:back()">취소</a>
+		<button type="button" onclick="fn_back();">취소</button>
     </div>
 </form>
 

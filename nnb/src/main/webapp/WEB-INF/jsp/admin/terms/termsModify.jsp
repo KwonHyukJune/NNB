@@ -57,7 +57,7 @@ $(document).ready(function(){
     <div>
     	<br/><br/>
 		<a href="#" id="update">저장하기</a>
-    	 <a href="javascript:back()">취소</a>
+		<button type="button" onclick="fn_back();">취소</button>
     </div>
 </form>
 

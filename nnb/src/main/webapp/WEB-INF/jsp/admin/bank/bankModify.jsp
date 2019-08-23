@@ -173,7 +173,7 @@
    </form>
    <br />
    <a href="javascript:submit(bankWriteForm)">등록</a>
-   <a href="javascript:back();">취소</a>
+		<button type="button" onclick="fn_back();">취소</button>
 
    <br />
    <br />
