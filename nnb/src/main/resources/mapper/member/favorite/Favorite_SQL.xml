@@ -143,5 +143,15 @@ WHERE
 ]]>
 </insert>
 
+<update id="updateFavCountInc" parameterType="hashmap">
+<![CDATA[
+UPDATE 
+	ROOM_BOARD
+SET
+	FAV_COUNT=NVL(FAV_COUNT,0)+1
+WHERE 
+	ROOM_NUM=#{ROOM_NUM,jdbcType=INTEGER}
+]]>
+</update>
 
 </mapper>
