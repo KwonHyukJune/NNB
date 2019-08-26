@@ -13,9 +13,14 @@ $(document).ready(function(){
 		$("#write").on("click", function(e){ //작성하기 버튼
 			insertBoard();
 		});
+		$()
 			
 		function insertBoard(){
+//			return fn_validation($('#TERMS_TITLE option:selected'),'공지유형을 선택하세요.');
+//			return fn_validation($('TERMS_CONTENT'),'내용을 입력하세요.');
 			var comSubmit = new ComSubmit("frm");
+			comSubmit.validation($('#TERMS_TITLE option:selected'),'공지유형을 선택하세요.');
+			comSubmit.validation($('TERMS_CONTENT'),'내용을 입력하세요.');
 			comSubmit.setUrl("<c:url value='/admin/terms/write' />");
 			comSubmit.submit();
 		}
@@ -32,12 +37,17 @@ $(document).ready(function(){
 <br/>
 </div>
    
-   <form action="insertTerms" method="get" id="frm" name="frm">
+   <form id="frm" name="frm">
      
 	
 	<div>
-       		 제목
-        	<input type="text" id="TERMS_TITLE" name="TERMS_TITLE" />
+       		분류
+			<select name="TERMS_TITLE" id="TERMS_TITLE">
+				<option value=''>-----</option>
+				<option value='이용약관'>이용약관</option>
+				<option value='개인정보처리방침'>개인정보처리방침</option>
+				<option value='매물관리규정'>매물관리규정</option>
+			</select>
   	</div>
   		<br/>
 	<div>    
@@ -47,7 +57,7 @@ $(document).ready(function(){
     <div>
     <br/><br/>
   		<a href="#" id="write">작성하기</a>
-    	 <a href="javascript:back()">취소</a>
+		<button type="button" onclick="fn_back();">취소</button>
     </div>
 </form>
 

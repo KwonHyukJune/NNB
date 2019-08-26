@@ -52,15 +52,14 @@ public class RoommateController {
 	}
 
 	@RequestMapping(value = "/roommate/list/addFavRoommate", method = RequestMethod.POST)
-	@ResponseBody
 	public ModelAndView listAddFavRoommate(HttpServletRequest request, HttpServletResponse response,
 			CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		HttpSession session = request.getSession();
+		commandMap.put("MEM_ID", session.getAttribute("MEM_ID"));
 		String check = request.getParameter("check");
-		if (check == "1") {
-			commandMap.put("RI_MEM_ID", session.getAttribute("MEM_ID"));
-			commandMap.put("FAV_MATE_NUM", commandMap.get("FAV_MATE_NUM"));
+		System.out.println("22:"+check);
+		if (check.equals("0")) {
 			roommateService.listAddFavRoommate(commandMap.getMap());
 			mv.setViewName("member/roommate/roommateList");
 		}
@@ -72,7 +71,7 @@ public class RoommateController {
 		ModelAndView mv = new ModelAndView();
 		HttpSession session = request.getSession();
 		String check = request.getParameter("check");
-		if (check == "0") {
+		if (check == "1") {
 			roommateService.listDeleteFavRoommate(commandMap.getMap());
 			mv.setViewName("redirect:/roommate/search");
 		}
@@ -95,9 +94,8 @@ public class RoommateController {
 		ModelAndView mv = new ModelAndView();
 		HttpSession session = request.getSession();
 		String check = request.getParameter("check");
-		if (check == "1") {
+		if (check == "0") {
 			commandMap.put("RI_MEM_ID", session.getAttribute("MEM_ID"));
-			commandMap.put("FAV_MATE_NUM", commandMap.get("FAV_MATE_NUM"));
 			roommateService.detailAddFavRoommate(commandMap.getMap());
 			mv.setViewName("member/roommate/roommateDetail");
 		} 
@@ -108,7 +106,7 @@ public class RoommateController {
 	public ModelAndView datailDeleteFavRoommate(CommandMap commandMap,HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		String check = request.getParameter("check");
-		if (check == "0") {
+		if (check == "1") {
 			roommateService.detailAddFavRoommate(commandMap.getMap());
 			mv.setViewName("member/roommate/roommateDetail");
 		}
@@ -127,25 +125,20 @@ public class RoommateController {
 	public ModelAndView messageWrite(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		HttpSession session = request.getSession();
-		
-	
-			commandMap.put("SENDER", session.getAttribute("MEM_ID"));
+		commandMap.put("SENDER", session.getAttribute("MEM_ID"));
 			commandMap.put("MESSAGE_NUM", commandMap.get("MESSAGE_NUM"));
 			mv.setViewName("member/myPage/messageWrite");
-	
-
-		return mv;
+	return mv;
 	}
 
 	@RequestMapping(value = "/roommate/ignore")
 	public ModelAndView ignoreUser(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("redirect:/member/roommate/roommateDetail");
 		HttpSession session = request.getSession();
+		commandMap.put("IGNORE_MEM", session.getAttribute("MEM_ID"));
 		int check = ignoreService.checkIgnore(commandMap.getMap());
 		if (check == 0) {
 			ignoreService.insertIgnore(commandMap.getMap());
-			commandMap.put("IGNORE_MEM", session.getAttribute("MEM_ID"));
-			commandMap.put("IGNORE_NUM", commandMap.get("IGNORE_NUM"));
 		}
 		return mv;
 	}

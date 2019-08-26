@@ -36,7 +36,10 @@ public class AdminRoomServiceImpl implements AdminRoomService{
 		return AdminRoomDAO.selectAdminRoomA(map);
 	}
 		
-
+	@Override
+	public void deleteRoom(Map<String, Object> map) throws Exception {
+		AdminRoomDAO.deleteRoom(map);
+	}
 
 	
 }   

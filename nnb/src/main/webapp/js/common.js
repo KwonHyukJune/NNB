@@ -12,9 +12,16 @@ function gfn_isNull(str){ //null 값을 체크하는 함수
 function ComSubmit(opt_formId){ 
 	this.formId = gfn_isNull(opt_formId)==true? "commonForm" : opt_formId; // 값이 없으면 commonForm, 있으면 그 아이디를 formId에 넣는다. 
 	this.url = ""; 
+	this.check = true;
+	this.message = "";
 	
 	if(this.formId=="commonForm"){
-		$("#commonForm")[0].reset();
+		var frm = $("#commonForm");
+		if(frm.length>0){
+			frm.remove();
+		}
+		var str = "<form id='commonForm' name='commonForm'></form>";
+		$('body').append(str);
 	}
 	
 	this.setUrl = function setUrl(url){
@@ -29,13 +36,25 @@ function ComSubmit(opt_formId){
 		var frm = $("#"+this.formId)[0];
 		frm.action = this.url;
 		frm.method = "post";
-		frm.submit();
+		if(this.check==true){
+			frm.submit();
+		}else{
+			alert(this.message);
+		}
 	};
 	
 	this.delParam = function delParam(){
 		var del = document.getElementById(this.formId);
 		while(del.firstChild){
 			del.removeChild(del.firstChild);
+		}
+	};
+	
+	this.validation = function fn_validation(obj,message){
+		var x = obj.val();
+		if(this.check==true && (x==null || x=='')){
+			this.message = message;
+			this.check = false;
 		}
 	};
 }
@@ -121,7 +140,7 @@ function gfn_renderPaging(params){
 	var str = "";
 	
 	var first = (parseInt((currentIndex-1) / 10) * 10) + 1;
-	var last = (parseInt(totalIndexCount/10) == parseInt(currentIndex/10)) ? totalIndexCount%10 : 10;
+	var last = (parseInt(totalIndexCount/10) == parseInt((currentIndex-1)/10)) ? totalIndexCount%10 : 10;
 	var prev = (parseInt((currentIndex-1)/10)*10) - 9 > 0 ? (parseInt((currentIndex-1)/10)*10) - 9 : 1; 
 	var next = (parseInt((currentIndex-1)/10)+1) * 10 + 1 < totalIndexCount ? (parseInt((currentIndex-1)/10)+1) * 10 + 1 : totalIndexCount;
 	
@@ -162,6 +181,19 @@ function _movePage(value){
 	}
 }
 
+// 검색
+function fn_addParam(ajax,param){
+	var key = param.attr("name");
+	var value = [];
+	$('input[name='+key+']').each(function(){
+		if(this.checked){
+			value.push(this.value);
+		}
+	});
+	ajax.addParam(key,value);
+}
+
+//
 function getParameterByName(name) {
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
     var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
@@ -215,3 +247,8 @@ function addCookie(cookieName,id) {
 	    setCookie(cookieName, id, expire);
 	  }
 	}
+
+function fn_back(){
+	history.go(-1);
+}
+

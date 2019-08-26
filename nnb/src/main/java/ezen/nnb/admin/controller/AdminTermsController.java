@@ -27,6 +27,7 @@ Logger log = Logger.getLogger(this.getClass());
 
 		List<Map<String, Object>> list = adminTermsService.selectTermsList(commandMap.getMap());
 		mv.addObject("list", list);
+		mv.addObject("size", list.size());
 		return mv;
 	}
 
@@ -51,6 +52,8 @@ Logger log = Logger.getLogger(this.getClass());
 		System.out.println("dd"+commandMap.getMap());
 
 		Map<String,Object> map = adminTermsService.selectTermsDetail(commandMap.getMap());
+		String str = map.get("TERMS_CONTENT").toString().replace("\n", "<br>");
+		map.replace("TERMS_CONTENT", str);
 		mv.addObject("terms", map);
 		
 		return mv;

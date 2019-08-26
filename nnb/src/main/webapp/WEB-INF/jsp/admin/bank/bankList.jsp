@@ -6,90 +6,35 @@
 <head>
 <%@include file="/WEB-INF/include/include-header.jspf"%>
 <%@include file="/WEB-INF/include/adminHeader.jspf"%>
-<style>
-.kuldyr {
-	line-height: 54px;
-	color: rgb(34, 34, 34);
-	font-size: 33px;
-	text-align: center;
-	font-weight: 400;
-	margin: 70px auto 45px;
-}
-.jtRefx {
-	width: 100%;
-}
-.jSSNqy {
-	width: 100%;
-	height: 57px;
-	border-bottom: 1px solid rgba(232, 232, 232, 0.7);
-}
-
-.jSSNqy>li {
-	float: left;
-	width: 50%;
-	height: 57px;
-}
-
-.jSSNqy>li>a {
-	display: block;
-	width: 100%;
-	height: 57px;
-	color: rgb(136, 136, 136);
-	font-size: 16px;
-	line-height: 57px;
-	text-align: center;
-	cursor: pointer;
-	border-bottom: 2px solid transparent;
-}
-
-.jSSNqy>li>a.active {
-	color: rgb(34, 34, 34);
-	font-weight: 500;
-	border-bottom-color: rgb(72, 72, 72);
-}
-
-.jSSNqy::after {
-	display: block;
-	content: "";
-	clear: both;
-}
-
-.jSSNqy>li>a:hover, .jSSNqy>li>a:active {
-	color: rgb(34, 34, 34);
-}
-</style>
+<link rel="stylesheet" type="text/css" href="<c:url value='/css/adminBank.css'/>"/>
 </head>
 <!-------------------------------------------------------------- -->
 
 
 <br />
 <br />
-<br />
 
 <body>
-<%@ include file="/WEB-INF/include/adminBankHeader.jspf"%>
-
-
-	<br/>
-	<br>
-	<div class="selectBankList" style="margin:0 700px"> 
-	
-	</div>
-	
-	<div id="PAGE_NAVI" style="margin:0 700px">  </div>
-		<input type="hidden" id="PAGE_INDEX" name="PAGE_INDEX" />
-   
-   <br>
-   	<div>    
-  		<a href="#" style="margin:0 700px" onClick="goPage1(${map.NT_NUM})">새 글 등록</a>
-	</div>
-
-
+<div class="jtRefx">
+	<h1 class="title kuldyr">제휴 은행 관리</h1>
+</div>
+<br/>
 
 <br>
-	<div>
-		<%@include file="/WEB-INF/include/footer.jspf"%>
-	</div>
+<div id="selectBankList"> 
+	
+</div>
+<div align="right">    
+  	<a href="#" onClick="goPage1(${map.BANK_NUM})">새 글 등록</a>
+</div>
+<div id="PAGE_NAVI">  </div>
+<input type="hidden" id="PAGE_INDEX" name="PAGE_INDEX" />
+   
+<br>
+<br>
+<div>
+	<%@include file="/WEB-INF/include/footer.jspf"%>
+</div>
 	
 <%@ include file="/WEB-INF/include/include-body.jspf"%>
 <script type="text/javascript">
@@ -123,12 +68,21 @@ function fn_selectBankList(pageNo){
 
 function fn_selectBankListCallback(data){ 
 	var total = data.TOTAL;
-	var body = $("div.selectBankList"); 
+	var body = $("div#selectBankList"); 
 	body.empty();
 	
 	if(total == 0){ 
-		var str = "<div class='bank'>" + "조회된 결과가 없습니다." 
-		+ "</div>"; 
+		var str = "<ul class='qUCQS'>"
+			+ "<li class='pbYHJ'>"
+			+ "<p>번호</p>"
+			+ "<p>은행종류</p>"
+			+ "<p>제목</p>"
+			+ "<p>조회수</p>"
+			+ "<p>날짜</p>"
+			+ "<p>기능</p>"
+		+ "</li>"
+	+ "<li class='bryRNw'>" + "조회된 결과가 없습니다. </li>"
+	+ "</ul>"
 		body.append(str); 
 	
 	} else{ 
@@ -140,16 +94,31 @@ function fn_selectBankListCallback(data){
 					}; 
 		gfn_renderPaging(params); 
 		var str = ""; 
+			str += "<ul class='qUCQS'>"
+				+ "<li class='pbYHJ'>"
+					+ "<p>번호</p>"
+					+ "<p>은행종류</p>"
+					+ "<p>제목</p>"
+					+ "<p>날짜</p>"
+					+ "<p>조회수</p>"
+					+ "<p>기능</p>"
+				+ "</li>"
 		$.each(data.list, function(key, value){ 
 			str += 
-			      "<div class='bank'>" 
-	    			+ "<a href='<c:url value='/admin/bankDetail?BANK_NUM=" + value.BANK_NUM + "'/>'>" 
-	    					+ value.ROW_NUM +"&nbsp;"+ value.BANK_KIND +"&nbsp;"+ value.BANK_REGDATE +"&nbsp;"+ value.BANK_TITLE + "</a>"
-	    			+ "<a href='#' onClick='goPage(" + value.BANK_NUM + ")'> 수정" + "</a>"
-					+ "<a href='#' class='btn' id='" + value.BANK_NUM +"' onclick='delet("+ value.BANK_NUM +")'>삭제</a>"
-				+ "</div>";
+				"<li class='bryRNw'>" 
+				+ "<a href='<c:url value='/bank/bankDetail?BANK_NUM=" + value.BANK_NUM + "'/>'>"+ 
+				"<p>"+value.ROW_NUM+"</p>"+ "<p>"+value.BANK_KIND +"</p>"
+				+"<p>"+value.BANK_TITLE + "</p>"
+				+ "<p>" + value.REGDATE +"</p>"+"<p>"+value.BANK_HITCOUNT +"</p>"+"</a>"
+				+	"<p>"
+	    			+ "<a href='#' onClick='goPage(" + value.BANK_NUM + ")'> 수정 / " + "</a>"
+				+ "<a href='#' class='btn' id='" + value.BANK_NUM +"' onclick='delet("+ value.BANK_NUM +")'>삭제</a>";
+				+ "</p>"
+				+ "</li>"
 
 			}); 
+				str+= "</ul>"
+					
 		body.append(str); 
 	} 
 }

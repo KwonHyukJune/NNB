@@ -14,7 +14,7 @@ select
 	BANK_TITLE,
 	BANK_CONTENT,
 	BANK_HITCOUNT,
-	BANK_REGDATE
+	TO_CHAR(BANK_REGDATE, 'YYYY/MM/DD') as REGDATE
 from(
 		SELECT 
      		ROW_NUMBER() OVER (ORDER BY BANK_NUM DESC) RNUM,
@@ -59,7 +59,18 @@ insert into bank(
 	<select id="selectBankDetail" parameterType="hashMap"
 		resultType="hashMap">
 <![CDATA[
-       select * from bank where bank_num=#{BANK_NUM}
+	select  
+		BANK_NUM
+		BANK_KIND,
+		BANK_TITLE,
+		BANK_CONTENT,
+		TO_CHAR(BANK_REGDATE, 'YYYY/MM/DD') as REGDATE,
+		BANK_STORED_FILE1,
+		BANK_STORED_FILE2
+	from 
+		bank 
+	where 
+		bank_num=#{BANK_NUM}
 ]]>
 	</select>
 
@@ -98,7 +109,7 @@ insert into bank(
 	</if>
 	<if test="ORIGINAL_FILE_NAME2!=null">
 <![CDATA[
-        BANK_ORIGINAL_FILE2=#{ORIGINAL_FILE_NAME2},                        
+        ,BANK_ORIGINAL_FILE2=#{ORIGINAL_FILE_NAME2},                        
         BANK_STORED_FILE2=#{STORED_FILE_NAME2}
 ]]>
 	</if>

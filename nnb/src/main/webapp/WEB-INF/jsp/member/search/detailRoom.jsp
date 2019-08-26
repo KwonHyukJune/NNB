@@ -41,18 +41,24 @@ function calculator2(chk){
 		  document.getElementById('real_p').value = (parseFloat(document.getElementById('real_m').value) / 3.3058).toFixed(2);
 	  }
 } */
-	function insertFav(num){
-		var comAjax = new ComAjax();
-		comAjax.setUrl("<c:url value='/search/detail/addFavRoom'/>");
-		comAjax.addParam("ROOM_NUM",num);
-		comAjax.ajax();
-	};
-	function deleteFav(num){
-		var comAjax = new ComAjax();
-		comAjax.setUrl("<c:url value='/search/detail/deleteFavRoom'/>");
-		comAjax.addParam("ROOM_NUM",num);
-		comAjax.ajax();
-	};
+function fn_addFav(obj){
+	var num = obj.children('#num').text();
+	var comSubmit = new ComSubmit();
+	comSubmit.setUrl("<c:url value='/search/addFavRoom'/>");
+	comSubmit.addParam("check", 0);
+	comSubmit.addParam("ROOM_NUM", num);
+	comSubmit.addParam("MEM_ID", idChk);
+	comSubmit.submit();
+}
+function fn_deleteFav(obj){
+	var num = obj.children('#num').text();
+	var comSubmit = new ComSubmit();
+	comSubmit.setUrl("<c:url value='/search/addFavRoom'/>");
+	comSubmit.addParam("check", 1);
+	comSubmit.addParam("ROOM_NUM", num);
+	comSubmit.addParam("MEM_ID", idChk);
+	comSubmit.submit();
+}
 /* 쿠키 */
 $(document).ready(function(){
 	addCookie('recentRoom','${room.ROOM_NUM}');

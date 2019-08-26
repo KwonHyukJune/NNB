@@ -3,31 +3,35 @@
 <mapper namespace="adminRoom">
 
 <select id="selectAdminRoomList" resultType="hashMap" parameterType="hashMap" >
+<include refid="common.pagingPre"/> 
 <![CDATA[
-SELECT BOARD_NUM,
+SELECT 
+	ROW_NUMBER() OVER (ORDER BY B.ROOM_NUM DESC) RNUM,
        B.ROOM_NUM,
        UPLOAD_DATE,
        MEM_ID,
        DESC_TITLE,
-       HIT_COUNT
+       HIT_COUNT,
+       TRADE_STATUS
 FROM
        ROOM_BOARD B, ROOM_INFO1 I1, ROOM_INFO2 I2
 WHERE  B.ROOM_NUM = I2.ROOM_NUM
 AND B.ROOM_NUM = I1.ROOM_NUM
 ]]>
+<include refid="common.pagingPost"/> 
 </select>
 
 
 
-<select id="updateAdminRoomStatus" resultType="hashMap" parameterType="hashMap" >
+<update id="updateAdminRoomStatus" parameterType="hashMap" >
 <![CDATA[ 
 UPDATE ROOM_BOARD
 SET
-             TRADE_STATE = #{TRADE_STATE}
+             TRADE_STATUS = #{TRADE_STATUS}
 WHERE  
-	BOARD_NUM = #{BOARD_NUM}
+	ROOM_NUM = #{ROOM_NUM}
 ]]>
-</select>
+</update>
 
 
 
@@ -101,7 +105,8 @@ AND
 
 <update id="deleteAdminRoom" parameterType="hashmap" >
 <![CDATA[ 
-	DELETE ROOM_BOARD WHERE BOARD_NUM = #{BOARD_NUM}]]>
+	DELETE FROM ROOM_INFO1 WHERE ROOM_NUM = #{ROOM_NUM}
+]]>
 </update>
 
 </mapper>

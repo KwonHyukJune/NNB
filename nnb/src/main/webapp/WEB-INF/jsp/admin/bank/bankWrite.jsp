@@ -7,7 +7,7 @@
 <head>
 <%@ include file="/WEB-INF/include/include-header.jspf"%>
 <%@include file="/WEB-INF/include/adminHeader.jspf"%>
-
+<link rel="stylesheet" type="text/css" href="<c:url value='/css/adminBank.css'/>"/>
 <script type="text/javascript">
 $(document).ready(function(){
 	
@@ -17,7 +17,7 @@ $(document).ready(function(){
 		
 	function insertBoard(){
 		var comSubmit = new ComSubmit("frm");
-		comSubmit.setUrl("<c:url value='/admin/bankWrite' />");
+		comSubmit.setUrl("<c:url value='/admin/bankWrite'/>");
 		comSubmit.submit();
 	}
 });
@@ -47,63 +47,64 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
-
-	<h1>
-		<div>제휴은행 등록</div>
-	</h1>
-
-
-
-	<div>
-		<h2>새 질문 등록</h2>
-		<hr>
+<br />
+<br />
+<div class="jtRefx">
+	<h1 class="title kuldyr">제휴 은행 관리</h1>
+</div>
+<div>
+		<h2 class="cYaAqA">새 제휴 은행 등록</h2>
+		
 		<br />
-	</div>
+</div>
 	<form method="post" name="frm" id="frm" enctype="multipart/form-data">
-		<div>
-			은행종류 <select name="BANK_KIND">
-				<option>은행종류</option>
-				<option value="국민">국민 은행</option>
-				<option value="신한">신한 은행</option>
-			</select>
-		</div>
-		<br />
-
-
-		<div>
-			제목&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" id="BANK_TITLE" name="BANK_TITLE" />
-		</div>
-		<br />
-		<div>
-			내용&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<textarea rows="20" cols="50" title="내용" id="BANK_CONTENT"
-				name="BANK_CONTENT"></textarea>
-		</div>
-
-		<div>
-			<br />
-			<br />
-			<hr>
-			<p>
+		<div class="eugBve">
+		<ul class="hIJwlj">
+			<li>
+				<p class="efvxco">은행 종류</p>
+				<select class="freEbZ hRFrgm" name="BANK_KIND">
+					<option>은행 종류 선택</option>
+					<option value="국민">국민 은행</option>
+					<option value="신한">신한 은행</option>
+					<option value="우리">우리 은행</option>
+					<option value="카카오">카카오 은행</option>
+				</select>
+			</li>
+			<li>
+				<p class="efvxco">제목</p>
+				<input autocomplete="off" class="styled__TitleInput-sc-1v9ngdo-6 ilgADB Input-sfsekm-0 kTQnUD" 
+					id="BANK_TITLE" name="BANK_TITLE">
+			</li>
+			<li>
+				<p class="efvxco">내용</p>
+				<textarea class="styled__InquiryArea-sc-1v9ngdo-7 bqTGEL Textarea-sc-6jro6l-0 hunnDM" id="BANK_CONTENT"
+				name="BANK_CONTENT" placeholder="내용을 입력하세요.">
+				</textarea>
+			</li>
+			<br>
+		<br>
+		<p align="center">
 				<input type="file" name="BANK_ORIGINAL_FILE1" accept='image/jpeg,image/gif,image/png' onchange='chk_file_type(this)'>
 				첨부파일 1
 				<a href="#" class="btn" id="delete1" name="delete">삭제</a>
 			</p>
-			<p>
+			<br>
+			<p align="center">
 				<input type="file" name="BANK_ORIGINAL_FILE2" accept='image/jpeg,image/gif,image/png' onchange='chk_file_type(this)'>
 				첨부파일 2 
 				<a href="#" class="btn" id="delete2" name="delete">삭제</a>
 			</p>
-			<hr>
-			<br />
-			<br /> <a href=# id="write">등록</a> <a
-				href="javascript:back();">닫기</a>
+			<br>
+			<br>
+			<br>
+		</ul>
+			<div align="center">
+			<button class="kcMULl" onclick="location.href='/nnb/admin/openAdminBankList'">취소</button>
+			<button class="iEZQG" id="write">등록</button>
+			</div>
 		</div>
 	</form>
 
-	<br />
-	<br />
-	<br />
 	<br />
 	<br />
 	<br /> &nbsp;&nbsp;&nbsp;&nbsp;

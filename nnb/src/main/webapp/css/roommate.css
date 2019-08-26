@@ -1,14 +1,68 @@
 @charset "EUC-KR";
-input[type="range"]{
-	width:100px;
-	margin:0;
-	border:0;
+
+.cAeKOJ {
+    width: 10px;
+    padding-bottom: 20px;
+    margin: 10px auto;
 }
-.h{
-	width:20%;
-	float: left;
+.bryRNw {
+    display:inline;
+    height: 59px;
+    line-height: 58px;
+   
 }
-.b{
-	width:80%;
-	float: left;
+.bryRN {
+	display:inline;
+    cursor: pointer;
 }
+ul, li {
+    list-style: none;
+}
+.qUCQS {
+    width: 100%;
+    margin: 50px auto 150px;
+    border-top: 1px solid rgb(34, 34, 34);
+    border-bottom: 1px solid rgb(204, 204, 204);
+}
+.pbYHJ {
+    height: 59px;
+    line-height: 58px;
+    border-bottom: 1px solid rgb(204, 204, 204);
+}
+
+ p{
+	width:5%;
+	padding:10px;
+	border:3px;
+	display:inline;
+}   
+button{
+width:100px;
+height:50%;
+border:0px;
+background:	#D5D5D5;
+outline:none;
+color:#ffffff
+}
+
+#mateList ul li{
+	float:left;
+	width:25%;
+	height:100%;
+	line-height:50px;
+	text-align:center;
+}
+#mate ul li{
+	float:left;
+	width:25%;
+	height:100%;
+	line-height:50px;
+	text-align:center;
+	margin:0 auto;
+}
+
+#mate ul li a{
+	display:block;
+}
+
+

@@ -63,6 +63,8 @@ public class AdminBankController {
 	public ModelAndView adminBankDetail(CommandMap commandMap) throws Exception{
 		ModelAndView mv = new ModelAndView("admin/bank/bankDetail");
 		Map<String,Object> map = adminBankService.selectBankDetail(commandMap.getMap());
+		String str = map.get("BANK_CONTENT").toString().replace("\n", "<br>");
+		map.replace("BANK_CONTENT", str);
 		mv.addObject("bank", map);
 		
 		return mv;
@@ -72,15 +74,14 @@ public class AdminBankController {
 		ModelAndView mv = new ModelAndView("admin/bank/bankModify");
 		Map<String,Object> map = adminBankService.selectBankDetail(commandMap.getMap());
 		mv.addObject("bank", map);
-		
 		return mv;
 	}
 	@RequestMapping(value="/admin/bankModify")
 	public ModelAndView adminBankModify(CommandMap commandMap, HttpServletRequest request) throws Exception{
 		ModelAndView mv = new ModelAndView("redirect:/admin/bankDetail");
 		adminBankService.updateBankModify(commandMap.getMap(), request);
-		
-		mv.addObject("num", commandMap.get("num"));
+		System.out.println(commandMap.get("BANK_NUM"));
+		mv.addObject("BANK_NUM", commandMap.get("BANK_NUM"));
 		return mv;
 	}
 	

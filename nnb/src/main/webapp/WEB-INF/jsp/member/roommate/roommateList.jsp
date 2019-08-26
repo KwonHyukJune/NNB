@@ -61,18 +61,25 @@
 		var strUrl = "<%=request.getContextPath()%>"+url;
 		window.open(strUrl);
 	};
+	$(document).ready(function(){
+		$("#favMate").on("click",function(e){
+			e.preventDefault();
+			insertFav();
+		});
+	}); 
 	function insertFav(num){
 		var comAjax = new ComAjax();
 		comAjax.setUrl("<c:url value='/roommate/list/addFavRoommate'/>");
 		comAjax.addParam("RI_MEM_ID","${mate.RI_MEM_ID}");
-		comAjax.addParam("MEM_ID",mem);
+		comAjax.addParam("MEM_ID","${MEM_ID}");
+		comAjax.addParam("check","0");
 		comAjax.ajax();
 	}
 	function deleteFav(num){
 		var comAjax = new ComAjax();
 		comAjax.setUrl("<c:url value='/roommate/list/deleteFavRoommate'/>");
 		comAjax.addParam("RI_MEM_ID","${mate.RI_MEM_ID}");
-		comAjax.addParam("MEM_ID",mem);
+		comAjax.addParam("MEM_ID","${MEM_ID}");
 		comAjax.ajax();
 	};
 	window.onload = function(){
@@ -146,8 +153,7 @@
 		comSubmit.addParam("IGNORE_MEM",mem);
 		comSubmit.submit(frm);
 	}
-	
-	
+ 	
 </script>
 
 </head>
@@ -155,64 +161,71 @@
 <%@ include file="/WEB-INF/include/header.jspf" %>
 
 <div class="roommateList">
-<div class="title">룸메이트 찾기</div>
 <div class="search">
-
+<ul class="qUCQS">
+	<li class="pbYHJ">
 	<form id="frm">
-	<ul>
-	닉네임<input type="text" name="MEM_NICK" id="MEM_NICK"></ul>
+	
+	닉네임<p><input type="text" name="MEM_NICK"  id="MEM_NICK" ></p>
+	
 		<select id="RI_GENDER" name="RI_GENDER">
 			<option value="">성별</option>
 			<option value="F">여성</option>
 			<option value="M">남성</option>
-		</select>
-		나이대<input type="text" id="minyear" name="minyear">~
+		</select>	
+
+		나이대:<p><input type="text" id="minyear"  name="minyear">~<input type="text" id="maxyear"  name="maxyear"></p>
 	<!-- 	<input type="range" class="slider" id="ageMin" step="1" min="0" max="50" value="0"><input type="range" class="slider" id="ageMax" step="1" min="50" max="100" value="100">  -->
-		<input type="text" id="maxyear" name="maxyear"><div id="maxyear"></div>
-	<br/>	보증금 <input type="text" id="mindeposit" name="mindeposit">~<input type="text" id="maxdeposit" name="maxdeposit">
-	<br/>	월세 <input type="text" id="minrent" name="minrent">~<input type="text" id="maxrent" name="maxrent">
-	<br/>	기간<input type="text" id="mindate" name="mindate"><input type="text" id="maxdate" name="maxdate">
-		<input type="submit" id="search"  value="검색">
-		
-	</form>
+		보증금:<p><input type="text" id="mindeposit" name="mindeposit">~<input type="text" id="maxdeposit" name="maxdeposit"></p>
+		월세:<p><input type="text" id="minrent" name="minrent" >~<input type="text" id="maxrent" name="maxrent" ></p>
+		기간:<p><input type="text" id="mindate" name="mindate" >~<input type="text" id="maxdate" name="maxdate" ></p>
+		<button>검색</button>
+	</form></li></ul>
 </div>
-<p>총 ${Count}명의 검색 결과가 있습니다.</p>
+</div>
+
+
+총 ${Count}명의 검색 결과가 있습니다.
 <c:if test="${Count!=null && Count!=''}">
-<div class="mateList">
-	<div class="listheader">
-		<div class="p1">닉네임</div>
-		<div class="p2">나이</div>
-		<div class="p3">성별</div>
-		<div class="p4">지역</div>
-		<div class="p5">부담가능금액</div>
-		<div class="p6">찜하기</div>
-		
-	</div>
+<div class="mateList" id="mateList">
+	<ul>
+		<li>닉네임</li>
+		<li >나이</li>
+		<li>성별</li>
+		<li >지역</li>
+		<li >부담가능금액</li>
+	</ul>
 	
 	<c:forEach var="mate" items="${searchRoommate}">
-	<div class="mate">
+	<div class="mate" id="mate">
 	<a href="#" onclick="openDetail('/roommate/detail?id=${mate.RI_MEM_ID}');" class="btn">
-		<div class="p1">${mate.MEM_NICK}</div>
-		<div class="p2">${mate.RI_AGE}</div>
-		<div class="p3">${mate.RI_GENDER}</div>
-		<div class="p4">${mate.RI_REGION1}</div>
-		<div class="p5">${mate.RI_LOAN_BIG}/${mate.RI_LOAN_SMALL}</div>
+		<ul>
+		<li >${mate.MEM_NICK}</li>
+		<li >${mate.RI_AGE}</li>
+		<li >${mate.RI_GENDER}</li>
+		<li >${mate.RI_REGION1}</li>
+		<li >${mate.RI_LOAN_BIG}/${mate.RI_LOAN_SMALL}</li>
+</ul>
 	</a>
+	<p><a href="#" class="btn" id="favMate">찜하기</p>
+	
+	
 		<c:if test="${mate.check=='1'}">
 		<div class="p6">
-			<div class="deleteFav" onclick="deleteFav(${mate.RI_MEM_NUM});">
+			<div class="deleteFav" onclick="deleteFav(${mate.RI_MEM_ID});">
 			</div>
 		</div>
 		</c:if>
 		<c:if test="${mate.check=='0'}">
 		<div class="p6">
-			<div class="insertFav" onclick="insertFav(${mate.RI_MEM_NUM});">
+			<div class="insertFav" onclick="insertFav(${mate.RI_MEM_ID});">
 			</div>
 		</div>
 		</c:if>
 	</div>
 	</c:forEach>
 </div>
+
 </c:if>
 <c:if test="${Count==null || Count==''}">
 	아직 등록된 사용자가 없습니다.<br>
@@ -223,6 +236,7 @@
 <br>
 <div>
 <%@ include file="/WEB-INF/include/footer.jspf" %>
+
 </div>
 </body>
 </html>

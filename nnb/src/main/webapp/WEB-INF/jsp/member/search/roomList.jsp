@@ -5,6 +5,24 @@
 <%@ include file="/WEB-INF/include/include-header.jspf"%>
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/search.css'/>"/>
 <script type="text/javascript">
+function fn_addFav(obj){
+	var num = obj.children('#num').text();
+	var comSubmit = new ComSubmit();
+	comSubmit.setUrl("<c:url value='/search/addFavRoom'/>");
+	comSubmit.addParam("check", 0);
+	comSubmit.addParam("ROOM_NUM", num);
+	comSubmit.addParam("MEM_ID", idChk);
+	comSubmit.submit();
+}
+function fn_deleteFav(obj){
+	var num = obj.children('#num').text();
+	var comSubmit = new ComSubmit();
+	comSubmit.setUrl("<c:url value='/search/addFavRoom'/>");
+	comSubmit.addParam("check", 1);
+	comSubmit.addParam("ROOM_NUM", num);
+	comSubmit.addParam("MEM_ID", idChk);
+	comSubmit.submit();
+}
 function toggle(obj){
 	if(obj.attr("class")=="fJNXpX"){
 		$(".cRtqxV").attr("class","fJNXpX");
@@ -42,6 +60,7 @@ function toggle(obj){
 		obj.next().hide();
 	}
 }
+
 </script>
 </head>
 <!-------------------------------------------------------------- -->
@@ -544,16 +563,7 @@ $(document).ready(function(){
 $("input").on("change",function(){
 	fn_search();
 });
-function fn_addParam(ajax,param){
-	var key = param.attr("name");
-	var value = [];
-	$('input[name='+key+']').each(function(){
-		if(this.checked){
-			value.push(this.value);
-		}
-	});
-	ajax.addParam(key,value);
-}
+
 function fn_search(){
 	var comAjax = new ComAjax();
 	comAjax.setUrl("<c:url value='/search/roomList'/>");
@@ -621,9 +631,23 @@ function fn_selectSearchRoomListCallback(data){
 			$.each(data.list, function(key, room){ 
 				str +=  "<li class='room hxpbDF'>"
 							+ "<div class='OUJOU'>"
-						+ "<div class='fav'>"
-							+ "<div class='insertFav'></div>"
-						+ "</div>"
+								+ "<div class='fav'>";
+						
+								if(room.ROOM_NUM in data.favRoom){
+						str	+=		  "<div class='deleteFav' onclick='fn_deleteFav($(this))'>"
+										+ "<div id='num' style='display:none;'>"
+											+ room.ROOM_NUM
+										+ "</div>"
+									+ "</div>";
+								}else{
+						str	+=		  "<div class='insertFav' onclick='fn_addFav($(this))'>"
+										+ "<div id='num' style='display:none;'>"
+											+ room.ROOM_NUM
+										+ "</div>"
+									+ "</div>";
+								}
+								
+						str	+=	  "</div>"
 						+ "<a href='<c:url value='/room/roomDetail?ROOM_NUM="+ room.ROOM_NUM + "'/>' class='kpKjGs'>"
 							+ "<div class='img jHIGoX'>"
 								+"<img src='<c:url value='/roomImages/"+ room.THUMBNAIL +"'/>'>"

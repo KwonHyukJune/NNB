@@ -26,7 +26,7 @@ function openMenu(){
 <nav class="header">
 
 <div class="img">
-	<img src="<%=request.getContextPath()%>/images/NNBsmall.png" onclick="location.href='<%=request.getContextPath()%>/main'" width="100px">
+	<img src="<%=request.getContextPath()%>/images/NNBsmall.png" onclick="location.href='<%=request.getContextPath()%>/admin/main'" width="100px">
 </div>
 <div class="fEjgY">
 	<a class="bFIMNX" href="<%=request.getContextPath()%>/main">고객 사이트</a>

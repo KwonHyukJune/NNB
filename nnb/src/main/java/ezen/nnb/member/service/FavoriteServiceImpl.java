@@ -60,6 +60,7 @@ public class FavoriteServiceImpl implements FavoriteService{
 	public void addFavRoom(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub
 		favoriteDAO.addFavRoom(map);
+		favoriteDAO.updateFavCountInc(map);
 	}
 	@Override
 	public void cancelFavRoom(Map<String, Object> map) throws Exception {

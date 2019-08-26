@@ -7,7 +7,7 @@
 <%@ include file="/WEB-INF/include/include-header.jspf" %>
 <%@ include file="/WEB-INF/include/adminHeader.jspf" %>
 
-<link rel="stylesheet" type="text/css" href="<c:url value='/css/myInterest.css'/>"/>
+<link rel="stylesheet" type="text/css" href="<c:url value='/css/terms.css'/>"/>
 
 <script type="text/javascript">
 
@@ -33,49 +33,38 @@ function goPage1(num) {   // 새 약관 등록
 
 </head>
 
-<br/><br/><br/>
 
 <body>
-
-
-<div><h1>게시판 관리</h1></div>
-<br/>
-	
-<div>
-	<a href=# onclick="location.href='/nnb/admin/openNoticeList'">공지 게시판</a>&nbsp;&nbsp;&nbsp;&nbsp;
-	<a href=# onclick="location.href='/nnb/admin/roomList'">방 게시판</a>&nbsp;&nbsp;&nbsp;&nbsp;
-	<a href=# onclick="location.href='/nnb/admin/terms/list'">약관 관리</a>
-</div>
-
-<br/><br/><br/>
+<%@ include file="/WEB-INF/include/adminBoardHeader.jspf"%>
+<br/><br/>
 
 <div class="selectTermsList">
-
-
-<div class="termsList">
-   
-  <c:forEach var="terms" items="${list}">
-   <div class="terms">
-
-<a href="<c:url value='/admin/terms/detail?num=${terms.TERMS_NUM}'/>">${terms.RNUM}&nbsp;${terms.TERMS_REGDATE}&nbsp;${terms.TERMS_TITLE} </a>
-
-   	  <a href="#" onClick="goPage(${terms.TERMS_NUM})">수정</a>
-      <a href="#" class="btn" id="${terms.TERMS_NUM}" onclick="delet(${terms.TERMS_NUM})">삭제</a>
-      
-   </div>	
-  </c:forEach>
-   
-  <div>
-     
- 	 <a href="#" onClick="goPage1(${terms.TERMS_NUM})">새 약관 작성</a>
-  </div>
-
-</div>
+	<ul class="qUCQS">
+		<li class="pbYHJ">이 용 약 관</p>
+	</ul>	
+  	<c:forEach var="terms" items="${list}">
+  		<c:if test="${terms.TERMS_NUM != null }">
+	  	<ul>
+				<li id="position" >${terms.TERMS_CONTENT}</li>
+   	 			<li id="content">
+   	 				<button class="kcMULl"onClick="goPage(${terms.TERMS_NUM})">수정</button>&nbsp;&nbsp;&nbsp;&nbsp;
+   	 				<button class="iEZQG"  onclick="location.href='<c:url value='/admin/terms/delete?num=${terms.TERMS_NUM }'/>'">삭제</button>
+    			</li>
+    	</ul>
+    	</c:if>	
+  	</c:forEach>
+  	<c:if test="${size <= 0 }">
+    		<div>
+    			<br/>
+    			<p id="content">조회된 결과가 없습니다. 약관을 작성해 주세요.</p><br/><br/>
+    			<p id="content"><a href="#" onClick="goPage1(${terms.TERMS_NUM})">새 약관 작성</a></p>
+    		</div>
+  	</c:if>
 
 </div>
 <br>
 <div>
-<%@ include file="/WEB-INF/include/footer.jspf" %>
+	<%@ include file="/WEB-INF/include/footer.jspf" %>
 </div>
 </body>
 </html>

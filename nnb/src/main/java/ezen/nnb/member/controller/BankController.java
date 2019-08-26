@@ -28,7 +28,7 @@ public class BankController {
 	public ModelAndView bankList(CommandMap commandMap,HttpServletRequest request)throws Exception{
 		ModelAndView mv=new ModelAndView("jsonView");
 		List<Map<String,Object>>list=bankService.bankList(commandMap.getMap());
-		
+		System.out.println(list.get(0).get("BANK_REGDATE"));
 		mv.addObject("list",list);
 		if(list.size() > 0){
     		mv.addObject("TOTAL", list.get(0).get("TOTAL_COUNT"));

@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -62,8 +63,10 @@ public class MyInterestController {
 	}
 
 	@RequestMapping("/myInterest/favRoommateList")
-	public ModelAndView favRoommateList(CommandMap commandMap)throws Exception{
+	public ModelAndView favRoommateList(CommandMap commandMap,HttpServletRequest request)throws Exception{
 		ModelAndView mv=new ModelAndView("member/myInterest/myRoommateList");
+		HttpSession session = request.getSession();
+		commandMap.put("MEM_ID", session.getAttribute("MEM_ID"));
 		List<Map<String,Object>> list=favoriteService.selectRoommateList(commandMap.getMap());
 		mv.addObject("list", list);
 		

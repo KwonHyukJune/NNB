@@ -19,6 +19,10 @@ public class FavoriteDAO extends AbstractDAO {
 		// TODO Auto-generated method stub
 		update("favorite.updateFavCountDec",map);
 	}
+	public void updateFavCountInc(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		update("favorite.updateFavCountInc",map);
+	}
 	@SuppressWarnings("unchecked")
 	public List<Map<String, Object>> selectRoommateList(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub

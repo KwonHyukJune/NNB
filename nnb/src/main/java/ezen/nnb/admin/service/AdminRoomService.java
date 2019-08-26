@@ -14,6 +14,8 @@ public interface AdminRoomService {
 	
 	public List<Map<String,Object>>selectAdminRoomA(Map<String, Object>map)throws Exception;
 
+	public void deleteRoom(Map<String, Object> map) throws Exception;
+
 
 }
     
