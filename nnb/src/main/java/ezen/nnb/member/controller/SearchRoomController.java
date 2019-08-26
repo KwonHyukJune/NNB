@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -128,6 +129,21 @@ public class SearchRoomController {
 		Map<String,Object> map = roomService.selectRoomDetail(commandMap.getMap());
 		mv.addObject("map", map.get("map")); //게시글 상세정보.
 		mv.addObject("list", map.get("list")); // 첨부파일의 목록을 가지고 있는 리스트.
+		return mv;
+	}
+	
+	@RequestMapping(value = "/search/addFavRoom", method = RequestMethod.POST)
+	public ModelAndView addFavRoom(CommandMap commandMap) throws Exception{
+		ModelAndView mv = new ModelAndView("redirect:/search/openSearchRoomList");
+		
+		if(commandMap.get("check").equals("0")) {
+			favoriteService.addFavRoom(commandMap.getMap());
+		}
+		else if(commandMap.get("check").equals("1")){
+			favoriteService.deleteFavRoom(commandMap.getMap());
+			favoriteService.updateFavCountDec(commandMap.getMap());
+		}
+		
 		return mv;
 	}
 }
