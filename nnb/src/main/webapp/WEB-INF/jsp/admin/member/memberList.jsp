@@ -5,6 +5,8 @@
 <head>
 <%@ include file="/WEB-INF/include/include-header.jspf" %>
 <%@include file = "/WEB-INF/include/adminHeader.jspf" %>
+<link rel="stylesheet" type="text/css"
+	href="<c:url value='/css/adminMember.css'/>" />
 <style>
 .kuldyr {
 	line-height: 54px;
@@ -80,41 +82,53 @@ function showPopup(num,id){
 <br>
 
 <br/>
-<div style="margin:0 700px">
+<div class ="searchT">
 <select>
 	<option>검색유형1</option>
 	<option>검색유형2</option>
 	<option>검색유형3</option>
 </select>
-	<input type="text" name='keyword' id="keywordInput" value='${cri.keyword }' style="height: 15px; ">
-    <a href="#this" class="btn" id="delete">조회</a>
+	<input type="text" name='keyword' id="keywordInput" value='${cri.keyword }'">
+    <a href="#this" class="amdinbtn" id="delete">조회</a>
 	<br/>
 	<p>총 ${count}건의 검색 결과가 있습니다.</p>
-	
+</div>	
 <br/>
 
 <div class="selectMeberList">
 
 
 <div class="memberList">
+ <table class = "tbody">
+	    <tbody>
+		    <tr>
+		    	<td class="adN" style = "width: 60px; height: 30px;  ">번호</td>
+		    	<td class="Inf" style = "width: 70px ">회원정보</td>
+		    	<td class="Mii" style = "width: 100px ">아이디</td>
+		    	<td class="Mel" style = "width: 190px ">이메일</td>
+		    	<td class="Mpn" style = "width: 170px ">전화번호</td>
+		    	<td class="Mld" style = "width:  ">상세보기　</td>
+		    	
+		    </tr>
+	    </tbody>
+    </table>
   
    <c:forEach var="memberDetail" items="${adminMemberList}">
-   <div class="member">
-      <div>
-         ${memberDetail.MEM_NUM}&nbsp;	
+   <div class="memberLS">
+   
+         <div style="border: 1px white; float: left; width: 10%; ">${memberDetail.MEM_NUM}</div>	
       	
-		 ${memberDetail.MEM_KIND}&nbsp;      
+		 <div style="border: 1px white; float: left; width: 10%; ">${memberDetail.MEM_KIND}</div>      
       	
-         ${memberDetail.MEM_ID}&nbsp;
+         <div style="border: 1px white; float: left; width: 15%; ">${memberDetail.MEM_ID}</div>
          
-         ${memberDetail.MEM_EMAIL}&nbsp;
+         <div style="border: 1px white; float: left; width: 28%; ">${memberDetail.MEM_EMAIL}</div>
          
-         ${memberDetail.MEM_PHONE}	
+         <div style="border: 1px white; float: left; width: 23%; ">${memberDetail.MEM_PHONE}</div>	
           
-      </div>
-     <form>    
-    <input type="button" value="상세보기" onclick="showPopup(${memberDetail.MEM_NUM},'${memberDetail.MEM_ID}');" />
-      <a href="#this" class="btn" id="delete">활성화</a>
+    
+     <form class="formMem">    
+    <input class = "adminbtn" type="button" value="상세보기" onclick="showPopup(${memberDetail.MEM_NUM},'${memberDetail.MEM_ID}');" />
 	</form> 
   
    </div>	
@@ -123,7 +137,7 @@ function showPopup(num,id){
 </div>
 
 </div>
-</div>
+
 <br>
 <div>
 <%@include file = "/WEB-INF/include/footer.jspf" %>
