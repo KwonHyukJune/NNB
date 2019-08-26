@@ -24,12 +24,13 @@
 <div id="selectBankList"> 
 	
 </div>
-<div align="right">    
-  	<a href="#" onClick="goPage1(${map.BANK_NUM})">새 글 등록</a>
+<div id='writeForm' align="center">   
+	<button class="iEZQG" onClick='goPage1(${map.BANK_NUM})'>새 글 등록</button>
 </div>
+<Br>
+<Br>
 <div id="PAGE_NAVI">  </div>
 <input type="hidden" id="PAGE_INDEX" name="PAGE_INDEX" />
-   
 <br>
 <br>
 <div>
@@ -106,7 +107,7 @@ function fn_selectBankListCallback(data){
 		$.each(data.list, function(key, value){ 
 			str += 
 				"<li class='bryRNw'>" 
-				+ "<a href='<c:url value='/bank/bankDetail?BANK_NUM=" + value.BANK_NUM + "'/>'>"+ 
+				+ "<a href='<c:url value='/admin/bankDetail?BANK_NUM=" + value.BANK_NUM + "'/>'>"+ 
 				"<p>"+value.ROW_NUM+"</p>"+ "<p>"+value.BANK_KIND +"</p>"
 				+"<p>"+value.BANK_TITLE + "</p>"
 				+ "<p>" + value.REGDATE +"</p>"+"<p>"+value.BANK_HITCOUNT +"</p>"+"</a>"
@@ -117,7 +118,7 @@ function fn_selectBankListCallback(data){
 				+ "</li>"
 
 			}); 
-				str+= "</ul>"
+				str+= "</ul>";
 					
 		body.append(str); 
 	} 

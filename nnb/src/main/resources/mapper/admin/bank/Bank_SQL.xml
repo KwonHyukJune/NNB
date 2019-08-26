@@ -60,7 +60,7 @@ insert into bank(
 		resultType="hashMap">
 <![CDATA[
 	select  
-		BANK_NUM
+		BANK_NUM,
 		BANK_KIND,
 		BANK_TITLE,
 		BANK_CONTENT,

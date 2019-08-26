@@ -113,7 +113,8 @@ $(document).ready(function(){
 		<br />
 </div>
    <form method="post" name="frm" id="frm" enctype="multipart/form-data">
-		<input type="hidden" name="BANK_NUM" value="${bank.BANK_NUM}">
+   		
+		<input type="hidden" name="BANK_NUM" id="BANK_NUM" value="${bank.BANK_NUM}">
 		<div class="eugBve">
 		<ul class="hIJwlj">
 			<li>
