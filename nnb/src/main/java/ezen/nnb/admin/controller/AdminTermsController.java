@@ -27,6 +27,7 @@ Logger log = Logger.getLogger(this.getClass());
 
 		List<Map<String, Object>> list = adminTermsService.selectTermsList(commandMap.getMap());
 		mv.addObject("list", list);
+		mv.addObject("size", list.size());
 		return mv;
 	}
 

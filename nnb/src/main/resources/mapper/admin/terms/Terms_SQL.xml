@@ -5,14 +5,13 @@
 <!-- 약관 목록 -->
 <select id="selectTermsList" parameterType="hashMap" resultType="hashMap">
 <![CDATA[
-	select
-    		ROW_NUMBER() OVER (ORDER BY TERMS_NUM ASC) RNUM,
-            TERMS_NUM,
+	select	
+			TERMS_NUM,
             TERMS_REGDATE,
-            TERMS_TITLE
+            TERMS_TITLE,
+            TERMS_CONTENT
 	from	
             TERMS
-            ORDER BY RNUM DESC
 	]]>
 </select>
 
