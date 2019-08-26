@@ -15,14 +15,14 @@
     IGNORE I, MEMBER M
   Where 
     I.IGNORE_D_MEM IN M.MEM_ID and
-    IGNORE_MEM=#{IGNORE_MEM}
+    IGNORE_MEM=#{IGNORE_MEM,jdbcType=VARCHAR}
     ORDER BY IGNORE_NUM DESC
 ]]>
 </select>
 
 <select id="countIgnoredUserList" parameterType="hashmap" resultType="Integer">
 <![CDATA[
-	select count(*) from IGNORE where IGNORE_MEM=#{IGNORE_MEM}
+	select count(*) from IGNORE where IGNORE_MEM=#{IGNORE_MEM,jdbcType=VARCHAR}
 ]]>
 </select>
 
@@ -34,15 +34,15 @@
     IGNORE_D_MEM
 )values(
     IGNORE_NUM_SEQ.NEXTVAL,
-    #{IGNORE_MEM},
-    #{IGNORE_D_MEM}
+    #{IGNORE_MEM,jdbcType=VARCHAR},
+    #{IGNORE_D_MEM,jdbcType=VARCHAR}
 )
 ]]>
 </insert>
 
 <delete id="deleteIgnore" parameterType="hashmap">
 <![CDATA[
-  DELETE FROM IGNORE WHERE IGNORE_NUM=#{IGNORE_NUM}
+  DELETE FROM IGNORE WHERE IGNORE_NUM=#{IGNORE_NUM,jdbcType=INTEGER}
 ]]>
 </delete>
 
@@ -53,8 +53,8 @@
 	from
 		IGNORE
 	where
-		IGNORE_MEM = #{IGNORE_MEM} and
-		IGNORE_D_MEM = #{IGNORE_D_MEM}
+		IGNORE_MEM = #{IGNORE_MEM,jdbcType=VARCHAR} and
+		IGNORE_D_MEM = #{IGNORE_D_MEM,jdbcType=VARCHAR}
 ]]>
 </select>
 
