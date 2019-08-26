@@ -1,5 +1,90 @@
 @charset "EUC-KR";
 
+.selectTermsList{
+	width: 1180px;
+	margin: auto;
+}
+ul, li {
+    list-style: none;
+}
+.content{
+	text-align:center;
+}
+/* 목차 */
+.gHsEax {
+    line-height: 54px;
+    color: rgb(34, 34, 34);
+    font-size: 33px;
+    text-align: center;
+    font-weight: 400;
+    margin: 70px auto 45px;
+}
+.qUCQS{
+    width: 100%;
+    margin: 50px auto 150px;
+    border-top: 1px solid rgb(34, 34, 34);
+    border-bottom: 1px solid rgb(204, 204, 204);
+}
+.pbYHJ {
+    height: 59px;
+    line-height: 58px;
+    border-bottom: 1px solid rgb(204, 204, 204);
+}
+.pbYHJ > p {
+    float: left;
+    color: rgb(34, 34, 34);
+    font-size: 15px;
+    font-weight: 500;
+    text-align: center;
+}
+.pbYHJ::after {
+    display: block;
+    content: "";
+    clear: both;
+}
+.pbYHJ > p:first-child {
+    width: 20%;
+}
+.pbYHJ > p:nth-child(2) {
+    width: 40%;
+}
+.pbYHJ > p:nth-child(3) {
+    width: 20%;
+}
+.pbYHJ > p:nth-child(4) {
+    width: 20%;
+}
+/* 내용 */
+.bryRNw {
+    height: 59px;
+    line-height: 58px;
+    text-align:center;
+}
+.bryRNw + li {
+    border-top: 1px solid rgb(238, 238, 238);
+}
+.bryRNw::after {
+    display: block;
+    content: "";
+    clear: both;
+}
+a  {
+	color: rgb(34, 34, 34);
+	text-align: center;
+}
+a > p {
+	float: left;
+}
+a > p:first-child {
+    width: 20%;
+}
+a > p:nth-child(2) {
+    width: 40%;
+}
+a > p:nth-child(3) {
+    width: 20%;
+}
+/* 상단고정 */
 .kuldyr {
 	line-height: 54px;
 	color: rgb(34, 34, 34);
@@ -22,6 +107,7 @@
 	width: 33%;
 	height: 57px;
 }
+
 .jSSNqy>li>a {
 	display: block;
 	width: 100%;
@@ -33,83 +119,19 @@
 	cursor: pointer;
 	border-bottom: 2px solid transparent;
 }
+
 .jSSNqy>li>a.active {
 	color: rgb(34, 34, 34);
 	font-weight: 500;
 	border-bottom-color: rgb(72, 72, 72);
 }
+
 .jSSNqy::after {
 	display: block;
 	content: "";
 	clear: both;
 }
+
 .jSSNqy>li>a:hover, .jSSNqy>li>a:active {
 	color: rgb(34, 34, 34);
-}
-.selectTermsList{
-	width: 1180px;
-	margin: auto;
-}
-ul, li {
-    list-style: none;
-}
-.newTerms{
-	text-align:center;
-}
-.qUCQS {
-    width: 100%;
-    margin: auto;
-    border-top: 1px solid rgb(34, 34, 34);
-    border-bottom: 1px solid rgb(204, 204, 204);
-}
-.pbYHJ {
-	text-align:center;
-	font-size:30px;
-	font-weight: bold;
-    height: 59px;
-    line-height: 58px;
-    border-bottom: 1px solid rgb(204, 204, 204);
-}
-.bryRNw {
-    height: 59px;
-    line-height: 58px;
-}
-.index {
-	text-align: center;
-	font-weight: 500;
-}
-#content{
-	text-align: center;
-}
-#position{
-	height: 59px;
-    line-height: 58px;
-    border-bottom: 1px solid rgb(204, 204, 204);
-	text-align: left;
-}
-.kcMULl {
-	width: 160px;
-	height: 50px;
-	margin-top: 30px;
-	color: rgb(34, 34, 34);
-	font-size: 15px;
-	background-color: rgb(255, 255, 255);
-	border-width: 1px;
-	border-style: solid;
-	border-color: rgb(204, 204, 204);
-	border-image: initial;
-}
-
-.iEZQG {
-	width: 160px;
-	height: 50px;
-	margin-top: 30px;
-	margin-left: 12px;
-	color: rgb(255, 255, 255);
-	font-size: 15px;
-	background-color: rgb(26, 90, 232);
-	border-width: 0px;
-	border-style: initial;
-	border-color: initial;
-	border-image: initial;
 }
