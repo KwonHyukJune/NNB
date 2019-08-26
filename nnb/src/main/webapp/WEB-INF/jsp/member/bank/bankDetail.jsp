@@ -26,7 +26,7 @@ function pop(url){
 	<div>
 		<ul class="board-top">
 			<li id ="title">${bank.BANK_TITLE}</li>
-			<li id = "bank">${bank.BANK_KIND}</li>
+			<li id = "bank">${bank.BANK_KIND} АєЗа</li>
 			<li id ="date">${bank.REGDATE}</li>
 		</ul>
 	</div>
@@ -35,13 +35,13 @@ function pop(url){
 		<c:if test="${bank.BANK_STORED_FILE1!=null && bank.BANK_STORED_FILE1!=''}">
 			<div class="image">
 				<img src="<c:url value='/bankImages/${bank.BANK_STORED_FILE1}'/>"
-					onclick="pop(this.src)" style="cursor:pointer;">
+					onclick="pop(this.src)" style="cursor:pointer;" width="100%">
 			</div>
 		</c:if>
 		<c:if test="${bank.BANK_STORED_FILE2!=null && bank.BANK_STORED_FILE2!=''}">
 			<div class="image">	
 				<img src="<c:url value='/bankImages/${bank.BANK_STORED_FILE1}'/>"
-					onclick="pop(this.src)" style="cursor:pointer;">
+					onclick="pop(this.src)" style="cursor:pointer;" width="100%">
 			</div>
 		</c:if>
 		
