@@ -7,7 +7,7 @@
 <![CDATA[
 	select	
 			TERMS_NUM,
-            TERMS_REGDATE,
+          	TO_CHAR(TERMS_REGDATE, 'YYYY/MM/DD') as REGDATE,
             TERMS_TITLE,
             TERMS_CONTENT
 	from	
@@ -20,7 +20,7 @@
 <![CDATA[
 	select
             TERMS_NUM,
-            TERMS_REGDATE,
+            TO_CHAR(TERMS_REGDATE, 'YYYY/MM/DD') as REGDATE,
             TERMS_TITLE,
             TERMS_CONTENT
             

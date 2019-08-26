@@ -10,7 +10,6 @@
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/terms.css'/>"/>
 
 <script type="text/javascript">
-
 function delet(num){  // 삭제
 	if(confirm('삭제하시겠습니까?')){
 		var x = $('a#'+num);
@@ -30,34 +29,77 @@ function goPage1(num) {   // 새 약관 등록
 	location.href="/nnb/admin/terms/termsWrite?num="+num; 
 	}
 </script>
-
 </head>
-
-
 <body>
 <%@ include file="/WEB-INF/include/adminBoardHeader.jspf"%>
-<br/><br/>
-
-<div class="selectTermsList">
-	<ul class="qUCQS">
-		<li class="pbYHJ">이 용 약 관</p>
-	</ul>	
-  	<c:forEach var="terms" items="${list}">
+<br/>
+<div class=selectTermsList>
+<ul class='qUCQS'>
+	<li class='pbYHJ'>
+		<p>번호 </p>
+		<p>종류</p>
+		<p>날짜</p>
+		<p>기능</p>
+	</li>
+	<c:forEach var="terms" items="${list}">
+	<c:if test="${terms.TERMS_NUM != null }">
+		<ul>
+			<li class='bryRNw'>
+				<a href='<c:url value='/admin/terms/detail?num=${terms.TERMS_NUM }'/>'>
+				<p>${terms.TERMS_NUM }</p>
+				<p>${terms.TERMS_TITLE }</p>
+				<p>${terms.REGDATE }</p>
+				</a>
+				<p><a href='#' onClick='goPage(${terms.TERMS_NUM})'>수정</a>/
+				<a href='#' id="${terms.TERMS_NUM }" onClick="delet(${terms.TERMS_NUM })">삭제</a></p>
+			</li>
+		</ul>
+	</c:if>
+	</c:forEach>
+		<c:if test="${size <= 0 }">
+		<div class="content">
+			<br/><br/>
+    		<p><h3>약관이 존재하지 않습니다. 약관 작성을 눌러주세요.</h3></p><br/><br/>
+    		<p><a href="#" onClick="goPage1(${terms.TERMS_NUM})">약관 작성</a></p>
+    		<br/><br/>
+    	</div>
+  	</c:if>
+	</ul>
+</div>
+<br>
+<div>
+	<%@ include file="/WEB-INF/include/footer.jspf" %>
+</div>
+<%-- <div class="selectTermsList">
+		<c:forEach var="terms" items="${list}">
   		<c:if test="${terms.TERMS_NUM != null }">
-	  	<ul>
-				<li id="position" >${terms.TERMS_CONTENT}</li>
-   	 			<li id="content">
-   	 				<button class="kcMULl"onClick="goPage(${terms.TERMS_NUM})">수정</button>&nbsp;&nbsp;&nbsp;&nbsp;
-   	 				<button class="iEZQG"  onclick="location.href='<c:url value='/admin/terms/delete?num=${terms.TERMS_NUM }'/>'">삭제</button>
-    			</li>
+		<ul class="qUCQS">
+ 	 	
+			<li id="pbYHJ" >
+				<p>번호</p>
+				<p>제목</p>
+				<p>날짜</p>
+			</li>
+			<li class='bryRNw'>
+				<p>${terms.row_NUM}</p>
+				<p>${terms.TERMS_TITLE}</p>
+				<p>${terms.REGDATE }</p>
+			</li>
     	</ul>
-    	</c:if>	
-  	</c:forEach>
+    	<ul>
+    	<li id="content">
+   	 			<button class="kcMULl"onClick="goPage(${terms.TERMS_NUM})">수정</button>&nbsp;&nbsp;&nbsp;&nbsp;
+   	 			<button class="iEZQG"  onclick="location.href='<c:url value='/admin/terms/delete?num=${terms.TERMS_NUM }'/>'">삭제</button>
+    		</li>
+    	</ul>
+       	</c:if>	
+  		</c:forEach>
+  
   	<c:if test="${size <= 0 }">
     		<div>
-    			<br/>
-    			<p id="content">조회된 결과가 없습니다. 약관을 작성해 주세요.</p><br/><br/>
-    			<p id="content"><a href="#" onClick="goPage1(${terms.TERMS_NUM})">새 약관 작성</a></p>
+    			<br/><br/><br/>
+    			<p id="content">약관이 존재하지 않습니다. 약관을 작성해주세요.</p><br/><br/>
+    			<p id="content"><a href="#" onClick="goPage1(${terms.TERMS_NUM})">약관 작성</a></p>
     		</div>
   	</c:if>
 
@@ -65,6 +107,6 @@ function goPage1(num) {   // 새 약관 등록
 <br>
 <div>
 	<%@ include file="/WEB-INF/include/footer.jspf" %>
-</div>
+</div> --%>
 </body>
 </html>
