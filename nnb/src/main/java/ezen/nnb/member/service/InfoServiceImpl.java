@@ -1,5 +1,6 @@
 package ezen.nnb.member.service;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -19,7 +20,14 @@ public class InfoServiceImpl implements InfoService{
 	
 	@Override
 	public List<Map<String, Object>> selectTermsDetail(Map<String, Object> map) throws Exception{
-		return infoDAO.selectTermsDetail(map);
+		List<Map<String, Object>> list = infoDAO.selectTermsDetail(map);
+		Iterator<Map<String, Object>> i = list.iterator();
+		while(i.hasNext()) {
+			Map<String, Object> resmap = i.next();
+			String str = resmap.get("TERMS_CONTENT").toString().replace("\n", "<br>");
+			resmap.replace("TERMS_CONTENT", str);
+		}
+		return list;
 	}
 
 	
