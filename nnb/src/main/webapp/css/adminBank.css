@@ -7,7 +7,7 @@
 	 margin:0 auto;
 	 
 }
-#selectBankList{
+#selectBankList, #writeForm{
 	width: 1180px;
 	margin: auto;
 }
