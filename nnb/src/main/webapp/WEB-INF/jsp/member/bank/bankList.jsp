@@ -14,9 +14,6 @@
 	<div id="selectBankList">
 
 	</div>
-	<!-- <div id=selectBankList>
-	
-	</div> -->
 	
 	<div id="PAGE_NAVI">  </div>
 	<input type="hidden" id="PAGE_INDEX" name="PAGE_INDEX" />
@@ -41,7 +38,7 @@ function fn_selectBankList(pageNo){
 	var comAjax = new ComAjax(); 
 	comAjax.setUrl("<c:url value='/bank/bankList'/>"); 
 	comAjax.setCallback("fn_selectBankListCallback"); 
-	comAjax.addParam("PAGE_INDEX",pageNo); 
+	comAjax.addParam("PAGE_INDEX",$("#PAGE_INDEX").val()); 
 	comAjax.addParam("PAGE_ROW", 15); 
 	comAjax.ajax(); }
 
