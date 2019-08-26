@@ -12,6 +12,8 @@ function gfn_isNull(str){ //null 값을 체크하는 함수
 function ComSubmit(opt_formId){ 
 	this.formId = gfn_isNull(opt_formId)==true? "commonForm" : opt_formId; // 값이 없으면 commonForm, 있으면 그 아이디를 formId에 넣는다. 
 	this.url = ""; 
+	this.check = true;
+	this.message = "";
 	
 	if(this.formId=="commonForm"){
 		var frm = $("#commonForm");
@@ -32,16 +34,27 @@ function ComSubmit(opt_formId){
 	
 	this.submit = function submit(){
 		var frm = $("#"+this.formId)[0];
-		console.log('ddd'+this.url);
 		frm.action = this.url;
 		frm.method = "post";
-		frm.submit();
+		if(this.check==true){
+			frm.submit();
+		}else{
+			alert(this.message);
+		}
 	};
 	
 	this.delParam = function delParam(){
 		var del = document.getElementById(this.formId);
 		while(del.firstChild){
 			del.removeChild(del.firstChild);
+		}
+	};
+	
+	this.validation = function fn_validation(obj,message){
+		var x = obj.val();
+		if(this.check==true && (x==null || x=='')){
+			this.message = message;
+			this.check = false;
 		}
 	};
 }
@@ -238,3 +251,4 @@ function addCookie(cookieName,id) {
 function fn_back(){
 	history.go(-1);
 }
+
