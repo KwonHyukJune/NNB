@@ -7,7 +7,7 @@
 
 <select id="selectMyInfoList" parameterType="hashmap" resultType="hashmap">
                 <![CDATA[
-                        SELECT
+                        SELECT DISTINCT
                                 RI_NUM,
                                 RI_MEM_ID,
                                 RI_REGION1,
@@ -93,7 +93,7 @@
 </delete>                              			
 	<select id="selectRoommateList" parameterType="hashmap" resultType="hashmap">
 	<![CDATA[
-SELECT
+SELECT DISTINCT
 	row_number() over (ORDER BY RI_NUM DESC) rnum,
 	MEM_ID,
 	RI_MEM_ID,
@@ -112,7 +112,7 @@ FROM
 ]]>
 <if test="RI_REGION!=null and !RI_REGION.equals('')">
 	<![CDATA[
-	(SELECT * FROM ROOMMATE_PROFILE 
+	(SELECT DISTINCT * FROM ROOMMATE_PROFILE 
 	WHERE
 		RI_REGION1 LIKE %#{RI_REGION,jdbcType=VARCHAR}%
 		OR RI_REGION2 LIKE %#{RI_REGION,jdbcType=VARCHAR}%
@@ -129,7 +129,7 @@ WHERE
 	M.MEM_ID=R.RI_MEM_ID
 	and RI_EXPOSE=1
 	and MEM_ID NOT IN (
-		SELECT 
+		SELECT DISTINCT 
 			IGNORE_D_MEM
 		FROM IGNORE
 		WHERE IGNORE_MEM = #{MEM_ID,jdbcType=VARCHAR}
@@ -137,8 +137,7 @@ WHERE
 	]]>	
 <if test="MEM_NICK!=null and!MEM_NICK.equals('')">
 	<![CDATA[
-	AND MEM_NICK LIKE '%' || #{MEM_NICK} || '%'
-	
+	AND MEM_NICK LIKE '%' || #{MEM_NICK,jdbcType=VARCHAR} || '%'
 	]]>
 </if>
 	
@@ -149,7 +148,8 @@ WHERE
 </if>
 <if test="minyear!=null and !minyear.equals('')">
 	<![CDATA[
- AND RI_BIRTH BETWEEN #{minyear} AND #{maxyear} ]]>
+ 	AND RI_BIRTH BETWEEN #{minyear,jdbcType=INTEGER} AND #{maxyear,jdbcType=INTEGER}
+ 	]]>
 </if> 
 
 <if test="mindeposit!=null and !mindeposit.equals('')">
@@ -175,14 +175,14 @@ WHERE
 <select id="countRoommateList" parameterType="int"
 		resultType="int"><!--  -->
 	<![CDATA[
-	SELECT 
+	SELECT DISTINCT 
 	COUNT(*)
 FROM
 	MEMBER M,
 ]]>
 <if test="RI_REGION!=null and !RI_REGION.equals('')">
 	<![CDATA[
-	(SELECT * FROM ROOMMATE_PROFILE 
+	(SELECT DISTINCT * FROM ROOMMATE_PROFILE 
 	WHERE
 		RI_REGION1 LIKE %#{RI_REGION,jdbcType=VARCHAR}%
 		OR RI_REGION2 LIKE %#{RI_REGION,jdbcType=VARCHAR}%
@@ -199,7 +199,7 @@ WHERE
 	M.MEM_ID=R.RI_MEM_ID
 	and RI_EXPOSE=1
 	and MEM_ID NOT IN (
-		SELECT 
+		SELECT DISTINCT 
 			IGNORE_D_MEM
 		FROM IGNORE
 		WHERE IGNORE_MEM = #{MEM_ID ,jdbcType=VARCHAR}
@@ -207,7 +207,7 @@ WHERE
 	]]>	
 <if test="MEM_NICK!=null and!MEM_NICK.equals('')">
 	<![CDATA[
-	AND MEM_NICK LIKE '%' || #{MEM_NICK} || '%'
+	AND MEM_NICK LIKE '%' || #{MEM_NICK,jdbcType=VARCHAR} || '%'
 	]]>
 </if>
 	
@@ -218,8 +218,8 @@ WHERE
 </if>
 <if test="minyear!=null and !minyear.equals('')">
 	<![CDATA[
-	 AND RI_BIRTH BETWEEN #{minyear} AND #{maxyear}
-]]>
+	 AND RI_BIRTH BETWEEN #{minyear,jdbcType=INTEGER} AND #{maxyear,jdbcType=INTEGER}
+	]]>
 </if>
 
 <if test="mindeposit!=null and !mindeposit.equals('')">
@@ -236,14 +236,14 @@ WHERE
 
 <if test="maxdate!=null and !maxdate.equals('')">
 	<![CDATA[
-	AND RI_DATE_START BETWEEM #{maxdate,jdbcType=INTEGER} AND #{mindate,jdbcType=INTEGER}
+	AND RI_DATE_START BETWEEM #{maxdate,jdbcType=DATE} AND #{mindate,jdbcType=DATE}
 	]]>
 </if>
 	</select>
 	<select id="selectRoommateDetail" parameterType="hashmap"
 		resultType="hashmap">
 	<![CDATA[
-SELECT
+SELECT DISTINCT
 	MEM_ID,
 	MEM_NICK,
 	RI_GENDER,
