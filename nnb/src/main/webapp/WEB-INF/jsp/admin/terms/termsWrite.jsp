@@ -21,9 +21,9 @@ $(document).ready(function(){
 //			return fn_validation($('TERMS_CONTENT'),'내용을 입력하세요.');
 			var comSubmit = new ComSubmit("frm");
 			//약관종류를 선택하지 않았을 경우 - 작성페이지
-			comSubmit.validation($('#TERMS_TITLE option:selected'),'약관 종류를 선택하세요.');
+//			comSubmit.validation($('#TERMS_TITLE option:selected'),'약관 종류를 선택하세요.');
 			//내용을 입력하지 않았을 경우 - 작성페이지
-			comSubmit.validation($('#TERMS_CONTENT'),'내용을 입력하세요.');
+//			comSubmit.validation($('#TERMS_CONTENT'),'내용을 입력하세요.');
 			//둘다 입력했을 경우 - 리스트
 			comSubmit.setUrl("<c:url value='/admin/terms/write'/>");
 			comSubmit.submit();

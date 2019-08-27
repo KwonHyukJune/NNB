@@ -46,7 +46,7 @@ function goPage1(num) {   // 새 약관 등록
 		<ul>
 			<li class='bryRNw'>
 				<a href='<c:url value='/admin/terms/detail?num=${terms.TERMS_NUM }'/>'>
-				<p>${terms.TERMS_NUM }</p>
+				<p>${terms.ROW_NUM }</p>
 				<p>${terms.TERMS_TITLE }</p>
 				<p>${terms.REGDATE }</p>
 				</a>

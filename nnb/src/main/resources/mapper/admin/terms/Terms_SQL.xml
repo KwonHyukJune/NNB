@@ -6,12 +6,23 @@
 <select id="selectTermsList" parameterType="hashMap" resultType="hashMap">
 <![CDATA[
 	select	
+			row_number() over (order by RNUM desc) row_num,
+			RNUM,
 			TERMS_NUM,
           	TO_CHAR(TERMS_REGDATE, 'YYYY/MM/DD') as REGDATE,
             TERMS_TITLE,
             TERMS_CONTENT
-	from	
-            TERMS
+	from	(
+            select	
+				row_number() over (order by TERMS_NUM desc) RNUM,
+				TERMS_NUM,
+          		TERMS_REGDATE,
+            	TERMS_TITLE,
+            	TERMS_CONTENT
+			from
+				TERMS
+			)
+			order by row_num desc
 	]]>
 </select>
 
@@ -23,7 +34,6 @@
             TO_CHAR(TERMS_REGDATE, 'YYYY/MM/DD') as REGDATE,
             TERMS_TITLE,
             TERMS_CONTENT
-            
 	FROM
             TERMS
 	WHERE
@@ -39,8 +49,8 @@
             TERMS_NUM, 
             TERMS_TITLE,
             TERMS_CONTENT, 
-            TO_CHAR(TERMS_REGDATE, 'YYYY/MM/DD') as REGDATE
-	) VALUES   (
+            TERMS_REGDATE
+	) VALUES (
 			TERMS_NUM_SEQ.NEXTVAL,           
             #{TERMS_TITLE},                
             #{TERMS_CONTENT},
