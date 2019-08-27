@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>공지사항 수정</title>
+<title>약관 수정</title>
 <head>
 <%@ include file="/WEB-INF/include/include-header.jspf" %>
 <%@include file = "/WEB-INF/include/adminHeader.jspf" %>
@@ -16,8 +16,8 @@ $(document).ready(function(){
 	$("#TERMS_TITLE").val("${terms.TERMS_TITLE}");
 
 	function updateTerms(){
-		return fn_validation($('#TERMS_TITLE option:selected'),'약관유형을 선택하세요.');
-		return fn_validation($('#TERMS_CONTENT'),'내용을 입력하세요.');
+		//return fn_validation($('#TERMS_TITLE option:selected'),'약관유형을 선택하세요.');
+		//return fn_validation($('#TERMS_CONTENT'),'내용을 입력하세요.');
 		var comSubmit = new ComSubmit("frm");
 		comSubmit.setUrl("<c:url value='/admin/terms/termsModify'/>");
 		comSubmit.submit();
@@ -62,6 +62,7 @@ $(document).ready(function(){
 	<h1 class="cYaAqA">약 관 수 정</h1>
 </div>
  <form name="frm" id="frm">
+ 	<input type="hidden" name="num" id="num" value="${terms.TERMS_NUM}">
 <div class="eugBve">
 		<ul class="hIJwlj ">
 			<li>
@@ -87,7 +88,7 @@ $(document).ready(function(){
 			</li>
 		</ul>
 	<div align="center">
-			<button class="kcMULl" onclick="location.href='/nnb/admin/terms/list'">취소</button>
+			<button class="kcMULl" onclick="location.href='/admin/terms/list'">취소</button>
 			<button class="iEZQG" id="update">등록</button>
 			</div>
 </div>	
