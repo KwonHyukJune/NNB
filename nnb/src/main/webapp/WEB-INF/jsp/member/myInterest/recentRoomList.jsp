@@ -18,18 +18,30 @@
 		conSubmit.addParam("ROOM_NUM",${ROOM_NUM});
 		conSubmit.submit();
 	}; */
-	function insertFav(num){
-		var comAjax = new ComAjax();
-		comAjax.setUrl("<c:url value='/search/list/addFavRoom'/>");
-		comAjax.addParam("ROOM_NUM",num);
-		comAjax.ajax();
-	};
-	function deleteFav(num){
-		var comAjax = new ComAjax();
-		comAjax.setUrl("<c:url value='/search/list/deleteFavRoom'/>");
-		comAjax.addParam("ROOM_NUM",num);
-		comAjax.ajax();
-	};
+	function fn_addFav(obj){
+		var str = window.location.href;
+		var url = "redirect:"+str.split("<%=request.getContextPath()%>")[1];
+		var num = obj.children('#num').text();
+		var comSubmit = new ComSubmit();
+		comSubmit.setUrl("<c:url value='/search/addFavRoom'/>");
+		comSubmit.addParam("check", 0);
+		comSubmit.addParam("ROOM_NUM", num);
+		comSubmit.addParam("MEM_ID", idChk);
+		comSubmit.addParam("url", url);
+		comSubmit.submit();
+	}
+	function fn_deleteFav(obj){
+		var str = window.location.href;
+		var url = "redirect:"+str.split("<%=request.getContextPath()%>")[1];
+		var num = obj.children('#num').text();
+		var comSubmit = new ComSubmit();
+		comSubmit.setUrl("<c:url value='/search/addFavRoom'/>");
+		comSubmit.addParam("check", 1);
+		comSubmit.addParam("ROOM_NUM", num);
+		comSubmit.addParam("MEM_ID", idChk);
+		comSubmit.addParam("url", url);
+		comSubmit.submit();
+	}
 /* ㅋㅋ써야됨 */
 </script>
 </head>
@@ -41,47 +53,7 @@
 <p>총 <span id="count"></span>개의 최근 본 방이 있습니다.</p>
 <div class="roomList">
 	<ul id="roomList"></ul>
-	<c:forEach var="room" items="${roomList}">
-	<div class="room">
-<!-- 	<a href="#" onclick="select()"> -->
-		<div class="fav">
-			<c:if test="${room.check=='0'}">
-			<div class="insertFav" onclick="insertFav(${room.ROOM_NUM});">
-			</div>
-			</c:if>
-			<c:if test="${room.check=='1'}">
-			<div class="deleteFav" onclick="deleteFav(${room.ROOM_NUM});">
-			</div>
-			</c:if>
-		</div>
-	<a href="<c:url value='/room/roomDetail?ROOM_NUM=${room.ROOM_NUM}'/>">
-		<div class="img">
-		<img src="<c:url value='/files/${room.STD_NAME}'/>">
-		</div>
-		<div>${room.ROOM_TYPE}</div>
-		<div>
-			${room.TRADE_TYPE} 
-			<c:if test="${room.TRADE_TYPE=='월세'}">
-			${room.MONTHLY_DEPOSIT}/${room.MONTHLY_PAYMENT}
-			</c:if>
-			<c:if test="${room.TRADE_TYPE=='전세'}">
-			${room.JEONSE}
-			</c:if>
-		</div>
-		<div>
-			${room.ROOM_FLOOR}층, ${room.REAL_SIZE}m2,
-			<c:if test="${room.UTILITY_PRICE!=null && room.UTILITY_PRICE!=''}">
-			관리비 ${room.UTILITY_PRICE}만
-			</c:if>
-		</div>
-		<div>${room.DESC_TITLE}</div>
-	</a>
-	</div>
-	</c:forEach>
 </div>
-<c:if test="${count eq 0}">
-<a href="<c:url value='/search/openRecentRoomList'/>" class="btn">방 보러가기</a>
-</c:if>
 <div id="PAGE_NAVI"></div>
 <input type="hidden" id="PAGE_INDEX" name="PAGE_INDEX">
 </div>
@@ -149,8 +121,9 @@ $(document).ready(function() {
 					str	+=	"</div>"
 						+	"<a href='<c:url value='/room/roomDetail?ROOM_NUM=" + room.ROOM_NUM + "'/>'>"
 							+	"<div class='img'>"
-							+		"<div>" + room.ROOM_TYPE + "</div>"
+							+		"<img src='<c:url value='/roomImages/" + room.THUMBNAIL + "'/>'>"
 							+	"</div>"
+							+	"<div>" + room.ROOM_TYPE + "</div>"
 							+	"<div>"
 							+		room.TRADE_TYPE;
 					if(room.TRADE_TYPE=='월세')

@@ -108,7 +108,7 @@ public class RoomController {
 		if(favRoom.containsKey(commandMap.get("ROOM_NUM"))){
 			mv.addObject("favRoom",1);
 		}else {
-			System.out.println("0");
+			mv.addObject("favRoom",0);
 		}
 		
 		return mv;

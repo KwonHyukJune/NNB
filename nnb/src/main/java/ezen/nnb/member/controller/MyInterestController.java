@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -65,12 +66,21 @@ public class MyInterestController {
 		
 		return mv;
 	}
-	 
+	
 	@RequestMapping(value="/myInterest/favRoomList")
-	public ModelAndView favRoomList(CommandMap commandMap)throws Exception{
+	public ModelAndView favRoomList(CommandMap commandMap) throws Exception{
 		ModelAndView mv=new ModelAndView("member/myInterest/favRoomList");
+		return mv;
+	}
+	
+	@RequestMapping(value="/myInterest/openFavRoomList")
+	public ModelAndView openFavRoomList(CommandMap commandMap, HttpServletRequest request)throws Exception{
+		ModelAndView mv=new ModelAndView("jsonView");
+		HttpSession session = request.getSession();
+		commandMap.put("MEM_ID",session.getAttribute("MEM_ID"));
 		List<Map<String,Object>> list=favoriteService.selectFavRoomList(commandMap.getMap());
 		mv.addObject("list",list);
+		mv.addObject("total",list.size());
 		return mv;
 	}
 

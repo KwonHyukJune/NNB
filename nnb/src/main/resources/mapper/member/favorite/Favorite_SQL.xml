@@ -29,8 +29,8 @@
 		R1.ROOM_NUM=RB.room_num and
 		RB.DEL_GB='N' and
 		RB.TRADE_STATUS='광고중'
-]]>
 		AND R1.ROOM_NUM in
+]]>
 		<foreach collection="ROOM_NUM" item="item" index="index" separator="," open="(" close=")">
 	<![CDATA[
 			#{item}
@@ -40,17 +40,22 @@
 </select>
 <!-- 회원이 찜 한 방 리스트 -->
 <select id="selectFavRoomList" parameterType="hashmap" resultType="hashmap">
+<include refid="common.pagingPre"/>
 <![CDATA[
 SELECT
-	R1.ROOM_NUM,
-	R1.ROOM_TYPE,
-	R1.TRADE_TYPE,
-	R1.monthly_payment,
-	R1.monthly_DEPOSIT,
-	R1.jeonse,
-	R1.THUMBNAIL,
-	R2.DESC_TITLE,
-	RB.UPLOAD_DATE
+	ROW_NUMBER() OVER (ORDER BY R1.ROOM_NUM DESC) RNUM,
+		R1.ROOM_NUM,
+		R1.ROOM_TYPE,
+		R1.TRADE_TYPE,
+		R1.MONTHLY_PAYMENT,
+		R1.MONTHLY_DEPOSIT,
+		R1.JEONSE,
+		R1.THUMBNAIL,
+		R1.ADDRESS1,
+		R2.REAL_SIZE,
+		R2.ROOM_FLOOR,
+		R2.UTILITY_PRICE,
+		R2.DESC_TITLE
 FROM
 	ROOM_INFO1 R1, 
 	ROOM_INFO2 R2, 
@@ -58,10 +63,15 @@ FROM
 WHERE
 	R1.ROOM_NUM=r2.room_num and
 	R1.ROOM_NUM=rb.room_num and
-	and	DEL_GB='N' and
-	R1.ROOM_NUM=#{rn,jdbcType=INTEGER}
-	ORDER BY R1.ROOM_NUM DESC
+	DEL_GB='N' and
+	R1.ROOM_NUM in
 ]]>
+<foreach collection="ROOM_NUM" item="item" index="index" separator="," open="(" close=")">
+	<![CDATA[
+			#{item.ROOM_NUM}
+	]]>
+</foreach>
+<include refid="common.pagingPost"/> 
 </select>
 <!-- 전체 찜 한 방 조회 -->
 <select id = "selectFavRoom" parameterType="hashmap" resultType="hashmap">

@@ -3,44 +3,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<%-- <!-- 테스트용 세팅 -->
-<%@ page import="java.util.HashMap" %>
-<%@ page import="java.util.Map" %>
-<%@ page import="java.util.List" %>
-<%@ page import="java.util.ArrayList" %>
-<%
-	Map<String,Object> room1 = new HashMap<String,Object>();
-	room1.put("check","0");
-	room1.put("ROOM_NUM","1");
-	room1.put("STD_NAME","room1.png");
-	room1.put("ROOM_TYPE","원룸");
-	room1.put("TRADE_TYPE","월세");
-	room1.put("MONTHLY_DEPOSIT","300");
-	room1.put("MONTHLY_PAYMENT","30");
-	room1.put("ROOM_FLOOR","2");
-	room1.put("REAL_SIZE","20");
-	room1.put("UTILITY_PRICE","5");
-	room1.put("DESC_TITLE","싸다싸");
-	Map<String,Object> room2 = new HashMap<String,Object>();
-	room2.put("check","1");
-	room2.put("ROOM_NUM","2");
-	room2.put("STD_NAME","room1.png");
-	room2.put("ROOM_TYPE","원룸");
-	room2.put("TRADE_TYPE","전세");
-	room2.put("JEONSE","3000");
-	room2.put("ROOM_FLOOR","2");
-	room2.put("REAL_SIZE","20");
-	room2.put("DESC_TITLE","싸다싸");
-	
-	List<Map<String,Object>> roomList = new ArrayList<Map<String,Object>>();
-	roomList.add(room1);
-	roomList.add(room2);
-	
-	int count = roomList.size();
-	request.setAttribute("count", count);
-	request.setAttribute("roomList",roomList);
-%>
-<!-- 테스트용 세팅 끝 --> --%>
 <%@ include file="/WEB-INF/include/include-header.jspf" %>
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/myInterest.css'/>"/>
 </head>
@@ -51,52 +13,10 @@
 
 <div class="favRoomList">
 
-<p>총 ${count}개의 찜한 방이 있습니다.</p>
-<c:if test="${count!=null && count!=''}">
-	<div class="roomList">
-	<c:forEach var="room" items="${roomList}">
-	<div class="room">
-<!-- 	<a href="#" onclick="select()"> -->
-		<div class="fav">
-			<c:if test="${room.check=='0'}">
-			<div class="insertFav" onclick="insertFav(${room.ROOM_NUM});">
-			</div>
-			</c:if>
-			<c:if test="${room.check=='1'}">
-			<div class="deleteFav" onclick="deleteFav(${room.ROOM_NUM});">
-			</div>
-			</c:if>
-		</div>
-		<a href="<c:url value='/search/detailRoom?ROOM_NUM=${room.ROOM_NUM}'/>">
-			<div class="img">
-			<img src="<c:url value='/files/${room.STD_NAME}'/>">
-			</div>
-			<div>${room.ROOM_TYPE}</div>
-			<div>
-				${room.TRADE_TYPE} 
-				<c:if test="${room.TRADE_TYPE=='월세'}">
-				${room.MONTHLY_DEPOSIT}/${room.MONTHLY_PAYMENT}
-				</c:if>
-				<c:if test="${room.TRADE_TYPE=='전세'}">
-				${room.JEONSE}
-				</c:if>
-			</div>
-			<div>
-				${room.ROOM_FLOOR}층, ${room.REAL_SIZE}m2,
-				<c:if test="${room.UTILITY_PRICE!=null && room.UTILITY_PRICE!=''}">
-				관리비 ${room.UTILITY_PRICE}만
-				</c:if>
-			</div>
-			<div>${room.DESC_TITLE}</div>
-		</a>
-	</div>
-	</c:forEach>
-	</div>
-</c:if>
-<c:if test="${count==null || count==''}">
-<a href="<c:url value='/search/openSearchRoomList'/>" class="btn">방 보러가기</a>
-</c:if>
-
+<p>총 <span id="count"></span>개의 찜한 방이 있습니다.</p>
+<ul id="roomList"></ul>
+<div id="PAGE_NAVI"></div>
+<input type="hidden" id="PAGE_INDEX" name="PAGE_INDEX">
 	
 </div>
 <br>
@@ -104,18 +24,91 @@
 <%@ include file="/WEB-INF/include/footer.jspf" %>
 </div>
 <script type="text/javascript">
-	function insertFav(num){
-		var comAjax = new ComAjax();
-		comAjax.setUrl("<c:url value='/search/list/addFavRoom'/>");
-		comAjax.addParam("ROOM_NUM",num);
-		comAjax.ajax();
-	};
-	function deleteFav(num){
-		var comAjax = new ComAjax();
-		comAjax.setUrl("<c:url value='/search/list/deleteFavRoom'/>");
-		comAjax.addParam("ROOM_NUM",num);
-		comAjax.ajax();
-	};
+function fn_deleteFav(obj){
+	var str = window.location.href;
+	var url = "redirect:"+str.split("<%=request.getContextPath()%>")[1];
+	var num = obj.children('#num').text();
+	var comSubmit = new ComSubmit();
+	comSubmit.setUrl("<c:url value='/search/addFavRoom'/>");
+	comSubmit.addParam("check", 1);
+	comSubmit.addParam("ROOM_NUM", num);
+	comSubmit.addParam("MEM_ID", idChk);
+	comSubmit.addParam("url", url);
+	comSubmit.submit();
+}
+$(document).ready(function() {
+	var PAGE_INDEX = gfn_isNull("${param.PAGE_INDEX}")==true? "1": "${param.PAGE_INDEX}";
+	$("#PAGE_INDEX").val(PAGE_INDEX);
+	fn_selectFavRoomList(PAGE_INDEX);
+});
+	function fn_selectFavRoomList(pageNo){
+		var comAjax = new ComAjax(); 
+		comAjax.setUrl("<c:url value='/myInterest/openFavRoomList'/>"); 
+		comAjax.setCallback("fn_selectFavRoomListCallback"); 
+		comAjax.addParam("PAGE_INDEX",$("#PAGE_INDEX").val()); 
+		comAjax.addParam("PAGE_ROW", 15); 
+		comAjax.ajax(); 
+	}
+	
+	function fn_selectFavRoomListCallback(data){ 
+		var total = data.total;
+		var body = $("ul#roomList"); 
+		body.empty(); 
+		
+		if(total == 0){ 
+			$("#count").empty();
+			$("#count").append('0');
+			var str = "<a href='<c:url value='/search/openSearchRoomList'/>' class='btn'>방 보러가기</a>"; 
+			body.append(str); 
+	        	
+		} else{ 
+			var params = { 
+				divId : "PAGE_NAVI", 
+				pageIndex : "PAGE_INDEX", 
+				totalCount : total, 
+				eventName : "fn_selectFavRoomList" 
+				}; 
+			
+			gfn_renderPaging(params); 
+				var str = "";
+				var count = data.total;
+				$("#count").empty();
+				$("#count").append(count);
+				$.each(data.list, function(key, room){ 
+					str	+=	"<li>"
+						+	"<div>"	//position:relative 해야 div.fav가 잘 붙음
+						+	"<div class='fav'>"
+						+		"<div class='deleteFav' onclick='fn_deleteFav($(this))'>"
+						+			"<div id='num' style='display:none;'>"
+						+				room.ROOM_NUM
+						+			"</div>"
+						+		"</div>"
+						+	"</div>"
+						+	"<a href='<c:url value='/room/roomDetail?ROOM_NUM=" + room.ROOM_NUM + "'/>'>"
+							+	"<div class='img'>"
+							+		"<img src='<c:url value='/roomImages/" + room.THUMBNAIL + "'/>'>"
+							+	"</div>"
+							+	"<div>" + room.ROOM_TYPE + "</div>"
+							+	"<div>"
+							+		room.TRADE_TYPE;
+					if(room.TRADE_TYPE=='월세')
+						str	+=		room.MONTHLY_DEPOSIT + "/" + room.MONTHLY_PAYMENT;
+					if(room.TRADE_TYPE=='전세')
+						str	+=		room.JEONSE;
+					str	+=		"</div>"
+						+		"<div>"
+						+			room.ROOM_FLOOR + "층, " + room.REAL_SIZE + "m2, ";
+					if(room.UTILITY_PRICE!=null && room.UTILITY_PRICE!='')
+						str	+=		room.UTILITY_PRICE만;
+					str	+=		"</div>"
+						+		"<div>" + room.DESC_TITLE + "</div>"
+						+	"</a>"
+						+"</div>"
+						+"</li>";
+	        	}); 
+	        	body.append(str); 
+			} 
+	}
 </script>
 </body>
 </html>
