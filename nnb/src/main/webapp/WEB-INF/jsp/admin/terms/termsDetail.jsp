@@ -2,61 +2,44 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<title>공지사항 상세보기</title>
+<title>약관 상세보기</title>
 <head>
 <%@ include file="/WEB-INF/include/include-header.jspf" %>
 <%@ include file="/WEB-INF/include/adminHeader.jspf" %>
 
-<link rel="stylesheet" type="text/css" href="<c:url value='/css/myInterest.css'/>"/>
-
+<link rel="stylesheet" type="text/css" href="<c:url value='/css/terms.css'/>"/>
 <script type="text/javascript">
 function goPage1(num) {   // 새 약관 등록
 	location.href="/nnb/admin/terms/list?num="+num; 
 	}	
 </script>
-
 </head>
-
-<br/><br/><br/>
-
 <body>
-
-
-<div><h1>공지사항</h1></div>
 <br/>
-<hr>
+<br/>
+<div>
+	<h1 class="cYaAqA">${terms.TERMS_TITLE }</h1>
+</div>
+<div class="eugBve">
+		<ul class="hIJwlj ">
+			<li>
+				<p class="efvxco">번호</p>
+				<p class="efvxco ilgADB">${terms.TERMS_NUM}</p>
+			</li>
+			<li>
+				<p class="efvxco">작성날짜</p>
+				<p class="efvxco ilgADB">${terms.REGDATE}</p>
+			</li>
+			<li>
+				<p class="efvxco">내용</p>
+				<p class="styled__InquiryArea-sc-1v9ngdo-7 bqTGEL Textarea-sc-6jro6l-0 hunnDM">${terms.TERMS_CONTENT }</p>
+			</li>
+		</ul>
+	<div align="center">
+    	<button class="iEZQG" onclick="location.href='<c:url value='/admin/terms/list'/>'">목록</button>
+    </div>
+</div>	
 <br/><br/><br/>
-
-<div class="selectNoticeDetail">
-
-
-<div class="noticeList">
-   
-   <div class="notice">
-      <ul>
-  	<li>번호 
-			 ${terms.TERMS_NUM} &nbsp;     
-			</li>	
-			<li>날짜 
-	         ${terms.TERMS_REGDATE}&nbsp;
-	      	</li>
-	      	<li>약관제목  :&nbsp;      	
-	         ${terms.TERMS_TITLE}&nbsp;
-	         </li>
-	         <li>약관내용  :&nbsp;
-			${terms.TERMS_CONTENT}    
-	         </li>	
-    </ul>
-    <br/><br/><br/> 
-    <a href="#" onClick="goPage1(${terms.TERMS_NUM})">목록으로</a>
-    
-
-   </div>	
- 
-</div>
-
-</div>
-<br/><hr><br/><br/>
 <div>
 <%@include file = "/WEB-INF/include/footer.jspf" %>
 </div>
