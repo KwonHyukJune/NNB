@@ -58,6 +58,6 @@ public List<Map<String, Object>> selectFavRoom(Map<String, Object> map) throws E
 	@SuppressWarnings("unchecked")
 	public List<Map<String, Object>> selectRecentRoomList(Map<String, Object> map) throws Exception{
 		// TODO Auto-generated method stub
-		return (List<Map<String,Object>>)selectList("favorite.selectRecentRoom",map);
+		return (List<Map<String,Object>>)selectPagingList("favorite.selectRecentRoom",map);
 	}
 }

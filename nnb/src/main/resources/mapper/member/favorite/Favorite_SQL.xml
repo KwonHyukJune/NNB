@@ -5,22 +5,7 @@
 <select id="selectRecentRoom" parameterType="hashmap" resultType="hashmap">
 <include refid="common.pagingPre"/>
 <![CDATA[
-SELECT
-	ROW_NUMBER() OVER (ORDER BY S.ROOM_NUM DESC) ROW_NUM,
-	S.ROOM_NUM,
-	S.ROOM_TYPE,
-	S.TRADE_TYPE,
-	S.MONTHLY_PAYMENT,
-	S.MONTHLY_DEPOSIT,
-	S.JEONSE,
-	S.THUMBNAIL,
-	S.ADDRESS1,
-	S.REAL_SIZE,
-	S.ROOM_FLOOR,
-	S.UTILITY_PRICE,
-	S.DESC_TITLE
-FROM
-	(
+
 	SELECT
 		ROW_NUMBER() OVER (ORDER BY R1.ROOM_NUM DESC) RNUM,
 		R1.ROOM_NUM,
@@ -51,11 +36,7 @@ FROM
 			#{item}
 	]]>
 		</foreach>
-<![CDATA[
-	) S ORDER BY ROW_NUM DESC
-
-) AA ) AAA WHERE AAA.ROW_NUM BETWEEN 1 AND 15
-]]>
+<include refid="common.pagingPost"/> 
 </select>
 <!-- 회원이 찜 한 방 리스트 -->
 <select id="selectFavRoomList" parameterType="hashmap" resultType="hashmap">
