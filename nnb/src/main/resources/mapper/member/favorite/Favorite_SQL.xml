@@ -92,7 +92,7 @@ WHERE
 <!-- 찜 한 방 삭제 -->
 <delete id="deleteFavRoom" parameterType="hashmap">
 <![CDATA[
-   delete from FAV_ROOM where MEM_ID=#{MEM_ID,jdbcType=VARCHAR }
+   delete from FAV_ROOM where MEM_ID=#{MEM_ID,jdbcType=VARCHAR } and ROOM_NUM = #{ROOM_NUM}
 ]]>
 </delete>   
 

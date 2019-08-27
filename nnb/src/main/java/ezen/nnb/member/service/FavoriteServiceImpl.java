@@ -1,5 +1,7 @@
 package ezen.nnb.member.service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -68,9 +70,15 @@ public class FavoriteServiceImpl implements FavoriteService{
 		favoriteDAO.cancelFavRoom(map);
 	}
 	@Override
-	public List<Map<String, Object>> selectFavRoom(Map<String, Object> map) throws Exception {
+	public Map<String, Object> selectFavRoom(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub
-		return favoriteDAO.selectFavRoom(map);
+		List<Map<String,Object>> room=favoriteDAO.selectFavRoom(map);
+		Map<String,Object> temp_map = new HashMap<String,Object>();
+		for(int i=0 ; i < room.size() ; i++) {
+			String rn = String.valueOf(room.get(i).get("ROOM_NUM"));
+			temp_map.put(rn,"ROOM_NUM");
+		}
+		return temp_map;
 	}
 
 }

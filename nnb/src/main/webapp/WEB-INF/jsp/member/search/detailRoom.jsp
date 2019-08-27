@@ -41,25 +41,39 @@ function calculator2(chk){
 		  document.getElementById('real_p').value = (parseFloat(document.getElementById('real_m').value) / 3.3058).toFixed(2);
 	  }
 } */
-function fn_addFav(obj){
-	var num = obj.children('#num').text();
+function fn_addFav(){
+	var str = window.location.href;
+	var url = "redirect:"+str.split("<%=request.getContextPath()%>")[1];
 	var comSubmit = new ComSubmit();
 	comSubmit.setUrl("<c:url value='/search/addFavRoom'/>");
 	comSubmit.addParam("check", 0);
-	comSubmit.addParam("ROOM_NUM", num);
+	comSubmit.addParam("ROOM_NUM", "${room.ROOM_NUM}");
 	comSubmit.addParam("MEM_ID", idChk);
+	comSubmit.addParam("url", url);
 	comSubmit.submit();
 }
-function fn_deleteFav(obj){
-	var num = obj.children('#num').text();
+function fn_deleteFav(){
+	var str = window.location.href;
+	var url = "redirect:"+str.split("<%=request.getContextPath()%>")[1];
 	var comSubmit = new ComSubmit();
 	comSubmit.setUrl("<c:url value='/search/addFavRoom'/>");
 	comSubmit.addParam("check", 1);
-	comSubmit.addParam("ROOM_NUM", num);
+	comSubmit.addParam("ROOM_NUM", "${room.ROOM_NUM}");
 	comSubmit.addParam("MEM_ID", idChk);
+	comSubmit.addParam("url", url);
 	comSubmit.submit();
 }
 /* 쿠키 */
+$(document).ready(function(){
+	$("p.dojagi").on("click",function(e){
+		if($("p.dojagi path").attr("fill")=="none"){
+			fn_addFav();
+		}else if($("p.dojagi path").attr("fill")=="#F63C4A"){
+			fn_deleteFav();
+		}
+	});
+	
+});
 $(document).ready(function(){
 	addCookie('recentRoom','${room.ROOM_NUM}');
 });
@@ -117,7 +131,14 @@ $(document).ready(function(){
 			<div class="bbfToB">
 				<p class="dojagi">
 					<!-- 찜 아이콘. 빨갛게 하려면 path fill, stroke 를 #F63C4A으로 -->
-					<svg width="23" height="22" viewBox="0 0 23 22"><path fill="none" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.5 19c.92-.7 6.89-5.628 8.41-7.623.877-1.154 1.09-2.17 1.09-3.358C21 5.247 18.776 3 16.033 3 13.32 3 11.5 5.862 11.5 5.862S9.68 3 6.967 3C4.224 3 2 5.247 2 8.019c0 1.187.213 2.204 1.09 3.358C4.61 13.372 10.58 18.3 11.5 19z"></path></svg>
+					<svg width="23" height="22" viewBox="0 0 23 22">
+						<c:if test="${favRoom==0}">
+						<path fill="none" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.5 19c.92-.7 6.89-5.628 8.41-7.623.877-1.154 1.09-2.17 1.09-3.358C21 5.247 18.776 3 16.033 3 13.32 3 11.5 5.862 11.5 5.862S9.68 3 6.967 3C4.224 3 2 5.247 2 8.019c0 1.187.213 2.204 1.09 3.358C4.61 13.372 10.58 18.3 11.5 19z"></path>
+						</c:if>
+						<c:if test="${favRoom==1}">
+						<path fill="#F63C4A" fill-rule="evenodd" stroke="#F63C4A" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.5 19c.92-.7 6.89-5.628 8.41-7.623.877-1.154 1.09-2.17 1.09-3.358C21 5.247 18.776 3 16.033 3 13.32 3 11.5 5.862 11.5 5.862S9.68 3 6.967 3C4.224 3 2 5.247 2 8.019c0 1.187.213 2.204 1.09 3.358C4.61 13.372 10.58 18.3 11.5 19z"></path>
+						</c:if>
+					</svg>
 					${room.FAV_COUNT}
 				</p>
 				<p class="fEBzAW">•</p>
@@ -356,7 +377,7 @@ $(document).ready(function(){
 							.replace('11','"전자레인지"')
 							.replace('12','"전자도어락"')
 							.replace('13','"비데"');
-						option = eval("["+option+"]");
+						option = "["+option+"]";
 						console.log(option);
 						for(var i=0;i<option.length;i++){
 							document.write("<div class='gqtsIc'><p>"+option[i]+"</p></div>");

@@ -54,8 +54,11 @@
     	<url-pattern>*.js</url-pattern>
     	<url-pattern>*.css</url-pattern>
     	<url-pattern>*.gif</url-pattern>
+    	<url-pattern>*.GIF</url-pattern>
     	<url-pattern>*.jpg</url-pattern>
+    	<url-pattern>*.JPG</url-pattern>
     	<url-pattern>*.png</url-pattern>
+    	<url-pattern>*.PNG</url-pattern>
     	<url-pattern>*.svg</url-pattern>
     </servlet-mapping>
 </web-app>

@@ -43,7 +43,7 @@ public class SearchRoomController {
 		
 		int count=searchRoomService.countRoomList(commandMap.getMap());
 		mv.addObject("count", count);
-		List<Map<String,Object>> favRoom=favoriteService.selectFavRoom(commandMap.getMap());
+		Map<String,Object> favRoom=favoriteService.selectFavRoom(commandMap.getMap());
 		mv.addObject("favRoom",favRoom);
 		List<Map<String,Object>> list=searchRoomService.selectRoomList(commandMap.getMap());
 		mv.addObject("list", list);
@@ -103,7 +103,7 @@ public class SearchRoomController {
 		 * ROOM_TYPE.add(array[i]); } commandMap.put("TRADE_TYPE", ROOM_TYPE); }
 		 */
 		
-		List<Map<String,Object>> favRoom=favoriteService.selectFavRoom(commandMap.getMap());
+		Map<String,Object> favRoom=favoriteService.selectFavRoom(commandMap.getMap());
 		mv.addObject("favRoom",favRoom);
 		
 		List<Map<String,Object>> list=searchRoomService.selectRoomList(commandMap.getMap());
@@ -129,12 +129,22 @@ public class SearchRoomController {
 		Map<String,Object> map = roomService.selectRoomDetail(commandMap.getMap());
 		mv.addObject("map", map.get("map")); //게시글 상세정보.
 		mv.addObject("list", map.get("list")); // 첨부파일의 목록을 가지고 있는 리스트.
+
+		Map<String,Object> favRoom=favoriteService.selectFavRoom(commandMap.getMap());
+		if(favRoom.containsKey(commandMap.get("ROOM_NUM"))){
+			System.out.println("1");
+			mv.addObject("favRoom",1);
+		}else {
+			mv.addObject("favRoom",0);
+			System.out.println("0");
+		}
 		return mv;
 	}
 	
 	@RequestMapping(value = "/search/addFavRoom", method = RequestMethod.POST)
 	public ModelAndView addFavRoom(CommandMap commandMap) throws Exception{
-		ModelAndView mv = new ModelAndView("redirect:/search/openSearchRoomList");
+		String url = (String) commandMap.get("url");
+		ModelAndView mv = new ModelAndView(url);
 		
 		if(commandMap.get("check").equals("0")) {
 			favoriteService.addFavRoom(commandMap.getMap());
