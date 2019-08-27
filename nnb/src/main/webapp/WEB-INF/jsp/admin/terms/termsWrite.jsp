@@ -16,7 +16,7 @@ $(document).ready(function(){
 			insertBoard();
 		});
 		$()		
-		function insertBoard(){
+		function insertBoard(){	
 //			return fn_validation($('#TERMS_TITLE option:selected'),'공지유형을 선택하세요.');
 //			return fn_validation($('TERMS_CONTENT'),'내용을 입력하세요.');
 			var comSubmit = new ComSubmit("frm");
