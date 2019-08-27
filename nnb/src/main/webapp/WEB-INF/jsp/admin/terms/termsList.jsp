@@ -66,7 +66,10 @@ function goPage1(num) {   // 새 약관 등록
   	</c:if>
 	</ul>
 </div>
-<br>
+<div align="center">   
+	<button class="iEZQG" onClick="goPage1(${terms.TERMS_NUM})">약관 작성</button>
+</div>
+<br/>
 <div>
 	<%@ include file="/WEB-INF/include/footer.jspf" %>
 </div>
