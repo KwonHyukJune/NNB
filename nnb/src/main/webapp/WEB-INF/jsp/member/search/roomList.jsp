@@ -6,21 +6,27 @@
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/search.css'/>"/>
 <script type="text/javascript">
 function fn_addFav(obj){
+	var str = window.location.href;
+	var url = "redirect:"+str.split("<%=request.getContextPath()%>")[1];
 	var num = obj.children('#num').text();
 	var comSubmit = new ComSubmit();
 	comSubmit.setUrl("<c:url value='/search/addFavRoom'/>");
 	comSubmit.addParam("check", 0);
 	comSubmit.addParam("ROOM_NUM", num);
 	comSubmit.addParam("MEM_ID", idChk);
+	comSubmit.addParam("url", url);
 	comSubmit.submit();
 }
 function fn_deleteFav(obj){
+	var str = window.location.href;
+	var url = "redirect:"+str.split("<%=request.getContextPath()%>")[1];
 	var num = obj.children('#num').text();
 	var comSubmit = new ComSubmit();
 	comSubmit.setUrl("<c:url value='/search/addFavRoom'/>");
 	comSubmit.addParam("check", 1);
 	comSubmit.addParam("ROOM_NUM", num);
 	comSubmit.addParam("MEM_ID", idChk);
+	comSubmit.addParam("url", url);
 	comSubmit.submit();
 }
 function toggle(obj){

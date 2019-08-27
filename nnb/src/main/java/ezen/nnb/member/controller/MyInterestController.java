@@ -12,7 +12,9 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import ezen.nnb.common.CommandMap;
@@ -35,6 +37,15 @@ public class MyInterestController {
 	@RequestMapping("/myInterest/recentRoom") 
 	public ModelAndView recentRoomList(CommandMap commandMap,HttpServletRequest request)throws Exception{ 
 		ModelAndView mv=new ModelAndView("member/myInterest/recentRoomList");
+		
+		return mv; 
+	}
+	
+	@RequestMapping("/myInterest/recentRoomList")
+	@ResponseBody
+	public ModelAndView selectRecentRoomList(CommandMap commandMap, HttpServletRequest request) throws Exception{
+		ModelAndView mv = new ModelAndView("jsonView");
+		
 		CookieBox cookieBox = new CookieBox(request);
 		List<String> ROOM_NUM = new ArrayList<String>();
 		if(cookieBox.exists("recentRoom")) {
@@ -45,20 +56,31 @@ public class MyInterestController {
 			}
 			commandMap.put("ROOM_NUM", ROOM_NUM);
 			List<Map<String,Object>> list = favoriteService.selectRecentRoomList(commandMap.getMap());
-			mv.addObject("roomList",list);
-			mv.addObject("count",list.size());
+			mv.addObject("list",list);
+			mv.addObject("total",list.size());
 		}else {
-			mv.addObject("count",0);
+			mv.addObject("total",0);
 		}
+		Map<String,Object> favRoom=favoriteService.selectFavRoom(commandMap.getMap());
+		mv.addObject("favRoom",favRoom);
 		
-		return mv; 
+		return mv;
 	}
-	 
+	
 	@RequestMapping(value="/myInterest/favRoomList")
-	public ModelAndView favRoomList(CommandMap commandMap)throws Exception{
+	public ModelAndView favRoomList(CommandMap commandMap) throws Exception{
 		ModelAndView mv=new ModelAndView("member/myInterest/favRoomList");
+		return mv;
+	}
+	
+	@RequestMapping(value="/myInterest/openFavRoomList")
+	public ModelAndView openFavRoomList(CommandMap commandMap, HttpServletRequest request)throws Exception{
+		ModelAndView mv=new ModelAndView("jsonView");
+		HttpSession session = request.getSession();
+		commandMap.put("MEM_ID",session.getAttribute("MEM_ID"));
 		List<Map<String,Object>> list=favoriteService.selectFavRoomList(commandMap.getMap());
 		mv.addObject("list",list);
+		mv.addObject("total",list.size());
 		return mv;
 	}
 

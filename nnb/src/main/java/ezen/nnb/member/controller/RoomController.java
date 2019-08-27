@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import ezen.nnb.common.CommandMap;
+import ezen.nnb.member.service.FavoriteService;
 import ezen.nnb.member.service.LoginService;
 import ezen.nnb.member.service.RoomService;
 
@@ -23,6 +25,8 @@ public class RoomController {
 
 	@Resource(name = "roomService")
 	private RoomService roomService;
+	@Resource(name="favoriteService")
+	private FavoriteService favoriteService;
 
 	@RequestMapping(value = "/room/adminRoom") //내가 올린 방리스트를 리턴해준다.  + 내가 올린 방 개수 카운트 
 	public ModelAndView adminRoomList(CommandMap commandMap, HttpServletRequest request) throws Exception {
@@ -90,12 +94,23 @@ public class RoomController {
 	}
 	
 	@RequestMapping(value = "/room/roomDetail") // 방 상세 정보를 찾아서 리턴해준다. + 첨부파일
-	public ModelAndView detailRoom(CommandMap commandMap) throws Exception {
+	public ModelAndView detailRoom(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("member/search/detailRoom");
+		
+		HttpSession session = request.getSession();
+		commandMap.put("MEM_ID", session.getAttribute("MEM_ID"));
 		
 		Map<String,Object> map = roomService.selectRoomDetail(commandMap.getMap());
 		mv.addObject("room", map.get("map")); //게시글 상세정보.
 		mv.addObject("list", map.get("list")); // 첨부파일의 목록을 가지고 있는 리스트.
+		
+		Map<String,Object> favRoom=favoriteService.selectFavRoom(commandMap.getMap());
+		if(favRoom.containsKey(commandMap.get("ROOM_NUM"))){
+			mv.addObject("favRoom",1);
+		}else {
+			mv.addObject("favRoom",0);
+		}
+		
 		return mv;
 	}
 	

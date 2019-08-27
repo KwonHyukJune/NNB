@@ -1,5 +1,7 @@
 package ezen.nnb.member.service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -43,13 +45,11 @@ public class FavoriteServiceImpl implements FavoriteService{
 	@Override
 	public List<Map<String, Object>> selectFavRoomList(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub // 내가 찜한 방 보기
-		List<Map<String,Object>> FavRoom = null ; //FavRoom 리스트 객체 선언.
 		List<Map<String,Object>> room=favoriteDAO.selectFavRoom(map); // 맵 객체에다가 내가 찜한 방의 방번호를 저장해준다.
-		for(int i=0 ; i < room.size() ; i++) {
-			String rn = (String)room.get(i).get("ROOM_NUM");		
-			FavRoom = favoriteDAO.selectFavRoomList(rn); 
-		}
-		return FavRoom; //반복된 작업을 거친 favRoom 리스트 객체를 리턴.
+		List<Map<String,Object>> FavRoom = new ArrayList<Map<String,Object>>();
+		if(room.size()==0) return FavRoom;
+		map.put("ROOM_NUM",room);
+		return favoriteDAO.selectFavRoomList(map); //반복된 작업을 거친 favRoom 리스트 객체를 리턴.
 	}
 	@Override
 	public void deleteFavRoommate(Map<String, Object> map) throws Exception {
@@ -68,9 +68,15 @@ public class FavoriteServiceImpl implements FavoriteService{
 		favoriteDAO.cancelFavRoom(map);
 	}
 	@Override
-	public List<Map<String, Object>> selectFavRoom(Map<String, Object> map) throws Exception {
+	public Map<String, Object> selectFavRoom(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub
-		return favoriteDAO.selectFavRoom(map);
+		List<Map<String,Object>> room=favoriteDAO.selectFavRoom(map);
+		Map<String,Object> temp_map = new HashMap<String,Object>();
+		for(int i=0 ; i < room.size() ; i++) {
+			String rn = String.valueOf(room.get(i).get("ROOM_NUM"));
+			temp_map.put(rn,"ROOM_NUM");
+		}
+		return temp_map;
 	}
 
 }
