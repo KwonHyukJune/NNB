@@ -7,7 +7,7 @@
 <include refid="common.pagingPre"/> 
 <![CDATA[  
 SELECT 
-  ROW_NUMBER() OVER (ORDER BY MEM_NUM DESC) RNUM,
+  ROW_NUMBER() OVER (ORDER BY MEM_NUM ASC) RNUM,
   MEM_NUM,
   MEM_DEL_GB,
   MEM_KIND,
