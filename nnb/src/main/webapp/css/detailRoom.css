@@ -1,0 +1,79 @@
+@charset "UTF-8";
+.aircondition {
+    width: 40px;
+    height: 40px;
+    margin: 0px auto;
+    background: url(/nnb/media/aircondition.svg) center center / cover no-repeat;
+}
+.laundry {
+    width: 40px;
+    height: 40px;
+    margin: 0px auto;
+    background: url(/nnb/media/laundry.svg) center center / cover no-repeat;
+}
+.bed {
+    width: 40px;
+    height: 40px;
+    margin: 0px auto;
+    background: url(/nnb/media/bed.svg) center center / cover no-repeat;
+}
+.desk {
+    width: 40px;
+    height: 40px;
+    margin: 0px auto;
+    background: url(/nnb/media/desk.svg) center center / cover no-repeat;
+}
+.closet {
+    width: 40px;
+    height: 40px;
+    margin: 0px auto;
+    background: url(/nnb/media/closet.svg) center center / cover no-repeat;
+}
+.tv {
+    width: 40px;
+    height: 40px;
+    margin: 0px auto;
+    background: url(/nnb/media/tv.svg) center center / cover no-repeat;
+}
+.shoes {
+    width: 40px;
+    height: 40px;
+    margin: 0px auto;
+    background: url(/nnb/media/shoes.svg) center center / cover no-repeat;
+}
+.refrigerator {
+    width: 40px;
+    height: 40px;
+    margin: 0px auto;
+    background: url(/nnb/media/refrigerator.svg) center center / cover no-repeat;
+}
+.gas {
+    width: 40px;
+    height: 40px;
+    margin: 0px auto;
+    background: url(/nnb/media/gas.svg) center center / cover no-repeat;
+}
+.induction {
+    width: 40px;
+    height: 40px;
+    margin: 0px auto;
+    background: url(/nnb/media/induction.svg) center center / cover no-repeat;
+}
+.microwave {
+    width: 40px;
+    height: 40px;
+    margin: 0px auto;
+    background: url(/nnb/media/microwave.svg) center center / cover no-repeat;
+}
+.doorlock {
+    width: 40px;
+    height: 40px;
+    margin: 0px auto;
+    background: url(/nnb/media/doorlock.svg) center center / cover no-repeat;
+}
+.bidet {
+    width: 40px;
+    height: 40px;
+    margin: 0px auto;
+    background: url(/nnb/media/bidet.svg) center center / cover no-repeat;
+}
