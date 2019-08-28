@@ -141,18 +141,19 @@ FROM
 </if>
 <if test="ROOM_FLOOR!=null and!ROOM_FLOOR.equals('')">
 <![CDATA[
-		AND R2.ROOM_FLOOR in
+		AND (R2.ROOM_FLOOR in
 	]]>
 		<foreach collection="ROOM_FLOOR" item="item" index="index" separator="," open="(" close=")">
 	<![CDATA[
 			#{item}
 	]]>
 		</foreach>
-</if>
-<if test="ROOM_FLOOR7!=null and ROOM_FLOOR7.equals('')">
-<![CDATA[
-		AND R2.ROOM_FLOOR >#{ROOM_FLOOR7}
-]]>
+	<if test="ROOM_FLOOR7!=null and !ROOM_FLOOR7.equals('')">
+	<![CDATA[
+			OR R2.ROOM_FLOOR >#{ROOM_FLOOR7}
+	]]>
+	</if>
+	)
 </if>
 
 <if test="STRUCTURES!=null and !STRUCTURES.equals('')">
@@ -192,7 +193,10 @@ FROM
 </if>
 <if test="OPTIONS!=null and!OPTIONS.equals('')">
 <![CDATA[
-	AND R2.OPTIONS=#{OPTIONS}
+	AND (
+	(R2.OPTIONS like '1,2%' and R2.OPTIONS like '%8%' and R2.OPTIONS like '%9%') or
+    (R2.OPTIONS like '1,2%' and R2.OPTIONS like '%8%' and R2.OPTIONS like '%10%')
+)
 ]]>
 </if>
 <if test="LOAN_ACCESS!=null and!LOAN_ACCESS.equals('')">
@@ -336,18 +340,19 @@ FROM
 </if>
 <if test="ROOM_FLOOR!=null and!ROOM_FLOOR.equals('')">
 <![CDATA[
-		AND R2.ROOM_FLOOR in
+		AND (R2.ROOM_FLOOR in
 	]]>
 		<foreach collection="ROOM_FLOOR" item="item" index="index" separator="," open="(" close=")">
 	<![CDATA[
 			#{item}
 	]]>
 		</foreach>
-</if>
-<if test="ROOM_FLOOR7!=null and ROOM_FLOOR7.equals('')">
-<![CDATA[
-		AND R2.ROOM_FLOOR >#{ROOM_FLOOR7}
-]]>
+	<if test="ROOM_FLOOR7!=null and !ROOM_FLOOR7.equals('')">
+	<![CDATA[
+			OR R2.ROOM_FLOOR >#{ROOM_FLOOR7}
+	]]>
+	</if>
+	)
 </if>
 
 <if test="STRUCTURES!=null and !STRUCTURES.equals('')">
@@ -387,7 +392,10 @@ FROM
 </if>
 <if test="OPTIONS!=null and!OPTIONS.equals('')">
 <![CDATA[
-	AND R2.OPTIONS=#{OPTIONS}
+	AND (
+	(R2.OPTIONS like '1,2%' and R2.OPTIONS like '%8%' and R2.OPTIONS like '%9%') or
+    (R2.OPTIONS like '1,2%' and R2.OPTIONS like '%8%' and R2.OPTIONS like '%10%')
+)
 ]]>
 </if>
 <if test="LOAN_ACCESS!=null and!LOAN_ACCESS.equals('')">

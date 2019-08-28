@@ -338,7 +338,14 @@ $(document).ready(function(){
 					</thead>
 					<tbody>
 						<tr>
-							<td><p>${room.MONTHLY_DEPOSIT}/${room.MONTHLY_PAYMENT}만 원</p></td>
+							<td><p>
+								<c:if test="${room.MONTHLY_DEPOSIT!=null && room.MONTHLY_DEPOSIT==''}">
+								${room.MONTHLY_DEPOSIT}/${room.MONTHLY_PAYMENT}만 원
+								</c:if>
+								<c:if test="${room.MONTHLY_DEPOSIT==null || room.MONTHLY_DEPOSIT==''}">
+								-
+								</c:if>
+							</p></td>
 							<td><p>
 								${room.JEONSE}<c:if test="${room.JEONSE==null || room.JEONSE==''}">-</c:if>
 							</p></td>
@@ -524,7 +531,7 @@ for(var i=0;i<array.length;i++){
 		$("#"+i).prepend("<div class='induction'></div>");
 		break;
 	case '전자레인지':
-		$("#"+i).prepend("<div class='microwave'></div>");
+		$("#"+i).prepend("<div class='microoven'></div>");
 		break;
 	case '전자도어락':
 		$("#"+i).prepend("<div class='doorlock'></div>");

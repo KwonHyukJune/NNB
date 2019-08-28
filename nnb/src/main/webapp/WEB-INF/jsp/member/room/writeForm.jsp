@@ -307,8 +307,8 @@ $(document).ready(function(){
 							<p class="hNdXGi">건물 층수 </p>
 							<select class="freEbZ hRFrgm" name="BUILDING_STORY" id="building_story">
 								<option>--건물 층수 선택--</option>
-								<option value="반지층">반지층</option>]
-								<option value="옥탑방">옥탑방</option>
+								<option value="0">반지층</option>]
+								<option value="-1">옥탑방</option>
 								<c:forEach var="i" begin="1" end="50">
 									<option value="${i}">${i}층</option>
 								</c:forEach>

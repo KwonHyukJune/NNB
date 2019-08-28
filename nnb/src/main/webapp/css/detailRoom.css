@@ -59,11 +59,11 @@
     margin: 0px auto;
     background: url(/nnb/media/induction.svg) center center / cover no-repeat;
 }
-.microwave {
+.microoven {
     width: 40px;
     height: 40px;
     margin: 0px auto;
-    background: url(/nnb/media/microwave.svg) center center / cover no-repeat;
+    background: url(/nnb/media/microoven.svg) center center / cover no-repeat;
 }
 .doorlock {
     width: 40px;
@@ -75,5 +75,5 @@
     width: 40px;
     height: 40px;
     margin: 0px auto;
-    background: url(/nnb/media/bidet.svg) center center / cover no-repeat;
+    background: url(/nnb/media/bidets.svg) center center / cover no-repeat;
 }
