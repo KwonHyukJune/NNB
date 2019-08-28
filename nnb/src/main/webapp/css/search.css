@@ -1157,6 +1157,14 @@ table {
     left: 8px;
     transform: translateY(-50%);
 }
+.bHPFKV > span {
+    color: rgb(34, 34, 34);
+    font-size: 11px;
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    transform: translateY(-50%);
+}
 .iuNQqL::after {
     display: block;
     content: "";
