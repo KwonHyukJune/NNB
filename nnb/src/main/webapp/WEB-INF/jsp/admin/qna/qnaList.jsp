@@ -23,6 +23,9 @@ function delet(num){  // 삭제
 		frm.submit();
 	}
 }
+function goDetail(num) {   // 수정
+	location.href="/nnb/admin/qna/detail?num="+num; 
+	}
 
 </script>
 </head>
