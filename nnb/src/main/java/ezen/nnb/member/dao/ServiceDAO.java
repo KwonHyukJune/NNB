@@ -10,22 +10,23 @@ import java.util.List;
 import java.util.Map;
 import org.springframework.stereotype.Repository;
 import ezen.nnb.common.AbstractDAO;
+import ezen.nnb.common.CommandMap;
 
 @Repository("serviceDAO") 
 public class ServiceDAO extends AbstractDAO{
 
 	@SuppressWarnings("unchecked")
 	public List<Map<String,Object>> selectFaqList(Map<String, Object> map) throws Exception{
-	return (List<Map<String,Object>>)selectList("service.selectFAQDetail",map);
+		return (List<Map<String,Object>>)selectList("service.selectFAQDetail",map);
 	}
 	@SuppressWarnings("unchecked")
 	public List<Map<String,Object>> selectNoticeList(Map<String, Object> map) throws Exception{
-	return (List<Map<String,Object>>)selectList("service.selectNoticeList",map);
+		return (List<Map<String,Object>>)selectList("service.selectNoticeList",map);
 	}
-	public void insertQNA(Map<String, Object> map) throws Exception{
-		insert("service.insertQNA", map);
+	public void sendQNA(Map<String, Object> map) throws Exception{
+		// TODO Auto-generated method stub
+		insert("service.sendQNA",map);				
 	}
-
 }
 
     

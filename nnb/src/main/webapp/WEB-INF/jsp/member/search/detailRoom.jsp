@@ -9,6 +9,7 @@
 </div>
 <fmt:parseDate var="dateString" value="${room.MOVE_IN_DATE}" pattern="yyyy-MM-dd"/>
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/search.css'/>"/>
+<link rel="stylesheet" type="text/css" href="<c:url value='/css/detailRoom.css'/>"/>
 <script type="text/javascript">
 /* openlessorInfo(id): 임대인 정보보기 새창으로 /room/detail/lessorInfo */
 /* report(): 신고하기 새창으로 */
@@ -80,28 +81,46 @@ $(document).ready(function(){
 		}
 	}
 });
-function fn_addFav(obj){
-	var num = obj.children('#num').text();
+
+function fn_addFav(){
+	var str = window.location.href;
+	var url = "redirect:"+str.split("<%=request.getContextPath()%>")[1];
+
 	var comSubmit = new ComSubmit();
 	comSubmit.setUrl("<c:url value='/search/addFavRoom'/>");
 	comSubmit.addParam("check", 0);
-	comSubmit.addParam("ROOM_NUM", num);
+	comSubmit.addParam("ROOM_NUM", "${room.ROOM_NUM}");
 	comSubmit.addParam("MEM_ID", idChk);
+	comSubmit.addParam("url", url);
 	comSubmit.submit();
 }
-function fn_deleteFav(obj){
-	var num = obj.children('#num').text();
+function fn_deleteFav(){
+	var str = window.location.href;
+	var url = "redirect:"+str.split("<%=request.getContextPath()%>")[1];
 	var comSubmit = new ComSubmit();
 	comSubmit.setUrl("<c:url value='/search/addFavRoom'/>");
 	comSubmit.addParam("check", 1);
-	comSubmit.addParam("ROOM_NUM", num);
+	comSubmit.addParam("ROOM_NUM", "${room.ROOM_NUM}");
 	comSubmit.addParam("MEM_ID", idChk);
+	comSubmit.addParam("url", url);
 	comSubmit.submit();
 }
 /* 쿠키 */
 $(document).ready(function(){
+	$("p.dojagi").on("click",function(e){
+		if($("p.dojagi path").attr("fill")=="none"){
+			fn_addFav();
+		}else if($("p.dojagi path").attr("fill")=="#F63C4A"){
+			fn_deleteFav();
+		}
+	});
+	
+});
+$(document).ready(function(){
 	addCookie('recentRoom','${room.ROOM_NUM}');
 });
+
+
 </script>
 </head>
 <body>
@@ -159,7 +178,14 @@ $(document).ready(function(){
 			<div class="bbfToB">
 				<p class="dojagi">
 					<!-- 찜 아이콘. 빨갛게 하려면 path fill, stroke 를 #F63C4A으로 -->
-					<svg width="23" height="22" viewBox="0 0 23 22"><path fill="none" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.5 19c.92-.7 6.89-5.628 8.41-7.623.877-1.154 1.09-2.17 1.09-3.358C21 5.247 18.776 3 16.033 3 13.32 3 11.5 5.862 11.5 5.862S9.68 3 6.967 3C4.224 3 2 5.247 2 8.019c0 1.187.213 2.204 1.09 3.358C4.61 13.372 10.58 18.3 11.5 19z"></path></svg>
+					<svg width="23" height="22" viewBox="0 0 23 22">
+						<c:if test="${favRoom==0}">
+						<path fill="none" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.5 19c.92-.7 6.89-5.628 8.41-7.623.877-1.154 1.09-2.17 1.09-3.358C21 5.247 18.776 3 16.033 3 13.32 3 11.5 5.862 11.5 5.862S9.68 3 6.967 3C4.224 3 2 5.247 2 8.019c0 1.187.213 2.204 1.09 3.358C4.61 13.372 10.58 18.3 11.5 19z"></path>
+						</c:if>
+						<c:if test="${favRoom==1}">
+						<path fill="#F63C4A" fill-rule="evenodd" stroke="#F63C4A" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.5 19c.92-.7 6.89-5.628 8.41-7.623.877-1.154 1.09-2.17 1.09-3.358C21 5.247 18.776 3 16.033 3 13.32 3 11.5 5.862 11.5 5.862S9.68 3 6.967 3C4.224 3 2 5.247 2 8.019c0 1.187.213 2.204 1.09 3.358C4.61 13.372 10.58 18.3 11.5 19z"></path>
+						</c:if>
+					</svg>
 					${room.FAV_COUNT}
 				</p>
 				<p class="fEBzAW">•</p>
@@ -182,18 +208,24 @@ $(document).ready(function(){
 				<li class="gWdVQs">
 					<p class="gPsGgb">전용/공급면적</p>
 					<div class="gbAeEp">
+
 						<span id="room_size2"></span>
 						<span id="room_size3"></span>
 						<button id="converter2" class="styled__ChangeBtn-sc-1kb7k96-7 bHPFKV">
 							<svg width="11" height="23" viewBox="0 0 11 23">
 							<g fill="#222" fill-rule="evenodd" stroke="#222" stroke-width=".2"><path d="M8.066 8.378L6.955 9.624a.335.335 0 0 0 0 .436.26.26 0 0 0 .194.09c.07 0 .14-.03.194-.09L8.92 8.293c.054-.06.08-.14.08-.22a.32.32 0 0 0-.094-.232l-1.563-1.75a.255.255 0 0 0-.388 0 .334.334 0 0 0 0 .435l1.102 1.236h-5.49c-1.415 0-2.567 1.3-2.567 2.9v1.03c0 .17.123.308.275.308.152 0 .275-.138.275-.308v-1.03c0-1.259.905-2.284 2.018-2.284h5.498zM.934 14.622l1.11-1.246a.335.335 0 0 0 0-.436.26.26 0 0 0-.193-.09c-.07 0-.141.03-.195.09L.08 14.707a.325.325 0 0 0-.08.22.32.32 0 0 0 .093.232l1.563 1.75c.108.121.282.121.389 0a.334.334 0 0 0 0-.435L.942 15.238h5.49c1.416 0 2.567-1.3 2.567-2.9v-1.03c0-.17-.123-.308-.274-.308-.153 0-.275.138-.275.308v1.03c0 1.259-.905 2.284-2.018 2.284H.934z"></path></g></svg>
 							<span id="unit2">평</span>
+
 						</button>
 					</div>
 				</li>
 				<li class="gWdVQs">
 					<p class="gPsGgb">난방종류</p>
-					<div class="gbAeEp">${room.HEATING_SYSTEM}</div>
+					<div class="gbAeEp">
+						<c:if test="${room.HEATING_SYSTEM=='1'}">중앙난방</c:if>
+						<c:if test="${room.HEATING_SYSTEM=='2'}">개별난방</c:if>
+						<c:if test="${room.HEATING_SYSTEM=='3'}">지역난방</c:if>
+					</div>
 				</li>
 				<li class="gWdVQs">
 					<p class="gPsGgb">빌트인</p>
@@ -205,29 +237,29 @@ $(document).ready(function(){
 				<li class="gWdVQs">
 					<p class="gPsGgb">엘리베이터</p>
 					<div class="gbAeEp">
-						<c:if test="${room.ELEVATOR}">있음</c:if>
-						<c:if test="${room.ELEVATOR}">없음</c:if>
+						<c:if test="${room.ELEVATOR=='1'}">있음</c:if>
+						<c:if test="${room.ELEVATOR=='0'}">없음</c:if>
 					</div>
 				</li>
 				<li class="gWdVQs">
 					<p class="gPsGgb">반려동물</p>
 					<div class="gbAeEp">
-						<c:if test="${room.PET}">가능</c:if>
-						<c:if test="${room.PET}">불가능</c:if>					
+						<c:if test="${room.PET=='1'}">가능</c:if>
+						<c:if test="${room.PET=='0'}">불가능</c:if>					
 					</div>
 				</li>
 				<li class="gWdVQs">
 					<p class="gPsGgb">베란다/발코니</p>
 					<div class="gbAeEp">
-						<c:if test="${room.BALCONY}">있음</c:if>
-						<c:if test="${room.BALCONY}">없음</c:if>					
+						<c:if test="${room.BALCONY=='1'}">있음</c:if>
+						<c:if test="${room.BALCONY=='0'}">없음</c:if>					
 					</div>
 				</li>
 				<li class="gWdVQs">
 					<p class="gPsGgb">전세자금대출</p>
 					<div class="gbAeEp">
-						<c:if test="${room.LOAN_ACCESS}">가능</c:if>
-						<c:if test="${room.LOAN_ACCESS}">불가능</c:if>					
+						<c:if test="${room.LOAN_ACCESS=='1'}">가능</c:if>
+						<c:if test="${room.LOAN_ACCESS=='0'}">불가능</c:if>					
 					</div>
 				</li>
 				<li class="gWdVQs">
@@ -310,30 +342,19 @@ $(document).ready(function(){
 							<td><p>
 								${room.JEONSE}<c:if test="${room.JEONSE==null || room.JEONSE==''}">-</c:if>
 							</p></td>
-							<td><p>
+							<td><p id='utility_price'>
 								<c:if test="${room.UTILITY_PRICE==null}">
 									없음
 								</c:if>
 								<c:if test="${room.UTILITY_PRICE!=null}">
 									${room.UTILITY_PRICE}만 원
-									<script type="text/javascript">
-										var utility = "${room.UTILITY_TYPE}";
-										document.write("("+utility.replace('1','인터넷')
-												.replace('2','유선TV')
-												.replace('3','청소비')
-												.replace('4','수도세')
-												.replace('5','도시가스')
-												.replace('6','전기세')
-												.replace('7','기타')
-												+")");
-									</script>
 								</c:if>
 							</p></td>
 							<td><p>
-								<c:if test="${room.UTILITY_PRICE==null}">
+								<c:if test="${room.PARKING_BILL==null}">
 									없음
 								</c:if>
-								<c:if test="${room.UTILITY_PRICE!=null}">
+								<c:if test="${room.PARKING_BILL!=null}">
 									${room.PARKING_BILL}만 원
 								</c:if>
 							</p></td>
@@ -383,30 +404,7 @@ $(document).ready(function(){
 		<div id="option" class="kZTRnS">
 			<div class="jFMhNO kBQneM">
 				<h1 class="lnMkbZ ">옵션</h1>
-				<div class="dDctva">
-					<script type="text/javascript">
-						var option = "${room.OPTIONS}";
-						console.log(option);
-						option = option.replace('1','에어컨')
-							.replace('2','"세탁기"')
-							.replace('3','"침대"')
-							.replace('4','"책상"')
-							.replace('5','"옷장"')
-							.replace('6','"TV"')
-							.replace('7','"신발장"')
-							.replace('8','"냉장고"')
-							.replace('9','"가스레인지"')
-							.replace('10','"인덕션"')
-							.replace('11','"전자레인지"')
-							.replace('12','"전자도어락"')
-							.replace('13','"비데"');
-						option = eval("["+option+"]");
-						console.log(option);
-						for(var i=0;i<option.length;i++){
-							document.write("<div class='gqtsIc'><p>"+option[i]+"</p></div>");
-						}
-					</script>
-				</div>
+				<div class="dDctva"></div>
 			</div>
 		</div>
 		
@@ -453,4 +451,88 @@ $(document).ready(function(){
             });    
          </script>
 	</c:forEach>
+<script type="text/javascript">
+//옵션 부분(위에 표)
+if(${room.UTILITY_PRICE}!=null){
+	var utility = "${room.UTILITY_TYPE}";
+	var array = utility.replace('1','인터넷')
+			.replace('2','유선TV')
+			.replace('3','청소비')
+			.replace('4','수도세')
+			.replace('5','도시가스')
+			.replace('6','전기세')
+			.replace('7','기타').split(',');
+	array = array.filter(String);
+	for(var i=0; i<array.length; i++){
+		if(i==0){
+			$("#utility_price").append("("+array[i]);
+		}else if(i==array.length-1){
+			$("#utility_price").append(", "+array[i]+")");
+		}else{
+			$("#utility_price").append(", "+array[i]);
+		}
+	}
+}
+//옵션 부분(아래)
+var option = "${room.OPTIONS}";
+option = option.replace('1','에어컨')
+	.replace('2','세탁기')
+	.replace('3','침대')
+	.replace('4','책상')
+	.replace('5','옷장')
+	.replace('6','TV')
+	.replace('7','신발장')
+	.replace('8','냉장고')
+	.replace('9','가스레인지')
+	.replace('10','인덕션')
+	.replace('11','전자레인지')
+	.replace('12','전자도어락')
+	.replace('13','비데');
+var array = option.split(',');
+array = array.filter(String);
+for(var i=0;i<array.length;i++){
+	$(".dDctva").append("<div class='gqtsIc' id='"+i+"'><p>"+array[i]+"</p></div>");
+	switch(array[i]){
+	case '에어컨':
+		$("#"+i).prepend("<div class='aircondition'></div>");
+		break;
+	case '세탁기':
+		$("#"+i).prepend("<div class='laundry'></div>");
+		break;
+	case '침대':
+		$("#"+i).prepend("<div class='bed'></div>");
+		break;
+	case '책상':
+		$("#"+i).prepend("<div class='desk'></div>");
+		break;
+	case '옷장':
+		$("#"+i).prepend("<div class='closet'></div>");
+		break;
+	case 'TV':
+		$("#"+i).prepend("<div class='tv'></div>");
+		break;
+	case '신발장':
+		$("#"+i).prepend("<div class='shoes'></div>");
+		break;
+	case '냉장고':
+		$("#"+i).prepend("<div class='refrigerator'></div>");
+		break;
+	case '가스레인지':
+		$("#"+i).prepend("<div class='gas'></div>");
+		break;
+	case '인덕션':
+		$("#"+i).prepend("<div class='induction'></div>");
+		break;
+	case '전자레인지':
+		$("#"+i).prepend("<div class='microwave'></div>");
+		break;
+	case '전자도어락':
+		$("#"+i).prepend("<div class='doorlock'></div>");
+		break;
+	case '비데':
+		$("#"+i).prepend("<div class='bidet'></div>");
+		break;
+	}
+}
+</script>
 </html>

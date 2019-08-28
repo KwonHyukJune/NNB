@@ -63,13 +63,13 @@
 
 <script type="text/javascript">
 
-function showPopup(num,id){
-
-    var url = "/nnb/admin/memberDetail?MEM_NUM="+num+"&MEM_ID="+id;
-    var name = "회원정보";
-    var option = "width = 500, height = 500, top = 100, left = 200, location = no, resizeable = yes, scrollbars = yes"
-    window.open(url, name, option);
-}
+	function showPopup(num,id){
+	
+	    var url = "/nnb/admin/memberDetail?MEM_NUM="+num+"&MEM_ID="+id;
+	    var name = "회원정보";
+	    var option = "width = 500, height = 500, top = 100, left = 200, location = no, resizeable = yes, scrollbars = yes"
+	    window.open(url, name, option);
+	}
 </script>
 
 </head>
@@ -77,70 +77,58 @@ function showPopup(num,id){
 <br/><br/><br/>
 
 <body>
-<%@ include file="/WEB-INF/include/adminMemberHeader.jspf"%>
+	<%@ include file="/WEB-INF/include/adminMemberHeader.jspf"%>
 
 <br>
 
 <br/>
 <div class ="searchT">
-<select>
-	<option>검색유형1</option>
-	<option>검색유형2</option>
-	<option>검색유형3</option>
-</select>
+	<select>
+		<option>검색유형1</option>
+		<option>검색유형2</option>
+		<option>검색유형3</option>
+	</select>
 	<input type="text" name='keyword' id="keywordInput" value='${cri.keyword }'">
-    <a href="#this" class="amdinbtn" id="delete">조회</a>
-	<br/>
-	<p>총 ${count}건의 검색 결과가 있습니다.</p>
+   		 <a class="amdinbtn" href="#this" id="delete">조회</a>
+			<br/>
+		<p>총 ${count}건의 검색 결과가 있습니다.</p>
 </div>	
 <br/>
 
 <div class="selectMeberList">
-
-
-<div class="memberList">
- <table class = "tbody">
-	    <tbody>
-		    <tr>
-		    	<td class="adN" style = "width: 60px; height: 30px;  ">번호</td>
-		    	<td class="Inf" style = "width: 70px ">회원정보</td>
-		    	<td class="Mii" style = "width: 100px ">아이디</td>
-		    	<td class="Mel" style = "width: 190px ">이메일</td>
-		    	<td class="Mpn" style = "width: 170px ">전화번호</td>
-		    	<td class="Mld" style = "width:  ">상세보기　</td>
-		    	
-		    </tr>
-	    </tbody>
-    </table>
-  
-   <c:forEach var="memberDetail" items="${adminMemberList}">
-   <div class="memberLS">
-   
-         <div style="border: 1px white; float: left; width: 10%; ">${memberDetail.MEM_NUM}</div>	
-      	
-		 <div style="border: 1px white; float: left; width: 10%; ">${memberDetail.MEM_KIND}</div>      
-      	
-         <div style="border: 1px white; float: left; width: 15%; ">${memberDetail.MEM_ID}</div>
-         
-         <div style="border: 1px white; float: left; width: 28%; ">${memberDetail.MEM_EMAIL}</div>
-         
-         <div style="border: 1px white; float: left; width: 23%; ">${memberDetail.MEM_PHONE}</div>	
-          
-    
-     <form class="formMem">    
-    <input class = "adminbtn" type="button" value="상세보기" onclick="showPopup(${memberDetail.MEM_NUM},'${memberDetail.MEM_ID}');" />
-	</form> 
-  
-   </div>	
- 
-  </c:forEach> 
+	<div class="memberList">
+	   	<table class = "tbody">
+		    <tbody>
+			    <tr>
+			    	<td class="adN" style = "width: 60px; height: 30px;  ">번호</td>
+			    	<td class="Inf" style = "width: 80px ">회원정보</td>
+			    	<td class="Mii" style = "width: 100px ">아이디</td>
+			    	<td class="Mel" style = "width: 190px ">이메일</td>
+			    	<td class="Mpn" style = "width: 170px ">전화번호</td>
+			    	<td class="Mld" style = "width:  ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;　</td>
+			    	
+			    </tr>
+		    </tbody>
+	    </table>
+	    	
+	   <c:forEach var="memberDetail" items="${adminMemberList}"> 
+		   <div class="member">		   
+		         <div style="border: 1px white; float: left; width: 10%;  ">${memberDetail.MEM_NUM}</div>			      	
+				 <div style="border: 1px white; float: left; width: 10%; ">${memberDetail.MEM_KIND}</div>      		      	
+		         <div style="border: 1px white; float: left; width: 15%; ">${memberDetail.MEM_ID}</div>		         
+		         <div style="border: 1px white; float: left; width: 28%; ">${memberDetail.MEM_EMAIL}</div>	         
+		         <div style="border: 1px white; float: left; width: 23%; ">${memberDetail.MEM_PHONE}</div>		          				    
+				    <form class="formMem">    
+				   		 <input class = "adminbtn" type="button" value="상세보기" onclick="showPopup(${memberDetail.MEM_NUM},'${memberDetail.MEM_ID}');" />
+					</form> 				  
+		   </div>	 
+	  </c:forEach> 
+	</div>
 </div>
 
-</div>
-
-<br>
+	<br>
 <div>
-<%@include file = "/WEB-INF/include/footer.jspf" %>
+	<%@include file = "/WEB-INF/include/footer.jspf" %>
 </div>
 </body>
 </html>

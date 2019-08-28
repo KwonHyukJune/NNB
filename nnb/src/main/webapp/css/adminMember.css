@@ -4,7 +4,7 @@
 	text-align: center;
 	
 }
-.memberLS{
+.member{
 	margin: 0px auto;
 	text-align: center;
 	box-shadow: 0px 1px blue;
@@ -106,4 +106,36 @@
 	vertical-align: middle;
 	background-color: #000dff;
 	
+}
+.pN{
+	border: 1px solid blue;
+	background-color:white;
+
+}
+.pI{
+  border: 1px solid blue;
+	backgr¤Áound-color:white;
+
+}
+.pNm{
+  border: 1px solid blue;
+	background-color:white;
+
+}
+.pEm{
+  border: 1px solid blue;
+	background-color:white;
+
+}
+.pPn{
+  border: 1px solid blue;
+	background-color:white;
+
+}
+.adminMemberDetail{
+	vertical-align: middle;
+	
+}
+.IgRsn{
+	background-color:skyblue;
 }
