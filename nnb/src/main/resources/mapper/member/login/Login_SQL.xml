@@ -10,6 +10,7 @@
 			MEM_ID,
 			MEM_PW,
 			MEM_NAME,
+			MEM_KIND,
 			MEM_VERIFY
 		FROM
 			MEMBER 

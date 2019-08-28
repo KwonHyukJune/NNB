@@ -43,7 +43,20 @@
 			<mvc:mapping path="/myPage/*"/>
 			<mvc:mapping path="/logout"/>
 			<mvc:mapping path="/searchRoommate"/>
+			<mvc:mapping path="/room/writeForm"/>
+			<mvc:mapping path="/room/adminRoom"/>
+			<mvc:mapping path="/myInterest/**"/>
 			<bean id="loginInterceptor" class="ezen.nnb.common.LoginInterceptor"></bean>
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/room/writeForm"/>
+			<mvc:mapping path="/room/adminRoom"/>
+			<bean id="lessorOnlyInterceptor" class="ezen.nnb.common.LessorOnlyInterceptor"></bean>
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/searchRoommate"/>
+			<mvc:mapping path="/myPage/myProfile"/>
+			<bean id="tenantOnlyInterceptor" class="ezen.nnb.common.TenantOnlyInterceptor"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>
 
