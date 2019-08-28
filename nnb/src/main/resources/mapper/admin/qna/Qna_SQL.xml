@@ -6,14 +6,24 @@
 <select id="selectQnaList" parameterType="hashmap" resultType="hashmap"> 
 	<![CDATA[
 	SELECT
-		ROW_NUMBER() OVER (ORDER BY QNA_NUM ASC) RNUM,
+		ROW_NUMBER() OVER (ORDER BY RNUM ASC) ROW_NUM,
+		RNUM,
 		QNA_NUM,
 		QNA_TITLE,
 		QNA_CONTENT,
-		QNA_DATE,
+		TO_CHAR(QNA_DATE, 'YYYY/MM/DD') as REGDATE,
 		RES_STATE
-	FROM
-		QNA 
+	FROM(
+		SELECT 
+     		ROW_NUMBER() OVER (ORDER BY QNA_NUM DESC) RNUM,
+     		QNA_NUM,
+			QNA_TITLE,
+			QNA_CONTENT,
+			QNA_DATE,
+			RES_STATE
+		FROM		 
+      		QNA
+	)ORDER BY ROW_NUM DESC
 	]]>
 </select>
 
