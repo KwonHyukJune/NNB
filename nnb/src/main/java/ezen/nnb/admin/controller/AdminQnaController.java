@@ -23,6 +23,8 @@ public class AdminQnaController {
 	public ModelAndView adminQnaList(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("/admin/qna/qnaList");
 		List<Map<String, Object>> list = adminQnaService.selectQnaList(commandMap.getMap());
+		
+		mv.addObject("size",list.size());
 		mv.addObject("list", list);
 		return mv;
 	}
