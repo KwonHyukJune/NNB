@@ -61,6 +61,7 @@ public class LoginController {
 				if (chk.get("MEM_VERIFY").equals("Y")) { // 이메일 인증을 했을ㄸ ㅐ
 					if (banChk==null || ((BigDecimal)banChk.get("EXP_DATE")).doubleValue() <= 0) {// 모든 조건을 충족시키면 로그인!
 						session.setAttribute("MEM_ID", commandMap.get("MEM_ID")); 
+						session.setAttribute("MEM_KIND", chk.get("MEM_KIND"));
 					} else { // 제재기한이 아직 남았을 때
 						java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 						message = "회원님은 " + sdf.format(banChk.get("BAN_REMOVAL_DATE")) + "까지 이용이 제재되었습니다.";
@@ -154,6 +155,27 @@ public class LoginController {
 		ModelAndView mv = new ModelAndView("/member/main/login");
 		String message = "로그인이 필요한 서비스입니다.";
 		String url = "/loginForm";
+		mv.addObject("message",message);
+		mv.addObject("url",url);
+		return mv;
+	}
+	@RequestMapping("/lessorOnly")
+	//로그인 인터셉터
+	public ModelAndView lessorOnly(CommandMap commandMap) throws Exception {
+		ModelAndView mv = new ModelAndView("/member/main/login");
+		String message = "임차인 계정만 이용할 수 있는 서비스입니다.";
+		String url = "/main";
+		mv.addObject("message",message);
+		mv.addObject("url",url);
+		return mv;
+	}
+	
+	@RequestMapping("/tenantOnly")
+	//로그인 인터셉터
+	public ModelAndView tenantOnly(CommandMap commandMap) throws Exception {
+		ModelAndView mv = new ModelAndView("/member/main/login");
+		String message = "임대인 계정만 이용할 수 있는 서비스입니다.";
+		String url = "/main";
 		mv.addObject("message",message);
 		mv.addObject("url",url);
 		return mv;
