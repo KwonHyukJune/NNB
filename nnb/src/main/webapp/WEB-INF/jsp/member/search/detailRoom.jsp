@@ -14,37 +14,78 @@
 /* openlessorInfo(id): 임대인 정보보기 새창으로 /room/detail/lessorInfo */
 /* report(): 신고하기 새창으로 */
 /* readMore() : 상세설명 더보기 */
+$(document).ready(function(){
+	var roomSize = $('#room_size1')
+	var currentUnit = '㎡' // P : 평, M : 제곱미터
+	var hidden =$('#hidden')
+	var unit = $('#unit1')
+	,currentValue = hidden.val()
+	,nextUnit
+	,nextValue
+	,conversionResult
+	roomSize.text(currentValue+currentUnit)
 
- 
- 
-/* $(function () { 
-            $('#converter').toggle(function () {
-                var m2 = $('#room_size').val();
-                var p = (parseFloat(m2)*3.3058).toFixed(2)
-                document.getElementById('room_size') = p
-            });
-}); */
-/* 
--------convert(m): 평수<->제곱미터 변환--------------
-function calculator1(chk){
-	  if(chk==1){ 
-		  document.getElementById('sup_m').value = (parseFloat(document.getElementById('sup_p').value) * 3.3058).toFixed(2);       
-	  }
-	  else { 
-		  document.getElementById('sup_p').value = (parseFloat(document.getElementById('sup_m').value) / 3.3058).toFixed(2);
-	  }
-}
-function calculator2(chk){
-	  if(chk==1){ 
-		  document.getElementById('real_m').value = (parseFloat(document.getElementById('real_p').value) * 3.3058).toFixed(2);       
-	  }
-	  else { 
-		  document.getElementById('real_p').value = (parseFloat(document.getElementById('real_m').value) / 3.3058).toFixed(2);
-	  }
-} */
+	$('#converter').click(function(e){
+		conversionResult = convertUnit(currentValue, currentUnit)
+		nextUnit = conversionResult[1]
+		nextValue = conversionResult[0]
+		roomSize.text(nextValue+nextUnit)
+		unit.text(currentUnit)
+		currentUnit = nextUnit
+		currentValue = nextValue
+	});
+
+	function convertUnit(value, currentUnit){
+		if(currentUnit==='평'){
+			return [parseFloat(value*3.3058).toFixed(2), '㎡']
+		}else{
+    		return [parseFloat(value/3.3058).toFixed(2), '평']
+		}
+	}
+});
+
+$(document).ready(function(){
+	var roomSize2 = $('#room_size2')
+	var roomSize3 = $('#room_size3')
+	var currentUnit = '㎡' // P : 평, M : 제곱미터
+	var hidden =$('#hidden')
+	var hidden2 =$('#hidden2')
+	var unit2 = $('#unit2')
+	,currentValue2 = hidden.val()
+	,currentValue3 = hidden2.val()
+	,nextUnit
+	,nextValue3
+	,nextValue2
+	,conversionResult
+	roomSize2.text(currentValue2+"/")
+	roomSize3.text(currentValue3+currentUnit)
+
+	$('#converter2').click(function(e){
+	  conversionResult = convertUnit(currentValue2, currentValue3, currentUnit)
+	  nextUnit = conversionResult[2]
+	  nextValue3 = conversionResult[1]
+	  nextValue2 = conversionResult[0]
+	  roomSize2.text(nextValue2+"/")
+	  roomSize3.text(nextValue3+nextUnit)
+	  unit2.text(currentUnit)
+	  currentUnit = nextUnit
+	  currentValue2 = nextValue2
+	  currentValue3 = nextValue3
+	})
+
+	function convertUnit(value2, value3, currentUnit){
+	  if(currentUnit==='평'){
+	    return [parseFloat(value2*3.3058).toFixed(2), parseFloat(value3*3.3058).toFixed(2), '㎡']
+	  }else{
+	    return [parseFloat(value2/3.3058).toFixed(2), parseFloat(value3/3.3058).toFixed(2), '평']
+		}
+	}
+});
+
 function fn_addFav(){
 	var str = window.location.href;
 	var url = "redirect:"+str.split("<%=request.getContextPath()%>")[1];
+
 	var comSubmit = new ComSubmit();
 	comSubmit.setUrl("<c:url value='/search/addFavRoom'/>");
 	comSubmit.addParam("check", 0);
@@ -109,15 +150,18 @@ $(document).ready(function(){
 					</div>
 				</li>
 				<li class="cqojtY">
-					<p class="hzbdBs">전용면적</p>
+					<p class="hzbdBs" id="real_m">전용면적</p>
 					<div class="dUILvV">
-						<h1 id="room_size" class="dUuerR">
-							${room.REAL_SIZE}㎡
+						<input type="hidden" id="hidden" value="${room.REAL_SIZE}">
+						<input type="hidden" id="hidden2" value="${room.SUPPLY_SIZE}">
+						<h1 id="room_size1" class="dUuerR">
+							
 						</h1>
 						<button class="ktfeIl" type="button" id="converter" onclick="convert($(this));">
-							<svg width="11" height="23" viewBox="0 0 11 23"><g fill="#222" fill-rule="evenodd" stroke="#222" stroke-width=".2"><path d="M8.066 8.378L6.955 9.624a.335.335 0 0 0 0 .436.26.26 0 0 0 .194.09c.07 0 .14-.03.194-.09L8.92 8.293c.054-.06.08-.14.08-.22a.32.32 0 0 0-.094-.232l-1.563-1.75a.255.255 0 0 0-.388 0 .334.334 0 0 0 0 .435l1.102 1.236h-5.49c-1.415 0-2.567 1.3-2.567 2.9v1.03c0 .17.123.308.275.308.152 0 .275-.138.275-.308v-1.03c0-1.259.905-2.284 2.018-2.284h5.498zM.934 14.622l1.11-1.246a.335.335 0 0 0 0-.436.26.26 0 0 0-.193-.09c-.07 0-.141.03-.195.09L.08 14.707a.325.325 0 0 0-.08.22.32.32 0 0 0 .093.232l1.563 1.75c.108.121.282.121.389 0a.334.334 0 0 0 0-.435L.942 15.238h5.49c1.416 0 2.567-1.3 2.567-2.9v-1.03c0-.17-.123-.308-.274-.308-.153 0-.275.138-.275.308v1.03c0 1.259-.905 2.284-2.018 2.284H.934z"></path></g></svg>
-							<span></span>
-						</button>
+                     <svg width="11" height="23" viewBox="0 0 11 23"><g fill="#222" fill-rule="evenodd" stroke="#222" stroke-width=".2"><path d="M8.066 8.378L6.955 9.624a.335.335 0 0 0 0 .436.26.26 0 0 0 .194.09c.07 0 .14-.03.194-.09L8.92 8.293c.054-.06.08-.14.08-.22a.32.32 0 0 0-.094-.232l-1.563-1.75a.255.255 0 0 0-.388 0 .334.334 0 0 0 0 .435l1.102 1.236h-5.49c-1.415 0-2.567 1.3-2.567 2.9v1.03c0 .17.123.308.275.308.152 0 .275-.138.275-.308v-1.03c0-1.259.905-2.284 2.018-2.284h5.498zM.934 14.622l1.11-1.246a.335.335 0 0 0 0-.436.26.26 0 0 0-.193-.09c-.07 0-.141.03-.195.09L.08 14.707a.325.325 0 0 0-.08.22.32.32 0 0 0 .093.232l1.563 1.75c.108.121.282.121.389 0a.334.334 0 0 0 0-.435L.942 15.238h5.49c1.416 0 2.567-1.3 2.567-2.9v-1.03c0-.17-.123-.308-.274-.308-.153 0-.275.138-.275.308v1.03c0 1.259-.905 2.284-2.018 2.284H.934z"></path></g></svg>
+                     <span id="unit1">평</span>
+                  </button>
+						
 					</div>
 				</li>
 				<li class="byeNFK">
@@ -145,7 +189,7 @@ $(document).ready(function(){
 					${room.FAV_COUNT}
 				</p>
 				<p class="fEBzAW">•</p>
-				<button type="button" class="lhWOpc">
+				<button type="button" class="lhWOpc" value="평">
 					<svg width="17" height="18" viewBox="0 0 17 18"><g fill="none" fill-rule="evenodd"><path stroke-width="1.2" d="M8.6.6h1v1.8h-1zM15.207 2.934l.707.707-1.273 1.273-.707-.707zM1.934 2.793l.707-.707 1.273 1.273-.707.707z"></path><path d="M3.5 17.5h10V11A4.5 4.5 0 0 0 9 6.5H8A4.5 4.5 0 0 0 3.5 11v6.5z"></path><path stroke-width="1.2" d="M.6 17.6h15.8v1H.6z"></path></g></svg>
 					<span>신고하기</span>
 				</button>
@@ -164,10 +208,14 @@ $(document).ready(function(){
 				<li class="gWdVQs">
 					<p class="gPsGgb">전용/공급면적</p>
 					<div class="gbAeEp">
-						<span>${room.REAL_SIZE}/${room.SUPPLY_SIZE}㎡</span>
-						<button class="bHPFKV">
-							<svg width="11" height="23" viewBox="0 0 11 23"><g fill="#222" fill-rule="evenodd" stroke="#222" stroke-width=".2"><path d="M8.066 8.378L6.955 9.624a.335.335 0 0 0 0 .436.26.26 0 0 0 .194.09c.07 0 .14-.03.194-.09L8.92 8.293c.054-.06.08-.14.08-.22a.32.32 0 0 0-.094-.232l-1.563-1.75a.255.255 0 0 0-.388 0 .334.334 0 0 0 0 .435l1.102 1.236h-5.49c-1.415 0-2.567 1.3-2.567 2.9v1.03c0 .17.123.308.275.308.152 0 .275-.138.275-.308v-1.03c0-1.259.905-2.284 2.018-2.284h5.498zM.934 14.622l1.11-1.246a.335.335 0 0 0 0-.436.26.26 0 0 0-.193-.09c-.07 0-.141.03-.195.09L.08 14.707a.325.325 0 0 0-.08.22.32.32 0 0 0 .093.232l1.563 1.75c.108.121.282.121.389 0a.334.334 0 0 0 0-.435L.942 15.238h5.49c1.416 0 2.567-1.3 2.567-2.9v-1.03c0-.17-.123-.308-.274-.308-.153 0-.275.138-.275.308v1.03c0 1.259-.905 2.284-2.018 2.284H.934z"></path></g></svg>
-							<span></span>
+
+						<span id="room_size2"></span>
+						<span id="room_size3"></span>
+						<button id="converter2" class="styled__ChangeBtn-sc-1kb7k96-7 bHPFKV">
+							<svg width="11" height="23" viewBox="0 0 11 23">
+							<g fill="#222" fill-rule="evenodd" stroke="#222" stroke-width=".2"><path d="M8.066 8.378L6.955 9.624a.335.335 0 0 0 0 .436.26.26 0 0 0 .194.09c.07 0 .14-.03.194-.09L8.92 8.293c.054-.06.08-.14.08-.22a.32.32 0 0 0-.094-.232l-1.563-1.75a.255.255 0 0 0-.388 0 .334.334 0 0 0 0 .435l1.102 1.236h-5.49c-1.415 0-2.567 1.3-2.567 2.9v1.03c0 .17.123.308.275.308.152 0 .275-.138.275-.308v-1.03c0-1.259.905-2.284 2.018-2.284h5.498zM.934 14.622l1.11-1.246a.335.335 0 0 0 0-.436.26.26 0 0 0-.193-.09c-.07 0-.141.03-.195.09L.08 14.707a.325.325 0 0 0-.08.22.32.32 0 0 0 .093.232l1.563 1.75c.108.121.282.121.389 0a.334.334 0 0 0 0-.435L.942 15.238h5.49c1.416 0 2.567-1.3 2.567-2.9v-1.03c0-.17-.123-.308-.274-.308-.153 0-.275.138-.275.308v1.03c0 1.259-.905 2.284-2.018 2.284H.934z"></path></g></svg>
+							<span id="unit2">평</span>
+
 						</button>
 					</div>
 				</li>
