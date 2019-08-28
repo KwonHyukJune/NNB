@@ -4,6 +4,7 @@
 <head>
 <%@ include file="/WEB-INF/include/include-header.jspf"%>
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/search.css'/>"/>
+<script src="<c:url value='/js/nouislider/nouislider.js'/>" charset="utf-8"></script>
 <script type="text/javascript">
 function fn_addFav(obj){
 	var str = window.location.href;
@@ -66,7 +67,6 @@ function toggle(obj){
 		obj.next().hide();
 	}
 }
-
 </script>
 </head>
 <!-------------------------------------------------------------- -->
@@ -162,54 +162,30 @@ function toggle(obj){
 			</div>
 			<div class="fhfjff" style="left:0px;">
 				<div class="fBFAQm">
-					<h1 class="lmqlXb">보증금/전세가<p class="eavwzc">무제한</p></h1>
+					<h1 class="lmqlXb">보증금/전세가<p class="eavwzc" id='p1'></p></h1>
 					<div class="jqwYlT">
 						<input type="hidden" name="MONTHLY_DEPOSIT_MIN" id="MONTHLY_DEPOSIT_MIN">
 						<input type="hidden" name="MONTHLY_DEPOSIT_MAX" id="MONTHLY_DEPOSIT_MAX">
 						<input type="hidden" name="JEONSE_MIN" id="JEONSE_MIN">
 						<input type="hidden" name="JEONSE_MAX" id="JEONSE_MAX">
-						<div class="noUi-target noUi-ltr noUi-horizontal">
-							<div class="noUi-base">
-								<div class="noUi-connects">
-									<div class="noUi-connect noUi-draggable" style="transform: translate(0%, 0px) scale(1, 1);"></div>
-								</div>
-								<div class="noUi-origin" style="transform: translate(-100%, 0px) z-index:5;">
-									<div class="noUi-handle noUi-handle-lower" data-handle="0" tabindex="0" role="slider" aria-orientation="horizontal" aria-valuemin="0.0" aria-valuemax="100.0" aria-valuenow="0.0" aria-valuetext="0.00"></div>
-								</div>
-								<div class="noUi-origin" style="transform: translate(0%, 0px); z-index: 4;">
-									<div class="noUi-handle noUi-handle-upper" data-handle="1" tabindex="0" role="slider" aria-orientation="horizontal" aria-valuemin="0.0" aria-valuemax="100.0" aria-valuenow="100.0" aria-valuetext="999999.00"></div>
-								</div>
-							</div>
-						</div>
+						<div class="noUi-target noUi-ltr noUi-horizontal" id="noUi-target"></div>
 					</div>
 					<ul class="ghXquW">
 						<li>0</li>
-						<li>1억 2000만 원</li>
+						<li>1억 1000만 원</li>
 						<li>무제한</li>
 					</ul>
 				</div>
 				<div class="fBFAQm">
-					<h1 class="lmqlXb">월세<p class="eavwzc">무제한</p></h1>
+					<h1 class="lmqlXb">월세<p class="eavwzc" id='p2'></p></h1>
 					<div class="jqwYlT">
 						<input type="hidden" name="MONTHLY_PAYMENT_MIN" id="MONTHLY_PAYMENT_MIN">
 						<input type="hidden" name="MONTHLY_PAYMENT_MAX" id="MONTHLY_PAYMENT_MAX">
-						<div class="noUi-target noUi-ltr noUi-horizontal">
-							<div class="noUi-base">
-								<div class="noUi-connects">
-									<div class="noUi-connect noUi-draggable" style="transform: translate(0%, 0px) scale(1, 1);"></div>
-								</div>
-								<div class="noUi-origin" style="transform: translate(-100%, 0px) z-index:5;">
-									<div class="noUi-handle noUi-handle-lower" data-handle="0" tabindex="0" role="slider" aria-orientation="horizontal" aria-valuemin="0.0" aria-valuemax="100.0" aria-valuenow="0.0" aria-valuetext="0.00"></div>
-								</div>
-								<div class="noUi-origin" style="transform: translate(0%, 0px); z-index: 4;">
-									<div class="noUi-handle noUi-handle-upper" data-handle="1" tabindex="0" role="slider" aria-orientation="horizontal" aria-valuemin="0.0" aria-valuemax="100.0" aria-valuenow="100.0" aria-valuetext="999999.00"></div>
-								</div>
-							</div>
-						</div>
+						<div class="noUi-target noUi-ltr noUi-horizontal"></div>
 					</div>
 					<ul class="ghXquW">
 						<li>0</li>
-						<li>60만 원</li>
+						<li>150만 원</li>
 						<li>무제한</li>
 					</ul>
 				</div>
@@ -228,27 +204,15 @@ function toggle(obj){
 			</div>
 			<div class="fhfjff" style="left:0px;">
 				<div class="fBFAQm">
-					<h1 class="lmqlXb">관리비<p class="eavwzc">무제한</p></h1>
+					<h1 class="lmqlXb">관리비<p class="eavwzc" id='p3'></p></h1>
 					<div class="jqwYlT">
 						<input type="hidden" name="UTILITY_PRICE_MIN" id="UTILITY_PRICE_MIN">
 						<input type="hidden" name="UTILITY_PRICE_MAX" id="UTILITY_PRICE_MAX">
-						<div class="noUi-target noUi-ltr noUi-horizontal">
-							<div class="noUi-base">
-								<div class="noUi-connects">
-									<div class="noUi-connect noUi-draggable" style="transform: translate(0%, 0px) scale(1, 1);"></div>
-								</div>
-								<div class="noUi-origin" style="transform: translate(-100%, 0px) z-index:5;">
-									<div class="noUi-handle noUi-handle-lower" data-handle="0" tabindex="0" role="slider" aria-orientation="horizontal" aria-valuemin="0.0" aria-valuemax="100.0" aria-valuenow="0.0" aria-valuetext="0.00"></div>
-								</div>
-								<div class="noUi-origin" style="transform: translate(0%, 0px); z-index: 4;">
-									<div class="noUi-handle noUi-handle-upper" data-handle="1" tabindex="0" role="slider" aria-orientation="horizontal" aria-valuemin="0.0" aria-valuemax="100.0" aria-valuenow="100.0" aria-valuetext="999999.00"></div>
-								</div>
-							</div>
-						</div>
+						<div class="noUi-target noUi-ltr noUi-horizontal"></div>
 					</div>
 					<ul class="ghXquW">
 						<li>0</li>
-						<li>20만 원</li>
+						<li>25만 원</li>
 						<li>무제한</li>
 					</ul>
 				</div>
@@ -267,27 +231,15 @@ function toggle(obj){
 			</div>
 			<div class="fhfjff" style="left:0px;">
 				<div class="fBFAQm">
-					<h1 class="lmqlXb">방크기<p class="eavwzc">무제한</p></h1>
+					<h1 class="lmqlXb">방크기<p class="eavwzc" id='p4'></p></h1>
 					<input type="hidden" name="REAL_SIZE_MIN" id="REAL_SIZE_MIN">
 					<input type="hidden" name="REAL_SIZE_MAX" id="REAL_SIZE_MAX">
 					<div class="jqwYlT">
-						<div class="noUi-target noUi-ltr noUi-horizontal">
-							<div class="noUi-base">
-								<div class="noUi-connects">
-									<div class="noUi-connect noUi-draggable" style="transform: translate(0%, 0px) scale(1, 1);"></div>
-								</div>
-								<div class="noUi-origin" style="transform: translate(-100%, 0px) z-index:5;">
-									<div class="noUi-handle noUi-handle-lower" data-handle="0" tabindex="0" role="slider" aria-orientation="horizontal" aria-valuemin="0.0" aria-valuemax="100.0" aria-valuenow="0.0" aria-valuetext="0.00"></div>
-								</div>
-								<div class="noUi-origin" style="transform: translate(0%, 0px); z-index: 4;">
-									<div class="noUi-handle noUi-handle-upper" data-handle="1" tabindex="0" role="slider" aria-orientation="horizontal" aria-valuemin="0.0" aria-valuemax="100.0" aria-valuenow="100.0" aria-valuetext="999999.00"></div>
-								</div>
-							</div>
-						</div>
+						<div class="noUi-target noUi-ltr noUi-horizontal"></div>
 					</div>
 					<ul class="ghXquW">
 						<li>0m²(0평)</li>
-						<li>33m²(10평)</li>
+						<li>40m²(13평)</li>
 						<li>무제한</li>
 					</ul>
 				</div>
@@ -686,6 +638,183 @@ function fn_selectSearchRoomListCallback(data){
 }
      
 </script>
+<script type="text/javascript">
+//슬라이드
+/* function getPos(obj){
+	var min = 0;
+	var max = -210;
+	// #bar의 left위치를 얻어온다
+	var barLeft = obj.attr("aria-valuenow");
+	barLeft = parseInt(barLeft);
+//	obj.prev().children().css("transform") = translate(barLeft)
+}
 
+$(function(){
+	// bar를 드래그할 수 있게 해준다
+	// x축으로만 움직힐 수 있으며, 범위는 bar의 부모크기만큼만 가능함
+	$(".noUi-handle").draggable({axis: 'x', containment: 'parent'});
+	// drag이벤트를 사용하여 드래그 하는 동안 getPos함수를 호출한다.
+	$(".noUi-handle").bind("drag", function(event, ui){
+		getPos($(this));
+	});
+}); */
+$(function(){
+	var sliders = document.getElementsByClassName('noUi-target');
+	for(var i=0; i<sliders.length; i++){
+		noUiSlider.create(sliders[i], {
+			start: [0,100],
+			step: 2,
+	        connect: true,
+	        margin: 2,
+	        range: { 'min': 0, 'max': 100 }
+		});
+	}
+	//보증금/전세가
+	sliders[0].noUiSlider.on('update', function( values, handle ) {
+		var input0 = document.getElementById('MONTHLY_DEPOSIT_MIN');
+		var input1 = document.getElementById('MONTHLY_DEPOSIT_MAX');
+		var input_value = [];
+		if(values[0]<=10){
+			input_value[0] = values[0]*50;
+		}else if(values[0]<=48){
+			input_value[0] = values[0]*250-2000;
+		}else if(values[0]<=68){
+			input_value[0] = values[0]*500-14000;
+		}else if(values[0]==100){
+			input_value[0] = '무제한';
+		}
+		else{
+			input_value[0] = values[0]*2500-150000;
+		}
+		if(values[1]<=10){
+			input_value[1] = values[1]*50;
+		}else if(values[1]<=48){
+			input_value[1] = values[1]*250-2000;
+		}else if(values[1]<=68){
+			input_value[1] = values[1]*500-14000;
+		}else if(values[1]==100){
+			input_value[1] = '무제한';
+		}
+		else{
+			input_value[1] = values[1]*2500-150000;
+		}
+	    input0.value = input_value[0];
+	    input1.value = input_value[1];
+	    $('#p1').text('');
+    	var str = '';
+    	if(input_value[0]=='0'){
+    		str += '0원';
+    	}else if(input_value[0]>=10000){
+    		str += parseInt(input_value[0]/10000) + '억' + (input_value[0]%10000==0?' 원':(input_value[0]%10000 + '만 원'));
+    	}else{
+    		str += input_value[0] + '만 원';
+    	}
+    	str += ' ~ '
+   		if(input_value[1]=='무제한'){
+   			str += '무제한';
+   		}else if(input_value[1]>=10000){
+    		str += parseInt(input_value[1]/10000) + '억' + (input_value[1]%10000==0?' 원':(input_value[1]%10000 + '만 원'));
+    	}else{
+    		str += input_value[1] + '만 원';
+    	}
+	    $('#p1').text(str);
+	});
+	//월세
+		sliders[1].noUiSlider.on('update', function( values, handle ) {
+		var input0 = document.getElementById('MONTHLY_PAYMENT_MIN');
+		var input1 = document.getElementById('MONTHLY_PAYMENT_MAX');
+		var input_value = [];
+		if(values[0]<=40){
+			input_value[0] = values[0]*2.5;
+		}else if(values[0]<=60){
+			input_value[0] = values[0]*5-100;
+		}else if(values[0]==100){
+			input_value[0] = '무제한';
+		}
+		else{
+			input_value[0] = values[0]*25-1300;
+		}
+		if(values[1]<=40){
+			input_value[1] = values[1]*2.5;
+		}else if(values[1]<=60){
+			input_value[1] = values[1]*5-100;
+		}else if(values[1]==100){
+			input_value[1] = '무제한';
+		}
+		else{
+			input_value[1] = values[1]*25-1300;
+		}
+	    input0.value = input_value[0];
+	    input1.value = input_value[1];
+	    $('#p2').text('');
+    	var str = '';
+    	if(input_value[0]=='0'){
+    		str += '0원';
+    	}else{
+    		str += input_value[0] + '만 원';
+    	}
+    	str += ' ~ '
+   		if(input_value[1]=='무제한'){
+   			str += '무제한';
+    	}else{
+    		str += input_value[1] + '만 원';
+    	}
+	    $('#p2').text(str);
+	});
+	//관리비
+		sliders[2].noUiSlider.on('update', function( values, handle ) {
+		var input0 = document.getElementById('UTILITY_PRICE_MIN');
+		var input1 = document.getElementById('UTILITY_PRICE_MAX');
+		var input_value = [];
+		input_value[0] = values[0]/2;
+		if(values[1]==100){
+			input_value[1] = '무제한';
+		}else{
+			input_value[1] = values[1]/2;
+		}
+	    input0.value = input_value[0];
+	    input1.value = input_value[1];
+	    $('#p3').text('');
+    	var str = '';
+    	if(input_value[0]=='0'){
+    		str += '0원';
+    	}else{
+    		str += input_value[0] + '만 원';
+    	}
+    	str += ' ~ '
+   		if(input_value[1]=='무제한'){
+   			str += '무제한';
+    	}else{
+    		str += input_value[1] + '만 원';
+    	}
+	    $('#p3').text(str);
+	});
+	//방크기
+		sliders[3].noUiSlider.on('update', function( values, handle ) {
+		var input0 = document.getElementById('REAL_SIZE_MIN');
+		var input1 = document.getElementById('REAL_SIZE_MAX');
+		var input_value = [];
+		input_value[0] = values[0]/2+15;
+		if(values[1]==100){
+			input_value[1] = '무제한';
+		}else{
+			input_value[1] = values[1]/2+15;
+		}
+	    input0.value = input_value[0];
+	    input1.value = input_value[1];
+	    $('#p4').text('');
+    	var str = '';
+    	str += input_value[0] + '㎡ (' + (input_value[0]/3.3).toFixed(0) + '평)';
+    	str += ' ~ '
+   		if(input_value[1]=='무제한'){
+   			str += '무제한';
+    	}else{
+    		str += input_value[1] + '㎡ (' + (input_value[1]/3.3).toFixed(0) + '평)';
+    	}
+	    $('#p4').text(str);
+	});
+	console.log("ㄴㄴ:"+$('#noUi-target').val());
+});
+</script>
 </body>
 </html>
