@@ -12,30 +12,30 @@ SELECT
 	FAQ_CATEGORY,
 	FAQ_CONTENT
 FROM
-	FAQ;
+	FAQ
     ]]>
 	</select>
 
-<insert id="insertQNA" parameterType="hashmap">
+<insert id="sendQNA" parameterType="hashmap">
 <![CDATA[
-	INSERT INTO QNA(
-	QNA_NUM,
-	MEM_ID,
-	QNA_TITLE,
-	QNA_CONTENT
-)
-VALUES(
-	QNA_NUM_SEQ.NEXTVAL,
-	#{id},
-	#{title},
-	#{content}
-);
+	INSERT INTO
+	QNA(
+		QNA_NUM,
+		MEM_ID,
+		QNA_TITLE,
+		QNA_CONTENT,
+		QNA_DATE
+	)VALUES(
+		QNA_NUM_SEQ.NEXTVAL,
+		#{MEM_ID},
+		#{QNA_TITLE},
+		#{QNA_CONTENT},
+		SYSDATE
+	)
 ]]>
 </insert>
-
-
-	<select id="selectNotice" parameterType="hashmap" resultType="hashmap">
-	<![CDATA[
+<select id="selectNotice" parameterType="hashmap" resultType="hashmap">
+<![CDATA[
 SELECT
 	row_number() over (ORDER BY NT_NUM DESC) rnum,
 	NT_NUM,
@@ -44,7 +44,7 @@ SELECT
 	NT_DATE,
 	NT_TYPE
 FROM
-	NOTICE;
+	NOTICE
     ]]>
 	</select>
 	
