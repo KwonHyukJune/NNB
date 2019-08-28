@@ -1,0 +1,19 @@
+<%@ page pageEncoding="utf-8"%>
+<div class="jtRefx">
+	<h1 class="title kuldyr">문의하기</h1>
+	<ul class="jSSNqy">
+		<li>
+		<a href="<c:url value='/faq'/>">자주 묻는 질문</a>
+		</li>
+		<li>
+		<a href="<c:url value='/qna'/>">1:1 문의</a>
+		</li>
+		<li>
+		<a href="<c:url value='/notice'/>">공지사항</a>
+		</li>
+	</ul>
+</div>
+<!-- \
+		<a href=# onclick="location.href='/nnb/admin/openNoticeList'">공지 게시판</a>&nbsp;&nbsp;&nbsp;&nbsp;
+		<a href=# onclick="location.href='/nnb/admin/roomList'">방 게시판</a>&nbsp;&nbsp;&nbsp;&nbsp;
+		<a href=# onclick="location.href='/nnb/admin/terms/list'">약관 관리</a> -->
