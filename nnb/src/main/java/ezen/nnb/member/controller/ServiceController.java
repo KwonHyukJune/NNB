@@ -26,23 +26,21 @@ Logger log = Logger.getLogger(this.getClass());
 	private ServiceService serviceService;
 	
 	//list & detail
-	@RequestMapping(value = "/faq")
+	@RequestMapping(value = "/service/faq")
 	public ModelAndView faqList(Map<String, Object> commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("/member/service/faq");
 		List<Map<String, Object>> list = serviceService.openFAQList(commandMap);
 		mv.addObject("list", list);
 		return mv;
 	}	
-	//WriteForm == /qna
 	@RequestMapping(value="/qna")
-	public ModelAndView writeQNA(CommandMap commandMap) throws Exception{
-		ModelAndView mv = new ModelAndView("/member/service/qna");
+	public ModelAndView qnaForm(CommandMap commandMap) throws Exception{
+		ModelAndView mv=new ModelAndView("/member/service/qna");
 		return mv;
 	}
-	//Write = /send = insert
-	@RequestMapping(value="/send")
+	@RequestMapping(value="/service/qna")
 	public ModelAndView sendQNA(CommandMap commandMap) throws Exception{
-		ModelAndView mv = new ModelAndView("redirect:/main");
+		ModelAndView mv = new ModelAndView("/member/service/send");
 		serviceService.sendQNA(commandMap.getMap());
 		return mv;
 	}

@@ -29,6 +29,14 @@ function goMyPage(){
 	$("div.login").append(str);
 	id.submit();
 };
+function goService(){
+	path = "<%=request.getContextPath()%>";
+	str = "<form id='id' action='"+path+"/qna' method='post'>"
+		+ "<input type='hidden' name='MEM_ID' value='"+idChk+"'>"
+		+ "</form>";
+	$("div.login").append(str);
+	id.submit();
+};
 </script>
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/header.css'/>"/>
 <nav class="header">
@@ -56,6 +64,7 @@ function goMyPage(){
 		<ul class="mymenu kNVAlJ" id="mymenu">
 	<%-- 		<li><a href="<c:url value='/myPage/messageList'/>">마이페이지</a></li>
 	 --%>		<li><a href="javascript:goMyPage()" class="gQxELh">마이페이지</a></li>
+	 			<li><a href="javascript:goService()" class="gQxELh">문의하기</a></li>
 			<li><a href="<c:url value='/logout'/>" class="gQxELh">로그아웃
 			<svg width="17" height="15" viewBox="0 0 17 15">
 				<g fill="#979797" fill-rule="nonzero">
