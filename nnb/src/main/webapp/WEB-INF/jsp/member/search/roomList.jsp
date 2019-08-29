@@ -164,10 +164,8 @@ function toggle(obj){
 				<div class="fBFAQm">
 					<h1 class="lmqlXb">보증금/전세가<p class="eavwzc" id='p1'></p></h1>
 					<div class="jqwYlT">
-						<input type="hidden" name="MONTHLY_DEPOSIT_MIN" id="MONTHLY_DEPOSIT_MIN">
-						<input type="hidden" name="MONTHLY_DEPOSIT_MAX" id="MONTHLY_DEPOSIT_MAX">
-						<input type="hidden" name="JEONSE_MIN" id="JEONSE_MIN">
-						<input type="hidden" name="JEONSE_MAX" id="JEONSE_MAX">
+						<input type="hidden" name="MONTHLY_DEPOSIT_MIN" id="MONTHLY_DEPOSIT_MIN" value="0">
+						<input type="hidden" name="MONTHLY_DEPOSIT_MAX" id="MONTHLY_DEPOSIT_MAX" value="무제한">
 						<div class="noUi-target noUi-ltr noUi-horizontal" id="noUi-target"></div>
 					</div>
 					<ul class="ghXquW">
@@ -179,8 +177,8 @@ function toggle(obj){
 				<div class="fBFAQm">
 					<h1 class="lmqlXb">월세<p class="eavwzc" id='p2'></p></h1>
 					<div class="jqwYlT">
-						<input type="hidden" name="MONTHLY_PAYMENT_MIN" id="MONTHLY_PAYMENT_MIN">
-						<input type="hidden" name="MONTHLY_PAYMENT_MAX" id="MONTHLY_PAYMENT_MAX">
+						<input type="hidden" name="MONTHLY_PAYMENT_MIN" id="MONTHLY_PAYMENT_MIN" value="0">
+						<input type="hidden" name="MONTHLY_PAYMENT_MAX" id="MONTHLY_PAYMENT_MAX" value="무제한">
 						<div class="noUi-target noUi-ltr noUi-horizontal"></div>
 					</div>
 					<ul class="ghXquW">
@@ -206,8 +204,8 @@ function toggle(obj){
 				<div class="fBFAQm">
 					<h1 class="lmqlXb">관리비<p class="eavwzc" id='p3'></p></h1>
 					<div class="jqwYlT">
-						<input type="hidden" name="UTILITY_PRICE_MIN" id="UTILITY_PRICE_MIN">
-						<input type="hidden" name="UTILITY_PRICE_MAX" id="UTILITY_PRICE_MAX">
+						<input type="hidden" name="UTILITY_PRICE_MIN" id="UTILITY_PRICE_MIN" value="0">
+						<input type="hidden" name="UTILITY_PRICE_MAX" id="UTILITY_PRICE_MAX" value="무제한">
 						<div class="noUi-target noUi-ltr noUi-horizontal"></div>
 					</div>
 					<ul class="ghXquW">
@@ -232,8 +230,8 @@ function toggle(obj){
 			<div class="fhfjff" style="left:0px;">
 				<div class="fBFAQm">
 					<h1 class="lmqlXb">방크기<p class="eavwzc" id='p4'></p></h1>
-					<input type="hidden" name="REAL_SIZE_MIN" id="REAL_SIZE_MIN">
-					<input type="hidden" name="REAL_SIZE_MAX" id="REAL_SIZE_MAX">
+					<input type="hidden" name="REAL_SIZE_MIN" id="REAL_SIZE_MIN" value="15">
+					<input type="hidden" name="REAL_SIZE_MAX" id="REAL_SIZE_MAX" value="무제한">
 					<div class="jqwYlT">
 						<div class="noUi-target noUi-ltr noUi-horizontal"></div>
 					</div>
@@ -538,6 +536,14 @@ function fn_search(){
 	var OPTIONS = $("input[name=OPTIONS]");
 	var LOAN_ACCESS = $("input[name=LOAN_ACCESS]");
 	var BUILT_IN = $("input[name=BUILT_IN]");
+	var MONTHLY_DEPOSIT_MIN = $("input[name=MONTHLY_DEPOSIT_MIN]");
+	var MONTHLY_DEPOSIT_MAX = $("input[name=MONTHLY_DEPOSIT_MAX]");
+	var REAL_SIZE_MIN = $("input[name=REAL_SIZE_MIN]");
+	var REAL_SIZE_MAX = $("input[name=REAL_SIZE_MAX]");
+	var MONTHLY_PAYMENT_MIN = $("input[name=MONTHLY_PAYMENT_MIN]");
+	var MONTHLY_PAYMENT_MAX = $("input[name=MONTHLY_PAYMENT_MAX]");
+	var UTILITY_PRICE_MIN = $("input[name=UTILITY_PRICE_MIN]");
+	var UTILITY_PRICE_MAX = $("input[name=UTILITY_PRICE_MAX]");
 	
 	fn_addParam(comAjax,ROOM_TYPE);
 	fn_addParam(comAjax,TRADE_TYPE);
@@ -547,9 +553,17 @@ function fn_search(){
 	fn_addParam(comAjax,PET);
 	fn_addParam(comAjax,ELEVATOR);
 	fn_addParam(comAjax,BALCONY);
-	fn_addParam(comAjax,BUILT_IN);
 	fn_addParam(comAjax,OPTIONS);
 	fn_addParam(comAjax,LOAN_ACCESS);
+	fn_addParam(comAjax,BUILT_IN);
+	comAjax.addParam("MONTHLY_DEPOSIT_MIN",$("#MONTHLY_DEPOSIT_MIN").val());
+	comAjax.addParam("MONTHLY_DEPOSIT_MAX",$("#MONTHLY_DEPOSIT_MAX").val());
+	comAjax.addParam("MONTHLY_PAYMENT_MIN",$("#MONTHLY_PAYMENT_MIN").val());
+	comAjax.addParam("MONTHLY_PAYMENT_MAX",$("#MONTHLY_PAYMENT_MAX").val());
+	comAjax.addParam("UTILITY_PRICE_MIN",$("#UTILITY_PRICE_MIN").val());
+	comAjax.addParam("UTILITY_PRICE_MAX",$("#UTILITY_PRICE_MAX").val());
+	comAjax.addParam("REAL_SIZE_MIN",$("#REAL_SIZE_MIN").val());
+	comAjax.addParam("REAL_SIZE_MAX",$("#REAL_SIZE_MAX").val());
 	
 	comAjax.addParam("PAGE_INDEX",$("#PAGE_INDEX").val()); 
 	comAjax.addParam("PAGE_ROW", 15); 
@@ -568,6 +582,9 @@ function fn_selectSearchRoomListCallback(data){
 	var total = data.TOTAL; 
 	var body = $("ul#selectSearchRoomList"); 
 	body.empty(); 
+	var count = data.count;
+	$("#count").empty();
+	$("#count").append(count);
 	
 	if(total == 0){ 
 		var str = "<div class='roomList'>" + "조회된 결과가 없습니다. </div>"; 
@@ -583,9 +600,6 @@ function fn_selectSearchRoomListCallback(data){
 		
 		gfn_renderPaging(params); 
 			var str = "";
-			var count = data.count;
-			$("#count").empty();
-			$("#count").append(count);
 			$.each(data.list, function(key, room){ 
 				str +=  "<li class='room hxpbDF'>"
 							+ "<div class='OUJOU'>"
@@ -629,35 +643,13 @@ function fn_selectSearchRoomListCallback(data){
 						str	+= "</p>"
 							+"<p class='jBkVAv'>" + room.DESC_TITLE + "</p>"
 						+ "</a></div></li>"
-					
-						
-				
         	}); 
         	body.append(str); 
 		} 
 }
-     
 </script>
 <script type="text/javascript">
 //슬라이드
-/* function getPos(obj){
-	var min = 0;
-	var max = -210;
-	// #bar의 left위치를 얻어온다
-	var barLeft = obj.attr("aria-valuenow");
-	barLeft = parseInt(barLeft);
-//	obj.prev().children().css("transform") = translate(barLeft)
-}
-
-$(function(){
-	// bar를 드래그할 수 있게 해준다
-	// x축으로만 움직힐 수 있으며, 범위는 bar의 부모크기만큼만 가능함
-	$(".noUi-handle").draggable({axis: 'x', containment: 'parent'});
-	// drag이벤트를 사용하여 드래그 하는 동안 getPos함수를 호출한다.
-	$(".noUi-handle").bind("drag", function(event, ui){
-		getPos($(this));
-	});
-}); */
 $(function(){
 	var sliders = document.getElementsByClassName('noUi-target');
 	for(var i=0; i<sliders.length; i++){
@@ -718,6 +710,7 @@ $(function(){
     		str += input_value[1] + '만 원';
     	}
 	    $('#p1').text(str);
+	    fn_search();
 	});
 	//월세
 		sliders[1].noUiSlider.on('update', function( values, handle ) {
@@ -760,6 +753,7 @@ $(function(){
     		str += input_value[1] + '만 원';
     	}
 	    $('#p2').text(str);
+	    fn_search();
 	});
 	//관리비
 		sliders[2].noUiSlider.on('update', function( values, handle ) {
@@ -788,6 +782,7 @@ $(function(){
     		str += input_value[1] + '만 원';
     	}
 	    $('#p3').text(str);
+	    fn_search();
 	});
 	//방크기
 		sliders[3].noUiSlider.on('update', function( values, handle ) {
@@ -812,6 +807,7 @@ $(function(){
     		str += input_value[1] + '㎡ (' + (input_value[1]/3.3).toFixed(0) + '평)';
     	}
 	    $('#p4').text(str);
+	    fn_search();
 	});
 	console.log("ㄴㄴ:"+$('#noUi-target').val());
 });

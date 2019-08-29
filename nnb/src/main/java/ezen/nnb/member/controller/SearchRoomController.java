@@ -60,6 +60,7 @@ public class SearchRoomController {
 		String MEM_ID = (String)session.getAttribute("MEM_ID");
 		commandMap.put("MEM_ID",MEM_ID);
 		
+		System.out.println(";;:"+commandMap.get("MONTHLY_DEPOSIT_MIN"));
 		if(commandMap.containsKey("ROOM_TYPE") && commandMap.get("ROOM_TYPE")!="") {
 			List<String> ROOM_TYPE = new ArrayList<String>();
 			String[] array = ((String) commandMap.get("ROOM_TYPE")).split(",");

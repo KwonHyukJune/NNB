@@ -64,54 +64,28 @@ FROM
 	]]>
 		</foreach>
 </if>
-<!-- 매물종류가 월세일 경우 -->
-<if test="MONTHLY_PAYMENT!=null and !MONTHLY_PAYMENT.equals('')">	
+<if test="MONTHLY_PAYMENT_MIN !=null and !MONTHLY_PAYMENT_MIN.equals('')">
 <![CDATA[
-	AND R1.MONTHLY_PAYMENT=#{MONTHLY_PAYMENT}
+	AND R1.MONTHLY_PAYMENT > #{MONTHLY_PAYMENT_MIN}
 ]]>
 </if>
-<!-- 보증금이 있을 경우  -->
-<if test="MONTHLY_DEPOSIT != null and !MONTHLY_DEPOSIT.equals('')">
+<if test="MONTHLY_PAYMENT_MAX !=null and !MONTHLY_PAYMENT_MAX.equals('') and !MONTHLY_PAYMENT_MAX.equals('무제한')">
 <![CDATA[
-	AND R1.MONTHLY_DEPOSIT=#{MONTHLY_DEPOSIT}
+	AND R1.MONTHLY_PAYMENT < #{MONTHLY_PAYMENT_MAX}
 ]]>
 </if>
-<!-- 매물종류가 전세일경우 -->
-<if test="JEONSE != null and !JEONSE.equals('')">
+<if test="MONTHLY_DEPOSIT_MIN !=null and !MONTHLY_DEPOSIT_MIN.equals('')">
 <![CDATA[
-	AND R1.JEONSE=#{JEONSE}
+	AND (R1.MONTHLY_DEPOSIT>#{MONTHLY_DEPOSIT_MIN}
+	or R1.JEONSE>#{MONTHLY_DEPOSIT_MIN})
 ]]>
 </if>
-<if test="minMpayment !=null and !minMpayment.equals('')">
+<if test="MONTHLY_DEPOSIT_MAX !=null and !MONTHLY_DEPOSIT_MAX.equals('') and !MONTHLY_DEPOSIT_MAX.equals('무제한')">
 <![CDATA[
-	AND R1.MONTHLY_PAYMENT > #{minPayment}
+	AND (R1.MONTHLY_DEPOSIT<#{MONTHLY_DEPOSIT_MAX}
+	or R1.JEONSE<#{MONTHLY_DEPOSIT_MAX})
 ]]>
 </if>
-<if test="maxMpayment !=null and !maxMpayment.equals('')">
-<![CDATA[
-	AND R1.MONTHLY_PAYMENT < #{maxPayment}
-]]>
-</if>
-<if test="minMdeposit!=null and !minMdeposit.equals('')">
-<![CDATA[
-	AND R1.MONTHLY_DEPOSIT>#{minMdeposit}
-]]>
-</if>
-<if test="maxMdeposit!=null and !maxMdeposit.equals('')">
-<![CDATA[
-	AND R1.MONTHLY_DEPOSIT<#{maxMdeposit}
-]]>
-</if>
-<if test="minJeonse!=null and !minJeonse.equals('')">
-<![CDATA[
-	AND R1.JEONSE>#{minJeonse}
-]]>
-</if>
-<if test="maxJeonse!=null and !maxJeonse.equals('')">
-<![CDATA[
-	AND R1.JEONSE<#{maxJeonse}
-]]>
-</if>	
 <if test="TRADE_TYPE!=null and!TRADE_TYPE.equals('')">
 	<![CDATA[
 		AND R1.TRADE_TYPE in
@@ -122,21 +96,24 @@ FROM
 	]]>
 		</foreach>
 </if>
-<if test="UTILITY_CHECK!=null and!UTILITY_CHECK.equals('')">
-	<if test="minUtility!=null and !minUtility.equals('')">
-		<![CDATA[
-			AND R2.UTILITY_PRICE>#{minUtility}
-		]]>
-	</if>
-	<if test="maxUtility!=null and !maxUtility.equals('')">
-		<![CDATA[
-			AND R2.UTILITY_PRICE>#{maxUtility}
-		]]>
-	</if>
+<if test="UTILITY_PRICE_MIN !=null and !UTILITY_PRICE_MIN.equals('')">
+	<![CDATA[
+		AND R2.UTILITY_PRICE>#{UTILITY_PRICE_MIN}
+	]]>
 </if>
-<if test="REAL_SIZE!=null and!REAL_SIZE.equals('')">
+<if test="UTILITY_PRICE_MAX !=null and !UTILITY_PRICE_MAX.equals('') and !UTILITY_PRICE_MAX.equals('무제한')">
+	<![CDATA[
+		AND R2.UTILITY_PRICE<#{UTILITY_PRICE_MAX}
+	]]>
+</if>
+<if test="REAL_SIZE_MIN!=null and !REAL_SIZE_MIN.equals('')">
 <![CDATA[
-	AND R2.REAL_SIZE=#{REAL_SIZE}
+	AND R2.REAL_SIZE>#{REAL_SIZE_MIN}
+]]>
+</if>
+<if test="REAL_SIZE_MAX !=null and !REAL_SIZE_MAX.equals('') and !REAL_SIZE_MAX.equals('무제한')">
+<![CDATA[
+	AND R2.REAL_SIZE<#{REAL_SIZE_MAX}
 ]]>
 </if>
 <if test="ROOM_FLOOR!=null and!ROOM_FLOOR.equals('')">
@@ -263,54 +240,28 @@ FROM
 	]]>
 		</foreach>
 </if>
-<!-- 매물종류가 월세일 경우 -->
-<if test="MONTHLY_PAYMENT!=null and !MONTHLY_PAYMENT.equals('')">	
+<if test="MONTHLY_PAYMENT_MIN !=null and !MONTHLY_PAYMENT_MIN.equals('')">
 <![CDATA[
-	AND R1.MONTHLY_PAYMENT=#{MONTHLY_PAYMENT}
+	AND R1.MONTHLY_PAYMENT > #{MONTHLY_PAYMENT_MIN}
 ]]>
 </if>
-<!-- 보증금이 있을 경우  -->
-<if test="MONTHLY_DEPOSIT != null and !MONTHLY_DEPOSIT.equals('')">
+<if test="MONTHLY_PAYMENT_MAX !=null and !MONTHLY_PAYMENT_MAX.equals('') and !MONTHLY_PAYMENT_MAX.equals('무제한')">
 <![CDATA[
-	AND R1.MONTHLY_DEPOSIT=#{MONTHLY_DEPOSIT}
+	AND R1.MONTHLY_PAYMENT < #{MONTHLY_PAYMENT_MAX}
 ]]>
 </if>
-<!-- 매물종류가 전세일경우 -->
-<if test="JEONSE != null and !JEONSE.equals('')">
+<if test="MONTHLY_DEPOSIT_MIN !=null and !MONTHLY_DEPOSIT_MIN.equals('')">
 <![CDATA[
-	AND R1.JEONSE=#{JEONSE}
+	AND (R1.MONTHLY_DEPOSIT>#{MONTHLY_DEPOSIT_MIN}
+	or R1.JEONSE>#{MONTHLY_DEPOSIT_MIN})
 ]]>
 </if>
-<if test="minMpayment !=null and !minMpayment.equals('')">
+<if test="MONTHLY_DEPOSIT_MAX !=null and !MONTHLY_DEPOSIT_MAX.equals('') and !MONTHLY_DEPOSIT_MAX.equals('무제한')">
 <![CDATA[
-	AND R1.MONTHLY_PAYMENT > #{minPayment}
+	AND (R1.MONTHLY_DEPOSIT<#{MONTHLY_DEPOSIT_MAX}
+	or R1.JEONSE<#{MONTHLY_DEPOSIT_MAX})
 ]]>
 </if>
-<if test="maxMpayment !=null and !maxMpayment.equals('')">
-<![CDATA[
-	AND R1.MONTHLY_PAYMENT < #{maxPayment}
-]]>
-</if>
-<if test="minMdeposit!=null and !minMdeposit.equals('')">
-<![CDATA[
-	AND R1.MONTHLY_DEPOSIT>#{minMdeposit}
-]]>
-</if>
-<if test="maxMdeposit!=null and !maxMdeposit.equals('')">
-<![CDATA[
-	AND R1.MONTHLY_DEPOSIT<#{maxMdeposit}
-]]>
-</if>
-<if test="minJeonse!=null and !minJeonse.equals('')">
-<![CDATA[
-	AND R1.JEONSE>#{minJeonse}
-]]>
-</if>
-<if test="maxJeonse!=null and !maxJeonse.equals('')">
-<![CDATA[
-	AND R1.JEONSE<#{maxJeonse}
-]]>
-</if>	
 <if test="TRADE_TYPE!=null and!TRADE_TYPE.equals('')">
 	<![CDATA[
 		AND R1.TRADE_TYPE in
@@ -322,20 +273,25 @@ FROM
 		</foreach>
 </if>
 <if test="UTILITY_CHECK!=null and!UTILITY_CHECK.equals('')">
-	<if test="minUtility!=null and !minUtility.equals('')">
+	<if test="UTILITY_PRICE_MIN !=null and !UTILITY_PRICE_MIN.equals('')">
 		<![CDATA[
-			AND R2.UTILITY_PRICE>#{minUtility}
+			AND R2.UTILITY_PRICE>#{UTILITY_PRICE_MIN}
 		]]>
 	</if>
-	<if test="maxUtility!=null and !maxUtility.equals('')">
+	<if test="UTILITY_PRICE_MAX !=null and !UTILITY_PRICE_MAX.equals('') and !UTILITY_PRICE_MAX.equals('무제한')">
 		<![CDATA[
-			AND R2.UTILITY_PRICE>#{maxUtility}
+			AND R2.UTILITY_PRICE>#{UTILITY_PRICE_MAX}
 		]]>
 	</if>
 </if>
-<if test="REAL_SIZE!=null and!REAL_SIZE.equals('')">
+<if test="REAL_SIZE_MIN!=null and !REAL_SIZE_MIN.equals('')">
 <![CDATA[
-	AND R2.REAL_SIZE=#{REAL_SIZE}
+	AND R2.REAL_SIZE>#{REAL_SIZE_MIN}
+]]>
+</if>
+<if test="REAL_SIZE_MAX !=null and !REAL_SIZE_MAX.equals('') and !REAL_SIZE_MAX.equals('무제한')">
+<![CDATA[
+	AND R2.REAL_SIZE<#{REAL_SIZE_MAX}
 ]]>
 </if>
 <if test="ROOM_FLOOR!=null and!ROOM_FLOOR.equals('')">
