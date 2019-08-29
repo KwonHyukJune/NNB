@@ -166,7 +166,7 @@
 	<div class="search">
 		<ul class="qUCQS">
 			<li class="pbYHJ">
-			<form id="frm">
+			<form id="frm"> 
 		<div style="color:white">닉네임<p><input type="text" name="MEM_NICK"  id="MEM_NICK" ></p>
 		<select id="RI_GENDER" name="RI_GENDER">
 			<option value="">성별</option>
