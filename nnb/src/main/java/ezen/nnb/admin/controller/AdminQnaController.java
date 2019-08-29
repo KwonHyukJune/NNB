@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import ezen.nnb.admin.service.AdminQnaService;
@@ -22,6 +23,12 @@ public class AdminQnaController {
 	@RequestMapping(value = "/admin/qna/list")
 	public ModelAndView adminQnaList(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("/admin/qna/qnaList");
+		return mv;
+	}
+	@RequestMapping(value = "/admin/qna/openList")
+	@ResponseBody
+	public ModelAndView openAdminQnaList(CommandMap commandMap) throws Exception {
+		ModelAndView mv = new ModelAndView("jsonView");
 		List<Map<String, Object>> list = adminQnaService.selectQnaList(commandMap.getMap());
 		
 		mv.addObject("size",list.size());
@@ -35,6 +42,8 @@ public class AdminQnaController {
 		
 		Map<String,Object> map = adminQnaService.selectQnaDetail(commandMap.getMap());
 		mv.addObject("map", map);
+		String str = map.get("QNA_CONTENT").toString().replace("\n", "<br>");
+		map.replace("QNA_CONTENT", str);
 		
 		return mv;
 	}

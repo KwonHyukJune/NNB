@@ -4,6 +4,7 @@
 <mapper namespace="qna">
 
 <select id="selectQnaList" parameterType="hashmap" resultType="hashmap"> 
+<include refid="common.pagingPre"/> 
 	<![CDATA[
 	SELECT
 		ROW_NUMBER() OVER (ORDER BY RNUM DESC) ROW_NUM,
@@ -23,8 +24,17 @@
 			RES_STATE
 		FROM		 
       		QNA
+	]]>
+    <if test="searchType!=null and !searchType.equals('')">
+	<![CDATA[
+    	WHERE
+    		RES_STATE = #{searchType}
+	]]>
+    </if>
+	<![CDATA[
 	)ORDER BY ROW_NUM DESC
 	]]>
+<include refid="common.pagingPost"/> 
 </select>
 
 <select id="selectQnaDetail" parameterType="hashmap" resultType="hashmap"> 

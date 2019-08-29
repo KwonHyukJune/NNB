@@ -42,6 +42,10 @@ public class MessageController {
 		}
 		List<Map<String,Object>> list=messageService.selectMessageList(commandMap.getMap());
 		int count = list.size();
+		for(int i=0; i<count; i++) {
+			String str = list.get(i).get("MESSAGE_CONTENT").toString().replace("\n", "<br>");
+			list.get(i).replace("MESSAGE_CONTENT", str);
+		}
 		mv.addObject("count",count);
 		mv.addObject("list", list);
 		

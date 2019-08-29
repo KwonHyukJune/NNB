@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +9,7 @@
 <script type="text/javascript">
 	var mem = sessionStorage.getItem("MEM_ID");
 	$(document).ready(function(){
-		$("#send").on("click", function(e){ //ÀÛ¼ºÇÏ±â ¹öÆ°
+		$("#send").on("click", function(e){ //ì‘ì„±í•˜ê¸° ë²„íŠ¼
 			submit();
 		});			
 		function submit(){
@@ -25,21 +25,21 @@
 <%@ include file="/WEB-INF/include/serviceHeader.jspf"%>
 <form id="frm" name="frm">
 <div class="styled__Wrap-sc-1v9ngdo-0 eugBve">
-	<h1 class="styled__Name-sc-1v9ngdo-1 cYaAqA">°í°´¼¾ÅÍ</h1>
+	<h1 class="styled__Name-sc-1v9ngdo-1 cYaAqA">ê³ ê°ì„¼í„°</h1>
 		<p class="styled__Tel-sc-1v9ngdo-2 mWqem">02-5888-7400</p>
-		<p class="styled__OpenTime-sc-1v9ngdo-3 csQndh">ÆòÀÏ 09:00 ~ 18:00 (Åä, ÀÏ¿äÀÏ, °øÈŞÀÏ ÈŞ¹«)</p>	
+		<p class="styled__OpenTime-sc-1v9ngdo-3 csQndh">í‰ì¼ 09:00 ~ 18:00 (í† , ì¼ìš”ì¼, ê³µíœ´ì¼ íœ´ë¬´)</p>	
 	<ul class="hIJwlj">
 		<li>
-			<p class="efvxco">Á¦¸ñ</p>
-			<input autocomplete="off" class="styled__TitleInput-sc-1v9ngdo-6 ilgADB Input-sfsekm-0 kTQnUD" id="QNA_TITLE" name="QNA_TITLE" placeholder="Á¦¸ñÀ» ÀÔ·ÂÇÏ¼¼¿ä.">
+			<p class="efvxco">ì œëª©</p>
+			<input autocomplete="off" class="styled__TitleInput-sc-1v9ngdo-6 ilgADB Input-sfsekm-0 kTQnUD" id="QNA_TITLE" name="QNA_TITLE" placeholder="ì œëª©ì„ ì…ë ¥í•˜ì„¸ìš”.">
 		</li>
 		<li>
-			<p class="efvxco">¹®ÀÇ³»¿ë</p>
-			<textarea class="styled__InquiryArea-sc-1v9ngdo-7 bqTGEL Textarea-sc-6jro6l-0 hunnDM" id="QNA_CONTENT" name="QNA_CONTENT" placeholder="³»¿ëÀ» ÀÔ·ÂÇÏ¼¼¿ä."></textarea>
+			<p class="efvxco">ë¬¸ì˜ë‚´ìš©</p>
+			<textarea class="styled__InquiryArea-sc-1v9ngdo-7 bqTGEL Textarea-sc-6jro6l-0 hunnDM" id="QNA_CONTENT" name="QNA_CONTENT" placeholder="ë‚´ìš©ì„ ì…ë ¥í•˜ì„¸ìš”."></textarea>
 		</li>
 	</ul>
 	<div align="center">
-		<button class="iEZQG" id="send">º¸³»±â</button>
+		<button class="iEZQG" id="send">ë³´ë‚´ê¸°</button>
 	</div>
 </div>
 </form>
