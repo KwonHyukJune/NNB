@@ -36,18 +36,7 @@ public class SearchRoomController {
 	@RequestMapping(value="/search/openSearchRoomList") 
 	public ModelAndView openSearchRoomList(CommandMap commandMap, HttpServletRequest request) throws Exception { 
 		ModelAndView mv = new ModelAndView("member/search/roomList"); 
-		
-		HttpSession session= request.getSession();
-		String MEM_ID = (String)session.getAttribute("MEM_ID");
-		commandMap.put("MEM_ID",MEM_ID);
-		
-		int count=searchRoomService.countRoomList(commandMap.getMap());
-		mv.addObject("count", count);
-		Map<String,Object> favRoom=favoriteService.selectFavRoom(commandMap.getMap());
-		mv.addObject("favRoom",favRoom);
-		List<Map<String,Object>> list=searchRoomService.selectRoomList(commandMap.getMap());
-		mv.addObject("list", list);
-		
+
 		return mv; 
 	} 
 	
@@ -60,6 +49,7 @@ public class SearchRoomController {
 		String MEM_ID = (String)session.getAttribute("MEM_ID");
 		commandMap.put("MEM_ID",MEM_ID);
 		
+		System.out.println(";;:"+commandMap.get("MONTHLY_DEPOSIT_MIN"));
 		if(commandMap.containsKey("ROOM_TYPE") && commandMap.get("ROOM_TYPE")!="") {
 			List<String> ROOM_TYPE = new ArrayList<String>();
 			String[] array = ((String) commandMap.get("ROOM_TYPE")).split(",");
