@@ -1,6 +1,12 @@
 @charset "EUC-KR";
+.roommateList{
+	    width: 1300px;
+	     margin:50px auto 100px;
+	     
+    /* margin: 0px auto; */
+}
 
-.cAeKOJ {
+.cAeKOJ { 
     width: 10px;
     padding-bottom: 20px;
     margin: 10px auto;
@@ -19,15 +25,22 @@ ul, li {
     list-style: none;
 }
 .qUCQS {
-    width: 100%;
-    margin: 50px auto 150px;
-    border-top: 1px solid rgb(34, 34, 34);
-    border-bottom: 1px solid rgb(204, 204, 204);
+    width: 1100px;
+    text-align:center;
+    margin: 50px auto 100px;
+   border-top: 3px solid rgb(25, 77, 241);
+    border-bottom: 3px solid rgb(25, 77, 241);
+    background-color:rgb(25, 77, 241);
+    height:120px;
+      border-radius: 10px 10px 10px 10px;
+   
 }
+
 .pbYHJ {
     height: 59px;
     line-height: 58px;
     border-bottom: 1px solid rgb(204, 204, 204);
+
 }
 
  p{
@@ -42,27 +55,40 @@ height:50%;
 border:0px;
 background:	#D5D5D5;
 outline:none;
-color:#ffffff
+color:#ffffff;
 }
 
 #mateList ul li{
 	float:left;
-	width:25%;
-	height:100%;
+	height:120%;
 	line-height:50px;
-	text-align:center;
+	text-align:center;  
+    margin: 0;
+    border-top: 1px solid #8C8C8C;
+
+/*    border-bottom: 1px solid rgb(204, 204, 204);  */
 }
 #mate ul li{
-	float:left;
-	width:25%;
-	height:100%;
+   float:left;
+	height:120%;
 	line-height:50px;
 	text-align:center;
-	margin:0 auto;
+	margin:0 auto; 
+    margin:  0;
+    border-top: 1px solid #8C8C8C;
+ 
+/*   border-bottom: 1px solid rgb(204, 204, 204);  */
+	
 }
 
 #mate ul li a{
 	display:block;
 }
-
+/*룸메이트 상세보기  */
+.alkdf{
+	height: 40px;
+    line-height: 40px;
+     border-bottom: 1px solid rgb(204, 204, 204);
+    border-bottom: 1px solid rgb(204, 204, 204);
+} 
 
