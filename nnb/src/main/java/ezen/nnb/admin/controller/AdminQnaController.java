@@ -52,12 +52,8 @@ public class AdminQnaController {
 	
 	@RequestMapping(value="/admin/qna/reply")
 	public ModelAndView adminFaqModify(CommandMap commandMap) throws Exception{
-		ModelAndView mv = new ModelAndView("/admin/qna/qnaAnswerComplete");
-		System.out.println("reply"+commandMap.getMap());
-
-		adminQnaService.updateQna(commandMap.getMap());
-		
-		mv.addObject("FAQ_NUM", commandMap.get("FAQ_NUM"));
+		ModelAndView mv = new ModelAndView("redirect:/admin/qna/list");
+		adminQnaService.updateQna(commandMap.getMap());	
 		return mv;
 	}
 	

@@ -23,7 +23,7 @@ function delet(num){  // 삭제
 		frm.submit();
 	}
 }
-function goDetail(num) {   // 수정
+function goDetail(num) {  
 	location.href="/nnb/admin/qna/detail?num="+num; 
 	}
 
@@ -34,11 +34,14 @@ function goDetail(num) {   // 수정
 <br>
 
 <div class="adminQNA">
-	<select>
-		<option>답변대기</option>
-		<option>답변완료</option>
-	</select>
-	<p>총 ${size}건의 검색 결과가 있습니다.</p>
+	<p>
+		<select class="freEbZ hRFrgm">
+			<option selected value="답변대기">답변대기</option>
+			<option value="답변완료">답변완료</option>
+		</select>
+	</p>
+	<br/><br/><br/>
+	<p class="hXdylP">1:1 문의 사항  총 ${size}개</p>
 	<ul class='qUCQS'>
 		<li class='pbYHJ'>
 			<p>번호 </p>
@@ -56,7 +59,7 @@ function goDetail(num) {   // 수정
 				<p>${qna.REGDATE }</p>
 				<p>	
 					<c:choose>
-					<c:when test="${qna.RES_STATE=='n' }">
+					<c:when test="${qna.RES_STATE=='N' }">
 						<span>답변 대기</span>
 					</c:when>
 					<c:otherwise>
@@ -72,6 +75,11 @@ function goDetail(num) {   // 수정
 	</ul>
 	</c:if>
 	</c:forEach>
+	<c:if test="${size<=0 }">
+	<div class="cbeboU">
+		<p >문의가 존재하지 않습니다</p>
+	</div>
+	</c:if>
 	</ul>
 </div>
 <br/>

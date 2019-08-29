@@ -6,7 +6,7 @@
 <select id="selectQnaList" parameterType="hashmap" resultType="hashmap"> 
 	<![CDATA[
 	SELECT
-		ROW_NUMBER() OVER (ORDER BY RNUM ASC) ROW_NUM,
+		ROW_NUMBER() OVER (ORDER BY RNUM DESC) ROW_NUM,
 		RNUM,
 		QNA_NUM,
 		QNA_TITLE,
@@ -30,15 +30,30 @@
 <select id="selectQnaDetail" parameterType="hashmap" resultType="hashmap"> 
 	<![CDATA[
 	SELECT
+		ROW_NUMBER() OVER (ORDER BY RNUM DESC) ROW_NUM,
+		RNUM,
 		QNA_NUM,
-		MEM_ID,
 		QNA_TITLE,
 		QNA_CONTENT,
-		QNA_DATE,
+		TO_CHAR(QNA_DATE, 'YYYY/MM/DD') as REGDATE,
 		RES_TITLE,
-		RES_CONTENT
-	FROM
-		QNA
+		RES_CONTENT,
+		TO_CHAR(RES_DATE, 'YYYY/MM/DD') as RESDATE,
+		RES_STATE
+	FROM(
+		SELECT 
+     		ROW_NUMBER() OVER (ORDER BY QNA_NUM DESC) RNUM,
+     		QNA_NUM,
+			QNA_TITLE,
+			QNA_CONTENT,
+			QNA_DATE,
+			RES_TITLE,
+			RES_CONTENT,
+			RES_DATE,
+			RES_STATE
+		FROM		 
+      		QNA
+      	)
 	WHERE
 		QNA_NUM = #{num}
 	]]>
@@ -50,9 +65,10 @@
 	SET
 		RES_TITLE = #{RES_TITLE},
 		RES_CONTENT = #{RES_CONTENT},
-		RES_DATE = sysdate,
-		RES_STATE ='y'
-	WHERE QNA_NUM = #{num}
+		RES_DATE = SYSDATE,
+		RES_STATE ='Y'
+	WHERE 
+		QNA_NUM = #{num}
 	]]>
 </select>	
 
