@@ -35,57 +35,92 @@ function goDetail(num) {
 
 <div class="adminQNA">
 	<p>
-		<select class="freEbZ hRFrgm">
-			<option selected value="답변대기">답변대기</option>
-			<option value="답변완료">답변완료</option>
+		<select class="freEbZ hRFrgm" name="searchType" id="searchType">
+			<option value="">전체</option>
+			<option value="n">답변대기</option>
+			<option value="Y">답변완료</option>
 		</select>
 	</p>
 	<br/><br/><br/>
-	<p class="hXdylP">1:1 문의 사항  총 ${size}개</p>
-	<ul class='qUCQS'>
-		<li class='pbYHJ'>
-			<p>번호 </p>
-			<p>제목</p>
-			<p>날짜</p>
-			<p>답변상태</p>
-			<p>비고</p>
-		</li>
-	<c:forEach var="qna" items="${list}">
-	<c:if test="${qna.QNA_NUM !=null }">
-	<ul>
-		<li class="pbYHJ">
-				<p>${qna.RNUM }</p>
-				<p>${qna.QNA_TITLE }</p>
-				<p>${qna.REGDATE }</p>
-				<p>	
-					<c:choose>
-					<c:when test="${qna.RES_STATE=='N' }">
-						<span>답변 대기</span>
-					</c:when>
-					<c:otherwise>
-						<span>답변 완료</span>
-					</c:otherwise>
-					</c:choose>
-				</p>
-				<p>
-					<a href="#" onClick='goDetail(${qna.QNA_NUM})'>답변</a> /
-					<a href="#" id="${qna.QNA_NUM }" onClick="delet(${qna.QNA_NUM })">삭제</a>
-				</p>
-		</li>
-	</ul>
-	</c:if>
-	</c:forEach>
-	<c:if test="${size<=0 }">
-	<div class="cbeboU">
-		<p >문의가 존재하지 않습니다</p>
-	</div>
-	</c:if>
-	</ul>
+	<p class="hXdylP" id="count"></p>
+	<ul class='qUCQS' id='body'></ul>
+	<div id="PAGE_NAVI"></div>
+	<input type='hidden' id='PAGE_INDEX' name="PAGE_INDEX">
 </div>
-<br/>
-<br/>
 <div>
 	<%@include file = "/WEB-INF/include/footer.jspf" %>
 </div>
+<script type="text/javascript">
+//검색
+function fn_search(){
+	var comAjax = new ComAjax()
+	comAjax.setUrl("<c:url value='/admin/qna/openList'/>");
+	comAjax.setCallback("fn_selectQnaListCallback");
+	comAjax.addParam("searchType",$("select[name=searchType]").val());
+	comAjax.addParam("PAGE_INDEX", $("#PAGE_INDEX").val());
+	comAjax.addParam("PAGE_ROW", 15);
+	comAjax.ajax();
+}
+$("#searchType").change(function(){
+	fn_search();
+});
+
+$(document).ready(function(){
+	var PAGE_INDEX = gfn_isNull("${param.PAGE_INDEX}")==true? "1": "${param.PAGE_INDEX}";
+	$("#PAGE_INDEX").val(PAGE_INDEX);
+	fn_selectQnaList(PAGE_INDEX);
+});
+function fn_selectQnaList(pageNo){
+	var comAjax = new ComAjax();
+	comAjax.setUrl("<c:url value='/admin/qna/openList'/>");
+	comAjax.setCallback("fn_selectQnaListCallback");
+	comAjax.addParam("searchType",$("select[name=searchType]").val());
+	comAjax.addParam("PAGE_INDEX", $("#PAGE_INDEX").val());
+	comAjax.addParam("PAGE_ROW", 15);
+	comAjax.ajax();
+}
+function fn_selectQnaListCallback(data) {
+	var total = data.size;
+	var body = $("ul#body");
+	$("#count").empty();
+	body.empty();
+	
+	if (total == 0) {
+		var str = "<div class='cbeboU'><p>" + "문의가 존재하지 않습니다." + "</p></div>";
+		body.append(str);
+		$("#PAGE_NAVI").empty();
+	} else {
+		var params = {
+			divId : "PAGE_NAVI",
+			pageIndex : "PAGE_INDEX",
+			totalCount : total,
+			eventName : "fn_selectQnaList"
+		};
+		gfn_renderPaging(params);
+		var str = "";
+		var count = "1:1 문의 사항  총 " + data.size + "개";
+		$("#count").append(count);
+		$.each(data.list, function(key, qna) {
+			str	+=	"<li class='pbYHJ'>"
+					+	"<p>" + qna.RNUM + "</p>"
+					+	"<p>" + qna.QNA_TITLE + "</p>"
+					+	"<p>" + qna.REGDATE + "</p>"
+					+	"<p>";
+					if(qna.RES_STATE=='n'){
+			str	+=			"답변대기";
+					}else{
+			str +=			"답변완료";
+					}
+			str	+=		"</p>"
+					+	"<p>"
+						+	"<a href='#' onClick='goDetail(" + qna.QNA_NUM + ")'>답변</a>";
+						+	"<a href='#' id='" + qna.QNA_NUM + "' onClick='delet(" + qna.QNA_NUM + ")'>삭제</a>"
+					+	"</p>"
+				+	"</li>";
+		});
+		body.append(str);
+	}
+}
+</script>
 </body>
 </html>

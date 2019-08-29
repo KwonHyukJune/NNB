@@ -45,7 +45,8 @@
 			<mvc:mapping path="/searchRoommate"/>
 			<mvc:mapping path="/room/writeForm"/>
 			<mvc:mapping path="/room/adminRoom"/>
-			<mvc:mapping path="/myInterest/**"/>
+			<mvc:mapping path="/myInterest/favRoomList"/>
+			<mvc:mapping path="/myInterest/favRoommateList"/>
 			<bean id="loginInterceptor" class="ezen.nnb.common.LoginInterceptor"></bean>
 		</mvc:interceptor>
 		<mvc:interceptor>

@@ -13,7 +13,7 @@ public class AdminQnaDAO extends AbstractDAO{
 	@SuppressWarnings("unchecked")
 	public List<Map<String, Object>> selectQnaList(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub
-		return (List<Map<String, Object>>) selectList("qna.selectQnaList", map);
+		return (List<Map<String, Object>>) selectPagingList("qna.selectQnaList", map);
 	}
 
 	@SuppressWarnings("unchecked")
