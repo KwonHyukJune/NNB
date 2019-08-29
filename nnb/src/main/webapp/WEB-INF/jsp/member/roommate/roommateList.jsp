@@ -159,7 +159,7 @@
 </script>
 
 <%@ include file="/WEB-INF/include/header.jspf" %>
-</head>
+</head> 
 <body>
 <div class="roommateList" >
 	<table style="min-height:1000px;">
