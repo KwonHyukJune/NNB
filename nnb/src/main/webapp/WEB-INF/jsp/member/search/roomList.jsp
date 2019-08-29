@@ -80,7 +80,7 @@ function toggle(obj){
 <!-- 검색 영역 -->
 <div class="dWEBFj">
 	<div class="byjidO">
-		<input class="keOJyH" type="text" name="region" class="search" id="region" placeholder="잠실동 아파트">
+		<input class="keOJyH" type="text" name="region" class="search" id="region" placeholder="잠실동 아파트" value="" onkeyup="fn_search();">
 		<svg width="18" height="18" viewBox="0 0 18 18"><g fill="none" fill-rule="evenodd" stroke="#222"><circle cx="7.5" cy="7.5" r="6.5"></circle><path d="M12 12l5 5"></path></g></svg>
 	</div>
 	<div class="fvkqQK">
@@ -516,7 +516,7 @@ $(document).ready(function(){
 	fn_selectSearchRoomList(1);
 });
 
-$("input").on("change",function(){
+$("input[type=checkbox]").on("change",function(){
 	fn_search();
 });
 
@@ -564,6 +564,7 @@ function fn_search(){
 	comAjax.addParam("UTILITY_PRICE_MAX",$("#UTILITY_PRICE_MAX").val());
 	comAjax.addParam("REAL_SIZE_MIN",$("#REAL_SIZE_MIN").val());
 	comAjax.addParam("REAL_SIZE_MAX",$("#REAL_SIZE_MAX").val());
+	comAjax.addParam("address",$("#region").val());
 	
 	comAjax.addParam("PAGE_INDEX",$("#PAGE_INDEX").val()); 
 	comAjax.addParam("PAGE_ROW", 15); 
@@ -710,7 +711,7 @@ $(function(){
     		str += input_value[1] + '만 원';
     	}
 	    $('#p1').text(str);
-	    fn_search();
+		fn_search();
 	});
 	//월세
 		sliders[1].noUiSlider.on('update', function( values, handle ) {
@@ -753,7 +754,7 @@ $(function(){
     		str += input_value[1] + '만 원';
     	}
 	    $('#p2').text(str);
-	    fn_search();
+		fn_search();
 	});
 	//관리비
 		sliders[2].noUiSlider.on('update', function( values, handle ) {
@@ -782,7 +783,7 @@ $(function(){
     		str += input_value[1] + '만 원';
     	}
 	    $('#p3').text(str);
-	    fn_search();
+		fn_search();
 	});
 	//방크기
 		sliders[3].noUiSlider.on('update', function( values, handle ) {
@@ -807,9 +808,8 @@ $(function(){
     		str += input_value[1] + '㎡ (' + (input_value[1]/3.3).toFixed(0) + '평)';
     	}
 	    $('#p4').text(str);
-	    fn_search();
+		fn_search();
 	});
-	console.log("ㄴㄴ:"+$('#noUi-target').val());
 });
 </script>
 </body>

@@ -50,7 +50,10 @@ FROM
 <!-- 주소에 조건이 있을 경우 -->
 <if test="address!=null and !address.equals('')">
 <![CDATA[
-	 AND R1.ROOM_NUM IN(SELECT ROOM_NUM FROM ROOM_INFO1 R1 WHERE ADDRESS1 LIKE '%'||#{address}||'%')
+	 AND R1.ROOM_NUM IN(SELECT ROOM_NUM FROM ROOM_INFO1 R1 WHERE 
+	 	(ADDRESS1 LIKE '%'||#{address}||'%' or
+	 	ADDRESS1 LIKE #{address}||'%' or
+	 	ADDRESS1 LIKE '%'||#{address}))
 ]]>
 </if>
 <!-- 방 종류에 조건이 있을 경우(원룸, 투룸 등 등) -->
@@ -96,7 +99,7 @@ FROM
 	]]>
 		</foreach>
 </if>
-<if test="UTILITY_PRICE_MIN !=null and !UTILITY_PRICE_MIN.equals('')">
+<if test="UTILITY_PRICE_MIN !=null and !UTILITY_PRICE_MIN.equals('') and UTILITY_PRICE_MIN != 0">
 	<![CDATA[
 		AND R2.UTILITY_PRICE>#{UTILITY_PRICE_MIN}
 	]]>
@@ -226,7 +229,10 @@ FROM
 <!-- 주소에 조건이 있을 경우 -->
 <if test="address!=null and !address.equals('')">
 <![CDATA[
-	 AND R1.ROOM_NUM IN(SELECT ROOM_NUM FROM ROOM_INFO1 R1 WHERE ADDRESS1 LIKE '%'||#{address}||'%')
+	 AND R1.ROOM_NUM IN(SELECT ROOM_NUM FROM ROOM_INFO1 R1 WHERE 
+	 	(ADDRESS1 LIKE '%'||#{address}||'%' or
+	 	ADDRESS1 LIKE #{address}||'%' or
+	 	ADDRESS1 LIKE '%'||#{address}))
 ]]>
 </if>
 <!-- 방 종류에 조건이 있을 경우(원룸, 투룸 등 등) -->
@@ -272,17 +278,15 @@ FROM
 	]]>
 		</foreach>
 </if>
-<if test="UTILITY_CHECK!=null and!UTILITY_CHECK.equals('')">
-	<if test="UTILITY_PRICE_MIN !=null and !UTILITY_PRICE_MIN.equals('')">
-		<![CDATA[
-			AND R2.UTILITY_PRICE>#{UTILITY_PRICE_MIN}
-		]]>
-	</if>
-	<if test="UTILITY_PRICE_MAX !=null and !UTILITY_PRICE_MAX.equals('') and !UTILITY_PRICE_MAX.equals('무제한')">
-		<![CDATA[
-			AND R2.UTILITY_PRICE>#{UTILITY_PRICE_MAX}
-		]]>
-	</if>
+<if test="UTILITY_PRICE_MIN !=null and !UTILITY_PRICE_MIN.equals('') and UTILITY_PRICE_MIN != 0">
+	<![CDATA[
+		AND R2.UTILITY_PRICE>#{UTILITY_PRICE_MIN}
+	]]>
+</if>
+<if test="UTILITY_PRICE_MAX !=null and !UTILITY_PRICE_MAX.equals('') and !UTILITY_PRICE_MAX.equals('무제한')">
+	<![CDATA[
+		AND R2.UTILITY_PRICE<#{UTILITY_PRICE_MAX}
+	]]>
 </if>
 <if test="REAL_SIZE_MIN!=null and !REAL_SIZE_MIN.equals('')">
 <![CDATA[
