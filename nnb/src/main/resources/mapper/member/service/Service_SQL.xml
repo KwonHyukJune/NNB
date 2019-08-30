@@ -1,20 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
 <mapper namespace="service">
-
-
-	<select id="selectFAQList" parameterType="hashmap" resultType="hashmap">
+<select id="selectFAQList" parameterType="hashmap" resultType="hashmap">
+<include refid="common.pagingPre"/> 
 	<![CDATA[
-SELECT
-	row_number() over (ORDER BY FAQ_NUM DESC) rnum,
-	FAQ_NUM,
-	FAQ_TITLE,
-	FAQ_CATEGORY,
-	FAQ_CONTENT
-FROM
-	FAQ
-    ]]>
-	</select>
+	SELECT
+		ROW_NUMBER() OVER (ORDER BY RNUM DESC) ROW_NUM,
+		RNUM,
+		FAQ_NUM,
+		FAQ_CATEGORY,
+		FAQ_TITLE,
+		FAQ_CONTENT
+	FROM(
+		SELECT
+			ROW_NUMBER() OVER (ORDER BY FAQ_NUM DESC) RNUM,
+			FAQ_NUM,
+			FAQ_CATEGORY,
+			FAQ_TITLE,
+			FAQ_CONTENT
+		FROM
+			FAQ
+	)ORDER BY ROW_NUM DESC
+	]]>
+<include refid="common.pagingPost"/> 
+</select>
 
 <insert id="sendQNA" parameterType="hashmap">
 <![CDATA[

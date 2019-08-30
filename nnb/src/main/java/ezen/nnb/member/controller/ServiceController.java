@@ -25,14 +25,25 @@ Logger log = Logger.getLogger(this.getClass());
 	@Resource(name = "serviceService")
 	private ServiceService serviceService;
 	
-	//list & detail
-	@RequestMapping(value = "/service/faq")
-	public ModelAndView faqList(Map<String, Object> commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("/member/service/faq");
-		List<Map<String, Object>> list = serviceService.openFAQList(commandMap);
+	@RequestMapping(value="/faq") 
+	public ModelAndView openBoardList(CommandMap commandMap) throws Exception{ 
+		ModelAndView mv = new ModelAndView("/member/service/faq"); 
+		return mv; 
+	} 
+	@RequestMapping(value = "/member/faq")
+	public ModelAndView faqList(CommandMap commandMap) throws Exception {
+		ModelAndView mv = new ModelAndView("jsonView");
+		List<Map<String, Object>> list = serviceService.openFAQList(commandMap.getMap());
+		
 		mv.addObject("list", list);
+		if(list.size() > 0){
+    		mv.addObject("TOTAL", list.get(0).get("TOTAL_COUNT"));
+    	}
+    	else{
+    		mv.addObject("TOTAL", 0);
+    	}
 		return mv;
-	}	
+	}
 	@RequestMapping(value="/qna")
 	public ModelAndView qnaForm(CommandMap commandMap) throws Exception{
 		ModelAndView mv=new ModelAndView("/member/service/qna");

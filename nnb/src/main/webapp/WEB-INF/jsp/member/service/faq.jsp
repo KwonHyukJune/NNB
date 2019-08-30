@@ -1,74 +1,75 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <%@ include file="/WEB-INF/include/include-header.jspf" %>
-<link rel="stylesheet" type="text/css" href="<c:url value='/css/service.css'/>"/>
-<script type="text/javascript">
-	function toggle(num){
-		var div = document.getElementById(num);
-		if(div.style.display=="none"){
-			div.style.display = "block";
-		}else if(div.style.display=="block"){
-			div.style.display = "none";
-		}
-	};
-</script>
+<%@ include file="/WEB-INF/include/header.jspf" %>
+<link rel="stylesheet" type="text/css" href="<c:url value='/css/faq.css'/>"/>
 </head>
 <body>
-<%@ include file="/WEB-INF/include/header.jspf" %>
-<%@ include file="service.jspf" %>
-
-<!-- ≈◊Ω∫∆ÆøÎ ºº∆√ -->
-<%@ page import="java.util.HashMap" %>
-<%@ page import="java.util.Map" %>
-<%@ page import="java.util.List" %>
-<%@ page import="java.util.ArrayList" %>
-<%
-	Map<String,Object> faq1 = new HashMap<String,Object>();
-	faq1.put("FAQ_NUM","1");
-	faq1.put("FAQ_CATEGORY","∞Ë¡§πÆ¿«");
-	faq1.put("FAQ_TITLE","¿ÃπÃ µÓ∑œµ» ∞Ë¡§¿Ã∂Û∞Ì ∂Â¥œ¥Ÿ");
-	faq1.put("FAQ_CONTENT","±◊∑±∞°ø‰..");
-	Map<String,Object> faq2 = new HashMap<String,Object>();
-	faq2.put("FAQ_NUM","2");
-	faq2.put("FAQ_CATEGORY","¥Ÿ∏•πÆ¿«");
-	faq2.put("FAQ_TITLE","¡˝ø° ∞°∞ÌΩÕæÓø‰");
-	faq2.put("FAQ_CONTENT","±◊∑±∞°ø‰..");
-	
-	List<Map<String,Object>> faqList = new ArrayList<Map<String,Object>>();
-	faqList.add(faq1);
-	faqList.add(faq2);
-	
-	request.setAttribute("FAQ",faqList);
-%>
-<!-- ≈◊Ω∫∆ÆøÎ ºº∆√ ≥° -->
-
-<div class="faq">
-
-	<div>
-		<div class="p1">º¯π¯</div>
-		<div class="p2">ƒ´≈◊∞Ì∏Æ</div>
-		<div class="p3">±€¡¶∏Ò</div>
-	</div>
-
-<c:forEach var="faq" items="${FAQ}">
-	<div class="title" onclick="toggle(${faq.FAQ_NUM});">
-		<div class="p1">${faq.FAQ_NUM}</div>
-		<div class="p2">${faq.FAQ_CATEGORY}</div>
-		<div class="p3">${faq.FAQ_TITLE}</div>
-	</div>
-	<div class="content" id="${faq.FAQ_NUM}" style="display: none;">
-		<div class="p4">≥ªøÎ</div>
-		<div class="p5">${faq.FAQ_CONTENT}</div>
-	</div>
-</c:forEach>
-	
-</div>
+<%@ include file="/WEB-INF/include/serviceHeader.jspf"%>
+<br><br>
+<div class="selectFAQList"></div>
+<div align="center" id="PAGE_NAVI"></div>
+<input type="hidden" id="PAGE_INDEX" name="PAGE_INDEX" />
 <br>
 <div>
-<%@ include file="/WEB-INF/include/footer.jspf" %>
+	<%@include file="/WEB-INF/include/footer.jspf"%>
 </div>
+<%@ include file="/WEB-INF/include/include-body.jspf"%>
+<script type="text/javascript">
+function toggle(num){
+	var div = document.getElementById(num);
+	if(div.style.display=="none"){
+		div.style.display = "block";
+	}else if(div.style.display=="block"){
+		div.style.display = "none";
+	}
+};
+//ÌéòÏù¥Ïßï
+$(document).ready(function(){
+	fn_selectFaqList(1);
+});
+function fn_selectFaqList(pageNo){
+	var comAjax = new ComAjax(); 
+	comAjax.setUrl("<c:url value='/member/faq'/>");  //value ÏöîÏ≤≠ÏúºÎ°ú Ïã§Ìñâ
+	comAjax.setCallback("fn_selectFaqListCallback");     //
+	comAjax.addParam("PAGE_INDEX",$("#PAGE_INDEX").val()); 
+	comAjax.addParam("PAGE_ROW", 15); 
+	comAjax.ajax(); }
+
+function fn_selectFaqListCallback(data){ 
+	var total = data.TOTAL; 
+	var body = $("div.selectFAQList"); 
+	body.empty(); 
+	
+	if(total == 0){ 
+		var str = "<div class='faq'>" + "Ï°∞ÌöåÎêú Í≤∞Í≥ºÍ∞Ä ÏóÜÏäµÎãàÎã§." 
+		+ "</div>"; 
+		body.append(str); 
+	} else{ 
+		var params = { divId : "PAGE_NAVI", 
+					pageIndex : "PAGE_INDEX", 
+					totalCount : total, 
+					eventName : "fn_selectFaqList" 
+					}; 
+		gfn_renderPaging(params); 
+		var str = ""; 
+		$.each(data.list, function(key, value){ 
+			str += 
+			    "<div class='faq'>" 
+	    			+ "<div class='title' onclick='toggle("+ value.FAQ_NUM +");'>"
+	    			+ "["+value.FAQ_CATEGORY +"]"+"&nbsp;"+ value.FAQ_TITLE 
+	    			+ "</div>"
+					+ "<div class='content' id='" + value.FAQ_NUM + "' style='display: none;'>"
+					+ "<div class='p5'>&nbsp&nbsp&nbsp"+ value.FAQ_CONTENT+ "</div>"
+					+ "</div>"
+				+ "</div>";
+			}); 
+		body.append(str); 
+	} 
+}
+</script>
 </body>
 </html>

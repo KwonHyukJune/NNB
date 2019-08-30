@@ -17,7 +17,7 @@ public class ServiceDAO extends AbstractDAO{
 
 	@SuppressWarnings("unchecked")
 	public List<Map<String,Object>> selectFaqList(Map<String, Object> map) throws Exception{
-		return (List<Map<String,Object>>)selectList("service.selectFAQDetail",map);
+		return (List<Map<String,Object>>)selectPagingList("service.selectFAQList",map);
 	}
 	@SuppressWarnings("unchecked")
 	public List<Map<String,Object>> selectNoticeList(Map<String, Object> map) throws Exception{
