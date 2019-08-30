@@ -1,6 +1,6 @@
 <%@ page pageEncoding="utf-8"%>
 <div class="jtRefx">
-	<h1 class="title kuldyr">문의하기</h1>
+	<h1 class="kuldyr">문의하기</h1>
 	<ul class="jSSNqy">
 		<li>
 		<a href="<c:url value='/faq'/>">자주 묻는 질문</a>

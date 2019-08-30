@@ -26,8 +26,8 @@ import ezen.nnb.member.dao.ServiceDAO;;
 		serviceDAO.sendQNA(map);
 	}
 	@Override
-	public List<Map<String, Object>> openFAQList(Map<String, Object> commandMap) throws Exception {
-		return (List<Map<String, Object>>) serviceDAO.selectFaqList(commandMap);
+	public List<Map<String, Object>> openFAQList(Map<String, Object> map) throws Exception {
+		return serviceDAO.selectFaqList(map);
 	}
 
 
