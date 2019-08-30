@@ -154,19 +154,14 @@ $(document).ready(function(){
 			<br>
 			<br>
 			<br>
-		</ul>
-			<div align="center">
-			<button class="kcMULl" onclick="location.href='/nnb/admin/openAdminBankList'">취소</button>
-			<button class="iEZQG" id="update">등록</button>
-			</div>
+		</ul>		
 		</div>
 	</form>
-	
-   <br />
-   <br />
-   <br />
-   <br />
-   <br /> &nbsp;&nbsp;&nbsp;&nbsp;
+	<div align="center">
+		<button class="kcMULl" onclick="location.href='/nnb/admin/openAdminBankList'">취소</button>
+		<button class="iEZQG" id="update">등록</button>
+	</div>
+	<br><br><br><br>
    <div>
       <%@include file="/WEB-INF/include/footer.jspf"%>
    </div>

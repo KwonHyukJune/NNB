@@ -58,13 +58,6 @@ $(document).ready(function(){
 	<button class="kcMULl" onclick="location.href='<c:url value='/admin/openAdminBankList'/>'">목록으로</button>
 	<button class="iEZQG" onclick="location.href='<c:url value='bankModifyForm?BANK_NUM=${bank.BANK_NUM}'/>'">수정</button>
 </div>
-         
-      </div>
-   </form>
-   <br />
-   <br />
-   <br />
-   <br />
    <div>
       <%@include file="/WEB-INF/include/footer.jspf"%>
    </div>

@@ -57,8 +57,9 @@ $(document).ready(function(){
 		
 		<br />
 </div>
-	<form method="post" name="frm" id="frm" enctype="multipart/form-data">
+
 		<div class="eugBve">
+			<form method="post" name="frm" id="frm" enctype="multipart/form-data">
 		<ul class="hIJwlj">
 			<li>
 				<p class="efvxco">은행 종류</p>
@@ -98,12 +99,14 @@ $(document).ready(function(){
 			<br>
 			<br>
 		</ul>
+			
+				</form>
 			<div align="center">
 			<button class="kcMULl" onclick="location.href='/nnb/admin/openAdminBankList'">취소</button>
 			<button class="iEZQG" id="write">등록</button>
 			</div>
 		</div>
-	</form>
+
 
 	<br />
 	<br />
