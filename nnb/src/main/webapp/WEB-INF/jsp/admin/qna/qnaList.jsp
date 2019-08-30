@@ -115,6 +115,7 @@ function fn_selectQnaListCallback(data) {
 			str	+=		"</p>"
 					+	"<p>"
 						+	"<a href='#' onClick='goDetail(" + qna.QNA_NUM + ")'>답변</a>"
+						+ " / "
 						+	"<a href='#' id='" + qna.QNA_NUM + "' onClick='delet(" + qna.QNA_NUM + ")'>삭제</a>"
 					+	"</p>"
 				+	"</li>";
