@@ -21,9 +21,9 @@ $(document).ready(function(){
 //			return fn_validation($('TERMS_CONTENT'),'내용을 입력하세요.');
 			var comSubmit = new ComSubmit("frm");
 			//약관종류를 선택하지 않았을 경우 - 작성페이지
-//			comSubmit.validation($('#TERMS_TITLE option:selected'),'약관 종류를 선택하세요.');
+			comSubmit.validation($('#TERMS_TITLE option:selected'),'약관 종류를 선택하세요.');
 			//내용을 입력하지 않았을 경우 - 작성페이지
-//			comSubmit.validation($('#TERMS_CONTENT'),'내용을 입력하세요.');
+			comSubmit.validation($('#TERMS_CONTENT'),'내용을 입력하세요.');
 			//둘다 입력했을 경우 - 리스트
 			comSubmit.setUrl("<c:url value='/admin/terms/write'/>");
 			comSubmit.submit();
@@ -42,8 +42,8 @@ $(document).ready(function(){
 		<ul class="hIJwlj ">
 			<li>
 				<p class="efvxco">약관 종류</p>
-				<select class="styled__Floor-sc-4u7gy5-7 freEbZ Select-sc-1sy32zq-0 hRFrgm" name="TERMS_TITLE">
-					<option selected>약관 종류 선택</option>
+				<select class="styled__Floor-sc-4u7gy5-7 freEbZ Select-sc-1sy32zq-0 hRFrgm" name="TERMS_TITLE" id="TERMS_TITLE">
+					<option selected value=''>약관 종류 선택</option>
 					<option value='이용약관'>이용약관</option>
 					<option value='개인정보처리방침'>개인정보처리방침</option>
 					<option value='매물관리규정'>매물관리규정</option>
@@ -57,7 +57,7 @@ $(document).ready(function(){
 		</ul>
 	<div align="center">
 			<button class="kcMULl" type="button" onclick="fn_back();">취소</button>
-			<button class="iEZQG" id="write">약관 등록</button>
+			<button type="button" class="iEZQG" id="write">약관 등록</button>
 			</div>
 </div>	
 </form>

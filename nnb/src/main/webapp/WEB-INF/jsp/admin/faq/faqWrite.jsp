@@ -15,6 +15,9 @@ $(document).ready(function(){
 		
 	function insertFaq(){
 		var comSubmit = new ComSubmit("frm");
+		comSubmit.validation($('#category option:selected'),'카테고리를 선택하세요.');
+		comSubmit.validation($('#FAQ_TITLE'),'제목을 입력하세요.');
+		comSubmit.validation($('#FAQ_CONTENT'),'내용을 입력하세요.');
 		comSubmit.setUrl("<c:url value='/admin/faq/write'/>");
 		comSubmit.submit();
 	}
@@ -34,8 +37,8 @@ $(document).ready(function(){
 	<ul class="hIJwlj">
       	 <li>
       	 <p class="efvxco">카테고리</p>
-      		<select class="freEbZ hRFrgm" name="FAQ_CATEGORY">
-					<option>카테고리 선택</option>
+      		<select class="freEbZ hRFrgm" name="FAQ_CATEGORY" id="category">
+					<option value=''>카테고리 선택</option>
 					<option value="회원정보">회원정보</option>
         			<option value="신고관련">신고관련</option>	
 			</select>
@@ -46,12 +49,12 @@ $(document).ready(function(){
  		</li>
 		<li>
  				<p class="efvxco">내용</p>
- 				<textarea class="bqTGEL hunnDM" name="FAQ_CONTENT"></textarea>
+ 				<textarea class="bqTGEL hunnDM" name="FAQ_CONTENT" id="FAQ_CONTENT"></textarea>
  		</li>
  	</ul>
  	 </form> 
    	<div align="center">
-    	<button class='kcMULl' id="write">작성</button>
+    	<button class='kcMULl' id="write" type="button">작성</button>
 		<button class='iEZQG' type="button" onclick="location.href='/nnb/admin/openFaqList'">취소</button>
 	</div>
 </div>
