@@ -64,7 +64,7 @@
 .msgDtl > p:first-child{
 	float:left;
 	width:10%;
-	box-shadow: 0px 2px #000dff;
+	box-shadow: 0px 2px #000dff	;
 }
 .msgDtl > p:nth-child(2){
 	float:left;
@@ -103,7 +103,7 @@
 
 		var url = "/nnb/admin/messageWriteForm?receiver=all";
 		var name = "회원정보";
-		var option = "width = 500, height = 500, top = 100, left = 200, location = no, resizeable = yes, scrollbars = yes"
+		var option = "width = 550, height = 500, top = 100, left = 200, location = no, resizeable = yes, scrollbars = yes"
 		window.open(url, name, option);
 	}
 
