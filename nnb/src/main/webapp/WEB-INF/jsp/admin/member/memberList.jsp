@@ -74,7 +74,7 @@
 }
 .kZIxja {
     display: inline-block;
-    width: 600px;
+    width: 670px;
     height: 46px;
     color: rgb(34, 34, 34);
     font-size: 15px;
@@ -83,7 +83,7 @@
     outline: none;
 }
 .dsdsd {
-    width: 80px;
+    width: 100px;
     height: 46px;
     color: rgb(255, 255, 255);
     font-size: 16px;
@@ -205,7 +205,7 @@ $(document).ready(function(){
 
 
 <body>
-<div style="margin:0 300px">
+<div style="margin:0 auto; width: 900px;">
 <%@ include file="/WEB-INF/include/adminMemberHeader.jspf"%>
 <div style="margin:50px 0">
 <select name="searchType" class="hRFrgm">

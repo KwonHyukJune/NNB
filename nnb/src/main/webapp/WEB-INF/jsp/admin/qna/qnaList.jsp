@@ -31,7 +31,7 @@ function goDetail(num) {
 </script>
 </head>
 <body>
-<div style="margin:0 300px; min-width:1180px;">
+<div style="margin:0 auto; width:1180px;">
 	<%@ include file="/WEB-INF/include/adminQnaHeader.jspf"%>
 
 <div class="adminQNA" style="padding-top: 30px;">
