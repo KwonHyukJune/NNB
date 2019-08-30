@@ -29,11 +29,15 @@ function goPage1(num) {   // 새 약관 등록
 	location.href="/nnb/admin/terms/termsWrite?num="+num; 
 	}
 </script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#aterm').addClass('active');
+});
+</script>
 </head>
 <body>
-<%@ include file="/WEB-INF/include/adminBoardHeader.jspf"%>
-<br/>
 <div class=selectTermsList>
+<%@ include file="/WEB-INF/include/adminBoardHeader.jspf"%>
 <ul class='qUCQS'>
 	<li class='pbYHJ'>
 		<p>번호 </p>

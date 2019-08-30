@@ -14,7 +14,7 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
-<div style="margin:0 300px; min-width:1180px;">
+<div style="margin:0 auto; width:1180px;">
 <%@ include file="/WEB-INF/include/adminQnaHeader.jspf"%>
 	<div class="selectFaqList"  style="padding-top: 50px; padding-bottom: 50px;">
 	</div>
@@ -71,7 +71,7 @@ function fn_selectFaqListCallback(data){
 	body.empty(); 
 	
 	if(total == 0){ 
-		var str = "<div class='faq' align='center'>" + "조회된 결과가 없습니다." 
+		var str = "<div class='faq' align='center' style='line-height:100px;'>" + "조회된 결과가 없습니다." 
 		+ "</div>"; 
 		body.append(str); 
 	} else{ 
