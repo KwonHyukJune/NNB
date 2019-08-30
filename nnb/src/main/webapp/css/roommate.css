@@ -3,34 +3,26 @@
 	    width: 1300px;
 	     margin:50px auto 100px;
 	     
-    /* margin: 0px auto; */
+
 }
 
-.cAeKOJ { 
-    width: 10px;
-    padding-bottom: 20px;
-    margin: 10px auto;
-}
 .bryRNw {
     display:inline;
     height: 59px;
     line-height: 58px;
    
 }
-.bryRN {
-	display:inline;
-    cursor: pointer;
-}
+
 ul, li {
     list-style: none;
 }
-.qUCQS {
+ .qUCQS {
     width: 1100px;
     text-align:center;
     margin: 50px auto 100px;
-   border-top: 3px solid rgb(25, 77, 241);
-    border-bottom: 3px solid rgb(25, 77, 241);
-    background-color:rgb(25, 77, 241);
+   border-top: 3px solid rgb(13, 103, 238);
+    border-bottom: 3px solid rgb(13, 103, 238);
+    background-color:rgb(13, 103, 238);
     height:120px;
       border-radius: 10px 10px 10px 10px;
    
@@ -44,20 +36,23 @@ ul, li {
 }
 
  p{
-	width:5%;
 	padding:10px;
-	border:3px;
+	border:0px;
 	display:inline;
-}   
-button{
-width:100px;
-height:50%;
-border:0px;
-background:	#D5D5D5;
-outline:none;
-color:#ffffff;
-}
+  
+}     
+.button{
 
+border:0px;
+background:	#ffffff;
+outline:none;
+color:#0000ff;
+ border-radius: 10px 10px 10px 10px;
+} 
+.size-btn{
+	width:100px;
+	height:40px;
+}
 #mateList ul li{
 	float:left;
 	height:120%;
@@ -84,11 +79,182 @@ color:#ffffff;
 #mate ul li a{
 	display:block;
 }
+.fhfjff {
+    background-color: rgb(255, 255, 255);
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 15px 18px -10px;
+    position: absolute;
+    top: 44px;
+    z-index: 101;
+    user-select: none;
+    padding: 27px 30px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(187, 187, 187);
+    border-image: initial;
+    border-radius: 3px;
+    display:none;
+}
+.fBFAQm {
+    width: 350px;
+}
+
+.ghXquW {
+    padding-bottom: 47px;
+    position: relative;
+    top: -5px;
+    border-bottom: 1px solid rgb(238, 238, 238);
+    list-style: none;
+}
+.ghXquW > li {
+    float: left;
+    width: 33.3333%;
+    padding-top: 10px;
+    color: rgb(170, 170, 170);
+    font-size: 12px;
+    position: relative;
+}
+.ghXquW > li:nth-child(2) {
+    text-align: center;
+}
+.ghXquW > li:last-child::before {
+    right: 14px;
+}
+.ghXquW > li:last-child {
+    text-align: right;
+    right: -3px;
+}
+.ghXquW > li:nth-child(2)::before {
+    left: 50%;
+    transform: translate(-50%, 0px);
+}
+.ghXquW > li:first-child::before {
+    left: 3px;
+}
+.ghXquW > li::before {
+    content: "";
+    display: block;
+    width: 1px;
+    height: 4px;
+    background-color: rgb(170, 170, 170);
+    position: absolute;
+    top: 0px;
+    margin: 0px auto 5px;
+}
+.lmqlXb {
+    margin-bottom: 27px;
+    color: rgb(0, 34, 34);
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 33px;
+}
+.eavwzc {
+    float: right;
+    color: rgb(0, 108, 255);
+    font-size: 15px;
+    font-weight: 300;
+
+}
+
+.hWgOZv {
+    float: left;
+    height: 36px;
+    margin-left: 10px;
+    position: relative;
+}
+.jqwYlT {
+    margin: 20px 0px;
+    padding: 0px 11px;
+}
+
+.noUi-target {
+    box-shadow: rgb(240, 240, 240) 0px 1px 1px inset, rgb(187, 187, 187) 0px 3px 6px -5px;
+    background: rgb(243, 243, 243);
+    border-radius: 4px;
+    border-width: 0px;
+    border-style: initial;
+    border-color: initial;
+    border-image: initial;
+}
+.noUi-horizontal {
+    height: 6px;
+}
+.noUi-target {
+    position: relative;
+    direction: ltr;
+}
+.noUi-target, .noUi-target * {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    touch-action: none;
+    user-select: none;
+    box-sizing: border-box;
+}
+.noUi-base, .noUi-connects {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 1;
+}
+.noUi-connects {
+    border-radius: 3px;
+}
+.noUi-connects {
+    z-index: 0;
+    overflow: hidden;
+}
+.noUi-draggable {
+    cursor: ew-resize;
+}
+.noUi-connect {
+    background: rgb(67, 131, 255);
+}
+.noUi-connect, .noUi-origin {
+    will-change: transform;
+    position: absolute;
+    z-index: 1;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    transform-origin: 0px 0px;
+}
+html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
+    right: -11px;
+    left: auto;
+}
+.noUi-horizontal .noUi-handle {
+    width: 22px;
+    height: 22px;
+    left: -11px;
+    top: -8px;
+}
+.noUi-handle {
+    cursor: default;
+    box-shadow: rgb(255, 255, 255) 0px 0px 1px inset, rgb(235, 235, 235) 0px 1px 7px inset, rgb(187, 187, 187) 0px 3px 6px -3px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(170, 170, 170);
+    border-image: initial;
+    border-radius: 50%;
+    background: rgb(255, 255, 255);
+    outline: none;
+}
+.noUi-handle {
+    position: absolute;
+}
+.hasdf{
+	 position:relative;  
+}
+ #alks { 	
+	padding:70px;
+	display:inline;
+   } 
 /*룸메이트 상세보기  */
 .alkdf{
 	height: 40px;
     line-height: 40px;
      border-bottom: 1px solid rgb(204, 204, 204);
     border-bottom: 1px solid rgb(204, 204, 204);
-} 
+	text-align:center;
+	padding: 30px;
+}
 
