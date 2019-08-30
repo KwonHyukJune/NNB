@@ -626,16 +626,26 @@ function fn_selectSearchRoomListCallback(data){
 								+"<img src='<c:url value='/roomImages/"+ room.THUMBNAIL +"'/>'>"
 							+ "</div>"
 							+ "<p class='kCTBqT jBkVAv'>" + room.ROOM_TYPE + "</p>"
-							+ "<p class='glovZ jBkVAv'>"+"<span>"+ room.TRADE_TYPE;
+							+ "<p class='glovZ jBkVAv'>"+"<span>"+ room.TRADE_TYPE + " ";
 							if(room.TRADE_TYPE=='월세'){
 								str+= room.MONTHLY_DEPOSIT+"/"+room.MONTHLY_PAYMENT;
 							}else if(room.TRADE_TYPE=='전세'){
+								if(room.JEONSE>=10000){
+									room.JEONSE = parseInt(room.JEONSE/10000) + '억' + (room.JEONSE%10000==0?'':room.JEONSE%10000);
+								}
 								str+=room.JEONSE;
 							}
 							str	+= "</span>"
 							+ "</p>"
-							+ "<p class='jBkVAv'>"
-								+ room.ROOM_FLOOR +"층, " + room.REAL_SIZE + "m2";
+							+ "<p class='jBkVAv'>";
+						if(room.ROOM_FLOOR=='-1'){
+							str	+=	"옥탑방, ";
+						}else if(room.ROOM_FLOOR='0'){
+							str +=	"반지하, ";
+						}else{
+							str	+=	room.ROOM_FLOOR +"층, ";
+						}
+							str	+=	room.REAL_SIZE + "㎡";
 							if(room.UTILITY_PRICE!=null){
 								str+=
 								", 관리비" + room.UTILITY_PRICE + "만";

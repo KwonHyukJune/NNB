@@ -46,6 +46,12 @@
 	color: rgb(34, 34, 34);
 }
 /* ³»¿ë */
+div.faq{
+	border-bottom: 1px solid rgb(238, 238, 238);
+}
+div.faq:nth-child(1){
+	border-top: 1px solid #919191;
+}
 .faq > .title {
     height: 70px;
     padding-left: 60px;

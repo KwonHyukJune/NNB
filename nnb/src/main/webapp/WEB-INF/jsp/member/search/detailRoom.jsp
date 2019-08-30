@@ -14,6 +14,19 @@
 /* openlessorInfo(id): 임대인 정보보기 새창으로 /room/detail/lessorInfo */
 /* report(): 신고하기 새창으로 */
 /* readMore() : 상세설명 더보기 */
+function readMore(obj){
+	var check = obj.prev().css('height');
+	if(check=='130px'){
+		console.log('ddd');
+		$(".cDEjhR").css({height:''});
+		obj.children('span').text('접기');
+		obj.children('svg').children().attr('d','M2 9l6-6 6 6');
+	}else{
+		$(".cDEjhR").css({height:'130px'});
+		obj.children('span').text('상세설명 더보기');
+		obj.children('svg').children().attr('d','M2 3l6 6 6-6');
+	}
+}
 
 $(document).ready(function(){
 	var roomSize = $('#room_size1')
@@ -40,7 +53,7 @@ $(document).ready(function(){
 		if(currentUnit==='평'){
 			return [parseFloat(value*3.3058).toFixed(2), '㎡']
 		}else{
-    		return [parseFloat(value/3.3058).toFixed(2), '평']
+    		return [parseFloat(value/3.3058).toFixed(0), '평']
 		}
 	}
 });
@@ -78,7 +91,7 @@ $(document).ready(function(){
 	  if(currentUnit==='평'){
 	    return [parseFloat(value2*3.3058).toFixed(2), parseFloat(value3*3.3058).toFixed(2), '㎡']
 	  }else{
-	    return [parseFloat(value2/3.3058).toFixed(2), parseFloat(value3/3.3058).toFixed(2), '평']
+	    return [parseFloat(value2/3.3058).toFixed(0), parseFloat(value3/3.3058).toFixed(0), '평']
 		}
 	}
 });
@@ -120,7 +133,6 @@ $(document).ready(function(){
 $(document).ready(function(){
 	addCookie('recentRoom','${room.ROOM_NUM}');
 });
-
 
 </script>
 </head>
@@ -205,7 +217,19 @@ $(document).ready(function(){
 			<ul class="iuNQqL">
 				<li class="gWdVQs">
 					<p class="gPsGgb">해당층/건물층</p>
-					<div class="gbAeEp">${room.ROOM_FLOOR}층/${room.BUILDING_STORY}층</div>
+					<div class="gbAeEp">
+						<c:choose>
+							<c:when test="${room.ROOM_FLOOR=='-1'}">
+								옥탑방
+							</c:when>
+							<c:when test="${room.ROOM_FLOOR=='0'}">
+								반지하
+							</c:when>
+							<c:otherwise>
+								${room.ROOM_FLOOR}층
+							</c:otherwise>
+						</c:choose>
+						/ ${room.BUILDING_STORY}층</div>
 				</li>
 				<li class="gWdVQs">
 					<p class="gPsGgb">전용/공급면적</p>
@@ -303,8 +327,8 @@ $(document).ready(function(){
 				<div class="cDEjhR" style="height:130px;">
 					<div>${room.DESC_DETAIL}</div>
 				</div>
-				<button class="jQYbpN" type="button" onclick="readMore();">
-					상세설명 더보기
+				<button class="jQYbpN" type="button" onclick="readMore($(this));">
+					<span>상세설명 더보기</span>
 					<!-- 접기는 path-d를 M2 9l6-6 6 6 로 -->
 					<svg width="16" height="12" viewBox="0 0 16 12"><path fill="none" fill-rule="evenodd" stroke="#1476FC" d="M2 3l6 6 6-6"></path></svg>
 				</button>
