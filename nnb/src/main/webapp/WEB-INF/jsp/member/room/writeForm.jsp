@@ -635,7 +635,7 @@ $(document).ready(function(){
 				매물과 다름이 없습니다.
 				</span>
 			</label>
-			<button class="kcMULl" onclick="location.href=<c:url value='/room/adminRoom'/>">취소</button>
+			<button class="kcMULl" onclick="location.href='<c:url value='/room/adminRoom'/>'">취소</button>
 			<button class="iEZQG" onclick="fsubmit();">매물 등록</button>
 		</div>
 	</div>

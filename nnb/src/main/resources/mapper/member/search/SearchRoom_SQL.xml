@@ -67,9 +67,9 @@ FROM
 	]]>
 		</foreach>
 </if>
-<if test="MONTHLY_PAYMENT_MIN !=null and !MONTHLY_PAYMENT_MIN.equals('')">
+<if test="MONTHLY_PAYMENT_MIN !=null and !MONTHLY_PAYMENT_MIN.equals('') and !MONTHLY_PAYMENT_MIN.equals('0')">
 <![CDATA[
-	AND R1.MONTHLY_PAYMENT > #{MONTHLY_PAYMENT_MIN}
+	AND (R1.MONTHLY_PAYMENT > #{MONTHLY_PAYMENT_MIN} or MONTHLY_PAYMENT is null)
 ]]>
 </if>
 <if test="MONTHLY_PAYMENT_MAX !=null and !MONTHLY_PAYMENT_MAX.equals('') and !MONTHLY_PAYMENT_MAX.equals('무제한')">
@@ -246,9 +246,9 @@ FROM
 	]]>
 		</foreach>
 </if>
-<if test="MONTHLY_PAYMENT_MIN !=null and !MONTHLY_PAYMENT_MIN.equals('')">
+<if test="MONTHLY_PAYMENT_MIN !=null and !MONTHLY_PAYMENT_MIN.equals('') and !MONTHLY_PAYMENT_MIN.equals('0')">
 <![CDATA[
-	AND R1.MONTHLY_PAYMENT > #{MONTHLY_PAYMENT_MIN}
+	AND (R1.MONTHLY_PAYMENT > #{MONTHLY_PAYMENT_MIN} or MONTHLY_PAYMENT is null)
 ]]>
 </if>
 <if test="MONTHLY_PAYMENT_MAX !=null and !MONTHLY_PAYMENT_MAX.equals('') and !MONTHLY_PAYMENT_MAX.equals('무제한')">

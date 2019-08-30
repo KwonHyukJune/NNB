@@ -664,8 +664,8 @@ $(function(){
 	}
 	//보증금/전세가
 	sliders[0].noUiSlider.on('update', function( values, handle ) {
-		var input0 = document.getElementById('MONTHLY_DEPOSIT_MIN');
-		var input1 = document.getElementById('MONTHLY_DEPOSIT_MAX');
+		var input0 = $("#MONTHLY_DEPOSIT_MIN");
+		var input1 = $("#MONTHLY_DEPOSIT_MAX");
 		var input_value = [];
 		if(values[0]<=10){
 			input_value[0] = values[0]*50;
@@ -691,8 +691,8 @@ $(function(){
 		else{
 			input_value[1] = values[1]*2500-150000;
 		}
-	    input0.value = input_value[0];
-	    input1.value = input_value[1];
+		input0.val(input_value[0]).trigger('change');
+		input1.val(input_value[1]);
 	    $('#p1').text('');
     	var str = '';
     	if(input_value[0]=='0'){
@@ -711,12 +711,11 @@ $(function(){
     		str += input_value[1] + '만 원';
     	}
 	    $('#p1').text(str);
-		fn_search();
 	});
 	//월세
-		sliders[1].noUiSlider.on('update', function( values, handle ) {
-		var input0 = document.getElementById('MONTHLY_PAYMENT_MIN');
-		var input1 = document.getElementById('MONTHLY_PAYMENT_MAX');
+	sliders[1].noUiSlider.on('update', function( values, handle ) {
+		var input0 = $("#MONTHLY_PAYMENT_MIN");
+		var input1 = $("#MONTHLY_PAYMENT_MAX");
 		var input_value = [];
 		if(values[0]<=40){
 			input_value[0] = values[0]*2.5;
@@ -738,8 +737,8 @@ $(function(){
 		else{
 			input_value[1] = values[1]*25-1300;
 		}
-	    input0.value = input_value[0];
-	    input1.value = input_value[1];
+		input0.val(input_value[0]).trigger('change');
+		input1.val(input_value[1]);
 	    $('#p2').text('');
     	var str = '';
     	if(input_value[0]=='0'){
@@ -754,12 +753,11 @@ $(function(){
     		str += input_value[1] + '만 원';
     	}
 	    $('#p2').text(str);
-		fn_search();
 	});
 	//관리비
-		sliders[2].noUiSlider.on('update', function( values, handle ) {
-		var input0 = document.getElementById('UTILITY_PRICE_MIN');
-		var input1 = document.getElementById('UTILITY_PRICE_MAX');
+	sliders[2].noUiSlider.on('update', function( values, handle ) {
+		var input0 = $("#UTILITY_PRICE_MIN");
+		var input1 = $("#UTILITY_PRICE_MAX");
 		var input_value = [];
 		input_value[0] = values[0]/2;
 		if(values[1]==100){
@@ -767,8 +765,8 @@ $(function(){
 		}else{
 			input_value[1] = values[1]/2;
 		}
-	    input0.value = input_value[0];
-	    input1.value = input_value[1];
+		input0.val(input_value[0]).trigger('change');
+		input1.val(input_value[1]);
 	    $('#p3').text('');
     	var str = '';
     	if(input_value[0]=='0'){
@@ -783,21 +781,20 @@ $(function(){
     		str += input_value[1] + '만 원';
     	}
 	    $('#p3').text(str);
-		fn_search();
 	});
 	//방크기
-		sliders[3].noUiSlider.on('update', function( values, handle ) {
-		var input0 = document.getElementById('REAL_SIZE_MIN');
-		var input1 = document.getElementById('REAL_SIZE_MAX');
+	sliders[3].noUiSlider.on('update', function( values, handle ) {
+		var input0 = $("#REAL_SIZE_MIN");
+		var input1 = $("#REAL_SIZE_MAX");
 		var input_value = [];
-		input_value[0] = values[0]/2+15;
+		input_value[0] = values[0]*3/2+15;
 		if(values[1]==100){
 			input_value[1] = '무제한';
 		}else{
-			input_value[1] = values[1]/2+15;
+			input_value[1] = values[1]*3/2+15;
 		}
-	    input0.value = input_value[0];
-	    input1.value = input_value[1];
+		input0.val(input_value[0]).trigger('change');
+		input1.val(input_value[1]);
 	    $('#p4').text('');
     	var str = '';
     	str += input_value[0] + '㎡ (' + (input_value[0]/3.3).toFixed(0) + '평)';
@@ -808,6 +805,9 @@ $(function(){
     		str += input_value[1] + '㎡ (' + (input_value[1]/3.3).toFixed(0) + '평)';
     	}
 	    $('#p4').text(str);
+	});
+	$("input[type=hidden]").change(function(){
+		console.log("dd:");
 		fn_search();
 	});
 });

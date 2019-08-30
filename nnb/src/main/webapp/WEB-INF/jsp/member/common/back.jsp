@@ -5,9 +5,8 @@
 <head>
 <%@ include file="/WEB-INF/include/include-header.jspf" %>
 <script type="text/javascript">
-	$(document).ready(function(){
- 		location.href="${URL}";
-	})
+	alert("${message}");
+	history.go(-1);
 </script>
 </head>
 <body>
