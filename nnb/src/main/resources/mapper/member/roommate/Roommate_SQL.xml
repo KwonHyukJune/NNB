@@ -92,6 +92,7 @@
         ]]>
 </delete>                              			
 	<select id="selectRoommateList" parameterType="hashmap" resultType="hashmap">
+<include refid="common.pagingPre"/> 
 	<![CDATA[
 SELECT DISTINCT
 	row_number() over (ORDER BY RI_NUM DESC) rnum,
@@ -190,6 +191,7 @@ WHERE
 	AND RI_DATE_END < #{maxdate,jdbcType=DATE} 
 	]]>
 </if>
+<include refid="common.pagingPost"/> 
 	</select>
 	
 <select id="countRoommateList" parameterType="int"
@@ -281,6 +283,8 @@ WHERE
 	]]>
 </if>
 	</select>
+
+
 	<select id="selectRoommateDetail" parameterType="hashmap"
 		resultType="hashmap">
 	<![CDATA[
@@ -296,7 +300,7 @@ SELECT DISTINCT
 	RI_DATE_START,
 	RI_DATE_END,
 	RI_PROFILE,
-	TO_CHAR(RI_BIRTH,'YYYYMMDD') AS RI_BIRTH
+	RI_BIRTH
 FROM
 	MEMBER M,
 	ROOMMATE_PROFILE R

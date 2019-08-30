@@ -24,7 +24,7 @@ public class RoommateDAO extends AbstractDAO{
 	}//여기까지 내방관리 에서의 룸메이트 정보
 	@SuppressWarnings("unchecked")
 	public List<Map<String,Object>>searchRoommate(Map<String,Object>map)throws Exception{
-		return (List<Map<String,Object>>)selectList("roommate.selectRoommateList",map);
+		return (List<Map<String,Object>>)selectPagingList("roommate.selectRoommateList",map);
 	}
 	public int countRoommate(Map<String,Object>map)throws Exception{
 		return (int)selectOne("roommate.countRoommateList",map);

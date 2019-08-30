@@ -11,8 +11,9 @@
 <script type="text/javascript">
 	var mem = sessionStorage.getItem("MEM_ID");
 	
-	function openDetail(url){
-		var strUrl = "<%=request.getContextPath()%>"+url;
+	function openDetail(obj){
+		var url = obj.children('#id').text();
+		var strUrl = "<%=request.getContextPath()%>"+"/roommate/detail?id="+url;
 		window.open(strUrl);
 	};
 	 $(document).ready(function(){
@@ -107,8 +108,7 @@
 <%@ include file="/WEB-INF/include/header.jspf" %>
 </head> 
 <body>
-<div class="roommateList" >
-	<table style="min-height:1000px;">
+<div class="roommateList" style="height:1000px;">
 	<div class="search">
 		<ul class="qUCQS">
 			<li class="pbYHJ">
@@ -207,62 +207,108 @@
 	</form></li></ul>
 </div>
 
-총 ${Count}명의 검색 결과가 있습니다.
-<c:if test="${Count!=null && Count!=''}">
-<div class="mateList" id="mateList">
-	<ul class="qUCQS1">
-		<li style="width:16%;">닉네임</li>
-		<li style="width:16%;">나이</li>
-		<li style="width:16%;">성별</li>
-		<li style="width:16%;">지역</li>
-		<li style="width:16%;">부담가능금액</li>
-		<li style="width:16%;">&nbsp;&nbsp;&nbsp;</li>
-	</ul>
-	
-	<c:forEach var="mate" items="${searchRoommate}">
-	<div class="mate" id="mate">
-	<a href="#" onclick="openDetail('/roommate/detail?id=${mate.RI_MEM_ID}');" class="btn">
-		<ul class="qUCQS2">
-		<li style="width:16%;">${mate.MEM_NICK}</li>
-		<li style="width:16%;">${mate.RI_BIRTH}</li>
-		<li style="width:16%;" >${mate.RI_GENDER }</li>
-		<li style="width:16%;">${mate.RI_REGION1}</li>
-		<li style="width:16%;">${mate.RI_LOAN_BIG}/${mate.RI_LOAN_SMALL}</li>
-	<li style="width:16%;"><a href="#" class="btn" id="favMate">찜하기</a></li>
-</ul>
-	</a>
-	</div>
-
-		<c:if test="${mate.check=='1'}">
-		<div class="p6">
-			<div class="deleteFav" onclick="deleteFav(${mate.RI_MEM_ID});">
-			</div>
-		</div>
-		</c:if>
-		<c:if test="${check.equals('0')}">
-		<div class="p6">
-			<div class="insertFav" onclick="insertFav(${mate.RI_MEM_ID});">
-			</div>
-		</div>
-		</c:if>
-	</div>
-	</c:forEach>
-
+<div id="count"></div>
+<ul class="mateList" id="mateList"></ul>
+<div class="dzQBoq" id="PAGE_NAVI"></div>
+<input type="hidden" id="PAGE_INDEX" name="PAGE_INDEX" />
 </div>
-
-</c:if>
-<c:if test="${Count==null || Count==''}">
-	아직 등록된 사용자가 없습니다.<br>
-	<a href="<c:url value='/myPage/registMyProfileForm'/>" class="btn">룸메이트 정보 등록하러 가기</a>
-</c:if>
-
-</table>
-</div>
-<br>
 <div>
  <%@ include file="/WEB-INF/include/footer.jspf" %>
 
 </div>
+<script type="text/javascript">
+$(document).ready(function(){
+	fn_selectSearchRoommateList(1);
+});
+
+function fn_search(){
+	var comAjax = new ComAjax();
+	comAjax.setUrl("<c:url value='/searchRoommateList'/>");
+	comAjax.setCallback("fn_selectSearchRoommateListCallback");
+
+	comAjax.addParam("MONTHLY_DEPOSIT_MIN",$("#MONTHLY_DEPOSIT_MIN").val());
+	comAjax.addParam("MONTHLY_DEPOSIT_MAX",$("#MONTHLY_DEPOSIT_MAX").val());
+	comAjax.addParam("MONTHLY_PAYMENT_MIN",$("#MONTHLY_PAYMENT_MIN").val());
+	comAjax.addParam("MONTHLY_PAYMENT_MAX",$("#MONTHLY_PAYMENT_MAX").val());
+	comAjax.addParam("UTILITY_PRICE_MIN",$("#UTILITY_PRICE_MIN").val());
+	comAjax.addParam("UTILITY_PRICE_MAX",$("#UTILITY_PRICE_MAX").val());
+	comAjax.addParam("REAL_SIZE_MIN",$("#REAL_SIZE_MIN").val());
+	comAjax.addParam("REAL_SIZE_MAX",$("#REAL_SIZE_MAX").val());
+	comAjax.addParam("address",$("#region").val());
+	
+	comAjax.addParam("PAGE_INDEX",$("#PAGE_INDEX").val()); 
+	comAjax.addParam("PAGE_ROW", 15); 
+	comAjax.ajax();
+}
+
+function fn_selectSearchRoommateList(pageNo){
+	var comAjax = new ComAjax(); 
+	comAjax.setUrl("<c:url value='/searchRoommateList'/>"); 
+	comAjax.setCallback("fn_selectSearchRoommateListCallback"); 
+	comAjax.addParam("PAGE_INDEX",$("#PAGE_INDEX").val()); 
+	comAjax.addParam("PAGE_ROW", 15); 
+	comAjax.ajax(); }
+
+function fn_selectSearchRoommateListCallback(data){ 
+	var total = data.total; 
+	var body = $("ul#mateList"); 
+	body.empty(); 
+	var count = $("#count");
+	
+	if(total == 0){ 
+		var str = "아직 등록된 사용자가 없습니다."
+				+ "<a href='<c:url value='/myPage/registMyProfileForm'/>' class='btn'>룸메이트 정보 등록하러 가기</a>"; 
+		body.append(str);
+        	
+	} else{ 
+		var params = { 
+			divId : "PAGE_NAVI", 
+			pageIndex : "PAGE_INDEX", 
+			totalCount : total, 
+			eventName : "fn_selectSearchRoommateList" 
+			}; 
+		
+		gfn_renderPaging(params); 
+		count.append("<p>총 "+total+"명의 검색 결과가 있습니다.</p>");
+		var str	=	"<li class='qUCQS1'>"
+					+	"<p style='width:16%;'>닉네임</p>"
+					+	"<p style='width:16%;'>나이</p>"
+					+	"<p style='width:16%;'>성별</p>"
+					+	"<p style='width:16%;'>지역</p>"
+					+	"<p style='width:16%;'>부담가능금액</p>"
+					+	"<p style='width:16%;'>&nbsp;&nbsp;&nbsp;</p>"
+				+	"</li>"
+		$.each(data.list, function(key, mate){ 
+			str	+=	"<a href='#' onclick='openDetail($(this));' class='btn'>"
+					+	"<div id='id' style='display:none;'>" + mate.RI_MEM_ID + "</div>"
+					+	"<li class='qUCQS2'>"
+						+	"<p style='width:16%;'>" + mate.MEM_NICK + "</p>"
+						+	"<p style='width:16%;'>" + mate.RI_BIRTH + "</p>"
+						+	"<p style='width:16%;'>" + mate.RI_GENDER + "</p>"
+						+	"<p style='width:16%;'>" + mate.RI_REGION1 + "</p>"
+						+	"<p style='width:16%;'>" + mate.RI_LOAN_BIG + "/" + mate.RI_LOAN_SMALL + "</p>"
+						+	"<p style='width:16%;'>";
+/* 			if(mate.RI_MEM_NUM in data.favRoom){
+						str	+=	"<div class='deleteFav' onclick='deleteFav($(this));'>"
+								+	"<div id='num' style='display:none;'>"
+									+	mate.RI_MEM_NUM
+								+	"</div>"
+							+	"</div>";
+			}else{
+						str	+=	"<div class='insertFav' onclick='fn_addFav($(this));'>"
+								+	"<div id='num' style='display:none;'>"
+									+	mate.RI_MEM_NUM
+								+	"</div>"
+							+	"</div>";
+			} */
+					str	+=	"</p>"
+					+	"</li>"
+				+	"</a>";
+       	}); 
+       	body.append(str); 
+	} 
+}
+</script>
 <script type="text/javascript">
 $(function(){
 	var sliders = document.getElementsByClassName('noUi-target');

@@ -35,7 +35,7 @@ ul, li {
 
 }
 
- p{
+.search p{
 	padding:10px;
 	border:0px;
 	display:inline;
@@ -53,15 +53,18 @@ color:#0000ff;
 	width:100px;
 	height:40px;
 }
-#mateList ul li{
+#mateList li p{
 	float:left;
-	height:120%;
+	height:50px;
 	line-height:50px;
 	text-align:center;  
     margin: 0;
     border-top: 1px solid #8C8C8C;
 
 /*    border-bottom: 1px solid rgb(204, 204, 204);  */
+}
+#mateList li{
+	height: 50px;
 }
 #mate ul li{
    float:left;

@@ -31,23 +31,25 @@ public class RoommateController {
 
 
 	@RequestMapping(value = "/searchRoommate")
-	public ModelAndView searchRoommate(HttpServletResponse response, HttpServletRequest request, CommandMap commandMap)
+	public ModelAndView openRoommateList(HttpServletResponse response, HttpServletRequest request, CommandMap commandMap)
 			throws Exception {
 		ModelAndView mv = new ModelAndView("/member/roommate/roommateList");
+		return mv;
+	}
+	
+	@RequestMapping(value = "/searchRoommateList")
+	@ResponseBody
+	public ModelAndView searchRoommateList(HttpServletResponse response, HttpServletRequest request, CommandMap commandMap)
+			throws Exception {
+		ModelAndView mv = new ModelAndView("jsonView");
 		HttpSession session = request.getSession();
 		commandMap.put("MEM_ID",session.getAttribute("MEM_ID"));
 		List<Map<String, Object>> searchRoommate = roommateService.searchRoommate(commandMap.getMap());
 		int Count = roommateService.countRoommate(commandMap.getMap());
 		
-		// int count =roommateService.countRoommate();
-//리스트?
-					mv.addObject("searchRoommate",searchRoommate);
-					mv.addObject("Count",Count);
+		mv.addObject("list",searchRoommate);
+		mv.addObject("total",Count);
 		
-		  mv.setViewName("member/roommate/roommateList");
-		  
-		  
-	
 		return mv;
 	}
 
