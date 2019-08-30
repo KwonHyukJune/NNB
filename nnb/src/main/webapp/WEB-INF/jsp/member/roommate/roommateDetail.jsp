@@ -19,6 +19,13 @@
 		comAjax.addParam("REPORT_D_ID","${mate.RI_MEM_ID}");
 		comAjax.ajax();
 	};
+	function ignore(){
+		var comAjax = new ComAjax();
+		comAjax.setUrl("<c:url value='/ignore'/>");
+		comAjax.addParam("IGNORE_MEM","${mate.RI_MEM_ID}");
+		comAjax.addParam("check",0);
+		comAjax.ajax();
+	};
 	function insertFav(num){
 		var comAjax = new ComAjax();
 		comAjax.setUrl("<c:url value='/common/back.jsp'/>");
@@ -45,31 +52,22 @@
 	};
 </script>
 </head>
-<body>
+<body style="text-align: center; display: block; margin: 0 auto; font-size: 16px; color: #999;" >
 <div class="title">룸메이트 상세보기</div>
-
-<div class="roommateDeteil">
-
-<div class="report"><a href="#" onclick="report();">신고</a></div>
-
-<div class="h">닉네임</div>
-<div class="b">${mate.MEM_NICK}</div>
-<div class="h">성별</div>
-<div class="b">${mate.RI_GENDER}</div>
-<div class="h">부담가능금액</div>
-<div class="b">보증금: ${mate.RI_LOAN_BIG}, 월세:${mate.RI_LOAN_SMALL}</div>
-<div class="h">선호지역</div>
-<div class="b">${mate.RI_REGION1}<br>${mate.RI_REGION2}<br>${mate.RI_REGION3}</div>
-<div class="h">생년월일</div>
-<div class="b">${mate.RI_BIRTH}</div>
-<div class="h">입주시기</div>
-<div class="b">${mate.RI_DATE_START}~${mate.RI_DATE_END}</div>
-<div class="h">자기소개</div>
-<div class="b">${mate.RI_PROFILE}</div>
-	
-	
-<div>
-		<a href="#" class="btn" onclick="javascript:ignore();">차단</a>
+<div class="roommateDeteil" style="text-align: center; display: block; margin: 0 auto; font-size: 16px; color: #999;">
+<table class="alkdf" >
+<tr><th>닉네임 </th><td>${mate.MEM_NICK}</td></tr>
+<tr><th >성별 </th><td>${mate.RI_LOAN_BIG}</td></tr>
+<tr><th>보증금 </th><td>${mate.RI_LOAN_BIG}</td></tr>
+<tr><th>월세 </th><td>${mate.RI_LOAN_SMALL}</td></tr>
+<tr><th>선호지역 </th><td>${mate.RI_REGION1}</td></tr>
+<tr><th>생년월일 </th><td>${mate.RI_BIRTH}</td></tr>
+<tr><th>입주시기 </th><td>${mate.RI_DATE_START}~${mate.RI_DATE_END}</td></tr>
+<tr><th>자기소개 </th><td>${mate.RI_PROFILE}</td></tr>
+<tr><th>성별 </th><td>${mate.RI_GENDER}</td></tr>
+</table>
+	</div>
+		<div class="ignore"><a href="#" class="btn" onclick="ignore();">차단</a></div>
 	<script type="text/javascript">
 	function ignore(){
 		var mem = "${mate.MEM_ID}";
@@ -77,12 +75,13 @@
 			var str = "<form id='frm' action='ignoreUser' method='post'>"
 				+ "<input type='hidden' name='IGNORE_D_MEM' value='"+mem+"'>"
 				+ "</form>";
-			$(".report").after(str);
+			$(".ignore").after(str);
 			frm.submit();
 		};
 	};
 	
 	</script>	
+	<div class="report"><a href="#" onclick="report();">신고</a></div>
 	<c:if test="${mate.check=='0'}">
 	<a href="#" class="btn" onclick="insertFav();">찜하기</a>
 	</c:if>
@@ -91,12 +90,12 @@
 	</c:if>
 	<a href="#" class="btn" onclick="sendMessage();">메시지 보내기</a>
 	<a href="#" class="btn" onclick="javascript:window.close();">닫기</a>
-</div>
 
+<div>
 </div>
 <br>
-<div class="footer">
+<%-- <div class="footer">
 <%@ include file="/WEB-INF/include/footer.jspf" %>
-</div>
+</div> --%>
 </body>
 </html>
