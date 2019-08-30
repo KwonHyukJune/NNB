@@ -45,7 +45,7 @@ function fn_selectFaqListCallback(data){
 	body.empty(); 
 	
 	if(total == 0){ 
-		var str = "<div class='faq'>" + "조회된 결과가 없습니다." 
+		var str = "<div class='faq' align='center'>" + "조회된 결과가 없습니다." 
 		+ "</div>"; 
 		body.append(str); 
 	} else{ 

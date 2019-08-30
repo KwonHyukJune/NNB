@@ -8,8 +8,6 @@
 <%@include file="/WEB-INF/include/adminHeader.jspf"%>
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/adminFaq.css'/>"/>
 </head>
-
-
 <body>
 <%@ include file="/WEB-INF/include/adminQnaHeader.jspf"%>
 <br>
@@ -51,12 +49,10 @@ function goPage(num) {   // 수정
 function goPage1(num) {   // 새 약관 등록
 	location.href="<c:url value='/admin/faq/writeForm?FAQ_NUM="+num+"'/>"
 	}	
-	
+//페이징
 $(document).ready(function(){
 	fn_selectFaqList(1);
 });
-
-//페이징
 function fn_selectFaqList(pageNo){
 	var comAjax = new ComAjax(); 
 	comAjax.setUrl("<c:url value='/admin/faq/list'/>");  //value 요청으로 실행
@@ -71,7 +67,7 @@ function fn_selectFaqListCallback(data){
 	body.empty(); 
 	
 	if(total == 0){ 
-		var str = "<div class='faq'>" + "조회된 결과가 없습니다." 
+		var str = "<div class='faq' align='center'>" + "조회된 결과가 없습니다." 
 		+ "</div>"; 
 		body.append(str); 
 	} else{ 
