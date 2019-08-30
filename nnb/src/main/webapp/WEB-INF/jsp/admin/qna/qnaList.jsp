@@ -44,8 +44,9 @@ function goDetail(num) {
 	<br/><br/><br/>
 	<p class="hXdylP" id="count"></p>
 	<ul class='qUCQS' id='body'></ul>
-	<div id="PAGE_NAVI"></div>
+	<div id="PAGE_NAVI" align="center"></div>
 	<input type='hidden' id='PAGE_INDEX' name="PAGE_INDEX">
+	<br><br><br>
 </div>
 <div>
 	<%@include file = "/WEB-INF/include/footer.jspf" %>
@@ -113,7 +114,7 @@ function fn_selectQnaListCallback(data) {
 					}
 			str	+=		"</p>"
 					+	"<p>"
-						+	"<a href='#' onClick='goDetail(" + qna.QNA_NUM + ")'>답변</a>";
+						+	"<a href='#' onClick='goDetail(" + qna.QNA_NUM + ")'>답변</a>"
 						+	"<a href='#' id='" + qna.QNA_NUM + "' onClick='delet(" + qna.QNA_NUM + ")'>삭제</a>"
 					+	"</p>"
 				+	"</li>";
