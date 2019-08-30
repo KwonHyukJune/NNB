@@ -14,6 +14,7 @@
 /* openlessorInfo(id): 임대인 정보보기 새창으로 /room/detail/lessorInfo */
 /* report(): 신고하기 새창으로 */
 /* readMore() : 상세설명 더보기 */
+
 $(document).ready(function(){
 	var roomSize = $('#room_size1')
 	var currentUnit = '㎡' // P : 평, M : 제곱미터
@@ -71,7 +72,7 @@ $(document).ready(function(){
 	  currentUnit = nextUnit
 	  currentValue2 = nextValue2
 	  currentValue3 = nextValue3
-	})
+	});
 
 	function convertUnit(value2, value3, currentUnit){
 	  if(currentUnit==='평'){
@@ -114,8 +115,8 @@ $(document).ready(function(){
 			fn_deleteFav();
 		}
 	});
-	
 });
+
 $(document).ready(function(){
 	addCookie('recentRoom','${room.ROOM_NUM}');
 });
@@ -124,6 +125,7 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
+
 <!-- 전체 -->
 <div class="detailRoom dQBfA">
 <!-- 헤더 -->
@@ -157,10 +159,10 @@ $(document).ready(function(){
 						<h1 id="room_size1" class="dUuerR">
 							
 						</h1>
-						<button class="ktfeIl" type="button" id="converter" onclick="convert($(this));">
-                     <svg width="11" height="23" viewBox="0 0 11 23"><g fill="#222" fill-rule="evenodd" stroke="#222" stroke-width=".2"><path d="M8.066 8.378L6.955 9.624a.335.335 0 0 0 0 .436.26.26 0 0 0 .194.09c.07 0 .14-.03.194-.09L8.92 8.293c.054-.06.08-.14.08-.22a.32.32 0 0 0-.094-.232l-1.563-1.75a.255.255 0 0 0-.388 0 .334.334 0 0 0 0 .435l1.102 1.236h-5.49c-1.415 0-2.567 1.3-2.567 2.9v1.03c0 .17.123.308.275.308.152 0 .275-.138.275-.308v-1.03c0-1.259.905-2.284 2.018-2.284h5.498zM.934 14.622l1.11-1.246a.335.335 0 0 0 0-.436.26.26 0 0 0-.193-.09c-.07 0-.141.03-.195.09L.08 14.707a.325.325 0 0 0-.08.22.32.32 0 0 0 .093.232l1.563 1.75c.108.121.282.121.389 0a.334.334 0 0 0 0-.435L.942 15.238h5.49c1.416 0 2.567-1.3 2.567-2.9v-1.03c0-.17-.123-.308-.274-.308-.153 0-.275.138-.275.308v1.03c0 1.259-.905 2.284-2.018 2.284H.934z"></path></g></svg>
-                     <span id="unit1">평</span>
-                  </button>
+						<button class="ktfeIl" type="button" id="converter">
+                     		<svg width="11" height="23" viewBox="0 0 11 23"><g fill="#222" fill-rule="evenodd" stroke="#222" stroke-width=".2"><path d="M8.066 8.378L6.955 9.624a.335.335 0 0 0 0 .436.26.26 0 0 0 .194.09c.07 0 .14-.03.194-.09L8.92 8.293c.054-.06.08-.14.08-.22a.32.32 0 0 0-.094-.232l-1.563-1.75a.255.255 0 0 0-.388 0 .334.334 0 0 0 0 .435l1.102 1.236h-5.49c-1.415 0-2.567 1.3-2.567 2.9v1.03c0 .17.123.308.275.308.152 0 .275-.138.275-.308v-1.03c0-1.259.905-2.284 2.018-2.284h5.498zM.934 14.622l1.11-1.246a.335.335 0 0 0 0-.436.26.26 0 0 0-.193-.09c-.07 0-.141.03-.195.09L.08 14.707a.325.325 0 0 0-.08.22.32.32 0 0 0 .093.232l1.563 1.75c.108.121.282.121.389 0a.334.334 0 0 0 0-.435L.942 15.238h5.49c1.416 0 2.567-1.3 2.567-2.9v-1.03c0-.17-.123-.308-.274-.308-.153 0-.275.138-.275.308v1.03c0 1.259-.905 2.284-2.018 2.284H.934z"></path></g></svg>
+                     		<span id="unit1">평</span>
+                  		</button>
 						
 					</div>
 				</li>
@@ -169,9 +171,9 @@ $(document).ready(function(){
 						<p class="hhDakc">임대인</p>
 						<p class="gTIMxh">${room.MEM_ID}</p>
 					</div>
-					<button class="fEkbZe" onclick="openLessorInfo(${room.MEM_ID});">
+					<button= class="fEkbZe" id="openLessor">
 						<svg width="18" height="18" viewBox="0 0 18 18"><path fill="#222" fill-rule="evenodd" d="M4.324.404c.328.457.689.979 1.081 1.565.393.586.818 1.236 1.275 1.95.117.188.167.4.15.634a1.834 1.834 0 0 1-.256.756c-.058.117-.158.304-.299.562L5.73 6.873c.247.352.56.744.94 1.178.382.433.824.902 1.328 1.406.516.516.987.964 1.415 1.345.428.38.812.694 1.151.94.399-.234.73-.425.994-.571.263-.147.454-.25.57-.308.142-.082.285-.143.432-.184.146-.041.284-.062.413-.062a1.066 1.066 0 0 1 .545.14c.527.317 1.084.672 1.67 1.064.585.393 1.212.824 1.88 1.292.118.082.211.188.282.317.07.129.117.27.14.422.012.164-.006.33-.052.5-.047.17-.13.343-.247.52a2.446 2.446 0 0 1-.21.298 19.35 19.35 0 0 1-.335.404c-.117.153-.269.325-.457.519-.187.193-.41.407-.668.641-.246.235-.471.41-.676.528-.205.117-.384.175-.536.175h-.036a6.392 6.392 0 0 1-1.916-.395 11.957 11.957 0 0 1-2.109-1.028 19.487 19.487 0 0 1-2.32-1.67 38.968 38.968 0 0 1-2.532-2.303A34.717 34.717 0 0 1 3.085 9.51a20.91 20.91 0 0 1-1.67-2.32A11.08 11.08 0 0 1 .387 5.07C.152 4.397.023 3.761 0 3.164 0 3 .059 2.815.176 2.61c.117-.205.293-.436.527-.694.235-.258.445-.478.633-.66.187-.18.357-.33.51-.447.14-.106.275-.205.404-.3.129-.093.24-.175.334-.245.129-.094.264-.161.404-.202C3.128.02 3.281 0 3.445 0c.188 0 .355.032.501.097a.947.947 0 0 1 .378.307zm-1.145.694a8.368 8.368 0 0 0-.688.538c-.223.194-.44.397-.652.609-.212.211-.38.394-.503.546a1.349 1.349 0 0 0-.238.389c.023.529.147 1.093.37 1.693.224.6.547 1.238.97 1.914.424.676.947 1.388 1.57 2.135a35.836 35.836 0 0 0 2.17 2.355 35.836 35.836 0 0 0 2.355 2.17 19.601 19.601 0 0 0 2.135 1.57c.676.423 1.317.746 1.923.97a6.12 6.12 0 0 0 1.702.388c.082-.035.2-.118.353-.247.153-.13.335-.3.547-.512.212-.211.411-.432.6-.661.188-.23.37-.462.547-.697a.417.417 0 0 0 .07-.132.19.19 0 0 0 0-.115 71.472 71.472 0 0 0-1.879-1.288c-.57-.376-1.085-.711-1.543-1.005-.047 0-.1.009-.159.026a1.231 1.231 0 0 0-.194.08c-.094.058-.27.158-.53.3l-1.005.546-.582.353-.582-.388c-.377-.259-.791-.59-1.244-.997-.453-.405-.95-.879-1.49-1.42a40.393 40.393 0 0 1-1.394-1.49c-.4-.453-.73-.868-.988-1.244l-.423-.547.352-.617a101.22 101.22 0 0 1 .847-1.535c.035-.07.062-.135.08-.194a.559.559 0 0 0 .026-.159c-.412-.647-.803-1.252-1.173-1.817a81.447 81.447 0 0 0-1.067-1.588h-.036a.48.48 0 0 0-.132.018.407.407 0 0 0-.115.053z"></path></svg>
-						<span>연락처보기</span>
+						<span>쪽지보내기</span>
 					</button>
 				</li>
 			</ul>
@@ -429,6 +431,80 @@ $(document).ready(function(){
 </div>
 
 <br>
+<script type="text/javascript">
+$(document).ready(function(){
+	var modal = document.getElementById('myModal');
+    var btn = document.getElementById('openLessor');
+    var span = document.getElementsByClassName("close")[0]; 
+    
+    btn.onclick = function() {
+        modal.style.display = 'block';
+    }
+	// When the user clicks on <span> (x), close the modal
+	span.onclick = function() {
+	    modal.style.display = 'none';
+	}
+	window.onclick = function(event) {
+		if (event.target == modal) {
+			modal.style.display = 'none';
+        }
+    }
+
+});
+</script>
+<div id="myModal" class="modal">
+<div class="styled__Overlay-sc-17v8eyt-0 dajUZo">
+<div class="styled__Wrap-sc-17v8eyt-1 klSSab" width="400">
+	<header class="styled__Header-sc-17v8eyt-2 GoREo">
+		<h1>쪽지 보내기</h1>
+			<button class="close styled__CloseBtn-sc-17v8eyt-3 kXLdvu">
+				<svg width="30" height="30" viewBox="0 0 32 32">
+					<g fill="none" fill-rule="evenodd" transform="translate(1 1)">
+						<circle class="Circle" cx="15" cy="15" r="15"></circle>
+						<g class="Close" stroke-linecap="round" stroke-width="2">
+							<path d="M19.243 19.243l-8.486-8.486M19.243 10.757l-8.486 8.486"></path>
+						</g>
+					</g>
+				</svg>
+			</button>
+	</header>
+	
+	<div class="styled__Wrap-sc-1skx99m-0 fxChzu">
+		<div class="styled__AgentWrap-sc-1skx99m-1 bUnfmq">
+			<div class="styled__AgentTitle-sc-1skx99m-2 gyvHLB">
+				<h1>임대인 아이디: ${room.MEM_ID}</h1>
+				<%-- <p>${lessor.MEM_PHONE}</p> --%>
+			</div>
+		</div>
+		<div class="styled__UserWrap-sc-1skx99m-5 kMFgaL">
+		<div class="styled__UserInfo-sc-1skx99m-7 hEBltZ">
+			<p class="styled__Name-sc-1skx99m-8 fKNqjm">담당: 니네방마스터 (중개보조원)</p>
+			<p class="styled__Phone-sc-1skx99m-9 bEkUP">
+				<svg width="18" height="19" viewBox="0 0 18 19">
+					<path fill="#1476FC" fill-rule="evenodd" d="M17.063 13.313c1.015 1.015 1.015 2.132 0 3.351-.407.474-.805.83-1.194 1.066-.39.237-.71.373-.965.407-.254.034-.618.05-1.091.05-1.32 0-2.895-.677-4.723-2.03a29.861 29.861 0 0 1-3.961-3.403A27.204 27.204 0 0 1 1.117 7.32C.102 5.424-.203 3.867.203 2.648.406 2.005.88 1.447 1.625.973l.05-.051c.61-.406 1.152-.61 1.626-.61.643 0 1.219.305 1.726.915l.051.05c.779 1.016 1.32 1.812 1.625 2.387.508 1.05.491 1.947-.05 2.691-.407.542-.61.931-.61 1.168 0 .102.22.407.66.915l.05.05c.813.914 1.254 1.405 1.321 1.473.034 0 .068.017.102.05l.203.204a39.899 39.899 0 0 0 1.473 1.422l.05.05c.305.271.508.407.61.407.169 0 .66-.254 1.472-.762.237-.17.525-.254.864-.254.609 0 1.345.254 2.209.762.863.508 1.532.999 2.005 1.473z"></path>
+				</svg>010-0000-8282
+			</p>
+			<p class="styled__Text-sc-1skx99m-10 jxqoHd">연락 시 매물 주소를 알려주시면</p>
+			<p class="styled__Text-sc-1skx99m-10 jxqoHd">더욱 빠르게 상담 받을 수 있습니다.</p>
+		</div>
+		</div>
+		<h1 class="styled__Request-sc-1skx99m-11 kLiQkI">임대인에게 쪽지보내기</h1>
+		<p class="styled__RequestDesc-sc-1skx99m-12 cKVLgb">임대인에 따라서 답장 시간이 늦어질 수 있습니다.</p>
+		<form action="/nnb/myPage/messageWrite2" class="styled__RequestForm-sc-1skx99m-13 dhDUnZ">
+			<input type="hidden" name="MESSAGE_TITLE" value="방 번호[${room.ROOM_NUM }]에 대한 문의입니다."/>
+			<input type="hidden" name="RECEIVER" value="${room.MEM_ID}"/>
+			<input type="hidden" name="ROOM_NUM" value="${room.ROOM_NUM}"/>
+			<textarea name="MESSAGE_CONTENT" autocomplete="off" placeholder="내용을 입력해주세요" class="styled__Input-sc-1skx99m-14 kmcUrF"></textarea>
+			<button class="styled__RequestBtn-sc-1skx99m-15 idBxyN" type="submit">보내기</button>
+		</form>
+	</div>
+</div>
+</div>
+</div>
+
+
+
+
 <div>
 <%@ include file="/WEB-INF/include/footer.jspf" %>
 </div>
@@ -459,8 +535,9 @@ $(document).ready(function(){
          </script>
 	</c:forEach>
 <script type="text/javascript">
+
 //옵션 부분(위에 표)
-if(${room.UTILITY_PRICE}!=null){
+if(${room.UTILITY_PRICE}!=null) {
 	var utility = "${room.UTILITY_TYPE}";
 	var array = utility.replace('1','인터넷')
 			.replace('2','유선TV')
@@ -541,5 +618,7 @@ for(var i=0;i<array.length;i++){
 		break;
 	}
 }
+
+
 </script>
 </html>

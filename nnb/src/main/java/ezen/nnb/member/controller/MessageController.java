@@ -66,6 +66,17 @@ public class MessageController {
 				
 		return mv;
 	}
+	//메세지 보내기
+		@RequestMapping(value="/myPage/messageWrite2")
+		public ModelAndView messageWrite2(CommandMap commandMap, HttpServletRequest request) throws Exception{
+			String room_Num = (String)commandMap.get("ROOM_NUM");
+			ModelAndView mv=new ModelAndView("redirect:/room/roomDetail?ROOM_NUM="+room_Num);
+			HttpSession session = request.getSession();
+			commandMap.put("SENDER", session.getAttribute("MEM_ID"));
+			messageService.insertMessage(commandMap.getMap());
+			return mv;
+		}
+	
 	//차단 목록+차단 목록 개수
 	@RequestMapping(value="/myPage/ignoreUserList")
 	public ModelAndView ignoreUserList(CommandMap commandMap, HttpServletRequest request) throws Exception{
