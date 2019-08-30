@@ -43,7 +43,8 @@
 	)
 ]]>
 </insert>
-<select id="selectNotice" parameterType="hashmap" resultType="hashmap">
+<select id="selectNoticeList" parameterType="hashmap" resultType="hashmap">
+<include refid="common.pagingPre"/> 
 <![CDATA[
 SELECT
 	row_number() over (ORDER BY NT_NUM DESC) rnum,
@@ -55,6 +56,7 @@ SELECT
 FROM
 	NOTICE
     ]]>
+<include refid="common.pagingPost"/> 
 	</select>
 	
 </mapper>

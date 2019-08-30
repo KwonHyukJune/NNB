@@ -3,13 +3,13 @@
 	<h1 class="kuldyr">문의하기</h1>
 	<ul class="jSSNqy">
 		<li>
-		<a href="<c:url value='/faq'/>">자주 묻는 질문</a>
+		<a id="afaq" href="<c:url value='/faq'/>">자주 묻는 질문</a>
 		</li>
 		<li>
-		<a href="<c:url value='/qna'/>">1:1 문의</a>
+		<a id="aqna" href="<c:url value='/qna'/>">1:1 문의</a>
 		</li>
 		<li>
-		<a href="<c:url value='/notice'/>">공지사항</a>
+		<a id="anotice" href="<c:url value='/notice'/>">공지사항</a>
 		</li>
 	</ul>
 </div>

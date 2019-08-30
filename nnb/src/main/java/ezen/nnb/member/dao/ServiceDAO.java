@@ -21,7 +21,7 @@ public class ServiceDAO extends AbstractDAO{
 	}
 	@SuppressWarnings("unchecked")
 	public List<Map<String,Object>> selectNoticeList(Map<String, Object> map) throws Exception{
-		return (List<Map<String,Object>>)selectList("service.selectNoticeList",map);
+		return (List<Map<String,Object>>)selectPagingList("service.selectNoticeList",map);
 	}
 	public void sendQNA(Map<String, Object> map) throws Exception{
 		// TODO Auto-generated method stub

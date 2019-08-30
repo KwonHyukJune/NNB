@@ -6,14 +6,27 @@
 <%@ include file="/WEB-INF/include/include-header.jspf" %>
 <%@ include file="/WEB-INF/include/header.jspf" %>
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/faq.css'/>"/>
+<style type="text/css">
+.box{
+    margin:0 auto; 
+    width:1180px;
+}
+</style>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#afaq').addClass('active');
+});
+</script>
 </head>
 <body>
+<div class="box">
 <%@ include file="/WEB-INF/include/serviceHeader.jspf"%>
 <br><br>
 <div class="selectFAQList"></div>
 <div align="center" id="PAGE_NAVI"></div>
 <input type="hidden" id="PAGE_INDEX" name="PAGE_INDEX" />
 <br>
+</div>
 <div>
 	<%@include file="/WEB-INF/include/footer.jspf"%>
 </div>
@@ -63,7 +76,7 @@ function fn_selectFaqListCallback(data){
 	    			+ "["+value.FAQ_CATEGORY +"]"+"&nbsp;"+ value.FAQ_TITLE 
 	    			+ "</div>"
 					+ "<div class='content' id='" + value.FAQ_NUM + "' style='display: none;'>"
-					+ "<div class='p5'>&nbsp&nbsp&nbsp"+ value.FAQ_CONTENT+ "</div>"
+					+ "<div class='p5'>"+ value.FAQ_CONTENT+ "</div>"
 					+ "</div>"
 				+ "</div>";
 			}); 

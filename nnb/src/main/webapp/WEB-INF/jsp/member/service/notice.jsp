@@ -4,7 +4,7 @@
 <html>
 <head>
 <%@ include file="/WEB-INF/include/include-header.jspf" %>
-<link rel="stylesheet" type="text/css" href="<c:url value='/css/service.css'/>"/>
+<link rel="stylesheet" type="text/css" href="<c:url value='/css/faq.css'/>"/>
 <script type="text/javascript">
 	function toggle(num){
 		var div = document.getElementById(num);
@@ -15,64 +15,90 @@
 		}
 	};
 </script>
+<style type="text/css">
+.box{
+    margin:0 auto; 
+    width:1180px;
+}
+.noticeList, #PAGE_NAVI{
+	margin: 50px 0;
+}
+</style>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#anotice').addClass('active');
+});
+</script>
 </head>
 <body>
 <%@ include file="/WEB-INF/include/header.jspf" %>
-<%@ include file="service.jspf" %>
-
-<!-- 테스트용 세팅 -->
-<%@ page import="java.util.HashMap" %>
-<%@ page import="java.util.Map" %>
-<%@ page import="java.util.List" %>
-<%@ page import="java.util.ArrayList" %>
-<%
-	Map<String,Object> notice1 = new HashMap<String,Object>();
-	notice1.put("NT_NUM","1");
-	notice1.put("NT_TITLE","공지입니다");
-	notice1.put("NT_CONTENT","집에 가고 싶어요");
-	notice1.put("NT_DATE","2019/07/25");
-	notice1.put("NT_TYPE","긴급공지");
-	Map<String,Object> notice2 = new HashMap<String,Object>();
-	notice2.put("NT_NUM","2");
-	notice2.put("NT_TITLE","공지2입니다");
-	notice2.put("NT_CONTENT","집에 가고 싶어요");
-	notice2.put("NT_DATE","2019/07/25");
-	notice2.put("NT_TYPE","일반공지");
+<div class="box">
+	<%@ include file="/WEB-INF/include/serviceHeader.jspf"%>
 	
-	List<Map<String,Object>> noticeList = new ArrayList<Map<String,Object>>();
-	noticeList.add(notice1);
-	noticeList.add(notice2);
+	<div class="noticeList"></div>
+	<div align="center" id="PAGE_NAVI"></div>
+	<input type="hidden" id="PAGE_INDEX" name="PAGE_INDEX" />
 	
-	request.setAttribute("noticeList",noticeList);
-%>
-<!-- 테스트용 세팅 끝 -->
-
-<div class="notice">
-
-	<div>
-		<div class="p1">순번</div>
-		<div class="p2">공지유형</div>
-		<div class="p3">등록날짜</div>
-		<div class="p4">제목</div>
-	</div>
-
-<c:forEach var="notice" items="${noticeList}">
-	<div class="title" onclick="toggle(${notice.NT_NUM});">
-		<div class="p1">${notice.NT_NUM}</div>
-		<div class="p2">${notice.NT_TYPE}</div>
-		<div class="p3">${notice.NT_DATE}</div>
-		<div class="p4">${notice.NT_TITLE}</div>
-	</div>
-	<div class="content" id="${notice.NT_NUM}" style="display: none;">
-		<div class="p5">내용</div>
-		<div class="p6">${notice.NT_CONTENT}</div>
-	</div>
-</c:forEach>
-	
+<%-- 	<c:forEach var="notice" items="${noticeList}">
+		<div class="title" onclick="toggle(${notice.NT_NUM});">
+			<div class="p1">${notice.NT_NUM}</div>
+			<div class="p2">${notice.NT_TYPE}</div>
+			<div class="p3">${notice.NT_DATE}</div>
+			<div class="p4">${notice.NT_TITLE}</div>
+		</div>
+		<div class="content" id="${notice.NT_NUM}" style="display: none;">
+			<div class="p5">내용</div>
+			<div class="p6">${notice.NT_CONTENT}</div>
+		</div>
+	</c:forEach> --%>
 </div>
-<br>
 <div>
 <%@ include file="/WEB-INF/include/footer.jspf" %>
 </div>
+<script type="text/javascript">
+//페이징
+$(document).ready(function(){
+	fn_selectNoticeList(1);
+});
+function fn_selectNoticeList(pageNo){
+	var comAjax = new ComAjax(); 
+	comAjax.setUrl("<c:url value='/member/notice'/>");  //value 요청으로 실행
+	comAjax.setCallback("fn_selectNoticeListCallback");     //
+	comAjax.addParam("PAGE_INDEX",$("#PAGE_INDEX").val()); 
+	comAjax.addParam("PAGE_ROW", 15); 
+	comAjax.ajax(); }
+
+function fn_selectNoticeListCallback(data){ 
+	var total = data.TOTAL; 
+	var body = $("div.noticeList"); 
+	body.empty(); 
+	
+	if(total == 0){ 
+		var str = "<div class='notice faq' align='center'>" + "조회된 결과가 없습니다." 
+		+ "</div>"; 
+		body.append(str); 
+	} else{ 
+		var params = { divId : "PAGE_NAVI", 
+					pageIndex : "PAGE_INDEX", 
+					totalCount : total, 
+					eventName : "fn_selectNoticeList" 
+					}; 
+		gfn_renderPaging(params); 
+		var str = ""; 
+		$.each(data.list, function(key, notice){ 
+			str += 
+			    "<div class='notice faq'>" 
+	    			+ "<div class='title' onclick='toggle("+ notice.NT_NUM +");'>"
+	    			+ "["+notice.NT_TYPE +"]"+"&nbsp;"+ notice.NT_TITLE 
+	    			+ "</div>"
+					+ "<div class='content' id='" + notice.NT_NUM + "' style='display: none;'>"
+					+ "<div class='p5'>"+ notice.NT_CONTENT+ "</div>"
+					+ "</div>"
+				+ "</div>";
+			}); 
+		body.append(str); 
+	} 
+}
+</script>
 </body>
 </html>

@@ -57,9 +57,21 @@ Logger log = Logger.getLogger(this.getClass());
 	}
 	//list & detail
 	@RequestMapping(value = "/notice")
-	public ModelAndView noticeList(Map<String, Object> commandMap) throws Exception {
+	public ModelAndView openNoticeList(Map<String, Object> commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("/member/service/notice");
+		return mv;
+	}	
+	@RequestMapping(value = "/member/notice")
+	public ModelAndView noticeList(Map<String, Object> commandMap) throws Exception {
+		ModelAndView mv = new ModelAndView("jsonView");
 		List<Map<String, Object>> list = serviceService.openNoticeList(commandMap);
+		mv.addObject("list", list);
+		if(list.size() > 0){
+    		mv.addObject("TOTAL", list.get(0).get("TOTAL_COUNT"));
+    	}
+    	else{
+    		mv.addObject("TOTAL", 0);
+    	}
 		mv.addObject("list", list);
 		return mv;
 	}	

@@ -20,8 +20,20 @@
 		}
 	});
 </script>
+<style type="text/css">
+.box{
+    margin:0 auto; 
+    width:1180px;
+}
+</style>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#aqna').addClass('active');
+});
+</script>
 </head>
 <body>
+<div class="box">
 <%@ include file="/WEB-INF/include/serviceHeader.jspf"%>
 <form id="frm" name="frm">
 <div class="styled__Wrap-sc-1v9ngdo-0 eugBve">
@@ -44,6 +56,7 @@
 </div>
 </form>
 <br>
+</div>
 <div>
 <%@ include file="/WEB-INF/include/footer.jspf" %>
 </div>
