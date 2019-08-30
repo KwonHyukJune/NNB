@@ -6,65 +6,55 @@
 <head>
 <%@ include file="/WEB-INF/include/include-header.jspf" %>
 <%@include file = "/WEB-INF/include/adminHeader.jspf" %>
-
+<link rel="stylesheet" type="text/css" href="<c:url value='/css/adminFaq.css'/>"/>
 <script type="text/javascript">
 $(document).ready(function(){
-	
 	$("#write").on("click", function(e){ //작성하기 버튼
-		insertBoard();
+		insertFaq();
 	});
 		
-	function insertBoard(){
+	function insertFaq(){
 		var comSubmit = new ComSubmit("frm");
 		comSubmit.setUrl("<c:url value='/admin/faq/write'/>");
 		comSubmit.submit();
 	}
 });
-	
 </script>
 </head>
 <body>
-
-<div><h1>FAQ 관리</h1></div>
-
-
-
-<div>
-<h2>새 질문 등록</h2>
-<hr>
-<br/>
+<div class="jtRefx">
+	<h1 class="kuldyr">자주묻는 질문</h1>
 </div>
- <form method="post" id="frm" name="frm">
-	<div>
-      	  카테고리
-      	<select id="FAQ_CATEGORY" name="FAQ_CATEGORY">
-        	<option value="회원정보">회원정보</option>
-        	<option value="신고관련">신고관련</option>
-        </select>
-   </div>
-   <br/>
-   
-  
-		<div>
-       		 제목
-        	<input type="text" id="FAQ_TITLE" name="FAQ_TITLE"/>
-  		</div>
-  		<br/>
-		<div>    
-	       	 내용
-		<textarea rows="20" cols="50" title="내용" id="FAQ_CONTENT" name="FAQ_CONTENT"></textarea>
-	    </div>
-
-    <div>
-    	<br/><br/>
-    	<a href="#" id="write">작성하기</a>
-    	 <a href="javascript:back()">취소</a>
-    </div>
- </form> 
-
-
-<br/><br/><br/><br/><br/><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;
+<div>
+	<h2 class="cYaAqA">새 질문 등록</h2>
+	<br/>
+</div>
+<div class="eugBve">
+ 	<form method="post" id="frm" name="frm">
+	<ul class="hIJwlj">
+      	 <li>
+      	 <p class="efvxco">카테고리</p>
+      		<select class="freEbZ hRFrgm" name="FAQ_CATEGORY">
+					<option>카테고리 선택</option>
+					<option value="회원정보">회원정보</option>
+        			<option value="신고관련">신고관련</option>	
+			</select>
+ 		</li> 
+  		<li>
+ 			<p class="efvxco">제목</p>
+ 			<input type="text" class="ilgADB kTQnUD" id="FAQ_TITLE" name="FAQ_TITLE">
+ 		</li>
+		<li>
+ 				<p class="efvxco">내용</p>
+ 				<textarea class="bqTGEL hunnDM" name="FAQ_CONTENT"></textarea>
+ 		</li>
+ 	</ul>
+ 	 </form> 
+   	<div align="center">
+    	<button class='kcMULl' id="write">작성</button>
+		<button class='iEZQG' type="button" onclick="location.href='/nnb/admin/openFaqList'">취소</button>
+	</div>
+</div>
 <div>
 <%@include file = "/WEB-INF/include/footer.jspf" %>
 </div>

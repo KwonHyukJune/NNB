@@ -55,7 +55,7 @@ $(document).ready(function(){
 </head>
 <body>
 <div class="jtRefx">
-	<h1 class="kuldyr">제휴 은행 관리</h1>
+	<h1 class="kuldyr">자주묻는 질문</h1>
 </div>
 <div>
 	<h2 class="cYaAqA">질문 수정</h2>
@@ -65,9 +65,9 @@ $(document).ready(function(){
  	 <form id="frm" name="frm">	 
  		<ul class="hIJwlj">
  			<li>
- 				<p class="efvxco">질문 종류</p>
+ 				<p class="efvxco">카테고리</p>
  				<select class="freEbZ hRFrgm" name="FAQ_CATEGORY">
-					<option>질문 종류 선택</option>
+					<option>카테고리 선택</option>
 					<option value="회원정보">회원정보</option>
         			<option value="신고관련">신고관련</option>	
 				</select>
