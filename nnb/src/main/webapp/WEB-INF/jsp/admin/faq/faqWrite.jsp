@@ -9,6 +9,11 @@
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/adminFaq.css'/>"/>
 <script type="text/javascript">
 $(document).ready(function(){
+	$('#awrite').addClass('active');
+});
+</script>
+<script type="text/javascript">
+$(document).ready(function(){
 	$("#write").on("click", function(e){ //작성하기 버튼
 		insertFaq();
 	});

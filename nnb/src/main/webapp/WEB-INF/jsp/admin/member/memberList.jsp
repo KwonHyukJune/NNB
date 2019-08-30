@@ -57,6 +57,46 @@
 .jSSNqy>li>a:hover, .jSSNqy>li>a:active {
 	color: rgb(34, 34, 34);
 }
+.hRFrgm {
+    height: 46px;
+    color: rgb(68, 68, 68);
+    font-size: 15px;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    padding: 0px 15px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(208, 210, 214);
+    border-image: initial;
+    border-radius: 0px;
+    background: url(/nnb/media/arrow.svg) right 15px center / 10px no-repeat rgb(255, 255, 255);
+    outline: none;
+}
+.kZIxja {
+    display: inline-block;
+    width: 600px;
+    height: 46px;
+    color: rgb(34, 34, 34);
+    font-size: 15px;
+    border: 1px solid rgb(208, 210, 214);
+    margin: 0;
+    outline: none;
+}
+.dsdsd {
+    width: 80px;
+    height: 46px;
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+    line-height: 46px;
+    letter-spacing: -0.3px;
+    background-color: rgb(19, 116, 248);
+    border-width: 0px;
+    border-style: initial;
+    border-color: initial;
+    border-image: initial;
+    border-radius: 2px;
+    outline: none;
+}
 </style>
 
 
@@ -67,7 +107,7 @@ function showPopup(obj){
 	var id = obj.children('.num').next().children('#id').text();
     var url = "/nnb/admin/memberDetail?MEM_NUM="+num+"&MEM_ID="+id;
     var name = "회원정보";
-    var option = "width = 500, height = 500, top = 100, left = 200, location = no, resizeable = yes, scrollbars = yes"
+    var option = "width = 700, height = 700, top = 100, left = 200, location = no, resizeable = yes, scrollbars = yes"
     window.open(url, name, option);
 }
 //검색
@@ -156,24 +196,27 @@ function fn_selectSearchMemberListCallback(data) {
 	}
 }
 </script>
-
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#awrite').addClass('active');
+});
+</script>
 </head>
 
 
 <body>
-<%@ include file="/WEB-INF/include/adminMemberHeader.jspf"%>
-
 <div style="margin:0 300px">
-<select name="searchType">
+<%@ include file="/WEB-INF/include/adminMemberHeader.jspf"%>
+<div style="margin:50px 0">
+<select name="searchType" class="hRFrgm">
 	<option value="">전체보기</option>
 	<option value="id">아이디+이름</option>
 	<option value="email">이메일</option>
 	<option value="phone">연락처</option>
 </select>
-	<input type="text" name='keyword' id="keywordInput" value='${cri.keyword }' style="height: 15px; ">
-	<button type="button" onclick="fn_search()">조회</button>
-    <a href="#this" class="btn" id="delete">조회</a>
-	<br/>
+	<input class="kZIxja" type="text" name='keyword' id="keywordInput" value='${cri.keyword }'>
+	<button class="dsdsd" type="button" onclick="fn_search()">조회</button>
+</div>
 	
 
 <div class="selectMeberList">

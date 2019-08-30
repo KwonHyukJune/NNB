@@ -46,7 +46,13 @@
 	color: rgb(34, 34, 34);
 }
 /* ³»¿ë */
-.title {
+div.faq{
+	border-bottom: 1px solid rgb(238, 238, 238);
+}
+div.faq:nth-child(1){
+	border-top: 1px solid #919191;
+}
+.faq > .title {
     height: 70px;
     padding-left: 60px;
     color: rgb(123, 189, 144);
@@ -56,7 +62,7 @@
     position: relative;
     cursor: pointer;
 }
-.title::before {
+.faq > .title::before {
     content: "Q.";
     color: rgb(123, 189, 144);
     font-size: 24px;
@@ -205,4 +211,7 @@ no-repeat rgb(255, 255, 255);
     border-image: initial;
     border-radius: 0px;
     outline: none;
+}
+.content > .p5{
+	margin: 0 15px;
 }

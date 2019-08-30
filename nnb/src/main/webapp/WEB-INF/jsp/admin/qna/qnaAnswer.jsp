@@ -9,6 +9,11 @@
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/adminQNA.css'/>"/>
 <script type="text/javascript">
 $(document).ready(function(){
+	$('#aadmin').addClass('active');
+});
+</script>
+<script type="text/javascript">
+$(document).ready(function(){
 	
 	$("#update").on("click", function(e){ //작성하기 버튼
 		insertBoard();

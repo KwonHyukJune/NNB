@@ -7,10 +7,11 @@
 <%@ include file="/WEB-INF/include/include-header.jspf" %>
 <%@include file = "/WEB-INF/include/adminHeader.jspf" %>
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/adminQNA.css'/>"/>
-<style>
-
-</style>
-
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#aadmin').addClass('active');
+});
+</script>
 <script type="text/javascript">
 function delet(num){  // 삭제
 	if(confirm('삭제하시겠습니까?')){
@@ -30,23 +31,23 @@ function goDetail(num) {
 </script>
 </head>
 <body>
+<div style="margin:0 300px; min-width:1180px;">
 	<%@ include file="/WEB-INF/include/adminQnaHeader.jspf"%>
-<br>
 
-<div class="adminQNA">
-	<p>
+<div class="adminQNA" style="padding-top: 30px;">
+	<p style="height: 80px;">
 		<select class="freEbZ hRFrgm" name="searchType" id="searchType">
 			<option value="">전체</option>
 			<option value="n">답변대기</option>
 			<option value="Y">답변완료</option>
 		</select>
 	</p>
-	<br/><br/><br/>
 	<p class="hXdylP" id="count"></p>
 	<ul class='qUCQS' id='body'></ul>
 	<div id="PAGE_NAVI" align="center"></div>
 	<input type='hidden' id='PAGE_INDEX' name="PAGE_INDEX">
 	<br><br><br>
+</div>
 </div>
 <div>
 	<%@include file = "/WEB-INF/include/footer.jspf" %>
