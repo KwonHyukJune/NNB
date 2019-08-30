@@ -7,7 +7,7 @@
 <%@include file="/WEB-INF/include/adminHeader.jspf"%>
 
 <link rel="stylesheet" type="text/css"
-	href="<c:url value='/css/myInterest.css'/>" />
+	href="<c:url value='/css/adminMessage.css'/>" />
 
 <style>
 .kuldyr {
@@ -59,6 +59,42 @@
 
 .jSSNqy>li>a:hover, .jSSNqy>li>a:active {
 	color: rgb(34, 34, 34);
+}
+
+.msgDtl > p:first-child{
+	float:left;
+	width:10%;
+	box-shadow: 0px 2px #000dff;
+}
+.msgDtl > p:nth-child(2){
+	float:left;
+	width:15%;
+	box-shadow: 0px 2px #000dff;
+}
+.msgDtl > p:nth-child(3){
+	float:left;
+	width:15%;
+	box-shadow: 0px 2px #000dff;
+}
+.msgDtl > p:nth-child(4){
+	float:left;
+	width:30%;
+	box-shadow: 0px 2px #000dff;
+}
+.msgDtl > p:nth-child(5){
+	float:left;
+	width:30%;
+	box-shadow: 0px 2px #000dff;
+}
+.tbody > li{
+	
+	width:18%;
+	heifht: 59px;
+}
+.message{
+	height:59px;
+	width: 100%;
+	line-height: 60px;
 }
 </style>
 
@@ -143,7 +179,7 @@
 			$.each(data.list, function(key, message) {
 				str += "<li class='message'>"
 						+ "<div class='num' style='display:none;'>" + message.MESSAGE_NUM + "</div>"
-						+ "<div class=''>" 
+						+ "<div class='msgDtl'>" 
 							+ "<p>" + message.RNUM + "</p>" 
 							+ "<p>" + message.MEM_KIND + "</p>" 
 							+ "<p>"	+ message.RECEIVER + "</p>" 
@@ -171,66 +207,66 @@
 <body>
 
 
-<div class="jtRefx">
-	<h1 class="title kuldyr">회원 관리</h1>
-	<ul class="tab jSSNqy">
-		<li>
-		<a id="awrite" class="tabmenu" href="memberList">회원 검색</a>
-		</li>
-		<li>
-		<a id="aadmin" class="tabmenu" href="messageList">전체 쪽지함</a>
-		</li>
-	</ul>
-</div>
-	<br />
-	<br />
+	<div class="jtRefx">
+		<h1 class="title kuldyr">회원 관리</h1>
+		<ul class="tab jSSNqy">
+			<li>
+			<a id="awrite" class="tabmenu" href="memberList">회원 검색</a>
+			</li>
+			<li>
+			<a id="aadmin" class="tabmenu" href="messageList">전체 쪽지함</a>
+			</li>
+		</ul>
+	</div>
+		<br />
+		<br />
 	
 	<div class="searchT">
-	<select name="searchType">
-		<option value="n"
-			<c:out value="${cri.searchType == null?'selected':''}"/>>
-			---</option>
-		<option value="t"
-			<c:out value="${cri.searchType eq 't'?'selected':''}"/>>제목</option>
-		<option value="c"
-			<c:out value="${cri.searchType eq 'c'?'selected':''}"/>>내용</option>
-		<option value="w"
-			<c:out value="${cri.searchType eq 'w'?'selected':''}"/>>대상</option>
-		<option value="tc"
-			<c:out value="${cri.searchType eq 'tc'?'selected':''}"/>>
-			제목+ 내용</option>
-		<option value="cw"
-			<c:out value="${cri.searchType eq 'cw'?'selected':''}"/>>내용
-			+ 대상</option>
-		<option value="tcw"
-			<c:out value="${cri.searchType eq 'tcw'?'selected':''}"/>>
-			제목 + 내용 + 대상</option>
-	</select>
-	<input type="text" name='keyword' id="keywordInput"
-		value='${cri.keyword }'>
-	<button class="adminbtn" type="button" id='searchBtn' onclick="fn_search()">검색</button>
-</div>
+		<select name="searchType">
+			<option value="n"
+				<c:out value="${cri.searchType == null?'selected':''}"/>>
+				---</option>
+			<option value="t"
+				<c:out value="${cri.searchType eq 't'?'selected':''}"/>>제목</option>
+			<option value="c"
+				<c:out value="${cri.searchType eq 'c'?'selected':''}"/>>내용</option>
+			<option value="w"
+				<c:out value="${cri.searchType eq 'w'?'selected':''}"/>>대상</option>
+			<option value="tc"
+				<c:out value="${cri.searchType eq 'tc'?'selected':''}"/>>
+				제목+ 내용</option>
+			<option value="cw"
+				<c:out value="${cri.searchType eq 'cw'?'selected':''}"/>>내용
+				+ 대상</option>
+			<option value="tcw"
+				<c:out value="${cri.searchType eq 'tcw'?'selected':''}"/>>
+				제목 + 내용 + 대상</option>
+		</select>
+		<input type="text" name='keyword' id="keywordInput"
+			value='${cri.keyword }'>
+		<button class="adminbtn" type="button" id='searchBtn' onclick="fn_search()">검색</button>
+	</div>
+	<br/>
 	<div class="adminMessageList">
 		
 		<div class="messageList">
 			<div id="count"></div>	
 			
 		<br/><br/>	
-		<table class = "tbody">
-		    <tbody>
-			    <tr>
-			    	<td class="adN" style = "width: 60px; height: 30px;  ">번호</td>
-			    	<td class="Inf" style = "width: 80px ">회원정보</td>
-			    	<td class="Mii" style = "width: 100px ">아이디</td>
-			    	<td class="Mel" style = "width: 190px ">매물번호</td>
-			    	<td class="Mpn" style = "width: 170px ">전화번호</td>
-			    	<td class="Mld" style = "width:  ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;　</td>
-			    	
-			    </tr>
-		    </tbody>
-	    </table>
-					
-			<ul id="selectSearchMessageList">
+	
+	<div class="tbodyM">
+		<ul class="tbody">
+		   
+			    	<li class="adN" style = "width: 10%; height: 50px; float:left; ">번&nbsp;호</li>
+			    	<li class="Inf" style = "width: 15%; height: 50px; float:left; ">회&nbsp;원&nbsp;정&nbsp;보</li>
+			    	<li class="Mii" style = "width: 15%; height: 50px; float:left; ">아&nbsp;이&nbsp;디</li>
+			    	<li class="Mel" style = "width: 30%; height: 50px; float:left; ">제&nbsp;&nbsp;목</li>
+			    	<li class="Mpn" style = "width: 30%; height: 50px; float:left; ">날&nbsp;&nbsp;짜</li>
+			  
+	    </ul>
+	    <br/>
+	</div>					
+			<ul class="Mls" id="selectSearchMessageList">
 			</ul>
 			<div class='' id="PAGE_NAVI"></div>
 			<input type='hidden' id='PAGE_INDEX' name="PAGE_INDEX">
@@ -240,7 +276,7 @@
 		</div>
 
 	</div>
-	<br>
+	<br/>
 	<div>
 		<%@include file="/WEB-INF/include/footer.jspf"%>
 	</div>

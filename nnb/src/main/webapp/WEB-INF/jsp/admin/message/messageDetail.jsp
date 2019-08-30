@@ -6,8 +6,112 @@
 <head>
 <%@ include file="/WEB-INF/include/include-header.jspf" %>
 <%@include file = "/WEB-INF/include/adminHeader.jspf" %>
-<link rel="stylesheet" type="text/css" href="<c:url value='/css/myInterest.css'/>"/>
+<link rel="stylesheet" type="text/css" href="<c:url value='/css/adminMessage.css'/>"/>
+<style>
+.MsgBox > p:first-child{
+	float:left;
+	width:25%;
+	height:60px;
+	line-height: 40px;
+	text-align:center;	
+	box-shadow: 0px 2px white;
+	background-color: #000dff;
+	padding: 10px;
+	color: white;
+	
+}
+.MsgBox > p:nth-child(2){
+	float:left;
+	width:75%;
+	text-align:left;
+	height:60px;
+	line-height: 40px;
+	box-shadow: -2px 2px white;
+	background-color: #000dff;
+	padding: 10px;
+	color: white;
+	
+}
+.MsgBox > p:nth-child(3){
+	float:left;
+	width:25%;
+	height:60px;	
+	line-height: 40px;
+	text-align:center;
+	box-shadow: 0px 2px #000dff;
+	padding: 10px;
+}
+.MsgBox > p:nth-child(4){
+	float:left;
+	width:75%;
+	text-align:left;
+	height:60px;
+	line-height: 40px;
+	box-shadow: -2px 2px #000dff;
+	padding: 10px;
+	
+}
+.MsgBox > p:nth-child(5){
+	float:left;
+	width:25%;
+	height:60px;
+	line-height: 40px;
+	text-align:center;
+	box-shadow: 0px 2px #000dff;
+	padding: 10px;
+}	
+.MsgBox > p:nth-child(6){
+	float:left;
+	width:75%;
+	text-align:left;
+	height:60px;
+	line-height: 40px;
+	box-shadow: -2px 2px #000dff;
+	padding: 10px;
+	
+}
+.MsgBox > p:nth-child(7){
+	float:left;
+	width:25%;
+	height:60px;
+	line-height: 40px;
+	text-align:center;
+	box-shadow: 0px 2px #000dff;
+	padding: 10px;
+	
+}
+.MsgBox > p:nth-child(8){
+	float:left;
+	width:75%;
+	text-align:left;
+	height:60px;
+	line-height: 40px;
+	box-shadow: -2px 2px #000dff;
+	padding: 10px;
+	
+}
+.MsgBox > p:nth-child(9){
+	float:left;
+	width:25%;
+	height:60px;
+	text-align:center;
+	line-height: 40px;
+	padding: 10px;
+	
+}
+.MsgBox > p:nth-child(10){
+	float:left;
+	width:75%;
+	height:auto;
+	text-align:left;
+	line-height: 40px;
+	box-shadow: -2px 0px #000dff;
+	padding: 10px;
 
+	
+}
+
+</style>
 <script type="text/javascript">
 
 function fn_openBoardList(obj){   // 목록으로
@@ -25,7 +129,9 @@ function fn_openBoardList(obj){   // 목록으로
 <body>
 
 
-<div><h1>메시지 보기</h1></div>
+<div class="mdTl">
+<h1>메시지 보기</h1>
+</div>
 <br/>
 <hr>
 <br/><br/><br/>
@@ -36,12 +142,14 @@ function fn_openBoardList(obj){   // 목록으로
 <div class="MessageList">
    
    <div class="Message">      
-	<ul>
-		<li>번호 
-		 ${map.MESSAGE_NUM} &nbsp;     
-		</li>	
-		<li>대상	  
-         ${map.MEM_ID} (
+	<div class="MsgBox">
+		<p>번호 </p>
+		
+		 <p>&nbsp;${map.MESSAGE_NUM}</p>	
+		 
+		<p>대상</p>	  
+		
+         <p>${map.MEM_ID} (
          	<c:if test="${map.MEM_KIND eq 'lessor'}">
          	임대회원
          	</c:if>
@@ -49,20 +157,18 @@ function fn_openBoardList(obj){   // 목록으로
          	임차회원
          	</c:if>
          )
-      	</li>
-      	<li>날짜  :&nbsp;      	
-         ${map.SEND_DATE}&nbsp;
-         </li>
-         <li>제목  :&nbsp;      	
-         ${map.MESSAGE_TITLE}&nbsp;
-         </li>
-         <li>내용  :&nbsp;
-		${map.MESSAGE_CONTENT}    
-         </li>	
-          
-      </ul>
-    <br/><br/><br/> 
-    <a href="#" onClick="fn_openBoardList($(this))">목록으로</a>
+      	</p>
+      	<p>날짜 </p>
+         <p>${map.SEND_DATE}</p>
+         <p>제목 </p>    	
+         <p>${map.MESSAGE_TITLE}</p>
+         <p>내용 </p>
+		<p>${map.MESSAGE_CONTENT}</p>&nbsp;
+         </div> 
+     
+    <br/><br/><br/>
+ 
+    <a class="adminbtn" href="#" onClick="fn_openBoardList($(this))">목록으로</a>
 
   
    </div>	
