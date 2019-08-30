@@ -8,6 +8,11 @@
 <%@include file = "/WEB-INF/include/adminHeader.jspf" %>
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/adminFaq.css'/>"/>
 <script type="text/javascript">
+$(document).ready(function(){
+	$('#awrite').addClass('active');
+});
+</script>
+<script type="text/javascript">
 
 $(document).ready(function(){
 	$("#update").on("click", function(e){ //저장하기 버튼

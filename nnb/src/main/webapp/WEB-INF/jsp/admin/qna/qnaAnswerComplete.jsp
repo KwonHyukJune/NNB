@@ -6,7 +6,11 @@
 <head>
 <%@ include file="/WEB-INF/include/include-header.jspf" %>
 <%@include file = "/WEB-INF/include/adminHeader.jspf" %>
-
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#aadmin').addClass('active');
+});
+</script>
 <script type="text/javascript">
 
 $(document).ready(function(){

@@ -8,7 +8,11 @@
 <%@ include file="/WEB-INF/include/adminHeader.jspf" %>
 
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/myInterest.css'/>"/>
-
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#awrite').addClass('active');
+});
+</script>
 <script type="text/javascript">
 
 function goPage1(num) {   // 목록으로

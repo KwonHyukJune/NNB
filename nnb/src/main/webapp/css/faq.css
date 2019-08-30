@@ -46,7 +46,7 @@
 	color: rgb(34, 34, 34);
 }
 /* ³»¿ë */
-.title {
+.faq > .title {
     height: 70px;
     padding-left: 60px;
     color: rgb(123, 189, 144);
@@ -56,7 +56,7 @@
     position: relative;
     cursor: pointer;
 }
-.title::before {
+.faq > .title::before {
     content: "Q.";
     color: rgb(123, 189, 144);
     font-size: 24px;
@@ -85,4 +85,7 @@
     position: absolute;
     top: 24px;
     left: 29px;
+}
+.p5{
+	margin: 0 15px;
 }

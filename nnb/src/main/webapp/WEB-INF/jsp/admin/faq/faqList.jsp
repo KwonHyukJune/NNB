@@ -7,20 +7,24 @@
 <%@ include file="/WEB-INF/include/include-header.jspf"%>
 <%@include file="/WEB-INF/include/adminHeader.jspf"%>
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/adminFaq.css'/>"/>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#awrite').addClass('active');
+});
+</script>
 </head>
 <body>
+<div style="margin:0 300px; min-width:1180px;">
 <%@ include file="/WEB-INF/include/adminQnaHeader.jspf"%>
-<br>
-<br>
-<div class="selectFaqList" >
+	<div class="selectFaqList"  style="padding-top: 50px; padding-bottom: 50px;">
+	</div>
+	<div align="center" id="PAGE_NAVI"></div>
+	<input type="hidden" id="PAGE_INDEX" name="PAGE_INDEX" />
+	<br>
+	<div align="center" style="padding-bottom: 100px;">    
+	 <button class="iEZQG" onClick="goPage1(${map.FAQ_NUM})">자주묻는 질문 작성</button>
+	</div>
 </div>
-<div align="center" id="PAGE_NAVI"></div>
-<input type="hidden" id="PAGE_INDEX" name="PAGE_INDEX" />
-<br>
-<div align="center">    
- <button class="iEZQG" onClick="goPage1(${map.FAQ_NUM})">자주묻는 질문 작성</button>
-</div>
-<br>
 	<div>
 		<%@include file="/WEB-INF/include/footer.jspf"%>
 	</div>
@@ -85,7 +89,7 @@ function fn_selectFaqListCallback(data){
 	    					+ "["+ value.FAQ_CATEGORY +"]"+"&nbsp;"+ value.FAQ_TITLE 
 	    			+ "</div>"
 					+ "<div class='content' id='" + value.FAQ_NUM + "' style='display: none;'>"
-						+ "<div class='p5'>&nbsp&nbsp&nbsp"+ value.FAQ_CONTENT+ "</div>"
+						+ "<div class='p5'>"+ value.FAQ_CONTENT+ "</div>"
 					+ "<div align='center'>"
 					+ "<button class='kcMULl' onClick='goPage(" + value.FAQ_NUM + ")'> 수정 </button>"
 					+ "<button class='iEZQG' id='" + value.FAQ_NUM +"' onclick='delet("+ value.FAQ_NUM +")'>삭제</button>"
