@@ -78,53 +78,71 @@ $(document).ready(function(){
 </head>
 <body>
 <%@ include file="/WEB-INF/include/header.jspf" %>
+<div class="hgdh">
 <%@ include file="myPage.jspf" %>
 
-<div class="myPageInfoForm">
-
-	<form id="frm" name="frm" method="post" action="modify">
-	<div>이름</div>
-		<input type="text" id="name" name="name" value="${map.MEM_NAME}" disabled="disabled">
-	<div>비밀번호</div>
-		<input type="password" id="password" name="MEM_PW">
-	<div>닉네임</div>
-	<div class="bhsJD">
-		<input type="text" id="nickname" name="nickname" placeholder="닉네임" class="jYdxqx2 kTQnUD" value="${map.MEM_NICK}">
-		<button class="kvrxoz2" onclick="fn_nickCheck();" type="button">닉네임 중복 확인</button>
-	</div>
-	<span id="chkMsg2"></span>
-	<div>이메일</div>
-		<input type="text" id="email1" name="email1" value="${map.email1}">
-		@
-		<input type="text" id="email2" name="email2" value="${map.email2}">
-		<select id="email">
-			<option>직접입력</option>
-			<option>naver.com</option>
-			<option>hanmail.net</option>
-			<option>gmail.com</option>
-			<option>nate.com</option>
-		</select>
-	<div>연락처</div>
-		<div>
-			<select id="phone1" name="phone1">
-				<option>010</option>
-				<option>011</option>
-				<option>016</option>
-				<option>017</option>
-				<option>018</option>
-				<option>019</option>
-			</select>
-			<input type="number" id="phone2" name="phone2">
-			<input type="number" id="phone3" name="phone3">
-		</div>
+	<div class="myPageInfoForm">
+		<div class="info1">
 		
-	</form>
-	<div>
-	<button onclick="fn_submit();">확인</button>
-	<button type="button" onclick="location.href='<c:url value='/myPage/MyInfodetail'/>'">취소</button>
-	</div>
-	<div><a href="<c:url value='/myPage/myPageDeleteComfirm'/>">회원탈퇴</a></div>
-	
+			<form id="frm" name="frm" method="post" action="modify">
+			<div class="mdftl">이름</div>
+			<div>
+				<input type="text" id="name" name="name" value="${map.MEM_NAME}" disabled="disabled">
+			</div>	
+			<br/>
+			
+			<div class="mdftl">비밀번호</div>
+			<div>
+				<input type="password" id="password" name="MEM_PW">
+			</div>
+			<br/>
+			
+			<div class="mdftl">닉네임</div>
+			<div class="bhsJD">
+				<input type="text" id="nickname" name="nickname" placeholder="닉네임" class="jYdxqx2 kTQnUD" value="${map.MEM_NICK}">
+				<button class="infobtn" onclick="fn_nickCheck();" type="button">닉네임 중복 확인</button>
+			</div>
+			<span id="chkMsg2" class="idinfo"></span>
+			<br/>
+			
+			<div class="mdftl">이메일</div>
+			<div>
+				<input type="text" id="email1" name="email1" value="${map.email1}">
+				
+				<input type="text" id="email2" name="email2" value="${map.email2}">
+				<select id="email">
+					<option>직접입력</option>
+					<option>naver.com</option>
+					<option>hanmail.net</option>
+					<option>gmail.com</option>
+					<option>nate.com</option>
+				</select>
+			</div>	
+			<br/>
+			
+			<div class="mdftl">연락처</div>
+				<div>
+					<select id="phone1" name="phone1">
+						<option>010</option>
+						<option>011</option>
+						<option>016</option>
+						<option>017</option>
+						<option>018</option>
+						<option>019</option>
+					</select>
+					<input type="number" id="phone2" name="phone2">
+					<input type="number" id="phone3" name="phone3">
+				</div>
+			<br/>
+			</form>
+			<div class="scbt">
+			<button class="infobtn" onclick="fn_submit();">확인</button>
+			<button class="infobtn" type="button" onclick="location.href='<c:url value='/myPage/MyInfodetail'/>'">취소</button>
+			
+			<div class="dtbt"><a class="infobtn" href="<c:url value='/myPage/myPageDeleteComfirm'/>">회원탈퇴</a></div>
+			</div>
+		</div>	
+	</div>	
 </div>
 <br>
 <div>

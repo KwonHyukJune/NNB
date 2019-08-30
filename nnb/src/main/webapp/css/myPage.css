@@ -122,3 +122,127 @@ div.message > p:nth-child(6), li > p:nth-child(5){
     line-height: 58px;
     border-bottom: 1px solid rgb(204, 204, 204);
 }
+.myPageInfo1{
+	width: 850px;
+    padding-bottom: 100px;
+    margin: 0px auto;
+}
+.myifl{
+	line-height: 58px;
+    border-bottom: 1px solid rgb(204, 204, 204);
+    padding: 70px 150px;
+}
+.adminbtn{
+	-moz-box-shadow: 0px 1px 0px 0px #f0f7fa;
+	-webkit-box-shadow: 0px 1px 0px 0px #f0f7fa;
+	box-shadow: 0px 1px 0px 0px #f0f7fa;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #e6e6ec), color-stop(1, #e6e6ec));
+	background:-moz-linear-gradient(top, #e6e6ec 5%, blue 100%);
+	background:-webkit-linear-gradient(top, #e6e6ec 5%, #000dff 100%);
+	background:-o-linear-gradient(top, #e6e6ec 5%, #e6e6ec 100%);
+	background:-ms-linear-gradient(top, #e6e6ec 5%, #e6e6ec 100%);
+	background:linear-gradient(to bottom, #e6e6ec 5%, #e6e6ec 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#e6e6ec', endColorstr='#e6e6ec',GradientType=0);
+	background-color:#87faa6;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	border-radius:4px;
+	border:1px solid #e6e6ec;
+	display:inline-block;
+	cursor:pointer;
+	color:black;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:2px 4px;
+	text-decoration:none;
+	text-shadow:0px -1px 0px #e6e6ec;
+	height: 30px;
+    text-align: center;
+    width: 70px;
+    line-height: 28px;
+}
+.adminbtn:hover {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #dcbluee5ff), color-stop(1, #e6e6ec));
+	background:-moz-linear-gradient(top, #e6e6ec 5%, white 100%);
+	background:-webkit-linear-gradient(top, #e6e6ec 5%, white 100%);
+	background:-o-linear-gradient(top, #e6e6ec 5%, white 100%);
+	background:-ms-linear-gradient(top, #e6e6ec 5%, white 100%);
+	background:linear-gradient(to bottom, #e6e6ec 5%, white 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#e6e6ec', endColorstr='#e6e6ec',GradientType=0);
+	background-color:#e6e6ec;
+}
+.adminbtn:active {
+	position:relative;
+	top:1px;
+}
+.infobtn{
+	-moz-box-shadow: 0px 1px 0px 0px #f0f7fa;
+	-webkit-box-shadow: 0px 1px 0px 0px #f0f7fa;
+	box-shadow: 0px 1px 0px 0px #f0f7fa;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #e6e6ec), color-stop(1, #e6e6ec));
+	background:-moz-linear-gradient(top, #e6e6ec 5%, blue 100%);
+	background:-webkit-linear-gradient(top, #e6e6ec 5%, #000dff 100%);
+	background:-o-linear-gradient(top, #e6e6ec 5%, #e6e6ec 100%);
+	background:-ms-linear-gradient(top, #e6e6ec 5%, #e6e6ec 100%);
+	background:linear-gradient(to bottom, #e6e6ec 5%, #e6e6ec 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#e6e6ec', endColorstr='#e6e6ec',GradientType=0);
+	background-color:#87faa6;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	border-radius:4px;
+	border:1px solid #e6e6ec;
+	display:inline-block;
+	cursor:pointer;
+	color:black;
+	font-family:Arial;
+	font-size:13px;
+	font-weight:bold;
+	padding:2px 4px;
+	text-decoration:none;
+	text-shadow:0px -1px 0px #e6e6ec;
+	height: 23px;
+    text-align: center;
+    width: auto;
+    line-height: 21px;
+}
+.infobtn:hover {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #dcbluee5ff), color-stop(1, #e6e6ec));
+	background:-moz-linear-gradient(top, #e6e6ec 5%, white 100%);
+	background:-webkit-linear-gradient(top, #e6e6ec 5%, white 100%);
+	background:-o-linear-gradient(top, #e6e6ec 5%, white 100%);
+	background:-ms-linear-gradient(top, #e6e6ec 5%, white 100%);
+	background:linear-gradient(to bottom, #e6e6ec 5%, white 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#e6e6ec', endColorstr='#e6e6ec',GradientType=0);
+	background-color:#e6e6ec;
+}
+.infobtn:active {
+	position:relative;
+	top:1px;
+}
+.hgdh{
+	width: 850px;
+    padding-bottom: 100px;
+    margin: 0px auto;
+	
+}
+.info1{
+	line-height: 40px;
+    border-bottom: 1px solid rgb(204, 204, 204);
+    padding: 50px 150px;
+}
+.mdftl{
+	float:left; 
+	width: 100px;
+	text-align: center;
+}
+.idinfo{
+	padding-left: 100px;
+	font-size: 13px;
+}
+.scbt{
+	text-align: center;
+}
+.dtbt{
+	text-align: right;
+}
