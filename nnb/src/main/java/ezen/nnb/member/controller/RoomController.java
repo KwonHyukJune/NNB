@@ -52,7 +52,7 @@ public class RoomController {
 
 	@RequestMapping(value = "/room/write") // 방 내놓기 폼에서 등록한 정보들을 db에 저장. 
 	public ModelAndView writeRoom(CommandMap commandMap, HttpServletRequest request) throws Exception {
-		ModelAndView mv = new ModelAndView("member/room/adminRoom");
+		ModelAndView mv = new ModelAndView("redirect:/room/adminRoom");
 		if(request.getParameterValues("UTILITY_TYPE")!=null) {
 			String[] arr = request.getParameterValues("UTILITY_TYPE");
 			String UTILITY_TYPE = "";

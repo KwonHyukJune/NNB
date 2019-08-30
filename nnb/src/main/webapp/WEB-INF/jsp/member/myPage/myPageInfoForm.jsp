@@ -121,8 +121,7 @@ $(document).ready(function(){
 	</form>
 	<div>
 	<button onclick="fn_submit();">확인</button>
-	<a href="#" id="submit" class="btn">확인</a>
-	<a href="<c:url value='/myPage/myPageInfo'/>" id="cancle" class="btn">취소</a>
+	<button type="button" onclick="location.href='<c:url value='/myPage/MyInfodetail'/>'">취소</button>
 	</div>
 	<div><a href="<c:url value='/myPage/myPageDeleteComfirm'/>">회원탈퇴</a></div>
 	

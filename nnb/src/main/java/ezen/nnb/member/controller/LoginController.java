@@ -162,22 +162,18 @@ public class LoginController {
 	@RequestMapping("/lessorOnly")
 	//로그인 인터셉터
 	public ModelAndView lessorOnly(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("/member/main/login");
+		ModelAndView mv = new ModelAndView("member/common/back");
 		String message = "임차인 계정만 이용할 수 있는 서비스입니다.";
-		String url = "/main";
 		mv.addObject("message",message);
-		mv.addObject("url",url);
 		return mv;
 	}
 	
 	@RequestMapping("/tenantOnly")
 	//로그인 인터셉터
 	public ModelAndView tenantOnly(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("/member/main/login");
+		ModelAndView mv = new ModelAndView("member/common/back");
 		String message = "임대인 계정만 이용할 수 있는 서비스입니다.";
-		String url = "/main";
 		mv.addObject("message",message);
-		mv.addObject("url",url);
 		return mv;
 	}
 }
