@@ -11,6 +11,9 @@
     margin:0 auto; 
     width:1180px;
 }
+.selectFAQList, #PAGE_NAVI {
+    margin: 50px 0;
+}
 </style>
 <script type="text/javascript">
 $(document).ready(function(){
