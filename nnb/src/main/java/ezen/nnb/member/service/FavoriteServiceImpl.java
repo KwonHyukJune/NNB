@@ -52,6 +52,25 @@ public class FavoriteServiceImpl implements FavoriteService{
 		return favoriteDAO.selectFavRoomList(map); //반복된 작업을 거친 favRoom 리스트 객체를 리턴.
 	}
 	@Override
+	public int countFavRoomList(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub // 내가 찜한 방 보기
+		return favoriteDAO.countFavRoomList(map); //반복된 작업을 거친 favRoom 리스트 객체를 리턴.
+	}
+	@Override
+	public List<Map<String, Object>> selectFavMateList(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub // 내가 찜한 방 보기
+		List<Map<String,Object>> mate=favoriteDAO.selectFavRoommate(map); // 맵 객체에다가 내가 찜한 방의 방번호를 저장해준다.
+		List<Map<String,Object>> FavMate = new ArrayList<Map<String,Object>>();
+		if(mate.size()==0) return FavMate;
+		map.put("MATE_ID",mate);
+		return favoriteDAO.selectFavMateList(map); //반복된 작업을 거친 favRoom 리스트 객체를 리턴.
+	}
+	@Override
+	public int countFavMateList(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub // 내가 찜한 방 보기
+		return favoriteDAO.countFavMateList(map); //반복된 작업을 거친 favRoom 리스트 객체를 리턴.
+	}
+	@Override
 	public void deleteFavRoommate(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub
 		favoriteDAO.deleteFavRoommate(map);
@@ -61,6 +80,11 @@ public class FavoriteServiceImpl implements FavoriteService{
 		// TODO Auto-generated method stub
 		favoriteDAO.addFavRoom(map);
 		favoriteDAO.updateFavCountInc(map);
+	}
+	@Override
+	public void addFavRoommate(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		favoriteDAO.addFavRoommate(map);
 	}
 	@Override
 	public void cancelFavRoom(Map<String, Object> map) throws Exception {
@@ -78,5 +102,15 @@ public class FavoriteServiceImpl implements FavoriteService{
 		}
 		return temp_map;
 	}
-
+	@Override
+	public Map<String, Object> selectFavRoommate(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		List<Map<String,Object>> roommate=favoriteDAO.selectFavRoommate(map);
+		Map<String,Object> temp_map = new HashMap<String,Object>();
+		for(int i=0 ; i < roommate.size() ; i++) {
+			String rn = String.valueOf(roommate.get(i).get("RI_MEM_ID"));
+			temp_map.put(rn,"RI_MEM_ID");
+		}
+		return temp_map;
+	}
 }

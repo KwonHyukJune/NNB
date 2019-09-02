@@ -22,21 +22,30 @@
 			insertFav();
 		});
 	});  
-	function insertFav(num){
-		var comAjax = new ComAjax();
-		comAjax.setUrl("<c:url value='/roommate/list/addFavRoommate'/>");
-		comAjax.addParam("RI_MEM_ID","${mate.RI_MEM_ID}");
-		comAjax.addParam("MEM_ID","${MEM_ID}");
-		comAjax.addParam("check",'0');
-		comAjax.ajax();
+	function fn_addFav(obj){
+		var str = window.location.href;
+		var url = "redirect:"+str.split("<%=request.getContextPath()%>")[1];
+		var num = obj.children('#num').text();
+		var comSubmit = new ComSubmit();
+		comSubmit.setUrl("<c:url value='/roommate/addFavRoommate'/>");
+		comSubmit.addParam("check", 0);
+		comSubmit.addParam("RI_MEM_ID", num);
+		comSubmit.addParam("MEM_ID", idChk);
+		comSubmit.addParam("url", url);
+		comSubmit.submit();
 	}
-	function deleteFav(num){
-		var comAjax = new ComAjax();
-		comAjax.setUrl("<c:url value='/roommate/list/deleteFavRoommate'/>");
-		comAjax.addParam("RI_MEM_ID","${mate.RI_MEM_ID}");
-		comAjax.addParam("MEM_ID","${MEM_ID}");
-		comAjax.ajax();
-	};
+	function fn_deleteFav(obj){
+		var str = window.location.href;
+		var url = "redirect:"+str.split("<%=request.getContextPath()%>")[1];
+		var num = obj.children('#num').text();
+		var comSubmit = new ComSubmit();
+		comSubmit.setUrl("<c:url value='/roommate/addFavRoommate'/>");
+		comSubmit.addParam("check", 1);
+		comSubmit.addParam("RI_MEM_ID", num);
+		comSubmit.addParam("MEM_ID", idChk);
+		comSubmit.addParam("url", url);
+		comSubmit.submit();
+	}
 	window.onload = function(){
 		$("#search").on("click",function(){
 			comAjax = new ComAjax();
@@ -271,39 +280,45 @@ function fn_selectSearchRoommateListCallback(data){
 		gfn_renderPaging(params); 
 		count.append("<p>총 "+total+"명의 검색 결과가 있습니다.</p>");
 		var str	=	"<li class='qUCQS1'>"
-					+	"<p style='width:16%;'>닉네임</p>"
-					+	"<p style='width:16%;'>나이</p>"
-					+	"<p style='width:16%;'>성별</p>"
-					+	"<p style='width:16%;'>지역</p>"
-					+	"<p style='width:16%;'>부담가능금액</p>"
-					+	"<p style='width:16%;'>&nbsp;&nbsp;&nbsp;</p>"
+					+	"<p>닉네임</p>"
+					+	"<p>나이</p>"
+					+	"<p>성별</p>"
+					+	"<p>지역</p>"
+					+	"<p>부담가능금액</p>"
+					+	"<p>&nbsp;&nbsp;&nbsp;</p>"
 				+	"</li>"
 		$.each(data.list, function(key, mate){ 
-			str	+=	"<a href='#' onclick='openDetail($(this));' class='btn'>"
-					+	"<div id='id' style='display:none;'>" + mate.RI_MEM_ID + "</div>"
-					+	"<li class='qUCQS2'>"
-						+	"<p style='width:16%;'>" + mate.MEM_NICK + "</p>"
-						+	"<p style='width:16%;'>" + mate.RI_BIRTH + "</p>"
-						+	"<p style='width:16%;'>" + mate.RI_GENDER + "</p>"
-						+	"<p style='width:16%;'>" + mate.RI_REGION1 + "</p>"
-						+	"<p style='width:16%;'>" + mate.RI_LOAN_BIG + "/" + mate.RI_LOAN_SMALL + "</p>"
-						+	"<p style='width:16%;'>";
-/* 			if(mate.RI_MEM_NUM in data.favRoom){
-						str	+=	"<div class='deleteFav' onclick='deleteFav($(this));'>"
+			str	+=	"<div id='id' style='display:none;'>" + mate.RI_MEM_ID + "</div>"
+				+	"<li class='qUCQS2'>"
+					+	"<a href='#' onclick='openDetail($(this));' class='btn'>"
+						+	"<div>" + mate.MEM_NICK + "</div>"
+						+	"<div>" + mate.RI_BIRTH + "</div>"
+						+	"<div>";
+						if(mate.RI_GENDER=='F'){
+			str	+=			"여자";
+						}else if(mate.RI_GENDER=='M'){
+			str	+=			"남자";
+						}
+			str	+=			"</div>"
+						+	"<div>" + mate.RI_REGION1 + "</div>"
+						+	"<div>" + mate.RI_LOAN_BIG + "/" + mate.RI_LOAN_SMALL + "</div>"
+					+	"</a>"
+						+	"<div>";
+ 			if(mate.RI_MEM_ID in data.favMateNum){
+						str	+=	"<div class='deleteFav' onclick='fn_deleteFav($(this));'>"
 								+	"<div id='num' style='display:none;'>"
-									+	mate.RI_MEM_NUM
+									+	mate.RI_MEM_ID
 								+	"</div>"
 							+	"</div>";
 			}else{
 						str	+=	"<div class='insertFav' onclick='fn_addFav($(this));'>"
 								+	"<div id='num' style='display:none;'>"
-									+	mate.RI_MEM_NUM
+									+	mate.RI_MEM_ID
 								+	"</div>"
 							+	"</div>";
-			} */
-					str	+=	"</p>"
-					+	"</li>"
-				+	"</a>";
+			} 
+					str	+=	"</div>"
+				+	"</li>";
        	}); 
        	body.append(str); 
 	} 

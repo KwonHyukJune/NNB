@@ -79,18 +79,27 @@ public class MyInterestController {
 		HttpSession session = request.getSession();
 		commandMap.put("MEM_ID",session.getAttribute("MEM_ID"));
 		List<Map<String,Object>> list=favoriteService.selectFavRoomList(commandMap.getMap());
+		int count = favoriteService.countFavRoomList(commandMap.getMap());
 		mv.addObject("list",list);
-		mv.addObject("total",list.size());
+		mv.addObject("total",count);
 		return mv;
 	}
 
 	@RequestMapping("/myInterest/favRoommateList")
 	public ModelAndView favRoommateList(CommandMap commandMap,HttpServletRequest request)throws Exception{
 		ModelAndView mv=new ModelAndView("member/myInterest/myRoommateList");
+		return mv;
+	}
+	@RequestMapping("/myInterest/openFavRoommateList")
+	@ResponseBody
+	public ModelAndView openFavRoommateList(CommandMap commandMap,HttpServletRequest request)throws Exception{
+		ModelAndView mv=new ModelAndView("jsonView");
 		HttpSession session = request.getSession();
 		commandMap.put("MEM_ID", session.getAttribute("MEM_ID"));
-		List<Map<String,Object>> list=favoriteService.selectRoommateList(commandMap.getMap());
+		List<Map<String,Object>> list=favoriteService.selectFavMateList(commandMap.getMap());
+		int count = favoriteService.countFavMateList(commandMap.getMap());
 		mv.addObject("list", list);
+		mv.addObject("total",count);
 		
 		return mv;
 	}
