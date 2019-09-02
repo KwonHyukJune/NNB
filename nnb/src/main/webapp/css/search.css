@@ -1,5 +1,177 @@
 @charset "UTF-8";
-.modal {
+
+.hezqfH {
+    width: 600px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 15px 18px -10px;
+    background-color: rgb(255, 255, 255);
+    position: relative;
+    z-index: 1001;
+    margin: 7% auto;
+    animation: 250ms ease-in-out 0s 1 normal none running hGDpgc;
+}
+.sAnxl {
+    width: 100%;
+    padding: 30px 30px 50px;
+}
+
+
+.kNWuAm > h1 {
+    margin-bottom: 10px;
+    color: rgb(21, 100, 249);
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.kNWuAm > p {
+    color: rgb(102, 102, 102);
+    font-size: 15px;
+    line-height: 22px;
+}
+
+.dSVCPu {
+    width: 100%;
+    margin-top: 30px;
+}
+.dpGWsW {
+    margin-bottom: 17px;
+    color: rgb(34, 34, 34);
+    font-size: 18px;
+    line-height: 27px;
+}
+
+.dpGWsW > span {
+    margin-left: 2px;
+    color: rgb(136, 136, 136);
+    font-size: 14px;
+    font-weight: 400;
+    position: relative;
+    bottom: 2px;
+}
+
+.jrruna {
+    height: 22px;
+    margin-bottom: 20px;
+}
+.jrruna > label {
+    float: left;
+}
+.kAqGVi {
+    display: block;
+    height: 22px;
+    padding-left: 23px;
+    position: relative;
+    cursor: pointer;
+}
+.jrruna::after {
+    display: block;
+    content: "";
+    clear: both;
+}
+.eKDcBx {
+    width: 100%;
+    height: 130px;
+}
+
+.hunnDM {
+    color: rgb(68, 68, 68);
+    font-size: 15px;
+    background-color: rgb(255, 255, 255);
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    resize: none;
+    padding: 12px 15px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(208, 210, 214);
+    border-image: initial;
+    border-radius: 0px;
+    outline: none;
+}
+
+.jrruna > label + label {
+    margin-left: 40px;
+    margin-top: 0px;
+}
+.hZQtkA {
+    width: 100%;
+}
+.kmrVIX {
+    display: block;
+    width: 100%;
+    height: 30px;
+    margin-bottom: 6px;
+    position: relative;
+}
+.dPAaNr {
+    float: left;
+    margin-bottom: 17px;
+    color: rgb(34, 34, 34);
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 27px;
+}
+.kXZAWg {
+    float: right;
+    margin-right: 37px;
+    color: rgb(34, 34, 34);
+    font-size: 15px;
+    line-height: 30px;
+}
+.jdLfJO {
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+}
+.kmrVIX > input[type="checkbox"] + svg {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+.jdLfJO + svg .Circle__fill {
+    fill: rgb(255, 255, 255);
+}
+.jdLfJO + svg .Circle__border {
+    stroke: rgb(221, 221, 221);
+}
+.jdLfJO + svg .Circle__check {
+    stroke: rgb(204, 204, 204);
+}
+.kmrVIX::after {
+    display: block;
+    content: "";
+    clear: both;
+}
+.hdLyxf {
+    width: 100%;
+    height: 120px;
+    background-color: rgb(244, 244, 244);
+    padding: 15px;
+    overflow: hidden;
+}
+
+iframe[Attributes Style] {
+    width: 100%;
+    height: 100%;
+    border-top-width: 0px;
+    border-right-width: 0px;
+    border-bottom-width: 0px;
+    border-left-width: 0px;
+}
+.bucdvX {
+    width: 100%;
+    height: 70px;
+    color: rgb(255, 255, 255);
+    font-size: 17px;
+    font-weight: 700;
+    background-color: rgb(26, 90, 232);
+    border-width: 0px;
+    border-style: initial;
+    border-color: initial;
+    border-image: initial;
+}
+
+
+.modal, .modal2{
   display: none; /* Hidden by default */
 }
 .klSSab {

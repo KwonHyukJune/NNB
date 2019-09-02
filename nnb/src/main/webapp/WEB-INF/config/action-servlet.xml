@@ -40,6 +40,7 @@
 		</mvc:interceptor>
 		<mvc:interceptor>
 			<mvc:mapping path="/roommate/*"/>
+			<mvc:mapping path="/report/*"/>
 			<mvc:mapping path="/myPage/*"/>
 			<mvc:mapping path="/logout"/>
 			<mvc:mapping path="/searchRoommate"/>
