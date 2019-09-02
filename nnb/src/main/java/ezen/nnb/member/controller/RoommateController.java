@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import ezen.nnb.common.CommandMap;
+import ezen.nnb.member.service.FavoriteService;
 import ezen.nnb.member.service.IgnoreService;
 import ezen.nnb.member.service.RoommateService;
 
@@ -28,26 +29,33 @@ public class RoommateController {
 	private RoommateService roommateService;
 	@Resource(name = "ignoreService")
 	private IgnoreService ignoreService;
+	@Resource(name="favoriteService")
+	private FavoriteService favoriteService;
 
 
 	@RequestMapping(value = "/searchRoommate")
-	public ModelAndView searchRoommate(HttpServletResponse response, HttpServletRequest request, CommandMap commandMap)
+	public ModelAndView openRoommateList(HttpServletResponse response, HttpServletRequest request, CommandMap commandMap)
 			throws Exception {
 		ModelAndView mv = new ModelAndView("/member/roommate/roommateList");
+		return mv;
+	}
+	
+	@RequestMapping(value = "/searchRoommateList")
+	@ResponseBody
+	public ModelAndView searchRoommateList(HttpServletResponse response, HttpServletRequest request, CommandMap commandMap)
+			throws Exception {
+		ModelAndView mv = new ModelAndView("jsonView");
 		HttpSession session = request.getSession();
 		commandMap.put("MEM_ID",session.getAttribute("MEM_ID"));
 		List<Map<String, Object>> searchRoommate = roommateService.searchRoommate(commandMap.getMap());
 		int Count = roommateService.countRoommate(commandMap.getMap());
+
+		Map<String,Object> favMateNum=favoriteService.selectFavRoommate(commandMap.getMap());
+		mv.addObject("favMateNum",favMateNum);
 		
-		// int count =roommateService.countRoommate();
-//리스트?
-					mv.addObject("searchRoommate",searchRoommate);
-					mv.addObject("Count",Count);
+		mv.addObject("list",searchRoommate);
+		mv.addObject("total",Count);
 		
-		  mv.setViewName("member/roommate/roommateList");
-		  
-		  
-	
 		return mv;
 	}
 
@@ -150,6 +158,21 @@ public class RoommateController {
 		if (check == 1) {
 			ignoreService.insertIgnore(commandMap.getMap());
 		}
+		return mv;
+	}
+	
+	@RequestMapping(value = "/roommate/addFavRoommate", method = RequestMethod.POST)
+	public ModelAndView addFavRoom(CommandMap commandMap) throws Exception{
+		String url = (String) commandMap.get("url");
+		ModelAndView mv = new ModelAndView(url);
+		
+		if(commandMap.get("check").equals("0")) {
+			favoriteService.addFavRoommate(commandMap.getMap());
+		}
+		else if(commandMap.get("check").equals("1")){
+			favoriteService.deleteFavRoommate(commandMap.getMap());
+		}
+		
 		return mv;
 	}
 }

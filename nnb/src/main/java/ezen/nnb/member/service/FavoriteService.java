@@ -23,4 +23,14 @@ public interface FavoriteService {
 
 	List<Map<String, Object>> selectRecentRoomList(Map<String, Object> map) throws Exception;
 
+	Map<String, Object> selectFavRoommate(Map<String, Object> map) throws Exception;
+
+	void addFavRoommate(Map<String, Object> map) throws Exception;
+
+	int countFavRoomList(Map<String, Object> map) throws Exception;
+
+	int countFavMateList(Map<String, Object> map) throws Exception;
+
+	List<Map<String, Object>> selectFavMateList(Map<String, Object> map) throws Exception;
+
 }

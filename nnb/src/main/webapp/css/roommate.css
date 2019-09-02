@@ -35,7 +35,7 @@ ul, li {
 
 }
 
- p{
+.search p{
 	padding:10px;
 	border:0px;
 	display:inline;
@@ -53,15 +53,26 @@ color:#0000ff;
 	width:100px;
 	height:40px;
 }
-#mateList ul li{
+#mateList li p, #mateList a>div{
 	float:left;
-	height:120%;
+	height:50px;
 	line-height:50px;
 	text-align:center;  
     margin: 0;
-    border-top: 1px solid #8C8C8C;
-
-/*    border-bottom: 1px solid rgb(204, 204, 204);  */
+}
+.insertFav, .deleteFav{
+	position: relative;
+	top: 10px;
+	z-index: 1;
+}
+#mateList li{
+	height: 50px;
+	border-bottom: 1px solid rgb(204, 204, 204);
+}
+#mateList li:first-child{
+	height: 50px;
+	border-top: 1px solid #8C8C8C;
+	border-bottom: 1px solid #8C8C8C;
 }
 #mate ul li{
    float:left;
@@ -70,14 +81,34 @@ color:#0000ff;
 	text-align:center;
 	margin:0 auto; 
     margin:  0;
-    border-top: 1px solid #8C8C8C;
- 
-/*   border-bottom: 1px solid rgb(204, 204, 204);  */
-	
 }
-
+#mateList li>p:first-child, #mateList a>div:first-child{
+	width:15%;
+}
+#mateList li>p:nth-child(2), #mateList a>div:nth-child(2){
+	width:10%;
+}
+#mateList li>p:nth-child(3), #mateList a>div:nth-child(3){
+	width:10%;
+}
+#mateList li>p:nth-child(4), #mateList a>div:nth-child(4){
+	width:40%;
+}
+#mateList li>p:nth-child(5), #mateList a>div:nth-child(5){
+	width:15%;
+}
+#mateList li>p:nth-child(6), #mateList li>div:last-child{
+	width:10%;
+}
+#mateList li>div:last-child{
+	float: right;
+	height: 50px;
+}
 #mate ul li a{
 	display:block;
+}
+#PAGE_NAVI{
+	text-align:center;
 }
 .fhfjff {
     background-color: rgb(255, 255, 255);

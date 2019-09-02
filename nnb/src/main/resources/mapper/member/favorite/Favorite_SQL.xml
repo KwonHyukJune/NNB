@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="favorite">
+
 <!-- 최근 본 방 -->
 <select id="selectRecentRoom" parameterType="hashmap" resultType="hashmap">
 <include refid="common.pagingPre"/>
@@ -38,6 +39,7 @@
 		</foreach>
 <include refid="common.pagingPost"/> 
 </select>
+
 <!-- 회원이 찜 한 방 리스트 -->
 <select id="selectFavRoomList" parameterType="hashmap" resultType="hashmap">
 <include refid="common.pagingPre"/>
@@ -73,10 +75,38 @@ WHERE
 </foreach>
 <include refid="common.pagingPost"/> 
 </select>
+
+<select id="countFavRoomList" parameterType="hashmap" resultType="integer">
+<![CDATA[
+SELECT count(*)
+FROM
+	ROOM_INFO1 R1, 
+	ROOM_INFO2 R2, 
+	ROOM_BOARD RB
+WHERE
+	R1.ROOM_NUM=r2.room_num and
+	R1.ROOM_NUM=rb.room_num and
+	DEL_GB='N' and
+	R1.ROOM_NUM in
+]]>
+<foreach collection="ROOM_NUM" item="item" index="index" separator="," open="(" close=")">
+	<![CDATA[
+			#{item.ROOM_NUM}
+	]]>
+</foreach>
+</select>
+
 <!-- 전체 찜 한 방 조회 -->
 <select id = "selectFavRoom" parameterType="hashmap" resultType="hashmap">
 <![CDATA[
 	select fav_room.room_num from fav_room where mem_id=#{MEM_ID,jdbcType=VARCHAR }
+]]>
+</select>
+
+<!-- 전체 찜 한 룸메이트 아이디 조회 -->
+<select id = "selectFavRoommate" parameterType="hashmap" resultType="hashmap">
+<![CDATA[
+	select RI_MEM_ID from FAV_MATE where mem_id=#{MEM_ID,jdbcType=VARCHAR }
 ]]>
 </select>
 
@@ -98,24 +128,54 @@ WHERE
 	ROOM_NUM=#{ROOM_NUM,jdbcType=INTEGER}
 ]]>
 </update>
+
 <!-- 찜한 룸메이트 리스트 -->
 <select id="selectFavRoommateList" parameterType="hashmap" resultType="hashmap">
 <![CDATA[
 select
-     FAV_MATE_NUM,
-     RI_MEM_ID,
-     MEM_ID                       
+	row_number() over (ORDER BY FAV_MATE_NUM DESC) rnum,
+	F.RI_MEM_ID,
+	MEM_NICK,
+	RI_GENDER,
+	RI_LOAN_BIG,
+	RI_LOAN_SMALL,
+	RI_REGION1,
+	RI_REGION2,
+	RI_REGION3,
+  	RI_DATE_START,
+  	RI_DATE_END,
+  	NVL(TRUNC(MONTHS_BETWEEN(TO_CHAR(SYSDATE,'YYYYMMDD'), TO_CHAR(RI_BIRTH, 'YYYYMMDD'))/12), 0) AS RI_BIRTH
+FROM
+     FAV_MATE F,
+     ROOMMATE_PROFILE P,
+     MEMBER M
+WHERE 
+	F.RI_MEM_ID = P.RI_MEM_ID and
+	M.MEM_ID = F.RI_MEM_ID and
+    F.MEM_ID=#{MEM_ID,jdbcType=VARCHAR } and
+    P.RI_MEM_ID in
+]]>
+<foreach collection="MATE_ID" item="item" index="index" separator="," open="(" close=")">
+	<![CDATA[
+			#{item.RI_MEM_ID}
+	]]>
+</foreach>
+</select>  
+   
+<select id="countFavRoommateList" parameterType="hashmap" resultType="integer">
+<![CDATA[
+select count(*)                 
 FROM
      FAV_MATE
 WHERE 
      MEM_ID=#{MEM_ID,jdbcType=VARCHAR }
-     ORDER BY FAV_MATE_NUM DESC
 ]]>
 </select>     
+
 <!-- 찜 한 룸메이트 취소 -->
 <delete id="deleteFavRoommate" parameterType="hashmap">
 <![CDATA[
-	delete from FAV_MATE where MEM_ID=#{MEM_ID,jdbcType=VARCHAR }
+	delete from FAV_MATE where MEM_ID=#{MEM_ID,jdbcType=VARCHAR } and RI_MEM_ID = #{RI_MEM_ID}
 ]]>
 </delete> 
 
@@ -129,6 +189,21 @@ WHERE
 	values(
 		FAV_ROOM_NUM_SEQ.NEXTVAL,
 		#{ROOM_NUM,jdbcType=INTEGER },
+		#{MEM_ID,jdbcType=VARCHAR }
+		)
+]]>
+</insert>
+
+<insert id = "addFavRoommate" parameterType="hashmap">
+<![CDATA[
+	insert into FAV_MATE(
+		FAV_MATE_NUM,
+		RI_MEM_ID,
+		MEM_ID
+		)
+	values(
+		FAV_MATE_NUM_SEQ.NEXTVAL,
+		#{RI_MEM_ID,jdbcType=INTEGER },
 		#{MEM_ID,jdbcType=VARCHAR }
 		)
 ]]>
