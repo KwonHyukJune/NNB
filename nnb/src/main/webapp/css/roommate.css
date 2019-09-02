@@ -276,7 +276,7 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
 	 position:relative;  
 }
  #alks { 	
-	padding:70px;
+	padding:0 70px;
 	display:inline;
    } 
 /*룸메이트 상세보기  */

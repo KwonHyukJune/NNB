@@ -519,7 +519,6 @@ $(document).ready(function(){
 $("input[type=checkbox]").on("change",function(){
 	fn_search();
 });
-
 function fn_search(){
 	var comAjax = new ComAjax();
 	comAjax.setUrl("<c:url value='/search/roomList'/>");
@@ -701,7 +700,7 @@ $(function(){
 		else{
 			input_value[1] = values[1]*2500-150000;
 		}
-		input0.val(input_value[0]).trigger('change');
+		input0.val(input_value[0]);
 		input1.val(input_value[1]);
 	    $('#p1').text('');
     	var str = '';
@@ -721,6 +720,7 @@ $(function(){
     		str += input_value[1] + '만 원';
     	}
 	    $('#p1').text(str);
+	    $("#search").trigger('click');
 	});
 	//월세
 	sliders[1].noUiSlider.on('update', function( values, handle ) {
@@ -747,7 +747,7 @@ $(function(){
 		else{
 			input_value[1] = values[1]*25-1300;
 		}
-		input0.val(input_value[0]).trigger('change');
+		input0.val(input_value[0]);
 		input1.val(input_value[1]);
 	    $('#p2').text('');
     	var str = '';
@@ -763,6 +763,7 @@ $(function(){
     		str += input_value[1] + '만 원';
     	}
 	    $('#p2').text(str);
+	    $("#search").trigger('click');
 	});
 	//관리비
 	sliders[2].noUiSlider.on('update', function( values, handle ) {
@@ -775,7 +776,7 @@ $(function(){
 		}else{
 			input_value[1] = values[1]/2;
 		}
-		input0.val(input_value[0]).trigger('change');
+		input0.val(input_value[0]);
 		input1.val(input_value[1]);
 	    $('#p3').text('');
     	var str = '';
@@ -791,6 +792,7 @@ $(function(){
     		str += input_value[1] + '만 원';
     	}
 	    $('#p3').text(str);
+	    $("#search").trigger('click');
 	});
 	//방크기
 	sliders[3].noUiSlider.on('update', function( values, handle ) {
@@ -803,7 +805,7 @@ $(function(){
 		}else{
 			input_value[1] = values[1]*3/2+15;
 		}
-		input0.val(input_value[0]).trigger('change');
+		input0.val(input_value[0]);
 		input1.val(input_value[1]);
 	    $('#p4').text('');
     	var str = '';
@@ -815,12 +817,10 @@ $(function(){
     		str += input_value[1] + '㎡ (' + (input_value[1]/3.3).toFixed(0) + '평)';
     	}
 	    $('#p4').text(str);
-	});
-	$("input[type=hidden]").change(function(){
-		console.log("dd:");
-		fn_search();
+	    $("#search").trigger('click');
 	});
 });
 </script>
+<button type="button" onclick="fn_search();" id="search"></button>
 </body>
 </html>
