@@ -107,7 +107,7 @@ SELECT DISTINCT
 	RI_REGION3,
   	RI_DATE_START,
   	RI_DATE_END,
-  	NVL(TRUNC(MONTHS_BETWEEN(TO_CHAR(SYSDATE,'YYYYMMDD'), TO_CHAR(RI_BIRTH, 'YYYYMMDD'))/12), 0) AS RI_BIRTH
+  	TO_CHAR(sysdate,'YYYY')-TO_CHAR(RI_BIRTH,'YYYY')+1 AS RI_BIRTH
 	
 FROM
 	MEMBER M,
@@ -150,12 +150,12 @@ WHERE
 </if>
 <if test="minyear!=null and !minyear.equals('')">
 	<![CDATA[
-	 AND RI_BIRTH > #{minyear,jdbcType=DATE} 
+	 AND TO_CHAR(sysdate,'YYYY')-TO_CHAR(RI_BIRTH,'YYYY')+1 >= #{minyear,jdbcType=DATE} 
 	]]>
 </if>
-<if test="maxyear!=null and !maxyear.equals('')">
+<if test="maxyear!=null and !maxyear.equals('무제한') and !maxyear.equals('')">
 	<![CDATA[
-	 AND RI_BIRTH < #{maxyear,jdbcType=DATE} 
+	 AND TO_CHAR(sysdate,'YYYY')-TO_CHAR(RI_BIRTH,'YYYY')+1 <= #{maxyear,jdbcType=DATE} 
 	]]>
 </if>
 <if test="mindeposit!=null and !mindeposit.equals('')">
@@ -163,7 +163,7 @@ WHERE
 	AND RI_LOAN_BIG > #{mindeposit,jdbcType=INTEGER} 
 ]]>
 </if>
-<if test="maxdeposit!=null and maxdeposit.equals('무제한')">
+<if test="maxdeposit!=null and !maxdeposit.equals('') and !maxdeposit.equals('무제한')">
 	<![CDATA[
 	AND RI_LOAN_BIG < #{maxdeposit} 
 ]]>
@@ -175,7 +175,7 @@ WHERE
 	]]>
 </if>
 
-<if test="maxrent!=null and maxrent.equals('무제한')">
+<if test="maxrent!=null and !maxrent.equals('') and !maxrent.equals('무제한')">
 	<![CDATA[
 	AND RI_LOAN_SMALL < #{maxrent} 
 	]]>
@@ -224,7 +224,7 @@ WHERE
 		SELECT DISTINCT 
 			IGNORE_D_MEM
 		FROM IGNORE
-		WHERE IGNORE_MEM = #{MEM_ID ,jdbcType=VARCHAR}
+		WHERE IGNORE_MEM = #{MEM_ID,jdbcType=VARCHAR}
 		)
 	]]>	
 <if test="MEM_NICK!=null and!MEM_NICK.equals('')">
@@ -240,21 +240,20 @@ WHERE
 </if>
 <if test="minyear!=null and !minyear.equals('')">
 	<![CDATA[
-	 AND RI_BIRTH > #{minyear,jdbcType=DATE} 
+	 AND TO_CHAR(sysdate,'YYYY')-TO_CHAR(RI_BIRTH,'YYYY')+1 >= #{minyear,jdbcType=DATE} 
 	]]>
 </if>
-<if test="maxyear!=null and !maxyear.equals('')">
+<if test="maxyear!=null and !maxyear.equals('무제한') and !maxyear.equals('')">
 	<![CDATA[
-	 AND RI_BIRTH < #{maxyear,jdbcType=DATE} 
+	 AND TO_CHAR(sysdate,'YYYY')-TO_CHAR(RI_BIRTH,'YYYY')+1 <= #{maxyear,jdbcType=DATE} 
 	]]>
 </if>
-
 <if test="mindeposit!=null and !mindeposit.equals('')">
 	<![CDATA[
 	AND RI_LOAN_BIG > #{mindeposit,jdbcType=INTEGER} 
 ]]>
 </if>
-<if test="maxdeposit!=null and maxdeposit.equals('무제한')">
+<if test="maxdeposit!=null and !maxdeposit.equals('') and !maxdeposit.equals('무제한')">
 	<![CDATA[
 	AND RI_LOAN_BIG < #{maxdeposit} 
 ]]>
@@ -266,7 +265,7 @@ WHERE
 	]]>
 </if>
 
-<if test="maxrent!=null and maxrent.equals('무제한')">
+<if test="maxrent!=null and !maxrent.equals('') and !maxrent.equals('무제한')">
 	<![CDATA[
 	AND RI_LOAN_SMALL < #{maxrent} 
 	]]>
