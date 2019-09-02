@@ -137,7 +137,6 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
-
 <!-- 전체 -->
 <div class="detailRoom dQBfA">
 <!-- 헤더 -->
@@ -203,7 +202,7 @@ $(document).ready(function(){
 					${room.FAV_COUNT}
 				</p>
 				<p class="fEBzAW">•</p>
-				<button type="button" class="lhWOpc" value="평">
+				<button id="openReport" type="button" class="lhWOpc" value="평">
 					<svg width="17" height="18" viewBox="0 0 17 18"><g fill="none" fill-rule="evenodd"><path stroke-width="1.2" d="M8.6.6h1v1.8h-1zM15.207 2.934l.707.707-1.273 1.273-.707-.707zM1.934 2.793l.707-.707 1.273 1.273-.707.707z"></path><path d="M3.5 17.5h10V11A4.5 4.5 0 0 0 9 6.5H8A4.5 4.5 0 0 0 3.5 11v6.5z"></path><path stroke-width="1.2" d="M.6 17.6h15.8v1H.6z"></path></g></svg>
 					<span>신고하기</span>
 				</button>
@@ -462,7 +461,12 @@ $(document).ready(function(){
     var span = document.getElementsByClassName("close")[0]; 
     
     btn.onclick = function() {
+    	var loginCH = idChk
+		if (loginCH == 'null'){
+			alert("로그인을 하셔야 이용하실 수 있는 기능입니다");
+		}else{
         modal.style.display = 'block';
+		}
     }
 	// When the user clicks on <span> (x), close the modal
 	span.onclick = function() {
@@ -526,6 +530,90 @@ $(document).ready(function(){
 </div>
 </div>
 
+<script type="text/javascript">
+$(document).ready(function(){
+	var modal = document.getElementById('myModal2');
+    var btn = document.getElementById('openReport');
+    var span = document.getElementsByClassName("close2")[0]; 
+    
+    btn.onclick = function() {
+    	var loginCH = idChk
+		if (loginCH == 'null'){
+			alert("로그인을 하셔야 이용하실 수 있는 기능입니다");
+		}else{
+        modal.style.display = 'block';
+		}
+    }
+	// When the user clicks on <span> (x), close the modal
+	span.onclick = function() {
+	    modal.style.display = 'none';
+	}
+	window.onclick = function(event) {
+		if (event.target == modal) {
+			modal.style.display = 'none';
+        }
+    }
+
+});
+</script>
+
+<div id="myModal2" class="modal2">
+	<div class="styled__Overlay-sc-17v8eyt-0 dajUZo">
+		<div class="styled__Wrap-sc-17v8eyt-1 hezqfH" width="600">
+			<header class="styled__Header-sc-17v8eyt-2 GoREo">
+				<h1>허위매물 신고</h1>
+				<button class="styled__CloseBtn-sc-17v8eyt-3 kXLdvu close2">
+				<svg width="30" height="30" viewBox="0 0 32 32">
+					<g fill="none" fill-rule="evenodd" transform="translate(1 1)">
+						<circle class="Circle" cx="15" cy="15" r="15">
+						</circle>
+						<g class="Close" stroke-linecap="round" stroke-width="2">
+							<path d="M19.243 19.243l-8.486-8.486M19.243 10.757l-8.486 8.486"></path>
+						</g>
+					</g>
+				</svg>
+				</button>
+			</header>
+			
+			<form action="/nnb/report">
+			<div class="styled__Wrap-sc-1n1jlbj-0 sAnxl">
+				<div class="styled__Notice-sc-1n1jlbj-1 kNWuAm">
+					<h1>매물에 대한 잘못된 정보를 신고해주세요!</h1>
+					<p>확인 후 허위매물일 경우 해당 매물은 삭제되거나 이용이 제재됩니다.</p>
+					<p>허위신고일 시 신고자는 법적인 책임을 질 수 있습니다.</p>
+					<p>다방은 자체 검열을 통해 허위매물 근절에 노력하고 있습니다.</p>
+				</div>
+				<div class="styled__Box-sc-1n1jlbj-2 dSVCPu">
+					<h1 class="styled__BoxTitle-sc-1n1jlbj-3 dpGWsW">신고항목
+						<span>(*필수)</span>
+					</h1>
+					<div class="styled__CheckWrap-sc-1n1jlbj-4 jrruna">
+						<label class="clearfix Checkbox__Label-ifp1yz-0 kAqGVi" size="22">
+							<input type="radio" class="Checkbox__CheckboxStd-ifp1yz-1 PcMeW" name="REPORT_TYPE" value="1">
+							<span class="CheckBox"></span>
+							<span class="styled__CheckText-sc-1n1jlbj-5 llNbGB">거래가 완료 된 매물</span>
+						</label>
+						<label class="clearfix Checkbox__Label-ifp1yz-0 kAqGVi" size="22">
+							<input type="radio" class="Checkbox__CheckboxStd-ifp1yz-1 PcMeW" name="REPORT_TYPE" value="2">
+							<span class="CheckBox"></span>
+							<span class="styled__CheckText-sc-1n1jlbj-5 llNbGB">정보가 다른 매물 (가격, 사진, 위치, 옵션 등)</span>
+						</label>
+					</div>
+						<textarea class="styled__Area-sc-1n1jlbj-6 eKDcBx Textarea-sc-6jro6l-0 hunnDM" name="REPORT_REASON" placeholder="추가 설명을 입력하세요.">
+						</textarea>
+				</div>
+				<input type="hidden" name="REPORT_TITLE" value="방 번호[${room.ROOM_NUM }]에 대한 신고글입니다."/>
+				<input type="hidden" name="REPORT_D_ID" value="${room.MEM_ID}"/>
+				<input type="hidden" name="REPORT_POST_NUM" value="${room.ROOM_NUM}"/>
+				<button class="styled__Btn-sc-1n1jlbj-18 bucdvX">허위매물 신고하기</button>
+			</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+
+
 
 
 
@@ -561,7 +649,7 @@ $(document).ready(function(){
 <script type="text/javascript">
 
 //옵션 부분(위에 표)
-if(${room.UTILITY_PRICE}!=null) {
+if(${room.UTILITY_PRICE!=null}) {
 	var utility = "${room.UTILITY_TYPE}";
 	var array = utility.replace('1','인터넷')
 			.replace('2','유선TV')

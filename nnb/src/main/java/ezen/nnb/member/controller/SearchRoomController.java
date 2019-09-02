@@ -115,7 +115,6 @@ public class SearchRoomController {
 	@RequestMapping(value = "/search/detailRoom") // 방 상세 정보를 찾아서 리턴해준다. + 첨부파일
 	public ModelAndView detailRoom(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("member/search/detailRoom");
-		
 		Map<String,Object> map = roomService.selectRoomDetail(commandMap.getMap());
 		mv.addObject("map", map.get("map")); //게시글 상세정보.
 		mv.addObject("list", map.get("list")); // 첨부파일의 목록을 가지고 있는 리스트.

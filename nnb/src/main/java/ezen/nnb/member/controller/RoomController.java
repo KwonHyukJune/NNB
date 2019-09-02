@@ -99,7 +99,6 @@ public class RoomController {
 		
 		HttpSession session = request.getSession();
 		commandMap.put("MEM_ID", session.getAttribute("MEM_ID"));
-		
 		Map<String,Object> map = roomService.selectRoomDetail(commandMap.getMap());
 		mv.addObject("room", map.get("map")); //게시글 상세정보.
 		mv.addObject("list", map.get("list")); // 첨부파일의 목록을 가지고 있는 리스트.
