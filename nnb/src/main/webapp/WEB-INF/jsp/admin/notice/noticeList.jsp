@@ -6,88 +6,22 @@
 <head>
 <%@ include file="/WEB-INF/include/include-header.jspf"%>
 <%@include file="/WEB-INF/include/adminHeader.jspf"%>
-	
-<style>
-.kuldyr {
-	line-height: 54px;
-	color: rgb(34, 34, 34);
-	font-size: 33px;
-	text-align: center;
-	font-weight: 400;
-	margin: 70px auto 45px;
-}
-.jtRefx {
-	width: 100%;
-}
-.jSSNqy {
-	width: 100%;
-	height: 57px;
-	border-bottom: 1px solid rgba(232, 232, 232, 0.7);
-}
-
-.jSSNqy>li {
-	float: left;
-	width: 33%;
-	height: 57px;
-}
-
-.jSSNqy>li>a {
-	display: block;
-	width: 100%;
-	height: 57px;
-	color: rgb(136, 136, 136);
-	font-size: 16px;
-	line-height: 57px;
-	text-align: center;
-	cursor: pointer;
-	border-bottom: 2px solid transparent;
-}
-
-.jSSNqy>li>a.active {
-	color: rgb(34, 34, 34);
-	font-weight: 500;
-	border-bottom-color: rgb(72, 72, 72);
-}
-
-.jSSNqy::after {
-	display: block;
-	content: "";
-	clear: both;
-}
-
-.jSSNqy>li>a:hover, .jSSNqy>li>a:active {
-	color: rgb(34, 34, 34);
-}
-</style>
+<link rel="stylesheet" type="text/css" href="<c:url value='/css/adminNotice.css'/>"/>	
 </head>
-<!-------------------------------------------------------------- -->
-<br />
-<br />
-<br />
-
 <body>
-
 <%@ include file="/WEB-INF/include/adminBoardHeader.jspf"%>
-	<div style="width:100%">
-	<br><br>
-		<div class="selectNoticeList" style="margin:0 300px;">
-
-
-
+<!-- 내용 -->
+	<div>
+		<div class="selectNoticeList">
 		</div>
 	</div>
-	
-	<br><br>
-	<div id="PAGE_NAVI" style="margin:0 300px; text-align:center;">  </div>
+<!-- 페이징 -->
+	<div id="PAGE_NAVI" align="center"></div>
 		<input type="hidden" id="PAGE_INDEX" name="PAGE_INDEX" />
-   
-   <br>
-   	<div style="margin:0 300px; text-align:center;">    
-  		<a href="#" onClick="goPage1(${map.NT_NUM})">새 공지 작성</a>
+<!-- 하단부 -->
+   	<div class="cxBJwZ" align="center">    
+  		<button class="hRSpXj" onClick="goPage1(${map.NT_NUM})">새 공지 작성</button>
 	</div>
-
-
-
 <br>
 	<div>
 		<%@include file="/WEB-INF/include/footer.jspf"%>
@@ -107,11 +41,9 @@ function delet(num){  // 삭제
 		frm.submit();
 	}
 }
-
 function goPage(num) {   // 수정
 	location.href="noticeModifyForm?num="+num; 
 	}
-	
 function goPage1(num) {   // 새 공지사항 등록
 	location.href="/nnb/admin/noticeWriteForm?num="+num; 
 	}	
@@ -135,8 +67,16 @@ function fn_selectNoticeListCallback(data){
 	body.empty(); 
 	
 	if(total == 0){ 
-		var str = "<div class='notice'>" + "조회된 결과가 없습니다." 
-		+ "</div>"; 
+		var str = "<ul class='qUCQS'>"
+			+ "<li class='pbYHJ'>"
+			+ "<p>번호</p>"
+			+ "<p>공지유형</p>"
+			+ "<p>제목</p>"
+			+ "<p>날짜</p>"
+			+ "<p>기능</p>"
+		+ "</li>"
+	+ "<li class='bryRNw'>" + "조회된 결과가 없습니다. </li>"
+	+ "</ul>" 
 		body.append(str); 
 	
 	} else{ 
@@ -147,17 +87,32 @@ function fn_selectNoticeListCallback(data){
 					eventName : "fn_selectNoticeList" 
 					}; 
 		gfn_renderPaging(params); 
-		var str = ""; 
+		var str = "";
+		str +=  "<ul class='qUCQS'>"
+			+ "<li class='pbYHJ'>"
+			+ "<p>번호</p>"
+			+ "<p>공지종류</p>"
+			+ "<p>제목</p>"
+			+ "<p>날짜</p>"
+			+ "<p>기능</p>"
+		+ "</li>"
 		$.each(data.list, function(key, value){ 
-			str += 
-			    "<div class='notice'>" 
-	    			+ "<a href='<c:url value='/admin/noticeDetail?num=" + value.NT_NUM + "'/>'>"+ 
-	    					value.ROW_NUM +"&nbsp;"+ value.NT_TYPE +"&nbsp;"+ value.NT_DATE +"&nbsp;"+ value.NT_TITLE + "</a>"
-	    			+ "<a href='#' onClick='goPage(" + value.NT_NUM + ")'>+ 수정" + "</a>"
+			str +=
+			    	"<li class='bryRNw'>" 
+	    			+ "<a href='<c:url value='/admin/noticeDetail?num=" + value.NT_NUM + "'/>'>"
+	    			+"<p>"+value.NT_NUM +"</p>"+"<p>"+"[ "+ value.NT_TYPE +"]"+"</p>"
+	    			+"<p>"+ value.NT_TITLE +"</p>"
+	    			+"<p>"+ value.NT_DATE +"</p>" 
+	    			+ "</a>"
+	    			+"<p>"
+	    			+ "<a href='#' onClick='goPage(" + value.NT_NUM + ")'>수정" + "</a>"
+	    			+ " / "
 					+ "<a href='#' class='btn' id='" + value.NT_NUM +"' onclick='delet("+ value.NT_NUM +")'>삭제</a>"
-				+ "</div>";
+					+ "</p>"
+				+ "</li>";
 
 			}); 
+			str+= "</ul>";
 		body.append(str); 
 	} 
 }
