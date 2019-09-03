@@ -17,9 +17,15 @@ function openDetail(obj){
 <body>
 <%@ include file="/WEB-INF/include/header.jspf" %>
 <%@ include file="myInterest.jspf" %>
-<div class="myRoommateList">
+<script type="text/javascript">
+$('.tabmenu:nth-child(3)').addClass('active');
+</script>
 
-<p>총 <span id="count"></span>명의 찜한 룸메이트가 있습니다.</p>
+<div class="myRoommateList hVYleu">
+
+<div class="jZuXcw">
+<p class="fxSxol">총 <span id="count"></span>명의 찜한 룸메이트가 있습니다.</p>
+</div>
 <ul id="mateList"></ul>
 <div id="PAGE_NAVI"></div>
 <input type="hidden" id="PAGE_INDEX" name="PAGE_INDEX">
