@@ -79,9 +79,13 @@ public class MyInterestController {
 		HttpSession session = request.getSession();
 		commandMap.put("MEM_ID",session.getAttribute("MEM_ID"));
 		List<Map<String,Object>> list=favoriteService.selectFavRoomList(commandMap.getMap());
-		int count = favoriteService.countFavRoomList(commandMap.getMap());
 		mv.addObject("list",list);
-		mv.addObject("total",count);
+		if(list.size()!=0) {
+			int count = favoriteService.countFavRoomList(commandMap.getMap());
+			mv.addObject("total",count);
+		}else {
+			mv.addObject("total",0);
+		}
 		return mv;
 	}
 
@@ -97,10 +101,13 @@ public class MyInterestController {
 		HttpSession session = request.getSession();
 		commandMap.put("MEM_ID", session.getAttribute("MEM_ID"));
 		List<Map<String,Object>> list=favoriteService.selectFavMateList(commandMap.getMap());
-		int count = favoriteService.countFavMateList(commandMap.getMap());
 		mv.addObject("list", list);
-		mv.addObject("total",count);
-		
+		if(list.size()!=0) {
+			int count = favoriteService.countFavMateList(commandMap.getMap());
+			mv.addObject("total",count);
+		}else {
+			mv.addObject("total",0);
+		}
 		return mv;
 	}
 	@RequestMapping("/myInterest/favRoommateCancel")
