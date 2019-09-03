@@ -64,27 +64,27 @@
 .msgDtl > p:first-child{
 	float:left;
 	width:10%;
-	box-shadow: 0px 2px #000dff	;
+	box-shadow: 0px 2px rgb(19, 116, 248);;
 }
 .msgDtl > p:nth-child(2){
 	float:left;
 	width:15%;
-	box-shadow: 0px 2px #000dff;
+	box-shadow: 0px 2px rgb(19, 116, 248);;
 }
 .msgDtl > p:nth-child(3){
 	float:left;
 	width:15%;
-	box-shadow: 0px 2px #000dff;
+	box-shadow: 0px 2px rgb(19, 116, 248);;
 }
 .msgDtl > p:nth-child(4){
 	float:left;
 	width:30%;
-	box-shadow: 0px 2px #000dff;
+	box-shadow: 0px 2px rgb(19, 116, 248);;
 }
 .msgDtl > p:nth-child(5){
 	float:left;
 	width:30%;
-	box-shadow: 0px 2px #000dff;
+	box-shadow: 0px 2px rgb(19, 116, 248);;
 }
 .tbody > li{
 	
@@ -95,6 +95,31 @@
 	height:59px;
 	width: 100%;
 	line-height: 60px;
+}
+.kZIxja {
+    display: inline-block;
+    width: 620px;
+    height: 46px;
+    color: rgb(34, 34, 34);
+    font-size: 15px;
+    border: 1px solid rgb(208, 210, 214);
+    margin: 0;
+    outline: none;
+}
+.hRFrgm {
+    height: 46px;
+    color: rgb(68, 68, 68);
+    font-size: 15px;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    padding: 0px 15px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(208, 210, 214);
+    border-image: initial;
+    border-radius: 0px;
+    background: url(/nnb/media/arrow.svg) right 15px center / 10px no-repeat rgb(255, 255, 255);
+    outline: none;
 }
 </style>
 
@@ -222,7 +247,7 @@
 		<br />
 	
 	<div class="searchT">
-		<select name="searchType">
+		<select name="searchType" class="hRFrgm">
 			<option value="n"
 				<c:out value="${cri.searchType == null?'selected':''}"/>>
 				---</option>
@@ -242,9 +267,9 @@
 				<c:out value="${cri.searchType eq 'tcw'?'selected':''}"/>>
 				제목 + 내용 + 대상</option>
 		</select>
-		<input type="text" name='keyword' id="keywordInput"
+		<input class="kZIxja" type="text" name='keyword' id="keywordInput"
 			value='${cri.keyword }'>
-		<button class="adminbtn" type="button" id='searchBtn' onclick="fn_search()">검색</button>
+		<button class="dsdsd" type="button" id='searchBtn' onclick="fn_search()">검색</button>
 	</div>
 	<br/>
 	<div class="adminMessageList">

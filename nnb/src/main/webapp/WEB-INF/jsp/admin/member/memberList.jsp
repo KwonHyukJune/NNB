@@ -158,11 +158,11 @@ function fn_selectSearchMemberListCallback(data) {
 		gfn_renderPaging(params);
 		
 		var head = 	"<li>"
-					+	"<p class='adN'>번호</p>"
-					+	"<p class='Inf'>유형</p>"
-					+	"<p class='Mii'>아이디</p>"
-					+	"<p class='Mel'>이메일</p>"
-					+	"<p class='Mpn'>연락처</p>"
+					+	"<p class='adN'>번 호</p>"
+					+	"<p class='Inf'>유 형</p>"
+					+	"<p class='Mii'>아 이 디</p>"
+					+	"<p class='Mel'>이 메 일</p>"
+					+	"<p class='Mpn'>연 락 처</p>"
 				+	"</li>"
 		body.append(head);
 

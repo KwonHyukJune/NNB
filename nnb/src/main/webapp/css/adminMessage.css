@@ -1,0 +1,197 @@
+@charset "EUC-KR";
+
+/*메세지 리스트 */
+.messageList{
+	margin: 0px auto;
+	text-align: center;
+	width:1180px;
+}
+
+.searchT{
+	margin: 0px auto;
+	text-align: center;
+	
+}
+.adminbtn{
+	-moz-box-shadow: 0px 1px 0px 0px #f0f7fa;
+	-webkit-box-shadow: 0px 1px 0px 0px #f0f7fa;
+	box-shadow: 0px 1px 0px 0px #f0f7fa;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, rgb(19, 116, 248)), color-stop(1, rgb(19, 116, 248)));
+	background:-moz-linear-gradient(top, rgb(19, 116, 248) 5%, blue 100%);
+	background:-webkit-linear-gradient(top, rgb(19, 116, 248) 5%, rgb(19, 116, 248) 100%);
+	background:-o-linear-gradient(top, rgb(19, 116, 248) 5%, rgb(19, 116, 248) 100%);
+	background:-ms-linear-gradient(top, rgb(19, 116, 248) 5%, rgb(19, 116, 248) 100%);
+	background:linear-gradient(to bottom, rgb(19, 116, 248) 5%, rgb(19, 116, 248) 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='rgb(19, 116, 248)', endColorstr='rgb(19, 116, 248)',GradientType=0);
+	background-color:#87faa6;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	border-radius:4px;
+	border:1px solid rgb(19, 116, 248);
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:2px 4px;
+	text-decoration:none;
+	text-shadow:0px -1px 0px rgb(19, 116, 248);
+}
+.adminbtn:hover {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #dcbluee5ff), color-stop(1, rgb(19, 116, 248)));
+	background:-moz-linear-gradient(top, rgb(19, 116, 248) 5%, white 100%);
+	background:-webkit-linear-gradient(top, rgb(19, 116, 248) 5%, white 100%);
+	background:-o-linear-gradient(top, rgb(19, 116, 248) 5%, white 100%);
+	background:-ms-linear-gradient(top, rgb(19, 116, 248) 5%, white 100%);
+	background:linear-gradient(to bottom, rgb(19, 116, 248) 5%, white 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='rgb(19, 116, 248)', endColorstr='rgb(19, 116, 248)',GradientType=0);
+	background-color:rgb(19, 116, 248);
+}
+.adminbtn:active {
+	position:relative;
+	top:1px;
+}
+.adN{
+	/*box-shadow: inset -2px 0px #ffffff;*/
+	vertical-align: middle;
+	background-color: rgb(19, 116, 248);
+	color: white;
+	font-size:15px;
+	/*font-weight: bold;*/
+}
+.Inf{
+	/*box-shadow: inset -2px 0px #ffffff;*/
+	vertical-align: middle;
+	background-color: rgb(19, 116, 248);
+	color: white;
+	font-size:15px;
+	/*font-weight: bold;*/
+}
+.Mii{
+	/*box-shadow: inset -2px 0px #ffffff;*/
+	vertical-align: middle;
+	background-color: rgb(19, 116, 248);
+	color: white;
+	font-size:15px;
+	/*font-weight: bold;*/
+}
+.Mel{
+	/*box-shadow: inset -2px 0px #ffffff;*/
+	vertical-align: middle;
+	background-color: rgb(19, 116, 248);
+	color: white;
+	font-size:15px;
+	/*font-weight: bold;*/
+	 
+}
+.Mpn{
+	/*box-shadow: inset -2px 0px #ffffff;*/
+	vertical-align: middle;
+	background-color: rgb(19, 116, 248);
+	color: white;
+	font-size:15px;
+	/*font-weight: bold;*/
+	
+}
+.Mld{
+
+	vertical-align: middle;
+	background-color: rgb(19, 116, 248);
+	color:#dce5ff;
+	font-size:15px;
+	
+}
+.tbodyM{
+	border-bottom: 1px solid rgb(204, 204, 204);
+	margin: auto; 
+	text-align: center;
+	height: 51.5px;
+}
+
+.Mls{
+	padding: 0 10px 10px 10px;
+	margin: auto; 
+	text-align: center;
+	width:1180px;
+	
+}
+.tbody{
+	width:100%;
+	line-height: 50px;
+}
+/*메세지 리스트 끝*/
+
+/*메시지 디테일 */
+.mdTl{
+	margin: 0px auto;
+	text-align: center;
+	width:1180px;
+	padding: 0 30% 10px 30%;
+}
+.selectMessageList{
+	margin: 0px auto;
+	text-align: center;
+	width:1180px;
+
+	
+}
+.MessageList{
+	margin: 0px auto;
+	text-align: center;
+	width:1180px;
+
+}
+.Message{
+	margin: 0px auto;
+	text-align: center;
+	width:1180px;
+	padding: 0 15% 10px 15%;
+}
+.MsgBox{
+	
+	
+	background-color: white;
+	color:black;
+}
+
+/*메세지 작성*/
+
+.msgW{
+	margin: 0px auto;
+	text-align: center;
+}
+.msgW2{
+	margin: 0px auto;
+	text-align: center;
+}
+.mwtl{
+	margin: 0px auto;
+	text-align: center;
+	width:487.2px;
+	padding: 0 30% 10px 30%;
+	line-height: 80px;
+	height: 80px;
+	color: white;
+    background: #000dff;
+    font-size: 20px;
+}
+.msbtn{
+	margin: 0px auto;
+	text-align: center;
+}
+.dsdsd {
+    width: 100px;
+    height: 46px;
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+    line-height: 46px;
+    letter-spacing: -0.3px;
+    background-color: rgb(19, 116, 248);
+    border-width: 0px;
+    border-style: initial;
+    border-color: initial;
+    border-image: initial;
+    border-radius: 2px;
+    outline: none;
+}
