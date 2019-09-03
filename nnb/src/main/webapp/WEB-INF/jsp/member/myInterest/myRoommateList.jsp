@@ -17,9 +17,15 @@ function openDetail(obj){
 <body>
 <%@ include file="/WEB-INF/include/header.jspf" %>
 <%@ include file="myInterest.jspf" %>
-<div class="myRoommateList">
+<script type="text/javascript">
+$('.tabmenu:nth-child(3)').addClass('active');
+</script>
 
-<p>총 <span id="count"></span>명의 찜한 룸메이트가 있습니다.</p>
+<div class="myRoommateList hVYleu">
+
+<div class="jZuXcw">
+<p class="fxSxol">총 <span id="count"></span>명의 찜한 룸메이트가 있습니다.</p>
+</div>
 <ul id="mateList"></ul>
 <div id="PAGE_NAVI"></div>
 <input type="hidden" id="PAGE_INDEX" name="PAGE_INDEX">
@@ -81,18 +87,11 @@ $(document).ready(function() {
 				var count = data.total;
 				$("#count").empty();
 				$("#count").append(count);
-				var str	=	"<li class='qUCQS1'>"
-							+	"<p>닉네임</p>"
-							+	"<p>나이</p>"
-							+	"<p>성별</p>"
-							+	"<p>지역</p>"
-							+	"<p>부담가능금액</p>"
-							+	"<p>&nbsp;&nbsp;&nbsp;</p>"
-						+	"</li>";
+				var str	=	"";
 					$.each(data.list, function(key, mate){ 
 						str	+=	"<div id='id' style='display:none;'>" + mate.RI_MEM_ID + "</div>"
 							+	"<li class='qUCQS2'>"
-								+	"<a href='#' onclick='openDetail($(this));' class='btn'>"
+								+	"<a href='#' onclick='openDetail($(this));' class='btn hVfzba2'>"
 									+	"<div>" + mate.MEM_NICK + "</div>"
 									+	"<div>" + mate.RI_BIRTH + "</div>"
 									+	"<div>";
@@ -104,7 +103,6 @@ $(document).ready(function() {
 						str	+=			"</div>"
 									+	"<div>" + mate.RI_REGION1 + "</div>"
 									+	"<div>" + mate.RI_LOAN_BIG + "/" + mate.RI_LOAN_SMALL + "</div>"
-								+	"</a>"
 									+	"<div>";
 									str	+=	"<div class='deleteFav' onclick='fn_deleteFav($(this));'>"
 											+	"<div id='num' style='display:none;'>"
@@ -112,6 +110,7 @@ $(document).ready(function() {
 											+	"</div>"
 										+	"</div>";
 								str	+=	"</div>"
+								+	"</a>"
 							+	"</li>";
 			       	}); 
 			       	body.append(str); 

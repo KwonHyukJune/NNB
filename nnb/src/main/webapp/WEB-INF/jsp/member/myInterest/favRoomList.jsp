@@ -9,12 +9,16 @@
 <body>
 <%@ include file="/WEB-INF/include/header.jspf" %>
 <%@ include file="myInterest.jspf" %>
+<script type="text/javascript">
+$('.tabmenu:nth-child(2)').addClass('active');
+</script>
 
+<div class="favRoomList hVYleu">
 
-<div class="favRoomList">
-
-<p>총 <span id="count"></span>개의 찜한 방이 있습니다.</p>
-<ul id="roomList"></ul>
+<div class="jZuXcw">
+	<p class="fxSxol">총 <span id="count"></span>개의 찜한 방이 있습니다.</p>
+</div>
+<ul id="roomList" class="hHBQOD"></ul>
 <div id="PAGE_NAVI"></div>
 <input type="hidden" id="PAGE_INDEX" name="PAGE_INDEX">
 	
@@ -75,8 +79,8 @@ $(document).ready(function() {
 				$("#count").empty();
 				$("#count").append(count);
 				$.each(data.list, function(key, room){ 
-					str	+=	"<li>"
-						+	"<div>"	//position:relative 해야 div.fav가 잘 붙음
+					str	+=	"<div class='laZlue'>"
+						+	"<div class='OUJOU'>"	//position:relative 해야 div.fav가 잘 붙음
 						+	"<div class='fav'>"
 						+		"<div class='deleteFav' onclick='fn_deleteFav($(this))'>"
 						+			"<div id='num' style='display:none;'>"
@@ -84,27 +88,27 @@ $(document).ready(function() {
 						+			"</div>"
 						+		"</div>"
 						+	"</div>"
-						+	"<a href='<c:url value='/room/roomDetail?ROOM_NUM=" + room.ROOM_NUM + "'/>'>"
-							+	"<div class='img'>"
+						+	"<a href='<c:url value='/room/roomDetail?ROOM_NUM=" + room.ROOM_NUM + "'/>' class='kpKjGs'>"
+							+	"<div class='img iCdwvo'>"
 							+		"<img src='<c:url value='/roomImages/" + room.THUMBNAIL + "'/>'>"
 							+	"</div>"
-							+	"<div>" + room.ROOM_TYPE + "</div>"
-							+	"<div>"
+							+	"<p class='kCTBqT jBkVAv'>" + room.ROOM_TYPE + "</p>"
+							+	"<p class='glovZ jBkVAv'><span>"
 							+		room.TRADE_TYPE;
 					if(room.TRADE_TYPE=='월세')
 						str	+=		room.MONTHLY_DEPOSIT + "/" + room.MONTHLY_PAYMENT;
 					if(room.TRADE_TYPE=='전세')
 						str	+=		room.JEONSE;
-					str	+=		"</div>"
-						+		"<div>"
-						+			room.ROOM_FLOOR + "층, " + room.REAL_SIZE + "m2, ";
+					str	+=		"</span></p>"
+						+		"<p class='jBkVAv'>"
+						+			room.ROOM_FLOOR + "층, " + room.REAL_SIZE + "m2";
 					if(room.UTILITY_PRICE!=null && room.UTILITY_PRICE!='')
-						str	+=		room.UTILITY_PRICE만;
-					str	+=		"</div>"
-						+		"<div>" + room.DESC_TITLE + "</div>"
+						str	+=		", " + room.UTILITY_PRICE+'만';
+					str	+=		"</p>"
+						+		"<p class='jBkVAv'>" + room.DESC_TITLE + "</p>"
 						+	"</a>"
 						+"</div>"
-						+"</li>";
+						+"</div>";
 	        	}); 
 	        	body.append(str); 
 			} 

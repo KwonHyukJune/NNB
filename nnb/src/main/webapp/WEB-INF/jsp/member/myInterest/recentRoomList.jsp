@@ -48,12 +48,15 @@
 <body>
 <%@ include file="/WEB-INF/include/header.jspf" %>
 <%@ include file="myInterest.jspf" %>
-<div class="recentRoomList">
+<script type="text/javascript">
+$('.tabmenu:first-child').addClass('active');
+</script>
+<div class="recentRoomList hVYleu">
 
-<p>총 <span id="count"></span>개의 최근 본 방이 있습니다.</p>
-<div class="roomList">
-	<ul id="roomList"></ul>
+<div class="jZuXcw">
+	<p class="fxSxol">총 <span id="count"></span>개의 최근 본 방이 있습니다.</p>
 </div>
+<ul id="roomList" class="hHBQOD"></ul>
 <div id="PAGE_NAVI"></div>
 <input type="hidden" id="PAGE_INDEX" name="PAGE_INDEX">
 </div>
@@ -102,44 +105,44 @@ $(document).ready(function() {
 				$("#count").empty();
 				$("#count").append(count);
 				$.each(data.list, function(key, room){ 
-					str	+=	"<li>"
-						+	"<div>";	//position:relative 해야 div.fav가 잘 붙음
-					str	+=	"<div class='fav'>";
-					if(room.ROOM_NUM in data.favRoom){
-					str	+=		"<div class='deleteFav' onclick='fn_deleteFav($(this))'>"
-						+			"<div id='num' style='display:none;'>"
-						+				room.ROOM_NUM
-						+			"</div>"
-						+		"</div>";
-					}else{
-					str +=		"<div class='insertFav' onclick='fn_addFav($(this))'>"
-						+			"<div id='num' style='display:none;'>"
-						+				room.ROOM_NUM
-						+			"</div>"
-						+		"</div>";	
-					}
-					str	+=	"</div>"
-						+	"<a href='<c:url value='/room/roomDetail?ROOM_NUM=" + room.ROOM_NUM + "'/>'>"
-							+	"<div class='img'>"
-							+		"<img src='<c:url value='/roomImages/" + room.THUMBNAIL + "'/>'>"
-							+	"</div>"
-							+	"<div>" + room.ROOM_TYPE + "</div>"
-							+	"<div>"
-							+		room.TRADE_TYPE;
-					if(room.TRADE_TYPE=='월세')
-						str	+=		room.MONTHLY_DEPOSIT + "/" + room.MONTHLY_PAYMENT;
-					if(room.TRADE_TYPE=='전세')
-						str	+=		room.JEONSE;
-					str	+=		"</div>"
-						+		"<div>"
-						+			room.ROOM_FLOOR + "층, " + room.REAL_SIZE + "m2, ";
-					if(room.UTILITY_PRICE!=null && room.UTILITY_PRICE!='')
-						str	+=		room.UTILITY_PRICE만;
-					str	+=		"</div>"
-						+		"<div>" + room.DESC_TITLE + "</div>"
-						+	"</a>"
-						+"</div>"
-						+"</li>";
+					str	+=	"<div class='laZlue'>"
+							+	"<div class='OUJOU'>";	//position:relative 해야 div.fav가 잘 붙음
+							str	+=	"<div class='fav'>";
+							if(room.ROOM_NUM in data.favRoom){
+							str	+=		"<div class='deleteFav' onclick='fn_deleteFav($(this))'>"
+								+			"<div id='num' style='display:none;'>"
+								+				room.ROOM_NUM
+								+			"</div>"
+								+		"</div>";
+							}else{
+							str +=		"<div class='insertFav' onclick='fn_addFav($(this))'>"
+								+			"<div id='num' style='display:none;'>"
+								+				room.ROOM_NUM
+								+			"</div>"
+								+		"</div>";	
+							}
+							str	+=	"</div>"
+								+	"<a href='<c:url value='/room/roomDetail?ROOM_NUM=" + room.ROOM_NUM + "'/>' class='kpKjGs'>"
+									+	"<div class='img iCdwvo'>"
+									+		"<img src='<c:url value='/roomImages/" + room.THUMBNAIL + "'/>'>"
+									+	"</div>"
+									+	"<p class='kCTBqT jBkVAv'>" + room.ROOM_TYPE + "</p>"
+									+	"<p class='glovZ jBkVAv'><span>"
+									+		room.TRADE_TYPE;
+							if(room.TRADE_TYPE=='월세')
+								str	+=		room.MONTHLY_DEPOSIT + "/" + room.MONTHLY_PAYMENT;
+							if(room.TRADE_TYPE=='전세')
+								str	+=		room.JEONSE;
+							str	+=		"</span></p>"
+								+		"<p class='jBkVAv'>"
+								+			room.ROOM_FLOOR + "층, " + room.REAL_SIZE + "m2";
+							if(room.UTILITY_PRICE!=null && room.UTILITY_PRICE!='')
+								str	+=		", " + room.UTILITY_PRICE+'만';
+							str	+=		"</p>"
+								+		"<p class='jBkVAv'>" + room.DESC_TITLE + "</p>"
+								+	"</a>"
+								+"</div>"
+							+"</div>";
 	        	}); 
 	        	body.append(str); 
 			} 
