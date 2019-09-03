@@ -102,10 +102,31 @@ $(document).ready(function(){
       alert($(this).val()); 
    });
 
-   function fsubmit(){
-      str = "<input type='hidden' name='MEM_ID' value='"+mem+"'>";
-      $("#frm").append(str);
-      frm.submit();
+function fsubmit(){
+	var comSubmit = new ComSubmit("frm");
+	comSubmit.addParam("MEM_ID", mem);
+	comSubmit.setUrl("<c:url value='/room/write'/>");
+	comSubmit.validation($('.ROOM_TYPE:checked'),'매물 종류를 선택하세요.');
+	comSubmit.validation($('.BUILDING_TYPE:checked'),'건물 종류를 선택하세요.');
+	comSubmit.validation($('.ADDRESS1'),'주소를 입력하세요.');
+	comSubmit.validation($('.TRADE_TYPE:checked'),'거래 종류를 선택하세요.');
+	comSubmit.validation($('.BUILDING_STORY option:selected'),'건물 층수를 선택하세요.');
+	comSubmit.validation($('.ROOM_FLOOR option:selected'),'해당 층수를 선택하세요.');
+	comSubmit.validation($('.HEATING_SYSTEM option:selected'),'난방 종류를 선택하세요.');
+	comSubmit.validation($('.ROOM_TYPE:checked'),'매물 종류를 선택하세요.');
+	comSubmit.validation($('.UTILITY_CHECK:checked'),'관리비 여부를 선택하세요.');
+	comSubmit.validation($('.PET:checked'),'주차가능 여부를 선택하세요.');
+	comSubmit.validation($('.ELEVATOR:checked'),'엘리베이터 여부를 선택하세요.');
+	comSubmit.validation($('.BALCONY:checked'),'발코니 여부를 선택하세요.');
+	comSubmit.validation($('.BUILT_IN:checked'),'빌트인 여부를 선택하세요.');
+	comSubmit.validation($('.LOAN_ACCESS:checked'),'전세자금대출 여부를 선택하세요.');
+	comSubmit.validation($('.PARKING:checked'),'주차가능 여부를 선택하세요.');
+	comSubmit.validation($('.SUPPLY_SIZE'),'상세설명 제목을 입력하세요.');
+	comSubmit.validation($('.REAL_SIZE'),'상세설명 제목을 입력하세요.');
+	comSubmit.validation($('.MOVE_IN_DATE'),'입주 가능일을 입력하세요.');
+	comSubmit.validation($('#DESC_TITLE'),'상세설명 제목을 입력하세요.');
+	comSubmit.validation($('#DESC_DETAIL'),'상세설명 내용을 입력하세요.');
+	comSubmit.submit();
    };
 </script>
 
@@ -193,7 +214,7 @@ $(document).ready(function(){
 						</td>
 						<td class="b fNOtpc bt" id="building_apart">
 							<label class="bVNPCb fSFsCh ">						
-								<input type="radio" name="BUILDING_TYPE" value="아파트">
+								<input type="radio" name="BUILDING_TYPE" class="BUILDING_TYPE" value="아파트">
 								<p class="button">아파트</p>
 							</label>
 						</td>
@@ -225,7 +246,7 @@ $(document).ready(function(){
 								</div>
 								<input type="hidden" name="ZIPCODE" id="sample6_postcode"
 									placeholder="우편번호">
-								<input type="hidden" name="ADDRESS1" id="sample6_address" size="50"
+								<input type="hidden" name="ADDRESS1" class="ADDRESS1" id="sample6_address" size="50"
 									placeholder="주소">
 							</div>
 	
@@ -247,12 +268,12 @@ $(document).ready(function(){
 					<th class="h" rowspan="2">거래 종류</th>
 					<td class="b fNOtpc iFmBhb">
 						<label class="bVNPCb fSFsCh">
-							<input type="radio" name="TRADE_TYPE" class="trade_type"
+							<input type="radio" name="TRADE_TYPE" class="TRADE_TYPE"
 								value="월세">
 							<p class="button">월세</p>
 						</label>
 						<label class="bVNPCb fSFsCh">
-							<input type="radio" name="TRADE_TYPE" class="trade_type"
+							<input type="radio" name="TRADE_TYPE" class="TRADE_TYPE"
 								value="전세">
 							<p class="button">전세</p>
 						</label>
@@ -299,13 +320,13 @@ $(document).ready(function(){
 							<p class="hNdXGi">공급 면적 </p>
 							<input class="gsCYXz kTQnUD" type="text" id="sup_p" onkeyup="calculator1(1);">
 							<p class="cmXpqK">평</p>
-							<input class="gsCYXz kTQnUD" type="text" name="SUPPLY_SIZE" id="sup_m" onkeyup="calculator1(2);">
+							<input class="gsCYXz kTQnUD" type="text" name="SUPPLY_SIZE" class="SUPPLY_SIZE" id="sup_m" onkeyup="calculator1(2);">
 							<p class="cmXpqK">m2</p>
 						</td>
 						<th rowspan="2">건물 층수</th>
 						<td class="ggZjqG">
 							<p class="hNdXGi">건물 층수 </p>
-							<select class="freEbZ hRFrgm" name="BUILDING_STORY" id="building_story">
+							<select class="freEbZ hRFrgm" name="BUILDING_STORY" class="BUILDING_STORY" id="building_story">
 								<option>--건물 층수 선택--</option>
 								<option value="0">반지층</option>]
 								<option value="-1">옥탑방</option>
@@ -320,12 +341,12 @@ $(document).ready(function(){
 							<p class="hNdXGi">전용 면적 </p>
 							<input class="gsCYXz kTQnUD " type="text" id="real_p" onkeyup="calculator2(1);">
 							<p class="cmXpqK">평</p>
-							<input class="gsCYXz kTQnUD " type="text" name="REAL_SIZE" id="real_m" onkeyup="calculator2(2);">
+							<input class="gsCYXz kTQnUD " type="text" name="REAL_SIZE" class="REAL_SIZE" id="real_m" onkeyup="calculator2(2);">
 							<p class="cmXpqK">m2</p>							
 						</td>
 						<td class="ggZjqG">
 							<p class="hNdXGi">해당 층수 </p>
-							<select class="freEbZ hRFrgm" name="ROOM_FLOOR" id="room_floor">
+							<select class="freEbZ hRFrgm" name="ROOM_FLOOR" class="ROOM_FLOOR" id="room_floor">
 								<option>--해당 층수 선택--</option>
 								<option value="0">반지층</option>
 								<option value="-1">옥탑</option>
@@ -338,7 +359,7 @@ $(document).ready(function(){
 					<tr>
 						<th>난방 종류</th>
 						<td class="ggZjqG" colspan="3">
-							<select name="HEATING_SYSTEM" id="heating_system" class="iDUqOA hRFrgm ">
+							<select name="HEATING_SYSTEM" id="heating_system" class="iDUqOA hRFrgm HEATING_SYSTEM">
 								<option>--난방 종류 선택--</option>
 								<option value="1">중앙난방</option>
 								<option value="2">개별난방</option>
@@ -349,7 +370,7 @@ $(document).ready(function(){
 					<tr>
 						<th>입주 가능일</th>
 						<td class="ggZjqG">
-							<input class="kTQnUD" type="date" name="MOVE_IN_DATE" id="move_in_date">
+							<input class="kTQnUD" type="date" name="MOVE_IN_DATE" id="move_in_date" class="MOVE_IN_DATE">
 						</td>
 					</tr>
 					</tbody>
@@ -417,7 +438,7 @@ $(document).ready(function(){
 						<th>주차여부</th>
 						<td class="cCUCai ">
 							<label class="gBFyOc fSFsCh">
-								<input type="radio" class="PARKING" name="PARKING" value="0">
+								<input type="radio" class="PARKING" name="PARKING" class="PARKING" value="0">
 								<p>불가능</p>
 							</label>
 							<label class="gBFyOc fSFsCh">
