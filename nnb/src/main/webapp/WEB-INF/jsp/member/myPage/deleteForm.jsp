@@ -27,7 +27,7 @@ function fn_submit(obj){
 
 <div class="myPageDelete">
 	<div class="info11">	
-		<div style=" text-align: center; font-weight:bold;" class="subtitle">회원탈퇴</div>
+		<div style=" text-align: center; font-weight:bold; font-size: 17px;" class="subtitle">회원탈퇴</div>
 		<div>
 		<p style= "color:red; font-weight:bold; text-align: center;" >*회원탈퇴를 신청하기 전에 아래 사항을 꼭 확인해주세요.*</p>		
 		<p style=" text-align: center;" >탈퇴 신청시 즉시 탈퇴 처리됩니다.</p>
