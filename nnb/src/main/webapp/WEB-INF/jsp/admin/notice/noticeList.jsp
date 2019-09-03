@@ -100,7 +100,7 @@ function fn_selectNoticeListCallback(data){
 			str +=
 			    	"<li class='bryRNw'>" 
 	    			+ "<a href='<c:url value='/admin/noticeDetail?num=" + value.NT_NUM + "'/>'>"
-	    			+"<p>"+value.NT_NUM +"</p>"+"<p>"+"[ "+ value.NT_TYPE +"]"+"</p>"
+	    			+"<p>"+value.RNUM +"</p>"+"<p>"+"[ "+ value.NT_TYPE +"]"+"</p>"
 	    			+"<p>"+ value.NT_TITLE +"</p>"
 	    			+"<p>"+ value.NT_DATE +"</p>" 
 	    			+ "</a>"

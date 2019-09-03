@@ -6,7 +6,7 @@
 <head>
 <%@ include file="/WEB-INF/include/include-header.jspf" %>
 <%@include file = "/WEB-INF/include/adminHeader.jspf" %>
-
+<link rel="stylesheet" type="text/css" href="<c:url value='/css/adminNotice.css'/>"/>	
 <script type="text/javascript">
 $(document).ready(function(){
 	
@@ -16,51 +16,51 @@ $(document).ready(function(){
 		
 	function insertBoard(){
 		var comSubmit = new ComSubmit("frm");
+		comSubmit.validation($('#type option:selected'),'공지유형을 선택하세요.');
+		comSubmit.validation($('#NT_TITLE'),'제목을 입력하세요.');
+		comSubmit.validation($('#NT_CONTENT'),'내용을 입력하세요.');
 		comSubmit.setUrl("<c:url value='/admin/noticeWrite' />");
 		comSubmit.submit();
 	}
 });
-	
-	
-
 </script>
 </head>
 <body>
-
-<div>
-<h2>새 공지 등록</h2>
-<hr>
-<br/>
+<div class="selectNoticeList">
+<div class="cYaAqA">
+	<h1 class="kuldyr">새 공지 등록</h1>
 </div>
-
- <form action="insertNoticeWrite" method="post" id="frm" name="frm">  
- 	<div>
-       	 공지유형
-        <select id="NT_TYPE" name="NT_TYPE">
-        	<option value="공지유형1">공지유형1</option>
-        	<option value="공지유형2">공지유형2</option>
-        </select>	
-  	</div>
- 
-	<div>
-       	 제목
-        <input type="text" id="NT_TITLE" name="NT_TITLE"/>
-  	</div>
-  		<br/>
-	<div>    
-	       	 내용
-		<textarea rows="20" cols="50" title="내용" id="NT_CONTENT" name="NT_CONTENT"></textarea>
+<div class="eugBve">
+ 	<form method="post" id="frm" name="frm">
+ 	<ul class="hIJwlj">
+ 		<li>
+      	 <p class="efvxco">공지유형</p>
+      		<select class="freEbZ hRFrgm" name="NT_TYPE" id="type">
+					<option value=''>공지유형 선택</option>
+					<option value="참고사항">참고사항</option>
+        			<option value="필독사항">필독사항</option>	
+			</select>
+ 		</li> 
+ 		<li>
+ 			<p class="efvxco">제목</p>
+ 			<input type="text" class="ilgADB kTQnUD" id="NT_TITLE" name="NT_TITLE">
+ 		</li>
+ 		<li>
+ 			<p class="efvxco">내용</p>
+ 			<textarea class="bqTGEL hunnDM" name="NT_CONTENT" id="NT_CONTENT"></textarea>
+ 		</li>
+ 	</ul>
+ 	</form>
+ 	<div align="center">
+    	<button class='kcMULl' id="write" type="button">작성</button>
+		<button class='iEZQG' type="button" onclick="location.href='/nnb/admin/openNoticeList'">취소</button>
 	</div>
-    <div>
-    	<br/><br/>
-    	<a href="#" id="write">작성하기</a>
-		<button type="button" onclick="fn_back();">취소</button>
-    </div>
- </form>    
-<br/><br/><br/><br/><br/><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;
+ 	</div>
+</div>
 <div>
-<%@include file = "/WEB-INF/include/footer.jspf" %>
+	<%@include file = "/WEB-INF/include/footer.jspf" %>
 </div>
 </body>
 </html>
+
+
