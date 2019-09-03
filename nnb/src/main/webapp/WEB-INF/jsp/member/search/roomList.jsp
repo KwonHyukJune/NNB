@@ -44,6 +44,23 @@ function toggle(obj){
 		obj.next().hide();
 	}
 }
+function divsize(obj){
+	var check = obj.attr('class');
+	console.log(check);
+	if(check=="cHCsIX"){
+		obj.parent().css('width','512px');
+		obj.parent().next('left','512px');
+		$('li.room').css('width','50%');
+		obj.attr('class','HggYs');
+		console.log('dd');
+	}else{
+		obj.parent().css('width','980px');
+		obj.parent().next('left','980px');
+		$('li.room').css('width','25%');
+		obj.attr('class','cHCsIX');
+		console.log('ss');
+	}
+}
 </script>
 </head>
 <!-------------------------------------------------------------- -->
@@ -421,7 +438,7 @@ function toggle(obj){
 			<!-- 페이징 영역 -->
 			
 		</div>
-		<button class="cHCsIX">
+		<button class="cHCsIX" onclick="divsize($(this));">
 			<svg width="13" height="8" viewBox="0 0 11 7"><path fill="none" fill-rule="evenodd" stroke="#444" stroke-width="1.7" d="M.658 1.021l4.537 4.263 4.463-4.263"></path></svg>
 		</button>
 	</div>
