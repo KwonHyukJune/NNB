@@ -15,7 +15,7 @@
 	line-height: 40px;
 	text-align:center;	
 	box-shadow: 0px 2px white;
-	background-color: #000dff;
+	background-color: rgb(19, 116, 248);
 	padding: 10px;
 	color: white;
 	
@@ -27,7 +27,7 @@
 	height:60px;
 	line-height: 40px;
 	box-shadow: -2px 2px white;
-	background-color: #000dff;
+	background-color: rgb(19, 116, 248);
 	padding: 10px;
 	color: white;
 	
@@ -38,7 +38,7 @@
 	height:60px;	
 	line-height: 40px;
 	text-align:center;
-	box-shadow: 0px 2px #000dff;
+	box-shadow: 0px 2px rgb(19, 116, 248);
 	padding: 10px;
 }
 .MsgBox > p:nth-child(4){
@@ -47,7 +47,7 @@
 	text-align:left;
 	height:60px;
 	line-height: 40px;
-	box-shadow: -2px 2px #000dff;
+	box-shadow: -2px 2px rgb(19, 116, 248);
 	padding: 10px;
 	
 }
@@ -57,7 +57,7 @@
 	height:60px;
 	line-height: 40px;
 	text-align:center;
-	box-shadow: 0px 2px #000dff;
+	box-shadow: 0px 2px rgb(19, 116, 248);
 	padding: 10px;
 }	
 .MsgBox > p:nth-child(6){
@@ -66,7 +66,7 @@
 	text-align:left;
 	height:60px;
 	line-height: 40px;
-	box-shadow: -2px 2px #000dff;
+	box-shadow: -2px 2px rgb(19, 116, 248);
 	padding: 10px;
 	
 }
@@ -76,7 +76,7 @@
 	height:60px;
 	line-height: 40px;
 	text-align:center;
-	box-shadow: 0px 2px #000dff;
+	box-shadow: 0px 2px rgb(19, 116, 248);
 	padding: 10px;
 	
 }
@@ -86,7 +86,7 @@
 	text-align:left;
 	height:60px;
 	line-height: 40px;
-	box-shadow: -2px 2px #000dff;
+	box-shadow: -2px 2px rgb(19, 116, 248);
 	padding: 10px;
 	
 }
@@ -105,7 +105,7 @@
 	height:auto;
 	text-align:left;
 	line-height: 40px;
-	box-shadow: -2px 0px #000dff;
+	box-shadow: -2px 0px rgb(19, 116, 248);
 	padding: 10px;
 
 	
@@ -143,11 +143,11 @@ function fn_openBoardList(obj){   // 목록으로
    
    <div class="Message">      
 	<div class="MsgBox">
-		<p>번호 </p>
+		<p>번 호 </p>
 		
 		 <p>&nbsp;${map.MESSAGE_NUM}</p>	
 		 
-		<p>대상</p>	  
+		<p>대 상</p>	  
 		
          <p>${map.MEM_ID} (
          	<c:if test="${map.MEM_KIND eq 'lessor'}">
@@ -158,11 +158,11 @@ function fn_openBoardList(obj){   // 목록으로
          	</c:if>
          )
       	</p>
-      	<p>날짜 </p>
+      	<p>날 짜 </p>
          <p>${map.SEND_DATE}</p>
-         <p>제목 </p>    	
+         <p>제 목 </p>    	
          <p>${map.MESSAGE_TITLE}</p>
-         <p>내용 </p>
+         <p>내 용 </p>
 		<p>${map.MESSAGE_CONTENT}</p>&nbsp;
          </div> 
      
