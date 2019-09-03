@@ -96,29 +96,7 @@ $(document).ready(function(){
 	}
 });
 
-function fn_addFav(){
-	var str = window.location.href;
-	var url = "redirect:"+str.split("<%=request.getContextPath()%>")[1];
 
-	var comSubmit = new ComSubmit();
-	comSubmit.setUrl("<c:url value='/search/addFavRoom'/>");
-	comSubmit.addParam("check", 0);
-	comSubmit.addParam("ROOM_NUM", "${room.ROOM_NUM}");
-	comSubmit.addParam("MEM_ID", idChk);
-	comSubmit.addParam("url", url);
-	comSubmit.submit();
-}
-function fn_deleteFav(){
-	var str = window.location.href;
-	var url = "redirect:"+str.split("<%=request.getContextPath()%>")[1];
-	var comSubmit = new ComSubmit();
-	comSubmit.setUrl("<c:url value='/search/addFavRoom'/>");
-	comSubmit.addParam("check", 1);
-	comSubmit.addParam("ROOM_NUM", "${room.ROOM_NUM}");
-	comSubmit.addParam("MEM_ID", idChk);
-	comSubmit.addParam("url", url);
-	comSubmit.submit();
-}
 /* 쿠키 */
 $(document).ready(function(){
 	$("p.dojagi").on("click",function(e){
@@ -731,6 +709,33 @@ for(var i=0;i<array.length;i++){
 	}
 }
 
-
+function fn_addFav(){
+	
+	if(idChk == 'null'){
+		alert('로그인하셔야 이용할 수 있는 기능입니다.');
+	}
+	else{
+	var str = window.location.href;
+	var url = "redirect:"+str.split("<%=request.getContextPath()%>")[1];
+	var comSubmit = new ComSubmit();
+	comSubmit.setUrl("<c:url value='/search/addFavRoom'/>");
+	comSubmit.addParam("check", 0);
+	comSubmit.addParam("ROOM_NUM", "${room.ROOM_NUM}");
+	comSubmit.addParam("MEM_ID", idChk);
+	comSubmit.addParam("url", url);
+	comSubmit.submit();
+	}
+}
+function fn_deleteFav(){
+	var str = window.location.href;
+	var url = "redirect:"+str.split("<%=request.getContextPath()%>")[1];
+	var comSubmit = new ComSubmit();
+	comSubmit.setUrl("<c:url value='/search/addFavRoom'/>");
+	comSubmit.addParam("check", 1);
+	comSubmit.addParam("ROOM_NUM", "${room.ROOM_NUM}");
+	comSubmit.addParam("MEM_ID", idChk);
+	comSubmit.addParam("url", url);
+	comSubmit.submit();
+}
 </script>
 </html>

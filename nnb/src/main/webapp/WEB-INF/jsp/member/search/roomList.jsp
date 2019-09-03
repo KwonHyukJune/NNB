@@ -6,30 +6,7 @@
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/search.css'/>"/>
 <script src="<c:url value='/js/nouislider/nouislider.js'/>" charset="utf-8"></script>
 <script type="text/javascript">
-function fn_addFav(obj){
-	var str = window.location.href;
-	var url = "redirect:"+str.split("<%=request.getContextPath()%>")[1];
-	var num = obj.children('#num').text();
-	var comSubmit = new ComSubmit();
-	comSubmit.setUrl("<c:url value='/search/addFavRoom'/>");
-	comSubmit.addParam("check", 0);
-	comSubmit.addParam("ROOM_NUM", num);
-	comSubmit.addParam("MEM_ID", idChk);
-	comSubmit.addParam("url", url);
-	comSubmit.submit();
-}
-function fn_deleteFav(obj){
-	var str = window.location.href;
-	var url = "redirect:"+str.split("<%=request.getContextPath()%>")[1];
-	var num = obj.children('#num').text();
-	var comSubmit = new ComSubmit();
-	comSubmit.setUrl("<c:url value='/search/addFavRoom'/>");
-	comSubmit.addParam("check", 1);
-	comSubmit.addParam("ROOM_NUM", num);
-	comSubmit.addParam("MEM_ID", idChk);
-	comSubmit.addParam("url", url);
-	comSubmit.submit();
-}
+
 function toggle(obj){
 	if(obj.attr("class")=="fJNXpX"){
 		$(".cRtqxV").attr("class","fJNXpX");
@@ -820,6 +797,36 @@ $(function(){
 	    $("#search").trigger('click');
 	});
 });
+
+function fn_addFav(obj){
+	if(idChk == 'null'){
+		alert('로그인하셔야 이용할 수 있는 기능입니다.');
+	}
+	else{
+	var str = window.location.href;
+	var url = "redirect:"+str.split("<%=request.getContextPath()%>")[1];
+	var num = obj.children('#num').text();
+	var comSubmit = new ComSubmit();
+	comSubmit.setUrl("<c:url value='/search/addFavRoom'/>");
+	comSubmit.addParam("check", 0);
+	comSubmit.addParam("ROOM_NUM", num);
+	comSubmit.addParam("MEM_ID", idChk);
+	comSubmit.addParam("url", url);
+	comSubmit.submit();
+	}
+}
+function fn_deleteFav(obj){
+	var str = window.location.href;
+	var url = "redirect:"+str.split("<%=request.getContextPath()%>")[1];
+	var num = obj.children('#num').text();
+	var comSubmit = new ComSubmit();
+	comSubmit.setUrl("<c:url value='/search/addFavRoom'/>");
+	comSubmit.addParam("check", 1);
+	comSubmit.addParam("ROOM_NUM", num);
+	comSubmit.addParam("MEM_ID", idChk);
+	comSubmit.addParam("url", url);
+	comSubmit.submit();
+}
 </script>
 <button type="button" onclick="fn_search();" id="search"></button>
 </body>
