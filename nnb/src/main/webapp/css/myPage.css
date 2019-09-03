@@ -246,3 +246,17 @@ div.message > p:nth-child(6), li > p:nth-child(5){
 .dtbt{
 	text-align: right;
 }
+.info11{
+	line-height: 40px;
+    border-bottom: 1px solid rgb(204, 204, 204);
+	padding: 50px 150px;
+}
+.pwd{
+	text-align: center;
+    box-shadow: 0px 0px 4px black;
+    width: 400px;
+    margin: 0 auto;
+    background-color: #0080ff;
+    color: white;
+    font-weight: bold;
+}
