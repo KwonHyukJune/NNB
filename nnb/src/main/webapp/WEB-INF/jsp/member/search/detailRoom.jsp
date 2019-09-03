@@ -88,10 +88,10 @@ $(document).ready(function(){
 	});
 
 	function convertUnit(value2, value3, currentUnit){
-	  if(currentUnit==='평'){
-	    return [parseFloat(value2*3.3058).toFixed(2), parseFloat(value3*3.3058).toFixed(2), '㎡']
-	  }else{
-	    return [parseFloat(value2/3.3058).toFixed(0), parseFloat(value3/3.3058).toFixed(0), '평']
+		if(currentUnit==='평'){
+			return [parseFloat(value2*3.3058).toFixed(2), parseFloat(value3*3.3058).toFixed(2), '㎡']
+		}else{
+			return [parseFloat(value2/3.3058).toFixed(0), parseFloat(value3/3.3058).toFixed(0), '평']
 		}
 	}
 });
@@ -649,7 +649,11 @@ if(${room.UTILITY_PRICE!=null}) {
 }
 //옵션 부분(아래)
 var option = "${room.OPTIONS}";
-option = option.replace('1','에어컨')
+option = option
+	.replace('10','인덕션')
+	.replace('11','전자레인지')
+	.replace('12','전자도어락')
+	.replace('13','비데')
 	.replace('2','세탁기')
 	.replace('3','침대')
 	.replace('4','책상')
@@ -658,10 +662,7 @@ option = option.replace('1','에어컨')
 	.replace('7','신발장')
 	.replace('8','냉장고')
 	.replace('9','가스레인지')
-	.replace('10','인덕션')
-	.replace('11','전자레인지')
-	.replace('12','전자도어락')
-	.replace('13','비데');
+	.replace('1','에어컨');
 var array = option.split(',');
 array = array.filter(String);
 for(var i=0;i<array.length;i++){
