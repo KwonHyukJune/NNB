@@ -18,7 +18,7 @@ $('.tabmenu:nth-child(2)').addClass('active');
 <div class="jZuXcw">
 	<p class="fxSxol">총 <span id="count"></span>개의 찜한 방이 있습니다.</p>
 </div>
-<ul id="roomList"></ul>
+<ul id="roomList" class="hHBQOD"></ul>
 <div id="PAGE_NAVI"></div>
 <input type="hidden" id="PAGE_INDEX" name="PAGE_INDEX">
 	
