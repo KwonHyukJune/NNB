@@ -112,10 +112,10 @@ function fsubmit(){
 	comSubmit.validation($('.TRADE_TYPE:checked'),'거래 종류를 선택하세요.');
 	comSubmit.validation($('.SUPPLY_SIZE'),'공급면적을 입력하세요.');
 	comSubmit.validation($('.REAL_SIZE'),'전용면적을 입력하세요.');
-	comSubmit.validation($('.MOVE_IN_DATE'),'입주 가능일을 입력하세요.');
 	comSubmit.validation($('#BUILDING_STORY option:selected'),'건물 층수를 선택하세요.');
 	comSubmit.validation($('#ROOM_FLOOR option:selected'),'해당 층수를 선택하세요.');
 	comSubmit.validation($('#HEATING_SYSTEM option:selected'),'난방 종류를 선택하세요.');
+	comSubmit.validation($('.MOVE_IN_DATE'),'입주 가능일을 입력하세요.');
 	comSubmit.validation($('.ROOM_TYPE:checked'),'매물 종류를 선택하세요.');
 	comSubmit.validation($('.UTILITY_CHECK:checked'),'관리비 여부를 선택하세요.');
 	comSubmit.validation($('.PET:checked'),'애완동물 여부를 선택하세요.');
@@ -327,8 +327,8 @@ function fsubmit(){
 						<td class="ggZjqG">
 							<p class="hNdXGi">건물 층수 </p>
 							<select class="freEbZ hRFrgm BUILDING_STORY" name="BUILDING_STORY" id="BUILDING_STORY">
-								<option>--건물 층수 선택--</option>
-								<option value="0">반지층</option>]
+								<option value="">--건물 층수 선택--</option>
+								<option value="0">반지층</option>
 								<option value="-1">옥탑방</option>
 								<c:forEach var="i" begin="1" end="50">
 									<option value="${i}">${i}층</option>
@@ -347,7 +347,7 @@ function fsubmit(){
 						<td class="ggZjqG">
 							<p class="hNdXGi">해당 층수 </p>
 							<select class="freEbZ hRFrgm ROOM_FLOOR" name="ROOM_FLOOR" id="ROOM_FLOOR">
-								<option>--해당 층수 선택--</option>
+								<option value="">--해당 층수 선택--</option>
 								<option value="0">반지층</option>
 								<option value="-1">옥탑</option>
 								<c:forEach var="i" begin="1" end="50">
@@ -360,7 +360,7 @@ function fsubmit(){
 						<th>난방 종류</th>
 						<td class="ggZjqG" colspan="3">
 							<select name="HEATING_SYSTEM" id="HEATING_SYSTEM" class="iDUqOA hRFrgm HEATING_SYSTEM">
-								<option>--난방 종류 선택--</option>
+								<option value="">--난방 종류 선택--</option>
 								<option value="1">중앙난방</option>
 								<option value="2">개별난방</option>
 								<option value="3">지역난방</option>
