@@ -151,7 +151,7 @@ WHERE
 <if test="minyear!=null and !minyear.equals('')">
 	<![CDATA[
 	 AND TO_CHAR(sysdate,'YYYY')-TO_CHAR(RI_BIRTH,'YYYY')+1 >= #{minyear,jdbcType=DATE} 
-	]]>
+	]]> 
 </if>
 <if test="maxyear!=null and !maxyear.equals('무제한') and !maxyear.equals('')">
 	<![CDATA[
@@ -296,15 +296,15 @@ SELECT DISTINCT
 	RI_REGION1,
 	RI_REGION2,
 	RI_REGION3,
-	RI_DATE_START,
-	RI_DATE_END,
+	SUBSTR(TO_CHAR(RI_DATE_START,'YYYYMMDD'),1,4)||'년'||SUBSTR(TO_CHAR(RI_DATE_START,'YYYYMMDD'),5,2)||'월'||SUBSTR(TO_CHAR(RI_DATE_START,'YYYYMMDD'),7,2)||'일'AS RI_DATE_START,
+	SUBSTR(TO_CHAR(RI_DATE_END,'YYYYMMDD'),1,4)||'년'||SUBSTR(TO_CHAR(RI_DATE_END,'YYYYMMDD'),5,2)||'월'||SUBSTR(TO_CHAR(RI_DATE_END,'YYYYMMDD'),7,2)||'일'AS RI_DATE_END,
 	RI_PROFILE,
-	RI_BIRTH
+	SUBSTR(TO_CHAR(RI_BIRTH,'YYYYMMDD'),1,4)||'년'||SUBSTR(TO_CHAR(RI_BIRTH,'YYYYMMDD'),5,2)||'월'||SUBSTR(TO_CHAR(RI_BIRTH,'YYYYMMDD'),7,2)||'일'AS RI_BIRTH
 FROM
 	MEMBER M,
 	ROOMMATE_PROFILE R
 WHERE
-	M.MEM_ID=R.RI_MEM_ID
+	M.MEM_ID=R.RI_MEM_ID 
 	and RI_MEM_ID = #{id}
 	]]>
 	</select>
