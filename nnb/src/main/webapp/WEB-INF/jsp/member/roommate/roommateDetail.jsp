@@ -20,14 +20,14 @@
 		comAjax.ajax();
 	}; */
 
- 	 function ignore(){
+/*  	 function ignore(){
 		var comSubmit = new ComSubmit();
 		comSubmit.setUrl("<c:url value='/roommate/ignore'/>");
 		comSubmit.addParam("IGNORE_MEM","${mate.MEM_ID}");
 		comSubmit.addParam("IGNORE_D_MEM","${mate.RI_MEM_ID}");
 		comSubmit.addParam("check",0); 
 		comSubmit.submit();
-	};  
+	};   */
 	function insertFav(num){
 		var comAjax = new ComAjax();
 		comAjax.setUrl("<c:url value='/common/back.jsp'/>");
@@ -74,7 +74,7 @@
 <tr ><a id="aa"><th id="asl">자기소개 </th></a><td id="dsl">${mate.RI_PROFILE}</td></tr>
 <tr ><a id="aa"><th id="asl">성별 </th></a><td id="dsl">${mate.RI_GENDER}</td></tr>
 </table>
-		<div class="ignore"><a href="<c:url value='/roommate/ignore?mem=${mate.MEM_ID}'/>" class="btn" onclick="ignore();">차단</a></div>
+		<div class="ignore"><a href="#" class="btn" onclick="ignore();">차단</a></div>
 	<script type="text/javascript">
 	function ignore(){
 		var mem = "${mate.MEM_ID}"; 

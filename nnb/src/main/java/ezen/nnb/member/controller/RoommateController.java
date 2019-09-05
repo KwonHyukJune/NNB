@@ -144,7 +144,7 @@ public class RoommateController {
   
 	@RequestMapping(value = "/roommate/ignore")
 	public ModelAndView ignoreUser(CommandMap commandMap, HttpServletRequest request) throws Exception {
-		ModelAndView mv = new ModelAndView("redirect:/member/roommate/roommateDetail");
+		ModelAndView mv = new ModelAndView("redirect:/roommate/detail?id="+commandMap.get("IGNORE_D_MEM"));
 		HttpSession session = request.getSession();
 		commandMap.put("IGNORE_MEM", session.getAttribute("MEM_ID"));
 		int check = ignoreService.checkIgnore(commandMap.getMap());
