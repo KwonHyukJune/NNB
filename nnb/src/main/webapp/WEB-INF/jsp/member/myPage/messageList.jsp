@@ -105,12 +105,12 @@ $(document).ready(function(){
 				};
 			</script>
 	</li>
-	<li class="content bryRNw2" style="display: none;" id="${message.MESSAGE_NUM}">
+	<li class="content bryRNw2" style="display: none; background-color: rgba(19, 116, 248, 0.04);" id="${message.MESSAGE_NUM}">
 		<p style="width:10%">내용</p>
 		<p style="width:90%; text-align:left">${message.MESSAGE_CONTENT}</p>
 		<div style="text-align:center; word-break: break-all;">
-		<a href="#" class="btn" onclick="javascript:reply_${i.index}();">답장</a>
-		<a href="#" class="btn" onclick="javascript:ignore_${i.index}();">차단</a>
+		<a href="#" class="adminbtn1" onclick="javascript:reply_${i.index}();">답장</a>
+		<a href="#" class="adminbtn1" onclick="javascript:ignore_${i.index}();">차단</a>
 		</div>
 	</li>
 	</c:forEach>
@@ -119,9 +119,9 @@ $(document).ready(function(){
 	<li>조회된 메시지가 없습니다.</li>
 	</c:if>
 	</div>
-	<div>
-	<a href="messageWriteForm" style="">새 메시지 작성</a>
-	<a href="ignoreUserList">차단목록</a>
+	<div style="padding: 0px 50px 5px 50px; text-align:center">
+	<a class="adminbtn1" href="messageWriteForm" style="">새 메시지 작성</a>
+	<a class="adminbtn1" href="ignoreUserList">차단목록</a>
 	</div>
 	
 </div>
