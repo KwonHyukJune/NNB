@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import ezen.nnb.common.CommandMap;
 import ezen.nnb.member.service.FavoriteService;
 import ezen.nnb.member.service.IgnoreService;
+import ezen.nnb.member.service.MessageService;
 import ezen.nnb.member.service.RoommateService;
 
 @Controller
@@ -31,12 +32,15 @@ public class RoommateController {
 	private IgnoreService ignoreService;
 	@Resource(name="favoriteService")
 	private FavoriteService favoriteService;
-
+	@Resource(name="messageService")
+	private MessageService messageService;
 
 	@RequestMapping(value = "/searchRoommate")
 	public ModelAndView openRoommateList(HttpServletResponse response, HttpServletRequest request, CommandMap commandMap)
 			throws Exception {
 		ModelAndView mv = new ModelAndView("/member/roommate/roommateList");
+		List<Map<String, Object>> searchRoommate = roommateService.searchRoommate(commandMap.getMap());
+		mv.addObject("list",searchRoommate);
 		return mv;
 	}
 	
@@ -49,13 +53,12 @@ public class RoommateController {
 		commandMap.put("MEM_ID",session.getAttribute("MEM_ID"));
 		List<Map<String, Object>> searchRoommate = roommateService.searchRoommate(commandMap.getMap());
 		int Count = roommateService.countRoommate(commandMap.getMap());
-
+		
 		Map<String,Object> favMateNum=favoriteService.selectFavRoommate(commandMap.getMap());
 		mv.addObject("favMateNum",favMateNum);
 		
 		mv.addObject("list",searchRoommate);
 		mv.addObject("total",Count);
-		
 		return mv;
 	}
 
@@ -125,7 +128,7 @@ public class RoommateController {
 	@RequestMapping(value = "/roommate/detail/messageWriteForm")
 	public ModelAndView messageWriteForm() throws Exception {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("/member/myPage/messageWriteForm");
+		mv.setViewName("/member/roommate/messageWriteForm");
 		return mv;
 	}
 
@@ -133,9 +136,9 @@ public class RoommateController {
 	public ModelAndView messageWrite(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		HttpSession session = request.getSession();
-		commandMap.put("SENDER", session.getAttribute("MEM_ID"));
-			commandMap.put("MESSAGE_NUM", commandMap.get("MESSAGE_NUM"));
-			mv.setViewName("member/myPage/messageWrite");
+		 commandMap.put("SENDER", session.getAttribute("MEM_ID")); 
+		messageService.insertMessage(commandMap.getMap());
+			mv.setViewName("member/roommate/messageWrite");
 	return mv;
 	}
 

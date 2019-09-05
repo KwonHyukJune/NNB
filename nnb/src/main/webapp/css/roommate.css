@@ -281,11 +281,52 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
    } 
 /*룸메이트 상세보기  */
 .alkdf{
-	height: 40px;
-    line-height: 40px;
-     border-bottom: 1px solid rgb(204, 204, 204);
-    border-bottom: 1px solid rgb(204, 204, 204);
-	text-align:center;
-	padding: 30px;
+  border-collapse: collapse;
+    text-align: left;
+    line-height: 1.5;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    margin: 20px 10px;
 }
 
+
+#aa{
+    width: 150px;
+    padding: 10px;
+}
+table.alkdf #dsl {
+      width: 350px;
+    padding: 10px;
+    vertical-align: top;
+    background: #ebfbff;
+     border-bottom: 1px solid rgb(204, 204, 204);
+
+}
+table.alkdf td {
+    width: 350px;
+    padding: 10px;
+    vertical-align: top;
+}
+
+.roommateDetail{
+	margin:10px;
+}
+
+table.alkdf #asl{
+    width: 150px;
+    padding: 10px;
+    font-weight: bold;
+    vertical-align: top;
+    color: #fff;
+      background-color:rgb(13, 103, 238);
+       border-bottom: 1px solid #FFFFFF;
+	
+}
+#qasl{
+	  padding:10px;
+	word-spacing:30px;
+	height: 30px;
+    line-height: 30px;
+    flex-flow: row wrap;
+    
+}
