@@ -82,7 +82,7 @@
 
 			var str = "<form id='frm' action='ignore' method='post'>"
 				+ "<input type='hidden' name='IGNORE_D_MEM' value='"+mem+"'>"
-				+ "</form>";
+				+ "</form>"; 
 			$(".ignore").after(str);
 			frm.submit();
 		};

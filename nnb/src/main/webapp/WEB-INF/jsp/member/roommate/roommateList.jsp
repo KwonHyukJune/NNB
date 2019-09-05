@@ -423,7 +423,7 @@ $(function(){
 		
 		var input_value = [];
 		input_value[0]=values[0]*1+20;
-		var str = Number(input_value[0]) + '技 ~ ';
+		var str = Number(input_value[0]) + '技 ~ '; 
 		if(values[1]==100){
 			input_value[1] = '公力茄';
 			str += '公力茄';

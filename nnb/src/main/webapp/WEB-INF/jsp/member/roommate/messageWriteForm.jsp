@@ -15,7 +15,7 @@ $(document).ready(function(){
 	$(document).ready(function(){
 		$('#amessage').addClass('active');
 	}); 
-});
+}); 
 
 function fn_submit(){
 	var conSubmit = new ComSubmit(frm);

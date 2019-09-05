@@ -43,7 +43,7 @@ public class RoommateController {
 		mv.addObject("list",searchRoommate);
 		return mv;
 	}
-	
+	 
 	@RequestMapping(value = "/searchRoommateList")
 	@ResponseBody
 	public ModelAndView searchRoommateList(HttpServletResponse response, HttpServletRequest request, CommandMap commandMap)
@@ -141,7 +141,7 @@ public class RoommateController {
 			mv.setViewName("member/roommate/messageWrite");
 	return mv;
 	}
-
+ 
 	@RequestMapping(value = "/roommate/ignore")
 	public ModelAndView ignoreUser(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("redirect:/member/roommate/roommateDetail");

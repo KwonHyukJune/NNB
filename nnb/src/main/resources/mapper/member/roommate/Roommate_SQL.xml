@@ -151,7 +151,7 @@ WHERE
 <if test="minyear!=null and !minyear.equals('')">
 	<![CDATA[
 	 AND TO_CHAR(sysdate,'YYYY')-TO_CHAR(RI_BIRTH,'YYYY')+1 >= #{minyear,jdbcType=DATE} 
-	]]>
+	]]> 
 </if>
 <if test="maxyear!=null and !maxyear.equals('무제한') and !maxyear.equals('')">
 	<![CDATA[
