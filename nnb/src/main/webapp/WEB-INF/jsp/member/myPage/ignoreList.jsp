@@ -4,6 +4,9 @@
 <html>
 <head>
 <%@ include file="/WEB-INF/include/include-header.jspf" %>
+<div style="display:none;">
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+</div>
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/myPage.css'/>"/>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -22,28 +25,29 @@ function unignore(num){
 </head>
 <body>
 <%@ include file="/WEB-INF/include/header.jspf" %>
-<%@ include file="myPage.jspf" %>
 
-<div class="ignoreList">
-
+<div class="ignoreList cAeKOJ">
+<%@ include file="myPage.jspf" %> 
 <div class="subtitle">차단 목록</div>
 <p>총 ${count}건의 차단 목록이 있습니다.</p>
 <c:if test="${count!=null && count!=''}">
-<ul>
-	<li>
-	<div>번호</div>
-	<div>차단날짜</div>
-	<div>아이디</div>
-	<div>닉네임</div>
+	<ul class="qUCQS">
+	<li class="pbYHJ">
+	<p id="alis" style="width:20%;">번호</p>	
+	<p id="alis" style="width:20%;">차단날짜</p>
+	<p id="alis" style="width:20%;">아이디</p>
+	<p id="alis" style="width:20%;">닉네임</p> 
+	<p id="alis" style="width:20%;"></p> 
 	</li>
-<c:forEach var="mate" items="${list}">
-	<li>
-	<div>${mate.RNUM}</div>
-	<div>${mate.IGNORE_DATE}</div>
-	<div>${mate.IGNORE_D_MEM}</div>
-	<div>${mate.MEM_NICK}</div>
+<c:forEach var="mate" items="${list}" varStatus="i">
+	<li id="li${i.index}" class="bryRNw">
+	<p id="alis" style="width:20%;">${mate.RNUM}</p>
+	<p id="alis" style="width:20%;">${mate.IGNORE_DATE}</p>
+	<p id="alis" style="width:20%;">${mate.IGNORE_D_MEM}</p> 
+	<p id="alis" style="width:20%;">${mate.MEM_NICK}</p>
+	<p id="alis" style="width:20%;"><a href="#" class="btn" id="unign" onclick="unignore(${mate.IGNORE_NUM})">차단 해제</a></p>
+	
 	</li>
-	<div><a href="#" class="btn" id="unign" onclick="unignore(${mate.IGNORE_NUM})">차단 해제</a></div>
 </c:forEach>
 </ul>
 </c:if>
