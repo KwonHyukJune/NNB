@@ -37,7 +37,7 @@ function unignore(num){
 	<p id="alis" style="width:20%;">차단날짜</p>
 	<p id="alis" style="width:20%;">아이디</p>
 	<p id="alis" style="width:20%;">닉네임</p> 
-	<p id="alis" style="width:20%;"></p>
+	<p id="alis" style="width:20%;"></p> 
 	</li>
 <c:forEach var="mate" items="${list}" varStatus="i">
 	<li id="li${i.index}" class="bryRNw">
