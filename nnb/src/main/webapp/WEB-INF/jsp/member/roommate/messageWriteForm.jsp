@@ -10,8 +10,8 @@ var mem = sessionStorage.getItem("${RECEIVER}");
 $(document).ready(function(){
 	$("#submit").on("click",function(e){
 		e.preventDefault();
-		fn_submit();
-	});
+		fn_submit(); 
+	}); 
 	$(document).ready(function(){
 		$('#amessage').addClass('active');
 	}); 

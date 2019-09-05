@@ -77,7 +77,7 @@
 		<div class="ignore"><a href="<c:url value='/roommate/ignore?mem=${mate.MEM_ID}'/>" class="btn" onclick="ignore();">차단</a></div>
 	<script type="text/javascript">
 	function ignore(){
-		var mem = "${mate.MEM_ID}";
+		var mem = "${mate.MEM_ID}"; 
 		if(confirm("'"+mem+"' 회원을 차단하시겠습니까?")){
 
 			var str = "<form id='frm' action='ignore' method='post'>"

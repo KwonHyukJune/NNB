@@ -12,7 +12,7 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
-<div class="messageWrite">
+<div class="messageWrite">   
 
 메시지가 전송되었습니다.<br>
 <a href="#" class="btn" onclick="javascript:window.close();">닫기</a>

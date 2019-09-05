@@ -304,7 +304,7 @@ FROM
 	MEMBER M,
 	ROOMMATE_PROFILE R
 WHERE
-	M.MEM_ID=R.RI_MEM_ID
+	M.MEM_ID=R.RI_MEM_ID 
 	and RI_MEM_ID = #{id}
 	]]>
 	</select>

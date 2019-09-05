@@ -10,7 +10,7 @@
 <script src="<c:url value='/js/nouislider/nouislider.js'/>" charset="utf-8"></script>
 <script type="text/javascript">
 	var mem = sessionStorage.getItem("MEM_ID");
-	
+	  
 	function openDetail(obj){
 		var url = obj.parent().prev().text();
 		var strUrl = "<%=request.getContextPath()%>"+"/roommate/detail?id="+url;
