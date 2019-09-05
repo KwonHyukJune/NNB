@@ -140,7 +140,7 @@ public class RoommateController {
 		messageService.insertMessage(commandMap.getMap());
 			mv.setViewName("member/roommate/messageWrite");
 	return mv;
-	}
+	} 
   
 	@RequestMapping(value = "/roommate/ignore")
 	public ModelAndView ignoreUser(CommandMap commandMap, HttpServletRequest request) throws Exception {
