@@ -10,7 +10,7 @@
 <script src="<c:url value='/js/nouislider/nouislider.js'/>" charset="utf-8"></script>
 <script type="text/javascript">
 	var mem = sessionStorage.getItem("MEM_ID");
-	  
+	
 	function openDetail(obj){
 		var url = obj.parent().prev().text();
 		var strUrl = "<%=request.getContextPath()%>"+"/roommate/detail?id="+url;
@@ -274,7 +274,7 @@ function fn_selectSearchRoommateListCallback(data){
 					+	"<p>&nbsp;&nbsp;&nbsp;</p>"
 				+	"</li>"
 		$.each(data.list, function(key, mate){ 
-			str	+=	"<div class='id' style='display:none;'>" + mate.RI_MEM_ID + "</div>"
+			str	+=	"<div id='num' style='display:none;'>" + mate.RI_MEM_ID + "</div>"
 				+	"<li class='qUCQS2'>"
 					+	"<a href='#' onclick='openDetail($(this));' class='btn'>"
 						+	"<div>" + mate.MEM_NICK + "</div>"
@@ -423,7 +423,7 @@ $(function(){
 		
 		var input_value = [];
 		input_value[0]=values[0]*1+20;
-		var str = Number(input_value[0]) + '技 ~ '; 
+		var str = Number(input_value[0]) + '技 ~ ';
 		if(values[1]==100){
 			input_value[1] = '公力茄';
 			str += '公力茄';
