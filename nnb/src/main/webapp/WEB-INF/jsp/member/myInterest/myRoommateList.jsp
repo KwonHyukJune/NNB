@@ -7,11 +7,11 @@
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/myInterest.css'/>"/>
 <script type="text/javascript">
 function openDetail(obj){
-	var url = obj.children('#id').text();
+	var url = obj.parent().prev().text();
 	var strUrl = "<%=request.getContextPath()%>"+"/roommate/detail?id="+url;
-	window.open(strUrl);
+	window.open(strUrl,'openDetail','width=426,height=623,toolbar=no,'+ 
+			+'menubar=no, scrollbars=no, resizable=yes');
 };
-
 </script>
 </head>
 <body>
@@ -89,7 +89,7 @@ $(document).ready(function() {
 				$("#count").append(count);
 				var str	=	"";
 					$.each(data.list, function(key, mate){ 
-						str	+=	"<div id='id' style='display:none;'>" + mate.RI_MEM_ID + "</div>"
+						str	+=	"<div id='num' style='display:none;'>" + mate.RI_MEM_ID + "</div>"
 							+	"<li class='qUCQS2'>"
 								+	"<a href='#' onclick='openDetail($(this));' class='btn hVfzba2'>"
 									+	"<div>" + mate.MEM_NICK + "</div>"
