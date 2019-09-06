@@ -12,8 +12,19 @@
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/detailRoom.css'/>"/>
 <script type="text/javascript">
 /* openlessorInfo(id): 임대인 정보보기 새창으로 /room/detail/lessorInfo */
-/* report(): 신고하기 새창으로 */
 /* readMore() : 상세설명 더보기 */
+var mem = sessionStorage.getItem("MEM_ID");
+	$(document).ready(function(){
+		$("#report").on("click", function(e){ //작성하기 버튼
+			submit();
+		});			
+		function submit(){
+			var comSubmit = new ComSubmit('frm');
+			comSubmit.setUrl("<c:url value='/report'/>");
+			comSubmit.addParam("MEM_ID",mem);
+			comSubmit.submit();
+		}
+	});
 function readMore(obj){
 	var check = obj.prev().css('height');
 	if(check=='130px'){
@@ -583,7 +594,7 @@ $(document).ready(function(){
 				<input type="hidden" name="REPORT_TITLE" value="방 번호[${room.ROOM_NUM }]에 대한 신고글입니다."/>
 				<input type="hidden" name="REPORT_D_ID" value="${room.MEM_ID}"/>
 				<input type="hidden" name="REPORT_POST_NUM" value="${room.ROOM_NUM}"/>
-				<button class="styled__Btn-sc-1n1jlbj-18 bucdvX">허위매물 신고하기</button>
+				<button class="styled__Btn-sc-1n1jlbj-18 bucdvX" id="report">허위매물 신고하기</button>
 			</div>
 			</form>
 		</div>
