@@ -158,6 +158,7 @@ function showPopup(num){
 </div>
 <br>
 </div>
+
 <div>
 	<%@include file = "/WEB-INF/include/footer.jspf" %>
 </div>
