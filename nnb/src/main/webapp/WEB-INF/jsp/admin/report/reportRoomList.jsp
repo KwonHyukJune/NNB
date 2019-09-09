@@ -7,7 +7,7 @@
 <%@ include file="/WEB-INF/include/include-header.jspf" %>
 <%@include file = "/WEB-INF/include/adminHeader.jspf" %>
 
-<link rel="stylesheet" type="text/css" href="<c:url value='/css/myInterest.css'/>"/>
+<link rel="stylesheet" type="text/css" href="<c:url value='/css/adminReportRL.css'/>"/>
 <style>
 .kuldyr {
 	line-height: 54px;
@@ -64,21 +64,11 @@
 function showPopup(num){
     var url = "/nnb/admin/reportRoomDetail?REPORT_NUM="+num;
     var name = "회원정보";
-    var option = "width = 500, height = 500, top = 100, left = 200, location = no, resizeable = yes, scrollbars = yes"
+    var option = "width = 500, height = 630, top = 100, left = 200, location = no, resizeable = yes, scrollbars = yes"
     window.open(url, name, option);
 }
 
-function delet(num){  // 삭제
-	if(confirm('삭제하시겠습니까?')){
-		var x = $('a#'+num);
-		var str = "<form id='frm' method='post' action='delete'>"
-				+ "<input type='hidden' name='num' value='"+num+"'>"
-				+ "</form>";
-		console.log(str);
-		x.html(str);
-		frm.submit();
-	}
-}
+
  </script>
 
 </head>
@@ -90,64 +80,86 @@ function delet(num){  // 삭제
 
 <br>
 <br/>
-<div style="margin:0 700px">
-<select>
-	<option>처리완료</option>
-	<option>처리대기</option>
-</select>
-&nbsp;&nbsp;
-<select>
-	<option>전체</option>
-	<option>검색유형1</option>
-	<option>검색유형2</option>
-</select>
-<select>
-	<option>제목</option>
-	<option>신고자</option>
-	<option>매물번호</option>
-</select>
-&nbsp;&nbsp;
-	<input type="text" name='keyword' id="keywordInput" value='${cri.keyword }' style="height: 15px; ">
-&nbsp;&nbsp;
-    <a href="#this" class="btn" id="delete">조회</a>
-	<br/>
-	<p>총x건의 검색 결과가 있습니다.</p>
-	
-<br/>
+<div class="repl">
 
-<br/>
+	<select>
+		<option>처리완료</option>
+		<option>처리대기</option>
+	</select>
+	&nbsp;&nbsp;
+	<select>
+		<option>전체</option>
+		<option>검색유형1</option>
+		<option>검색유형2</option>
+	</select>
+	<select>
+		<option>제목</option>
+		<option>신고자</option>
+		<option>매물번호</option>
+	</select>
+	&nbsp;&nbsp;
+		<input type="text" name='keyword' id="keywordInput" value='${cri.keyword }' style="height: 15px; ">
+	&nbsp;&nbsp;
+	    <a class="rlDtl2" href="#this" class="btn" id="delete">조회</a>
+		<br/>
+		<p>총x건의 검색 결과가 있습니다.</p>
+		
+	<br/>
+	
+	<br/>
 </div>
 
+<div class="rlAll">
+
+	<ul class="tbody" style="width: 900px; height:50px; line-height: 50px;">
+	   
+		    	<li class="adN" style = "width: 5%; height: 50px; float:left; font-size: ; text-align:center;">번호</li>
+		    	<li class="Inf" style = "width: 12%; height: 50px; float:left; font-size: ; text-align:center;">신고유형</li>
+		    	<li class="Mii" style = "width: 20%; height: 50px; float:left; font-size: ; text-align:center;">날짜</li>
+		    	<li class="Mel" style = "width: 10%; height: 50px; float:left; font-size: 12px; text-align:center;">신고한 글 번호</li>
+		    	<li class="Mpn" style = "width: 33%; height: 50px; float:left; font-size: ; text-align:center;">제목</li>
+		    	<li class="Mpn" style = "width: 10%; height: 50px; float:left; font-size: 12px; text-align:center;">신고 번호</li>
+		    	<li class="Mpn" style = "width: 10%; height: 50px; float:left; text-align: center; ">상세보기</li>	  
+		    	
+    </ul>
+    <br/>
+			
 
 <div class="selectReportRoomList">
-<div class="reportRoomList">
-   
-   <c:forEach var="map" items="${list}">
-   <div class="report">
-  <div>
-         ${map.RNUM}&nbsp;	
-      	
-		 ${map.REPORT_TYPE}&nbsp;      
-      	
-         ${map.REPORT_DATE}&nbsp;
-         
-         ${map.REPORT_POST_NUM}&nbsp;	
-         
-         ${map.REPORT_TITLE} ${map.REPORT_NUM}
-     
-      <input type="button" value="상세보기" onclick="showPopup(${map.REPORT_NUM});" /> 
-      
-   </div>
-     
-   </div>	
-  
-   </c:forEach>
-</div>
-
+	<div class="reportRoomList">
+	   
+	  <c:forEach var="map" items="${list}">
+	   <div class="report">
+	   
+	 
+	   
+		  <div class="rlDtl">
+		         <p>${map.RNUM}</p>	
+		      	
+				<p>${map.REPORT_TYPE}</p>      
+		      	
+		         <p>${map.REPORT_DATE}</p>
+		         
+		         <p>${map.REPORT_POST_NUM}</p>	
+		         
+		         <p>${map.REPORT_TITLE}</p> 
+		         
+		         <p>${map.REPORT_NUM}</p>
+		         
+		         <p><input class="rlDtl2" type="button" value="상세보기" onclick="showPopup(${map.REPORT_NUM});" /></p>     	
+		     	
+			     	&nbsp;
+		     
+		   </div>
+	   </div>	
+	  
+	   </c:forEach>
+	</div>
 </div>
 <br>
+</div>
 <div>
-<%@include file = "/WEB-INF/include/footer.jspf" %>
+	<%@include file = "/WEB-INF/include/footer.jspf" %>
 </div>
 </body>
 </html>
