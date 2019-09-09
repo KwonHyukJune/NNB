@@ -309,6 +309,7 @@ $(document).ready(function(){
 }; */
 </script>
 
+</div>
 <div>
 <%@ include file="/WEB-INF/include/footer.jspf" %>
 </div>

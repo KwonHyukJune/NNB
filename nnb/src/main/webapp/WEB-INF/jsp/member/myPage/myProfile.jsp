@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +8,8 @@
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/myPage.css'/>"/>
 <link rel="stylesheet" type="text/css"
 	href="<c:url value='/css/room.css'/>" />
+<fmt:parseDate var="dateString" value="${map.RI_AVAILABLE_DATE}" pattern="yyyy-MM-dd"/>
+<fmt:parseDate var="dateString2" value="${map.RI_BIRTH}" pattern="yyyy-MM-dd"/>
 <script type="text/javascript">
 $(document).ready(function(){
 	$('#amyProfile').addClass('active');
@@ -49,11 +52,11 @@ function updateMyProfile(){
 			</div>
 			<div class="styled__Box-qdiane-2 LEUHe">
 				<h1 class="styled__Title-qdiane-3 fHGwAQ">생일</h1>
-				<div class="styled__FakeInput-qdiane-5 fZOKyS">${map.RI_BIRTH}</div>
+				<div class="styled__FakeInput-qdiane-5 fZOKyS"><fmt:formatDate value="${dateString2}" pattern="yyyy-MM-dd"/></div>
 			</div>
 			<div class="styled__Box-qdiane-2 LEUHe">
 				<h1 class="styled__Title-qdiane-3 fHGwAQ">입주 가능일</h1>
-				<div class="styled__FakeInput-qdiane-5 fZOKyS">${map.RI_AVAILABLE_DATE}</div>
+				<div class="styled__FakeInput-qdiane-5 fZOKyS"><fmt:formatDate value="${dateString}" pattern="yyyy-MM-dd"/></div>
 			</div>
 			<div class="styled__Box-qdiane-2 LEUHe">
 				<h1 class="styled__Title-qdiane-3 fHGwAQ">자기소개</h1>
