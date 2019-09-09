@@ -10,6 +10,8 @@
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/myPage.css'/>"/>
 <link rel="stylesheet" type="text/css"
 	href="<c:url value='/css/room.css'/>" />
+<fmt:parseDate var="dateString" value="${map.RI_AVAILABLE_DATE}" pattern="yyyy-MM-dd"/>
+<fmt:parseDate var="dateString2" value="${map.RI_BIRTH}" pattern="yyyy-MM-dd"/>
 <script type="text/javascript">
 $(document).ready(function(){
 	$('#amyProfile').addClass('active');
@@ -57,7 +59,7 @@ $(document).ready(function(){
 			<tr>
 				<th>생년월일</th>
 					<td class="ggZjqG">
-						<input class="kTQnUD MOVE_IN_DATE" type="date" name="birth" id="birth" value="${map.RI_BIRTH}">
+						<input class="kTQnUD MOVE_IN_DATE" type="date" name="BIRTH" id="RI_BIRTH">
 					</td>
 			</tr>
 			<tr>
@@ -75,7 +77,7 @@ $(document).ready(function(){
 			<tr>
 				<th>입주 가능일</th>
 					<td class="ggZjqG">
-						<input class="kTQnUD MOVE_IN_DATE" type="date" name="MOVE_IN_DATE" id="move_in_date">
+						<input class="kTQnUD MOVE_IN_DATE" type="date" name="RI_AVAILABLE_DATE" id="RI_AVAILABLE_DATE">
 					</td>
 			</tr>
 			<tr>
@@ -103,7 +105,7 @@ $(document).ready(function(){
 			<tr>
 				<th>자기 소개</th>
 					<td class="ggZjqG">
-						<textarea class="kTQnUD" name="profile" id="profile" style="margin: 0px; width: 658px; height: 193px; padding:10px 15px;"></textarea>
+						<textarea class="kTQnUD" name="profile" id="profile" style="margin: 0px; width: 658px; height: 193px; padding:10px 15px;">${map.RI_PROFILE}</textarea>
 					</td>
 			</tr>
 			<tr>
@@ -221,8 +223,42 @@ function displayCenterInfo(result, status) {
 }
 </script>
 <script type="text/javascript">
+$(document).ready(function(){
+	var gender = '${map.RI_GENDER}';
+	var expose = ${map.RI_EXPOSE};
+	if(gender=="M"){
+		$("#male").prop("checked", true);
+	};
+	if(gender=="F"){
+		$("#female").prop("checked", true);
+	}
+	if(expose==1){
+		$("#Y").prop("checked", true);
+	}
+	if(expose==0){
+		$("#N").prop("checked", true);
+	}
+	(function(){
+		var value = '<fmt:formatDate value="${dateString}" pattern="yyyy-MM-dd"/>';
+		console.log(value);
+		var key = $("input[name='RI_AVAILABLE_DATE']");
+		for(var i=0;i<key.length;i++){
+			key[i].value = value;
+		};
+	})();
+	(function(){
+		var value = '<fmt:formatDate value="${dateString2}" pattern="yyyy-MM-dd"/>';
+		console.log(value);
+		var key = $("input[name='BIRTH']");
+		for(var i=0;i<key.length;i++){
+			key[i].value = value;
+		};
+	})();
+}); 
+	
+
 /* 헤드에 써도 되나? */
-window.onload = function(){
+/* window.onload = function(){
 
 	if(${map.RI_GENDER=="M"}){
 		$("#male").checked = true;
@@ -270,7 +306,7 @@ window.onload = function(){
 	}else if(${map.RI_EXPOSE==0}){
 		$("#N").prop("checked",true);
 	};
-};
+}; */
 </script>
 
 <div>
