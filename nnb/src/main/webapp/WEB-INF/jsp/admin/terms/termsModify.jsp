@@ -88,7 +88,7 @@ $(document).ready(function(){
 			</li>
 		</ul>
 	<div align="center">
-			<button class="kcMULl" onclick="location.href='/admin/terms/list'">취소</button>
+			<button class="kcMULl" type="button" onclick="location.href='/nnb/admin/terms/list'">취소</button>
 			<button class="iEZQG" id="update">등록</button>
 			</div>
 </div>	
