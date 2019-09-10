@@ -3,7 +3,7 @@
 	<h1 class="title kuldyr">신고 관리</h1>
 	<ul class="tab jSSNqy">
 		<li>
-		<a id="awrite" class="tabmenu" href="<c:url value='/admin/reportRoomList'/>">신고 게시글 관리</a>
+		<a id="awrite" class="tabmenu" href="<c:url value='/admin/report/openReportRoomList'/>">신고 게시글 관리</a>
 		</li>
 		<li>
 		<a id="aadmin" class="tabmenu" href="<c:url value='/admin/reportMateList'/>">신고 룸메이트 관리</a>
