@@ -5,9 +5,9 @@
 <title>신고 상세보기</title>
 <head>
 <%@ include file="/WEB-INF/include/include-header.jspf" %>
-<%@include file = "/WEB-INF/include/adminHeader.jspf" %>
 
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/adminReport.css'/>"/>
+
 
 <script type="text/javascript">
 
@@ -39,11 +39,9 @@ function openPopup(url) {
 
 </head>
 
-<br/><br/><br/>
+<br/>
 
 <body>
-
-
 <div class="jtRefx">
 	<h2 class="kuldyr">상세보기</h2>
 </div>
@@ -106,5 +104,3 @@ function openPopup(url) {
 <div>
 <%@include file = "/WEB-INF/include/footer.jspf" %>
 </div>
-</body>
-</html>
