@@ -37,7 +37,7 @@ function openMenu(){
 		<a class="hVfzba" href="<c:url value='/admin/qna/list'/>">Q&A 관리</a>
 		<a class="hVfzba" href="<c:url value='/admin/openNoticeList'/>">게시판 관리</a>
 		<a class="hVfzba" href="<c:url value='/admin/openAdminBankList'/>">제휴 은행 관리</a>
-		<a class="hVfzba" href="<c:url value='/admin/reportRoomList'/>">신고 관리</a>
+		<a class="hVfzba" href="<c:url value='/admin/report/openReportRoomList'/>">신고 관리</a>
 	</div>
 
 	<div class="login hVfzba kiTmxU" onclick="location.href='<%=request.getContextPath()%>/admin/logout'">

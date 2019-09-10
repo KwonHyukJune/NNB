@@ -6,7 +6,8 @@
 <head>
 <%@ include file="/WEB-INF/include/include-header.jspf" %>
 
-<link rel="stylesheet" type="text/css" href="<c:url value='/css/adminReportRL.css'/>"/>
+<link rel="stylesheet" type="text/css" href="<c:url value='/css/adminReport.css'/>"/>
+
 
 <script type="text/javascript">
 
@@ -21,19 +22,18 @@ $(document).ready(function(){
 	$("#submit").on("click", function(e){ //확인 버튼
 		insertBoard();
 	});
-		
+	
 	function insertBoard(){
-		var comSubmit = new ComSubmit("frm");
-		comSubmit.setUrl("<c:url value='/room/tradeStatus'/>");
-		comSubmit.submit();
+		if(confirm("광고상태를 변경하시겠습니까?")){
+			var comSubmit = new ComSubmit("frm");
+			comSubmit.setUrl("<c:url value='/admin/report/roomStatus'/>");
+			comSubmit.submit();
+		}
 	}
 });
-
-
-
 function openPopup(url) {
 
-	window.open(url,"name","width = 500, height = 500, top = 100, left = 200, location = no, resizeable = yes, scrollbars = yes");
+	window.open(url,"name","width = 700, height = 700, top = 100, left = 200, location = no, resizeable = yes, scrollbars = yes");
 }
 </script>
 
@@ -42,71 +42,65 @@ function openPopup(url) {
 <br/>
 
 <body>
-
-
-<div style="text-align: center;"><h2>상세보기</h2></div>
+<div class="jtRefx">
+	<h2 class="kuldyr">상세보기</h2>
+</div>
 <br/>
-<hr>
-<br/><br/>
-
-<div class="selectReportRoomDetail">
-
-
-		<div class="reportRoomList">
-		   
-		   <div class="report">      
-			<ul>
-				<li style="text-align: center; color: red; font-weight: bold">
-				${map.REPORT_ID}님이 신고하셨습니다.				
-				</li>
-				<br/><br/>
-				<div class="liG">
-					<li class="lig1">
-						<p>번 호</p>
-					 	<p>&nbsp; ${map.REPORT_NUM} &nbsp;</p>     
-					</li>
-					<li class="lig2">
-						<p>신고유형 </p>
-			         	<p>&nbsp; ${map.REPORT_TYPE}&nbsp;</p>
-			      	</li>
-			      	<li class="lig3">
-			      		<p>날 짜 </p>     	
-			        	<p>&nbsp; ${map.REPORT_DATE}&nbsp;</p>
-			         </li>
-			         <li class="lig4">
-			         	<p>아이디</p>     	
-			         	<p>&nbsp; ${map.REPORT_D_ID}&nbsp;</p>
-			         </li>
-			         <li class="lig5">			        	
-			         	<p>매물번호 </p> 
-			         	<p><a class="rllink" href = javascript:openPopup("/nnb/admin/memberList")>&nbsp; ${map.REPORT_POST_NUM}&nbsp;</a></p> 
-			         </li>
-			         <li class="lig6">
-			         	<p>제 목</p>     	
-			         	<p>&nbsp; ${map.REPORT_TITLE}&nbsp;</p>
-			         </li>
-			         <li class="lig7">
-			         	<p>내 용</p>
-						<p>&nbsp; ${map.REPORT_REASON}</p>    
-			         </li>	
-		       	 </div>   
-		      </ul>
-		    <br/><br/><hr><br>
-		    
-	<form class="bttb" action="insertBan" method="post" id="frm" name="contents">     
-		<select id="BAN_REMOVAL_DATE" name="BAN_REMOVAL_DATE">
-	     	<option value="1">광고종료</option>
-	     	<option value="2">거래완료</option>
-	     	<option value="3">삭제처리</option>
-	     </select> &nbsp;&nbsp;		 
-	      
-	   	<a class="rlDtl2" href="#" id="submit">확인</a> &nbsp;&nbsp;  
-		<a class="rlDtl2" href="javascript:frameclose()">닫기</a>
+<div class="eugBve">		
+	<form action="insertBan" method="post" id="frm" name="contents">   
+	<input type='hidden' name='ROOM_NUM' value='${map.REPORT_POST_NUM}'/>  
+	<input type='hidden' name='num' value='${map.REPORT_NUM}'/>  
+	<ul class="hIJwlj">
+		<li>
+			<p class="efvxco">신고자</p>
+			<p class="efvxco">${map.REPORT_ID}</p>
+		</li>
+		<li>
+			<p class="efvxco">번호</p>
+			<p class="efvxco">${map.REPORT_NUM}</p>
+		</li>
+		<li>
+			<p class="efvxco">신고유형</p> 
+		    <p class="efvxco">
+		    	<c:if test="${map.REPORT_TYPE==1}">
+		    	거래가 완료된 매물
+		    	</c:if>
+		    	<c:if test="${map.REPORT_TYPE==2}">
+		    	정보가 다른 매물
+		    	</c:if>
+		    </p>
+		</li>
+		<li>
+			<p class="efvxco">날짜</p>   	
+		    <p class="efvxco">${map.REGDATE}</p>
+		</li>
+		<li>
+			<p class="efvxco">신고당한 회원 아이디</p>     	
+		    <p class="efvxco">${map.REPORT_D_ID}</p>
+		</li>
+		<li>
+			<p class="efvxco">매물 번호</p>    			        	
+		    <p class="efvxco"><a href = "javascript:openPopup('/nnb/room/roomDetail?ROOM_NUM=${map.REPORT_POST_NUM}')">${map.REPORT_POST_NUM}</a></p> 
+		</li>
+		<li>
+			<p class="efvxco">내용</p>
+			<p class="efvxco">${map.REPORT_REASON}</p>    
+		</li>
+		<li>
+			<p class="efvxco">처리</p>
+			<select class="hRFrgm freEbZ" id="TRADE_STATUS" name="TRADE_STATUS">
+	     		<option value="광고종료">광고종료</option>
+			</select>
+		</li>		
+	 </ul>
+	 <br><br>
+	<div align="center">
+	   	<button class="iEZQG" id="submit">확인</button>
+		<button class="kcMULl" onClick="javascript:frameclose()">닫기</button>
+	</div>
 	</form>
    		</div>	
-	</div>
+<br><hr><br><br>
+<div>
+<%@include file = "/WEB-INF/include/footer.jspf" %>
 </div>
-
-
-</body>
-</html>

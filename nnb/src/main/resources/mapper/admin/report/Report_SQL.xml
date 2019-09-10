@@ -4,51 +4,44 @@
 <mapper namespace="report">
 
 <select id="selectReportRoomList" parameterType="hashmap" resultType="hashmap"> 
+<include refid="common.pagingPre"/> 
 	<![CDATA[
 	SELECT
-		ROW_NUMBER() OVER (ORDER BY REPORT_NUM ASC) RNUM,
+		ROW_NUMBER() OVER (ORDER BY REPORT_NUM ASC) ROW_NUM,
+		RNUM,
 		REPORT_NUM,
 		REPORT_ID,
 		REPORT_D_ID,
 		REPORT_POST_NUM,
-		REPORT_DATE,
+		TO_CHAR(REPORT_DATE, 'YYYY/MM/DD') as REGDATE,
 		REPORT_TYPE,
-		REPORT_TITLE		
-	FROM
-		REPORT
+		REPORT_TITLE,
+		REPORT_STATE		
+	FROM(
+		SELECT
+			ROW_NUMBER() OVER (ORDER BY REPORT_NUM DESC) RNUM,
+			REPORT_NUM,
+			REPORT_ID,
+			REPORT_D_ID,
+			REPORT_POST_NUM,
+			REPORT_DATE,
+			REPORT_TYPE,
+			REPORT_TITLE,
+			REPORT_STATE
+		FROM	
+			REPORT
 	]]>	
-	<choose>
-	<when test="ReportType==1">
+		<!-- 처리상태가 있고  거래가 완료된 매물-->
+		<if test="reportType!=null and !reportType.equals('')">
+		<![CDATA[
+			WHERE
+    			REPORT_STATE = #{reportType}
+		]]>
+    	</if>
 	<![CDATA[
-	WHERE 
-		REPORT_TYPE = '욕설 및 혐오발언' AND REPORT_POST_NUM IS NOT NULL
-	]]>	
-	</when>
-	<when test="ReportType==2">
-	<![CDATA[
-	WHERE 
-		REPORT_TYPE = '허위정보 기재' AND REPORT_POST_NUM IS NOT NULL
-	]]>	
-	</when>
-	<when test="ReportType==3">
-	<![CDATA[
-	WHERE 
-		REPORT_TYPE = '음란성 게시글' AND REPORT_POST_NUM IS NOT NULL
-	]]>	
-	</when>
-	<when test="ReportType==4">
-	<![CDATA[
-	WHERE 
-		REPORT_TYPE = '도배/광고' AND REPORT_POST_NUM IS NOT NULL
-	]]>	
-	</when>
-	<otherwise>
-	<![CDATA[
-	WHERE 
-		REPORT_POST_NUM IS NOT NULL
-	]]>	
-	</otherwise>
-	</choose>
+		)ORDER BY ROW_NUM DESC
+	]]>
+<include refid="common.pagingPost"/>
 </select>
 
 <select id="selectReportMateList" parameterType="hashmap" resultType="hashmap"> 
@@ -96,7 +89,7 @@
 		REPORT_ID,
 		REPORT_D_ID,
 		REPORT_POST_NUM,
-		REPORT_DATE,
+		TO_CHAR(REPORT_DATE, 'YYYY/MM/DD') as REGDATE,
 		REPORT_REASON,
 		REPORT_TYPE,
 		REPORT_TITLE,
@@ -121,7 +114,8 @@
 		REPORT_POST_NUM,
 		REPORT_TITLE,
 		REPORT_REASON,
-		REPORT_TYPE
+		REPORT_TYPE,
+		REPORT_STATE
 		) 
 	VALUES(
 		REPORT_NUM_SEQ.NEXTVAL,
@@ -130,11 +124,27 @@
 		#{REPORT_POST_NUM},
 		#{REPORT_TITLE},
 		#{REPORT_REASON},
-		#{REPORT_TYPE}
+		#{REPORT_TYPE},
+		'N'
 	)
 	]]>
 </select>
+<select id="updateRoom" parameterType="hashmap"> 
+	<![CDATA[
+	UPDATE REPORT
+	SET
+		REPORT_STATE ='Y'
+	WHERE 
+		REPORT_NUM = #{num}
+	]]>
+</select>	
 
+<select id="deleteRoom" parameterType="hashmap"> 
+	<![CDATA[
+	DELETE REPORT
+	WHERE REPORT_NUM = #{num}
+	]]>
+</select>
 <!-- <select id="updateREPORT" parameterType="hashmap"> 
 	<![CDATA[
 	UPDATE REPORT
