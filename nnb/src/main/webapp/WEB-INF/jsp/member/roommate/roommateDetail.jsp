@@ -70,11 +70,11 @@
 <tr ><a id="aa"><th id="asl">월세 </th></a><td id="dsl">${mate.RI_LOAN_SMALL}</td></tr>
 <tr><a id="aa"><th id="asl">선호지역 </th></a><td id="dsl">${mate.RI_REGION1}</td></tr>
 <tr ><a id="aa"><th id="asl">생년월일 </th></a><td id="dsl">${mate.RI_BIRTH}</td></tr>
-<tr ><a id="aa"><th id="asl">입주시기 </th></a><td id="dsl">${mate.RI_DATE_START}~${mate.RI_DATE_END}</td></tr>
+<tr ><a id="aa"><th id="asl">입주시기 </th></a><td id="dsl">${mate.RI_AVAILABLE_DATE}</td></tr>
 <tr ><a id="aa"><th id="asl">자기소개 </th></a><td id="dsl">${mate.RI_PROFILE}</td></tr>
 <tr ><a id="aa"><th id="asl">성별 </th></a><td id="dsl">${mate.RI_GENDER}</td></tr>
 </table>
-		<div class="ignore"><a href="#" class="btn" onclick="ignore();">차단</a></div>
+		<div class="ignore" style="text-align:center;"><a href="#" class="btn" onclick="ignore();">차단</a></div>
 	<script type="text/javascript">
 	function ignore(){
 		var mem = "${mate.MEM_ID}"; 
@@ -98,11 +98,12 @@
 	<c:if test="${mate.check=='1'}">
 	<th id="qasl"><a href="#" class="btn" onclick="deleteFav();">찜취소</a></th>
 	</c:if>
+	<div style="text-align:center;">
 <a href="<c:url value='/roommate/detail/messageWriteForm?RECEIVER=${mate.MEM_ID}'/>" class="btn">메시지 보내기</a>
-
-
-	<a href="#" class="btn" onclick="javascript:window.close();">닫기</a>
-
+</div>
+<div style="text-align:center;">
+	<a href="#" class="btn" onclick="javascript:window.close();" style="text-align:center;">닫기</a>
+</div>
 <br>
 <%-- <div class="footer">
 <%@ include file="/WEB-INF/include/footer.jspf" %>
