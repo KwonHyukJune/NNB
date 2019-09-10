@@ -8,10 +8,13 @@ public interface AdminReportService {
 
 	List<Map<String, Object>> selectReportMateList (Map<String, Object> map) throws Exception;
 
-
 		 Map<String, Object>  selectReportRoomDetail(Map<String, Object> map) throws Exception;
 
 		 Map<String, Object>  selectReportMateDetail(Map<String, Object> map) throws Exception;
+
+		void updateRoom(Map<String, Object> map) throws Exception;
+
+		void deleteRoom(Map<String, Object> map) throws Exception;
 
 
 }

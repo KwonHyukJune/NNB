@@ -64,27 +64,27 @@
 .msgDtl > p:first-child{
 	float:left;
 	width:10%;
-	box-shadow: 0px 2px rgb(19, 116, 248);;
+	box-shadow: 0px 0.5px rgb(19, 116, 248);;
 }
 .msgDtl > p:nth-child(2){
 	float:left;
 	width:15%;
-	box-shadow: 0px 2px rgb(19, 116, 248);;
+	box-shadow: 0px 0.5px rgb(19, 116, 248);;
 }
 .msgDtl > p:nth-child(3){
 	float:left;
 	width:15%;
-	box-shadow: 0px 2px rgb(19, 116, 248);;
+	box-shadow: 0px 0.5px rgb(19, 116, 248);;
 }
 .msgDtl > p:nth-child(4){
 	float:left;
 	width:30%;
-	box-shadow: 0px 2px rgb(19, 116, 248);;
+	box-shadow: 0px 0.5px rgb(19, 116, 248);;
 }
 .msgDtl > p:nth-child(5){
 	float:left;
 	width:30%;
-	box-shadow: 0px 2px rgb(19, 116, 248);;
+	box-shadow: 0px 0.5px rgb(19, 116, 248);;
 }
 .tbody > li{
 	

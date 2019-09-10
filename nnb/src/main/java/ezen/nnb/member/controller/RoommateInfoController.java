@@ -43,8 +43,12 @@ public class RoommateInfoController {
 		return mv;
 	}
 	@RequestMapping(value="/myPage/myProfileModifyForm")
-	public ModelAndView myProfileModifyForm()throws Exception{
+	public ModelAndView myProfileModifyForm(HttpServletRequest request, CommandMap commandMap)throws Exception{
 		ModelAndView mv=new ModelAndView("/member/myPage/myProfileModifyForm");
+		HttpSession session= request.getSession();
+		commandMap.put("MEM_ID",session.getAttribute("MEM_ID"));
+		Map<String,Object>map=roommateService.myProfile(commandMap.getMap());
+		mv.addObject("map",map);
 		return mv;
 	}
 	@RequestMapping(value="/myPage/myProfileModify")
@@ -58,7 +62,7 @@ public class RoommateInfoController {
 	}
 	@RequestMapping(value="/myPage/myProfileDelete")
 	public ModelAndView myProfileDelete(CommandMap commandMap)throws Exception{
-		ModelAndView mv=new ModelAndView("redirect:/member/myPage/messageList");
+		ModelAndView mv=new ModelAndView("redirect:/myPage/myProfile");
 		roommateService.myProfileDelete(commandMap.getMap());
 		return mv;
 	}

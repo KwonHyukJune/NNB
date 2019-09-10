@@ -171,7 +171,7 @@ WHERE
 	]]>
 </if>
 
-<if test="mindate!=null and !mindate.equals('')">
+<if test="available_date!=null and !available_date.equals('')">
 	<![CDATA[
 	AND RI_AVAILABLE_DATE > #{mindate,jdbcType=DATE} 
 	]]>

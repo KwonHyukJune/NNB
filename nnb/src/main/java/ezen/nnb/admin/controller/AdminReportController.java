@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import ezen.nnb.admin.service.AdminMemberService;
@@ -28,28 +29,25 @@ public class AdminReportController {
 	@Resource(name="adminMemberService") 
 	private AdminMemberService adminMemberService;
 
-	
-	@RequestMapping(value = "/admin/reportRoomList")
+	@RequestMapping(value="/admin/report/openReportRoomList")
+	public ModelAndView openReportRoomList(CommandMap commandMap) throws Exception{
+		ModelAndView mv=new ModelAndView("/admin/report/reportRoomList");
+		return mv;
+	}
+	@RequestMapping(value="/admin/reportRoomList")
+	@ResponseBody
 	public ModelAndView adminReportRoomList(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("/admin/report/reportRoomList");
-
+		ModelAndView mv = new ModelAndView("jsonView");
+		if(commandMap.get("searchType")!=null && commandMap.get("keyword")==null) {
+			commandMap.put("keyword","");
+		}
 		List<Map<String, Object>> list = adminReportService.selectReportRoomList(commandMap.getMap());
+		
+		mv.addObject("size",list.size());
 		mv.addObject("list", list);
 
 		return mv;
 	}
-	
-	@RequestMapping(value = "/admin/reportMateList")
-	public ModelAndView adminReportMateList(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("/admin/report/reportMateList");
-		System.out.println("mateList"+commandMap.getMap());
-
-		List<Map<String, Object>> list = adminReportService.selectReportMateList(commandMap.getMap());
-		mv.addObject("list", list);
-
-		return mv;
-	}
-
 	@RequestMapping(value="/admin/reportRoomDetail")
 	public ModelAndView adminRoomReportDetail(CommandMap commandMap) throws Exception{
 		ModelAndView mv = new ModelAndView("/admin/report/reportRoomDetail");
@@ -60,7 +58,38 @@ public class AdminReportController {
 		
 		return mv;
 	}
-	
+	@RequestMapping(value="admin/report/roomStatus")
+	public ModelAndView adminRoomStatus(CommandMap commandMap) throws Exception{
+	ModelAndView mv = new ModelAndView();
+	adminRoomService.updateAdminRoomStatus(commandMap.getMap());
+	mv.addObject("room_status", commandMap.get("room_status"));
+	mv.setViewName("redirect:/admin/reportRoomDetail?REPORT_NUM="+commandMap.get("num"));
+	return mv;	
+	}
+	@RequestMapping(value="/admin/report/update")
+	public ModelAndView adminReportRoomUpdate(CommandMap commandMap)throws Exception{
+		ModelAndView mv=new ModelAndView("redirect:/admin/report/openReportRoomList");
+		adminReportService.updateRoom(commandMap.getMap());
+		return mv;
+	}
+	@RequestMapping(value="/admin/report/delete")
+	public ModelAndView adminFaqDelete(CommandMap commandMap) throws Exception{
+		ModelAndView mv = new ModelAndView("redirect:/admin/report/openReportRoomList");
+		
+		adminReportService.deleteRoom(commandMap.getMap());
+		
+		return mv;
+	}
+	@RequestMapping(value = "/admin/reportMateList")
+	public ModelAndView adminReportMateList(CommandMap commandMap) throws Exception {
+		ModelAndView mv = new ModelAndView("/admin/report/reportMateList");
+		System.out.println("mateList"+commandMap.getMap());
+
+		List<Map<String, Object>> list = adminReportService.selectReportMateList(commandMap.getMap());
+		mv.addObject("list", list);
+
+		return mv;
+	}
 	@RequestMapping(value="/admin/reportMemberDetail")
 	public ModelAndView adminMateReportDetail(CommandMap commandMap) throws Exception{
 		ModelAndView mv = new ModelAndView("/admin/report/reportMateDetail");

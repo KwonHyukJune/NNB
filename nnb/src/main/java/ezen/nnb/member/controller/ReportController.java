@@ -24,13 +24,13 @@ public class ReportController {
 	
 	@RequestMapping(value = "/reportForm") //방내놓기 폼으로 이동 시켜준다
 	public ModelAndView reportForm(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("member/reportForm");
+		ModelAndView mv = new ModelAndView("member/report/reportForm");
 		return mv;
 	}
 	
 	@RequestMapping(value = "/report") //방내놓기 폼으로 이동 시켜준다
 	public ModelAndView report(CommandMap commandMap, HttpServletRequest request) throws Exception {
-		ModelAndView mv = new ModelAndView();
+		ModelAndView mv = new ModelAndView("member/report/report");
 		HttpSession session = request.getSession();
 		commandMap.put("REPORT_ID", session.getAttribute("MEM_ID"));
 		reportService.report(commandMap.getMap());

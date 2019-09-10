@@ -72,7 +72,7 @@ function goPage(url){
 	<li>
 		<ul>
 			<li>신고 관리</li>
-			<li onclick="goPage('reportRoomList');">신고 게시글 관리</li>
+			<li onclick="goPage('/nnb/admin/report/openReportRoomList');">신고 게시글 관리</li>
 			<li onclick="goPage('reportMateList');">신고 룸메이트 관리</li>
 		</ul>
 	</li>

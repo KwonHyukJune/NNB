@@ -110,20 +110,20 @@ function fsubmit(){
 	comSubmit.validation($('.BUILDING_TYPE:checked'),'건물 종류를 선택하세요.');
 	comSubmit.validation($('.ADDRESS1'),'주소를 입력하세요.');
 	comSubmit.validation($('.TRADE_TYPE:checked'),'거래 종류를 선택하세요.');
-	comSubmit.validation($('.BUILDING_STORY option:selected'),'건물 층수를 선택하세요.');
-	comSubmit.validation($('.ROOM_FLOOR option:selected'),'해당 층수를 선택하세요.');
-	comSubmit.validation($('.HEATING_SYSTEM option:selected'),'난방 종류를 선택하세요.');
+	comSubmit.validation($('.SUPPLY_SIZE'),'공급면적을 입력하세요.');
+	comSubmit.validation($('.REAL_SIZE'),'전용면적을 입력하세요.');
+	comSubmit.validation($('#BUILDING_STORY option:selected'),'건물 층수를 선택하세요.');
+	comSubmit.validation($('#ROOM_FLOOR option:selected'),'해당 층수를 선택하세요.');
+	comSubmit.validation($('#HEATING_SYSTEM option:selected'),'난방 종류를 선택하세요.');
+	comSubmit.validation($('.MOVE_IN_DATE'),'입주 가능일을 입력하세요.');
 	comSubmit.validation($('.ROOM_TYPE:checked'),'매물 종류를 선택하세요.');
 	comSubmit.validation($('.UTILITY_CHECK:checked'),'관리비 여부를 선택하세요.');
-	comSubmit.validation($('.PET:checked'),'주차가능 여부를 선택하세요.');
+	comSubmit.validation($('.PET:checked'),'애완동물 여부를 선택하세요.');
 	comSubmit.validation($('.ELEVATOR:checked'),'엘리베이터 여부를 선택하세요.');
 	comSubmit.validation($('.BALCONY:checked'),'발코니 여부를 선택하세요.');
 	comSubmit.validation($('.BUILT_IN:checked'),'빌트인 여부를 선택하세요.');
 	comSubmit.validation($('.LOAN_ACCESS:checked'),'전세자금대출 여부를 선택하세요.');
 	comSubmit.validation($('.PARKING:checked'),'주차가능 여부를 선택하세요.');
-	comSubmit.validation($('.SUPPLY_SIZE'),'상세설명 제목을 입력하세요.');
-	comSubmit.validation($('.REAL_SIZE'),'상세설명 제목을 입력하세요.');
-	comSubmit.validation($('.MOVE_IN_DATE'),'입주 가능일을 입력하세요.');
 	comSubmit.validation($('#DESC_TITLE'),'상세설명 제목을 입력하세요.');
 	comSubmit.validation($('#DESC_DETAIL'),'상세설명 내용을 입력하세요.');
 	comSubmit.submit();
@@ -320,15 +320,15 @@ function fsubmit(){
 							<p class="hNdXGi">공급 면적 </p>
 							<input class="gsCYXz kTQnUD" type="text" id="sup_p" onkeyup="calculator1(1);">
 							<p class="cmXpqK">평</p>
-							<input class="gsCYXz kTQnUD" type="text" name="SUPPLY_SIZE" class="SUPPLY_SIZE" id="sup_m" onkeyup="calculator1(2);">
+							<input class="gsCYXz kTQnUD SUPPLY_SIZE" type="text" name="SUPPLY_SIZE" id="sup_m" onkeyup="calculator1(2);">
 							<p class="cmXpqK">m2</p>
 						</td>
 						<th rowspan="2">건물 층수</th>
 						<td class="ggZjqG">
 							<p class="hNdXGi">건물 층수 </p>
-							<select class="freEbZ hRFrgm" name="BUILDING_STORY" class="BUILDING_STORY" id="building_story">
-								<option>--건물 층수 선택--</option>
-								<option value="0">반지층</option>]
+							<select class="freEbZ hRFrgm BUILDING_STORY" name="BUILDING_STORY" id="BUILDING_STORY">
+								<option value="">--건물 층수 선택--</option>
+								<option value="0">반지층</option>
 								<option value="-1">옥탑방</option>
 								<c:forEach var="i" begin="1" end="50">
 									<option value="${i}">${i}층</option>
@@ -341,13 +341,13 @@ function fsubmit(){
 							<p class="hNdXGi">전용 면적 </p>
 							<input class="gsCYXz kTQnUD " type="text" id="real_p" onkeyup="calculator2(1);">
 							<p class="cmXpqK">평</p>
-							<input class="gsCYXz kTQnUD " type="text" name="REAL_SIZE" class="REAL_SIZE" id="real_m" onkeyup="calculator2(2);">
+							<input class="gsCYXz kTQnUD REAL_SIZE" type="text" name="REAL_SIZE" id="real_m" onkeyup="calculator2(2);">
 							<p class="cmXpqK">m2</p>							
 						</td>
 						<td class="ggZjqG">
 							<p class="hNdXGi">해당 층수 </p>
-							<select class="freEbZ hRFrgm" name="ROOM_FLOOR" class="ROOM_FLOOR" id="room_floor">
-								<option>--해당 층수 선택--</option>
+							<select class="freEbZ hRFrgm ROOM_FLOOR" name="ROOM_FLOOR" id="ROOM_FLOOR">
+								<option value="">--해당 층수 선택--</option>
 								<option value="0">반지층</option>
 								<option value="-1">옥탑</option>
 								<c:forEach var="i" begin="1" end="50">
@@ -359,8 +359,8 @@ function fsubmit(){
 					<tr>
 						<th>난방 종류</th>
 						<td class="ggZjqG" colspan="3">
-							<select name="HEATING_SYSTEM" id="heating_system" class="iDUqOA hRFrgm HEATING_SYSTEM">
-								<option>--난방 종류 선택--</option>
+							<select name="HEATING_SYSTEM" id="HEATING_SYSTEM" class="iDUqOA hRFrgm HEATING_SYSTEM">
+								<option value="">--난방 종류 선택--</option>
 								<option value="1">중앙난방</option>
 								<option value="2">개별난방</option>
 								<option value="3">지역난방</option>
@@ -370,7 +370,7 @@ function fsubmit(){
 					<tr>
 						<th>입주 가능일</th>
 						<td class="ggZjqG">
-							<input class="kTQnUD" type="date" name="MOVE_IN_DATE" id="move_in_date" class="MOVE_IN_DATE">
+							<input class="kTQnUD MOVE_IN_DATE" type="date" name="MOVE_IN_DATE" id="move_in_date">
 						</td>
 					</tr>
 					</tbody>
@@ -521,51 +521,51 @@ function fsubmit(){
 								<p>에어컨</p>
 							</label>
 							<label class="hrokF cdcjQK">
-								<input class="hrokF cdcjQK" type="checkbox" class="STRUCTURES" value="2" name="OPTIONS">
+								<input class="hrokF cdcjQK" type="checkbox" value="2" name="OPTIONS">
 								<p>세탁기</p>
 							</label>
 							<label class="hrokF cdcjQK">
-								<input class="hrokF cdcjQK" type="checkbox" class="STRUCTURES" value="3" name="OPTIONS">
+								<input class="hrokF cdcjQK" type="checkbox" value="3" name="OPTIONS">
 								<p>침대</p>
 							</label>
 							<label class="hrokF cdcjQK">
-								<input class="hrokF cdcjQK" type="checkbox" class="STRUCTURES" value="4" name="OPTIONS">
+								<input class="hrokF cdcjQK" type="checkbox" value="4" name="OPTIONS">
 								<p>책상</p>
 							</label>
 							<label class="hrokF cdcjQK">
-								<input class="hrokF cdcjQK" type="checkbox" class="STRUCTURES" value="5" name="OPTIONS">
+								<input class="hrokF cdcjQK" type="checkbox" value="5" name="OPTIONS">
 								<p>옷장</p>
 							</label>
 							<label class="hrokF cdcjQK">
-								<input class="hrokF cdcjQK" type="checkbox" class="STRUCTURES" value="6" name="OPTIONS">
+								<input class="hrokF cdcjQK" type="checkbox" value="6" name="OPTIONS">
 								<p>TV</p>
 							</label>
 							<label class="hrokF cdcjQK">
-								<input class="hrokF cdcjQK" type="checkbox" class="STRUCTURES" value="7" name="OPTIONS">
+								<input class="hrokF cdcjQK" type="checkbox" value="7" name="OPTIONS">
 								<p>신발장</p>
 							</label>
 							<label class="hrokF cdcjQK">
-								<input class="hrokF cdcjQK" type="checkbox" class="STRUCTURES" value="8" name="OPTIONS">
+								<input class="hrokF cdcjQK" type="checkbox" value="8" name="OPTIONS">
 								<p>냉장고</p>
 							</label>
 							<label class="hrokF cdcjQK">
-								<input class="hrokF cdcjQK" type="checkbox" class="STRUCTURES" value="9" name="OPTIONS">
+								<input class="hrokF cdcjQK" type="checkbox" value="9" name="OPTIONS">
 								<p>가스레인지</p>
 							</label>
 							<label class="hrokF cdcjQK">
-								<input class="hrokF cdcjQK" type="checkbox" class="STRUCTURES" value="10" name="OPTIONS">
+								<input class="hrokF cdcjQK" type="checkbox" value="10" name="OPTIONS">
 								<p>인덕션</p>
 							</label>
 							<label class="hrokF cdcjQK">
-								<input class="hrokF cdcjQK" type="checkbox" class="STRUCTURES" value="11" name="OPTIONS">
+								<input class="hrokF cdcjQK" type="checkbox" value="11" name="OPTIONS">
 								<p>전자레인지</p>
 							</label>
 							<label class="hrokF cdcjQK">
-								<input class="hrokF cdcjQK" type="checkbox" class="STRUCTURES" value="12" name="OPTIONS">
+								<input class="hrokF cdcjQK" type="checkbox" value="12" name="OPTIONS">
 								<p>전자도어락</p>
 							</label>
 							<label class="hrokF cdcjQK">
-								<input class="hrokF cdcjQK" type="checkbox" class="STRUCTURES" value="13" name="OPTIONS">
+								<input class="hrokF cdcjQK" type="checkbox" value="13" name="OPTIONS">
 								<p>비데</p>
 							</label>
 						</td>

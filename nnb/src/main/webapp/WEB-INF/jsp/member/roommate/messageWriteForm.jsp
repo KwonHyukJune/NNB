@@ -69,7 +69,7 @@ function validation(){
 	</li>
 	<li>
 		<a href="#" id="submit" class="btn" onclick="validation()">보내기</a>
-		<a href="<c:url value='/myPage/messageList'/>" id="cancle" class="btn">취소</a>
+		<a href="#" onclick="fn_back();" id="cancle" class="btn">취소</a>
 	</li>
 	</ul>
 </form>

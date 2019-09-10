@@ -17,90 +17,107 @@
 </head>
 <%@ include file="/WEB-INF/include/include-header.jspf" %>
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/myPage.css'/>"/>
+<link rel="stylesheet" type="text/css"
+	href="<c:url value='/css/room.css'/>" />
 </head>
 <body>
 <%@ include file="/WEB-INF/include/header.jspf" %>
+<div class="myProfileModifyForm cAeKOJ">
 <%@ include file="myPage.jspf" %>
-
-<div class="title">룸메이트 정보 등록</div>
-
-<form id="frm" name="frm" method="post" action="registMyProfile">
-<div class="h">성별</div>
-<div class="b">
-	<input type="radio" name="gender" value="M">남
-	<input type="radio" name="gender" value="F">여
-</div>
-<div class="h">부담가능금액</div>
-<div class="b">
-	보증금: <input type="number" name="loan_big" id="loan_big">만원<br>
-	월세: <input type="number" name="loan_small" id="loan_small">만원
-</div>
-<div class="h">
-선호지역
-	<button type="button" onclick="fn_addRegion($(this))">추가</button>
-</div>
-<div class="b" id="region">
-	<input type="text" readonly="readonly" name="region1" id="region1">
-</div>
-
-<!----------------------------------------------------------------------------------------------------->
-
-<br><br><br><br><br><br>
-<div class="fUXvpI addressarea">   </div>
-<input type="hidden" name="RI_REGION1" id="sample6_address" size="50"
-	placeholder="주소">
-
-<div class="map_wrap">
-    <div id="map" style="width:50%;height:100%;position:relative;overflow:hidden;">  </div>
-    <div class="hAddr">
-        <span class="title">지도중심기준 행정동 주소정보</span>
-        <span id="centerAddr"></span>
-    </div>
-</div>
-
-<!----------------------------------------------------------------------------------------------------->
-<br><br><br><br><br><br>
-<div class="b">
-</div>
-<div class="h">생년월일</div>
-<div class="b">
-	<c:set var="nowTime" value="<%=new Date() %>"/>
-	<fmt:formatDate value="${nowTime}" type="date" var="currentYear" pattern="yyyy"/>
-	<select id="birth_year" name="birth_year">
-		<c:forEach var="i" begin="1900" end="${currentYear}">
-		<option value="${i}">${i}</option>
-		</c:forEach>
-	</select>년
-	<select id="birth_month" name="birth_month">
-		<c:forEach var="i" begin="1" end="12">
-		<option value="${i}">${i}</option>
-		</c:forEach>
-	</select>월
-	<select id="birth_date" name="birth_date">
-		<c:forEach var="i" begin="1" end="31">
-		<option value="${i}">${i}</option>
-		</c:forEach>
-	</select>일
-</div>
-<div class="h">입주시기</div>
-<div class="b">
-	<input type="date" id="date_start" name="date_start"> ~ 
-	<input type="date" id="date_end" name="date_end">
-</div>
-<div class="h">자기소개</div>
-<div class="b"><textarea name="profile"></textarea></div>
-<div class="h">검색 노출 여부</div>
-<div class="b">
-<input type="radio" name="expose" value="1">가능
-<input type="radio" name="expose" value="0">블가능
-</div>
-</form>
-
-<button type="button" onclick="fn_submit();">등록</button>
-<a href="#" id="submit" class="btn">등록</a>
-<a href="<c:url value='/myPage/myProfile'/>">취소</a>
-
 <br>
+<br>
+<div class="styled__Box-sc-1etgh1k-1 etFHhl" name="registMyRoommateInfo">
+	<h1>내 룸메이트 정보 변경하기</h1>
+	<form id="frm" name="frm" method="post">
+	<table>
+		<colgroup><col width="150px"><col></colgroup>
+		<tbody>
+			<tr>
+				<th>성별</th>
+				<td class="styled__Td-loqpne-0 fNOtpc">
+					<label class="styled__Radio-loqpne-1 bVNPCb styled__RadioBtn-j1kyvo-0 fSFsCh">
+						<input type="radio" name="gender" value ="M">
+						<p>남자</p>
+					</label>
+					<label class="styled__Radio-loqpne-1 bVNPCb styled__RadioBtn-j1kyvo-0 fSFsCh">
+						<input type="radio" name="gender" value="F">
+						<p>여자</p>
+					</label>
+				</td>
+			</tr>
+			<tr>
+				<th>생년월일</th>
+					<td class="ggZjqG">
+						<input class="kTQnUD MOVE_IN_DATE" type="date" name="birth" id="move_in_date">
+					</td>
+			</tr>
+			<tr>
+				<th>부담가능액</th>
+					<td class="styled__Td-sc-1toww6o-0 iFmBhb">
+						<div class="styled__Info-sc-1toww6o-5 bMtYCv">
+							<input autocomplete="off" class="styled__Deposit-sc-1toww6o-7 fqDzuM Input-sfsekm-0 kTQnUD" name="loan_big" type="text" placeholder="보증금">
+							<p class="styled__Space-sc-1toww6o-8 ktwJnl">/</p>
+							<input autocomplete="off" class="styled__Price-sc-1toww6o-9 ghUXBC Input-sfsekm-0 kTQnUD" name="loan_small" type="text" placeholder="월세">
+							<p class="styled__Won-sc-1toww6o-10 fIWZWk">만원 <span>(예 월세 1000만원/50만원)</span>
+							</p>
+						</div>
+					</td>
+			</tr>
+			<tr>
+				<th>입주 가능일</th>
+					<td class="ggZjqG">
+						<input class="kTQnUD" type="date" name="available_date">
+					</td>
+			</tr>
+			<tr>
+				<th>자기 소개</th>
+					<td class="ggZjqG">
+						<textarea class="kTQnUD" name="profile" id="RI_PROFILE" style="margin: 0px; width: 658px; height: 193px; padding:10px 15px;">
+						</textarea>
+					</td>
+			</tr>
+			<tr>
+				<th>선호 지역</th>
+				<td>
+					<div class="h">
+						선호지역
+						<button type="button" onclick="fn_addRegion($(this))">추가</button>
+					</div>
+					<div class="b" id="region">
+						<input class="kTQnUD" type="text" readonly="readonly" name="region1" id="region1">
+					</div>
+					<div class="fUXvpI addressarea">   </div>
+					<input type="hidden" name="RI_REGION1" id="sample6_address" size="50" placeholder="주소">
+
+					<div class="map_wrap">
+    					<div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;">  </div>
+    					<div class="hAddr">
+        						<span class="title">지도중심기준 행정동 주소정보</span>
+        						<span id="centerAddr"></span>
+    					</div>
+					</div>
+				</td>
+			<tr>
+				<th>검색 노출 여부</th>
+				<td class="styled__Td-loqpne-0 fNOtpc">
+					<label class="styled__Radio-loqpne-1 bVNPCb styled__RadioBtn-j1kyvo-0 fSFsCh">
+						<input type="radio" name="expose" value="1">
+						<p>가능</p>
+					</label>
+					<label class="styled__Radio-loqpne-1 bVNPCb styled__RadioBtn-j1kyvo-0 fSFsCh">
+						<input type="radio" name="expose" value="0">
+						<p>불가능</p>
+					</label>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	</form>
+</div>
+<div style="text-align:center">
+<button class="styled__EditBtn-qdiane-19 gsJtOS styled__Btn-qdiane-17 ejTRmD" type="button" onclick="fn_submit();">등록</button>
+</div>
+
 <div>
 <%@ include file="/WEB-INF/include/footer.jspf" %>
 </div>
@@ -111,7 +128,7 @@
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = {
         center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
-        level: 1 // 지도의 확대 레벨
+        level: 3 // 지도의 확대 레벨
     };  
 
 // 지도를 생성합니다    
@@ -200,16 +217,12 @@ function displayCenterInfo(result, status) {
 </script>
 
 <script type="text/javascript">
-$(document).ready(function(){
-	$("#submit").on("click",function(e){
-		e.preventDefault();
-		fn_submit();
-	});
-});
+var mem = sessionStorage.getItem("MEM_ID");
 
 function fn_submit(){
 	var conSubmit = new ComSubmit("frm");
 	conSubmit.setUrl("<c:url value='/myPage/registMyProfile'/>");
+	conSubmit.addParam("MEM_ID", mem);
 	conSubmit.submit();
 };
 
@@ -217,7 +230,7 @@ function fn_addRegion(obj){
 	var count = obj.parent().next().children().length + 1;
 	if(count<=3){
 		var str = "<div>"
-				+ "<input type='text' readonly='readonly' name='region"+count+"' id='region"+count+"'>"
+				+ "<input class='kTQnUD' type='text' readonly='readonly' name='region"+count+"' id='region"+count+"'>"
 				+ "<button type='button' onclick='fn_deleteRegion($(this))'>삭제</button>"
 				+ "</div>";
 		obj.parent().next().append(str);
@@ -230,21 +243,6 @@ function fn_addRegion(obj){
 
 function fn_deleteRegion(obj){
 	obj.parent().remove();
-}
-
-function fn_submit(){
-	var year = $("#birth_year option:selected").val();
-	var month = $("#birth_month option:selected").val();
-	if(month.length==1){
-		month = "0"+month;
-	}
-	var date = $("#birth_date option:selected").val();
-	if(date.length==1){
-		date = "0"+date;
-	}
-	var birth = year.toString()+month.toString()+date.toString();
-	$("#frm").append("<input type='hidden' name='birth' value='"+birth+"'>");
-	frm.submit();
 }
 </script>
 </body>

@@ -91,7 +91,8 @@ $(document).ready(function(){
 				<p>${map.MEM_EMAIL}</p>
 				<p>연락처</p>
 				<p>${map.MEM_PHONE}</p>				
-				<p>		</p>
+				<p>		
+				</p>
 				<p><a class="adminbtn" href="<c:url value='/myPage/modifyForm'/>" class="btn">수정</a></p>
 					
 		</div>
