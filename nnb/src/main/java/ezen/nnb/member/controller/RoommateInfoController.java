@@ -62,7 +62,7 @@ public class RoommateInfoController {
 	}
 	@RequestMapping(value="/myPage/myProfileDelete")
 	public ModelAndView myProfileDelete(CommandMap commandMap)throws Exception{
-		ModelAndView mv=new ModelAndView("redirect:/myPage/messageList");
+		ModelAndView mv=new ModelAndView("redirect:/myPage/myProfile");
 		roommateService.myProfileDelete(commandMap.getMap());
 		return mv;
 	}
