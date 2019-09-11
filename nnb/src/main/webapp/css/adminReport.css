@@ -79,22 +79,19 @@
     width: 10%;
 }
 .pbYHJ > p:nth-child(2) {
-    width: 20%;
+    width: 30%;
 }
 .pbYHJ > p:nth-child(3) {
-    width: 10%;
+    width: 15%;
 }
 .pbYHJ > p:nth-child(4) {
-    width: 10%;
+    width: 15%;
 }
 .pbYHJ > p:nth-child(5) {
-    width: 20%;
+    width: 15%;
 }
 .pbYHJ > p:nth-child(6) {
-    width: 10%;
-}
-.pbYHJ > p:nth-child(7) {
-    width: 20%;
+    width: 15%;
 }
 /* 내용-리스트 */
 .hXdylP {

@@ -89,7 +89,6 @@ function fn_selectReportListCallback(data) {
 				+	"<p>신고당한 회원</p>"
 				+	"<p>신고한 회원</p>"
 				+	"<p>신고날짜</p>"
-				+	"<p>처리상태</p>"
 				+	"<p>비고</p>"
 				+	"</li>"
 		body.append(head);
@@ -109,13 +108,6 @@ function fn_selectReportListCallback(data) {
 					+	"<p>" + report.REPORT_D_ID + "</p>"
 					+	"<p>" + report.REPORT_ID + "</p>"
 					+	"<p>" + report.REGDATE + "</p>"
-					+	"<p>";
-					if(report.REPORT_STATE=='N'){
-			str	+=			"처리대기";
-					}else{
-			str +=			"처리완료";
-					}
-			str	+=		"</p>"
 					+	"<p>"
 						+	"<a href='#' onClick='showPopup(" + report.REPORT_NUM + ")'>상세보기</a>"
 						+ " / "
