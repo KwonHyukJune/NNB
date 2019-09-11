@@ -194,11 +194,34 @@
 								</div>
 							</div>
 						</div>
+						<div class="hWgOZv">
+							<div class="fUMVvC" onclick="toggle($(this));">
+								<p id="alks"><span style="color:white;">지역</span></p>
+								<svg width="11" height="7" viewBox="0 0 11 7"><path fill="none" fill-rule="evenodd" stroke-width="1.5" d="M.658 1.021l4.537 4.263 4.463-4.263"></path></svg>
+							</div>
+							<div class="fhfjff" style="left:0px;">
+								<div class="fBFAQm">
+									
+									<div class="jqwYlT">
+							 
+								<input type="text" id="RI_REGION"  name="RI_REGION">
+							
+									
+									<div id="map" style="width:100%;height:300px;"></div>
+										
+									</div>
+					
+								</div>
+					
+							</div>
+							</div>
 					</div>
 				</form>
 			</li>
 		</ul>
 	</div>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e603a6f6c5db5707c8168383f3516651&libraries=services,clusterer,drawing"></script>
+
 
 	<div id="count"></div>
 	<ul class="mateList" id="mateList"></ul>
@@ -218,7 +241,7 @@ function fn_search(){
 	var comAjax = new ComAjax();
 	comAjax.setUrl("<c:url value='/searchRoommateList'/>");
 	comAjax.setCallback("fn_selectSearchRoommateListCallback");
-
+	comAjax.addParam("RI_REGION",$("#RI_REGION").val());
 	comAjax.addParam("minyear",$("#minyear").val());
 	comAjax.addParam("maxyear",$("#maxyear").val());
 	comAjax.addParam("mindeposit",$("#mindeposit").val());
@@ -238,7 +261,8 @@ function fn_search(){
 function fn_selectSearchRoommateList(pageNo){
 	var comAjax = new ComAjax(); 
 	comAjax.setUrl("<c:url value='/searchRoommateList'/>"); 
-	comAjax.setCallback("fn_selectSearchRoommateListCallback"); 
+	comAjax.setCallback("fn_selectSearchRoommateListCallback");
+	comAjax.addParam("RI_REGION",$("#RI_REGION").val());
 	comAjax.addParam("minyear",$("#minyear").val());
 	comAjax.addParam("maxyear",$("#maxyear").val());
 	comAjax.addParam("mindeposit",$("#mindeposit").val());
@@ -284,6 +308,17 @@ function fn_selectSearchRoommateListCallback(data){
 					+	"<p>부담가능금액</p>"
 					+	"<p>&nbsp;&nbsp;&nbsp;</p>"
 				+	"</li>"
+				var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+				mapOption = {
+				    center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+				    level: 3 // 지도의 확대 레벨
+				};  
+
+				//지도를 생성합니다    
+				var map = new kakao.maps.Map(mapContainer, mapOption); 
+
+				//주소-좌표 변환 객체를 생성합니다
+				var geocoder = new kakao.maps.services.Geocoder();	
 		$.each(data.list, function(key, mate){ 
 			str	+=	"<div id='num' style='display:none;'>" + mate.RI_MEM_ID + "</div>"
 				+	"<li class='qUCQS2'>"
@@ -316,6 +351,22 @@ function fn_selectSearchRoommateListCallback(data){
 			} 
 					str	+=	"</div>"
 				+	"</li>";
+					geocoder.addressSearch(mate.RI_REGION1, function(result, status) {
+
+					    // 정상적으로 검색이 완료됐으면 
+					     if (status === kakao.maps.services.Status.OK) {
+					        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+					        // 결과값으로 받은 위치를 마커로 표시합니다
+					        var marker = new kakao.maps.Marker({
+					            map: map,
+					            position: coords
+					        });
+					        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+					        map.setCenter(coords);
+					    } 
+					});
+					 
        	}); 
        	body.append(str); 
 	} 
