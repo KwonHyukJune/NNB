@@ -282,7 +282,7 @@ function fsubmit(){
 					<tr class="trpay">
 					<td class="iFmBhb" id="monthly">
 						<div id="monthly" class="bMtYCv">
-							<p class="tmpFp">월세</p>
+							
 							<input class="fqDzuM kTQnUD" type="number" name="MONTHLY_DEPOSIT" id="deposit"
 								placeholder="보증금">
 							<p class="ktwJnl">/</p> 
@@ -296,7 +296,7 @@ function fsubmit(){
 					</td>
 					<td class="iFmBhb" id="jeonse">
 						<div id="jeonsediv" class="bMtYCv">
-							<p class="tmpFp">전세</p>
+							
 							<input class="fqDzuM kTQnUD " type="number" name="JEONSE" id="jeonse" placeholder="전세">
 							<p class="fIWZWk">
 								만원

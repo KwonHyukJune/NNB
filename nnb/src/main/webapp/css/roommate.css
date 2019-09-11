@@ -144,6 +144,10 @@ color:#0000ff;
     font-size: 12px;
     position: relative;
 }
+.ghXquW > li:nth-child(1) {
+    text-align: left;
+    padding-left: 7px;
+}
 .ghXquW > li:nth-child(2) {
     text-align: center;
 }
@@ -159,7 +163,7 @@ color:#0000ff;
     transform: translate(-50%, 0px);
 }
 .ghXquW > li:first-child::before {
-    left: 3px;
+    left: 10px;
 }
 .ghXquW > li::before {
     content: "";

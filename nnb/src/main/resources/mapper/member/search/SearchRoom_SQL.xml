@@ -130,7 +130,7 @@ FROM
 		</foreach>
 	<if test="ROOM_FLOOR7!=null and !ROOM_FLOOR7.equals('')">
 	<![CDATA[
-			OR R2.ROOM_FLOOR >#{ROOM_FLOOR7}
+			OR R2.ROOM_FLOOR >= #{ROOM_FLOOR7}
 	]]>
 	</if>
 	)

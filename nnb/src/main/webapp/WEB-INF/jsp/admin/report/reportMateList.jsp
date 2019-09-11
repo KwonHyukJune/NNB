@@ -86,7 +86,8 @@ function delet(num){  // 삭제
 <br/><br/><br/>
 
 <body>
-<%@ include file="/WEB-INF/include/adminReportHeader.jspf"%>
+<div style="margin:0 auto; width:1180px;">
+	<%@ include file="/WEB-INF/include/adminReportHeader.jspf"%>
 
 <br/>
 <br/>
@@ -164,7 +165,7 @@ function delet(num){  // 삭제
 </div>
 <br>
 </div>
-
+</div>
 <div>
 	<%@include file = "/WEB-INF/include/footer.jspf" %>
 </div>

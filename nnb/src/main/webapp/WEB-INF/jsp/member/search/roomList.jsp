@@ -50,12 +50,14 @@ function divsize(obj){
 	if(check=="cHCsIX"){
 		obj.parent().css('width','512px');
 		obj.parent().next('left','512px');
+		$('.gdoUVB').css('left','512px');
 		$('li.room').css('width','50%');
 		obj.attr('class','HggYs');
 		console.log('dd');
 	}else{
 		obj.parent().css('width','980px');
 		obj.parent().next('left','980px');
+		$('.gdoUVB').css('left','980px');
 		$('li.room').css('width','25%');
 		obj.attr('class','cHCsIX');
 		console.log('ss');
@@ -459,30 +461,6 @@ function divsize(obj){
 </div>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e603a6f6c5db5707c8168383f3516651&libraries=services,clusterer,drawing"></script>
-	<c:forEach var="address" items="${list}">
-		<script>
-            var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-            mapOption = { 
-             center: new kakao.maps.LatLng(37.502541, 127.024711), // 지도의 중심좌표
-             level: 3 // 지도의 확대 레벨
-            };
-            var map = new kakao.maps.Map(mapContainer, mapOption); //지도를 미리 생성
-            var geocoder = new kakao.maps.services.Geocoder(); // 주소-좌표 변환 객체를 생성합니다
-            
-            geocoder.addressSearch('${address.ADDRESS1}', function(result, status) { // 주소로 좌표를 검색합니다
-               // 정상적으로 검색이 완료됐으면 
-            if (status === kakao.maps.services.Status.OK) {
-            var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-                // 결과값으로 받은 위치를 마커로 표시합니다
-            var marker = new kakao.maps.Marker({
-                  map: map,
-                  position: coords
-                });
-                map.setCenter(coords);
-              } 
-            });    
-         </script>
-	</c:forEach>
 </div>
 
 <%@ include file="/WEB-INF/include/include-body.jspf"%>
@@ -594,6 +572,16 @@ function fn_selectSearchRoomListCallback(data){
 		
 		gfn_renderPaging(params); 
 			var str = "";
+			
+			//지도
+			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+            mapOption = { 
+             center: new kakao.maps.LatLng(37.502541, 127.024711), // 지도의 중심좌표
+             level: 3 // 지도의 확대 레벨
+            };
+            var map = new kakao.maps.Map(mapContainer, mapOption); //지도를 미리 생성
+            var geocoder = new kakao.maps.services.Geocoder(); // 주소-좌표 변환 객체를 생성합니다
+            
 			$.each(data.list, function(key, room){ 
 				str +=  "<li class='room hxpbDF'>"
 							+ "<div class='OUJOU'>"
@@ -646,7 +634,20 @@ function fn_selectSearchRoomListCallback(data){
 							
 						str	+= "</p>"
 							+"<p class='jBkVAv'>" + room.DESC_TITLE + "</p>"
-						+ "</a></div></li>"
+						+ "</a></div></li>" 
+				
+	            geocoder.addressSearch(room.ADDRESS1, function(result, status) { // 주소로 좌표를 검색합니다
+	               // 정상적으로 검색이 완료됐으면 
+	            if (status === kakao.maps.services.Status.OK) {
+	            var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+	                // 결과값으로 받은 위치를 마커로 표시합니다
+	            var marker = new kakao.maps.Marker({
+	                  map: map,
+	                  position: coords
+	                });
+	                map.setCenter(coords);
+	              } 
+	            });
         	}); 
         	body.append(str); 
 		} 

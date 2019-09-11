@@ -4,7 +4,7 @@
 .messageList{
 	margin: 0px auto;
 	text-align: center;
-	width:1180px;
+	width:100%;
 }
 
 .searchT{
@@ -113,7 +113,7 @@
 	padding: 0 10px 10px 10px;
 	margin: auto; 
 	text-align: center;
-	width:1180px;
+	width:100%;
 	
 }
 .tbody{

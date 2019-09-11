@@ -32,6 +32,11 @@
 	width: 50%;
 	height: 57px;
 }
+.jSSNqy>li>a.active {
+	color: rgb(34, 34, 34);
+	font-weight: 500;
+	border-bottom-color: rgb(72, 72, 72);
+}
 
 .jSSNqy>li>a {
 	display: block;
@@ -45,11 +50,6 @@
 	border-bottom: 2px solid transparent;
 }
 
-.jSSNqy>li>a.active {
-	color: rgb(34, 34, 34);
-	font-weight: 500;
-	border-bottom-color: rgb(72, 72, 72);
-}
 
 .jSSNqy::after {
 	display: block;
@@ -57,7 +57,9 @@
 	clear: both;
 }
 
-.jSSNqy>li>a:hover, .jSSNqy>li>a:active {
+
+
+.jSSNqy>li>a:hover {
 	color: rgb(34, 34, 34);
 }
 
@@ -225,24 +227,11 @@
 
 </head>
 
-<br />
-<br />
-<br />
 
 <body>
+<div style="margin:0 auto; width: 900px;">
 
-
-	<div class="jtRefx">
-		<h1 class="title kuldyr">회원 관리</h1>
-		<ul class="tab jSSNqy">
-			<li>
-			<a id="awrite" class="tabmenu" href="memberList">회원 검색</a>
-			</li>
-			<li>
-			<a id="aadmin" class="tabmenu" href="messageList">전체 쪽지함</a>
-			</li>
-		</ul>
-	</div>
+<%@ include file="/WEB-INF/include/adminMemberHeader.jspf"%>
 		<br />
 		<br />
 	
@@ -302,6 +291,7 @@
 
 	</div>
 	<br/>
+	</div>
 	<div>
 		<%@include file="/WEB-INF/include/footer.jspf"%>
 	</div>
