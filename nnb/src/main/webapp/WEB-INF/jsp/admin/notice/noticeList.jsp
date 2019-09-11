@@ -9,6 +9,7 @@
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/adminNotice.css'/>"/>	
 </head>
 <body>
+<div style="margin:0 auto; width:1180px; min-height: 800px;">
 <%@ include file="/WEB-INF/include/adminBoardHeader.jspf"%>
 <!-- 내용 -->
 	<div>
@@ -19,10 +20,11 @@
 	<div id="PAGE_NAVI" align="center"></div>
 		<input type="hidden" id="PAGE_INDEX" name="PAGE_INDEX" />
 <!-- 하단부 -->
-   	<div class="cxBJwZ" align="center">    
+   	<div class="cxBJwZ" align="center">e    
   		<button class="hRSpXj" onClick="goPage1(${map.NT_NUM})">새 공지 작성</button>
 	</div>
 <br>
+</div>
 	<div>
 		<%@include file="/WEB-INF/include/footer.jspf"%>
 	</div>

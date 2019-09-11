@@ -27,7 +27,7 @@
 <br>
 <br>
 <div class="styled__Box-sc-1etgh1k-1 etFHhl" name="registMyRoommateInfo">
-	<h1>내 룸메이트 정보 변경하기</h1>
+	<h1>내 룸메이트 정보 등록하</h1>
 	<form id="frm" name="frm" method="post">
 	<table>
 		<colgroup><col width="150px"><col></colgroup>
@@ -72,13 +72,12 @@
 			<tr>
 				<th>자기 소개</th>
 					<td class="ggZjqG">
-						<textarea class="kTQnUD" name="profile" id="RI_PROFILE" style="margin: 0px; width: 658px; height: 193px; padding:10px 15px;">
-						</textarea>
+						<textarea class="kTQnUD" name="profile" id="RI_PROFILE" style="margin: 0px; width: 658px; height: 193px; padding:10px 15px;"></textarea>
 					</td>
 			</tr>
 			<tr>
 				<th>선호 지역</th>
-				<td>
+				<td class="ggZjqG">
 					<div class="h">
 						선호지역
 						<button type="button" onclick="fn_addRegion($(this))">추가</button>
@@ -86,9 +85,7 @@
 					<div class="b" id="region">
 						<input class="kTQnUD" type="text" readonly="readonly" name="region1" id="region1">
 					</div>
-					<div class="fUXvpI addressarea">   </div>
-					<input type="hidden" name="RI_REGION1" id="sample6_address" size="50" placeholder="주소">
-
+					<p>&nbsp;</p>
 					<div class="map_wrap">
     					<div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;">  </div>
     					<div class="hAddr">
@@ -117,7 +114,7 @@
 <div style="text-align:center">
 <button class="styled__EditBtn-qdiane-19 gsJtOS styled__Btn-qdiane-17 ejTRmD" type="button" onclick="fn_submit();">등록</button>
 </div>
-
+</div>
 <div>
 <%@ include file="/WEB-INF/include/footer.jspf" %>
 </div>

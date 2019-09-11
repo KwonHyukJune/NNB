@@ -4,7 +4,7 @@
 <html>
 <head>
 <%@ include file="/WEB-INF/include/include-header.jspf" %>
-<%@include file = "/WEB-INF/include/adminHeader.jspf" %>
+<%@include file ="/WEB-INF/include/adminHeader.jspf" %>
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/adminMember.css'/>" />
 <style>
 .kuldyr {
@@ -29,7 +29,11 @@
 	width: 50%;
 	height: 57px;
 }
-
+.jSSNqy>li>a.active {
+	color: rgb(34, 34, 34);
+	font-weight: 500;
+	border-bottom-color: rgb(72, 72, 72);
+}
 .jSSNqy>li>a {
 	display: block;
 	width: 100%;
@@ -42,11 +46,7 @@
 	border-bottom: 2px solid transparent;
 }
 
-.jSSNqy>li>a.active {
-	color: rgb(34, 34, 34);
-	font-weight: 500;
-	border-bottom-color: rgb(72, 72, 72);
-}
+
 
 .jSSNqy::after {
 	display: block;
@@ -54,7 +54,7 @@
 	clear: both;
 }
 
-.jSSNqy>li>a:hover, .jSSNqy>li>a:active {
+.jSSNqy>li>a:hover{
 	color: rgb(34, 34, 34);
 }
 .hRFrgm {

@@ -124,11 +124,11 @@
 									<div class="jqwYlT">
 										<input type="hidden" id="minyear"  name="minyear">
 										<input type="hidden" id="maxyear"  name="maxyear">
-										<div class="noUi-target noUi-ltr noUi-horizontal"></div>
+										<div class="noUi-target noUi-ltr noUi-horizontal"> </div>
 									</div>
 									<ul class="ghXquW">
 										<li>20</li>
-										<li>60</li>
+										<li>40</li>
 										<li>公力茄</li>
 									</ul>
 								</div>
@@ -239,6 +239,17 @@ function fn_selectSearchRoommateList(pageNo){
 	var comAjax = new ComAjax(); 
 	comAjax.setUrl("<c:url value='/searchRoommateList'/>"); 
 	comAjax.setCallback("fn_selectSearchRoommateListCallback"); 
+	comAjax.addParam("minyear",$("#minyear").val());
+	comAjax.addParam("maxyear",$("#maxyear").val());
+	comAjax.addParam("mindeposit",$("#mindeposit").val());
+	comAjax.addParam("maxdeposit",$("#maxdeposit").val());
+	comAjax.addParam("minrent",$("#minrent").val());
+	comAjax.addParam("maxrent",$("#maxrent").val());
+	comAjax.addParam("mindate",$("#mindate").val());
+	comAjax.addParam("maxdate",$("#maxdate").val());
+	comAjax.addParam("RI_GENDER",$("#RI_GENDER").val());
+	comAjax.addParam("MEM_NICK",$("#MEM_NICK").val());
+	
 	comAjax.addParam("PAGE_INDEX",$("#PAGE_INDEX").val()); 
 	comAjax.addParam("PAGE_ROW", 15); 
 	comAjax.ajax(); }
@@ -422,13 +433,13 @@ $(function(){
 		var input1 = $("#maxyear");
 		
 		var input_value = [];
-		input_value[0]=values[0]*1+20;
+		input_value[0]=values[0]*0.5+20;
 		var str = Number(input_value[0]) + '技 ~ ';
 		if(values[1]==100){
 			input_value[1] = '公力茄';
 			str += '公力茄';
 		}else {
-			input_value[1] = values[1]*1+20;
+			input_value[1] = values[1]*0.5+20;
 			str += Number(input_value[1])+'技';
 		}
 		input0.val(input_value[0]);
