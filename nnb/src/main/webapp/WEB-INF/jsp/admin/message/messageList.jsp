@@ -87,6 +87,7 @@
 	float:left;
 	width:30%;
 	box-shadow: 0px 0.5px rgb(19, 116, 248);;
+
 }
 .tbody > li{
 	
@@ -224,7 +225,11 @@
 		}
 	}
 </script>
-
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#aadmin').addClass('active');
+});
+</script>
 </head>
 
 
@@ -262,12 +267,9 @@
 	</div>
 	<br/>
 	<div class="adminMessageList">
-		
 		<div class="messageList">
 			<div id="count"></div>	
-			
 		<br/><br/>	
-	
 	<div class="tbodyM">
 		<ul class="tbody">
 		   
@@ -278,12 +280,13 @@
 			    	<li class="Mpn" style = "width: 30%; height: 50px; float:left; ">날&nbsp;&nbsp;짜</li>
 			  
 	    </ul>
-	    <br/>
-	</div>					
+	</div>	
+			<br><br/><br/>				
 			<ul class="Mls" id="selectSearchMessageList">
 			</ul>
 			<div class='' id="PAGE_NAVI"></div>
 			<input type='hidden' id='PAGE_INDEX' name="PAGE_INDEX">
+			<br><br>
 			<div>
 				<input class="adminbtn" type="button" value="메시지 작성" onclick="showPopup();" />
 			</div>
@@ -292,6 +295,7 @@
 	</div>
 	<br/>
 	</div>
+	<br><br>
 	<div>
 		<%@include file="/WEB-INF/include/footer.jspf"%>
 	</div>

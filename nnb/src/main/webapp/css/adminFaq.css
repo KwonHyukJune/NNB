@@ -55,7 +55,7 @@ div.faq:nth-child(1){
 .faq > .title {
     height: 70px;
     padding-left: 60px;
-    color: rgb(123, 189, 144);
+    color: rgb(19, 116, 248);
     font-size: 17px;
     font-weight:bold;
     line-height: 70px;
@@ -64,7 +64,7 @@ div.faq:nth-child(1){
 }
 .faq > .title::before {
     content: "Q.";
-    color: rgb(123, 189, 144);
+    color: rgb(19, 116, 248);
     font-size: 24px;
     font-weight: 300;
     line-height: 36px;
@@ -112,7 +112,7 @@ div.faq:nth-child(1){
     margin-left: 12px;
     color: rgb(255, 255, 255);
     font-size: 15px;
-    background-color: rgb(123, 189, 144);
+    background-color: rgb(19, 116, 248);
     border-width: 0px;
     border-style: initial;
     border-color: initial;

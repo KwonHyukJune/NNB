@@ -6,6 +6,59 @@
 <%@ include file="/WEB-INF/include/include-header.jspf" %>
 <%@include file = "/WEB-INF/include/adminHeader.jspf" %>
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/adminReport.css'/>"/>
+<style>
+.kuldyr {
+	line-height: 54px;
+	color: rgb(34, 34, 34);
+	font-size: 33px;
+	text-align: center;
+	font-weight: 400;
+	margin: 70px auto 45px;
+}
+.jtRefx {
+	width: 100%;
+}
+.jSSNqy {
+	width: 100%;
+	height: 57px;
+	border-bottom: 1px solid rgba(232, 232, 232, 0.7);
+}
+
+.jSSNqy>li {
+	float: left;
+	width: 50%;
+	height: 57px;
+}
+
+.jSSNqy>li>a {
+	display: block;
+	width: 100%;
+	height: 57px;
+	color: rgb(136, 136, 136);
+	font-size: 16px;
+	line-height: 57px;
+	text-align: center;
+	cursor: pointer;
+	border-bottom: 2px solid transparent;
+}
+
+.jSSNqy>li>a.active {
+	color: rgb(34, 34, 34);
+	font-weight: 500;
+	border-bottom-color: rgb(72, 72, 72);
+}
+
+.jSSNqy::after {
+	display: block;
+	content: "";
+	clear: both;
+}
+
+.jSSNqy>li>a:hover, .jSSNqy>li>a:active {
+	color: rgb(34, 34, 34);
+}
+</style>
+
 <script type="text/javascript">
 function showPopup(num){
     var url = "/nnb/admin/reportRoomDetail?REPORT_NUM="+num;
@@ -25,18 +78,16 @@ function delet(num){  // 삭제
 	}
 }
 </script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#awrite').addClass('active');
+});
+</script>
 </head>
 <body>
 <div style="margin:0 auto; width:1180px;">
 	<%@ include file="/WEB-INF/include/adminReportHeader.jspf"%>
 <div class="adminReport" style="padding-top: 30px;">
-	<p style="height: 80px;">
-		<select class="freEbZ hRFrgm" name="reportType" id="reportType">
-			<option value="">처리상태</option>
-			<option value="N">처리대기</option>
-			<option value="Y">처리완료</option>
-		</select>
-	</p>
 		<div class="reportRoomList"></div>
 		<p class="hXdylP" id="count"></p>
 		<ul class='qUCQS' id='body'></ul>

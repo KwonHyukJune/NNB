@@ -18,6 +18,7 @@ $(document).ready(function(){
 <%@ include file="/WEB-INF/include/adminQnaHeader.jspf"%>
 	<div class="selectFaqList"  style="padding-top: 50px; padding-bottom: 50px;">
 	</div>
+	<br>
 	<div align="center" id="PAGE_NAVI"></div>
 	<input type="hidden" id="PAGE_INDEX" name="PAGE_INDEX" />
 	<br>
