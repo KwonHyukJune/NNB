@@ -16,37 +16,37 @@
 	-moz-box-shadow: 0px 1px 0px 0px #f0f7fa;
 	-webkit-box-shadow: 0px 1px 0px 0px #f0f7fa;
 	box-shadow: 0px 1px 0px 0px #f0f7fa;
-	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, rgb(19, 116, 248)), color-stop(1, rgb(19, 116, 248)));
-	background:-moz-linear-gradient(top, rgb(19, 116, 248) 5%, blue 100%);
-	background:-webkit-linear-gradient(top, rgb(19, 116, 248) 5%, rgb(19, 116, 248) 100%);
-	background:-o-linear-gradient(top, rgb(19, 116, 248) 5%, rgb(19, 116, 248) 100%);
-	background:-ms-linear-gradient(top, rgb(19, 116, 248) 5%, rgb(19, 116, 248) 100%);
-	background:linear-gradient(to bottom, rgb(19, 116, 248) 5%, rgb(19, 116, 248) 100%);
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='rgb(19, 116, 248)', endColorstr='rgb(19, 116, 248)',GradientType=0);
-	background-color:#87faa6;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #000dff), color-stop(1, #000dff));
+	background:-moz-linear-gradient(top, #000dff 5%, #000dff 100%);
+	background:-webkit-linear-gradient(top, #000dff 5%, #000dff 100%);
+	background:-o-linear-gradient(top, #000dff 5%, #000dff 100%);
+	background:-ms-linear-gradient(top, #000dff 5%, #000dff 100%);
+	background:linear-gradient(to bottom, #000dff 5%, #000dff 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#000dff', endColorstr='#000dff',GradientType=0);
+	background-color:#000dff;
 	-moz-border-radius:4px;
 	-webkit-border-radius:4px;
 	border-radius:4px;
-	border:1px solid rgb(19, 116, 248);
+	border:1px solid #000dff;
 	display:inline-block;
 	cursor:pointer;
 	color:#ffffff;
 	font-family:Arial;
-	font-size:15px;
+	font-size:12px;
 	font-weight:bold;
 	padding:2px 4px;
 	text-decoration:none;
-	text-shadow:0px -1px 0px rgb(19, 116, 248);
+	text-shadow:0px -1px 0px #5b6178;
 }
 .adminbtn:hover {
-	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #dcbluee5ff), color-stop(1, rgb(19, 116, 248)));
-	background:-moz-linear-gradient(top, rgb(19, 116, 248) 5%, white 100%);
-	background:-webkit-linear-gradient(top, rgb(19, 116, 248) 5%, white 100%);
-	background:-o-linear-gradient(top, rgb(19, 116, 248) 5%, white 100%);
-	background:-ms-linear-gradient(top, rgb(19, 116, 248) 5%, white 100%);
-	background:linear-gradient(to bottom, rgb(19, 116, 248) 5%, white 100%);
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='rgb(19, 116, 248)', endColorstr='rgb(19, 116, 248)',GradientType=0);
-	background-color:rgb(19, 116, 248);
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #000dff), color-stop(1, #000dff));
+	background:-moz-linear-gradient(top, #000dff 5%, #000dff 100%);
+	background:-webkit-linear-gradient(top, #000dff 5%, #000dff 100%);
+	background:-o-linear-gradient(top, #000dff 5%, #000dff 100%);
+	background:-ms-linear-gradient(top, #000dff 5%, #000dff 100%);
+	background:linear-gradient(to bottom, #000dff 5%, #000dff 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#000dff', endColorstr='#000dff',GradientType=0);
+	background-color:#000dff;
 }
 .adminbtn:active {
 	position:relative;

@@ -37,7 +37,7 @@ $(document).ready(function(){
 <br/>
 
 <body>
-
+<br><br>
 <div class="loginForm eaRvjJ">
 	<div class='flwTzf'>
 		<h1 class="csAEhT">관리자 로그인</h1>
@@ -49,11 +49,9 @@ $(document).ready(function(){
 			<button class="hgemcD" type="button" onclick="fsubmit();">로그인</button>
 	</div>
 </div>
-
-
+<br><br><br>
 <div>
 <%@include file = "/WEB-INF/include/footer.jspf" %>
 </div>
-
 </body>
 </html>

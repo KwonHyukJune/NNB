@@ -80,91 +80,49 @@ function delet(num){  // 삭제
 	}
 }
  </script>
-
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#aadmin').addClass('active');
+});
+</script>
 </head>
-
-<br/><br/><br/>
-
-<body>
+<body>	
 <div style="margin:0 auto; width:1180px;">
+<div>
 	<%@ include file="/WEB-INF/include/adminReportHeader.jspf"%>
-
-<br/>
-<br/>
-<div class="repl">
-<select>
-	<option>처리완료</option>
-	<option>처리대기</option>
-</select>
-&nbsp;&nbsp;
-<select>
-	<option>전체</option>
-	<option>검색유형1</option>
-	<option>검색유형2</option>
-</select>
-<select>
-	<option>제목</option>
-	<option>신고자</option>
-	<option>매물번호</option>
-</select>
-&nbsp;&nbsp;
-	<input type="text" name='keyword' id="keywordInput" value='${cri.keyword }' style="height: 15px; ">
-&nbsp;&nbsp;
-    <a class="rlDtl2" href="#this" class="btn" id="delete">조회</a>
-	<br/>
-	<p>총x건의 검색 결과가 있습니다.</p>
-	
-<br/>
-
-<br/>
 </div>
+<c:if test="${map.REPORT_NUM != null }">
+<div>
+	<ul class="qUCQS">
+		<li class="pbYHJ">
+			<p>번 호</p>
+			<p>신고유형</p>
+			<p>신고당한 회원</p>
+			<p>신고한 회원</p>
+			<p>신고날짜</p>
+			<p>비고</p>
+		</li>
+		<li class="pbYHJ">
+			<p>${map.RNUM }</p>
+			<p>${map.REPORT_TYPE }</p>
+			<p>${map.REPORT_D_ID }</p>
+			<p>${map.REPORT_ID }</p>
+			<p>${map.REPORT_DATE }</p>
+			<p>
+			<a href='#' onClick='showPopup("${map.REPORT_NUM} ")'>상세보기</a>
+			/
+			<a href='#' id="report.REPORT_NUM" onClick='delet("${map.REPORT_NUM} ")'>삭제</a>
+			</p>
 
-<div class="rlAll">
-
-	<ul class="tbody" style="width: 900px; height:50px; line-height: 50px;">
-	   
-		    	<li class="adN" style = "width: 5%; height: 50px; float:left; font-size: ; text-align:center;">번호</li>
-		    	<li class="Inf" style = "width: 12%; height: 50px; float:left; font-size: ; text-align:center;">신고유형</li>
-		    	<li class="Mii" style = "width: 20%; height: 50px; float:left; font-size: ; text-align:center;">날짜</li>
-		    	<li class="Mel" style = "width: 10%; height: 50px; float:left; font-size: ; text-align:center;">아이디</li>
-		    	<li class="Mpn" style = "width: 33%; height: 50px; float:left; font-size: ; text-align:center;">제목</li>
-		    	<li class="Mpn" style = "width: 10%; height: 50px; float:left; font-size: ; text-align:center;">상세보기</li>
-		    	<li class="Mpn" style = "width: 10%; height: 50px; float:left; text-align: center; ">삭제</li>	  
-		    	
-    </ul>
-   
-<br/>
-
-<div class="selectReportMateList">
-	<div class="reportMateList">
-	   
-	   <c:forEach var="map" items="${list}">
-		   <div class="report">
-		   
-		   <div class="rmDtl">
-		         <p>${map.RNUM}&nbsp;</p>	
-		      	
-				 <p>${map.REPORT_TYPE}&nbsp;</p>      
-		      	
-		         <p>${map.REPORT_DATE}&nbsp;</p>
-		         
-		         <p>${map.REPORT_D_ID}&nbsp;</p>	
-		         
-		         <p>${map.REPORT_TITLE}</p>
-		     
-		      <p><input class="rlDtl3" type="button" value="상세보기" onclick="showPopup(${map.REPORT_NUM});" /></p>
-		      <p><a class="rlDtl3" href="#" class="btn" id="${map.REPORT_NUM}" onclick="delet(${map.REPORT_NUM})">삭&nbsp;&nbsp; 제</a></p>
-		        
-		        	&nbsp;
-		        	
-		     </div>
-		   </div>	
-		    
-	   </c:forEach>
+		</li>
+	</ul>
+</div>
+</c:if>
+<c:if test="${map.REPORT_NUM == null }">
+	<div class="cbeboU">
+		<p>조회된 결과가 없습니다.</p>
 	</div>
-</div>
-<br>
-</div>
+</c:if>
 </div>
 <div>
 	<%@include file = "/WEB-INF/include/footer.jspf" %>

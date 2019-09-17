@@ -78,10 +78,9 @@ function goPage(url){
 	</li>
 </ul>
 </div>
-
+<br><br><br>
 <div>
-<%@include file = "/WEB-INF/include/footer.jspf" %>
+	<%@include file = "/WEB-INF/include/footer.jspf" %>
 </div>
-
 </body>
 </html>

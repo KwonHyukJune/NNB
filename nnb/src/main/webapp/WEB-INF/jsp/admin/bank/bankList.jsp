@@ -9,11 +9,6 @@
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/adminBank.css'/>"/>
 </head>
 <!-------------------------------------------------------------- -->
-
-
-<br />
-<br />
-
 <body>
 <div class="jtRefx">
 	<h1 class="title kuldyr">제휴 은행 관리</h1>
