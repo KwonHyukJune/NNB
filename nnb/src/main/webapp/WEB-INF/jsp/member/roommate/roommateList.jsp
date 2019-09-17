@@ -97,7 +97,7 @@
 <%@ include file="/WEB-INF/include/header.jspf" %>
 </head> 
 <body>
-<div class="roommateList" style="height:1000px;">
+<div class="roommateList" >
 	<div class="search">
 		<ul class="qUCQS">
 			<li class="pbYHJ">
@@ -225,6 +225,7 @@
 
 	<div id="count"></div>
 	<ul class="mateList" id="mateList"></ul>
+	<br><br>
 	<div class="dzQBoq" id="PAGE_NAVI"></div>
 	<input type="hidden" id="PAGE_INDEX" name="PAGE_INDEX" />
 </div>
