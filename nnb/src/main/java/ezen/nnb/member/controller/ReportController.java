@@ -36,6 +36,16 @@ public class ReportController {
 		reportService.report(commandMap.getMap());
 		return mv;
 	}
+	
+	@RequestMapping(value = "/reportmate")
+	public ModelAndView reportmate(CommandMap commandMap, HttpServletRequest request) throws Exception {
+		ModelAndView mv = new ModelAndView("redirect:/roommate/detail?id="+commandMap.get("REPORT_D_ID"));
+		HttpSession session = request.getSession();
+		commandMap.put("REPORT_ID", session.getAttribute("MEM_ID"));
+		reportService.report(commandMap.getMap());
+		mv.addObject("report",1);
+		return mv;
+	}
 }
 
  
