@@ -434,10 +434,11 @@ function divsize(obj){
 				<ul class='fxRDHg' id="selectSearchRoomList">
 				
 				</ul>
-				<div class="dzQBoq" id="PAGE_NAVI">    </div>
+				<!-- 페이징 영역 -->
+				<div style="text-align:center;" class="dzQBoq" id="PAGE_NAVI">    </div>
 				<input type="hidden" id="PAGE_INDEX" name="PAGE_INDEX" />
 			</div>
-			<!-- 페이징 영역 -->
+			
 			
 		</div>
 		<button class="cHCsIX" onclick="divsize($(this));">

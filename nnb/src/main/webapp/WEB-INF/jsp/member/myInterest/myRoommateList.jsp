@@ -21,7 +21,7 @@ function openDetail(obj){
 $('.tabmenu:nth-child(3)').addClass('active');
 </script>
 
-<div class="myRoommateList hVYleu">
+<div style="text-align:center;" class="myRoommateList hVYleu">
 
 <div class="jZuXcw">
 <p class="fxSxol">총 <span id="count"></span>명의 찜한 룸메이트가 있습니다.</p>

@@ -35,7 +35,8 @@ $(document).ready(function(){
 <div class="box">
 	<%@ include file="/WEB-INF/include/serviceHeader.jspf"%>
 	
-	<div class="noticeList"></div>
+	<div class="noticeList">
+	</div>
 	<div align="center" id="PAGE_NAVI"></div>
 	<input type="hidden" id="PAGE_INDEX" name="PAGE_INDEX" />
 	
@@ -52,6 +53,7 @@ $(document).ready(function(){
 		</div>
 	</c:forEach> --%>
 </div>
+<br><br><br><br><br><br><br><br>
 <div>
 <%@ include file="/WEB-INF/include/footer.jspf" %>
 </div>
@@ -101,4 +103,5 @@ function fn_selectNoticeListCallback(data){
 }
 </script>
 </body>
+
 </html>
