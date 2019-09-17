@@ -8,24 +8,16 @@
 </head>
 <body>
 <%@ include file="/WEB-INF/include/header.jspf" %>
-
-
 	<h1 class="styled__Title-sc-1pis5dj-1 gHsEax">제휴 은행</h1>
-	<div id="selectBankList">
-
-	</div>
-	
+	<div id="selectBankList">  </div>
 	<div id="PAGE_NAVI">  </div>
 	<input type="hidden" id="PAGE_INDEX" name="PAGE_INDEX" />
-	
-
+<br>
+<br>
 <br>
 <div>
 <%@ include file="/WEB-INF/include/footer.jspf" %>
 </div>
-
-<%@ include file="/WEB-INF/include/include-body.jspf"%>
-
 <script type="text/javascript">
 $(document).ready(function(){
 	fn_selectBankList(1);
@@ -58,7 +50,7 @@ function fn_selectBankListCallback(data){
 				+ "<p>날짜</p>"
 			+ "</li>"
 		+ "<li class='bryRNw'>" + "조회된 결과가 없습니다. </li>"
-		+ "</ul>"
+		+ "</ul>";
 		body.append(str); 
         	
 	} else{ 
@@ -78,7 +70,7 @@ function fn_selectBankListCallback(data){
 							+ "<p>제목</p>"
 							+ "<p>날짜</p>"
 							+ "<p>조회수</p>"
-						+ "</li>"
+						+ "</li>";
 			$.each(data.list, function(key, value){ 
 				str += 
 					  "<li class='bryRNw'>" 
@@ -88,7 +80,7 @@ function fn_selectBankListCallback(data){
 	    					+ "<p>" + value.REGDATE +"</p>"+"<p>"+value.BANK_HITCOUNT +"</p>"+"</a>"
 					+ "</li>";
         		}); 
-				str+= "</ul>"
+				str+= "</ul>";
         	body.append(str);
 		} 
 
@@ -96,6 +88,7 @@ function fn_selectBankListCallback(data){
 </script>
 
 </body>
+
 </html>
 
 

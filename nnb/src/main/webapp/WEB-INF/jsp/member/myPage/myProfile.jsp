@@ -41,14 +41,17 @@ function updateMyProfile(){
 			</div>
 			<div class="styled__Box-qdiane-2 LEUHe">
 				<h1 class="styled__Title-qdiane-3 fHGwAQ">선호지역</h1>
-				<div class="styled__FakeInput-qdiane-5 fZOKyS">${map.RI_REGION1}
+				<div class="styled__FakeInput-qdiane-5 fZOKyS">${map.RI_REGION1}</div>
 					<c:if test="${map.RI_REGION2!=null}">
-						, ${map.RI_REGION2}
+						<br>
+						<h1 class="styled__Title-qdiane-3 fHGwAQ">선호지역 2</h1>
+						<div class="styled__FakeInput-qdiane-5 fZOKyS">${map.RI_REGION2}</div>
 					</c:if>
 					<c:if test="${map.RI_REGION3!=null}">
-						, ${map.RI_REGION3}
+						<br>
+						<h1 class="styled__Title-qdiane-3 fHGwAQ">선호지역 3</h1>
+						<div class="styled__FakeInput-qdiane-5 fZOKyS">${map.RI_REGION3}</div>
 					</c:if>
-				</div>
 			</div>
 			<div class="styled__Box-qdiane-2 LEUHe">
 				<h1 class="styled__Title-qdiane-3 fHGwAQ">생일</h1>
