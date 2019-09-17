@@ -9,7 +9,7 @@
 <body>
 <%@ include file="/WEB-INF/include/header.jspf" %>
 	<h1 class="styled__Title-sc-1pis5dj-1 gHsEax">Á¦ÈÞ ÀºÇà</h1>
-	<div id="selectBankList">  </div>
+	<div style="text-align:center;" id="selectBankList">  </div>
 	<div id="PAGE_NAVI">  </div>
 	<input type="hidden" id="PAGE_INDEX" name="PAGE_INDEX" />
 <br>
