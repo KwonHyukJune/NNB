@@ -15,8 +15,8 @@
 		REPORT_POST_NUM,
 		TO_CHAR(REPORT_DATE, 'YYYY/MM/DD') as REGDATE,
 		REPORT_TYPE,
-		REPORT_TITLE,
-		REPORT_STATE		
+		REPORT_TITLE
+	
 	FROM(
 		SELECT
 			ROW_NUMBER() OVER (ORDER BY REPORT_NUM DESC) RNUM,
@@ -26,19 +26,10 @@
 			REPORT_POST_NUM,
 			REPORT_DATE,
 			REPORT_TYPE,
-			REPORT_TITLE,
-			REPORT_STATE
+			REPORT_TITLE
+
 		FROM	
 			REPORT
-	]]>	
-		<!-- 처리상태가 있고  거래가 완료된 매물-->
-		<if test="reportType!=null and !reportType.equals('')">
-		<![CDATA[
-			WHERE
-    			REPORT_STATE = #{reportType}
-		]]>
-    	</if>
-	<![CDATA[
 		)ORDER BY ROW_NUM DESC
 	]]>
 <include refid="common.pagingPost"/>
