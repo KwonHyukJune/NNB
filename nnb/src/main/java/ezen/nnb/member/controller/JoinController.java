@@ -71,7 +71,7 @@ public class JoinController {
 				.append("<a href='http://localhost:8080/nnb/memberVerify?mem_email="
 						+ commandMap.getMap().get("mem_email")/* .toString() */)
 				.append("' target='_blenk'>이메일 인증 확인</a>").toString());
-		sendMail.setFrom("rrnjs1245@naver.com","테스트");
+		sendMail.setFrom("ezenyoon@gmail.com","니내방관리자");
 		sendMail.setTo(commandMap.getMap().get("mem_email").toString());
 		sendMail.send();
 		
