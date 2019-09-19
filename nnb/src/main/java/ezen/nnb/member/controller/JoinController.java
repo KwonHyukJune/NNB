@@ -59,33 +59,32 @@ public class JoinController {
 	//회원가입 할 경우 해당 이메일 인증을 요구하는 링크를 첨부한 이메일을 발송
 	public ModelAndView emailAuth(CommandMap commandMap) throws Exception{
 		ModelAndView mv=new ModelAndView("member/main/joinConfirm");
-		System.out.println(commandMap.get("mem_id"));
-		//mybatis로 inserMeber() 기능 처리 및 해당 이메일로 이메일 발송
+		//새 회원 등록 및 해당 이메일로 이메일 발송
 		joinService.insertMember(commandMap.getMap());
-		
 		MailHandler sendMail=new MailHandler(mailSender);
-		
 		sendMail.setSubject("이메일 인증 확인 메일입니다.");
 		sendMail.setText(new StringBuffer()
 				.append("<h1>메일인증<h1>")
 				.append("<a href='http://localhost:8080/nnb/memberVerify?mem_email="
-						+ commandMap.getMap().get("mem_email")/* .toString() */)
+						+ commandMap.getMap().get("mem_email")) 
 				.append("' target='_blenk'>이메일 인증 확인</a>").toString());
 		sendMail.setFrom("ezenyoon@gmail.com","니내방관리자");
 		sendMail.setTo(commandMap.getMap().get("mem_email").toString());
 		sendMail.send();
-		
+		// 이메일 링크를 누르면 signSucess 메서드를 불러 회원 테이블을 update한다. 
 		return mv;
 	}
 	@RequestMapping(value="/memberVerify", method=RequestMethod.GET)
-	//member table에 verfiy컬럼의 값을 바꿔준다.
+	//회원 테이블의 verify 컬럼의 값을 바꿔준다.
 	public ModelAndView signSuccess(CommandMap commandMap) throws Exception{
-		//이메일 인증기능 처리
 		ModelAndView mv=new ModelAndView("member/main/main");
 		commandMap.getMap().get("mem_email").toString();
 		joinService.verifyMember(commandMap.getMap());
 		
 		return mv;
 	}
+	
+	
+	
 }
 

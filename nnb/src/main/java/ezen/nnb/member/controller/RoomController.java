@@ -124,7 +124,7 @@ public class RoomController {
 	
 	@RequestMapping(value="/room/update")
 	public ModelAndView updateRoom(CommandMap commandMap, HttpServletRequest request) throws Exception {
-		ModelAndView mv = new ModelAndView("member/room/adminRoom");
+		ModelAndView mv = new ModelAndView("redirect:/room/adminRoom");
 		if(request.getParameterValues("UTILITY_TYPE")!=null) {
 			String[] arr = request.getParameterValues("UTILITY_TYPE");
 			String UTILITY_TYPE = "";
