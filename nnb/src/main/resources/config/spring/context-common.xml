@@ -12,7 +12,7 @@
 	<context:component-scan base-package="ezen">
 		<context:exclude-filter type="annotation"
 			expression="org.springframework.stereotype.Controller" />
-	</context:component-scan> <!-- MultipartResolver 설정 -->
+	</context:component-scan>
 	
 	
 	

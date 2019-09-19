@@ -25,6 +25,58 @@ function calculator2(chk){
 		  document.getElementById('real_p').value = (parseFloat(document.getElementById('real_m').value) / 3.3058).toFixed(2);
 	  }
 }
+$(document).ready(function(){
+	$('#awrite').addClass('active');
+	$('tr.bt').hide();
+	var trbt = document.getElementById("bt");
+	var tdbd = document.getElementById("building");
+	var tdbo = document.getElementById("building_office");
+	$('input:radio[name=ROOM_TYPE]').on("change",function(){
+		if($('input:radio[name=ROOM_TYPE]:checked').val()=='원룸'||
+				$('input:radio[name=ROOM_TYPE]:checked').val()=='투룸'||
+				$('input:radio[name=ROOM_TYPE]:checked').val()=='쓰리룸'){
+			$('tr.bt').show();
+			$('td.bt').hide();
+			$('td#building').show();
+		}else if($('input:radio[name=ROOM_TYPE]:checked').val()=='오피스텔'){
+			$('tr.bt').show();
+			$('td.bt').hide();
+			$('td#building_office').show();
+		}else if($('input:radio[name=ROOM_TYPE]:checked').val()=='아파트'){
+			$('tr.bt').hide();
+			$('input:radio[name=BUILDING_TYPE]').prop("checked", true);;
+		}
+	});
+	$('tr.trpay').hide();
+	$('input:radio[name=TRADE_TYPE]').on("change",function(){
+		if($('input:radio[name=TRADE_TYPE]:checked').val()=="월세"){
+			$('tr.trpay').show();
+			$('td#jeonse').hide();
+			$('td#monthly').show();
+		}else if($('input:radio[name=TRADE_TYPE]:checked').val()=="전세"){
+			$('tr.trpay').show();
+			$('td#monthly').hide();
+			$('td#jeonse').show();
+		}
+	});
+	
+	$('input:radio[name=UTILITY_CHECK]').on("change",function(){
+		if($('input:radio[name=UTILITY_CHECK]:checked').val()=="0"){
+			$('input:text[name=UTILITY_PRICE]').attr("disabled",true);
+		}else if($('input:radio[name=UTILITY_CHECK]:checked').val()=="1"){
+			$('input:text[name=UTILITY_PRICE]').attr("disabled",false);
+		}
+	});
+	
+	$('input:radio[name=PARKING]').on("change",function(){
+		if($('input:radio[name=PARKING]:checked').val()=="0"){
+			$('input:text[name=PARKING_BILL]').attr("disabled",true);
+		}else if($('input:radio[name=PARKING]:checked').val()=="1"){
+			$('input:text[name=PARKING_BILL]').attr("disabled",false);
+		}
+	});
+});
+
 
 $(document).ready(function(){
 	$('#aadmin').addClass('active');
@@ -314,9 +366,9 @@ $(document).ready(function(){
 		<li>일반 회원은 1개의 매물만 내놓을 수 있고, 직거래로 표시됩니다.</li>
 		</ul>
 		</div>
-		<input type="hidden" id="ROOM_NUM" name="ROOM_NUM" value="${room.ROOM_NUM }">
-		<form id="frm" name="frm" enctype="multipart/form-data" action="write"
-			method="post">
+		<form id="frm" name="frm" enctype="multipart/form-data" action="write" method="post">
+	<div class="roomWrite ggiCSo">
+		<input type="hidden" id="ROOM_NUM" name="ROOM_NUM" value="${room.ROOM_NUM}">
 			<div class="table etFHhl">
 				<h1 class="thead">매물 종류</h1>
 				<table class="tbody">
@@ -417,9 +469,9 @@ $(document).ready(function(){
 								</div>
 								</div>
 								<input type="hidden" name="ZIPCODE" id="sample6_postcode"
-									placeholder="우편번호">
+									placeholder="우편번호" value="${room.ZIPCODE }">
 								<input type="hidden" name="ADDRESS1" id="sample6_address" size="50"
-									placeholder="주소">
+									placeholder="주소" value="${room.ADDRESS1}">
 							</div>
 	
 	
@@ -454,7 +506,6 @@ $(document).ready(function(){
 					<tr class="trpay">
 					<td class="iFmBhb" id="monthly">
 						<div id="monthly" class="bMtYCv">
-							<p class="tmpFp">월세</p>
 							<input class="fqDzuM kTQnUD" type="number" name="MONTHLY_DEPOSIT" id="deposit"
 								placeholder="보증금">
 							<p class="ktwJnl">/</p> 
@@ -468,7 +519,6 @@ $(document).ready(function(){
 					</td>
 					<td class="iFmBhb" id="jeonse">
 						<div id="jeonsediv" class="bMtYCv">
-							<p class="tmpFp">전세</p>
 							<input class="fqDzuM kTQnUD " type="number" name="JEONSE" id="jeonse" placeholder="전세">
 							<p class="fIWZWk">
 								만원
@@ -822,7 +872,7 @@ $(document).ready(function(){
 						<a href="#">허위매물 제재 정책 확인하기</a>
 					</p>
 				</div>
-			</div>
+		</div>
 		</form>
 		<div class="check gfvOAV">
 			<label class="kAqGVi">
@@ -833,26 +883,28 @@ $(document).ready(function(){
 				매물과 다름이 없습니다.
 				</span>
 			</label>
-			<button class="kcMULl" onclick="location.href=<c:url value='/room/adminRoom'/>">취소</button>
-			<button class="iEZQG" onclick="fn_updateBoard();">매물 등록</button>
+			<button class="kcMULl" onclick="location.href='<c:url value='/room/adminRoom'/>'">취소</button>
+			<button class="iEZQG" id="update">매물 등록</button>
 			<button class="kcMULl" id="delete">삭제하기</button>
 		</div>
 	</div>
-
 	<div>
 		<%@ include file="/WEB-INF/include/footer.jspf"%>
 	</div>
-	<script type="text/javascript"> 
+
+<script type="text/javascript"> 
 	
 	var gfv_count = '${fn:length(list)+1}'; 
 	
 	$(document).ready(function(){ 
-		
 		$("#delete").on("click", function(e){ //삭제하기 버튼 
 			e.preventDefault(); 
 			fn_deleteBoard(); 
 		}); 
-		
+		$("#update").on("click", function(e){ //수정하기 버튼 
+			e.preventDefault(); 
+			fn_updateBoard(); 
+		}); 
 		$("#addFile").on("click", function(e){ //파일 추가 버튼 
 			e.preventDefault(); 
 			fn_addFile(); 
@@ -861,18 +913,17 @@ $(document).ready(function(){
 		$("a[name^='delete']").on("click", function(e){ //파일 삭제 버튼 
 			e.preventDefault(); 
 			fn_deleteFile($(this)); 
-		});  
-		
+		});
 		
 		function fn_updateBoard(){ 
 			var comSubmit = new ComSubmit("frm"); 
-			comSubmit.setUrl("<c:url value='/room/adminRoom' />"); 
+			comSubmit.setUrl("<c:url value='/room/update'/>"); 
 			comSubmit.submit(); 
 		} 
 		
 		function fn_deleteBoard(){ 
 			var comSubmit = new ComSubmit(); 
-			comSubmit.setUrl("<c:url value='/room/delete' />"); 
+			comSubmit.setUrl("<c:url value='/room/delete'/>"); 
 			comSubmit.addParam("ROOM_NUM", $("#ROOM_NUM").val()); 
 			comSubmit.submit(); 
 		} 
@@ -890,9 +941,8 @@ $(document).ready(function(){
 		
 		function fn_deleteFile(obj){ 
 			obj.parent().remove(); 
-		} 
-	}
-
+		}
+	});
 </script>
 </body>
 

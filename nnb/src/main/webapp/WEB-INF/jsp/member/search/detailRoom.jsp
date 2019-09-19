@@ -353,7 +353,7 @@ $(document).ready(function(){
 					<tbody>
 						<tr>
 							<td><p>
-								<c:if test="${room.MONTHLY_DEPOSIT!=null && room.MONTHLY_DEPOSIT==''}">
+								<c:if test="${room.MONTHLY_DEPOSIT!=null && room.MONTHLY_DEPOSIT!=''}">
 								${room.MONTHLY_DEPOSIT}/${room.MONTHLY_PAYMENT}만 원
 								</c:if>
 								<c:if test="${room.MONTHLY_DEPOSIT==null || room.MONTHLY_DEPOSIT==''}">

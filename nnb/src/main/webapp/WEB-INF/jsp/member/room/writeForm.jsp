@@ -42,7 +42,7 @@ $(document).ready(function(){
 			$('td#building_office').show();
 		}else if($('input:radio[name=ROOM_TYPE]:checked').val()=='아파트'){
 			$('tr.bt').hide();
-			$('input:radio[name=ROOM_TYPE]:checked').val('아파트');
+			$('input:radio[name=BUILDING_TYPE]').prop("checked", true);;
 		}
 	});
 	$('tr.trpay').hide();
@@ -94,7 +94,7 @@ $(document).ready(function(){
          e.preventDefault();
          fn_deleteFile($(this));
       });
-   };/* 흔한개발자 코드 그대로 긁어왔음 */
+   };
    function fn_deleteFile(obj){
       obj.parent().remove();
    };
