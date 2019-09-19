@@ -38,7 +38,7 @@ function goDetail(num) {
 	<p style="height: 80px;">
 		<select class="freEbZ hRFrgm" name="searchType" id="searchType">
 			<option value="">전체</option>
-			<option value="n">답변대기</option>
+			<option value="N">답변대기</option>
 			<option value="Y">답변완료</option>
 		</select>
 	</p>
@@ -108,7 +108,7 @@ function fn_selectQnaListCallback(data) {
 					+	"<p>" + qna.QNA_TITLE + "</p>"
 					+	"<p>" + qna.REGDATE + "</p>"
 					+	"<p>";
-					if(qna.RES_STATE=='n'){
+					if(qna.RES_STATE=='N'){
 			str	+=			"답변대기";
 					}else{
 			str +=			"답변완료";
