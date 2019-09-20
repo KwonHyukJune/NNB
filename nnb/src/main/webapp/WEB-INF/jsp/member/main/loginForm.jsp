@@ -7,6 +7,18 @@
 <%@ include file="/WEB-INF/include/header.jspf" %>
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/main.css'/>"/>
 <script type="text/javascript">
+function showPopupId(num) { //새 메시지 작성
+	var url = "/nnb/findId";
+	var name = "아이디 찾기";
+	var option = "width = 500, height = 500, location = no, resizeable = yes, scrollbars = yes"
+	window.open(url, name, option);
+}
+function showPopupPw(num) { //새 메시지 작성
+	var url = "/nnb/findPw";
+	var name = "비밀번호 찾기";
+	var option = "width = 500, height = 500, location = no, resizeable = yes, scrollbars = yes"
+	window.open(url, name, option);
+}
 function fsubmit(){
 	var id = $("#MEM_ID")[0].value;
 	var pw = $("#MEM_PW")[0].value;
@@ -62,9 +74,9 @@ $(document).ready(function(){
 		</form>
 			<button class="hgemcD" type="button" onclick="fsubmit();">로그인</button>
 			<div class="ewSpjL2">
-				<a class="styled__FindPassword-jsiei0-6 ewSpjL" href="<c:url value='/findId'/>" target="javascript:window.open();">아이디 찾기</a>
+				<a class="styled__FindPassword-jsiei0-6 ewSpjL" href="#" onclick="showPopupId();">아이디 찾기</a>
 				<span> | </span>
-				<a class="styled__FindPassword-jsiei0-6 ewSpjL" href="<c:url value='/findPw'/>" target="javascript:window.open();">비밀번호 찾기</a>
+				<a class="styled__FindPassword-jsiei0-6 ewSpjL" href="#" onclick="showPopupPw();">비밀번호 찾기</a>
 			</div>
 	</div>
 </div>
