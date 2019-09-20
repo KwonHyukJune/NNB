@@ -4,46 +4,31 @@
 <html>
 <head>
 <%@ include file="/WEB-INF/include/include-header.jspf" %>
-<script type="text/javascript">
-$(document).ready(function(){
-		$("#email").change(function(){
-			$("#email2").val($(this).val());
-		});
-	});
+<link rel="stylesheet" type="text/css" href="<c:url value='/css/main.css'/>"/>
+<script type="text/javascript">	
 function fsubmit(){
-	var email = $("#email1").val()+"@"+$("#email2").val();
-	$("#MEM_EMAIL").val(email);
 	frm.submit();
 }
-/* 
-다음
-취소
-닫기
- */
 </script>
 </head>
 <body>
 
-<div class="findpw" style="display: block">
-<form action="join/findPwConfirm" method="post" id="frm">
-	<img src="/nnb/images/NNBsmall.png" width="300px"><br>
-	<h1>비밀번호 찾기</h1>
-	<input type="text" id="MEM_ID" name="MEM_ID" placeholder="아이디"><br>
-	<input type="hidden" id="MEM_EMAIL" name="MEM_EMAIL">
-	<input type="text" id="email1" name="email1" placeholder="이메일">
-	@
-	<input type="text" id="email2" name="email2" value="">
-	<select id="email">
-	<option>직접입력</option>
-	<option>naver.com</option>
-	<option>hanmail.net</option>
-	<option>gmail.com</option>
-	<option>nate.com</option>
-	</select>
+<div class="loginForm eaRvjJ">
+	<div class='flwTzf'>
+	<p align="center"><img src="/nnb/images/NNBsmall.png" width="100px"/><p>
 	<br>
+	<h1 class="csAEhT">비밀번호 찾기</h1>
+<form action="/nnb/findPwConfirm" method="post" id="frm">
+	<input type="text" id="MEM_ID" name="MEM_ID" placeholder="아이디를 입력하세요" class="kEQJNp kTQnUD "><br>
+	<br>
+	<input type="text" id="MEM_EMAIL" name="MEM_EMAIL" placeholder="이메일을 입력하세요" class="kEQJNp kTQnUD "><br>
 </form>
-	<a href="#" class="btn" onclick="fsubmit();">다음</a>
-	<a href="#" class="btn" onclick="close();">취소</a>
+<div class="ewSpjL2">
+	<a href="#" class="styled__FindPassword-jsiei0-6 ewSpjL" onclick="fsubmit();">다음</a>
+	&nbsp;
+	<a href="#" class="styled__FindPassword-jsiei0-6 ewSpjL" onclick="javascript:window.close();">취소</a>
+</div>
+</div>
 </div>
 
 </body>

@@ -4,6 +4,7 @@
 <html>
 <head>
 <%@ include file="/WEB-INF/include/include-header.jspf" %>
+<link rel="stylesheet" type="text/css" href="<c:url value='/css/main.css'/>"/>
 <script type="text/javascript">
 /* 
 닫기
@@ -11,10 +12,16 @@
 </script>
 </head>
 <body>
-${eCheck }
-<div class="result" style="display: none">
-임시 비밀번호가 입력하신 이메일로 전송되었습니다.<br>
-<a href="#" class="btn" onclick="close();">닫기</a>
+<div class="eaRvjJ">
+	<div class='flwTzf' style=text-align:center;>
+	임시비밀번호가 전송되었습니다<br><br>
+	입력하신 이메일에서 확인해주세요<br><br>
+	<strong>비밀번호는 꼭 변경해주세요</strong>
+	
+	<div class="ewSpjL2">
+		<a href="#" class="btn" onclick="javascript:window.close();">닫기</a>
+	</div>
+</div>
 </div>
 
 </body>
